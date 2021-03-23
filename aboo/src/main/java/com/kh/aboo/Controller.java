@@ -12,7 +12,7 @@ public class Controller {
 		return "generation/index";
 	}
 	
-	@GetMapping("admin")
+	@GetMapping("admin/index")
 	public String admin() {
 		return "admin/index";
 	}
@@ -39,4 +39,10 @@ public class Controller {
 	public void adminVehicle() {};
 	
 	// 아영끝
+	
+	// 민희꺼 테스트
+	@GetMapping("myapt/vote/votelist")
+	public void voteList() {};
+	
+	
 }
