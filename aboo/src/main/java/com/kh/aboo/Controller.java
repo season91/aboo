@@ -44,5 +44,19 @@ public class Controller {
 	@GetMapping("myapt/vote/votelist")
 	public void voteList() {};
 	
+	@GetMapping("board/interior/intlist")
+	public void intList() {};
+	
+	@GetMapping("board/interior/intdetail")
+	public void intDetail() {};
+	
+	@GetMapping("board/interior/intmodify")
+	public void intModify() {};
+	
+	@GetMapping("admin/vote/makevote")
+	public String makeVote() {
+		return "admin/vote/makevote";
+	}
+	
 	
 }
