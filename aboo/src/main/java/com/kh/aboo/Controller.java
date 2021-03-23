@@ -12,7 +12,7 @@ public class Controller {
 		return "generation/index";
 	}
 	
-	@GetMapping("admin")
+	@GetMapping("admin/index")
 	public String admin() {
 		return "admin/index";
 	}
