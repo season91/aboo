@@ -7,12 +7,15 @@
 	
 	<!-- * root에는 외부라이브러리 셋팅한다. JSP와 소통하지 않는 -->
 	<!-- 1. DB연동, 마이바티스 -->
-	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-		<property name="username" value="bm"/>
-		<property name="password" value="user11"/>
-	</bean>
+	<bean id="dataSource" class="oracle.jdbc.pool.OracleDataSource">
+	      <property name="URL" value="jdbc:oracle:thin:@pclassdb_high?TNS_ADMIN=C:/CODE/afternoon/E_SERVLET/Wallet_pclassDB"/>
+	      <property name="connectionCacheProperties">
+	         <props>
+	            <prop key="user">admin</prop>
+	            <prop key="password"></prop>
+	         </props>
+	      </property>
+	   </bean>
 	
 	<!-- 마이바티스 설정은 main, test 다르게 설정해놓을 수 있다. resources에 셋팅. -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
