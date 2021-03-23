@@ -44,14 +44,13 @@
 	<!-- scheduled annotation -->
 	<task:annotation-driven/>
 	
-	<!-- <interceptors>
+	<interceptors>
 		<interceptor>
-			url 패턴
 			<mapping path="/**"/>		
 			<beans:bean class="common.interceptor.AuthInterceptor"/>
 		</interceptor>
 	</interceptors>
-	 -->
+
 	
 	<beans:bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<beans:constructor-arg name="dataSource" ref="dataSource"/>
@@ -69,15 +68,12 @@
 		
 	<aop:config>
 		<!-- .. : 하위의 모든 패키지를 포함 -->
-		<aop:pointcut expression="execution(* com.kh.toy..*.*ServiceImpl.*(..))" id="txPointCut"/>
+		<aop:pointcut expression="execution(* com.kh.aboo..*.*ServiceImpl.*(..))" id="txPointCut"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCut"/>
 	</aop:config>
 	
 	<tx:annotation-driven transaction-manager="transactionManager"/>
-	
-	
-	
-	
+
 	
 	<context:component-scan base-package="com.kh.aboo" />
 </beans:beans>
