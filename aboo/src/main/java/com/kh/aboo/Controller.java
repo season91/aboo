@@ -50,4 +50,7 @@ public class Controller {
 
 	}
 	
+	@GetMapping("common/adminresult")
+	public void adminresult() {};
+	
 }

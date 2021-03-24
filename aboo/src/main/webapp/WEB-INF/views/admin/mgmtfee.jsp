@@ -163,6 +163,9 @@
                         <div class="col-md-3">
                           <button class="btn btn-primary btn-block" id="search-button" data-toggle="modal" data-target="#searchModal">세대정보로 검색</button>
                         </div>
+                         <div class="col-md-3">
+                          <button class="btn btn-primary btn-block" id="mgmtfee-upload" data-toggle="modal" data-target="#mgmtfeeUploadrModal">관리비 업로드</button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -385,6 +388,30 @@
        </div>
      </div>
     
+    
+     <div class="modal fade" id="mgmtfeeUploadrModal" tabindex="-1" role="dialog" aria-labelledby="mgmtfeeUploadModalLabel" aria-hidden="true">
+       <div class="modal-dialog" role="document">
+         <div class="modal-content" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675); color:white;">
+           <div class="modal-header">
+           	<h4 class="modal-title" id="mgmtfeeUploadModalLabel">관리비 파일 업로드</h4>
+            	 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i class="tim-icons icon-simple-remove"></i>
+              </button>
+           </div>
+           <div class="modal-body">
+        <form action="/work/mgmtfeeuploadimpl" id="form-mgmtfee" method="post" enctype="multipart/form-data">
+          <div class="">
+           <input type="file" name="file" class="form-control col-xs-2 " id="inlineFormInputGroup" value="파일을 업로드 하세요">
+          </div>
+    	  </div>
+           <div class="modal-footer">
+           <button type="submit" class="btn btn-primary " data-dismiss="modal" onclick="send()">업로드하기</button>
+           </form>
+           <button type="button" class="btn btn-primary btn_down-file" data-dismiss="modal" onclick="downloadFile()">관리비 양식 다운로드</button>
+           </div>
+         </div>
+       </div>
+     </div>
   
     <!--   Core JS Files   -->
     <script src="../../../resources/js/admin/mgmtfee.js"></script>
@@ -516,6 +543,23 @@
      $('.modal').on('hidden.bs.modal', function (e) {
  	    $(this).find('form')[0].reset()
 		});
+     
+     function send() {
+ 		let form = new FormData(document.getElementById('form-mgmtfee'));
+ 		
+ 		$.ajax({
+ 			url:"${ContextPath}/admin/mgmtfee/uploadimpl",
+ 			dataType:"json",
+ 			data:form,
+ 			processData:false,
+ 			contentType:false,
+ 			type:"POST"
+ 		})
+ 	}
+ 	
+ 	function downloadFile(){
+ 	      location.href = '${context}' + "/admin/mgmtfeeformdownload";
+ 	   }
     </script>
     <script>
       $(document).ready(function() {

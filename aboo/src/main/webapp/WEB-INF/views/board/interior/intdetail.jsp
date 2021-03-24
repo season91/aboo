@@ -7,7 +7,7 @@
     
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="/index"><img class="col-md-3" src="../../../resources/images/logo_w.png"></a>
+	      <a class="navbar-brand" href="/index">ABOO</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -17,9 +17,16 @@
 	          <li class="nav-item"><a href="/index" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
-	          <li class="nav-item active"><a class="nav-link" href="/board/info/infolist">Board</a></li>
+	          <li class="nav-item active"><a class="nav-link" href="/board/info/listinfo">Board</a></li>
 	          <li class="nav-item"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
-	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>
+	          <c:choose>
+	          <c:when test="${sessionScope.generation == null}">
+	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
+	          </c:when>
+	          <c:when test="${sessionScope.generation != null}">
+	          <li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>	          
+	          </c:when>
+	          </c:choose>
 	        </ul>
 	      </div>
 	    </div>
@@ -27,7 +34,7 @@
     <!-- END nav -->
 
     <section class="home-slider owl-carousel">
-      <div class="slider-item bread-item" style="background-image: url(../../../../resources/images/bg_1.jpg);" data-stellar-background-ratio="0.5">
+      <div class="slider-item bread-item" style="background-image: url(../../../resources/abooimg/logo_w.png);" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container-fluid">
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
@@ -79,7 +86,7 @@
               <ul class="comment-list">
                 <li class="comment">
                   <div class="vcard bio">
-                    <img src="../../../../resources/images/user.jpg" alt="Image placeholder">
+                    <img src="../../../../resources/abooimg/user.jpg" alt="Image placeholder">
                   </div>
                   <div class="comment-body">
                     <h3>101동 901호</h3>
@@ -95,7 +102,7 @@
 
                 <li class="comment">
                   <div class="vcard bio">
-                    <img src="../../../../resources/images/user.jpg" alt="Image placeholder">
+                    <img src="../../../../resources/abooimg/user.jpg" alt="Image placeholder">
                   </div>
                   <div class="comment-body">
                     <h3>101동 901호</h3>
@@ -111,7 +118,7 @@
                 
                 <li class="comment">
                   <div class="vcard bio">
-                    <img src="../../../../resources/images/user.jpg" alt="Image placeholder">
+                    <img src="../../../../resources/abooimg/user.jpg" alt="Image placeholder">
                   </div>
                   <div class="comment-body">
                     <h3>101동 901호</h3>
@@ -127,7 +134,7 @@
                 
                 <li class="comment">
                   <div class="vcard bio">
-                    <img src="../../../../resources/images/user.jpg" alt="Image placeholder">
+                    <img src="../../../../resources/abooimg/user.jpg" alt="Image placeholder">
                   </div>
                   <div class="comment-body">
                     <h3>101동 901호</h3>
@@ -143,7 +150,7 @@
                 
                 <li class="comment">
                   <div class="vcard bio">
-                    <img src="../../../../resources/images/user.jpg" alt="Image placeholder">
+                    <img src="../../../../resources/abooimg/user.jpg" alt="Image placeholder">
                   </div>
                   <div class="comment-body">
                     <h3>101동 901호</h3>
@@ -159,7 +166,7 @@
 
                 <li class="comment">
                   <div class="vcard bio">
-                    <img src="../../../../resources/images/user.jpg" alt="Image placeholder">
+                    <img src="../../../../resources/abooimg/user.jpg" alt="Image placeholder">
                   </div>
                   <div class="comment-body">
                     <h3>101동 901호</h3>

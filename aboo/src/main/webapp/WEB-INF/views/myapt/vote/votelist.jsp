@@ -3,37 +3,11 @@
 <%@ include file="/WEB-INF/views/include/generationhead.jsp" %>
 <!DOCTYPE html>
 <html>
-<head>
-  <title>WebHost - Free Bootstrap 4 Template by Colorlib</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,,500,600,700" rel="stylesheet">
-
-    <link rel="stylesheet" href="../../../../resources/css/generation/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="../../../../resources/css/generation/animate.css">
-    
-    <link rel="stylesheet" href="../../../../resources/css/generation/owl.carousel.min.css">
-    <link rel="stylesheet" href="../../../../resources/css/generation/owl.theme.default.min.css">
-    <link rel="stylesheet" href="../../../../resources/css/generation/magnific-popup.css">
-
-    <link rel="stylesheet" href="../../../../resources/css/generation/aos.css">
-
-    <link rel="stylesheet" href="../../../../resources/css/generation/ionicons.min.css">
-
-    <link rel="stylesheet" href="../../../../resources/css/generation/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="../../../../resources/css/generation/jquery.timepicker.css">
-
-    
-    <link rel="stylesheet" href="../../../../resources/css/generation/flaticon.css">
-    <link rel="stylesheet" href="../../../../resources/css/generation/icomoon.css">
-    <link rel="stylesheet" href="../../../../resources/css/generation/style.css">
-</head>
-<body>
+  <body>
     
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="/index"><img class="col-md-3" src="../../../resources/images/logo_w.png"></a>
+	      <a class="navbar-brand" href="/index">ABOO</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -43,9 +17,16 @@
 	          <li class="nav-item"><a href="/index" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
 	          <li class="nav-item active"><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
-	          <li class="nav-item"><a class="nav-link" href="/board/info/infolist">Board</a></li>
+	          <li class="nav-item"><a class="nav-link" href="/board/info/listinfo">Board</a></li>
 	          <li class="nav-item"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
-	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login/Log out</span></a></li>
+	          <c:choose>
+	          <c:when test="${sessionScope.generation == null}">
+	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
+	          </c:when>
+	          <c:when test="${sessionScope.generation != null}">
+	          <li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>	          
+	          </c:when>
+	          </c:choose>
 	        </ul>
 	      </div>
 	    </div>
@@ -53,7 +34,7 @@
     <!-- END nav -->
 
     <section class="home-slider owl-carousel">
-      <div class="slider-item bread-item" style="background-image: url(../../../../resources/images/bg_1.jpg);" data-stellar-background-ratio="0.5">
+      <div class="slider-item bread-item" style="background-image: url(../../../resources/abooimg/logo_w.png);" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container-fluid">
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
@@ -202,7 +183,7 @@
           </div>
           <div class="col-md">
             <div class="ftco-footer-widget mb-4 ml-md-5">
-              <h2 class="ftco-heading-2">Useful Links</h2>
+              <h2 class="ftco-heading-2">Unseful Links</h2>
               <ul class="list-unstyled">
                 <li><a href="/myapt/parking" class="py-2 d-block">Parking</a></li>
                 <li><a href="/board/info/listinfo" class="py-2 d-block">Info Board</a></li>

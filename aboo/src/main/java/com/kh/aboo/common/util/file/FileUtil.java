@@ -1,12 +1,18 @@
 package com.kh.aboo.common.util.file;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.aboo.common.code.Configcode;
@@ -68,4 +74,72 @@ public class FileUtil {
 		File file = new File(Configcode.UPLOAD_PATH + path + renameFileName);
 		file.delete();
 	}
+	
+	// 아영 : 관리비 엑셀 양식 선 셋팅.
+	public XSSFWorkbook mgmtfeeFormSetting() {
+		// XSSFWorkbook은 엑셀파일 전체 내용을 담고 있는 객체
+		// 엑셀을 구성하는 것은 총4개이다. 아래 객체를 구현해야한다.
+		// XSSFWorkbook 
+		// XSSFSheet : sheet 에서 row 생성 createRow()
+		// XSSFRow : row에서 cell 생성 createCell()
+		// XSSFCell : cell에서 값 입력 setCellValue()
+		// 워크북, 시트,  행, 셀 생성
+		int rowNo = 0;
+		
+		XSSFWorkbook workbook = new XSSFWorkbook();
+		XSSFSheet sheet = workbook.createSheet("세대관리비");
+		XSSFRow row = sheet.createRow(rowNo++);
+		XSSFCell cell;
+		
+		// 엑셀 양식 지정
+		// 들어가야할 항목 15개
+		// 세대정보,일반관리비,청소비,승강기유지비,세대전기료,공동전기료
+		// 세대수도료, 하수도료, 경비비, 세대감면액, 납기내금액, 납기일
+		// 관리시작일, 관리종료일, 관리비작성일
+		String[] writeList = {"세대정보(동)","세대정보(호)","일반관리비","청소비","승강기유지비","세대전기료","공동전기료",
+				"세대수도료","하수도료","경비비","세대감면액","납기내금액","납기일",
+				"관리시작일","관리종료일","관리비작성일"};
+		for (int i = 0; i < writeList.length; i++) {
+			cell = row.createCell(i);
+			cell.setCellValue(writeList[i]);
+		}
+		
+		return workbook;
+	}
+	
+	// 아영 : 셋팅된 양식 excel file로 구성하기.
+	public File mfmtgeeFormExcel() {
+		// excel 양식 셋팅하기
+		XSSFWorkbook workbook = mgmtfeeFormSetting();
+		
+		// 파일 내보내기
+		// 파일 명
+		String fileName = "세대관리비양식.xlsx";
+		
+		File file = new File(fileName);
+		FileOutputStream fos = null;
+		if(!file.exists()) {
+			try {
+				fos = new FileOutputStream(file);
+				workbook.write(fos);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				try {
+					workbook.close();
+					fos.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		}
+		return file;
+	}
+		
 }
