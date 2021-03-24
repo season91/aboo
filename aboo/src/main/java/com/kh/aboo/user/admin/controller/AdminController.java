@@ -76,7 +76,6 @@ public class AdminController {
 	@ResponseBody
 	public String authorityAdd(@RequestBody Generation generationInfo) {
 		
-		
 		System.out.println(generationInfo);
 		
 		return "susesse";

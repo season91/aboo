@@ -12,6 +12,8 @@ import com.kh.aboo.user.apartment.model.service.ApartmentService;
 import com.kh.aboo.user.apartment.model.vo.Apartment;
 import com.kh.aboo.user.generation.model.vo.Generation;
 
+/*@RequestMapping("myapt")
+@Controller*/
 public class InstitutionsController {
 	
 	private final ApartmentService apartmentService;
