@@ -112,7 +112,7 @@ public class AdminController {
 		System.out.println("여기오나??");
 
 		Map<String, Object> commandMap = adminService.mgmtfeeRead(file);
-		List<Mgmtfee> mgmtfeeList = adminService.addMgmtfee(commandMap);
+		List<Mgmtfee> mgmtfeeList = adminService.insertMgmtfee(commandMap);
 		System.out.println(mgmtfeeList.size());
 		
 		// 성공 실패 분기나누기
@@ -130,10 +130,12 @@ public class AdminController {
 	public ResponseEntity<FileSystemResource> mgmtFormDownload() {
 		// 엑셀양식 다운로드하게
 		System.out.println("양식만들기시작");
+		//관리자 세션에 따른 아파트 정보 기준으로 양식 만든다.
+		String apartmentIdx = "";
 		
 		FileUtil fileUtil = new FileUtil();
 		// mgmtfeeFormExcel 엑셀 양식 호출.
-		File file = fileUtil.mfmtgeeFormExcel();
+		File file = fileUtil.mfmtgeeFormExcel(apartmentIdx);
 		
 		// 내보내기
 		HttpHeaders headers= new HttpHeaders();

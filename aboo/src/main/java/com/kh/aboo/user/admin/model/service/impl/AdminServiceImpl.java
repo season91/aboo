@@ -25,6 +25,7 @@ import com.kh.aboo.user.admin.model.repository.AdminRepository;
 import com.kh.aboo.user.admin.model.service.AdminService;
 import com.kh.aboo.user.admin.model.vo.Admin;
 import com.kh.aboo.user.admin.model.vo.Mgmtfee;
+import com.kh.aboo.user.generation.model.vo.Generation;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -128,7 +129,7 @@ public class AdminServiceImpl implements AdminService {
 
 	// 아영 : 읽은 엑셀파일을 mgmtfee vo에 넣고 DB에 추가한다.
 	@Override
-	public List<Mgmtfee> addMgmtfee(Map<String, Object> commandMap) {
+	public List<Mgmtfee> insertMgmtfee(Map<String, Object> commandMap) {
 		List<Mgmtfee> mgmtfeeList = new ArrayList<>();
 		Mgmtfee mgmtfee = null;
 		for (String	key : commandMap.keySet()) {
@@ -136,8 +137,13 @@ public class AdminServiceImpl implements AdminService {
 			List<String> list = (List<String>) commandMap.get(key);
 			//System.out.println("동호수:" + list.get(0)+"d"+list.get(1)+"h");
 			//System.out.println("일반관리비:"+list.get(2));
+			
+			// 동호수로 세대관리번호 조회해온다.
+			String generationInfo = list.get(0)+"d"+list.get(1)+"h";
+			Generation generation = adminRepository.selectGenerationIdx(generationInfo);
+			
 			mgmtfee = Mgmtfee.builder()
-					.generationInfo(list.get(0)+"d"+list.get(1)+"h")
+					.generationIdx(generation.getGenerationIdx())
 					.gnrlMgmtFee(list.get(2))
 					.cleanFee(list.get(3))
 					.elvtrMnfee(list.get(4))
@@ -154,8 +160,11 @@ public class AdminServiceImpl implements AdminService {
 					.mgmtWriteDate(Date.valueOf(list.get(15)))
 					.build();
 			System.out.println(mgmtfee.toString());
+
+			adminRepository.insertMgmtfee(mgmtfee);
 			mgmtfeeList.add(mgmtfee);
 		}
+		
 		
 		return mgmtfeeList;
 	}

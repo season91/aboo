@@ -39,6 +39,7 @@ public class GenerationControllerTest {
 //				.param("aprtmentIdx", "100000")
 //				).andDo(print());
 		
+		// 101~109동부터 1호~6호까지
 		for (int i = 1; i < 10; i++) {
 			String a = "10"+i;
 			System.out.println(a);

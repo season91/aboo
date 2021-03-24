@@ -14,12 +14,14 @@
 	<typeAliases>
 		<typeAlias type="com.kh.aboo.member.model.vo.Member" alias="member"/>
 		<typeAlias type="com.kh.aboo.board.model.vo.Board" alias="board"/>
+		<typeAlias type="com.kh.aboo.user.admin.model.vo.Mgmtfee" alias="mgmtfee"/>
 		
 	</typeAliases>
 
 <!-- 3. 작성쿼리 root등록을 위한 경로 설정. 맨아래에 있어야 한다.-->
 	<mappers>
 		<mapper resource="mybatis/mapper/board/boardMapper.xml"/>
+		<mapper resource="mybatis/mapper/admin/adminMapper.xml"/>
 	</mappers>
 
 </configuration>

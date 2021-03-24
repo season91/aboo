@@ -3,9 +3,9 @@ package com.kh.aboo.user.admin.model.vo;
 import java.sql.Date;
 
 public class Mgmtfee {
-	private String mgmtfeeNo;
-	private String generationIdx; 
-	private String generationInfo; //세대아이디
+	private String mgmtfeeIdx;
+	private String generationIdx; //세대관리번호
+	private String generationInfo; //세대아이디, generationIdx 산출을 위한 이용 변수.
 	private String gnrlMgmtFee; //일반관리비
 	private String cleanFee; // 청소비
 	private String elvtrMnfee; //승강기 유지비
@@ -24,7 +24,7 @@ public class Mgmtfee {
 	private int isOverdue; //연체여부
 	
 	private Mgmtfee(MgmtBuilder builder) {
-		this.generationInfo = builder.generationInfo;
+		this.generationIdx = builder.generationIdx;
 		this.gnrlMgmtFee = builder.gnrlMgmtFee;
 		this.cleanFee = builder.cleanFee;
 		this.elvtrMnfee = builder.elvtrMnfee;
@@ -48,7 +48,7 @@ public class Mgmtfee {
 	
 	public static class MgmtBuilder{
 		// 엑셀로 입력받을 값
-		private String generationInfo; //세대아이디
+		private String generationIdx; //세대아이디
 		private String gnrlMgmtFee; //일반관리비
 		private String cleanFee; // 청소비
 		private String elvtrMnfee; //승강기 유지비
@@ -64,8 +64,8 @@ public class Mgmtfee {
 		private Date mgmtEndDate; // 관리종료일
 		private Date mgmtWriteDate; //관리비 작성일
 		
-		public MgmtBuilder generationInfo(String val) {
-			this.generationInfo = val;
+		public MgmtBuilder generationIdx(String val) {
+			this.generationIdx = val;
 			return this;
 		}
 		
@@ -153,8 +153,8 @@ public class Mgmtfee {
 	public String getPeriodPayment() {
 		return periodPayment;
 	}
-	public String getMgmtfeeNo() {
-		return mgmtfeeNo;
+	public String getMgmtfeeIdx() {
+		return mgmtfeeIdx;
 	}
 	public String getGenerationIdx() {
 		return generationIdx;
@@ -207,7 +207,7 @@ public class Mgmtfee {
 
 	@Override
 	public String toString() {
-		return "Mgmtfee [mgmtfeeNo=" + mgmtfeeNo + ", generationIdx=" + generationIdx + ", generationInfo="
+		return "Mgmtfee [mgmtfeeIdx=" + mgmtfeeIdx + ", generationIdx=" + generationIdx + ", generationInfo="
 				+ generationInfo + ", gnrlMgmtFee=" + gnrlMgmtFee + ", cleanFee=" + cleanFee + ", elvtrMnfee="
 				+ elvtrMnfee + ", genElctr=" + genElctr + ", comonElctr=" + comonElctr + ", genWater=" + genWater
 				+ ", sewer=" + sewer + ", expenses=" + expenses + ", genReduction=" + genReduction + ", periodPayment="
