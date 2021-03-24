@@ -37,10 +37,16 @@ public class AdminServiceImpl implements AdminService {
 	public AdminServiceImpl(AdminRepository adminRepository) {
 		this.adminRepository = adminRepository;
 	}
+	
+	@Override
+	public void insertAdmin(Admin admin) {
+		adminRepository.insertAdmin(admin);
+	}
+	
 
 	@Override
 	public Admin selectGenerationForAuth(Admin admin) {
-
+		
 		Admin authInfo = adminRepository.selectGenerationForAuth(admin.getId());
 		if (authInfo == null || !encoder.matches(admin.getPassword(), authInfo.getPassword())) {
 			return null;
@@ -49,21 +55,17 @@ public class AdminServiceImpl implements AdminService {
 		return authInfo;
 	}
 
-
-	@Override
-	public void insertAdmin(Admin admin) {
-		adminRepository.insertAdmin(admin);
-	}
-
 	
 	// 아영 : 업로드된 관리비 엑셀 읽기
 	@Override
 	public Map<String, Object> mgmtfeeRead(MultipartFile file) {
 		// 전달받은 MultipartFile file의 타입을 확인한다. xlxs인지 xls인지
 		String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+		System.out.println(extension);
 		// 1. 업로드된 엑셀파일의 확장자 확인
 		Workbook workbook = null;
-		if(!extension.equals("xlsx") || !extension.equals("xls")) {
+		if(!extension.equals("xlsx")) {
+			System.out.println("예외발동한다.");
 			throw new ToAlertException(ErrorCode.ER01);
 		}
 		
@@ -157,8 +159,5 @@ public class AdminServiceImpl implements AdminService {
 		
 		return mgmtfeeList;
 	}
-	
-	
-
 
 }

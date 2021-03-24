@@ -7,14 +7,12 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,11 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kh.aboo.common.code.ErrorCode;
-import com.kh.aboo.common.exception.ToAlertException;
 import com.kh.aboo.common.util.file.FileUtil;
 import com.kh.aboo.user.admin.model.service.AdminService;
 import com.kh.aboo.user.admin.model.vo.Admin;
@@ -35,9 +30,10 @@ import com.kh.aboo.user.generation.model.vo.Generation;
 
 @Controller
 public class AdminController {
+
 	@Autowired
 	private PasswordEncoder encoder;
-
+	
 	private final AdminService adminService;
 
 	public AdminController(AdminService adminService) {
@@ -49,8 +45,7 @@ public class AdminController {
 	public String admin() {
 		return "admin/index";
 	}
-
-
+	
 	@GetMapping("admin/login")
 	public String login() {
 		return "admin/login";
@@ -76,17 +71,17 @@ public class AdminController {
 	public String adminAuthority() {
 		return "admin/authority";
 	}
-
+	
 	@PostMapping("admin/authorityadd")
 	@ResponseBody
 	public String authorityAdd(@RequestBody Generation generationInfo) {
-
+		
+		
 		System.out.println(generationInfo);
-
+		
 		return "susesse";
 	}
-
-
+	
 	@GetMapping("admin/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("admin");
@@ -110,17 +105,24 @@ public class AdminController {
 		adminService.insertAdmin(admin);
 	}
 
-
+	
 	// 아영 : 업로드된 엑셀파일 읽기. 비동기통신
-	@PostMapping(value="admin/mgmtfee/uploadimpl",headers = ("content-type=multipart/*"))
-	public ResponseEntity<HttpStatus> mgmtUpload(@RequestParam MultipartFile file, Model model) {
+	@PostMapping(value="admin/mgmtfee/uploadimpl")
+	@ResponseBody
+	public String mgmtUpload(@RequestParam MultipartFile file, Model model) {
 		System.out.println("여기오나??");
 
 		Map<String, Object> commandMap = adminService.mgmtfeeRead(file);
 		List<Mgmtfee> mgmtfeeList = adminService.addMgmtfee(commandMap);
-		System.out.println(mgmtfeeList.toString());
+		System.out.println(mgmtfeeList.size());
 		
-		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+		// 성공 실패 분기나누기
+		if(mgmtfeeList == null || mgmtfeeList.size() == 0) {
+			System.out.println("실패유");
+			return "fail";
+		}
+		
+		return "success";
 
 	}
 	
@@ -143,5 +145,4 @@ public class AdminController {
 		return ResponseEntity.ok().headers(headers).body(resource);
 	}
 	
-
 }

@@ -546,15 +546,27 @@
      
      function send() {
  		let form = new FormData(document.getElementById('form-mgmtfee'));
+ 		const url = "${ContextPath}/admin/mgmtfee/uploadimpl";
  		
- 		$.ajax({
- 			url:"${ContextPath}/admin/mgmtfee/uploadimpl",
- 			dataType:"json",
- 			data:form,
- 			processData:false,
- 			contentType:false,
- 			type:"POST"
- 		})
+        fetch(url,{
+        	method:"post",
+        	body:form
+        }).then(response => {
+        	if(response.ok){
+        		return response.text();
+        	}
+        	throw new AsyncPageError(response.text()); 
+        }).then((text)=>{
+        	if(text == "success"){
+        		alert('등록 성공했습니다.');
+             } else {
+            	alert('등록할 내용이 없습니다.');
+             }
+        })
+         .catch(error=>{
+        	 error.alertMessage();
+         })
+ 		
  	}
  	
  	function downloadFile(){

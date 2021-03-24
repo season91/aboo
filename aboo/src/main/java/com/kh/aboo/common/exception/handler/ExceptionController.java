@@ -16,13 +16,14 @@ import com.kh.aboo.common.exception.CustomException;
 //예외들 맡아서 처리해줄 클래스.
 @Controller
 // Advice 지정한 패키지내의 모든 컨트롤러들의 공통 관심사를 처리하는 클래스.
-@ControllerAdvice(basePackages = {"com.kh.toy","common"})
+@ControllerAdvice(basePackages = {"com.kh.aboo"})
 public class ExceptionController {
 	
 	//slf4j 사용
 	Logger logger = LoggerFactory.getLogger(ExceptionController.class);
 
 	// 우리가 구현해놓은 CustomException을 받아서 처리할 것 (즉, throw ToAlertException 인 경우 다 이렇게 처리될 것)
+	@ResponseStatus(code = HttpStatus.NOT_FOUND)
 	@ExceptionHandler(CustomException.class)
 	public String businessExceptionHandler(CustomException e, Model model) {
 		model.addAttribute("alertMsg", e.error.errMsg());
@@ -38,8 +39,7 @@ public class ExceptionController {
 		e.printStackTrace();
 		model.addAttribute("alertMsg", "데이터 베이스 접근 중 에러가 발생하였습니다.");
 		model.addAttribute("url", "/member/login");
-		System.out.println(model);
-		System.out.println("Exception");
+
 		return "common/result";
 	}
 }
