@@ -10,6 +10,7 @@
 
 <%-- generation! --%>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="icon" type="image/png" href="../../../resources/img/favicon.png">
 <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,,500,600,700" rel="stylesheet">
 <link rel="stylesheet" href="../../../resources/css/generation/open-iconic-bootstrap.min.css">
 <link rel="stylesheet" href="../../../resources/css/generation/animate.css">
@@ -24,7 +25,7 @@
 <link rel="stylesheet" href="../../../resources/css/generation/icomoon.css">
 <link rel="stylesheet" href="../../../resources/css/generation/style.css">
 <link rel="stylesheet" href="../../../resources/css/all.css">
-<title>pclass</title>
+<title>WELCOME ABOO!</title>
 <%-- 
 	contextPath를 context변수에 저장
 	ex) 이 프로젝트에서는 contextPath가 jsp 이므로 jsp가 변수에 담긴다.
