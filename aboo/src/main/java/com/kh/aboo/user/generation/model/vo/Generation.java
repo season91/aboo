@@ -1,4 +1,4 @@
-package com.kh.aboo.member.generation.model.vo;
+package com.kh.aboo.user.generation.model.vo;
 
 import java.sql.Date;
 
