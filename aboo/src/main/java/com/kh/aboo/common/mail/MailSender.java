@@ -1,4 +1,4 @@
-package common.mail;
+package com.kh.aboo.common.mail;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
 
-import common.code.Configcode;
+import com.kh.aboo.common.code.Configcode;
 
 // 어디서든 사용가능한 우리만의 MailSender 구현.
 // 외부 패키지 생성하는 경우에도 servlet-context에 해당 경로 추가해주어 관리대상으로 만든다.

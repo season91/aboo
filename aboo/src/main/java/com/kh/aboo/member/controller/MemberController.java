@@ -20,13 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.kh.aboo.common.code.Configcode;
+import com.kh.aboo.common.code.ErrorCode;
+import com.kh.aboo.common.exception.ToAlertException;
 import com.kh.aboo.member.model.service.MemberService;
 import com.kh.aboo.member.model.vo.Member;
 import com.kh.aboo.member.validator.MemberValidator;
-
-import common.code.Configcode;
-import common.code.ErrorCode;
-import common.exception.ToAlertException;
 
 //Controller 어노테이션이 하는 일 : 해당 클래스가 Controller임을 스프링에게 알려준다.
 //해당 클래스를 bean으로 등록. 컨트롤러와 관련된 어노테이션을 해당 클래스내에서 사용할 수 있게 해준다.

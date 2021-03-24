@@ -86,6 +86,12 @@
 		    <artifactId>osdt_cert</artifactId>
 		    <version>19.7.0.0</version>
 		</dependency>
+		<!-- ucp -->
+		<dependency>
+		    <groupId>com.oracle.database.jdbc</groupId>
+		    <artifactId>ucp</artifactId>
+		    <version>19.7.0.0</version>
+		</dependency>
 		
 		<!-- AOP -->
 		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
@@ -253,6 +259,7 @@
 		    <artifactId>jsoup</artifactId>
 		    <version>1.13.1</version>
 		</dependency>
+		
 		
 		<!-- Test -->
 		<dependency>

@@ -10,12 +10,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.aboo.board.model.repository.BoardRepository;
 import com.kh.aboo.board.model.service.BoardService;
 import com.kh.aboo.board.model.vo.Board;
-
-import common.code.ErrorCode;
-import common.exception.ToAlertException;
-import common.util.file.FileUtil;
-import common.util.file.FileVo;
-import common.util.paging.Paging;
+import com.kh.aboo.common.code.ErrorCode;
+import com.kh.aboo.common.exception.ToAlertException;
+import com.kh.aboo.common.util.file.FileUtil;
+import com.kh.aboo.common.util.file.FileVo;
+import com.kh.aboo.common.util.paging.Paging;
 
 @Service
 public class BoardServiceImpl implements BoardService {

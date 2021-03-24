@@ -1,4 +1,4 @@
-package common.exception.handler;
+package com.kh.aboo.common.exception.handler;
 
 
 import org.slf4j.Logger;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import common.exception.CustomException;
+import com.kh.aboo.common.exception.CustomException;
 
 //예외들 맡아서 처리해줄 클래스.
 @Controller

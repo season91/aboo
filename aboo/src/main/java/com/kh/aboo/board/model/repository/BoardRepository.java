@@ -7,9 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import com.kh.aboo.board.model.vo.Board;
-
-import common.util.file.FileVo;
-import common.util.paging.Paging;
+import com.kh.aboo.common.util.file.FileVo;
+import com.kh.aboo.common.util.paging.Paging;
 
 @Mapper
 public interface BoardRepository {

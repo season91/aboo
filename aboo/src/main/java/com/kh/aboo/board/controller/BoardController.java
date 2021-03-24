@@ -18,9 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.aboo.board.model.service.BoardService;
 import com.kh.aboo.board.model.vo.Board;
+import com.kh.aboo.common.util.file.FileVo;
 import com.kh.aboo.member.model.vo.Member;
-
-import common.util.file.FileVo;
 
 @Controller
 @RequestMapping("board")

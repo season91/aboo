@@ -9,7 +9,7 @@
 	<!-- 1. DB연동, 마이바티스 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		<property name="url" value="jdbc:oracle:thin:@abooDB_medium?TNS_ADMIN=C:\CODE\wallet\Wallet_abooDB"/>
+		<property name="url" value="jdbc:oracle:thin:@abooDB_medium?TNS_ADMIN=C:\\CODE\\wallet\\Wallet_abooDB"/>
 		<property name="username" value="admin"/>
 		<property name="password" value="Aboo91939699"/>
 	</bean>
@@ -21,7 +21,7 @@
 	</bean>
 	
 	<!-- @Mapper 어노테이션이 등록된 인터페이스 한해서만 스프링에 등록한다. -->
-	<mybatis:scan base-package="com.kh.aboo, common" annotation="org.apache.ibatis.annotations.Mapper"/>
+	<mybatis:scan base-package="com.kh.aboo" annotation="org.apache.ibatis.annotations.Mapper"/>
 	
 	<!-- mail 보내기 -->
 	<bean id="mailSenderImpl" class="org.springframework.mail.javamail.JavaMailSenderImpl">
