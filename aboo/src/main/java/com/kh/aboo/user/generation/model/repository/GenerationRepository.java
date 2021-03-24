@@ -14,5 +14,6 @@ public interface GenerationRepository {
 	
 	@Insert("insert into TB_GENERATION(GENERATION_IDX,APARTMENT_IDX,ID,PASSWORD,BUILDING,NUM) values(SC_GENERATION_IDX.nextval,'100000',#{id},#{password},'101','101')")
 	public int insertGeneration(Generation generation);
+	
 }
 

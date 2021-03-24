@@ -116,10 +116,10 @@
                   <li class="nav-link">
                   <c:choose>
                   	<c:when test="${sessionScope.admin == null}">
-                    	<a href="#" class="nav-item dropdown-item">Log in</a>
+                    	<a href="/admin/login" class="nav-item dropdown-item">Log in</a>
                   	</c:when>
                   	<c:when test="${sessionScope.admin != null}">
-                    	<a href="#" class="nav-item dropdown-item">Log out</a>
+                    	<a href="/admin/logout" class="nav-item dropdown-item">Log out</a>
                   	</c:when>
                   </c:choose>
                   </li>
@@ -158,135 +158,48 @@
 		                    <div class="table-responsive">
 		                        <table class="table tablesorter " id="">
 		                            <thead class=" text-primary">
-		                                <th>NO.</th>
+		                                <th>인덱스</th>
 		                                <th>동 </th>
 		                                <th>호</th>
 		                                <th>아이디</th>
-		                                <th>비밀번호</th>
 		                                <th>입주일</th>
 		                            </thead>
 		                            <tbody>
-		                                <tr>
-		                                    <td>
-		                                        1
-		                                    </td>
-		                                    <td>
-		                                        301동
-		                                    </td>
-		                                    <td>
-		                                        101호
-		                                    </td>
-		                                    <td>
-		                                        301d101h
-		                                    </td>
-		                                    <td>
-		                                        123
-		                                    </td>
-		                                    <td>
-		                                        2021-03-18
-		                                    </td>
-		                                </tr>
-		                                <tr>
-		                                    <td>
-		                                        2
-		                                    </td>
-		                                    <td>
-		                                        301동
-		                                    </td>
-		                                    <td>
-		                                        102호
-		                                    </td>
-		                                    <td>
-		                                        301d102h
-		                                    </td>
-		                                    <td>
-		                                        123
-		                                    </td>
-		                                    <td>
-		                                        2021-03-18
-		                                    </td>
-		                                </tr>
-		                                <tr>
-		                                    <td>
-		                                        1
-		                                    </td>
-		                                    <td>
-		                                        301동
-		                                    </td>
-		                                    <td>
-		                                        101호
-		                                    </td>
-		                                    <td>
-		                                        301d101h
-		                                    </td>
-		                                    <td>
-		                                        123
-		                                    </td>
-		                                    <td>
-		                                        2021-03-18
-		                                    </td>
-		                                </tr>
-		                                <tr>
-		                                    <td>
-		                                        2
-		                                    </td>
-		                                    <td>
-		                                        301동
-		                                    </td>
-		                                    <td>
-		                                        102호
-		                                    </td>
-		                                    <td>
-		                                        301d102h
-		                                    </td>
-		                                    <td>
-		                                        123
-		                                    </td>
-		                                    <td>
-		                                        2021-03-18
-		                                    </td>
-		                                </tr>
-		                                <tr>
-		                                    <td>
-		                                        2
-		                                    </td>
-		                                    <td>
-		                                        301동
-		                                    </td>
-		                                    <td>
-		                                        102호
-		                                    </td>
-		                                    <td>
-		                                        301d102h
-		                                    </td>
-		                                    <td>
-		                                        123
-		                                    </td>
-		                                    <td>
-		                                        2021-03-18
-		                                    </td>
-		                                </tr>
+										<c:forEach items="${authorityList}" var="authority">
+											<tr>
+											    <td>${authority.generationIdx}</td>
+											    <td>${authority.building}</td>
+											    <td>${authority.num}</td>
+											   	<td>${authority.id}</td>
+											    <td>${authority.regDate}</td>
+											 </tr>
+									    </c:forEach>
 		                            </tbody>
 		                        </table>
 		                    </div>
 		                </div>		
 		            </div>
-						
 						<div class="row d-flex">
-						    <div class="col text-center">
-						      <div class="block-27">
-						        <ul>
-						          <li><a href="#">&lt;</a></li>
-						          <li class="active"><span>1</span></li>
-						          <li><a href="#">2</a></li>
-						          <li><a href="#">3</a></li>
-						          <li><a href="#">4</a></li>
-						          <li><a href="#">5</a></li>
-						          <li><a href="#">&gt;</a></li>
-						        </ul>
-						      </div>
-						    </div>
-						</div>		        
+					    <div class="col text-center">
+					      <div class="block-27">
+					        <ul>
+					        <li>
+	         				<a href="/admin/authority" class="nav first">&lt;&lt;</a>
+					        </li>
+					        <li><a href="/admin/authority?page=${paging.prev}">&lt;</a></li>
+					        <li> 
+					         <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
+			         		  <a href="/admin/authority?page=${page}">${page}</a>
+			         		 </c:forEach>
+			         		</li>
+					        <li><a href="/admin/authority?page=${paging.next}">&gt;</a></li>
+					        <li>
+	 	   	 				 <a href="/admin/authority?page=${paging.lastPage}">&gt;&gt;</a>
+					         </li>
+					        </ul>
+					      </div>
+					    </div>
+					</div>		        
 		        </div>
 		    </div>
 		</div>
@@ -524,44 +437,12 @@
 
       });
     </script>
-    <script type="text/javascript">
-	      let login = () => {
-	         const url = '/admin/loginimpl';
-	         let paramObj = new Object();
-	         paramObj.id = id.value;
-	         paramObj.password = password.value;
-	         
-	         let headerObj = new Headers();
-	         headerObj.append("content-type","application/json");
-	         fetch(url,{
-	            method:"post",
-	            headers:headerObj,
-	            //body:urlEncodeForm(paramObj)
-	            body:JSON.stringify(paramObj)
-	         }).then(response => {
-	            //response.ok : 상태코드 200~299사이라면 ok = true            
-	            if(response.ok){
-	               return response.text();   
-	            }
-	            //200번대 코드가 아니라면 에러를 발생시켜서 catch블록으로 이동
-	            throw new AsyncPageError(response.text());
-	         }).then((text) => {
-	            if(text == 'fail'){
-	          		alert("아이디와 비밀번호를 확인하세요")
-	            }else{
-	               <%-- 로그인에 성공하면 index페이지로 브라우저가 재요청 --%>
-	               location.href="/index";
-	            }
-	         }).catch(error => {
-	            error.alertMessage();
-	         });
-	      }
-	   </script>    
-
+  
 	
    <script type="text/javascript">
       $('#add').modal(options)
    </script>
+   
    <!-- 세대 추가 자바스크립트 -->
    <script type="text/javascript">
    let add = () => {
@@ -588,9 +469,9 @@
            throw new AsyncPageError(response.text());
         }).then((text) => {
            if(text == 'susesse'){
-         		alert("추가 완료")
+         		alert("세대 추가 완료")
+				location.href = "/admin/authority"
            }else{
-        		alert("추가 실패")
            }
         }).catch(error => {
            error.alertMessage();

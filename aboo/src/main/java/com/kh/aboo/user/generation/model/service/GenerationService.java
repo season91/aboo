@@ -9,4 +9,5 @@ public interface GenerationService {
 	
 	void insertGeneration(Generation generation);
 	
+	
 }
