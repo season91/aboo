@@ -40,17 +40,18 @@ public class GenerationControllerTest {
 //				).andDo(print());
 		
 		for (int i = 1; i < 10; i++) {
-			String a = "10"+i+"d";
+			String a = "10"+i;
 			System.out.println(a);
 			for (int j = 1; j < 7; j++) {
-				String b = i + "0" + j +"h";
+				String b = i + "0" + j;
 				System.out.println(a+b);
 				mockMvc.perform(get("/generation/add")
-		                  .param("id", a+b)
+		                  .param("id", a+"d"+b+"h")
 		                  .param("password", "123")
 		                  .param("apartmentIdx", "100000")
+		                  .param("building", a)
+		                  .param("num", b)
 		                  ).andDo(print());
-				continue;
 			}
 			
 		}
