@@ -82,6 +82,18 @@ public class BoardController {
 		
 	}
 	
+	@GetMapping("info/listinfo")
+	public void listInfo() {};
+	
+	@GetMapping("info/detailinfo")
+	public void detailInfo() {};
+	
+	@GetMapping("info/addinfo")
+	public void addInfo() {};
+	
+	@GetMapping("info/editinfo")
+	public void editInfo() {};
+	
 	
 	
 }

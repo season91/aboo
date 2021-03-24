@@ -58,5 +58,9 @@ public class Controller {
 		return "admin/vote/makevote";
 	}
 	
+	@GetMapping("myapt/schedule")
+	public void schedule() {
+
+	}
 	
 }
