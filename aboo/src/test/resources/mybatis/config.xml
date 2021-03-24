@@ -12,8 +12,8 @@
 
 <!-- 2. 경로 별칭 지정-->
 	<typeAliases>
-		<typeAlias type="com.kh.toy.member.model.vo.Member" alias="member"/>
-		<typeAlias type="com.kh.toy.board.model.vo.Board" alias="board"/>
+		<typeAlias type="com.kh.aboo.member.model.vo.Member" alias="member"/>
+		<typeAlias type="com.kh.aboo.board.model.vo.Board" alias="board"/>
 		
 	</typeAliases>
 

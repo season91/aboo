@@ -1,4 +1,4 @@
-package com.kh.toy.board;
+package com.kh.aboo.board;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

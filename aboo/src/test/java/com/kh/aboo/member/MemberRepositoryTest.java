@@ -1,4 +1,4 @@
-package com.kh.toy.member;
+package com.kh.aboo.member;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
