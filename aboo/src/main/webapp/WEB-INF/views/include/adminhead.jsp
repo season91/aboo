@@ -23,7 +23,7 @@
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="../../../resources/demo/demo.css" rel="stylesheet" />
 
-<title>pclass</title>
+<title>ABOO ADMIN</title>
 <%-- 
 	contextPath를 context변수에 저장
 	ex) 이 프로젝트에서는 contextPath가 jsp 이므로 jsp가 변수에 담긴다.
