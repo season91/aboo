@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <body>
-	   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
 	      <a class="navbar-brand" href="/index">ABOO</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,43 +31,56 @@
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
 
             <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/mypage/myalarm">My alarm</a></span><span class="mr-2"><a href="/mypage/myvehicle">My Management Fee</a></span><span class="mr-2"><a href="/mypage/modifyinfo">My Information</a></span><span class="mr-2"><a href="/mypage/writelist">My write list</a></span></p>
-	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">My vehicle</h1>
+              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/mypage/myalarm">My alarm</a></span><span class="mr-2"><a href="/mypage/myvehicle">My vehicle</a></span><span class="mr-2"><a href="/mypage/modifyinfo">My Information</a></span><span class="mr-2"><a href="/mypage/writelist">My write list</a></span></p>
+	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Management Fee detail</h1>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="ftco-section">
-    	<div class="container d-flex flex-column justify-content-center align-items-center">
-   		 <div class="col-md-7 text-center heading-section ftco-animate">
-            <h2 class="mb-4">현재 등록하신 차량은 2대 입니다.</h2>
-            <p>차량 추가 등록을 원하시는 세대는 관리자에게 신청하시기 바랍니다.</p>
-            <p>추가 등록은 세대당 최대 2대 이며, 2대 이상은 등록 불가능 합니다.</p>
+
+    <section class="ftco-section bg-light">
+    	<div class="container">
+    		<div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+            <h2 class="mb-4">21년 3월 관리비 상세 내역</h2>
+            <p>관리비 관련 문의사항은 관리자에게 문의해주시기 바랍니다.</p>
           </div>
-    		<div class="row col-md-10 d-flex justify-content-center">
-    			<div class="col-md-5 text-center ftco-animate">
-    				<div class="steps">
-    					<div class="icon mb-3 d-flex justify-content-center align-items-center">
-    						<span><i class="fas fa-car"></i></span>
-    					</div>
-    					<p>차량번호 123가 1234</p>
-    					<p>등록일 2018년 10월 17일</p>
-    				</div>
-    			</div>
-    			<div class="col-md-5 text-center ftco-animate">
-    				<div class="steps">
-    					<div class="icon mb-3 d-flex justify-content-center align-items-center">
-    						<span><i class="fas fa-car"></i></span>
-    					</div>
-    					<p>차량번호 456나 5678</p>
-    					<p>등록일 2020년 1월 11일</p>
-    				</div>
-    			</div>
-    		</div>
+        </div>
+    		<div class="row d-flex justify-content-center">
+	        <div class="col-lg-6 col-md-10 ftco-animate ">
+	          <div class="block-7">
+	            <div class="text-center">
+		            <span class="price"><span class="number">21년 3월 고지서</span></span>
+		            <span class="price"><span class="number">260,000</span></span>
+		            <span class="excerpt d-block"><strong>관리비 작성일 </strong> 21년 4월 1일</span>
+		            <span class="excerpt d-block"><strong>관리기간 </strong>21년 3월 1일 ~ 3월 31일</span>
+		            <ul class="pricing-text mb-4">
+		              <li><strong>일반관리비</strong> 75,000</li>
+		              <li><strong>청소비</strong> 15,000</li>
+		              <li><strong>승강기유지비</strong> 2,000</li>
+		              <li><strong>세대전기료</strong> 65,000</li>
+		              <li><strong>공동전기료</strong> 13,000</li>
+		              <li><strong>세대수도료</strong> 20,000</li>
+		              <li><strong>하수도료</strong> 30,000</li>
+		              <li><strong>경비비</strong> 50,000</li>
+		              <li><strong>세대감면액</strong> -10,000</li>
+		              <li><strong>납기내 금액</strong> 260,000</li>
+		              <li><strong>납기일</strong> 21년 4월 10일</li>
+		              <li>납부기한을 넘겨 납부하면 연체료가 일할계산되어 다음달 관리비에 포함됩니다.</li>
+		            </ul>
+			          <a href="#" class="btn btn-primary d-block px-3 py-3 mb-4">결제하기</a>
+	            </div>
+	          </div>
+	          <div class="row d-flex justify-content-center">
+	          	 <a href="/mypage/mgmtfee" class="btn btn-primary btn-primary-2 p-3 px-xl-5 py-xl-3" style="background: linear-gradient(45deg, #56c8fb 0%, #627bed 100%); border: none;">목록으로</a>
+	          </div>
+	        </div>
+	      </div>
     	</div>
     </section>
+
 
     <footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container">
@@ -136,8 +149,6 @@
         </div>
       </div>
     </footer>
-  
-    
   
 
   <!-- loader -->

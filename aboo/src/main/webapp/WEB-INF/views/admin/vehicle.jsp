@@ -25,49 +25,49 @@
         </div>
         <ul class="nav">
           <li >
-            <a href="./dashboard.html">
+            <a href="/admin/mypage/modifyinfos">
               <i class="tim-icons icon-badge"></i>
               <p>Mypage</p>
             </a>
           </li>
           <li>
-            <a href="./dashboard.html">
+            <a href="/admin/vote/makevote">
               <i class="tim-icons icon-tap-02"></i>
               <p>Vote</p>
             </a>
           </li>
           <li>
-            <a href="./icons.html">
+            <a href="/admin/authority">
               <i class="tim-icons icon-single-02"></i>
               <p>Authority</p>
             </a>
           </li>
           <li>
-            <a href="./map.html">
+            <a href="/admin/mgmtfee">
               <i class="tim-icons icon-chart-bar-32"></i>
-              <p>Mgmtfee</p>
+              <p>Management Fee</p>
             </a>
           </li>
           <li class="active ">
-            <a href="./notifications.html">
+            <a href="/admin/vehicle">
               <i class="tim-icons icon-bus-front-12"></i>
               <p>Vehicle</p>
             </a>
           </li>
           <li>
-            <a href="./user.html">
+            <a href="/admin/schedule/addschedule">
               <i class="tim-icons icon-calendar-60"></i>
               <p>Schedule</p>
             </a>
           </li>
           <li>
-            <a href="./tables.html">
+            <a href="/admin/chat">
               <i class="tim-icons icon-chat-33"></i>
               <p>Chat</p>
             </a>
           </li>
           <li>
-            <a href="./rtl.html">
+            <a href="/admin/bdin">
               <i class="tim-icons icon-key-25"></i>
               <p>BDIN</p>
             </a>
@@ -406,8 +406,8 @@
           <nav>
             <ul>
               <li>
-                <a href="/aboutus">
-                  About Us
+                <a href="/about">
+                  About
                 </a>
               </li>
               <li>
