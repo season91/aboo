@@ -117,10 +117,10 @@
                   <li class="nav-link">
                   <c:choose>
                   	<c:when test="${sessionScope.admin == null}">
-                    	<a href="#" class="nav-item dropdown-item">Log in</a>
+                    	<a href="/admin/login" class="nav-item dropdown-item">Log in</a>
                   	</c:when>
                   	<c:when test="${sessionScope.admin != null}">
-                    	<a href="#" class="nav-item dropdown-item">Log out</a>
+                    	<a href="/admin/logout" class="nav-item dropdown-item">Log out</a>
                   	</c:when>
                   </c:choose>
                   </li>
@@ -237,7 +237,7 @@
 	          		alert("아이디와 비밀번호를 확인하세요")
 	            }else{
 	               <%-- 로그인에 성공하면 index페이지로 브라우저가 재요청 --%>
-	               location.href="/index";
+	               location.href="/admin/index";
 	            }
 	         }).catch(error => {
 	            error.alertMessage();

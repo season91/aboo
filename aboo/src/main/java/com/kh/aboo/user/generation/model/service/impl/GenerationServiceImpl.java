@@ -31,4 +31,9 @@ public class GenerationServiceImpl implements GenerationService {
 		return authInfo;
 	}
 
+	@Override
+	public void insertGeneration(Generation generation) {
+		generationRepository.insertGeneration(generation);
+	}
+
 }

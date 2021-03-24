@@ -2,6 +2,8 @@ package com.kh.aboo.user.admin.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,11 +16,18 @@ import com.kh.aboo.user.generation.model.vo.Generation;
 
 @Controller
 public class AdminController {
+	@Autowired
+	private PasswordEncoder encoder;
 
 	private final AdminService adminService;
 
 	public AdminController(AdminService adminService) {
 		this.adminService = adminService;
+	}
+
+	@GetMapping("admin/index")
+	public String admin() {
+		return "admin/index";
 	}
 
 	@GetMapping("admin/login")
@@ -46,15 +55,36 @@ public class AdminController {
 	public String adminAuthority() {
 		return "admin/authority";
 	}
-	
+
 	@PostMapping("admin/authorityadd")
 	@ResponseBody
 	public String authorityAdd(@RequestBody Generation generationInfo) {
-		
-		
+
 		System.out.println(generationInfo);
-		
+
 		return "susesse";
 	}
 
+	@GetMapping("admin/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("admin");
+		return "redirect:/admin/index";
+	}
+
+	// 어드민 추가 메서드 이거 쓰세용
+	@GetMapping("admin/add")
+	public void adminAdd() {
+		Admin admin = new Admin();
+		admin.setId("admin2");
+		admin.setPassword(encoder.encode("admin2"));
+		admin.setName("어드민2");
+		admin.setTell("010-9268-0961");
+		admin.setEmail("suny10312@naver.com");
+		String birth = "2000-02-28";
+		java.sql.Date birthday = java.sql.Date.valueOf(birth);
+		admin.setBirth(birthday);
+		System.out.println(admin);
+
+		adminService.insertAdmin(admin);
+	}
 }

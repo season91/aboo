@@ -1,30 +1,50 @@
 package com.kh.aboo.user.admin.model.vo;
 
+import java.sql.Date;
+
 public class Admin {
 
-	private String adminIdx;
+	private String partnerIdx;
+	private String apartmentIdx;
 	private String id;
 	private String password;
+	private String name;
+	private String email;
+	private String tell;
+	private Date birth;
 	private String isDel;
 
 	public Admin() {
-
 	}
 
-	public Admin(String adminIdx, String id, String password, String isDel) {
+	public Admin(String partnerIdx, String apartmentIdx, String id, String password, String name, String email,
+			String tell, Date birth, String isDel) {
 		super();
-		this.adminIdx = adminIdx;
+		this.partnerIdx = partnerIdx;
+		this.apartmentIdx = apartmentIdx;
 		this.id = id;
 		this.password = password;
+		this.name = name;
+		this.email = email;
+		this.tell = tell;
+		this.birth = birth;
 		this.isDel = isDel;
 	}
 
-	public String getAdminIdx() {
-		return adminIdx;
+	public String getPartnerIdx() {
+		return partnerIdx;
 	}
 
-	public void setAdminIdx(String adminIdx) {
-		this.adminIdx = adminIdx;
+	public void setPartnerIdx(String partnerIdx) {
+		this.partnerIdx = partnerIdx;
+	}
+
+	public String getApartmentIdx() {
+		return apartmentIdx;
+	}
+
+	public void setApartmentIdx(String apartmentIdx) {
+		this.apartmentIdx = apartmentIdx;
 	}
 
 	public String getId() {
@@ -43,6 +63,38 @@ public class Admin {
 		this.password = password;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getTell() {
+		return tell;
+	}
+
+	public void setTell(String tell) {
+		this.tell = tell;
+	}
+
+	public Date getBirth() {
+		return birth;
+	}
+
+	public void setBirth(Date birth) {
+		this.birth = birth;
+	}
+
 	public String getIsDel() {
 		return isDel;
 	}
@@ -53,7 +105,9 @@ public class Admin {
 
 	@Override
 	public String toString() {
-		return "Admin [adminIdx=" + adminIdx + ", id=" + id + ", password=" + password + ", isDel=" + isDel + "]";
+		return "Admin [partnerIdx=" + partnerIdx + ", apartmentIdx=" + apartmentIdx + ", id=" + id + ", password="
+				+ password + ", name=" + name + ", email=" + email + ", tell=" + tell + ", birth=" + birth + ", isDel="
+				+ isDel + "]";
 	}
 
 }

@@ -5,5 +5,6 @@ import com.kh.aboo.user.admin.model.vo.Admin;
 
 public interface AdminService {
 	Admin selectGenerationForAuth(Admin admin);
-
+	void insertAdmin(Admin admin);
+	
 }

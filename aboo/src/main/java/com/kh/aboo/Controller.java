@@ -12,10 +12,6 @@ public class Controller {
 		return "generation/index";
 	}
 	
-	@GetMapping("admin/index")
-	public String admin() {
-		return "admin/index";
-	}
 	
 	@GetMapping("myapt/parking")
 	public void parking() {};

@@ -22,13 +22,18 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Admin selectGenerationForAuth(Admin admin) {
-		
+
 		Admin authInfo = adminRepository.selectGenerationForAuth(admin.getId());
 		if (authInfo == null || !encoder.matches(admin.getPassword(), authInfo.getPassword())) {
 			return null;
 		}
 
 		return authInfo;
+	}
+
+	@Override
+	public void insertAdmin(Admin admin) {
+		adminRepository.insertAdmin(admin);
 	}
 
 }
