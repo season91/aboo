@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.kh.aboo.common.code.ErrorCode;
+import com.kh.aboo.common.exception.ToAlertException;
 import com.kh.aboo.user.generation.model.service.GenerationService;
 import com.kh.aboo.user.generation.model.vo.Generation;
+import com.kh.aboo.user.manager.model.vo.Admin;
 
 @Controller
 public class GenerationController {
@@ -65,9 +68,9 @@ public class GenerationController {
 
 	@PostMapping("mypage/findidimpl")
 	@ResponseBody
-	public String findidImpl(@RequestBody Generation generation, HttpSession session) {
+	public String findidImpl(@RequestBody Generation generationInfo, HttpSession session) {
 
-		Generation findGeneration = generationService.selectfindid(generation);
+		Generation findGeneration = generationService.selectFindId(generationInfo);
 		System.out.println(findGeneration);
 
 		if (findGeneration == null) {
@@ -89,7 +92,7 @@ public class GenerationController {
 		Generation findGeneration = (Generation) session.getAttribute("findGeneration");
 
 		if (!certifiedNum.equals(authPath)) {
-			model.addAttribute("alertMsg", "인증번호가 일치 하지 않습니다");
+			throw new ToAlertException(ErrorCode.AH01);
 		}
 
 		model.addAttribute("url", "/mypage/findidresult");
@@ -100,11 +103,46 @@ public class GenerationController {
 	}
 
 	
-	
 	@GetMapping("mypage/findidresult")
 	public String findidResult() {
 		return "mypage/findIdResult";
 	}
+	
+	
+	@GetMapping("mypage/findpassword")
+	public String findPassword() {
+		return "mypage/findPassword";
+	}
+	
+	
+	@PostMapping("mypage/findpasswordimpl")
+	@ResponseBody
+	public String findPasswordImpl(Generation generationInfo, HttpSession session,Model model) {
+			
+		System.out.println(generationInfo);
+		Generation generation = generationService.selectFindPassword(generationInfo);
+		if (generation == null) {
+			throw new ToAlertException(ErrorCode.AH02);
+		}		
+		
+		model.addAttribute("alertMsg", "임시비밀번호를 발송하였습니다.");
+		model.addAttribute("url", "/mypage/findpassword");
+		return "common/result";
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	// 세대 추가 메서드 이거 쓰세용

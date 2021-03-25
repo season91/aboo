@@ -10,9 +10,12 @@ public interface GenerationService {
 	void insertGeneration(Generation generation);
 	
 	//아이디 찾기 전 확인
-	Generation selectfindid(Generation generation);
+	Generation selectFindId(Generation generation);
 	
 	//아이디 찾기 메일
 	void authenticationIdMail(Generation generation ,String authPath);
+	
+	//비밀번호 찾기 전 확인
+	Generation selectFindPassword(Generation generation);
 
 }

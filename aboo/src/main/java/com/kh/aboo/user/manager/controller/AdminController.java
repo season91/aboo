@@ -4,6 +4,7 @@ import java.io.File;
 import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -32,6 +34,7 @@ import com.kh.aboo.user.manager.model.service.AdminService;
 import com.kh.aboo.user.manager.model.vo.Admin;
 
 @Controller
+@RequestMapping("admin")
 public class AdminController {
 
 	@Autowired
@@ -44,19 +47,27 @@ public class AdminController {
 	}
 
 	// 선영
-	@GetMapping("admin/index")
+	@GetMapping("index")
 	public String admin() {
 		return "admin/index";
 	}
 
 	// 선영
-	@GetMapping("admin/login")
+	@GetMapping("login")
 	public String login() {
 		return "admin/login";
 	}
+	
+	// 선영
+	@GetMapping("logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("admin");
+		return "redirect:/admin/index";
+	}
+
 
 	// 선영
-	@PostMapping("admin/loginimpl")
+	@PostMapping("loginimpl")
 	@ResponseBody
 	public String loginimpl(@RequestBody Admin adminInfo, HttpSession session) {
 
@@ -73,7 +84,7 @@ public class AdminController {
 	}
 
 	// 선영
-	@GetMapping("admin/authority")
+	@GetMapping("authority")
 	public String adminAuthority(@RequestParam(defaultValue = "1") int page
 			,@SessionAttribute(name = "admin", required = false)Admin admin, Model model) {
 				
@@ -83,7 +94,7 @@ public class AdminController {
 	}
 
 	// 선영
-	@PostMapping("admin/authorityadd")
+	@PostMapping("authorityadd")
 	@ResponseBody
 	public String authorityAdd(@RequestBody Generation generationInfo,
 			@SessionAttribute(name = "admin", required = false) Admin admin) {
@@ -96,15 +107,58 @@ public class AdminController {
 		return "susesse";
 	}
 
+	
 	// 선영
-	@GetMapping("admin/logout")
-	public String logout(HttpSession session) {
-		session.removeAttribute("admin");
-		return "redirect:/admin/index";
+	@GetMapping("mypage/findid")
+	public String findId() {
+		return "admin/mypage/findId";
 	}
 
+	
+	@PostMapping("mypage/findidimpl")
+	@ResponseBody
+	public String findidImpl(@RequestBody Admin adminInfo, HttpSession session) {
+		System.out.println(adminInfo);
+
+		Admin findAdmin = adminService.selectfindId(adminInfo);
+		
+
+		if (findAdmin == null) {
+			return "fail";
+		} else {
+			String authPath = UUID.randomUUID().toString();
+			session.setAttribute("authPath", authPath);
+			session.setAttribute("findAdmin", findAdmin);
+			adminService.authenticationIdMail(adminInfo, authPath);
+			return "success";
+		}
+
+	}
+	
+	@GetMapping("mypage/authenticationid")
+	public String authenticationId(@RequestParam String certifiedNum, HttpSession session, Model model) {
+
+		String authPath = (String) session.getAttribute("authPath");
+		Admin findAdmin = (Admin) session.getAttribute("findAdmin");
+
+		if (!certifiedNum.equals(authPath)) {
+			throw new ToAlertException(ErrorCode.AH01);
+		}
+
+		model.addAttribute("url", "/admin/mypage/findidresult");
+		model.addAttribute("findAdmin", findAdmin);
+
+		return "common/result";
+
+	}
+	
+	@GetMapping("mypage/findidresult")
+	public String findidResult() {
+		return "/admin/mypage/findIdResult";
+	}
+	
 	// 선영 어드민 추가 메서드 이거 쓰세용
-	@GetMapping("admin/add")
+	@GetMapping("add")
 	public void adminAdd() {
 		Admin admin = new Admin();
 		admin.setId("admin2");

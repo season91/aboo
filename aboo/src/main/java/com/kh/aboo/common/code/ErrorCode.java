@@ -14,7 +14,10 @@ public enum ErrorCode {
 	MAIL01("메일 발송 중 에러가 발생했습ㅂ니다."),
 	API01("API통신 도중 에러가 발생하였습니다."),
 	ER01("EXCEL 업로드 중 에러가 발생했습니다.","/admin/mgmtfee"),
-	CD_404("존재하지 않는 경로입니다.");
+	CD_404("존재하지 않는 경로입니다."),
+	AH01("잘못된 인증 번호입니다","/mypage/findid"),
+	AH02("존재하지 않는 사용자입니다.","/mypage/findpassword"),
+	AAH01("잘못된 인증 번호입니다","/admin/mypage/findid");
 	
 	//result.jsp를 사용해 띄울 안내문구 
 	private String errMsg;

@@ -72,7 +72,7 @@
 		<h4 class="text-center mb-4">회원님의 아이디는</h4>
 		<div class="container">
 			<div class="row block-9 justify-content-center">
-				<b>${findGeneration.id}</b>입니다 감사합니다.
+				<b>${findAdmin.id}</b>입니다 감사합니다.
 			</div>
 		</div>
 	</section>

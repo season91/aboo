@@ -51,7 +51,7 @@ public class GenerationServiceImpl implements GenerationService {
 	}
 
 	@Override
-	public Generation selectfindid(Generation generation) {
+	public Generation selectFindId(Generation generation) {
 		return generationRepository.selectFindId(generation);
 	}
 
@@ -68,6 +68,11 @@ public class GenerationServiceImpl implements GenerationService {
 		String message = response.getBody();
 		mail.send(generation.getEmail(), "메일", message);
 
+	}
+
+	@Override
+	public Generation selectFindPassword(Generation generation) {
+		return generationRepository.selectFindPassword(generation);
 	}
 
 }
