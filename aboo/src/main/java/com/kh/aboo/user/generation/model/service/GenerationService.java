@@ -17,5 +17,11 @@ public interface GenerationService {
 	
 	//비밀번호 찾기 전 확인
 	Generation selectFindPassword(Generation generation);
+	
+	//비밀번호 변경
+	void updateFindPassword(Generation generation);
+	
+	//비밀번호 찾기 메일
+	void authenticationPasswordMail(Generation generation, String password);
 
 }

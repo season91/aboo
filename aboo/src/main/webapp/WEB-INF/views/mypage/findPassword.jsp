@@ -47,17 +47,15 @@
       <div class="container">
         <div class="row block-9 justify-content-center">
           <div class="col-md-6">
-            <form action="/mypage/findpasswordimpl" method="post">
               <div class="form-group">
-                <input type="text" class="form-control" name="id" placeholder="아이디">
+                <input type="text" class="form-control" id = "id" name="id" placeholder="아이디">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" name = "email" placeholder="이메일">
+                <input type="text" class="form-control" id = "email" name = "email" placeholder="이메일">
               </div>
               <div class="form-group">
-                <input type="submit" value="확인" class="btn btn-primary py-3 px-5 col-sm-12" >
+                <input type="submit" value="확인" class="btn btn-primary py-3 px-5 col-sm-12" onclick="emailSend()" >
               </div>
-            </form>
       		<div class = "col-sm-12 d-flex justify-content-center"><div><a href="/admin/mypage/findid">아이디 찾기</a> | <a href="/admin/mypage/findpassword">비밀번호 찾기</a></div></div> 
           </div>
         </div>
@@ -136,11 +134,10 @@
 	
 	<script type="text/javascript">
       let emailSend = () => {
-          const url = '/mypage/findidimpl';
+          const url = '/mypage/findpasswordimpl';
           
           let paramObj = new Object();
-          paramObj.building = document.querySelector("#building").value;
-          paramObj.num = document.querySelector("#num").value;
+          paramObj.id = document.querySelector("#id").value;
           paramObj.email = document.querySelector("#email").value;
           
           let headerObj = new Headers();
@@ -159,7 +156,6 @@
                 alert('존재하지 않는 사용자입니다.')
              }else{ 
                  alert('메일이 발송되었습니다.');
-                 document.querySelector("#certifiedBox").style.display = ''
              }
           }).catch(error => {
              error.alertMessage();

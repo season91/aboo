@@ -102,32 +102,38 @@ public class GenerationController {
 
 	}
 
-	
 	@GetMapping("mypage/findidresult")
 	public String findidResult() {
 		return "mypage/findIdResult";
 	}
-	
-	
+
 	@GetMapping("mypage/findpassword")
 	public String findPassword() {
 		return "mypage/findPassword";
 	}
-	
-	
+
 	@PostMapping("mypage/findpasswordimpl")
 	@ResponseBody
-	public String findPasswordImpl(Generation generationInfo, HttpSession session,Model model) {
+	public String findPasswordImpl(@RequestBody Generation generationInfo, HttpSession session, Model model) {
+
+		Generation findGeneration = generationService.selectFindPassword(generationInfo);
+		System.out.println(findGeneration);
+		if (findGeneration == null) {
+			return "fail";
+		} else {
 			
-		System.out.println(generationInfo);
-		Generation generation = generationService.selectFindPassword(generationInfo);
-		if (generation == null) {
-			throw new ToAlertException(ErrorCode.AH02);
-		}		
-		
-		model.addAttribute("alertMsg", "임시비밀번호를 발송하였습니다.");
-		model.addAttribute("url", "/mypage/findpassword");
-		return "common/result";
+			String password = UUID.randomUUID().toString().replace("-","");
+			password = password.substring(0,10);
+			System.out.println("임시 번호 : "+ password);
+			
+			generationService.authenticationIdMail(findGeneration, password);
+			
+			findGeneration.setPassword(password);
+			generationService.updateFindPassword(findGeneration);
+			
+			return "success";
+
+		}
 
 	}
 	
@@ -145,6 +151,16 @@ public class GenerationController {
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 	// 세대 추가 메서드 이거 쓰세용
 	// 세대 더미 용
 	@GetMapping("generation/add")

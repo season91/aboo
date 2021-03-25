@@ -22,5 +22,11 @@ public interface GenerationRepository {
 	//비밀번호 메일보내기 전에 있는 세대인지 체크
 	@Select("select * from TB_GENERATION where email = #{email} and id = #{id}")
 	public Generation selectFindPassword(Generation generation);
+	
+	//비밀번호 메일보내기 전에 있는 세대인지 체크
+	@Select("update TB_GENERATION set PASSWORD = #{password} where ID = #{id}")
+	public void updateFindPassword(Generation generation);
+	
+	
 }
 

@@ -187,11 +187,16 @@
 	         				<a href="/admin/authority" class="nav first">&lt;&lt;</a>
 					        </li>
 					        <li><a href="/admin/authority?page=${paging.prev}">&lt;</a></li>
-					        <li> 
-					         <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
-			         		  <a href="/admin/authority?page=${page}">${page}</a>
+					         <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">					         
+						         <c:choose>
+						         	<c:when test="${paging.currentPage eq page}">
+				         		  		<li class = "active"><a href="/admin/authority?page=${page}">${page}</a></li>
+						         	</c:when>
+						         	<c:otherwise>
+				         		  		<li><a href="/admin/authority?page=${page}">${page}</a></li>
+						         	</c:otherwise>
+						         </c:choose>
 			         		 </c:forEach>
-			         		</li>
 					        <li><a href="/admin/authority?page=${paging.next}">&gt;</a></li>
 					        <li>
 	 	   	 				 <a href="/admin/authority?page=${paging.lastPage}">&gt;&gt;</a>
