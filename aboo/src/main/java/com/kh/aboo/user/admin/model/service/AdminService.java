@@ -20,7 +20,8 @@ public interface AdminService {
 	Map<String, Object> mgmtfeeRead(MultipartFile file);
 	
 	//아영 관리비 mgmtfee vo에 넣어 DB에 추가하기.
-	List<Mgmtfee> addMgmtfee(Map<String,Object> commandMap);
+	List<Mgmtfee> insertMgmtfee(Map<String,Object> commandMap);
+	
 
 	//선영 어드민 세대 추가
 	int insertGeneration(Generation generation, String apartmentIdx);

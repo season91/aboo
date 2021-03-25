@@ -12,7 +12,7 @@ public interface GenerationRepository {
 	@Select("select * from TB_GENERATION where ID = #{Id} and IS_DEL = 0")
 	public Generation selectGenerationForAuth(String Id);
 	
-	@Insert("insert into TB_GENERATION(GENERATION_IDX,APARTMENT_IDX,ID,PASSWORD,BUILDING,NUM) values(SC_GENERATION_IDX.nextval,'100000',#{id},#{password},'101','101')")
+	@Insert("insert into TB_GENERATION(GENERATION_IDX,APARTMENT_IDX,ID,PASSWORD,BUILDING,NUM) values(SC_GENERATION_IDX.nextval,#{apartmentIdx},#{id},#{password},#{building},#{num})")
 	public int insertGeneration(Generation generation);
 	
 }

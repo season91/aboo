@@ -130,24 +130,43 @@ public class AdminServiceImpl implements AdminService {
 
 	// 아영 : 읽은 엑셀파일을 mgmtfee vo에 넣고 DB에 추가한다.
 	@Override
-	public List<Mgmtfee> addMgmtfee(Map<String, Object> commandMap) {
+	public List<Mgmtfee> insertMgmtfee(Map<String, Object> commandMap) {
 		List<Mgmtfee> mgmtfeeList = new ArrayList<>();
 		Mgmtfee mgmtfee = null;
 		for (String key : commandMap.keySet()) {
 			// System.out.println(commandMap.get(key));
 			List<String> list = (List<String>) commandMap.get(key);
-			// System.out.println("동호수:" + list.get(0)+"d"+list.get(1)+"h");
-			// System.out.println("일반관리비:"+list.get(2));
-			mgmtfee = Mgmtfee.builder().generationInfo(list.get(0) + "d" + list.get(1) + "h").gnrlMgmtFee(list.get(2))
-					.cleanFee(list.get(3)).elvtrMnfee(list.get(4)).genElctr(list.get(5)).comonElctr(list.get(6))
-					.genWater(list.get(7)).sewer(list.get(8)).expenses(list.get(9)).genReduction(list.get(10))
-					.periodPayment(list.get(11)).dueDate(Date.valueOf(list.get(12)))
-					.mgmtStartDate(Date.valueOf(list.get(13))).mgmtEndDate(Date.valueOf(list.get(14)))
-					.mgmtWriteDate(Date.valueOf(list.get(15))).build();
+			//System.out.println("동호수:" + list.get(0)+"d"+list.get(1)+"h");
+			//System.out.println("일반관리비:"+list.get(2));
+			
+			// 동호수로 세대관리번호 조회해온다.
+			String generationInfo = list.get(0)+"d"+list.get(1)+"h";
+			Generation generation = adminRepository.selectGenerationIdx(generationInfo);
+			
+			mgmtfee = Mgmtfee.builder()
+					.generationIdx(generation.getGenerationIdx())
+					.gnrlMgmtFee(list.get(2))
+					.cleanFee(list.get(3))
+					.elvtrMnfee(list.get(4))
+					.genElctr(list.get(5))
+					.comonElctr(list.get(6))
+					.genWater(list.get(7))
+					.sewer(list.get(8))
+					.expenses(list.get(9))
+					.genReduction(list.get(10))
+					.periodPayment(list.get(11))
+					.dueDate(Date.valueOf(list.get(12)))
+					.mgmtStartDate(Date.valueOf(list.get(13)))
+					.mgmtEndDate(Date.valueOf(list.get(14)))
+					.mgmtWriteDate(Date.valueOf(list.get(15)))
+					.build();
 			System.out.println(mgmtfee.toString());
+
+			adminRepository.insertMgmtfee(mgmtfee);
 			mgmtfeeList.add(mgmtfee);
 		}
-
+		
+		
 		return mgmtfeeList;
 	}
 

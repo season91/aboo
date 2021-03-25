@@ -16,6 +16,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.aboo.common.code.Configcode;
+import com.kh.aboo.user.admin.model.repository.AdminRepository;
+import com.kh.aboo.user.generation.model.vo.Generation;
 
 public class FileUtil {
 	
@@ -76,7 +78,7 @@ public class FileUtil {
 	}
 	
 	// 아영 : 관리비 엑셀 양식 선 셋팅.
-	public XSSFWorkbook mgmtfeeFormSetting() {
+	public XSSFWorkbook mgmtfeeFormSetting(String apartmentIdx) {
 		// XSSFWorkbook은 엑셀파일 전체 내용을 담고 있는 객체
 		// 엑셀을 구성하는 것은 총4개이다. 아래 객체를 구현해야한다.
 		// XSSFWorkbook 
@@ -92,7 +94,7 @@ public class FileUtil {
 		XSSFCell cell;
 		
 		// 엑셀 양식 지정
-		// 들어가야할 항목 15개
+		// 1. 관리비 항목 : 들어가야할 항목 15개
 		// 세대정보,일반관리비,청소비,승강기유지비,세대전기료,공동전기료
 		// 세대수도료, 하수도료, 경비비, 세대감면액, 납기내금액, 납기일
 		// 관리시작일, 관리종료일, 관리비작성일
@@ -104,13 +106,17 @@ public class FileUtil {
 			cell.setCellValue(writeList[i]);
 		}
 		
+		// 2. 세대정보
+		
+		
+		
 		return workbook;
 	}
 	
 	// 아영 : 셋팅된 양식 excel file로 구성하기.
-	public File mfmtgeeFormExcel() {
+	public File mfmtgeeFormExcel(String apartmentIdx) {
 		// excel 양식 셋팅하기
-		XSSFWorkbook workbook = mgmtfeeFormSetting();
+		XSSFWorkbook workbook = mgmtfeeFormSetting(apartmentIdx);
 		
 		// 파일 내보내기
 		// 파일 명

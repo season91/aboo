@@ -53,12 +53,15 @@ public class GenerationController {
 	}
 	
 	//세대 추가 메서드 이거 쓰세용 
+	//세대 더미 용
 	@GetMapping("generation/add") 
-	public void generationAdd() {
+	public void generationAdd(String id, String password, String apartmentIdx, String building, String num) {
 		Generation generation = new Generation();
-		generation.setId("101d101h");
-		generation.setPassword(encoder.encode("123"));
-		generation.setApartmentIdx("100000");
+		generation.setId(id);
+		generation.setPassword(encoder.encode(password));
+		generation.setApartmentIdx(apartmentIdx);
+		generation.setBuilding(building);
+		generation.setNum(num);
 		
 		generationService.insertGeneration(generation);
 	}

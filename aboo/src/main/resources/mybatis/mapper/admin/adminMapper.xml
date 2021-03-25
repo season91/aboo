@@ -17,4 +17,13 @@
 			) where rnum between #{paging.queryStart} and #{paging.queryEnd}
 		
 	</select>
-    </mapper>
+
+	<insert id="insertMgmtfee">
+		insert into tb_mgmtfee (MGMTFEE_IDX, GENERATION_IDX, GNRL_MGMT_FEE, CLEAN_FEE, ELVTR_MNFEE, GEN_ELCTR, COMON_ELCTR, GEN_WATER,
+		SEWER, EXPENSES, GEN_REDUCTION, PERIOD_PAYMENT, DUE_DATE, MGMT_START_DATE, MGMT_END_DATE, MGMT_WRITE_DATE) 
+		values (sc_mgmtfee_idx.nextval, #{generationIdx}, #{gnrlMgmtFee},
+		#{cleanFee}, #{elvtrMnfee}, #{genElctr}, #{comonElctr}, #{genWater}, #{sewer}, #{expenses}, #{genReduction}, #{periodPayment},
+		#{dueDate}, #{mgmtStartDate}, #{mgmtEndDate}, #{mgmtWriteDate})
+	</insert>
+	
+</mapper>
