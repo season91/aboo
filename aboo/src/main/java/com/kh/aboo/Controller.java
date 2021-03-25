@@ -44,11 +44,7 @@ public class Controller {
 	public String makeVote() {
 		return "admin/vote/makevote";
 	}
-	
-	@GetMapping("myapt/schedule")
-	public void schedule() {
 
-	}
 	
 	@GetMapping("common/adminresult")
 	public void adminresult() {};

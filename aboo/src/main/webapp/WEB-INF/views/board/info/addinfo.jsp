@@ -46,24 +46,25 @@
             <h2 class="h4 pl-4">정보 & 질문 게시판</h2>
             <p class="h6 mt-3 pl-4">게시글 작성</p>
             <div class="card-body mt-4">
-                    <a class="nav-link dropdown-toggle border col-md-2 text-dark mb-3" href="#" id="userDropdown" role="button"
-                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                         <span>Category</span>
-                   </a>
+             
                    <!-- Dropdown - 말머리 -->
-                   <div class="dropdown-menu animated--grow-in"
-                         aria-labelledby="userDropdown">
-                      <a class="dropdown-item" href="#">
-                           정보
-                      </a>
-                      <a class="dropdown-item" href="#">
-                           질문
-                      </a>
+                   <div class="dropdown mb-3">
+                   		<button id="mystatus" class="btn dropdown-toggle" aria-haspopup="true"  aria-expanded="false" data-toggle="dropdown">
+                   			Category
+                   		</button>
+                    <ul id="mytype" class="dropdown-menu" role="menu" aria-labelledby="searchType">
+				        <li>
+				            <a role="menuitem" tabindex="-1" value="정보">정보</a>
+				        </li>
+				        <li>
+				            <a role="menuitem" tabindex="-1"  value="질문">질문</a>
+				        </li>
+				    </ul>
                    </div>
                    
                    <div class="row block-9">
 			          <div class="col-md-12">
-			            <form action="#">
+			            <form action="${context}/board/info/upload" method="post" enctype="multipart/form-data">
 			              <div class="form-group">
 			                <input type="text" class="form-control" placeholder="제목을 입력하세요">
 			              </div>
@@ -186,7 +187,17 @@
  			 'info_content', 
  			 {height: 500                                                  
            });
+ 	 
+ 
   
+  </script>
+  
+  <script type="text/javascript">
+		$('#mytype li > a').on('click', function() {
+	 	    // 버튼에 선택된 항목 텍스트 넣기 
+	 	    $('#mystatus').text($(this).text());
+
+	 	});
   </script>
 
 
