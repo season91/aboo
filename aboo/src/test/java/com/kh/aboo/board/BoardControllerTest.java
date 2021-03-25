@@ -20,7 +20,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class) 
-@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/*-context.xml"}) 
+@ContextConfiguration(locations = {"file:aboo/src/main/webapp/WEB-INF/spring/**/*-context.xml"}) 
 public class BoardControllerTest {
 	
 
