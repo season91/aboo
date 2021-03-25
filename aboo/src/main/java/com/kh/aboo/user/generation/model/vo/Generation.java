@@ -12,12 +12,13 @@ public class Generation {
 	private String email;
 	private String building;
 	private String num;
+	private String isDel;
 
 	public Generation() {
 	}
 
 	public Generation(String generationIdx, String apartmentIdx, String id, String password, String tell, Date regDate,
-			String email, String building, String num) {
+			String email, String building, String num, String isDel) {
 		super();
 		this.generationIdx = generationIdx;
 		this.apartmentIdx = apartmentIdx;
@@ -28,6 +29,7 @@ public class Generation {
 		this.email = email;
 		this.building = building;
 		this.num = num;
+		this.isDel = isDel;
 	}
 
 	public String getGenerationIdx() {
@@ -102,11 +104,19 @@ public class Generation {
 		this.num = num;
 	}
 
+	public String getIsDel() {
+		return isDel;
+	}
+
+	public void setIsDel(String isDel) {
+		this.isDel = isDel;
+	}
+
 	@Override
 	public String toString() {
 		return "Generation [generationIdx=" + generationIdx + ", apartmentIdx=" + apartmentIdx + ", id=" + id
 				+ ", password=" + password + ", tell=" + tell + ", regDate=" + regDate + ", email=" + email
-				+ ", building=" + building + ", num=" + num + "]";
+				+ ", building=" + building + ", num=" + num + ", isDel=" + isDel + "]";
 	}
 
 }

@@ -9,5 +9,10 @@ public interface GenerationService {
 	
 	void insertGeneration(Generation generation);
 	
+	//메일 보내기전에 체크
+	Generation selectfindid(Generation generation);
 	
+	//메일
+	void authenticateEmail(Generation generation, String authPath);
+
 }
