@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/*-context.xml"})
+@ContextConfiguration(locations = {"file:aboo/src/main/webapp/WEB-INF/spring/**/*-context.xml"})
 public class RestTemplateTest {
 	
 	@Autowired
