@@ -11,11 +11,12 @@ public interface MgmtfeeService {
 	
 	
 	//아영 관리비업로드 파일 읽기
+	
 	Map<String, Object> mgmtfeeRead(MultipartFile file);
 	
-	//아영 관리비 mgmtfee vo에 넣어 DB에 추가하기.
-	List<Mgmtfee> insertMgmtfee(Map<String,Object> commandMap);
+	List<Mgmtfee> insertMgmtfee(Map<String,Object> commandMap, String apartmentIdx);
+	
+	Map<String, Object> selectGenerationList(String apartmentIdx);
 
-
-
+	Map<String, Object> selectMgmtfeeList(int currentPage, String apartmentIdx);
 }

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -78,7 +79,7 @@ public class FileUtil {
 	}
 	
 	// 아영 : 관리비 엑셀 양식 선 셋팅.
-	public XSSFWorkbook mgmtfeeFormSetting(String apartmentIdx) {
+	public XSSFWorkbook mgmtfeeFormSetting(Map<String, Object> generationList) {
 		// XSSFWorkbook은 엑셀파일 전체 내용을 담고 있는 객체
 		// 엑셀을 구성하는 것은 총4개이다. 아래 객체를 구현해야한다.
 		// XSSFWorkbook 
@@ -107,20 +108,29 @@ public class FileUtil {
 		}
 		
 		// 2. 세대정보
+		List<String> building = (List<String>) generationList.get("building");
+		List<String> num = (List<String>) generationList.get("num");
 		
-		
+		for (int i = 0; i < building.size(); i++) {
+			row = sheet.createRow(rowNo++);
+			cell = row.createCell(0);
+			cell.setCellValue(building.get(i));
+			
+			cell = row.createCell(1);
+			cell.setCellValue(num.get(i));
+		}
 		
 		return workbook;
 	}
 	
 	// 아영 : 셋팅된 양식 excel file로 구성하기.
-	public File mfmtgeeFormExcel(String apartmentIdx) {
+	public File mfmtgeeFormExcel(Map<String, Object> generationList) {
 		// excel 양식 셋팅하기
-		XSSFWorkbook workbook = mgmtfeeFormSetting(apartmentIdx);
+		XSSFWorkbook workbook = mgmtfeeFormSetting(generationList);
 		
 		// 파일 내보내기
 		// 파일 명
-		String fileName = "세대관리비양식.xlsx";
+		String fileName = "test6.xlsx";
 		
 		File file = new File(fileName);
 		FileOutputStream fos = null;

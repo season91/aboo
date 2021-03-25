@@ -3,6 +3,7 @@ package com.kh.aboo.admin.mgmtfee.model.service.impl;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,7 @@ import com.kh.aboo.admin.mgmtfee.model.service.MgmtfeeService;
 import com.kh.aboo.admin.mgmtfee.model.vo.Mgmtfee;
 import com.kh.aboo.common.code.ErrorCode;
 import com.kh.aboo.common.exception.ToAlertException;
+import com.kh.aboo.common.util.paging.Paging;
 import com.kh.aboo.user.generation.model.vo.Generation;
 
 @Service
@@ -106,20 +108,29 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 
 	// 아영 : 읽은 엑셀파일을 mgmtfee vo에 넣고 DB에 추가한다.
 	@Override
-	public List<Mgmtfee> insertMgmtfee(Map<String, Object> commandMap) {
+	public List<Mgmtfee> insertMgmtfee(Map<String, Object> commandMap,String apartmentIdx) {
 		List<Mgmtfee> mgmtfeeList = new ArrayList<>();
 		Mgmtfee mgmtfee = null;
-		for (String key : commandMap.keySet()) {
-			// System.out.println(commandMap.get(key));
+		for (String	key : commandMap.keySet()) {
+			//System.out.println(commandMap.get(key));
 			List<String> list = (List<String>) commandMap.get(key);
 			//System.out.println("동호수:" + list.get(0)+"d"+list.get(1)+"h");
 			//System.out.println("일반관리비:"+list.get(2));
 			
-			// 동호수로 세대관리번호 조회해온다.
-			String generationInfo = list.get(0)+"d"+list.get(1)+"h";
+			// 아파트번호와 동호수로 세대관리번호 조회해온다.
+			String building = list.get(0);
+			String num = list.get(1);
+			
+			System.out.println(building+"동");
+			Generation generationInfo = new Generation();
+			generationInfo.setApartmentIdx(apartmentIdx);;
+			generationInfo.setBuilding(building);
+			generationInfo.setNum(num);
+			
 			Generation generation = mgmtfeeRepository.selectGenerationIdx(generationInfo);
 			
 			mgmtfee = Mgmtfee.builder()
+					.apartmentIdx(apartmentIdx)
 					.generationIdx(generation.getGenerationIdx())
 					.gnrlMgmtFee(list.get(2))
 					.cleanFee(list.get(3))
@@ -144,6 +155,55 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 		
 		
 		return mgmtfeeList;
+	}
+
+	// 세대정보 엑셀다운을 위한 리스트 동,호수 리스트받아오기.
+	@Override
+	public Map<String, Object> selectGenerationList(String apartmentIdx) {
+		List<String> builging = mgmtfeeRepository.selectBuildingByApartmentIdx(apartmentIdx);
+		List<String> num = mgmtfeeRepository.selectNumByApartmentIdx(apartmentIdx);
+		
+		Map<String, Object> commandMap = new HashMap<>();
+		commandMap.put("building", builging);
+		commandMap.put("num", num);
+		
+		return commandMap;
+	}
+
+	@Override
+	public Map<String, Object> selectMgmtfeeList(int currentPage, String apartmentIdx) {
+		Paging paging = Paging.builder()
+				.currentPage(currentPage)
+				.blockCnt(5)
+				.cntPerPage(10)
+				.type("board")
+				.total(mgmtfeeRepository.selectContentCnt(apartmentIdx))
+				.build();
+
+		System.out.println(paging.toString());
+		// 반환할 맵
+		Map<String, Object> commandMap = new HashMap<>();
+		
+		// paing 세대조건 정보 넣을 맵
+		Map<String, Object> generationMap = new HashMap<>();
+		generationMap.put("paging", paging);
+		generationMap.put("apartmentIdx", apartmentIdx);
+		
+		List<Mgmtfee> mgmtfeeList = mgmtfeeRepository.selectMgmtfeeList(generationMap);
+		
+		commandMap.put("paging", paging);
+		commandMap.put("mgmtfeeList", mgmtfeeList);
+		
+		// 관리비번호 기준  세대정보 가져오자.
+		List<Generation> generationList = new ArrayList<>();
+		for (int i = 0; i < mgmtfeeList.size(); i++) {
+			String generationIdx = mgmtfeeList.get(i).getGenerationIdx();
+			generationList.add(mgmtfeeRepository.selectGenerationByGenerationIdx(generationIdx));
+		}
+		
+		commandMap.put("generationList", generationList);
+		
+		return commandMap;
 	}
 
 
