@@ -21,10 +21,10 @@ import com.kh.aboo.user.generation.model.vo.Generation;
 
 @Controller
 public class GenerationController {
-
+	
 	@Autowired
 	private PasswordEncoder encoder;
-
+	
 	private final GenerationService generationService;
 
 	public GenerationController(GenerationService generationService) {
@@ -40,16 +40,16 @@ public class GenerationController {
 	@ResponseBody
 	public String loginimpl(@RequestBody Generation generationInfo, HttpSession session) {
 
-		// generationInfo : 받아와서 맵핑 해주는 객체 이름
-		// generation : 진짜 generation 정보가 담긴 객체 이름
-
+		//generationInfo : 받아와서 맵핑 해주는 객체 이름
+		//generation : 진짜 generation 정보가 담긴 객체 이름
+		
 		Generation generation = generationService.selectGenerationForAuth(generationInfo);
 		if (generation == null) {
 			return "fail";
 		}
 		session.setAttribute("generation", generation);
-		return "success";
-
+		return "sussece";
+		
 	}
 
 	@GetMapping("logout")
@@ -57,6 +57,7 @@ public class GenerationController {
 		session.removeAttribute("generation");
 		return "index/index";
 	}
+
 
 	@GetMapping("mypage/findid")
 	public String findId() {
@@ -109,9 +110,9 @@ public class GenerationController {
 	}
 
 
-	// 세대 추가 메서드 이거 쓰세용
-	// 세대 더미 용
-	@GetMapping("generation/add")
+	//세대 추가 메서드 이거 쓰세용 
+	//세대 더미 용
+	@GetMapping("generation/add") 
 	public void generationAdd(String id, String password, String apartmentIdx, String building, String num) {
 		Generation generation = new Generation();
 		generation.setId(id);
@@ -119,7 +120,7 @@ public class GenerationController {
 		generation.setApartmentIdx(apartmentIdx);
 		generation.setBuilding(building);
 		generation.setNum(num);
-
+		
 		generationService.insertGeneration(generation);
 	}
 

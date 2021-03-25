@@ -23,4 +23,6 @@ public interface GenerationRepository {
 	@Select("select * from TB_GENERATION where id = #{id} and email = #{email}")
 	public Generation selectFindPassword(Generation generation);
 
+
 }
+

@@ -18,7 +18,6 @@ import com.kh.aboo.user.generation.model.vo.Generation;
 
 @Service
 public class GenerationServiceImpl implements GenerationService {
-	
 	@Autowired
 	private MailSender mail;
 
@@ -90,7 +89,7 @@ public class GenerationServiceImpl implements GenerationService {
 		ResponseEntity<String> response = http.exchange(request, String.class);
 		String message = response.getBody();
 		System.out.println(System.nanoTime());
-		mail.send(generation.getEmail(), "인증번호 발송", message);		
+		mail.send(generation.getEmail(), "인증번호 발송", message);
 	}
 
 }

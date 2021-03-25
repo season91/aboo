@@ -19,16 +19,19 @@
 	          <li class="nav-item "><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
 	          <li class="nav-item"><a class="nav-link" href="/board/info/infolist">Board</a></li>
 	          <li class="nav-item"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
-		          <c:choose>
-		          <c:when test="${sessionScope.generation == null and sessionScope.admin == null}">
+	          <c:choose>
+		          <c:when test="${sessionScope.generation == null}">
 		          	<li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
 		          </c:when>
 		          <c:when test="${sessionScope.generation != null}">
 		          	<li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>	          
 		          </c:when>
-                  <c:when test="${sessionScope.admin != null}">
-                    <li class="nav-item cta"><a href="/admin/logout" class="nav-link"><span>Logout</span></a></li>	
-                  </c:when>		                    
+		          <c:when test="${sessionScope.admin == null}">
+		          	<li class="nav-item cta"><a href="/login" class="nav-link"><span>Admin Login</span></a></li>	          
+		          </c:when>
+		          <c:when test="${sessionScope.admin != null}">
+		          	<li class="nav-item cta"><a href="/login" class="nav-link"><span>Admin Logout</span></a></li>	          
+		          </c:when>
 	          </c:choose>
 	        </ul>
 	      </div>
@@ -64,7 +67,7 @@
               <div class="form-group">
                 <input type="submit" value="로그인" class="btn btn-primary py-3 px-5 col-sm-12" onclick="login()" >
               </div>
-      		<div class = "col-sm-12 d-flex justify-content-center"><div><a href="/mypage/findid">아이디 찾기</a> | <a href="/mypage/findpassword">비밀번호 찾기</a></div></div>    
+      		<div class = "col-sm-12 d-flex justify-content-center"><div><a href="#">아이디 찾기</a> | <a href="#">비밀번호 찾기</a></div></div>    
           </div>
         </div>
       </div>
