@@ -51,10 +51,10 @@ public class GenerationServiceImpl implements GenerationService {
 	}
 
 	@Override
-	public void authenticateEmail(Generation generation, String authPath) {
+	public void authenticateEmailId(Generation generation, String authPath) {
 		// 내부적으로 Map<String,List<k>> 를 구현
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
-		body.add("mail-template", "findid");
+		body.add("mail-template", "findId");
 		body.add("userId", generation.getId());
 		body.add("authPath", authPath);
 		// RestTemplate의 기본 Content-type은 application/json
@@ -70,7 +70,27 @@ public class GenerationServiceImpl implements GenerationService {
 
 	@Override
 	public Generation selectfindid(Generation generation) {
-		return generationRepository.selectfindid(generation);
+		return generationRepository.selectFindId(generation);
+	}
+
+	@Override
+	public Generation selectFindPassword(Generation generation) {
+		return generationRepository.selectFindPassword(generation);
+	}
+
+	@Override
+	public void authenticateEmailPassword(Generation generation, String authPath) {
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
+		body.add("mail-template", "findPassword");
+		body.add("id", generation.getId());
+		body.add("authPath", authPath);
+		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(Configcode.DOMAIN + "/mail")
+				.header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE).body(body);
+
+		ResponseEntity<String> response = http.exchange(request, String.class);
+		String message = response.getBody();
+		System.out.println(System.nanoTime());
+		mail.send(generation.getEmail(), "인증번호 발송", message);		
 	}
 
 }

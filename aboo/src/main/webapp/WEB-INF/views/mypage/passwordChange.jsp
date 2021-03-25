@@ -69,12 +69,13 @@
 	</section>
 
 	<section class="ftco-section contact-section ftco-degree-bg">
-		<h4 class="text-center mb-4">회원님의 아이디는</h4>
-		<div class="container">
-			<div class="row block-9 justify-content-center">
-				<b>${findId.id}</b>입니다 감사합니다.
-			</div>
-		</div>
+
+	<form action="/mypage/passwordchangeimpl">
+		바꾸실 비밀번호는
+		<input name="password">
+		<button></button>
+		
+		</form>
 	</section>
 
 	<footer class="ftco-footer ftco-bg-dark ftco-section">

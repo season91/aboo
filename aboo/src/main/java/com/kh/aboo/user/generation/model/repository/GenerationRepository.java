@@ -17,6 +17,10 @@ public interface GenerationRepository {
 	
 	//메일보내기 전에 있는 세대인지 체크
 	@Select("select * from TB_GENERATION where BUILDING = #{building} and NUM = #{num} and EMAIL = #{email}")
-	public Generation selectfindid(Generation generation);
+	public Generation selectFindId(Generation generation);
+	
+	//메일보내기 전에 있는 세대인지 체크
+	@Select("select * from TB_GENERATION where id = #{id} and email = #{email}")
+	public Generation selectFindPassword(Generation generation);
 
 }

@@ -47,18 +47,18 @@
       <div class="container">
         <div class="row block-9 justify-content-center">
           <div class="col-md-6">
-            <form action="#">
+            <form action="/mypage/findpasswordimpl" method="post">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="아이디">
+                <input type="text" class="form-control" name="id" placeholder="아이디">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="이메일">
+                <input type="text" class="form-control" name = "email" placeholder="이메일">
               </div>
               <div class="form-group">
                 <input type="submit" value="확인" class="btn btn-primary py-3 px-5 col-sm-12" >
               </div>
             </form>
-      		<div class = "col-sm-12 d-flex justify-content-center"><div><a href="#">아이디 찾기</a> | <a href="#">비밀번호 찾기</a></div></div> 
+      		<div class = "col-sm-12 d-flex justify-content-center"><div><a href="/mypage/findid">아이디 찾기</a> | <a href="/mypage/findpassword">비밀번호 찾기</a></div></div> 
           </div>
         </div>
       </div>
@@ -132,7 +132,41 @@
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+	
+	
+	<script type="text/javascript">
+      let emailSend = () => {
+          const url = '/mypage/findidimpl';
+          
+          let paramObj = new Object();
+          paramObj.building = document.querySelector("#building").value;
+          paramObj.num = document.querySelector("#num").value;
+          paramObj.email = document.querySelector("#email").value;
+          
+          let headerObj = new Headers();
+          headerObj.append("content-type","application/json");
+          fetch(url,{
+             method:"post",
+             headers:headerObj,
+             body:JSON.stringify(paramObj)
+          }).then(response => {
+             if(response.ok){
+                return response.text();    
+             }
+             throw new AsyncPageError(response.text());
+          }).then((text) => {
+             if(text == 'fail'){ 
+                alert('존재하지 않는 사용자입니다.')
+             }else{ 
+                 alert('메일이 발송되었습니다.');
+                 document.querySelector("#certifiedBox").style.display = ''
+             }
+          }).catch(error => {
+             error.alertMessage();
+          });
+       }
 
+   </script>
 
   <script src="../../../resources/js/generation/jquery.min.js"></script>
   <script src="../../../resources/js/generation/jquery-migrate-3.0.1.min.js"></script>

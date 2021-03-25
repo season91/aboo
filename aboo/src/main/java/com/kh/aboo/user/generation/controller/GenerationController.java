@@ -9,10 +9,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.kh.aboo.user.generation.model.service.GenerationService;
 import com.kh.aboo.user.generation.model.vo.Generation;
@@ -63,55 +65,50 @@ public class GenerationController {
 
 	@PostMapping("mypage/findidimpl")
 	@ResponseBody
-	public String findidImpl(@RequestBody Generation generation, HttpSession session) {
+	public String findIdImpl(@RequestBody Generation generationInfo, HttpSession session) {
 
-		Generation findGeneration = generationService.selectfindid(generation);
-		System.out.println(findGeneration);
-
+		Generation findGeneration = generationService.selectfindid(generationInfo);
+		System.out.println("찾나 ?"+findGeneration);
 		if (findGeneration == null) {
 			return "fail";
+
 		} else {
 
-			String authPath = UUID.randomUUID().toString();
-			session.setAttribute("authPath", authPath);
+			String authPathId = UUID.randomUUID().toString();
+
+			session.setAttribute("authPathId", authPathId);
 			session.setAttribute("findGeneration", findGeneration);
 
-			generationService.authenticateEmail(generation, authPath);
+			generationService.authenticateEmailId(generationInfo, authPathId);
 			return "success";
 
 		}
 
 	}
 
-	@GetMapping("mypage/findidresult")
-	public String findidResult(HttpSession session) {
-		return "mypage/findIdResult";
-	}
-
 	@GetMapping("mypage/findidcertified")
-	public String findidCertified(@RequestParam String certifiedNum, HttpSession session, Model model) {
+	public String findIdCertified(@RequestParam String certifiedNum, HttpSession session, Model model) {
 
-		String authPath = (String) session.getAttribute("authPath");
-		Generation findGeneration = (Generation) session.getAttribute("findGeneration");
+		String authPath = (String) session.getAttribute("authPathId");
+		Generation findId = (Generation) session.getAttribute("findGeneration");
 
 		if (!certifiedNum.equals(authPath)) {
 			model.addAttribute("alertMsg", "인증번호가 일치 하지 않습니다");
 		}
 
 		model.addAttribute("url", "/mypage/findidresult");
-		model.addAttribute("findGeneration", findGeneration);
+		model.addAttribute("findId", findId);
 
 		return "common/result";
 
 	}
 
-	
-	@GetMapping("mypage/findpassword")
-	public String findPassword() {
-		return "mypage/findPassword";
+	@GetMapping("mypage/findidresult")
+	public String findIdResult() {
+		return "mypage/findIdResult";
 	}
-	
-	
+
+
 	// 세대 추가 메서드 이거 쓰세용
 	// 세대 더미 용
 	@GetMapping("generation/add")
