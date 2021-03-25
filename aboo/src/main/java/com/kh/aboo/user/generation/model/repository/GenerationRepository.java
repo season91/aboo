@@ -15,5 +15,8 @@ public interface GenerationRepository {
 	@Insert("insert into TB_GENERATION(GENERATION_IDX,APARTMENT_IDX,ID,PASSWORD,BUILDING,NUM) values(SC_GENERATION_IDX.nextval,#{apartmentIdx},#{id},#{password},#{building},#{num})")
 	public int insertGeneration(Generation generation);
 	
-}
+	//메일보내기 전에 있는 세대인지 체크
+	@Select("select * from TB_GENERATION where BUILDING = #{building} and NUM = #{num} and EMAIL = #{email}")
+	public Generation selectfindid(Generation generation);
 
+}
