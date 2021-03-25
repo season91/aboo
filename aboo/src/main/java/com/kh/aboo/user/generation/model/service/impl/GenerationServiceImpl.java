@@ -18,12 +18,13 @@ import com.kh.aboo.user.generation.model.vo.Generation;
 
 @Service
 public class GenerationServiceImpl implements GenerationService {
+
 	@Autowired
 	private MailSender mail;
 
 	@Autowired
 	private RestTemplate http;
-	
+
 	@Autowired
 	private PasswordEncoder encoder;
 
@@ -50,37 +51,14 @@ public class GenerationServiceImpl implements GenerationService {
 	}
 
 	@Override
-	public void authenticateEmailId(Generation generation, String authPath) {
-		// 내부적으로 Map<String,List<k>> 를 구현
-		MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
-		body.add("mail-template", "findId");
-		body.add("userId", generation.getId());
-		body.add("authPath", authPath);
-		// RestTemplate의 기본 Content-type은 application/json
-		// Content-type을 form-url-encoded로 설정해서 통신해보기
-		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(Configcode.DOMAIN + "/mail")
-				.header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE).body(body);
-
-		ResponseEntity<String> response = http.exchange(request, String.class);
-		String message = response.getBody();
-		System.out.println(System.nanoTime());
-		mail.send(generation.getEmail(), "인증번호 발송", message);
-	}
-
-	@Override
 	public Generation selectfindid(Generation generation) {
 		return generationRepository.selectFindId(generation);
 	}
 
 	@Override
-	public Generation selectFindPassword(Generation generation) {
-		return generationRepository.selectFindPassword(generation);
-	}
-
-	@Override
-	public void authenticateEmailPassword(Generation generation, String authPath) {
+	public void authenticationIdMail(Generation generation, String authPath) {
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
-		body.add("mail-template", "findPassword");
+		body.add("mail-template", "findid");
 		body.add("id", generation.getId());
 		body.add("authPath", authPath);
 		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(Configcode.DOMAIN + "/mail")
@@ -88,8 +66,8 @@ public class GenerationServiceImpl implements GenerationService {
 
 		ResponseEntity<String> response = http.exchange(request, String.class);
 		String message = response.getBody();
-		System.out.println(System.nanoTime());
-		mail.send(generation.getEmail(), "인증번호 발송", message);
+		mail.send(generation.getEmail(), "메일", message);
+
 	}
 
 }

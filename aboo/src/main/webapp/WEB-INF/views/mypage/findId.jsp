@@ -86,7 +86,7 @@
 						<input type="text" class="form-control" id="email" name="email" placeholder="이메일">
 					</div>
 					<div id = "certifiedBox" class="form-group" style="display: none;">
-						<form action="/mypage/findidcertified" method="get">
+						<form action="/mypage/authenticationid" method="get">
 						<div class= "d-flex justify-content-between">
 								<input type="text" class="form-control col-md-10" id="certifiedNum" name="certifiedNum" placeholder="인증번호">
 								<button class = "btn btn-primary px-xl-3 py-xl-1 ">확인</button>
