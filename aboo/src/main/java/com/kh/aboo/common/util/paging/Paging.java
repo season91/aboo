@@ -60,7 +60,7 @@ public class Paging {
 	// d.이전, 다음 구현
 	private void calPrevAndNext() {
 		prev = currentPage == 1?currentPage:currentPage-1;
-		next = currentPage == lastPage?lastPage:lastPage+1;
+		next = currentPage == lastPage?lastPage:currentPage+1;
 	}
 	
 	// 2. PagingBuilder를 밖에서 부를수 있게 해줄 클래스 구현
