@@ -23,20 +23,10 @@ public class MgmtfeeRepositoryTest {
 	MgmtfeeRepository mgmtfeeRepository;
 	
 	@Test
-	public void selectGenerationIdx() {
-		String generationInfo = "101d101h";
-		Generation generation = mgmtfeeRepository.selectGenerationIdx(generationInfo);
-		System.out.println(generation);
-		System.out.println(generation.getGenerationIdx());
-	}
-	
-	@Test
 	public void insertMgmtfee() {
-		Generation generation = mgmtfeeRepository.selectGenerationIdx("101d102h");
-		String generationIdx = generation.getGenerationIdx();
-		
+
 		Mgmtfee mgmtfee = Mgmtfee.builder()
-				.generationIdx(generationIdx)
+				.generationIdx("121212")
 				.gnrlMgmtFee("111")
 				.cleanFee("222")
 				.elvtrMnfee("333")

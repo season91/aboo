@@ -101,10 +101,6 @@
                   <div class="photo">
                     <img src="../../resources/img/anime3.png">
                   </div>
-                  <b class="caret d-none d-lg-block d-xl-block"></b>
-                  <p class="d-lg-none">
-                    Log out / Login
-                  </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link">
@@ -115,7 +111,14 @@
                   </li>
                   <div class="dropdown-divider"></div>
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Log out</a>
+                  <c:choose>
+                  	<c:when test="${sessionScope.admin == null}">
+                    	<a href="/admin/login" class="nav-item dropdown-item">Log in</a>
+                  	</c:when>
+                  	<c:when test="${sessionScope.admin != null}">
+                    	<a href="/admin/logout" class="nav-item dropdown-item">Log out</a>
+                  	</c:when>
+                  </c:choose>
                   </li>
                 </ul>
               </li>
@@ -172,163 +175,69 @@
                 </div>
           </div>
               
-              <div class="card-body">
+          	<div class="card-body">
                 <div class="table-responsive">
                   <table class="table tablesorter " id="">
                     <thead class=" text-primary">
-                      <th>
-                        관리비번호
-                      </th>
-                      <th>
-                        세대정보
-                      </th>
-                      <th>
-                        관리비 고지월
-                      </th>
-                      <th>
-                        산출금액
-                      </th>
-                      <th>
-                        납부상태
-                      </th>
+                      <th>관리비번호</th>
+                      <th>세대정보</th>
+                      <th>관리비 고지월 </th>
+                      <th>산출금액</th>
+                      <th>납부상태</th>
+                      <th>수정/삭제</th>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>
-                          F100000
-                        </td>
-                        <td>
-                          103동 906호
-                        </td>
-                        <td>
-                          21년 3월
-                        </td>
-                        <td>
-                          260,000
-                        </td>
-                        <td>
-                        	미납
-                        </td>
+                  
+            	<c:forEach items="${mgmtfeeList}" var="mgmtfee" varStatus="status">
+                    <tr>
+                       <td><a href="/mypage/mgmtfee?${mgmtfee.mgmtfeeIdx }"> ${mgmtfee.mgmtfeeIdx}</a> </td>
+                       <td> ${generationList[status.index].building }동 ${generationList[status.index].num}호</td>
+                       <td> ${mgmtfee.dueDate } </td>
+                       <td> ${mgmtfee.periodPayment}</td>
+                       <c:choose>
+                       	<c:when test="${mgmtfee.isPayment eq 0}">
+                       		<td>미납</td>
+                       	</c:when>
+                       	<c:otherwise>
+                       		<td>완료</td>
+                       	</c:otherwise>
+                       </c:choose>
+                       <td> <a href="/admin/mgmtfee/modify?${mgmtfee.mgmtfeeIdx}">이동</a></td>
                       </tr>
-                      <tr>
-                        <td>
-                          F100001
-                        </td>
-                        <td>
-                          103동 905호
-                        </td>
-                        <td>
-                          21년 3월
-                        </td>
-                        <td>
-                          123,789
-                        </td>
-                        <td>
-                        미납
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                          F100002
-                        </td>
-                        <td>
-                          103동 904호
-                        </td>
-                        <td>
-                          21년 3월
-                        </td>
-                        <td>
-                          213,789
-                        </td>
-                        <td>
-                        완료
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                          F100003
-                        </td>
-                        <td>
-                          103동 905호
-                        </td>
-                        <td>
-                          21년 3월
-                        </td>
-                        <td>
-                          123,789
-                        </td>
-                        <td>
-                        미납
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                          F100004
-                        </td>
-                        <td>
-                          103동 903호
-                        </td>
-                        <td>
-                          21년 3월
-                        </td>
-                        <td>
-                          223,000
-                        </td>
-                        <td>
-                        미납
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                          F100005
-                        </td>
-                        <td>
-                          103동 902호
-                        </td>
-                        <td>
-                          21년 3월
-                        </td>
-                        <td>
-                          172,000
-                        </td>
-                        <td>
-                        미납
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                          F100006
-                        </td>
-                        <td>
-                          103동 901호
-                        </td>
-                        <td>
-                          21년 3월
-                        </td>
-                        <td>
-                          100,000
-                        </td>
-                        <td>
-                        완료
-                        </td>
-                      </tr>
+                   </c:forEach>
+              		
                     </tbody>
                   </table>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row mt-5 d-flex card-body ">
+          <div class="row d-flex card-body ">
 	          <div class="col text-center">
 	            <div class="block-27">
 	              <ul>
-	                <li><a href="#">&lt;</a></li>
-	                <li class="active"><span>1</span></li>
-	                <li><a href="#">2</a></li>
-	                <li><a href="#">3</a></li>
-	                <li><a href="#">4</a></li>
-	                <li><a href="#">5</a></li>
-	                <li><a href="#">&gt;</a></li>
+	                <li><a href="/admin/mgmtfee">&lt;&lt;</a></li>
+	                <li><a href="/admin/mgmtfee?page=${paging.prev}">&lt;</a></li>
+	                <c:choose>
+	                	<c:when test="${paging.lastPage eq 0 }">
+	                		<li><a href="/admin/mgmtfee"><span>1</span></a></li>
+	                	</c:when>
+	                	<c:otherwise>
+	                		<c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
+		                      <c:choose>
+		                         <c:when test="${paging.currentPage eq page}">
+		                            <li class="active"><a href="/admin/mgmtfee?page=${page}"><span>${page}</span></a></li>
+		                         </c:when>
+		                         <c:otherwise>
+		                            <li><a href="/admin/mgmtfee?page=${page}"><span>${page}</span></a></li>
+		                         </c:otherwise>
+		                      </c:choose>
+		                 	 </c:forEach> 
+	                	</c:otherwise>
+	                </c:choose>
+	                 
+	                <li><a href="/admin/mgmtfee?page=${paging.next}">&gt;</a></li>
+	                <li><a href="/admin/mgmtfee?page=${paging.lastPage }">&gt;&gt;</a></li>
 	              </ul>
 	            </div>
 	          </div>
@@ -337,6 +246,7 @@
     	</div>
         </div>
       </div>
+
 
      <footer class="footer">
         <div class="container-fluid">
@@ -560,6 +470,7 @@
         }).then((text)=>{
         	if(text == "success"){
         		alert('등록 성공했습니다.');
+        		location.href='${context}' + "/admin/mgmtfee";
              } else {
             	alert('등록할 내용이 없습니다.');
              }
