@@ -38,7 +38,7 @@ public class ExceptionController {
 		//logger.error(e.getMessage());
 		e.printStackTrace();
 		model.addAttribute("alertMsg", "데이터 베이스 접근 중 에러가 발생하였습니다.");
-		model.addAttribute("url", "/member/login");
+		model.addAttribute("url", "/index");
 
 		return "common/result";
 	}

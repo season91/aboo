@@ -39,8 +39,7 @@
       </div>
     </section>
 
-      
-    <section class="ftco-section">
+     <section class="ftco-section">
     	<div class="container">
     		<div class="row justify-content-center mb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
@@ -56,7 +55,7 @@
 	    				<table class="table">
 						    <thead class="thead-primary">
 						      <tr>
-						        <th>고지월</th>
+						        <th>${mgmtfeeMonth}고지일</th>
 						        <th>납부상태</th>
 						        <th>납부금액</th>
 						        <th>연체금액</th>
@@ -64,48 +63,22 @@
 						      </tr>
 						    </thead>
 						    <tbody>
-						      <tr>
-						        <td><a href="/mypage/mgmtfee/detail">21년 3월</a></td>
-						        <td>미납</td>
-						        <td>226,000</td>
-						        <td>-</td>
-						        <td>-</td>
+						    <c:forEach items="${myMgmtfeeList }" var="mymgmtfee" varStatus="status">
+						    	<tr>
+						        <td><a href="/mypage/mymgmtfee/detail?mgmtfeeidx=${mymgmtfee.mgmtfeeIdx}">${mymgmtfee.mgmtWriteDate }</a></td>
+						        <c:choose>
+		                        	<c:when test="${mymgmtfee.isPayment eq 0}">
+		                        		<td>미납</td>
+		                        	</c:when>
+		                        	<c:otherwise>
+		                        		<td>완료</td>
+		                        	</c:otherwise>
+		                        </c:choose>
+						        <td>${mymgmtfee.periodPayment }</td>
+						        <td>연체금액</td>
+						        <td>납부일자</td>
 						      </tr>
-						      <tr>
-						        <td>21년 2월</td>
-						        <td>완료</td>
-						        <td>251,000</td>
-						        <td>-</td>
-						        <td>21년 3월 1일</td>
-						      </tr>
-						      <tr>
-						        <td>21년 1월</td>
-						        <td>완료</td>
-						        <td>280,000</td>
-						        <td>5,000</td>
-						        <td>21년 3월 1일</td>
-						      </tr>
-						      <tr>
-						        <td>20년 12월</td>
-						        <td>완료</td>
-						        <td>260,000</td>
-						        <td>-</td>
-						        <td>21년 1월 1일</td>
-						      </tr>
-						      <tr>
-						        <td>20년 11월</td>
-						        <td>완료</td>
-						        <td>240,000</td>
-						        <td>-</td>
-						        <td>20년 12월 1일</td>
-						      </tr>
-						      <tr>
-						        <td>20년 10월</td>
-						        <td>완료</td>
-						        <td>210,500</td>
-						        <td>-</td>
-						        <td>20년 11월 1일</td>
-						      </tr>
+						    </c:forEach>
 						    </tbody>
 						  </table>
 					  </div>
@@ -115,13 +88,20 @@
 	          <div class="col text-center">
 	            <div class="block-27">
 	              <ul>
-	                <li><a href="#">&lt;</a></li>
-	                <li class="active"><span>1</span></li>
-	                <li><a href="#">2</a></li>
-	                <li><a href="#">3</a></li>
-	                <li><a href="#">4</a></li>
-	                <li><a href="#">5</a></li>
-	                <li><a href="#">&gt;</a></li>
+	                <li><a href="/mypage/mymgmtfee">&lt;&lt;</a></li>
+	                <li><a href="/mypage/mymgmtfee?page=${paging.prev}">&lt;</a></li>
+	                 <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
+                      <c:choose>
+                         <c:when test="${paging.currentPage eq page}">
+                            <li class="active"><a href="/mypage/mymgmtfee?page=${page}"><span>${page}</span></a></li>
+                         </c:when>
+                         <c:otherwise>
+                            <li><a href="/mypage/mymgmtfee?page=${page}"><span>${page}</span></a></li>
+                         </c:otherwise>
+                      </c:choose>
+                 	 </c:forEach> 
+	                <li><a href="/mypage/mymgmtfee?page=${paging.next}">&gt;</a></li>
+	                <li><a href="/mypage/mymgmtfee?page=${paging.lastPage }">&gt;&gt;</a></li>
 	              </ul>
 	            </div>
 	          </div>

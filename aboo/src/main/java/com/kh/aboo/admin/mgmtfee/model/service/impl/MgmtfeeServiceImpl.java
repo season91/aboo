@@ -75,31 +75,36 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 			// 4. 셀 읽기, 행의 셀 수만큼
 			List<Object> list = new ArrayList<Object>();
 			int cells = row.getPhysicalNumberOfCells();
-			for (int j = 0; j < cells; j++) {
-
-				Cell cell = row.getCell(j);
-				String value = "";
-				// 셀타입에 따라 읽는다.
-				// System.out.println(cell.getCellType());
-				switch (cell.getCellType()) {
-				case FORMULA:
-					value = cell.getCellFormula();
-					break;
-				case NUMERIC:
-					value = (int) cell.getNumericCellValue() + "";
-					break;
-				case STRING:
-					value = cell.getStringCellValue() + "";
-					break;
-				case BLANK:
-					value = cell.getBooleanCellValue() + "";
-					break;
-				case ERROR:
-					value = cell.getErrorCellValue() + "";
-					break;
+			if(cells > 2) {
+				for (int j = 0; j < cells; j++) {
+					
+					Cell cell = row.getCell(j);
+					String value = "";
+					// 셀타입에 따라 읽는다.
+					// System.out.println(cell.getCellType());
+					switch (cell.getCellType()) {
+					case FORMULA:
+						value = cell.getCellFormula();
+						break;
+					case NUMERIC:
+						value = (int) cell.getNumericCellValue()+"";
+						break;
+					case STRING:
+						value = cell.getStringCellValue() + "";
+						break;
+					case BLANK:
+						value = cell.getBooleanCellValue() + "";
+						break;
+					case ERROR:
+						value = cell.getErrorCellValue() + "";
+						break;
+					}
+					list.add(value);
 				}
-				list.add(value);
+			} else { 
+				throw new ToAlertException(ErrorCode.ER01);
 			}
+			
 			commandMap.put(i + "행", list);
 		}
 
@@ -121,7 +126,6 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 			String building = list.get(0);
 			String num = list.get(1);
 			
-			System.out.println(building+"동");
 			Generation generationInfo = new Generation();
 			generationInfo.setApartmentIdx(apartmentIdx);;
 			generationInfo.setBuilding(building);
