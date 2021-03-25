@@ -24,6 +24,13 @@ import com.kh.aboo.member.model.vo.Member;
 @Controller
 @RequestMapping("board")
 public class BoardController {
+	// 배웟떤 자료고 여기다 구현하면 안됨!!!
+	// 배웟떤 자료고 여기다 구현하면 안됨!!!
+	// 배웟떤 자료고 여기다 구현하면 안됨!!!
+	// 배웟떤 자료고 여기다 구현하면 안됨!!!
+	// 배웟떤 자료고 여기다 구현하면 안됨!!!
+	// 배웟떤 자료고 여기다 구현하면 안됨!!!
+	// 배웟떤 자료고 여기다 구현하면 안됨!!!
 	
 	private final BoardService boardService;
 	
@@ -80,19 +87,6 @@ public class BoardController {
 		return ResponseEntity.ok().headers(headers).body(resource);
 		
 	}
-	
-	@GetMapping("info/listinfo")
-	public void listInfo() {};
-	
-	@GetMapping("info/detailinfo")
-	public void detailInfo() {};
-	
-	@GetMapping("info/addinfo")
-	public void addInfo() {};
-	
-	@GetMapping("info/editinfo")
-	public void editInfo() {};
-	
 	
 	
 }

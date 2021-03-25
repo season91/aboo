@@ -17,7 +17,7 @@
        <div class="sidebar-wrapper">
         <div class="logo">
           <a href="/admin/index" class="simple-text logo-mini">
-            <img src="../../../resources/images/logo_w.png">
+            <img src="../../../resources/abooimg/logo_w.png">
           </a>
           <a href="/admin/index" class="simple-text logo-normal">
             ADMIN
@@ -401,7 +401,8 @@
            <div class="modal-body">
         <form action="/work/mgmtfeeuploadimpl" id="form-mgmtfee" method="post" enctype="multipart/form-data">
           <div class="">
-           <input type="file" name="file" class="form-control col-xs-2 " id="inlineFormInputGroup" value="파일을 업로드 하세요">
+           <input type="file" accept='xlsx, xls' 
+            name="file" class="form-control col-xs-2 " id="inlineFormInputGroup" value="파일을 업로드 하세요">
           </div>
     	  </div>
            <div class="modal-footer">

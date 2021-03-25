@@ -16,8 +16,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.aboo.common.code.Configcode;
-import com.kh.aboo.user.admin.model.repository.AdminRepository;
 import com.kh.aboo.user.generation.model.vo.Generation;
+import com.kh.aboo.user.manager.model.repository.AdminRepository;
 
 public class FileUtil {
 	
