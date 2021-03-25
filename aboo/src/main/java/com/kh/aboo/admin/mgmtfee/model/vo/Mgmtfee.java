@@ -4,8 +4,8 @@ import java.sql.Date;
 
 public class Mgmtfee {
 	private String mgmtfeeIdx;
+	private String apartmentIdx; //아파트번호
 	private String generationIdx; //세대관리번호
-	private String generationInfo; //세대아이디, generationIdx 산출을 위한 이용 변수.
 	private String gnrlMgmtFee; //일반관리비
 	private String cleanFee; // 청소비
 	private String elvtrMnfee; //승강기 유지비
@@ -23,7 +23,13 @@ public class Mgmtfee {
 	private int isPayment; //결제여부
 	private int isOverdue; //연체여부
 	
+	public Mgmtfee() {
+		super();
+	}
+
 	private Mgmtfee(MgmtBuilder builder) {
+		this.mgmtfeeIdx = builder.mgmtfeeIdx;
+		this.apartmentIdx = builder.apartmentIdx;
 		this.generationIdx = builder.generationIdx;
 		this.gnrlMgmtFee = builder.gnrlMgmtFee;
 		this.cleanFee = builder.cleanFee;
@@ -40,6 +46,9 @@ public class Mgmtfee {
 		this.mgmtEndDate = builder.mgmtEndDate;
 		this.mgmtStartDate = builder.mgmtStartDate;
 		this.mgmtWriteDate = builder.mgmtWriteDate;
+		this.isPayment = builder.isPayment;
+		this.isOverdue = builder.isOverdue;
+
 	}
 	
 	public static MgmtBuilder builder() {
@@ -48,7 +57,9 @@ public class Mgmtfee {
 	
 	public static class MgmtBuilder{
 		// 엑셀로 입력받을 값
-		private String generationIdx; //세대아이디
+		private String mgmtfeeIdx;
+		private String apartmentIdx;
+		private String generationIdx; //세대관리번호
 		private String gnrlMgmtFee; //일반관리비
 		private String cleanFee; // 청소비
 		private String elvtrMnfee; //승강기 유지비
@@ -63,12 +74,34 @@ public class Mgmtfee {
 		private Date mgmtStartDate; // 관리시작일
 		private Date mgmtEndDate; // 관리종료일
 		private Date mgmtWriteDate; //관리비 작성일
+		private int isPayment; //결제여부
+		private int isOverdue; //연체여부
+
+		
+		public MgmtBuilder isPayment(int val) {
+			this.isPayment = val;
+			return this;
+		}
+		
+		public MgmtBuilder isOverdue(int val) {
+			this.isOverdue = val;
+			return this;
+		}
+		
+		public MgmtBuilder mgmtfeeIdx(String val) {
+			this.mgmtfeeIdx = val;
+			return this;
+		}
+		
+		public MgmtBuilder apartmentIdx(String val) {
+			this.apartmentIdx = val;
+			return this;
+		}
 		
 		public MgmtBuilder generationIdx(String val) {
 			this.generationIdx = val;
 			return this;
 		}
-		
 		
 		public MgmtBuilder gnrlMgmtFee(String val) {
 			this.gnrlMgmtFee = val;
@@ -146,8 +179,8 @@ public class Mgmtfee {
 	}
 	
 
-	public String getGenerationInfo() {
-		return generationInfo;
+	public String getApartmentIdx() {
+		return apartmentIdx;
 	}
 
 	public String getPeriodPayment() {
@@ -207,13 +240,14 @@ public class Mgmtfee {
 
 	@Override
 	public String toString() {
-		return "Mgmtfee [mgmtfeeIdx=" + mgmtfeeIdx + ", generationIdx=" + generationIdx + ", generationInfo="
-				+ generationInfo + ", gnrlMgmtFee=" + gnrlMgmtFee + ", cleanFee=" + cleanFee + ", elvtrMnfee="
-				+ elvtrMnfee + ", genElctr=" + genElctr + ", comonElctr=" + comonElctr + ", genWater=" + genWater
-				+ ", sewer=" + sewer + ", expenses=" + expenses + ", genReduction=" + genReduction + ", periodPayment="
-				+ periodPayment + ", dueDate=" + dueDate + ", mgmtStartDate=" + mgmtStartDate + ", mgmtEndDate="
-				+ mgmtEndDate + ", mgmtWriteDate=" + mgmtWriteDate + ", isPayment=" + isPayment + ", isOverdue="
-				+ isOverdue + "]";
+		return "Mgmtfee [mgmtfeeIdx=" + mgmtfeeIdx + ", apartmentIdx=" + apartmentIdx + ", generationIdx="
+				+ generationIdx + ", gnrlMgmtFee=" + gnrlMgmtFee + ", cleanFee="
+				+ cleanFee + ", elvtrMnfee=" + elvtrMnfee + ", genElctr=" + genElctr + ", comonElctr=" + comonElctr
+				+ ", genWater=" + genWater + ", sewer=" + sewer + ", expenses=" + expenses + ", genReduction="
+				+ genReduction + ", periodPayment=" + periodPayment + ", dueDate=" + dueDate + ", mgmtStartDate="
+				+ mgmtStartDate + ", mgmtEndDate=" + mgmtEndDate + ", mgmtWriteDate=" + mgmtWriteDate + ", isPayment="
+				+ isPayment + ", isOverdue=" + isOverdue + "]";
 	}
 
+	
 }

@@ -16,11 +16,6 @@ public class Controller {
 	@GetMapping("myapt/parking")
 	public void parking() {};
 
-	@GetMapping("admin/mgmtfee")
-	public void adminMgmtfee() {};
-	
-	@GetMapping("admin/mgmtfee/upload")
-	public void adminMgmtfeeUpload() {};
 	
 	@GetMapping("admin/vehicle")
 	public void adminVehicle() {};
