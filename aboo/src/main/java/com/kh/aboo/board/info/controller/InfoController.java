@@ -55,7 +55,7 @@ public class InfoController {
 		
 		infoService.insertInfoBoard(infoBoard, files);
 		//  /index url로 redirect 요청
-		return "redirect:/board/info/listinfo";
+		return "board/info/listinfo";
 	}
 	
 	//희원

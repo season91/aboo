@@ -49,23 +49,27 @@
             <div class="card-body mt-4">
              
                    <!-- Dropdown - 말머리 -->
-                   <select name="bCategory" class="choose-lan">
-						<option>Category</option>
-						<option value="정보">정보</option>
-						<option value="질문">질문</option>
-											
-					</select>
+                   <div class="dropdown mb-3">
+                   		<select name="bCategory" class="btn p-2">
+							<option >Category 선택</option>
+							<option value="정보">정보</option>
+							<option value="질문">질문</option>
+						</select>
 
+                   </div>
                    
                    <div class="row block-9">
 			          <div class="col-md-12">
 			            
 			              <div class="form-group">
-			                <input type="text" class="form-control" placeholder="제목을 입력하세요">
+			                <input type="text" name="bContent" class="form-control" placeholder="제목을 입력하세요">
 			              </div>
 			              <div class="form-group">
-			                <textarea name="" id="info_content" cols="30" rows="15" class="form-control" placeholder="내용을 입력하세요"></textarea>
+			                <textarea name="bContent" id="bContent" class="form-control" cols="30" rows="15" placeholder="내용을 입력하세요"></textarea>
 			              </div>
+			               <div class="form-group">
+							 <input type="file" name="files" id="contract_file" multiple/>
+							</div>
 			              
 			            
 
@@ -73,11 +77,13 @@
          		 </div>
 
               </div>
-              </form>
+              
               <div class="nav ftco-animate nav-pills d-flex justify-content-center mt-5" id="v-pills-tab" role="tablist" aria-orientation="vertical">	
-                 <a class="nav-link pl-5 pr-5" id="v-pills-mission-tab" data-toggle="pill" href="#v-pills-mission" role="tab" aria-controls="v-pills-mission" aria-selected="false">등록하기</a>
-                 <a class="nav-link pl-5 pr-5" id="v-pills-mission-tab" data-toggle="pill" href="#v-pills-mission" role="tab" aria-controls="v-pills-mission" aria-selected="false">취소</a>
+                 <a class="nav-link pl-5 pr-5" href="board/info/upload">등록하기</a>
+                 <a class="nav-link pl-5 pr-5" href="board/info/listinfo">취소</a>
               </div>
+              </form>
+              
           </div>
         </div>
         
@@ -179,22 +185,13 @@
   <script src="../../../resources/ckeditor/ckeditor.js"></script>
   
   <script type="text/javascript">
- 	 CKEDITOR.replace(
- 			 'info_content', 
- 			 {height: 500                                                  
-           });
- 	 
- 
+	  CKEDITOR.replace(
+				 'bContent', 
+				 {height: 500                                                  
+	        });
   
   </script>
   
-  <script type="text/javascript">
-		$('#mytype li > a').on('click', function() {
-	 	    // 버튼에 선택된 항목 텍스트 넣기 
-	 	    $('#mystatus').text($(this).text());
-
-	 	});
-  </script>
 
 
 </body>
