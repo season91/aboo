@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.kh.aboo.user.generation.model.vo.Generation;
 import com.kh.aboo.user.generationWon.model.vo.GenerationWon;
@@ -28,14 +29,25 @@ public interface GenerationRepository {
 	public Generation selectFindPassword(Generation generation);
 	
 	//비밀번호 변경
-	@Select("update TB_GENERATION set PASSWORD = #{password} where ID = #{id}")
-	public void updateFindPassword(Generation generation);
+	@Update("update TB_GENERATION set PASSWORD = #{password} where ID = #{id}")
+	public int updateFindPassword(Generation generation);
 		
 	//세대원 추가 페이지 리스트
 	List<GenerationWon> selectGenerationWonList(Map<String,Object> generationMap);
 	
 	@Select("select count(*) from TB_GENERATION_WON where IS_DEL = 0 and GENERATION_IDX = #{generationIdx}")
 	int selectContentCnt(String generationIdx);
+
+	@Update("update TB_GENERATION_WON set NAME = #{name} , tell = #{tell} where generation_won_idx = #{generationWonIdx}")
+	int updateGenerationWonModify(GenerationWon generationWon);
 	
+	@Update("update TB_GENERATION_WON set is_del = 1 where generation_won_idx = #{generationWonIdx}")
+	int updateGenerationWonDelete(GenerationWon generationWon);
+	
+	@Insert("insert into TB_GENERATION_WON(GENERATION_WON_IDX,GENERATION_IDX,TELL,NAME) values(SC_GENERATIONW_IDX.nextval,#{generationIdx},#{tell},#{name})")
+	int insertGenerationWonAdd(GenerationWon generationWon);
+	
+	@Select("select * from TB_GENERATION where GENERATION_IDX = #{generationIdx}")
+	Generation selectGeneration(Generation generation);
 }
 

@@ -9388,3 +9388,10 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+    
+    
+/* 선영 validator css */
+.validator{
+color: red;
+font-size: 1vw;
+}

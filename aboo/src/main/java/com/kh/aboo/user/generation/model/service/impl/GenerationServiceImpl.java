@@ -120,10 +120,29 @@ public class GenerationServiceImpl implements GenerationService {
 		return commandMap;
 	}
 
+	//세대원 수정
+	@Override
+	public int updateGenerationWonModify(GenerationWon generationWon) {
+		return generationRepository.updateGenerationWonModify(generationWon);
+	}
 
+	//세대원 삭제
+	@Override
+	public int updateGenerationWonDelete(GenerationWon generationWon) {
+		return generationRepository.updateGenerationWonDelete(generationWon);
+	}
 	
+	//세대원 추가
+	@Override
+	public int insertGenerationWonAdd(GenerationWon generationWon) {
+		return generationRepository.insertGenerationWonAdd(generationWon);
+	}
 	
-	
+	//세대원 전체 검색
+	@Override
+	public Generation selectGeneration(Generation generation) {
+		return generationRepository.selectGeneration(generation);
+	}
 
 	
 }

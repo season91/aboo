@@ -65,8 +65,8 @@
 						    </thead>
 						    <tbody>
 								<c:forEach items="${generationWonList}" var="generationWon">
-									<tr onclick="openModal(this)" data-toggle="modal" data-target="#modify">
-										<td>1</td>
+									<tr onclick="openModal(this)" data-toggle="modal" data-target="#modifyModal">
+									    <td class = "generationWonIdx" >${generationWon.generationWonIdx}</td>
 									    <td class = "name" >${generationWon.name}</td>
 									    <td class = "tell">${generationWon.tell}</td>
 									 </tr>
@@ -177,16 +177,16 @@
             <div class="modal-body">
        	      <div class="form-group">
                 <label for="name">이름</label>
-    			<input type="text" class="form-control" id="name" placeholder="이름을 입력하세요">
+    			<input type="text" class="form-control" id="addName" class= "addName" placeholder="이름을 입력하세요">
               </div>             
               <div class="form-group">
                 <label for="name">전화번호</label>
-    			<input type="text" class="form-control" id="name" placeholder="전화번호를 입력하세요">
+    			<input type="text" class="form-control" id="addTell" class = "addTell" placeholder="전화번호를 입력하세요">
               </div>      
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">확인</button>
+              <button type="button" class="btn btn-primary" onclick="add()">확인</button>
             </div>
           </div>
         </div>
@@ -194,7 +194,7 @@
       
       
       <!-- 세대원 수정 Modal -->
-      <div class="modal fade" id="modify" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -204,17 +204,18 @@
             <div class="modal-body">
        	      <div class="form-group">
                 <label for="name">이름</label>
-    			<input type="text" class="form-control" id="modalName" class= "modalName" name = "name" >
+    			<input type="text" class="form-control" id="modifyName" class= "modifyName" >
               </div>             
               <div class="form-group">
                 <label for="name">전화번호</label>
-    			<input type="text" class="form-control" id="modalTell" class= "modalTell" name = "modalTell" >
+    			<input type="text" class="form-control" id="modityTell" class= "modityTell" >
+    			<input type="hidden" id = "modifyGenerationWonIdx" class = "modifyGenerationWonIdx" name = "generationWonIdx">
               </div>     
             </div>
             <div class="modal-footer">
               <button type="button" id = "closeModity" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-info" onclick="modity()">수정</button>
-              <button type="button" class="btn btn-danger" onclick="delete()">삭제</button>
+              <button type="button" class="btn btn-info" onclick="modity() ">수정</button>
+              <button type="button" class="btn btn-danger" onclick="del() ">삭제</button>
             </div>
           </div>
         </div>
@@ -228,31 +229,150 @@
 	
 	
  		let openModal = (info) => {
-		   $('#modify').show();
+		   $('#modifyModal').show();
+		   let generationWonIdx = info.cells[0].innerText
 		   let name = info.cells[1].innerText
 		   let tell = info.cells[2].innerText
 		   
-		   document.querySelector("#modalName").value = name;
-		   document.querySelector("#modalTell").value = tell;
-			
+		   document.querySelector("#modifyName").value = name;
+		   document.querySelector("#modityTell").value = tell;
+		   document.querySelector("#modifyGenerationWonIdx").value = generationWonIdx;
 		}
  		
 	</script>
 	
 	<script type="text/javascript">
+		let modity = () => {
+		
+		let modifyName = document.querySelector("#modifyName").value
+		let modifyTell = document.querySelector("#modityTell").value
+		let modifyGenerationWonIdx = document.querySelector("#modifyGenerationWonIdx").value
+		
+		let	result = confirm('정말 수정하시겠습니까?')
+		 
+		if (result) {
 
- 		let modity = () => {
-			
-			let modifyName = document.querySelector("#modalName").value
-			let modifyTell = document.querySelector("#modalTell").value
-			
-			console.dir(modifyName)
-			
-			
-			
+         const url = '/mypage/generationwonmodify';
+         let paramObj = new Object();
+         paramObj.name = modifyName;
+         paramObj.tell = modifyTell;
+         paramObj.generationWonIdx = modifyGenerationWonIdx;
+         let headerObj = new Headers();
+         headerObj.append("content-type","application/json");
+         fetch(url,{
+            method:"post",
+            headers:headerObj,
+            body:JSON.stringify(paramObj)
+         }).then(response => {
+            if(response.ok){
+               return response.text();   
+            }
+            throw new AsyncPageError(response.text());
+         }).then((text) => {
+            if(text == 'success'){
+          		alert("수정에 성공하였습니다.")
+          		location.href = "/mypage/generationwon"
+            }else{
+          		alert("수정에 실패하였습니다.")
+            }
+         }).catch(error => {
+            error.alertMessage();
+         });	
+         
+		 }
 		}
  		
 	</script>
+	
+	
+	<script type="text/javascript">
+	let del = () => {
+		
+		let modifyName = document.querySelector("#modifyName").value
+		let modifyTell = document.querySelector("#modityTell").value
+		let modifyGenerationWonIdx = document.querySelector("#modifyGenerationWonIdx").value
+		
+		let	result = confirm('정말 삭제하시겠습니까?')
+		 
+		if (result) {
+
+         const url = '/mypage/generationwondelete';
+         let paramObj = new Object();
+         paramObj.name = modifyName;
+         paramObj.tell = modifyTell;
+         paramObj.generationWonIdx = modifyGenerationWonIdx;
+         let headerObj = new Headers();
+         headerObj.append("content-type","application/json");
+         fetch(url,{
+            method:"post",
+            headers:headerObj,
+            body:JSON.stringify(paramObj)
+         }).then(response => {
+            if(response.ok){
+               return response.text();   
+            }
+            throw new AsyncPageError(response.text());
+         }).then((text) => {
+            if(text == 'success'){
+          		alert("삭제에 성공하였습니다.")
+          		location.href = "/mypage/generationwon"
+            }else{
+          		alert("삭제에 실패하였습니다.")
+            }
+         }).catch(error => {
+            error.alertMessage();
+         });	
+         
+		 }
+		}
+ 		
+	</script>
+	
+	<script type="text/javascript">
+	let add = () => {
+		
+	let addName = document.querySelector("#addName").value;
+	let addTell = document.querySelector("#addTell").value;
+	
+	console.dir(addName)
+	
+	let	result = confirm('정말 추가하시겠습니까?') 
+	if (result) {
+
+        const url = '/mypage/generationwonadd';
+        let paramObj = new Object();
+        paramObj.name = addName;
+        paramObj.tell = addTell;
+
+        let headerObj = new Headers();
+        headerObj.append("content-type","application/json");
+        fetch(url,{
+           method:"post",
+           headers:headerObj,
+           body:JSON.stringify(paramObj)
+        }).then(response => {
+           if(response.ok){
+              return response.text();   
+           }
+           throw new AsyncPageError(response.text());
+        }).then((text) => {
+           if(text == 'success'){
+         		alert("추가에 성공하였습니다.")
+         		location.href = "/mypage/generationwon"
+           }else{
+         		alert("추가에 실패하였습니다.")
+           }
+        }).catch(error => {
+           error.alertMessage();
+        });	
+        
+	 }
+	}
+ 		
+	</script>
+	
+	
+	
 	
 	<script type="text/javascript">
 	$('#closeModity').click(function(e) {

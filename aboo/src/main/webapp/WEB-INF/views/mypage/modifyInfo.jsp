@@ -3,24 +3,37 @@
 <%@ include file="/WEB-INF/views/include/generationhead.jsp" %>
 <!DOCTYPE html>
 <html>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <body>
     
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="index.html">WebHost</a>
+	      <a class="navbar-brand" href="/index">ABOO</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-	          <li class="nav-item"><a href="domain.html" class="nav-link">Domain</a></li>
-	          <li class="nav-item"><a class="nav-link" href="hosting.html">Hosting</a></li>
-	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-	          <li class="nav-item active"><a href="contact.html" class="nav-link">Contact</a></li>
-	          <li class="nav-item cta"><a href="contact.html" class="nav-link"><span>Get started</span></a></li>
+	          <li class="nav-item active"><a href="/index" class="nav-link">Home</a></li>
+	          <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+	          <li class="nav-item "><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
+	          <li class="nav-item"><a class="nav-link" href="/board/info/infolist">Board</a></li>
+	          <li class="nav-item "><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
+	          <c:choose>
+		          <c:when test="${sessionScope.generation == null}">
+		          	<li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
+		          </c:when>
+		          <c:when test="${sessionScope.generation != null}">
+		          	<li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>	          
+		          </c:when>
+		          <c:when test="${sessionScope.admin == null}">
+		          	<li class="nav-item cta"><a href="/login" class="nav-link"><span>Admin Login</span></a></li>	          
+		          </c:when>
+		          <c:when test="${sessionScope.admin != null}">
+		          	<li class="nav-item cta"><a href="/login" class="nav-link"><span>Admin Logout</span></a></li>	          
+		          </c:when>
+	          </c:choose>
 	        </ul>
 	      </div>
 	    </div>
@@ -46,103 +59,131 @@
       <div class="container">
         <div class="row block-9 justify-content-center">
           <div class="col-md-6">
-            <form action="#">
+            <form:form action="/mypage/modifyupdate" modelAttribute ="generation">
               <div class="form-group">
-                <input type="text" readonly="readonly" class="form-control" placeholder="아이디">
+                <input type="text" readonly="readonly" class="form-control" name = "id" value = "${selectGeneration.id}" >
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="비밀번호"> 
+                <input type="text" class="form-control password"  id = "password_1"  placeholder="비밀번호"> 
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="비밀번호확인">
+                <input type="text" class="form-control password" id = "password_2"  name = "password" placeholder="비밀번호확인">
+              	<span id="success" style="display: none; color: #1E90FF">비밀번호가 일치합니다.</span>
+			    <span id="danger" style="display: none; color: #DC143C;">비밀번호가 일치하지 않습니다.</span>
+              	<form:errors path="password" cssClass=".validator"/>
               </div>
               <div class="form-group">
-                <input type="text" readonly="readonly" class="form-control" placeholder="동">
+                <input type="text" readonly="readonly" name ="building" value = "${selectGeneration.building}" class="form-control" >
               </div>
               <div class="form-group">
-                <input type="text" readonly="readonly" class="form-control" placeholder="호">
+                <input type="text" readonly="readonly" name = "num" value = "${selectGeneration.num}" class="form-control" >
               </div>
               <div class="form-group d-flex justify-content-between">
-                <input type="text" class="form-control col-md-10" placeholder="전화번호"><button type="button" class="btn btn-primary px-xl-3 py-xl-1" data-toggle="modal" data-target="#tellModal">인증</button>              
+                <input type="text" class="form-control col-md-10" name = "tell" placeholder="전화번호"><button type="button" class="btn btn-primary px-xl-3 py-xl-1" data-toggle="modal" data-target="#tellModal">인증</button>              
               </div>
               <div class="form-group d-flex justify-content-between">
-                <input type="text" class="form-control col-md-10" placeholder="이메일"><button type="button" class="btn btn-primary px-xl-3 py-xl-1" data-toggle="modal" data-target="#emailModal">인증</button>
+                <input type="text" class="form-control col-md-10" name = "email" placeholder="이메일"><button type="button" class="btn btn-primary px-xl-3 py-xl-1" data-toggle="modal" data-target="#emailModal">인증</button>
               </div>
               <div class="form-group">
-                <input type="text" readonly="readonly" class="form-control" placeholder="입주일">
+                <input type="text" readonly="readonly" class="form-control" name = "regDate" value = "${selectGeneration.regDate}" >
               </div>
               <div class="form-group">
                 <input type="submit" value="수정완료" class="btn btn-primary py-3 px-5 col-sm-12" >
               </div>
-            </form>                    
+            </form:form>                              
           </div>
         </div>
       </div>
     </section>
+    
 
-    <footer class="ftco-footer ftco-bg-dark ftco-section">
-      <div class="container">
-        <div class="row mb-5">
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">WebHost</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4 ml-md-5">
-              <h2 class="ftco-heading-2">Unseful Links</h2>
-              <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Servers</a></li>
-                <li><a href="#" class="py-2 d-block">Windos Hosting</a></li>
-                <li><a href="#" class="py-2 d-block">Cloud Hosting</a></li>
-                <li><a href="#" class="py-2 d-block">OS Servers</a></li>
-                <li><a href="#" class="py-2 d-block">Linux Servers</a></li>
-                <li><a href="#" class="py-2 d-block">Policy</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md">
-             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Navigational</h2>
-              <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Home</a></li>
-                <li><a href="#" class="py-2 d-block">Domain</a></li>
-                <li><a href="#" class="py-2 d-block">Hosting</a></li>
-                <li><a href="#" class="py-2 d-block">About</a></li>
-                <li><a href="#" class="py-2 d-block">Blog</a></li>
-                <li><a href="#" class="py-2 d-block">Contact</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4">
-            	<h2 class="ftco-heading-2">Office</h2>
-            	<div class="block-23 mb-3">
-	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+    
+    <script>
+    $('.password').focusout(function () {
+        var pwd1 = $("#password_1").val();
+        var pwd2 = $("#password_2").val();
+
+        if (pwd1 != '' && pwd2 == '') {
+            null;
+        } else if (pwd1 != "" || pwd2 != "") {
+            if (pwd1 == pwd2) {
+                $("#success").css('display', 'inline-block');
+                $("#danger").css('display', 'none');
+            } else {
+                $("#success").css('display', 'none');
+                $("#danger").css('display', 'inline-block');
+            }
+        }
+    });
+	</script>
+    
+	<footer class="ftco-footer ftco-bg-dark ftco-section">
+	      <div class="container">
+	        <div class="row mb-5">
+	          <div class="col-md">
+	            <div class="ftco-footer-widget mb-4">
+	              <h2 class="ftco-heading-2">ABOO</h2>
+	              <p>아파트를 부탁해!<br>
+	              아파트 주변 공공기관부터 투표, 관리비납부, 차량등록, 층간소음 문의 등 관리하기 편한 기능을 제공합니다.
+	              </p>
+	              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+	                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+	                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+	                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
 	              </ul>
 	            </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 text-center">
-
-            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-          </div>
-        </div>
-      </div>
-    </footer>
+	          </div>
+	          <div class="col-md">
+	            <div class="ftco-footer-widget mb-4 ml-md-5">
+	              <h2 class="ftco-heading-2">Unseful Links</h2>
+	              <ul class="list-unstyled">
+	                <li><a href="/myapt/parking" class="py-2 d-block">Parking</a></li>
+	                <li><a href="/board/info/listinfo" class="py-2 d-block">Info Board</a></li>
+	                <li><a href="/board/interior/intlist" class="py-2 d-block">Interior Board</a></li>
+	                <li><a href="/board/used/usedlist" class="py-2 d-block">Used Board</a></li>
+	                <li><a href="/myapt/schedule" class="py-2 d-block">Apt Schedule</a></li>
+	                <li><a href="/myapt/institutions" class="py-2 d-block">Institutions</a></li>
+	              </ul>
+	            </div>
+	          </div>
+	          <div class="col-md">
+	             <div class="ftco-footer-widget mb-4">
+	              <h2 class="ftco-heading-2">Navigational</h2>
+	              <ul class="list-unstyled">
+	                <li><a href="/index" class="py-2 d-block">Home</a></li>
+	                <li><a href="/about" class="py-2 d-block">About</a></li>
+	                <li><a href="/myapt/schedule" class="py-2 d-block">MyApt</a></li>
+	                <li><a href="/baord/info/listinfo" class="py-2 d-block">Board</a></li>
+	                <li><a href="/mypage/modifyinfo" class="py-2 d-block">MyPage</a></li>
+	              </ul>
+	            </div>
+	          </div>
+	          <div class="col-md">
+	            <div class="ftco-footer-widget mb-4">
+	            	<h2 class="ftco-heading-2">Office</h2>
+	            	<div class="block-23 mb-3">
+		              <ul>
+		                <li><span class="icon icon-map-marker"></span><span class="text">6, Teheran-ro 14-gil, Gangnam-gu, Seoul, Republic of Korea</span></li>
+		                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+82 123 4567 8910</span></a></li>
+		                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">choayoung91@naver.com</span></a></li>
+		                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">gmldnjs74@gmail.com</span></a></li>
+		                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">minh0380@naver.com</span></a></li>
+		                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">psuny1031@naver.com</span></a></li>
+		              </ul>
+		            </div>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="row">
+	          <div class="col-md-12 text-center">
+	
+	            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+	  Copyright &copy;<script>document.write(new Date().getFullYear());</script> <i class="icon-heart" aria-hidden="true"></i> by aboo for a better apartment.
+	  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+	          </div>
+	        </div>
+	      </div>
+	    </footer>
     
        <!-- 번호 인증 Modal -->
       <div class="modal fade" id="tellModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

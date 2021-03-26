@@ -1,10 +1,6 @@
 package com.kh.aboo.user.generation.validator;
 
-import java.util.Set;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.executable.ExecutableValidator;
-import javax.validation.metadata.BeanDescriptor;
+import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -30,6 +26,15 @@ public class GenerationValidator implements Validator{
 
 	@Override
 	public void validate(Object target, Errors errors) {
+		Pattern pattern = Pattern.compile("^(?!.*[ㄱ-힣])(?=.*\\W)(?=.*\\d)(?=.*[a-zA-Z])(?=.{8,})");
+		Generation generation = (Generation) target;
+		
+		
+		if (!pattern.matcher(generation.getPassword()).find()) {
+			errors.rejectValue("password","error.password","비밀번호는 숫자,영문자,특수문자 조합의 8글자 이상인 문자열입니다.");
+		}
+		
+		
 		
 	}
 	
