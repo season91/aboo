@@ -43,7 +43,7 @@
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
 
             <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Info</a></span> <span>Bullentin</span></p>
+              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Info</a></span> <span>Used</span></p>
 	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Interior</h1>
             </div>
           </div>
@@ -62,12 +62,12 @@
             <p>게시글 작성</p>
           </div>
         </div>
-        <form action="#">
+        <form action="${context}/board/interior/intuploadimpl" method="post" enctype="multipart/form-data">
         	<div class="p-2 bg-light mt-1">
 	        	<div class="row block-9 d-flex justify-content-center text-center">
 		          <div class="col-md-11">
 		              <div class="form-group mb-0 d-flex w-80">
-		                <span class="col-md-3 align-self-center text-left">제목</span><input type="text" class="form-control" placeholder="제목을 입력해주세요.">
+		                <span class="col-md-3 align-self-center text-left">제목</span><input type="text" class="form-control" name="intTitle" required="required" placeholder="제목을 입력해주세요.">
 		              </div>
 		          </div>
 		        </div>
@@ -76,9 +76,11 @@
 	        	<div class="row block-9 d-flex justify-content-center text-center">
 		          <div class="col-md-11">
 		              <div class="form-group m-0">
-		              	<textarea class="form-control" id="p_content"></textarea>
+		              	<textarea class="form-control" id="p_content" name="intContent" required="required"></textarea>
 		              	<script type="text/javascript">
-							CKEDITOR.replace('p_content', {height: 500, editorplaceholder: '인테리어에 관한 내용을 입력해주세요.'});
+							CKEDITOR.replace('p_content', {
+								height: 500
+								, editorplaceholder: '인테리어에 관한 내용을 입력해주세요.'});
 							CKEDITOR.config.resize_enabled = false;
 						</script>
 		              </div>

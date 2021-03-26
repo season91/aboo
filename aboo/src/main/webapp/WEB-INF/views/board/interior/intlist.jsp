@@ -40,7 +40,7 @@
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
 
             <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Info</a></span> <span>Bullentin</span></p>
+              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Info</a></span> <span>Used</span></p>
 	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Interior</h1>
             </div>
           </div>
@@ -51,7 +51,25 @@
     <section class="ftco-section bg-light">
       <div class="container">
         <div class="row">
-            <div class="col-md-4 ftco-animate">
+        	<c:forEach items="${interiorBrd}" var="interiorBrd">
+                <div class="col-md-4 ftco-animate">
+					<div class="blog-entry">
+					  <a href="blog-single.html" class="block-20" style="background-image: url('${interiorBrd.intThumbnail}');">
+					  </a>
+					  <div class="text d-flex py-4">
+					    <div class="meta mb-3">
+					      <div><a href="#">${interiorBrd.intRegDate}</a></div>
+					      <div><a href="#">${interiorBrd.intWriter}</a></div>
+					      <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+					    </div>
+					    <div class="desc pl-3">
+					      <h3 class="heading"><a href="#">${interiorBrd.intTitle}</a></h3>
+					    </div>
+					  </div>
+					</div>
+            	</div>
+            </c:forEach>
+            <!-- <div class="col-md-4 ftco-animate">
               <div class="blog-entry">
                 <a href="blog-single.html" class="block-20" style="background-image: url('../../../../resources/images/image_1.jpg');">
                 </a>
@@ -66,7 +84,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
           <div class="col-md-4 ftco-animate">
             <div class="blog-entry">
               <a href="blog-single.html" class="block-20" style="background-image: url('../../../../resources/images/image_2.jpg');">
@@ -168,13 +186,20 @@
           <div class="col text-center">
             <div class="block-27">
               <ul>
-                <li><a href="#">&lt;</a></li>
-                <li class="active"><span>1</span></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&gt;</a></li>
+                <li><a href="${context}/board/${paging.type}/intlist">&lt;&lt;</a></li>
+                <li><a href="${context}/board/${paging.type}/intlist?page=${paging.prev}">&lt;</a></li>
+	                <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
+	                   <c:choose>
+	                      <c:when test="${paging.currentPage eq page}">
+	                         <li class="active"><a href="${context}/board/${paging.type}/intlist?page=${page}"><span>${page}</span></a></li>
+	                      </c:when>
+	                      <c:otherwise>
+	                         <li><a href="${context}/board/${paging.type}?page=${page}/intlist"><span>${page}</span></a></li>
+	                      </c:otherwise>
+	                   </c:choose>
+	              	 </c:forEach>
+                <li><a href="${context}/board/${paging.type}/intlist?page=${paging.next}">&gt;</a></li>
+                <li><a href="${context}/board/${paging.type}/intlist?page=${paging.lastPage}">&gt;&gt;</a></li>
               </ul>
             </div>
           </div>
