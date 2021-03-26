@@ -5,8 +5,7 @@
 <html>
 <body>
 
-	<nav
-		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 		id="ftco-navbar">
 		<div class="container">
 			<a class="navbar-brand" href="/index">ABOO</a>
@@ -25,7 +24,7 @@
 					<li class="nav-item"><a class="nav-link"
 						href="/board/info/infolist">Board</a></li>
 					<li class="nav-item"><a href="/mypage/modifyinfo"
-						class="nav-link">MyPage</a></li>
+						class="nav-link action">MyPage</a></li>
 					<c:choose>
 						<c:when
 							test="${sessionScope.generation == null and sessionScope.admin == null}">
@@ -58,10 +57,10 @@
 						data-scrollax=" properties: { translateY: '70%' }">
 						<p class="breadcrumbs"
 							data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
-							<span class="mr-2"><a href="index.html">Home</a></span> <span>Contact</span>
+							<span class="mr-2"><a href="index.html">FindId</a></span> <span>FindPasswrod</span>
 						</p>
 						<h1 class="mb-3 bread"
-							data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Contact</h1>
+							data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Mypage</h1>
 					</div>
 				</div>
 			</div>
@@ -86,7 +85,7 @@
 						<input type="text" class="form-control" id="email" name="email" placeholder="이메일">
 					</div>
 					<div id = "certifiedBox" class="form-group" style="display: none;">
-						<form action="/mypage/authenticationid" method="get">
+						<form action="/authenticationid" method="get">
 						<div class= "d-flex justify-content-between">
 								<input type="text" class="form-control col-md-10" id="certifiedNum" name="certifiedNum" placeholder="인증번호">
 								<button class = "btn btn-primary px-xl-3 py-xl-1 ">확인</button>
@@ -98,7 +97,7 @@
 					</div>
 					<div class="col-sm-12 d-flex justify-content-center">
 						<div>
-							<a href="#">아이디 찾기</a> | <a href="#">비밀번호 찾기</a>
+							<a href="/mypage/findid">아이디 찾기</a> | <a href="/mypage/findpassword">비밀번호 찾기</a>
 						</div>
 					</div>
 				</div>
@@ -208,7 +207,7 @@
 
 	<script type="text/javascript">
       let emailSend = () => {
-          const url = '/mypage/findidimpl';
+          const url = '/findidimpl';
           
           let paramObj = new Object();
           paramObj.building = document.querySelector("#building").value;

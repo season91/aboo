@@ -10,66 +10,66 @@
 
 <body class=" ">
   <div class="wrapper ">
-    <div class="sidebar">
+        <div class="sidebar">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
       <div class="sidebar-wrapper">
         <div class="logo">
-          <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-            CT
+          <a href="/admin/index" class="simple-text logo-mini">
+            <img src="../../../resources/abooimg/logo_w.png">
           </a>
-          <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-            Creative Tim
+          <a href="/admin/index" class="simple-text logo-normal">
+            ADMIN
           </a>
         </div>
-        <ul class="nav">
-          <li class="active ">
+        <ul class="nav ">
+          <li class="active">
             <a href="./dashboard.html">
-              <i class="tim-icons icon-chart-pie-36"></i>
-              <p>Dashboard</p>
+              <i class="tim-icons icon-badge"></i>
+              <p>Mypage</p>
             </a>
           </li>
           <li>
-            <a href="./icons.html">
-              <i class="tim-icons icon-atom"></i>
-              <p>Icons</p>
+            <a href="./dashboard.html">
+              <i class="tim-icons icon-tap-02"></i>
+              <p>Vote</p>
+            </a>
+          </li>
+          <li>
+            <a href="/admin/authority">
+              <i class="tim-icons icon-single-02"></i>
+              <p>Authority</p>
             </a>
           </li>
           <li>
             <a href="./map.html">
-              <i class="tim-icons icon-pin"></i>
-              <p>Maps</p>
+              <i class="tim-icons icon-chart-bar-32"></i>
+              <p>Mgmtfee</p>
             </a>
           </li>
           <li>
             <a href="./notifications.html">
-              <i class="tim-icons icon-bell-55"></i>
-              <p>Notifications</p>
+              <i class="tim-icons icon-bus-front-12"></i>
+              <p>Vehicle</p>
             </a>
           </li>
           <li>
             <a href="./user.html">
-              <i class="tim-icons icon-single-02"></i>
-              <p>User Profile</p>
+              <i class="tim-icons icon-calendar-60"></i>
+              <p>Schedule</p>
             </a>
           </li>
           <li>
             <a href="./tables.html">
-              <i class="tim-icons icon-puzzle-10"></i>
-              <p>Table List</p>
-            </a>
-          </li>
-          <li>
-            <a href="./typography.html">
-              <i class="tim-icons icon-align-center"></i>
-              <p>Typography</p>
+              <i class="tim-icons icon-chat-33"></i>
+              <p>Chat</p>
             </a>
           </li>
           <li>
             <a href="./rtl.html">
-              <i class="tim-icons icon-world"></i>
-              <p>RTL Support</p>
+              <i class="tim-icons icon-key-25"></i>
+              <p>BDIN</p>
             </a>
           </li>
         </ul>
@@ -87,62 +87,15 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Dashboard</a>
+            <a class="navbar-brand" href="#pablo">Table List</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navigation">
+            <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto ">
-              <div class="search-bar input-group">
-                <!-- <input type="text" class="form-control" placeholder="Search...">
-      <div class="input-group-addon"><i class="tim-icons icon-zoom-split"></i></div> -->
-                <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal"><i class="tim-icons icon-zoom-split"></i></button>
-                <!-- You can choose types of search input -->
-              </div>
-              <!-- <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="SEARCH">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <i class="tim-icons icon-simple-remove"></i>
-          </button>
-        </div>
-
-        <div class="modal-footer">
-        </div>
-      </div>
-    </div>
-  </div> -->
-              <li class="dropdown nav-item">
-                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                  <div class="notification d-none d-lg-block d-xl-block"></div>
-                  <i class="tim-icons icon-sound-wave"></i>
-                  <p class="d-lg-none">
-                    New Notifications
-                  </p>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
-                  <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Mike John responded to your email</a>
-                  </li>
-                  <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">You have 5 more tasks</a>
-                  </li>
-                  <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Your friend Michael is in town</a>
-                  </li>
-                  <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Another notification</a>
-                  </li>
-                  <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Another one</a>
-                  </li>
-                </ul>
-              </li>
               <li class="dropdown nav-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div class="photo">
@@ -150,7 +103,7 @@
                   </div>
                   <b class="caret d-none d-lg-block d-xl-block"></b>
                   <p class="d-lg-none">
-                    Log out
+                    Log out / Login
                   </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
@@ -162,7 +115,14 @@
                   </li>
                   <div class="dropdown-divider"></div>
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Log out</a>
+                  <c:choose>
+                  	<c:when test="${sessionScope.admin == null}">
+                    	<a href="/admin/login" class="nav-item dropdown-item">Log in</a>
+                  	</c:when>
+                  	<c:when test="${sessionScope.admin != null}">
+                    	<a href="/admin/logout" class="nav-item dropdown-item">Log out</a>
+                  	</c:when>
+                  </c:choose>
                   </li>
                 </ul>
               </li>
@@ -186,15 +146,31 @@
         </div>
       </div>
       <!-- End Navbar -->
-      <div class="content d-flex flex-column justify-content-center">
+      <div class = "content d-flex flex-column justify-content-center">
     	<div style="height: 10vh"></div>
-		<h4 class="text-center mb-4">회원님의 아이디는</h4>
-		<div class="container">
-			<div class="row block-9 justify-content-center">
-				<b>${findAdmin.id}</b>입니다 감사합니다.
-			</div>
-		</div>
-      </div>
+    	<h4 class = "text-center mb-4">비밀번호 찾기</h4>
+	    <div class="ftco-section contact-section ftco-degree-bg">
+	     <div class = "d-flex justify-content-center">
+	     	<p class= "text-secondary">아래정보를 입력하시면 임시 비밀번호를 메일로 발송해드립니다</p>
+	     </div>
+	      <div class="container">
+	        <div class="row block-9 justify-content-center">
+	          <div class="col-md-6">
+	              <div class="form-group">
+	                <input type="text" class="form-control" id = "id" name="id" placeholder="아이디">
+	              </div>
+	              <div class="form-group">
+	                <input type="text" class="form-control" id = "email" name = "email" placeholder="이메일">
+	              </div>
+	              <div class="form-group">
+	                <input type="submit" value="확인" class="btn btn-primary py-3 px-5 col-sm-12" onclick="emailSend()" >
+	              </div>
+	      		<div class = "col-sm-12 d-flex justify-content-center"><div><a href="#">아이디 찾기</a> | <a href="#">비밀번호 찾기</a></div></div> 
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	   </div>
       <footer class="footer">
         <div class="container-fluid">
           <nav>
@@ -266,40 +242,49 @@
         </ul>
       </div>
     </div>
-  
-	   <script type="text/javascript">
-	      let emailSend = () => {
-	          const url = '/admin/mypage/findidimpl';
-	          
-	          let paramObj = new Object();
-	          paramObj.name = document.querySelector("#name").value;
-	          paramObj.email = document.querySelector("#email").value;
-	          
-	          let headerObj = new Headers();
-	          headerObj.append("content-type","application/json");
-	          fetch(url,{
-	             method:"post",
-	             headers:headerObj,
-	             body:JSON.stringify(paramObj)
-	          }).then(response => {
-	             if(response.ok){
-	                return response.text();    
-	             }
-	             throw new AsyncPageError(response.text());
-	          }).then((text) => {
-	             if(text == 'fail'){ 
-	                alert('존재하지 않는 사용자입니다.')
-	             }else{ 
-	                 alert('메일이 발송되었습니다.');
-	                 document.querySelector("#certifiedBox").style.display = ''
-	             }
-	          }).catch(error => {
-	             error.alertMessage();
-	          });
-	       }
-	
-	   </script>
-   
+    
+    
+    <script type="text/javascript">
+      let emailSend = () => {
+          const url = '/admin/findpasswordimpl';
+          
+          let paramObj = new Object();
+          paramObj.id = document.querySelector("#id").value;
+          paramObj.email = document.querySelector("#email").value;
+          
+          let headerObj = new Headers();
+          headerObj.append("content-type","application/json");
+          fetch(url,{
+             method:"post",
+             headers:headerObj,
+             body:JSON.stringify(paramObj)
+          }).then(response => {
+             if(response.ok){
+                return response.text();    
+             }
+             throw new AsyncPageError(response.text());
+          }).then((text) => {
+             if(text == 'fail'){ 
+                alert('존재하지 않는 사용자입니다.')
+             }else{ 
+                 alert('메일이 발송되었습니다.');
+             }
+          }).catch(error => {
+             error.alertMessage();
+          });
+       }
+
+   </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <!--   Core JS Files   -->
     <script src="../../../resources/js/admin/core/jquery.min.js"></script>
     <script src="../../../resources/js/admin/core/popper.min.js"></script>

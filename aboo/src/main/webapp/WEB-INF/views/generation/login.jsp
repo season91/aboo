@@ -14,11 +14,11 @@
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item"><a href="/index" class="nav-link">Home</a></li>
+	          <li class="nav-item active"><a href="/index" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
 	          <li class="nav-item "><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
 	          <li class="nav-item"><a class="nav-link" href="/board/info/infolist">Board</a></li>
-	          <li class="nav-item"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
+	          <li class="nav-item "><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
 	          <c:choose>
 		          <c:when test="${sessionScope.generation == null}">
 		          	<li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
@@ -67,7 +67,7 @@
               <div class="form-group">
                 <input type="submit" value="로그인" class="btn btn-primary py-3 px-5 col-sm-12" onclick="login()" >
               </div>
-      		<div class = "col-sm-12 d-flex justify-content-center"><div><a href="/mypage/findid">아이디 찾기</a> | <a href="/mypage/findpassword">비밀번호 찾기</a></div></div>    
+      		<div class = "col-sm-12 d-flex justify-content-center"><div><a href="/findid">아이디 찾기</a> | <a href="/findpassword">비밀번호 찾기</a></div></div>    
           </div>
         </div>
       </div>
