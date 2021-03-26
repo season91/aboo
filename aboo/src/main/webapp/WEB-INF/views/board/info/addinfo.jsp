@@ -45,26 +45,21 @@
          <div class="col-md-12 mb-4">
             <h2 class="h4 pl-4">정보 & 질문 게시판</h2>
             <p class="h6 mt-3 pl-4">게시글 작성</p>
+            <form action="${context}/board/info/upload" method="post" enctype="multipart/form-data">
             <div class="card-body mt-4">
              
                    <!-- Dropdown - 말머리 -->
-                   <div class="dropdown mb-3">
-                   		<button id="mystatus" class="btn dropdown-toggle" aria-haspopup="true"  aria-expanded="false" data-toggle="dropdown">
-                   			Category
-                   		</button>
-                    <ul id="mytype" class="dropdown-menu" role="menu" aria-labelledby="searchType">
-				        <li>
-				            <a role="menuitem" tabindex="-1" value="정보">정보</a>
-				        </li>
-				        <li>
-				            <a role="menuitem" tabindex="-1"  value="질문">질문</a>
-				        </li>
-				    </ul>
-                   </div>
+                   <select name="bCategory" class="choose-lan">
+						<option>Category</option>
+						<option value="정보">정보</option>
+						<option value="질문">질문</option>
+											
+					</select>
+
                    
                    <div class="row block-9">
 			          <div class="col-md-12">
-			            <form action="${context}/board/info/upload" method="post" enctype="multipart/form-data">
+			            
 			              <div class="form-group">
 			                <input type="text" class="form-control" placeholder="제목을 입력하세요">
 			              </div>
@@ -72,12 +67,13 @@
 			                <textarea name="" id="info_content" cols="30" rows="15" class="form-control" placeholder="내용을 입력하세요"></textarea>
 			              </div>
 			              
-			            </form>
+			            
 
 			          </div>
          		 </div>
 
               </div>
+              </form>
               <div class="nav ftco-animate nav-pills d-flex justify-content-center mt-5" id="v-pills-tab" role="tablist" aria-orientation="vertical">	
                  <a class="nav-link pl-5 pr-5" id="v-pills-mission-tab" data-toggle="pill" href="#v-pills-mission" role="tab" aria-controls="v-pills-mission" aria-selected="false">등록하기</a>
                  <a class="nav-link pl-5 pr-5" id="v-pills-mission-tab" data-toggle="pill" href="#v-pills-mission" role="tab" aria-controls="v-pills-mission" aria-selected="false">취소</a>

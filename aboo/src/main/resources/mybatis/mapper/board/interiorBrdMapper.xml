@@ -5,16 +5,6 @@
     
 <mapper namespace="com.kh.aboo.board.interior.model.repository.InteriorBrdRepository">
 	
-	<select id="selectInteriorBrdList" resultType="interiorBrd">
-		select *
-		from(
-			select rownum rnum, b.*
-			from(
-				select *
-				from tb_interior_brd
-				order by int_post_no desc
-			) b
-		) where rnum between #{queryStart} and #{queryEnd}
-	</select>
+
 	
 </mapper>

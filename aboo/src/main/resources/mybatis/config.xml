@@ -26,6 +26,7 @@
 		<mapper resource="mybatis/mapper/mgmtfee/mgmtfeeMapper.xml"/>
 		<mapper resource="mybatis/mapper/mymgmtfee/mymgmtfeeMapper.xml"/>
 		<mapper resource="mybatis/mapper/board/interiorBrdMapper.xml"/>
+		<mapper resource="mybatis/mapper/board/infoBrdMapper.xml"/>
 	</mappers>
 
 

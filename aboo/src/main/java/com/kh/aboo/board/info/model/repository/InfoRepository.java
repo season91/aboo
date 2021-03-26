@@ -1,9 +1,11 @@
 package com.kh.aboo.board.info.model.repository;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 
 import com.kh.aboo.board.info.model.vo.InfoBoard;
 
+@Mapper
 public interface InfoRepository {
 	
 	//정보게시판 게시글 업로드
