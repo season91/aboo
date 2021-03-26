@@ -51,7 +51,7 @@ public class GenerationServiceImpl implements GenerationService {
 	}
 
 	@Override
-	public Generation selectfindid(Generation generation) {
+	public Generation selectFindId(Generation generation) {
 		return generationRepository.selectFindId(generation);
 	}
 
@@ -70,4 +70,34 @@ public class GenerationServiceImpl implements GenerationService {
 
 	}
 
+	@Override
+	public Generation selectFindPassword(Generation generation) {
+		return generationRepository.selectFindPassword(generation);
+	}
+
+	@Override
+	public void updateFindPassword(Generation generation) {
+		String password = generation.getPassword();
+		generation.setPassword(encoder.encode(password));
+		System.out.println("이제 바뀔번호 : " +password);
+		generationRepository.updateFindPassword(generation);
+	}
+
+	@Override
+	public void authenticationPasswordMail(Generation generation, String password) {
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
+		body.add("mail-template", "findpassword");
+		body.add("id", generation.getId());
+		body.add("password",password);
+		System.out.println("메일 보낼번호 : " +password);
+		
+		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(Configcode.DOMAIN + "/mail")
+				.header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE).body(body);
+
+		ResponseEntity<String> response = http.exchange(request, String.class);
+		String message = response.getBody();
+		mail.send(generation.getEmail(), "메일", message);		
+	}
+
+	
 }

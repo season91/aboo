@@ -17,5 +17,10 @@ public interface AdminService {
 
 	//선영 어드민 세대 리스트
 	public Map<String,Object> selectauthorityList(int currentPage,String apartmentIdx);
-
+	
+	//아이디 찾기 전 확인
+	Admin selectfindId(Admin admin);
+	
+	//아이디 찾기 메일
+	void authenticationIdMail(Admin admin ,String authPath);
 }

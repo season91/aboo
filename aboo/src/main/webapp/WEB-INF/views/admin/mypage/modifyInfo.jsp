@@ -7,68 +7,69 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+
 <body class=" ">
   <div class="wrapper ">
-       <div class="sidebar">
+    <div class="sidebar">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
       <div class="sidebar-wrapper">
         <div class="logo">
-          <a href="/admin/index" class="simple-text logo-mini">
-            <img src="../../../resources/abooimg/logo_w.png">
+          <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+            CT
           </a>
-          <a href="/admin/index" class="simple-text logo-normal">
-            ADMIN
+          <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+            Creative Tim
           </a>
         </div>
         <ul class="nav">
-          <li >
+          <li class="active ">
             <a href="./dashboard.html">
-              <i class="tim-icons icon-badge"></i>
-              <p>Mypage</p>
+              <i class="tim-icons icon-chart-pie-36"></i>
+              <p>Dashboard</p>
             </a>
           </li>
           <li>
-            <a href="./dashboard.html">
-              <i class="tim-icons icon-tap-02"></i>
-              <p>Vote</p>
-            </a>
-          </li>
-          <li class="active">
-            <a href="/admin/authority">
-              <i class="tim-icons icon-single-02"></i>
-              <p>Authority</p>
+            <a href="./icons.html">
+              <i class="tim-icons icon-atom"></i>
+              <p>Icons</p>
             </a>
           </li>
           <li>
             <a href="./map.html">
-              <i class="tim-icons icon-chart-bar-32"></i>
-              <p>Mgmtfee</p>
+              <i class="tim-icons icon-pin"></i>
+              <p>Maps</p>
             </a>
           </li>
           <li>
             <a href="./notifications.html">
-              <i class="tim-icons icon-bus-front-12"></i>
-              <p>Vehicle</p>
+              <i class="tim-icons icon-bell-55"></i>
+              <p>Notifications</p>
             </a>
           </li>
           <li>
             <a href="./user.html">
-              <i class="tim-icons icon-calendar-60"></i>
-              <p>Schedule</p>
+              <i class="tim-icons icon-single-02"></i>
+              <p>User Profile</p>
             </a>
           </li>
           <li>
             <a href="./tables.html">
-              <i class="tim-icons icon-chat-33"></i>
-              <p>Chat</p>
+              <i class="tim-icons icon-puzzle-10"></i>
+              <p>Table List</p>
+            </a>
+          </li>
+          <li>
+            <a href="./typography.html">
+              <i class="tim-icons icon-align-center"></i>
+              <p>Typography</p>
             </a>
           </li>
           <li>
             <a href="./rtl.html">
-              <i class="tim-icons icon-key-25"></i>
-              <p>BDIN</p>
+              <i class="tim-icons icon-world"></i>
+              <p>RTL Support</p>
             </a>
           </li>
         </ul>
@@ -86,15 +87,62 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Table List</a>
+            <a class="navbar-brand" href="#pablo">Dashboard</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
-            <div class="collapse navbar-collapse" id="navigation">
+          <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto ">
+              <div class="search-bar input-group">
+                <!-- <input type="text" class="form-control" placeholder="Search...">
+      <div class="input-group-addon"><i class="tim-icons icon-zoom-split"></i></div> -->
+                <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal"><i class="tim-icons icon-zoom-split"></i></button>
+                <!-- You can choose types of search input -->
+              </div>
+              <!-- <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="SEARCH">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <i class="tim-icons icon-simple-remove"></i>
+          </button>
+        </div>
+
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div> -->
+              <li class="dropdown nav-item">
+                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                  <div class="notification d-none d-lg-block d-xl-block"></div>
+                  <i class="tim-icons icon-sound-wave"></i>
+                  <p class="d-lg-none">
+                    New Notifications
+                  </p>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
+                  <li class="nav-link">
+                    <a href="#" class="nav-item dropdown-item">Mike John responded to your email</a>
+                  </li>
+                  <li class="nav-link">
+                    <a href="#" class="nav-item dropdown-item">You have 5 more tasks</a>
+                  </li>
+                  <li class="nav-link">
+                    <a href="#" class="nav-item dropdown-item">Your friend Michael is in town</a>
+                  </li>
+                  <li class="nav-link">
+                    <a href="#" class="nav-item dropdown-item">Another notification</a>
+                  </li>
+                  <li class="nav-link">
+                    <a href="#" class="nav-item dropdown-item">Another one</a>
+                  </li>
+                </ul>
+              </li>
               <li class="dropdown nav-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div class="photo">
@@ -102,7 +150,7 @@
                   </div>
                   <b class="caret d-none d-lg-block d-xl-block"></b>
                   <p class="d-lg-none">
-                    Log out / Login
+                    Log out
                   </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
@@ -114,14 +162,7 @@
                   </li>
                   <div class="dropdown-divider"></div>
                   <li class="nav-link">
-                  <c:choose>
-                  	<c:when test="${sessionScope.admin == null}">
-                    	<a href="/admin/login" class="nav-item dropdown-item">Log in</a>
-                  	</c:when>
-                  	<c:when test="${sessionScope.admin != null}">
-                    	<a href="/admin/logout" class="nav-item dropdown-item">Log out</a>
-                  	</c:when>
-                  </c:choose>
+                    <a href="#" class="nav-item dropdown-item">Log out</a>
                   </li>
                 </ul>
               </li>
@@ -145,81 +186,55 @@
         </div>
       </div>
       <!-- End Navbar -->
-			  <div class="content">
-		    <div class="row">
-		        <div class="col-md-12">
-					
-					<div class= "w-100 d-flex justify-content-end"><button class="btn btn-primary px-xl-5 py-xl-2 mb-2" data-toggle="modal" data-target="#add">추가</button></div>
-		            <div class="card ">
-		                <div class="card-header">
-		                    <h4 class="card-title">세대관리</h4>
-		                </div>
-		                <div class="card-body">
-		                    <div class="table-responsive">
-		                        <table class="table tablesorter " id="">
-		                            <thead class=" text-primary">
-		                                <th>인덱스</th>
-		                                <th>동 </th>
-		                                <th>호</th>
-		                                <th>아이디</th>
-		                                <th>입주일</th>
-		                            </thead>
-		                            <tbody>
-										<c:forEach items="${authorityList}" var="authority">
-											<tr>
-											    <td>${authority.generationIdx}</td>
-											    <td>${authority.building}</td>
-											    <td>${authority.num}</td>
-											   	<td>${authority.id}</td>
-											    <td>${authority.regDate}</td>
-											 </tr>
-									    </c:forEach>
-		                            </tbody>
-		                        </table>
-		                    </div>
-		                </div>		
-		            </div>
-						<div class="row d-flex">
-					    <div class="col text-center">
-					      <div class="block-27">
-					        <ul>
-					        <li>
-	         				<a href="/admin/authority" class="nav first">&lt;&lt;</a>
-					        </li>
-					        <li><a href="/admin/authority?page=${paging.prev}">&lt;</a></li>
-					         <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">					         
-						         <c:choose>
-						         	<c:when test="${paging.currentPage eq page}">
-				         		  		<li class = "active"><a href="/admin/authority?page=${page}">${page}</a></li>
-						         	</c:when>
-						         	<c:otherwise>
-				         		  		<li><a href="/admin/authority?page=${page}">${page}</a></li>
-						         	</c:otherwise>
-						         </c:choose>
-			         		 </c:forEach>
-					        <li><a href="/admin/authority?page=${paging.next}">&gt;</a></li>
-					        <li>
-	 	   	 				 <a href="/admin/authority?page=${paging.lastPage}">&gt;&gt;</a>
-					         </li>
-					        </ul>
-					      </div>
-					    </div>
-					</div>		        
-		        </div>
-		    </div>
-		</div>
-           <footer class="footer">
+      <div class="content">
+		<section class="ftco-section contact-section ftco-degree-bg">
+    	<div style="height: 10vh"></div>
+     	<h4 class = "text-center mb-4">개인정보 수정</h4>
+	      <div class="container">
+	        <div class="row block-9 justify-content-center">
+	          <div class="col-md-6">
+	            <form action="#">
+	              <div class="form-group">
+	                <input type="text" readonly="readonly" class="form-control" placeholder="아이디">
+	              </div>
+	              <div class="form-group">
+	                <input type="text" class="form-control" placeholder="비밀번호"> 
+	              </div>
+	              <div class="form-group">
+	                <input type="text" class="form-control" placeholder="비밀번호확인">
+	              </div>
+	              <div class="form-group d-flex justify-content-between">
+	                <input type="text" class="form-control col-md-10" placeholder="전화번호"><button type="button" class="btn btn-primary px-xl-3 py-xl-1" data-toggle="modal" data-target="#tellModal">인증</button>              
+	              </div>
+	              <div class="form-group d-flex justify-content-between">
+	                <input type="text" class="form-control col-md-10" placeholder="이메일"><button type="button" class="btn btn-primary px-xl-3 py-xl-1" data-toggle="modal" data-target="#emailModal">인증</button>
+	              </div>
+	              <div class="form-group">
+	                <input type="submit" value="수정완료" class="btn btn-primary py-3 px-5 col-sm-12" >
+	              </div>
+	            </form>                    
+	          </div>
+	        </div>
+	      </div>
+	    </section>
+      </div>
+      <footer class="footer">
         <div class="container-fluid">
           <nav>
             <ul>
               <li>
-                <a href="/aboutus">
+                <a href="https://www.creative-tim.com">
+                  Creative Tim
+                </a>
+              </li>
+              <li>
+                <a href="http://presentation.creative-tim.com">
                   About Us
                 </a>
               </li>
               <li>
-                <a href="/index">
-                  to generation
+                <a href="http://blog.creative-tim.com">
+                  Blog
                 </a>
               </li>
             </ul>
@@ -229,7 +244,7 @@
             <script>
               document.write(new Date().getFullYear())
             </script> made with <i class="tim-icons icon-heart-2"></i> by
-            <a href="https://www.creative-tim.com" target="_blank">aboo</a> for a better apartment.
+            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
           </div>
       </footer>
       </div>
@@ -274,35 +289,48 @@
         </ul>
       </div>
     </div>
-    
-      <!-- 세대원 추가  Modal -->
-      <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      
+      <!-- 번호 인증 Modal -->
+      <div class="modal fade" id="tellModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title text-dark" id="myModalLabel">세대 추가</h4>
+              <h4 class="modal-title text-dark" id="myModalLabel">인증번호</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-            <form action="">
        	      <div class="form-group">
-                <label for="name">동</label>
-    			<input type="text" id = "building" name = "building" class="form-control text-dark" id="d" placeholder="동을 입력하세요">
-              </div>             
-              <div class="form-group">
-                <label for="name">호</label>
-    			<input type="text" id = "num" name = "num" class="form-control text-dark" id="h" placeholder="호를 입력하세요">
-              </div>  
-              </form>    
+                <input type="text" class="form-control"> 
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" onclick="add()">확인</button>
+              <button type="button" class="btn btn-primary">확인</button>
             </div>
           </div>
         </div>
       </div>
       
+       <!-- 이메일 인증 Modal -->
+      <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title text-dark" id="myModalLabel">발송된 메일 코드</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+       	      <div class="form-group">
+                <input type="text" class="form-control"> 
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">확인</button>
+            </div>
+          </div>
+        </div>
+      </div>
     <!--   Core JS Files   -->
     <script src="../../../resources/js/admin/core/jquery.min.js"></script>
     <script src="../../../resources/js/admin/core/popper.min.js"></script>
@@ -318,7 +346,6 @@
     <script src="../../../resources/js/admin/black-dashboard.min.js?v=1.0.0" type="text/javascript"></script>
     <!-- Black Dashboard DEMO methods, don't include it in your project! -->
     <script src="../../../resources/demo/demo.js"></script>
-	 
     <script>
       $(document).ready(function() {
         $().ready(function() {
@@ -429,12 +456,7 @@
           });
         });
       });
-  	$('.modal').on('hidden.bs.modal', function (e) {
-	    console.log('modal close');
-	  $(this).find('form')[0].reset()
-	});
     </script>
-    
     <script>
       $(document).ready(function() {
         // Javascript method's body can be found in assets/js/demos.js
@@ -442,47 +464,14 @@
 
       });
     </script>
-  
-	
+    
    <script type="text/javascript">
-      $('#add').modal(options)
+      $('#tellModal').modal(options)
    </script>
    
-   <!-- 세대 추가 자바스크립트 -->
    <script type="text/javascript">
-   let add = () => {
-	  let building = document.querySelector("#building").value;
-	  let num = document.querySelector("#num").value;
-	  console.dir(building);
-	  console.dir(num);
-	  
-	  const url = '/admin/authorityadd';
-	  let paramObj = new Object();
-	  
-	   paramObj.building = building;
-       paramObj.num = num;
-       let headerObj = new Headers();
-       headerObj.append("content-type","application/json");
-       fetch(url,{
-           method:"post",
-           headers:headerObj,
-           body:JSON.stringify(paramObj)
-        }).then(response => {
-           if(response.ok){
-              return response.text();   
-           }
-           throw new AsyncPageError(response.text());
-        }).then((text) => {
-           if(text == 'susesse'){
-         		alert("세대 추가 완료")
-				location.href = "/admin/authority"
-           }else{
-           }
-        }).catch(error => {
-           error.alertMessage();
-        });
-     }
-   
+      $('#emailModal').modal(options)
    </script>
+    
 </body>
 </html>

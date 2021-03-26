@@ -16,13 +16,21 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.aboo.admin.mgmtfee.model.vo.Mgmtfee;
+import com.kh.aboo.common.code.Configcode;
 import com.kh.aboo.common.code.ErrorCode;
 import com.kh.aboo.common.exception.ToAlertException;
+import com.kh.aboo.common.mail.MailSender;
 import com.kh.aboo.common.util.paging.Paging;
 import com.kh.aboo.user.generation.model.repository.GenerationRepository;
 import com.kh.aboo.user.generation.model.vo.Generation;
@@ -35,7 +43,13 @@ public class AdminServiceImpl implements AdminService {
 
 	@Autowired
 	private PasswordEncoder encoder;
+	
+	@Autowired
+	private MailSender mail;
 
+	@Autowired
+	private RestTemplate http;
+	
 	private final AdminRepository adminRepository;
 
 	public AdminServiceImpl(AdminRepository adminRepository) {
@@ -71,24 +85,39 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Map<String, Object> selectauthorityList(int currentPage, String apartmentIdx) {
-		Paging paging = Paging.builder()
-				.currentPage(currentPage)
-				.blockCnt(5)
-				.cntPerPage(5)
-				.type("board")
-				.total(adminRepository.selectContentCnt(apartmentIdx))
-				.build();
-		
-		Map<String,Object> commandMap = new HashMap<String, Object>();
-		Map<String,Object> authorityMap = new HashMap<String, Object>();
+		Paging paging = Paging.builder().currentPage(currentPage).blockCnt(5).cntPerPage(5).type("board")
+				.total(adminRepository.selectContentCnt(apartmentIdx)).build();
+
+		Map<String, Object> commandMap = new HashMap<String, Object>();
+		Map<String, Object> authorityMap = new HashMap<String, Object>();
 		authorityMap.put("paging", paging);
 		authorityMap.put("apartmentIdx", apartmentIdx);
-		System.out.println("paging"+paging.toString());
-		
+		System.out.println("paging" + paging.toString());
+
 		commandMap.put("paging", paging);
 		commandMap.put("authorityList", adminRepository.selectauthorityList(authorityMap));
 
 		return commandMap;
+	}
+
+	@Override
+	public Admin selectfindId(Admin admin) {
+		return adminRepository.selectFindId(admin);
+	}
+
+	@Override
+	public void authenticationIdMail(Admin admin, String authPath) {
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
+		body.add("mail-template", "adminid");
+		body.add("id", admin.getId());
+		body.add("authPath", authPath);
+		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(Configcode.DOMAIN + "/mail")
+				.header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE).body(body);
+
+		ResponseEntity<String> response = http.exchange(request, String.class);
+		String message = response.getBody();
+		mail.send(admin.getEmail(), "메일", message);
+
 	}
 
 }

@@ -42,21 +42,39 @@
     </section>
   
     <section class="ftco-section contact-section ftco-degree-bg">
-     <h4 class = "text-center mb-4">비밀번호 찾기</h4>
-     <div class = "d-flex justify-content-center"><div>아래정보를 입력하시면 임시 비밀번호를 메일로 발송해드립니다</div></div>
+     	<h4 class = "text-center mb-4">개인정보 수정</h4>
       <div class="container">
         <div class="row block-9 justify-content-center">
           <div class="col-md-6">
+            <form action="#">
               <div class="form-group">
-                <input type="text" class="form-control" id = "id" name="id" placeholder="아이디">
+                <input type="text" readonly="readonly" class="form-control" placeholder="아이디">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" id = "email" name = "email" placeholder="이메일">
+                <input type="text" class="form-control" placeholder="비밀번호"> 
               </div>
               <div class="form-group">
-                <input type="submit" value="확인" class="btn btn-primary py-3 px-5 col-sm-12" onclick="emailSend()" >
+                <input type="text" class="form-control" placeholder="비밀번호확인">
               </div>
-      		<div class = "col-sm-12 d-flex justify-content-center"><div><a href="/admin/mypage/findid">아이디 찾기</a> | <a href="/admin/mypage/findpassword">비밀번호 찾기</a></div></div> 
+              <div class="form-group">
+                <input type="text" readonly="readonly" class="form-control" placeholder="동">
+              </div>
+              <div class="form-group">
+                <input type="text" readonly="readonly" class="form-control" placeholder="호">
+              </div>
+              <div class="form-group d-flex justify-content-between">
+                <input type="text" class="form-control col-md-10" placeholder="전화번호"><button type="button" class="btn btn-primary px-xl-3 py-xl-1" data-toggle="modal" data-target="#tellModal">인증</button>              
+              </div>
+              <div class="form-group d-flex justify-content-between">
+                <input type="text" class="form-control col-md-10" placeholder="이메일"><button type="button" class="btn btn-primary px-xl-3 py-xl-1" data-toggle="modal" data-target="#emailModal">인증</button>
+              </div>
+              <div class="form-group">
+                <input type="text" readonly="readonly" class="form-control" placeholder="입주일">
+              </div>
+              <div class="form-group">
+                <input type="submit" value="수정완료" class="btn btn-primary py-3 px-5 col-sm-12" >
+              </div>
+            </form>                    
           </div>
         </div>
       </div>
@@ -126,42 +144,56 @@
       </div>
     </footer>
     
-  
-
+       <!-- 번호 인증 Modal -->
+      <div class="modal fade" id="tellModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel">인증번호</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+       	      <div class="form-group">
+                <input type="text" class="form-control"> 
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">확인</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+       <!-- 이메일 인증 Modal -->
+      <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel">발송된 메일 코드</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+       	      <div class="form-group">
+                <input type="text" class="form-control"> 
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">확인</button>
+            </div>
+          </div>
+        </div>
+      </div>
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-	
-	
-	<script type="text/javascript">
-      let emailSend = () => {
-          const url = '/mypage/findpasswordimpl';
-          
-          let paramObj = new Object();
-          paramObj.id = document.querySelector("#id").value;
-          paramObj.email = document.querySelector("#email").value;
-          
-          let headerObj = new Headers();
-          headerObj.append("content-type","application/json");
-          fetch(url,{
-             method:"post",
-             headers:headerObj,
-             body:JSON.stringify(paramObj)
-          }).then(response => {
-             if(response.ok){
-                return response.text();    
-             }
-             throw new AsyncPageError(response.text());
-          }).then((text) => {
-             if(text == 'fail'){ 
-                alert('존재하지 않는 사용자입니다.')
-             }else{ 
-                 alert('메일이 발송되었습니다.');
-             }
-          }).catch(error => {
-             error.alertMessage();
-          });
-       }
 
+   <script type="text/javascript">
+      $('#tellModal').modal(options)
+   </script>
+   
+   <script type="text/javascript">
+      $('#emailModal').modal(options)
    </script>
 
   <script src="../../../resources/js/generation/jquery.min.js"></script>
