@@ -27,4 +27,17 @@ public interface AdminRepository {
 	int selectContentCnt(String apartmentIdx);
 
 	List<Generation> selectauthorityList(Map<String,Object> authorityMap);
+		
+	//아이디 메일 전에 있는 어드민인지 체크
+	@Select("select * from TB_MANAGER where name = #{name} and EMAIL = #{email}")
+	public Admin selectFindId(Admin admin);
+	
+	//비밀번호 메일보내기 전에 있는 어드민인지 체크
+	@Select("select * from TB_MANAGER where email = #{email} and id = #{id}")
+	public Admin selectFindPassword(Admin admin);
+	
+	//비밀번호 변경
+	@Select("update TB_MANAGER set PASSWORD = #{password} where ID = #{id}")
+	public void updateFindPassword(Admin admin);
+	
 }	
