@@ -17,7 +17,17 @@
 	          <li class="nav-item"><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
 	          <li class="nav-item"><a class="nav-link" href="/board/info/listinfo">Board</a></li>
 	          <li class="nav-item active"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
-	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>
+	           <c:choose>
+		          <c:when test="${sessionScope.generation == null and sessionScope.admin == null}">
+		          	<li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
+		          </c:when>
+		          <c:when test="${sessionScope.generation != null}">
+		          	<li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>	          
+		          </c:when>
+                  <c:when test="${sessionScope.admin != null}">
+                    <li class="nav-item cta"><a href="/admin/logout" class="nav-link"><span>Logout</span></a></li>	
+                  </c:when>		                    
+	          </c:choose>
 	        </ul>
 	      </div>
 	    </div>
@@ -43,7 +53,7 @@
     	<div class="container">
     		<div class="row justify-content-center mb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
-            <h2 class="mb-4">103동 906호 관리비 내역</h2>
+            <h2 class="mb-4">${generation.building}동 ${generation.num }호 관리비 내역</h2>
             <p>월별 관리비 고지 현황입니다.</p>
             <p>미납시 고지월 납부상태를 통해 결제페이지로 이동하실 수 있습니다.</p>
             <p>상세내역은 고지월을 통해 조회하실 수 있습니다.</p>

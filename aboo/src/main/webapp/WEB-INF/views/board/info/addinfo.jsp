@@ -45,42 +45,45 @@
          <div class="col-md-12 mb-4">
             <h2 class="h4 pl-4">정보 & 질문 게시판</h2>
             <p class="h6 mt-3 pl-4">게시글 작성</p>
+            <form action="${context}/board/info/upload" method="post" enctype="multipart/form-data">
             <div class="card-body mt-4">
-                    <a class="nav-link dropdown-toggle border col-md-2 text-dark mb-3" href="#" id="userDropdown" role="button"
-                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                         <span>Category</span>
-                   </a>
+             
                    <!-- Dropdown - 말머리 -->
-                   <div class="dropdown-menu animated--grow-in"
-                         aria-labelledby="userDropdown">
-                      <a class="dropdown-item" href="#">
-                           정보
-                      </a>
-                      <a class="dropdown-item" href="#">
-                           질문
-                      </a>
+                   <div class="dropdown mb-3">
+                   		<select name="bCategory" class="btn p-2">
+							<option >Category 선택</option>
+							<option value="정보">정보</option>
+							<option value="질문">질문</option>
+						</select>
+
                    </div>
                    
                    <div class="row block-9">
 			          <div class="col-md-12">
-			            <form action="#">
+			            
 			              <div class="form-group">
-			                <input type="text" class="form-control" placeholder="제목을 입력하세요">
+			                <input type="text" name="bContent" class="form-control" placeholder="제목을 입력하세요">
 			              </div>
 			              <div class="form-group">
-			                <textarea name="" id="info_content" cols="30" rows="15" class="form-control" placeholder="내용을 입력하세요"></textarea>
+			                <textarea name="bContent" id="bContent" class="form-control" cols="30" rows="15" placeholder="내용을 입력하세요"></textarea>
 			              </div>
+			               <div class="form-group">
+							 <input type="file" name="files" id="contract_file" multiple/>
+							</div>
 			              
-			            </form>
+			            
 
 			          </div>
          		 </div>
 
               </div>
+              
               <div class="nav ftco-animate nav-pills d-flex justify-content-center mt-5" id="v-pills-tab" role="tablist" aria-orientation="vertical">	
-                 <a class="nav-link pl-5 pr-5" id="v-pills-mission-tab" data-toggle="pill" href="#v-pills-mission" role="tab" aria-controls="v-pills-mission" aria-selected="false">등록하기</a>
-                 <a class="nav-link pl-5 pr-5" id="v-pills-mission-tab" data-toggle="pill" href="#v-pills-mission" role="tab" aria-controls="v-pills-mission" aria-selected="false">취소</a>
+                 <a class="nav-link pl-5 pr-5" href="board/info/upload">등록하기</a>
+                 <a class="nav-link pl-5 pr-5" href="board/info/listinfo">취소</a>
               </div>
+              </form>
+              
           </div>
         </div>
         
@@ -182,12 +185,13 @@
   <script src="../../../resources/ckeditor/ckeditor.js"></script>
   
   <script type="text/javascript">
- 	 CKEDITOR.replace(
- 			 'info_content', 
- 			 {height: 500                                                  
-           });
+	  CKEDITOR.replace(
+				 'bContent', 
+				 {height: 500                                                  
+	        });
   
   </script>
+  
 
 
 </body>
