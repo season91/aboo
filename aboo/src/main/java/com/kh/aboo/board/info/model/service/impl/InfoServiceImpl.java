@@ -28,10 +28,11 @@ public class InfoServiceImpl implements InfoService{
 
 	@Override
 	@Transactional
-	public void insertInfoBoard(InfoBoard infoBoard, List<MultipartFile> files) {
+	public int insertInfoBoard(InfoBoard infoBoard, List<MultipartFile> files) {
 		
 		FileUtil fileUtil = new FileUtil();
-		infoRepository.insertInfoBoard(infoBoard);
+		int res=infoRepository.insertInfoBoard(infoBoard);
+
 		
 		try {
 			
@@ -43,14 +44,13 @@ public class InfoServiceImpl implements InfoService{
 			throw new ToAlertException(ErrorCode.IB01,e);
 		}
 		
+		return res;
+		
 	}
 
 	@Override
 	public Map<String, Object> selectInfoBoardList(int currentPage) {
-<<<<<<< Updated upstream
-		// TODO Auto-generated method stub
-		return null;
-=======
+
 		
 		Paging paging = Paging.builder()
 				.currentPage(currentPage)
@@ -65,21 +65,19 @@ public class InfoServiceImpl implements InfoService{
 		commandMap.put("boardList", infoRepository.selectInfoBoardList(paging));
 					
 		return commandMap;
->>>>>>> Stashed changes
+
 	}
 
 	@Override
 	public Map<String, Object> selectInfoBoardDetail(String bIdx) {
-<<<<<<< Updated upstream
-		// TODO Auto-generated method stub
-=======
-		InfoBoard infoBoard = infoRepository.selectBoardDetail(bIdx);
+
+		InfoBoard infoBoard = infoRepository.selectInfoBoardDetail(bIdx);
 		List<FileVo> files = infoRepository.selectFileWithBdIdx(bIdx);
 		
 		Map<String,Object> commandMap = new HashMap<String, Object>();
 		commandMap.put("infoBoard",infoBoard);
 		commandMap.put("files", files);
->>>>>>> Stashed changes
+
 		return null;
 	}
 

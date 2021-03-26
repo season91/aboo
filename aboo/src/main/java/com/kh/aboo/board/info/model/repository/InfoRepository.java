@@ -1,10 +1,8 @@
 package com.kh.aboo.board.info.model.repository;
 
 import java.util.List;
-<<<<<<< Updated upstream
 import java.util.Map;
-=======
->>>>>>> Stashed changes
+
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -23,25 +21,17 @@ public interface InfoRepository {
 	int insertInfoBoard(InfoBoard infoBoard);
 	int insertFile(FileVo file);
 	
-<<<<<<< Updated upstream
 	Map<String,Object> selectInfoBoardList(Paging paging);
-=======
-	List<InfoBoard> selectInfoBoardList(Paging paging);
->>>>>>> Stashed changes
 	
 	@Select("select count(*) from tb_inf_qst_brd")
 	int selectInfoContentCnt();
 	
 	@Select("select * from tb_inf_qst_brd where b_idx = #{bIdx}")
-<<<<<<< Updated upstream
 	InfoBoard selectInfoBoardDetail(String bIdx);
 	
 	@Select("select * from tb_file where type_idx = #{bIdx}")
 	List<FileVo> selectFileWithBIdx(String bIdx);
-=======
-	InfoBoard selectBoardDetail(String bdIdx);
 	
-	@Select("select * from tb_file where type_idx = #{bIdx}")
+	@Select("select * from tb_file where type_idx = #{bdIdx}")
 	List<FileVo> selectFileWithBdIdx(String bdIdx);
->>>>>>> Stashed changes
 }

@@ -18,10 +18,6 @@ public class InfoBoard {
 	public InfoBoard() {
 		
 	}
-<<<<<<< Updated upstream
-=======
-	
->>>>>>> Stashed changes
 	
 	public InfoBoard(String bIdx, String apartmentIdx, String bCategory, String bTitle, String bContent, Date bWdate,
 			String bWriter, int bAns, int bIsDel, int bIsPrivate) {
