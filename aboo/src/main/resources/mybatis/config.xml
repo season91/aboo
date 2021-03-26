@@ -18,6 +18,7 @@
 		<typeAlias type="com.kh.aboo.admin.mgmtfee.model.vo.Mgmtfee" alias="mgmtfee"/>
 		<typeAlias type="com.kh.aboo.user.generationWon.model.vo.GenerationWon" alias="generationWon"/>
 		<typeAlias type="com.kh.aboo.board.interior.model.vo.InteriorBrd" alias="interiorBrd"/>
+		<typeAlias type="com.kh.aboo.board.info.model.vo.InfoBoard" alias="infoBoard"/>
 	</typeAliases>
 
 <!-- 3. 작성쿼리 root등록을 위한 경로 설정. 맨아래에 있어야 한다.-->

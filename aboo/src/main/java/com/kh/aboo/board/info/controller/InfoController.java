@@ -28,7 +28,12 @@ public class InfoController {
 
 	//희원
 	@GetMapping("listinfo")
-	public void listInfo() {};
+	public String listInfo(@RequestParam(defaultValue = "1") int page, Model model) {
+		
+		model.addAllAttributes(infoService.selectInfoBoardList(page));
+		return "board/info/listinfo";
+		
+	};
 	
 	//희원
 	@GetMapping("detailinfo")

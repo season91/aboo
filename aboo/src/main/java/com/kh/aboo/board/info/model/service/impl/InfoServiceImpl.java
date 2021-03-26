@@ -55,14 +55,15 @@ public class InfoServiceImpl implements InfoService{
 		Paging paging = Paging.builder()
 				.currentPage(currentPage)
 				.blockCnt(5)
-				.currentPage(10)
+				.cntPerPage(10)
 				.type("infoBoard")
 				.total(infoRepository.selectInfoContentCnt())
 				.build();
+		System.out.println(paging.toString());
 	
 		Map<String,Object> commandMap = new HashMap<String, Object>();
 		commandMap.put("paging", paging);
-		commandMap.put("boardList", infoRepository.selectInfoBoardList(paging));
+		commandMap.put("infoBoard", infoRepository.selectInfoBoardList(paging));
 					
 		return commandMap;
 

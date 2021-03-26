@@ -21,7 +21,7 @@ public interface InfoRepository {
 	int insertInfoBoard(InfoBoard infoBoard);
 	int insertFile(FileVo file);
 	
-	Map<String,Object> selectInfoBoardList(Paging paging);
+	List<InfoBoard> selectInfoBoardList(Paging paging);
 	
 	@Select("select count(*) from tb_inf_qst_brd")
 	int selectInfoContentCnt();
