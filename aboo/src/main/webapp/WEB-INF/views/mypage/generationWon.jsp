@@ -58,50 +58,41 @@
 	    				<table class="table">
 						    <thead class="thead-primary">
 						      <tr>
-						        <th>NO.</th>
+						      	<th>No.</th>
 						        <th>이름</th>
 						        <th>전화번호</th>
 						      </tr>
 						    </thead>
 						    <tbody>
-						     <tr>
-						        <td>1</td>
-						        <td data-toggle="modal" data-target="#modify">박선영</td>
-						        <td></td>
-						      </tr>						    
-						      <tr>
-						        <td>2</td>
-						        <td></td>
-						        <td></td>
-						      </tr>
-						      <tr>
-						        <td>3</td>
-						        <td></td>
-						        <td></td>
-						      </tr>
-						      <tr>
-						        <td>4</td>
-						        <td></td>
-						        <td></td>
-						      </tr>
-						      <tr>
-						        <td>5</td>
-						        <td></td>
-						        <td></td>
-						      </tr>		      				
+								<c:forEach items="${generationWonList}" var="generationWon">
+									<tr onclick="openModal(this)" data-toggle="modal" data-target="#modify">
+										<td>1</td>
+									    <td class = "name" >${generationWon.name}</td>
+									    <td class = "tell">${generationWon.tell}</td>
+									 </tr>
+							    </c:forEach>						    				
 						    </tbody>						    
 						  </table>
 				          <div class="col text-center">
 				            <div class="block-27">
-				              <ul>
-				                <li><a href="#">&lt;</a></li>
-				                <li class="active"><span>1</span></li>
-				                <li><a href="#">2</a></li>
-				                <li><a href="#">3</a></li>
-				                <li><a href="#">4</a></li>
-				                <li><a href="#">5</a></li>
-				                <li><a href="#">&gt;</a></li>
-				              </ul>
+				            <ul>
+						        <li><a href="/mypage/generationwon" class="nav first">&lt;&lt;</a></li>
+						        <li><a href="/mypage/generationwon?page=${paging.prev}">&lt;</a></li>
+						         <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">					         
+							         <c:choose>
+							         	<c:when test="${paging.currentPage eq page}">
+					         		  		<li class = "active"><a href="/mypage/generationwon?page=${page}">${page}</a></li>
+							         	</c:when>
+							         	<c:otherwise>
+					         		  		<li><a href="/mypage/generationwon?page=${page}">${page}</a></li>
+							         	</c:otherwise>
+							         </c:choose>
+				         		 </c:forEach>
+						        <li><a href="/mypage/generationwon?page=${paging.next}">&gt;</a></li>
+						        <li>
+		 	   	 				 <a href="/mypage/generationwon?page=${paging.lastPage}">&gt;&gt;</a>
+						         </li>
+					        </ul>
 				            </div>
 				          </div>						  						  
 					  </div>
@@ -211,21 +202,19 @@
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-            <form action="">
        	      <div class="form-group">
                 <label for="name">이름</label>
-    			<input type="text" class="form-control" id="name" placeholder="이름을 입력하세요">
+    			<input type="text" class="form-control" id="modalName" class= "modalName" name = "name" >
               </div>             
               <div class="form-group">
                 <label for="name">전화번호</label>
-    			<input type="text" class="form-control" id="name" placeholder="전화번호를 입력하세요">
+    			<input type="text" class="form-control" id="modalTell" class= "modalTell" name = "modalTell" >
               </div>     
-              </form> 
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-info">수정</button>
-              <button type="button" class="btn btn-danger">삭제</button>
+              <button type="button" id = "closeModity" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-info" onclick="modity()">수정</button>
+              <button type="button" class="btn btn-danger" onclick="delete()">삭제</button>
             </div>
           </div>
         </div>
@@ -234,19 +223,44 @@
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 	
+	
 	<script type="text/javascript">
-	$('.modal').on('hidden.bs.modal', function (e) {
-	    console.log('modal close');
-	  $(this).find('form')[0].reset()
-	});
+	
+	
+ 		let openModal = (info) => {
+		   $('#modify').show();
+		   let name = info.cells[1].innerText
+		   let tell = info.cells[2].innerText
+		   
+		   document.querySelector("#modalName").value = name;
+		   document.querySelector("#modalTell").value = tell;
+			
+		}
+ 		
 	</script>
-   <script type="text/javascript">
-      $('#addModal').modal(options)
-   </script>
-   
-   <script type="text/javascript">
-      $('#modify').modal(options)
-   </script>
+	
+	<script type="text/javascript">
+
+ 		let modity = () => {
+			
+			let modifyName = document.querySelector("#modalName").value
+			let modifyTell = document.querySelector("#modalTell").value
+			
+			console.dir(modifyName)
+			
+			
+			
+		}
+ 		
+	</script>
+	
+	<script type="text/javascript">
+	$('#closeModity').click(function(e) {
+	   $('#modify').hide();
+	});
+	
+	</script>
+
   <script src="../../../resources/js/generation/jquery.min.js"></script>
   <script src="../../../resources/js/generation/jquery-migrate-3.0.1.min.js"></script>
   <script src="../../../resources/js/generation/popper.min.js"></script>

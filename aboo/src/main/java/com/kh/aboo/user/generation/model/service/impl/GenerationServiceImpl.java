@@ -1,5 +1,8 @@
 package com.kh.aboo.user.generation.model.service.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
@@ -12,9 +15,11 @@ import org.springframework.web.client.RestTemplate;
 
 import com.kh.aboo.common.code.Configcode;
 import com.kh.aboo.common.mail.MailSender;
+import com.kh.aboo.common.util.paging.Paging;
 import com.kh.aboo.user.generation.model.repository.GenerationRepository;
 import com.kh.aboo.user.generation.model.service.GenerationService;
 import com.kh.aboo.user.generation.model.vo.Generation;
+import com.kh.aboo.user.generationWon.model.vo.GenerationWon;
 
 @Service
 public class GenerationServiceImpl implements GenerationService {
@@ -98,6 +103,27 @@ public class GenerationServiceImpl implements GenerationService {
 		generationRepository.updateFindPassword(generation);
 				
 	}
+
+	@Override
+	public Map<String, Object> selectGenerationWonList(int currentPage, String generationIdx) {
+		Paging paging = Paging.builder().currentPage(currentPage).blockCnt(5).cntPerPage(5).type("board")
+				.total(generationRepository.selectContentCnt(generationIdx)).build();
+		Map<String, Object> commandMap = new HashMap<String, Object>();
+		Map<String, Object> generationMap = new HashMap<String, Object>();
+		generationMap.put("paging", paging);
+		generationMap.put("generationIdx", generationIdx);
+		System.out.println("paging" + paging.toString());
+
+		commandMap.put("paging", paging);
+		commandMap.put("generationWonList", generationRepository.selectGenerationWonList(generationMap));
+		
+		return commandMap;
+	}
+
+
+	
+	
+	
 
 	
 }

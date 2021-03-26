@@ -26,7 +26,8 @@ public interface AdminRepository {
 	@Select("select count(*) from TB_GENERATION where is_del = 0 and APARTMENT_IDX = #{apartmentIdx}")
 	int selectContentCnt(String apartmentIdx);
 
-	List<Generation> selectauthorityList(Map<String,Object> authorityMap);
+	//세대 추가 페이지 리스트
+	List<Generation> selectAuthorityList(Map<String,Object> authorityMap);
 		
 	//아이디 메일 전에 있는 어드민인지 체크
 	@Select("select * from TB_MANAGER where name = #{name} and EMAIL = #{email}")

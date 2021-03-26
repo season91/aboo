@@ -90,7 +90,7 @@ public class AdminController {
 	public String adminAuthority(@RequestParam(defaultValue = "1") int page,
 			@SessionAttribute(name = "admin", required = false) Admin admin, Model model) {
 
-		model.addAllAttributes(adminService.selectauthorityList(page, admin.getApartmentIdx()));
+		model.addAllAttributes(adminService.selectAuthorityList(page, admin.getApartmentIdx()));
 
 		return "admin/authority";
 	}
