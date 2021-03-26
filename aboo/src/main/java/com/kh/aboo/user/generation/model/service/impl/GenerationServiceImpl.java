@@ -63,11 +63,13 @@ public class GenerationServiceImpl implements GenerationService {
 		body.add("authPath", authPath);
 		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(Configcode.DOMAIN + "/mail")
 				.header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE).body(body);
-
+		
 		ResponseEntity<String> response = http.exchange(request, String.class);
 		String message = response.getBody();
 		mail.send(generation.getEmail(), "메일", message);
-
+				
+		
+		
 	}
 
 	@Override
@@ -75,13 +77,6 @@ public class GenerationServiceImpl implements GenerationService {
 		return generationRepository.selectFindPassword(generation);
 	}
 
-	@Override
-	public void updateFindPassword(Generation generation) {
-		String password = generation.getPassword();
-		generation.setPassword(encoder.encode(password));
-		System.out.println("이제 바뀔번호 : " +password);
-		generationRepository.updateFindPassword(generation);
-	}
 
 	@Override
 	public void authenticationPasswordMail(Generation generation, String password) {
@@ -97,6 +92,11 @@ public class GenerationServiceImpl implements GenerationService {
 		ResponseEntity<String> response = http.exchange(request, String.class);
 		String message = response.getBody();
 		mail.send(generation.getEmail(), "메일", message);		
+		
+		System.out.println("바뀔번호");
+		generation.setPassword(encoder.encode(password));
+		generationRepository.updateFindPassword(generation);
+				
 	}
 
 	

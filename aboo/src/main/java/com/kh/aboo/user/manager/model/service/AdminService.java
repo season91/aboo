@@ -23,4 +23,10 @@ public interface AdminService {
 	
 	//아이디 찾기 메일
 	void authenticationIdMail(Admin admin ,String authPath);
+	
+	//비밀번호 찾기 전 확인
+	Admin selectFindPassword(Admin admin);
+	
+	//비밀번호 찾기 메일
+	void authenticationPasswordMail(Admin admin, String password);
 }
