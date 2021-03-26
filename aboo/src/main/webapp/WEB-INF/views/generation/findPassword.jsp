@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/include/generationhead.jsp"%>
+    pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/include/generationhead.jsp" %>
 <!DOCTYPE html>
 <html>
 <body>
-
-	<nav
-		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+    
+	  	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 		id="ftco-navbar">
 		<div class="container">
 			<a class="navbar-brand" href="/index">ABOO</a>
@@ -25,7 +24,7 @@
 					<li class="nav-item"><a class="nav-link"
 						href="/board/info/infolist">Board</a></li>
 					<li class="nav-item"><a href="/mypage/modifyinfo"
-						class="nav-link">MyPage</a></li>
+						class="nav-link active">MyPage</a></li>
 					<c:choose>
 						<c:when
 							test="${sessionScope.generation == null and sessionScope.admin == null}">
@@ -45,37 +44,40 @@
 	</nav>
 	<!-- END nav -->
 
-	<section class="home-slider owl-carousel">
-		<div class="slider-item bread-item"
-			style="background-image: url(images/bg_1.jpg);"
-			data-stellar-background-ratio="0.5">
-			<div class="overlay"></div>
-			<div class="container-fluid">
-				<div
-					class="row slider-text align-items-center justify-content-center"
-					data-scrollax-parent="true">
-					<div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate"
-						data-scrollax=" properties: { translateY: '70%' }">
-						<p class="breadcrumbs"
-							data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
-							<span class="mr-2"><a href="index.html">Home</a></span> <span>Contact</span>
-						</p>
-						<h1 class="mb-3 bread"
-							data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Contact</h1>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section class="ftco-section contact-section ftco-degree-bg">
-		<h4 class="text-center mb-4">회원님의 아이디는</h4>
-		<div class="container">
-			<div class="row block-9 justify-content-center">
-				<b>${findAdmin.id}</b>입니다 감사합니다.
-			</div>
-		</div>
-	</section>
+    <section class="home-slider owl-carousel">
+      <div class="slider-item bread-item" style="background-image: url(images/bg_1.jpg);" data-stellar-background-ratio="0.5">
+        <div class="overlay"></div>
+        <div class="container-fluid">
+          <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
+            <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">FindId</a></span> <span>FindPassword</span></p>
+	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Mypage</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <section class="ftco-section contact-section ftco-degree-bg">
+     <h4 class = "text-center mb-4">비밀번호 찾기</h4>
+     <div class = "d-flex justify-content-center"><div>아래정보를 입력하시면 임시 비밀번호를 메일로 발송해드립니다</div></div>
+      <div class="container">
+        <div class="row block-9 justify-content-center">
+          <div class="col-md-6">
+              <div class="form-group">
+                <input type="text" class="form-control" id = "id" name="id" placeholder="아이디">
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" id = "email" name = "email" placeholder="이메일">
+              </div>
+              <div class="form-group">
+                <input type="submit" value="확인" class="btn btn-primary py-3 px-5 col-sm-12" onclick="emailSend()" >
+              </div>
+      		<div class = "col-sm-12 d-flex justify-content-center"><div><a href="/findid">아이디 찾기</a> | <a href="/findpassword">비밀번호 찾기</a></div></div> 
+          </div>
+        </div>
+      </div>
+    </section>
 
 	<footer class="ftco-footer ftco-bg-dark ftco-section">
 		<div class="container">
@@ -165,42 +167,63 @@
 			</div>
 		</div>
 	</footer>
+    
+  
 
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+	
+	
+	<script type="text/javascript">
+      let emailSend = () => {
+          const url = '/findpasswordimpl';
+          
+          let paramObj = new Object();
+          paramObj.id = document.querySelector("#id").value;
+          paramObj.email = document.querySelector("#email").value;
+          
+          let headerObj = new Headers();
+          headerObj.append("content-type","application/json");
+          fetch(url,{
+             method:"post",
+             headers:headerObj,
+             body:JSON.stringify(paramObj)
+          }).then(response => {
+             if(response.ok){
+                return response.text();    
+             }
+             throw new AsyncPageError(response.text());
+          }).then((text) => {
+             if(text == 'fail'){ 
+                alert('존재하지 않는 사용자입니다.')
+             }else{ 
+                 alert('메일이 발송되었습니다.');
+             }
+          }).catch(error => {
+             error.alertMessage();
+          });
+       }
 
-	<!-- loader -->
-	<div id="ftco-loader" class="show fullscreen">
-		<svg class="circular" width="48px" height="48px">
-			<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
-				stroke-width="4" stroke="#eeeeee" />
-			<circle class="path" cx="24" cy="24" r="22" fill="none"
-				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
-	</div>
+   </script>
 
-
-
-   
-	<script src="../../../resources/js/generation/jquery.min.js"></script>
-	<script
-		src="../../../resources/js/generation/jquery-migrate-3.0.1.min.js"></script>
-	<script src="../../../resources/js/generation/popper.min.js"></script>
-	<script src="../../../resources/js/generation/bootstrap.min.js"></script>
-	<script src="../../../resources/js/generation/jquery.easing.1.3.js"></script>
-	<script src="../../../resources/js/generation/jquery.waypoints.min.js"></script>
-	<script src="../../../resources/js/generation/jquery.stellar.min.js"></script>
-	<script src="../../../resources/js/generation/owl.carousel.min.js"></script>
-	<script
-		src="../../../resources/js/generation/jquery.magnific-popup.min.js"></script>
-	<script src="../../../resources/js/generation/aos.js"></script>
-	<script
-		src="../../../resources/js/generation/jquery.animateNumber.min.js"></script>
-	<script src="../../../resources/js/generation/bootstrap-datepicker.js"></script>
-	<script src="../../../resources/js/generation/jquery.timepicker.min.js"></script>
-	<script src="../../../resources/js/generation/scrollax.min.js"></script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-	<script src="../../../resources/js/generation/google-map.js"></script>
-	<script src="../../../resources/js/generation/main.js"></script>
-
-
+  <script src="../../../resources/js/generation/jquery.min.js"></script>
+  <script src="../../../resources/js/generation/jquery-migrate-3.0.1.min.js"></script>
+  <script src="../../../resources/js/generation/popper.min.js"></script>
+  <script src="../../../resources/js/generation/bootstrap.min.js"></script>
+  <script src="../../../resources/js/generation/jquery.easing.1.3.js"></script>
+  <script src="../../../resources/js/generation/jquery.waypoints.min.js"></script>
+  <script src="../../../resources/js/generation/jquery.stellar.min.js"></script>
+  <script src="../../../resources/js/generation/owl.carousel.min.js"></script>
+  <script src="../../../resources/js/generation/jquery.magnific-popup.min.js"></script>
+  <script src="../../../resources/js/generation/aos.js"></script>
+  <script src="../../../resources/js/generation/jquery.animateNumber.min.js"></script>
+  <script src="../../../resources/js/generation/bootstrap-datepicker.js"></script>
+  <script src="../../../resources/js/generation/jquery.timepicker.min.js"></script>
+  <script src="../../../resources/js/generation/scrollax.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="../../../resources/js/generation/google-map.js"></script>
+  <script src="../../../resources/js/generation/main.js"></script>
+    
+    
 </body>
 </html>

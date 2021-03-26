@@ -161,7 +161,7 @@
 		                  <input type="submit" value="로그인" class="btn btn-primary py-3 px-5 col-sm-12" onclick="login()">
 		                </div>
 		              <div class="col-sm-12 d-flex justify-content-center">
-		                <div><a href="#">아이디 찾기</a> | <a href="#">비밀번호 찾기</a></div>
+		                <div><a href="/admin/findid">아이디 찾기</a> | <a href="/admin/findpassword">비밀번호 찾기</a></div>
 		              </div>
 		            </div>
 		          </div>

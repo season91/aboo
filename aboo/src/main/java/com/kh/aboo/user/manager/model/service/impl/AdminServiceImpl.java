@@ -1,10 +1,6 @@
 package com.kh.aboo.user.manager.model.service.impl;
 
-import java.io.IOException;
-import java.sql.Date;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections4.map.HashedMap;
@@ -43,13 +39,13 @@ public class AdminServiceImpl implements AdminService {
 
 	@Autowired
 	private PasswordEncoder encoder;
-	
+
 	@Autowired
 	private MailSender mail;
 
 	@Autowired
 	private RestTemplate http;
-	
+
 	private final AdminRepository adminRepository;
 
 	public AdminServiceImpl(AdminRepository adminRepository) {
@@ -120,4 +116,29 @@ public class AdminServiceImpl implements AdminService {
 
 	}
 
+	@Override
+	public Admin selectFindPassword(Admin admin) {
+		return adminRepository.selectFindPassword(admin);
+	}
+
+	@Override
+	public void authenticationPasswordMail(Admin admin, String password) {
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
+		body.add("mail-template", "findpassword");
+		body.add("id", admin.getId());
+		body.add("password", password);
+		System.out.println("메일 보낼번호 : " + password);
+
+		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(Configcode.DOMAIN + "/mail")
+				.header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE).body(body);
+
+		ResponseEntity<String> response = http.exchange(request, String.class);
+		String message = response.getBody();
+		mail.send(admin.getEmail(), "메일", message);
+
+		System.out.println("바뀔번호");
+		admin.setPassword(encoder.encode(password));
+		adminRepository.updateFindPassword(admin);
+
+	}
 }
