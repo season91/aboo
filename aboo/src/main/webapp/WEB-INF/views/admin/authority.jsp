@@ -183,9 +183,7 @@
 					    <div class="col text-center">
 					      <div class="block-27">
 					        <ul>
-					        <li>
-	         				<a href="/admin/authority" class="nav first">&lt;&lt;</a>
-					        </li>
+					        <li><a href="/admin/authority" class="nav first">&lt;&lt;</a></li>
 					        <li><a href="/admin/authority?page=${paging.prev}">&lt;</a></li>
 					         <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">					         
 						         <c:choose>

@@ -16,6 +16,7 @@
 		<typeAlias type="com.kh.aboo.board.model.vo.Board" alias="board"/>
 		<typeAlias type="com.kh.aboo.user.generation.model.vo.Generation" alias="generation"/>
 		<typeAlias type="com.kh.aboo.admin.mgmtfee.model.vo.Mgmtfee" alias="mgmtfee"/>
+		<typeAlias type="com.kh.aboo.user.generationWon.model.vo.GenerationWon" alias="generationWon"/>
 		<typeAlias type="com.kh.aboo.board.interior.model.vo.InteriorBrd" alias="interiorBrd"/>
 	</typeAliases>
 
@@ -25,12 +26,10 @@
 		<mapper resource="mybatis/mapper/admin/adminMapper.xml"/>
 		<mapper resource="mybatis/mapper/mgmtfee/mgmtfeeMapper.xml"/>
 		<mapper resource="mybatis/mapper/mymgmtfee/mymgmtfeeMapper.xml"/>
-<<<<<<< Updated upstream
+		<mapper resource="mybatis/mapper/generation/generationMapper.xml"/>
 		<mapper resource="mybatis/mapper/board/interiorBrdMapper.xml"/>
 		<mapper resource="mybatis/mapper/board/infoBrdMapper.xml"/>
-=======
-		<mapper resource="mybatis/mapper/info/infoMapper.xml"/>
->>>>>>> Stashed changes
+
 	</mappers>
 
 

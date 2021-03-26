@@ -56,5 +56,4 @@ public class MyMgmtfeeServiceImpl implements MyMgmtfeeService {
 		return myMgmtfeeRepository.selectMyMgmtfeeDate(mgmtfeeIdx);
 	}
 
-	
 }

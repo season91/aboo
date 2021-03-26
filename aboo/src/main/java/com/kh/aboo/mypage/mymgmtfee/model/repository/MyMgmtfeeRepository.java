@@ -12,7 +12,7 @@ import com.kh.aboo.user.generation.model.vo.Generation;
 @Mapper
 public interface MyMgmtfeeRepository {
 	
-	// 페이징 용 
+	// 페이징용
 	@Select("select * from tb_mgmtfee where generation_idx = #{generationIdx}")
 	Mgmtfee selectMgmtfeeByGenerationIdx(String generationIdx);
 	

@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.kh.aboo.common.code.ErrorCode;
 import com.kh.aboo.common.exception.ToAlertException;
 import com.kh.aboo.common.util.ramdom.Ramdom;
 import com.kh.aboo.user.generation.model.service.GenerationService;
 import com.kh.aboo.user.generation.model.vo.Generation;
+import com.kh.aboo.user.manager.model.vo.Admin;
 
 @Controller
 public class GenerationController {
@@ -137,6 +139,55 @@ public class GenerationController {
 		}
 
 	}
+	
+	
+	@GetMapping("/mypage/generationwon")
+	public String addGenerationWon(@RequestParam(defaultValue = "1") int page,
+			@SessionAttribute(name = "generation", required = false) Generation generation, Model model) {
+
+		model.addAllAttributes(generationService.selectGenerationWonList(page, generation.getGenerationIdx()));
+		System.out.println(generation);
+		System.out.println(generationService.selectGenerationWonList(page, generation.getGenerationIdx()));
+		return "mypage/generationWon";	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

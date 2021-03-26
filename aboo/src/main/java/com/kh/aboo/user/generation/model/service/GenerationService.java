@@ -1,6 +1,9 @@
 package com.kh.aboo.user.generation.model.service;
 
+import java.util.Map;
+
 import com.kh.aboo.user.generation.model.vo.Generation;
+import com.kh.aboo.user.generationWon.model.vo.GenerationWon;
 
 public interface GenerationService {
 
@@ -20,5 +23,8 @@ public interface GenerationService {
 	
 	//비밀번호 찾기 메일
 	void authenticationPasswordMail(Generation generation, String password);
+	
+	//선영 어드민 세대 리스트
+	public Map<String,Object> selectGenerationWonList(int currentPage,String apartmentIdx);
 
 }
