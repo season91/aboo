@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +28,12 @@ public class InfoController {
 
 	//희원
 	@GetMapping("listinfo")
-	public void listInfo() {};
+	public String listInfo(@RequestParam(defaultValue = "1") int page, Model model) {
+		
+		model.addAllAttributes(infoService.selectInfoBoardList(page));
+		return "board/info/listinfo";
+		
+	};
 	
 	//희원
 	@GetMapping("detailinfo")
@@ -42,7 +48,8 @@ public class InfoController {
 			@RequestParam List<MultipartFile> files
 			,InfoBoard infoBoard
 			,@SessionAttribute(name="generation", required = false)
-			Generation generation
+			Generation generation,
+			Model model
 			) {
 		
 		//System.out.println("multipartFile list length : " + files.size());
@@ -53,9 +60,16 @@ public class InfoController {
 		infoBoard.setApartmentIdx(apartmentIdx);
 		infoBoard.setbWriter(bWriter);
 		
-		infoService.insertInfoBoard(infoBoard, files);
-		//  /index url로 redirect 요청
-		return "board/info/listinfo";
+		int res = infoService.insertInfoBoard(infoBoard, files);
+		if(res > 0) {
+			model.addAttribute("alertMsg", "게시물이 등록되었습니다.");
+			model.addAttribute("url", "/board/info/listinfo");
+		}else {
+			model.addAttribute("alertMsg", "게시물이 등록 도중 에러가 발생했습니다.");
+			model.addAttribute("url", "/board/info/listinfo");
+		}
+		
+		return "common/result";
 	}
 	
 	//희원

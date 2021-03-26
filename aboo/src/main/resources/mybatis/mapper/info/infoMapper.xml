@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Mapper 어노테이션이 달려있는 repository 경로 넣기.-->
+	<mapper namespace="com.kh.aboo.board.info.model.repository.InfoRepository">
+	
+	<insert id="insertFile">
+		insert into tb_file
+			(f_idx,type_idx,origin_file_name,rename_file_name,save_path)
+		values(
+			sc_file_idx.nextval,
+			<choose>
+				<when test="typeIdx != null">
+					#{typeIdx},
+				</when>
+				<otherwise>
+					sc_info_idx.currval,
+				</otherwise>
+			</choose>
+		#{originFileName},
+		#{renameFileName},
+		#{savePath})
+	</insert>
+	
+	<select id="selectInfoBoardList" resultType="board">
+		select b_idx, b_category, b_title, b_writer, b_wdate, b_isdel
+		from(
+			select rownum rnum, b.*
+			from(
+				select b_idx, b_category, b_title, b_writer, b_wdate, b_isdel
+				from tb_inf_qst_brd
+				order by b_idx desc
+			) b
+		) where rnum between #{queryStart} and #{queryEnd}
+	</select>
+	
+	
+	</mapper>

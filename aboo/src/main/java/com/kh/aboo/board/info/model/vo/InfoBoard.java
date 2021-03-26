@@ -15,6 +15,9 @@ public class InfoBoard {
 	private int bIsDel;
 	private int bIsPrivate;
 	
+	public InfoBoard() {
+		
+	}
 	
 	public InfoBoard(String bIdx, String apartmentIdx, String bCategory, String bTitle, String bContent, Date bWdate,
 			String bWriter, int bAns, int bIsDel, int bIsPrivate) {

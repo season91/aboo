@@ -3,16 +3,30 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-<mapper namespace="com.kh.aboo.board.interior.model.repository.InfoRepository">
+<mapper namespace="com.kh.aboo.board.info.model.repository.InfoRepository">
 	
-	<select id="selectInteriorBrdList" resultType="interiorBrd">
+	 <insert id="insertFile">
+	 	insert into tb_file(f_idx,type_idx,origin_file_name,rename_file_name,save_path)
+	 	values(sc_file_idx.nextval,
+	 			<choose>
+	 				<when test="typeIdx != null">
+	 					#{typeIdx},
+	 				</when>
+	 				<otherwise>
+	 					sc_info_idx.currval,
+	 				</otherwise>
+	 			</choose>
+	 	#{originFileName},#{renameFileName},#{savePath})
+	 </insert>
+
+	<select id="selectInfoBoardList" resultType="infoBoard">
 		select *
 		from(
 			select rownum rnum, b.*
 			from(
 				select *
-				from tb_interior_brd
-				order by int_post_no desc
+				from tb_inf_qst_brd
+				order by b_idx desc
 			) b
 		) where rnum between #{queryStart} and #{queryEnd}
 	</select>

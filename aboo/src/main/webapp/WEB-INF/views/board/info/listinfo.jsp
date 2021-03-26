@@ -59,6 +59,7 @@
                 <div class="table-responsive">
                   <table class="table tablesorter " id="">
                     <thead class=" text-primary">
+                    
                       <th>
                         
                       </th>
@@ -75,31 +76,33 @@
                         작성날짜
                       </th>
                     </thead>
+                   
                     <tbody>
- 
+ 						 <c:forEach items="${infoBoard}" var="infoBoard">
                       <tr>
                         <td>
-                          1
+                         ${infoBoard.bIdx}
                         </td>
                         <td>
-                         정보
+                         ${infoBoard.bCategory}
                         </td>
                        
                         <td>
                          <a href="/board/info/detailinfo" class="text-dark">
-                           우성트램타워에 있는 이비인후과 추천드려요~^^	
+                          ${infoBoard.bTitle}
                          </a>
                         </td>
                         
                         <td>
-                           3506동 1311호	
+                           ${infoBoard.bWriter}
                         </td>
                         <td class="text-center">
-                           2021. 03. 11 
+                          ${infoBoard.bWdate}
                         </td>
                       </tr>
-   
+    					</c:forEach>
                     </tbody>
+                   
                   </table>
 				<div class="nav ftco-animate nav-pills d-flex justify-content-start" aria-orientation="vertical">	
                   <a class="nav-link pl-5 pr-5" href="/board/info/addinfo">글쓰기</a>
@@ -111,14 +114,21 @@
           <div class="text-center">
             <div class="block-27">
             
-              <ul>
-                <li><a href="#">&lt;</a></li>
-                <li class="active"><span>1</span></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&gt;</a></li>
+                  <ul>
+                <li><a href="${context}/board/${paging.type}/listinfo">&lt;&lt;</a></li>
+                <li><a href="${context}/board/${paging.type}/listinfot?page=${paging.prev}">&lt;</a></li>
+	                <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
+	                   <c:choose>
+	                      <c:when test="${paging.currentPage eq page}">
+	                         <li class="active"><a href="${context}/board/${paging.type}/listinfo?page=${page}"><span>${page}</span></a></li>
+	                      </c:when>
+	                      <c:otherwise>
+	                         <li><a href="${context}/board/${paging.type}?page=${page}/listinfo"><span>${page}</span></a></li>
+	                      </c:otherwise>
+	                   </c:choose>
+	              	 </c:forEach>
+                <li><a href="${context}/board/${paging.type}/listinfo?page=${paging.next}">&gt;</a></li>
+                <li><a href="${context}/board/${paging.type}/listinfo?page=${paging.lastPage}">&gt;&gt;</a></li>
               </ul>
             </div>
           </div>
