@@ -28,8 +28,9 @@ public class MyMgmtfeeController {
 	public void mgmtfee(@RequestParam(defaultValue = "1") int page,@SessionAttribute(name = "generation", required = false) Generation generation, Model model) {
 		String generationIdx = generation.getGenerationIdx();
 		System.out.println("page"+page);
-		model.addAllAttributes(myMgmtfeeService.selectMyMgmtfeeList(page, generationIdx));
 		
+		model.addAllAttributes(myMgmtfeeService.selectMyMgmtfeeList(page, generationIdx));
+		model.addAttribute(generation);
 	};
 	
 	// 관리비상세
