@@ -25,8 +25,12 @@
 		<mapper resource="mybatis/mapper/admin/adminMapper.xml"/>
 		<mapper resource="mybatis/mapper/mgmtfee/mgmtfeeMapper.xml"/>
 		<mapper resource="mybatis/mapper/mymgmtfee/mymgmtfeeMapper.xml"/>
+<<<<<<< Updated upstream
 		<mapper resource="mybatis/mapper/board/interiorBrdMapper.xml"/>
 		<mapper resource="mybatis/mapper/board/infoBrdMapper.xml"/>
+=======
+		<mapper resource="mybatis/mapper/info/infoMapper.xml"/>
+>>>>>>> Stashed changes
 	</mappers>
 
 

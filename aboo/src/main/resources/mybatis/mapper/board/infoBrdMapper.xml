@@ -5,14 +5,28 @@
     
 <mapper namespace="com.kh.aboo.board.interior.model.repository.InfoRepository">
 	
-	<select id="selectInteriorBrdList" resultType="interiorBrd">
-		select *
+	 <insert id="insertFile">
+	 	insert into tb_file(f_idx,type_idx,origin_file_name,rename_file_name,save_path)
+	 	values(sc_file_idx.nextval,
+	 			<choose>
+	 				<when test="typeIdx != null">
+	 					#{typeIdx},
+	 				</when>
+	 				<otherwise>
+	 					sc_info_idx.currval,
+	 				</otherwise>
+	 			</choose>
+	 	#{originFileName},#{renameFileName},#{savePath})
+	 </insert>
+
+	<select id="selectBoardList" resultType="board">
+		select b_idx, b_category, b_title, b_content, b_writer, b_wdate
 		from(
 			select rownum rnum, b.*
 			from(
-				select *
-				from tb_interior_brd
-				order by int_post_no desc
+				select b_idx, b_category, b_title, b_content, b_writer, b_wdate
+				from tb_inf_qst_brd
+				order by b_idx desc
 			) b
 		) where rnum between #{queryStart} and #{queryEnd}
 	</select>
