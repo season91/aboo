@@ -128,125 +128,167 @@
         </div>
       </nav>
       
-      
-      <div class="content">
-      	 
-           <div class="row">
+     <div class="content">
+        <div class="row">
           <div class="col-md-12">
-            <div class="card ">
+            <div class="card">
               <div class="card-header">
-                <h3 class="title">세대별 관리비 고지 내역</h3>
+                <h3 class="title">관리비 수정</h3>
+                <p>수정시 기존 정보가 전부 변경됩니다. 수정시 유의바랍니다.</p>
               </div>
-              
-              <div class="col-md-12">
-                <div class="places-buttons">
-                  <div class="row">
-                    <div class="col-md-6 ml-auto mr-auto text-center">
-                      <h4 class="card-title">
-                       	고지서 상세 검색
-                        <p class="category">조회 조건을 선택하세요.</p>
-                      </h4>
+                	  
+              <div class="card-body">
+                  <c:choose>
+                  	<c:when test="${mgmtfee eq null }">
+                  		<div class="col-md-2 pr-md-1">
+	                      <div class="form-group">
+	                        <label>조회내역이 없습니다.</label>
+	                      </div>
+	                    </div>                 	
+                  	</c:when>
+                  	<c:otherwise>
+                  	 <form id="form-mgmtfee-modify" action="${context}/admin/mgmtfee/modifyimpl" method="post">
+                  	<div class="row">
+	                    <div class="col-md-3 pr-md-1">
+	                      <div class="form-group">
+	                        <label>아파트정보</label>
+	                        <input type="text" class="form-control" disabled="" name="apartmentIdx" value="${mgmtfee.apartmentIdx }">
+	                      </div>
+	                    </div>
+	                    <div class="col-md-3 pl-md-1">
+	                      <div class="form-group">
+	                        <label for="exampleInputEmail1">세대정보</label>
+	                        <input type="tel" class="form-control" placeholder="동호수" value="${generation.building}동 ${generation.num}호">
+	                      </div>
+	                    </div>
+	                  </div>
+	                 <div class="row">
+                	 <div class="col-md-3 px-md-1">
+                      <div class="form-group">
+                        <label>관리비 번호</label>
+                        <input type="text" class="form-control" placeholder="Company" name="mgmtfeeIdx" value="${mgmtfee.mgmtfeeIdx }">
+                      </div>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-16 ml-auto mr-auto">
-                      <div class="row">
-                        <div class="col-md-3">
-                          <button class="btn btn-primary btn-block">미납상태만 보기</button>
-                        </div>
-                        <div class="col-md-3 dropdown">
-                          <button class="btn btn-primary btn-block" data-toggle="dropdown">고지월별 보기</button>
-                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-		                    <input type="month">
-		                  </div>
-                        </div>
-                        <div class="col-md-3">
-                          <button class="btn btn-primary btn-block" id="search-button" data-toggle="modal" data-target="#mgmtfeeNumberModal">관리비번호로 검색</button>
-                        </div>
-                        <div class="col-md-3">
-                          <button class="btn btn-primary btn-block" id="search-button" data-toggle="modal" data-target="#searchModal">세대정보로 검색</button>
-                        </div>
-                         <div class="col-md-3">
-                          <button class="btn btn-primary btn-block" id="mgmtfee-upload" data-toggle="modal" data-target="#mgmtfeeUploadrModal">관리비 업로드</button>
-                        </div>
+                    <div class="col-md-3 px-md-1">
+                      <div class="form-group">
+                        <label>세대 번호</label>
+                        <input type="text" class="form-control" placeholder="Company" name="generationIdx" value="${mgmtfee.generationIdx }">
+                      </div>
+                    </div>
+                  	<div class="col-md-2 pr-md-1">
+                      <div class="form-group">
+                        <label>일반관리비</label>
+                        <input type="text" class="form-control" placeholder="Company" name="gnrlMgmtFee" value="${mgmtfee.gnrlMgmtFee }">
+                      </div>
+                    </div>                 	
+                     <div class="col-md-2 pr-md-1">
+                      <div class="form-group">
+                        <label>청소비</label>
+                        <input type="text" class="form-control" placeholder="Company" name="cleanFee" value="${mgmtfee.cleanFee }">
+                      </div>
+                    </div>                 	
+                     <div class="col-md-2 pr-md-1">
+                      <div class="form-group">
+                        <label>승강기 유지비</label>
+                        <input type="text" class="form-control" placeholder="Company" name="elvtrMnfee" value="${mgmtfee.elvtrMnfee }">
+                      </div>
+                    </div>                 	
+                     <div class="col-md-2 pr-md-1">
+                      <div class="form-group">
+                        <label>세대전기료</label>
+                        <input type="text" class="form-control" placeholder="Company" name="genElctr" value="${mgmtfee.genElctr }">
+                      </div>
+                    </div>                 	
+                     <div class="col-md-2 pr-md-1">
+                      <div class="form-group">
+                        <label>공동전기료</label>
+                        <input type="text" class="form-control" placeholder="Company" name="comonElctr" value="${mgmtfee.comonElctr }">
+                      </div>
+                    </div>                 	
+                     <div class="col-md-2 pr-md-1">
+                      <div class="form-group">
+                        <label>세대수도료</label>
+                        <input type="text" class="form-control" placeholder="Company" name="genWater" value="${mgmtfee.genWater }">
+                      </div>
+                    </div>                 	
+                     <div class="col-md-2 pr-md-1">
+                      <div class="form-group">
+                        <label>하수도료</label>
+                        <input type="text" class="form-control" placeholder="Company" name="sewer" value="${mgmtfee.sewer }">
+                      </div>
+                    </div>    
+                    <div class="col-md-2 pr-md-1">
+                      <div class="form-group">
+                        <label>경비비</label>
+                        <input type="text" class="form-control" placeholder="Company" name="expenses" value="${mgmtfee.expenses }">
+                      </div>
+                    </div>     
+                    <div class="col-md-2 pr-md-1">
+                      <div class="form-group">
+                        <label>세대감면액</label>
+                        <input type="text" class="form-control" placeholder="Company" name="genReduction" value="${mgmtfee.genReduction }">
+                      </div>
+                    </div>     
+                    <div class="col-md-2 pr-md-1">
+                      <div class="form-group">
+                        <label>납기일</label>
+                        <input type="text" class="form-control" placeholder="Company" name="dueDate" value="${mgmtfee.dueDate }">
+                      </div>
+                    </div>     
+                    <div class="col-md-2 pr-md-1">
+                      <div class="form-group">
+                        <label>관리 시작일</label>
+                        <input type="text" class="form-control" placeholder="Company" name="mgmtStartDate" value="${mgmtfee.mgmtStartDate }">
+                      </div>
+                    </div>     
+                    <div class="col-md-2 pr-md-1">
+                      <div class="form-group">
+                        <label>관리 종료일</label>
+                        <input type="text" class="form-control" placeholder="Company" name="mgmtEndDate" value="${mgmtfee.mgmtEndDate }">
+                      </div>
+                    </div>     
+                    <div class="col-md-2 pr-md-1">
+                      <div class="form-group">
+                        <label>관리비 작성일</label>
+                        <input type="text" class="form-control" placeholder="Company" name="mgmtWriteDate" value="${mgmtfee.mgmtWriteDate }">
+                      </div>
+                    </div>     
+                    <div class="col-md-2 pr-md-1">
+                      <div class="form-group">
+                        <label>결제여부</label>
+                        <input type="text" class="form-control" placeholder="Company" name="isPayment" value="${mgmtfee.isPayment }">
+                      </div>
+                    </div>     
+                    <div class="col-md-2 pr-md-1">
+                      <div class="form-group">
+                        <label>연체여부</label>
+                        <input type="text" class="form-control" placeholder="Company" name="isOverdue" value="${mgmtfee.isOverdue }">
+                      </div>
+                    </div>
+                    </div> 
+                   <div class="row">
+                    <div class="col-md-8">
+                      <div class="form-group">
+                        <label>알림 메시지</label>
+                        <textarea rows="4" cols="80" class="form-control" name="mgmtfee-alarm">지난달 세대전기료가 과다 부과되어 당월 금액 조정하였습니다.</textarea>
                       </div>
                     </div>
                   </div>
-                </div>
-          </div>
-              
-          	<div class="card-body">
-                <div class="table-responsive">
-                  <table class="table tablesorter " id="">
-                    <thead class=" text-primary">
-                      <th>관리비번호</th>
-                      <th>세대정보</th>
-                      <th>관리비 고지월 </th>
-                      <th>산출금액</th>
-                      <th>납부상태</th>
-                      <th>수정/삭제</th>
-                    </thead>
-                    <tbody>
-                  
-            	<c:forEach items="${mgmtfeeList}" var="mgmtfee" varStatus="status">
-                    <tr>
-                       <td><a href="/mypage/mymgmtfee?${mgmtfee.mgmtfeeIdx }"> ${mgmtfee.mgmtfeeIdx}</a> </td>
-                       <td> ${generationList[status.index].building }동 ${generationList[status.index].num}호</td>
-                       <td> ${mgmtfee.dueDate } </td>
-                       <td> ${mgmtfee.periodPayment}</td>
-                       <c:choose>
-                       	<c:when test="${mgmtfee.isPayment eq 0}">
-                       		<td>미납</td>
-                       	</c:when>
-                       	<c:otherwise>
-                       		<td>완료</td>
-                       	</c:otherwise>
-                       </c:choose>
-                       <td> <a href="/admin/mgmtfee/modify?mgmtfeeidx=${mgmtfee.mgmtfeeIdx}">이동</a></td>
-                      </tr>
-                   </c:forEach>
-              		
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+                    <div class="card-footer" style="display: flex; justify-content: space-around;">
+	                <button type="submit" class="btn btn-fill btn-primary">전송하기</button>
+	                <a href="${context}/admin/mgmtfee"><button type="button" class="btn btn-fill btn-warning">목록으로</button></a>
+                	</div>
+                </form>
+                	
+                </c:otherwise>
+              </c:choose>
+             	
+			</div>
             </div>
           </div>
-          <div class="row d-flex card-body ">
-	          <div class="col text-center">
-	            <div class="block-27">
-	              <ul>
-	                <li><a href="/admin/${paging.type }">&lt;&lt;</a></li>
-	                <li><a href="/admin/${paging.type }?page=${paging.prev}">&lt;</a></li>
-	                <c:choose>
-	                	<c:when test="${paging.lastPage eq 0 }">
-	                		<li><a href="/admin/${paging.type }"><span>1</span></a></li>
-	                	</c:when>
-	                	<c:otherwise>
-	                		<c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
-		                      <c:choose>
-		                         <c:when test="${paging.currentPage eq page}">
-		                            <li class="active"><a href="/admin/${paging.type }?page=${page}"><span>${page}</span></a></li>
-		                         </c:when>
-		                         <c:otherwise>
-		                            <li><a href="/admin/${paging.type }?page=${page}"><span>${page}</span></a></li>
-		                         </c:otherwise>
-		                      </c:choose>
-		                 	 </c:forEach> 
-	                	</c:otherwise>
-	                </c:choose>
-	                 
-	                <li><a href="/admin/${paging.type }?page=${paging.next}">&gt;</a></li>
-	                <li><a href="/admin/${paging.type }?page=${paging.lastPage }">&gt;&gt;</a></li>
-	              </ul>
-	            </div>
-	          </div>
-	        </div>
-    	</div>
-    	</div>
-        </div>
       </div>
-
+      </div>
+    
 
      <footer class="footer">
         <div class="container-fluid">
@@ -275,55 +317,6 @@
       </div>
     </div>
     
-    <div class="modal fade" id="mgmtfeeNumberModal" tabindex="-1" role="dialog" aria-labelledby="mgmtfeeNumberModalLabel" aria-hidden="true">
-       <div class="modal-dialog" role="document">
-         <div class="modal-content" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675); color:white;">
-           <div class="modal-header">
-           	<h4 class="modal-title" id="mgmtfeeNumberModalLabel">관리비번호로 검색</h4>
-            	 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <i class="tim-icons icon-simple-remove"></i>
-              </button>
-           </div>
-           <div class="modal-body">
-        <form>
-          <div class="form-group">
-           <input type="text" class="form-control mgmtfee-keyword" id="inlineFormInputGroup" placeholder="관라비번호로 검색하세요.">
-          </div>
-        </form>
-      </div>
-           <div class="modal-footer">
-           <button type="button" class="btn btn-primary btn-search-vehicleNumber" data-dismiss="modal">검색</button>
-           </div>
-         </div>
-       </div>
-     </div>
-    
-    
-     <div class="modal fade" id="mgmtfeeUploadrModal" tabindex="-1" role="dialog" aria-labelledby="mgmtfeeUploadModalLabel" aria-hidden="true">
-       <div class="modal-dialog" role="document">
-         <div class="modal-content" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675); color:white;">
-           <div class="modal-header">
-           	<h4 class="modal-title" id="mgmtfeeUploadModalLabel">관리비 파일 업로드</h4>
-            	 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <i class="tim-icons icon-simple-remove"></i>
-              </button>
-           </div>
-           <div class="modal-body">
-        <form action="/work/mgmtfeeuploadimpl" id="form-mgmtfee" method="post" enctype="multipart/form-data">
-          <div class="">
-           <input type="file" accept='xlsx, xls' 
-            name="file" class="form-control col-xs-2 " id="inlineFormInputGroup" value="파일을 업로드 하세요">
-          </div>
-    	  </div>
-           <div class="modal-footer">
-           <button type="submit" class="btn btn-primary " data-dismiss="modal" onclick="send()">업로드하기</button>
-           </form>
-           <button type="button" class="btn btn-primary btn_down-file" data-dismiss="modal" onclick="downloadFile()">관리비 양식 다운로드</button>
-           </div>
-         </div>
-       </div>
-     </div>
-  
     <!--   Core JS Files   -->
     <script src="../../../resources/js/admin/mgmtfee.js"></script>
     <script src="../../../resources/js/admin/core/jquery.min.js"></script>

@@ -22,6 +22,7 @@
 	<mappers>
 		<mapper resource="mybatis/mapper/board/boardMapper.xml"/>
 		<mapper resource="mybatis/mapper/mgmtfee/mgmtfeeMapper.xml"/>
+		<mapper resource="mybatis/mapper/mymgmtfee/mymgmtfeeMapper.xml"/>
 	</mappers>
 
 </configuration>

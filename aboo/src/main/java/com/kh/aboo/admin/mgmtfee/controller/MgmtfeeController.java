@@ -20,6 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.aboo.admin.mgmtfee.model.service.MgmtfeeService;
 import com.kh.aboo.admin.mgmtfee.model.vo.Mgmtfee;
+import com.kh.aboo.common.code.ErrorCode;
+import com.kh.aboo.common.exception.ToAlertException;
 import com.kh.aboo.common.util.file.FileUtil;
 import com.kh.aboo.user.manager.model.vo.Admin;
 
@@ -87,5 +89,36 @@ public class MgmtfeeController {
 		return ResponseEntity.ok().headers(headers).body(resource);
 	}
 
-
+	// 수정,삭제하기의 수정
+	@GetMapping("admin/mgmtfee/modify")
+	public void mgmtfeeModify(@SessionAttribute(name = "admin", required = false) Admin admin, @RequestParam String mgmtfeeidx, Model model) {
+		//관리비번호로 내역조회
+		//조회관리비 기준세대정보 가져오기
+		Mgmtfee mgmtfee = mgmtfeeService.selectMgmtfeeByMgmtfeeIdx(mgmtfeeidx);
+		
+		//로그인한 관리자의 아파트번호와 관리비의 아파트번호가 일치해야만 열람 가능
+		System.out.println("같나?"+admin.getApartmentIdx().equals(mgmtfee.getApartmentIdx()));
+		System.out.println("관리자아파트"+admin.getApartmentIdx());
+		System.out.println("관리비아파트"+mgmtfee.getApartmentIdx());
+		if(!admin.getApartmentIdx().equals(mgmtfee.getApartmentIdx())) {
+			throw new ToAlertException(ErrorCode.AUTH03);
+		}
+		
+		String generationIdx = mgmtfee.getGenerationIdx();
+		model.addAttribute(mgmtfee);
+		model.addAttribute(mgmtfeeService.selectGenerationByGenerationIdx(generationIdx));
+	}
+	
+	@PostMapping("admin/mgmtfee/modifyimpl")
+	public String mgmtfeeModifyImpl(Mgmtfee mgmtfee, Model model) {
+		System.out.println("vo찍히나???"+mgmtfee);
+		
+		Mgmtfee updateMgmtefee = mgmtfeeService.updateMgmtfee(mgmtfee);
+		
+		model.addAttribute("alertMsg", "수정이 완로되었습니다.");
+		model.addAttribute("url", "/admin/mgmtfee/modify?mgmtfeeidx="+mgmtfee.getMgmtfeeIdx());
+		model.addAttribute("mgmtfee",updateMgmtefee);
+		
+		return "common/result";
+	}
 }

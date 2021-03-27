@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.kh.aboo.admin.mgmtfee.model.repository.AdminRepository">
+<mapper namespace="com.kh.aboo.admin.mgmtfee.model.repository.MgmtfeeRepository">
 
 	<insert id="insertMgmtfee">
 		insert into tb_mgmtfee (MGMTFEE_IDX, GENERATION_IDX, GNRL_MGMT_FEE, CLEAN_FEE, ELVTR_MNFEE, GEN_ELCTR, COMON_ELCTR, GEN_WATER, 
@@ -12,5 +12,28 @@
 		#{cleanFee}, #{elvtrMnfee}, #{genElctr}, #{comonElctr}, #{genWater}, #{sewer}, #{expenses}, #{genReduction}, #{periodPayment},
 		#{dueDate}, #{mgmtStartDate}, #{mgmtEndDate}, #{mgmtWriteDate})
 	</insert>
+	
+	<select id="selectMgmtfeeList" resultType="mgmtfee">
+	select m.*, g.id as generation_info 
+	from tb_mgmtfee m JOIN tb_generation g on (m.generation_idx = g.generation_idx) 
+	where m.apartment_idx = #{apartmentIdx}
+	</select>
+	
+	<update id="updateMgmtfee">
+		update tb_mgmtfee 
+		set GNRL_MGMT_FEE=#{gnrlMgmtFee}, CLEAN_FEE = #{cleanFee}, ELVTR_MNFEE = #{elvtrMnfee}, GEN_ELCTR = #{genElctr}, 
+		COMON_ELCTR = #{comonElctr}, GEN_WATER =  #{genWater}, SEWER = #{sewer}, EXPENSES = #{expenses}, GEN_REDUCTION = #{genReduction} 
+		where MGMTFEE_IDX = #{mgmtfeeIdx}
+	</update>
+	
+	<update id="procedureUpdatePeriodPayment" statementType="CALLABLE">
+		{call pl_mgmtfee_update(#{mgmtfeeIdx, mode=IN})}
+	</update>
+	
+	<insert id="procedureMgmtOverDue" statementType="CALLABLE">
+		{call pl_overdue_return(#{mgmtfeeIdx, mode=IN})}
+	
+	</insert>
+	
 	
 </mapper>

@@ -22,162 +22,81 @@ public class Mgmtfee {
 	private Date mgmtWriteDate; //관리비 작성일
 	private int isPayment; //결제여부
 	private int isOverdue; //연체여부
-	
-	public Mgmtfee() {
-		super();
+	public void setMgmtfeeIdx(String mgmtfeeIdx) {
+		this.mgmtfeeIdx = mgmtfeeIdx;
 	}
 
-	private Mgmtfee(MgmtBuilder builder) {
-		this.mgmtfeeIdx = builder.mgmtfeeIdx;
-		this.apartmentIdx = builder.apartmentIdx;
-		this.generationIdx = builder.generationIdx;
-		this.gnrlMgmtFee = builder.gnrlMgmtFee;
-		this.cleanFee = builder.cleanFee;
-		this.elvtrMnfee = builder.elvtrMnfee;
-		this.genElctr = builder.genElctr;
-		this.comonElctr = builder.comonElctr;
-		this.genWater = builder.genWater;
-		this.sewer = builder.sewer;
-		this.expenses = builder.expenses;
-		this.genReduction = builder.genReduction;
-		this.periodPayment = builder.periodPayment;
-		this.dueDate = builder.dueDate;
-		this.mgmtStartDate = builder.mgmtStartDate;
-		this.mgmtEndDate = builder.mgmtEndDate;
-		this.mgmtStartDate = builder.mgmtStartDate;
-		this.mgmtWriteDate = builder.mgmtWriteDate;
-		this.isPayment = builder.isPayment;
-		this.isOverdue = builder.isOverdue;
-
+	public void setApartmentIdx(String apartmentIdx) {
+		this.apartmentIdx = apartmentIdx;
 	}
-	
-	public static MgmtBuilder builder() {
-		return new MgmtBuilder();
+
+	public void setGenerationIdx(String generationIdx) {
+		this.generationIdx = generationIdx;
 	}
-	
-	public static class MgmtBuilder{
-		// 엑셀로 입력받을 값
-		private String mgmtfeeIdx;
-		private String apartmentIdx;
-		private String generationIdx; //세대관리번호
-		private String gnrlMgmtFee; //일반관리비
-		private String cleanFee; // 청소비
-		private String elvtrMnfee; //승강기 유지비
-		private String genElctr; //세대전기료
-		private String comonElctr; //공동전기료
-		private String genWater; //세대수도료
-		private String sewer; //하수도료
-		private String expenses; //경비비
-		private String genReduction; //세대감면액
-		private String periodPayment; //납기내 금액
-		private Date dueDate; //납기일
-		private Date mgmtStartDate; // 관리시작일
-		private Date mgmtEndDate; // 관리종료일
-		private Date mgmtWriteDate; //관리비 작성일
-		private int isPayment; //결제여부
-		private int isOverdue; //연체여부
 
-		
-		public MgmtBuilder isPayment(int val) {
-			this.isPayment = val;
-			return this;
-		}
-		
-		public MgmtBuilder isOverdue(int val) {
-			this.isOverdue = val;
-			return this;
-		}
-		
-		public MgmtBuilder mgmtfeeIdx(String val) {
-			this.mgmtfeeIdx = val;
-			return this;
-		}
-		
-		public MgmtBuilder apartmentIdx(String val) {
-			this.apartmentIdx = val;
-			return this;
-		}
-		
-		public MgmtBuilder generationIdx(String val) {
-			this.generationIdx = val;
-			return this;
-		}
-		
-		public MgmtBuilder gnrlMgmtFee(String val) {
-			this.gnrlMgmtFee = val;
-			return this;
-		}
-		
-		public MgmtBuilder cleanFee(String val) {
-			this.cleanFee = val;
-			return this;
-		}
-		
-		public MgmtBuilder elvtrMnfee(String val) {
-			this.elvtrMnfee = val;
-			return this;
-		}
-		
-		public MgmtBuilder genElctr(String val) {
-			this.genElctr = val;
-			return this;
-		}
-		
-		public MgmtBuilder comonElctr(String val) {
-			this.comonElctr = val;
-			return this;
-		}
-		
-		public MgmtBuilder genWater(String val) {
-			this.genWater = val;
-			return this;
-		}
-		
-		public MgmtBuilder sewer(String val) {
-			this.sewer = val;
-			return this;
-		}
-		
-		public MgmtBuilder expenses(String val) {
-			this.expenses = val;
-			return this;
-		}
-		
-		public MgmtBuilder genReduction(String val) {
-			this.genReduction = val;
-			return this;
-		}
-		
-		public MgmtBuilder periodPayment(String val) {
-			this.periodPayment = val;
-			return this;
-		}
-
-		public MgmtBuilder dueDate(Date val) {
-			this.dueDate = val;
-			return this;
-		}
-
-		public MgmtBuilder mgmtStartDate(Date val) {
-			this.mgmtStartDate = val;
-			return this;
-		}
-		
-		public MgmtBuilder mgmtEndDate(Date val) {
-			this.mgmtEndDate = val;
-			return this;
-		}
-		
-		public MgmtBuilder mgmtWriteDate(Date val) {
-			this.mgmtWriteDate = val;
-			return this;
-		}
-		
-		public Mgmtfee build() {
-			return new Mgmtfee(this);
-		}
+	public void setGnrlMgmtFee(String gnrlMgmtFee) {
+		this.gnrlMgmtFee = gnrlMgmtFee;
 	}
-	
+
+	public void setCleanFee(String cleanFee) {
+		this.cleanFee = cleanFee;
+	}
+
+	public void setElvtrMnfee(String elvtrMnfee) {
+		this.elvtrMnfee = elvtrMnfee;
+	}
+
+	public void setGenElctr(String genElctr) {
+		this.genElctr = genElctr;
+	}
+
+	public void setComonElctr(String comonElctr) {
+		this.comonElctr = comonElctr;
+	}
+
+	public void setGenWater(String genWater) {
+		this.genWater = genWater;
+	}
+
+	public void setSewer(String sewer) {
+		this.sewer = sewer;
+	}
+
+	public void setExpenses(String expenses) {
+		this.expenses = expenses;
+	}
+
+	public void setGenReduction(String genReduction) {
+		this.genReduction = genReduction;
+	}
+
+	public void setPeriodPayment(String periodPayment) {
+		this.periodPayment = periodPayment;
+	}
+
+	public void setDueDate(Date dueDate) {
+		this.dueDate = dueDate;
+	}
+
+	public void setMgmtStartDate(Date mgmtStartDate) {
+		this.mgmtStartDate = mgmtStartDate;
+	}
+
+	public void setMgmtEndDate(Date mgmtEndDate) {
+		this.mgmtEndDate = mgmtEndDate;
+	}
+
+	public void setMgmtWriteDate(Date mgmtWriteDate) {
+		this.mgmtWriteDate = mgmtWriteDate;
+	}
+
+	public void setIsPayment(int isPayment) {
+		this.isPayment = isPayment;
+	}
+
+	public void setIsOverdue(int isOverdue) {
+		this.isOverdue = isOverdue;
+	}
 
 	public String getApartmentIdx() {
 		return apartmentIdx;
@@ -248,6 +167,4 @@ public class Mgmtfee {
 				+ mgmtStartDate + ", mgmtEndDate=" + mgmtEndDate + ", mgmtWriteDate=" + mgmtWriteDate + ", isPayment="
 				+ isPayment + ", isOverdue=" + isOverdue + "]";
 	}
-
-	
 }

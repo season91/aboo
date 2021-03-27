@@ -13,14 +13,6 @@ public class Controller {
 	}
 	
 	
-	@GetMapping("myapt/parking")
-	public void parking() {};
-
-	
-	@GetMapping("admin/vehicle")
-	public void adminVehicle() {};
-	
-	// 아영끝
 	
 	@GetMapping("common/adminresult")
 	public void adminresult() {};
