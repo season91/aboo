@@ -37,4 +37,19 @@ public interface MgmtfeeRepository {
 	@Select("select * from tb_generation where generation_idx = #{generationIdx}")
 	Generation selectGenerationByGenerationIdx(String generationIdx);
 
+	//관리비 수정을 위한 관리비조회
+	@Select("select * from tb_mgmtfee where mgmtfee_idx = #{mgmtfeeIdx}")
+	Mgmtfee selectMgmtfeeByMgmtfeeIdx(String mgmtfeeIdx);
+	
+	//관리비 수정
+	int updateMgmtfee(Mgmtfee mgmtfee);
+	
+	//수정된 관리비 납부금액 업데이트
+	void procedureUpdatePeriodPayment(String mgmtfeeIdx);
+	
+	// 납기일이 지난 전체 미납 관리비 내역 조회
+	@Select("select * from tb_mgmtfee where is_payment = 0 and TRUNC(DUE_DATE) < TRUNC(SYSDATE)")
+	List<Mgmtfee> selectMgmtfeeListByAll();
+	
+	void procedureMgmtOverDue(String mgmtfeeIdx);
 }

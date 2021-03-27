@@ -98,20 +98,20 @@
 	          <div class="col text-center">
 	            <div class="block-27">
 	              <ul>
-	                <li><a href="/mypage/mymgmtfee">&lt;&lt;</a></li>
-	                <li><a href="/mypage/mymgmtfee?page=${paging.prev}">&lt;</a></li>
+	                <li><a href="/mypage/${paging.type }">&lt;&lt;</a></li>
+	                <li><a href="/mypage/${paging.type }?page=${paging.prev}">&lt;</a></li>
 	                 <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
                       <c:choose>
                          <c:when test="${paging.currentPage eq page}">
-                            <li class="active"><a href="/mypage/mymgmtfee?page=${page}"><span>${page}</span></a></li>
+                            <li class="active"><a href="/mypage/${paging.type }?page=${page}"><span>${page}</span></a></li>
                          </c:when>
                          <c:otherwise>
-                            <li><a href="/mypage/mymgmtfee?page=${page}"><span>${page}</span></a></li>
+                            <li><a href="/mypage/${paging.type }?page=${page}"><span>${page}</span></a></li>
                          </c:otherwise>
                       </c:choose>
                  	 </c:forEach> 
-	                <li><a href="/mypage/mymgmtfee?page=${paging.next}">&gt;</a></li>
-	                <li><a href="/mypage/mymgmtfee?page=${paging.lastPage }">&gt;&gt;</a></li>
+	                <li><a href="/mypage/${paging.type }?page=${paging.next}">&gt;</a></li>
+	                <li><a href="/mypage/${paging.type }?page=${paging.lastPage }">&gt;&gt;</a></li>
 	              </ul>
 	            </div>
 	          </div>

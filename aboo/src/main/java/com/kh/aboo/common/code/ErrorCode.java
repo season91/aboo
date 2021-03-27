@@ -14,6 +14,8 @@ public enum ErrorCode {
 	MAIL01("메일 발송 중 에러가 발생했습ㅂ니다."),
 	API01("API통신 도중 에러가 발생하였습니다."),
 	ER01("EXCEL 업로드 중 에러가 발생했습니다.","/admin/mgmtfee"),
+	UMGMT01("관리비 수정중 에러가 발생했습니다","/admin/mgmtfee"),
+	AUTH03("해당 아파트는 관리대상이 아닙니다.","/admin/index"),
 	CD_404("존재하지 않는 경로입니다."),
 	AH01("잘못된 인증 번호입니다","/findid"),
 	AH02("존재하지 않는 사용자입니다."),

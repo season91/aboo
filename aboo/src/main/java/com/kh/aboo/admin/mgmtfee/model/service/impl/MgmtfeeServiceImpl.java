@@ -15,6 +15,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -115,7 +116,7 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 	@Override
 	public List<Mgmtfee> insertMgmtfee(Map<String, Object> commandMap,String apartmentIdx) {
 		List<Mgmtfee> mgmtfeeList = new ArrayList<>();
-		Mgmtfee mgmtfee = null;
+		Mgmtfee mgmtfee = new Mgmtfee();
 		for (String	key : commandMap.keySet()) {
 			//System.out.println(commandMap.get(key));
 			List<String> list = (List<String>) commandMap.get(key);
@@ -132,25 +133,24 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 			generationInfo.setNum(num);
 			
 			Generation generation = mgmtfeeRepository.selectGenerationIdx(generationInfo);
+
+			mgmtfee.setApartmentIdx(apartmentIdx);
+			mgmtfee.setGenerationIdx(generation.getGenerationIdx());
+			mgmtfee.setGnrlMgmtFee(list.get(2));
+			mgmtfee.setCleanFee(list.get(3));
+			mgmtfee.setElvtrMnfee(list.get(4));
+			mgmtfee.setGenElctr(list.get(5));
+			mgmtfee.setComonElctr(list.get(6));
+			mgmtfee.setGenWater(list.get(7));
+			mgmtfee.setSewer(list.get(8));
+			mgmtfee.setExpenses(list.get(9));
+			mgmtfee.setGenReduction(list.get(10));
+			mgmtfee.setPeriodPayment(list.get(11));
+			mgmtfee.setDueDate(Date.valueOf(list.get(12)));
+			mgmtfee.setMgmtStartDate(Date.valueOf(list.get(13)));
+			mgmtfee.setMgmtEndDate(Date.valueOf(list.get(14)));
+			mgmtfee.setMgmtWriteDate(Date.valueOf(list.get(15)));
 			
-			mgmtfee = Mgmtfee.builder()
-					.apartmentIdx(apartmentIdx)
-					.generationIdx(generation.getGenerationIdx())
-					.gnrlMgmtFee(list.get(2))
-					.cleanFee(list.get(3))
-					.elvtrMnfee(list.get(4))
-					.genElctr(list.get(5))
-					.comonElctr(list.get(6))
-					.genWater(list.get(7))
-					.sewer(list.get(8))
-					.expenses(list.get(9))
-					.genReduction(list.get(10))
-					.periodPayment(list.get(11))
-					.dueDate(Date.valueOf(list.get(12)))
-					.mgmtStartDate(Date.valueOf(list.get(13)))
-					.mgmtEndDate(Date.valueOf(list.get(14)))
-					.mgmtWriteDate(Date.valueOf(list.get(15)))
-					.build();
 			System.out.println(mgmtfee.toString());
 
 			mgmtfeeRepository.insertMgmtfee(mgmtfee);
@@ -180,7 +180,7 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 				.currentPage(currentPage)
 				.blockCnt(5)
 				.cntPerPage(10)
-				.type("board")
+				.type("mgmtfee")
 				.total(mgmtfeeRepository.selectContentCnt(apartmentIdx))
 				.build();
 
@@ -208,6 +208,50 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 		commandMap.put("generationList", generationList);
 		
 		return commandMap;
+	}
+
+	@Override
+	public Mgmtfee selectMgmtfeeByMgmtfeeIdx(String mgmtfeeIdx) {
+		// TODO Auto-generated method stub
+		return mgmtfeeRepository.selectMgmtfeeByMgmtfeeIdx(mgmtfeeIdx);
+	}
+
+	@Override
+	public Generation selectGenerationByGenerationIdx(String generationIdx) {
+		// TODO Auto-generated method stub
+		return mgmtfeeRepository.selectGenerationByGenerationIdx(generationIdx);
+	}
+
+	@Override
+	public Mgmtfee updateMgmtfee(Mgmtfee mgmtfee) {
+		String mgmtfeeIdx = mgmtfee.getMgmtfeeIdx();
+		int res = mgmtfeeRepository.updateMgmtfee(mgmtfee);
+		//납부금액 업데이트
+
+		if(res > 0) {
+			mgmtfeeRepository.procedureUpdatePeriodPayment(mgmtfeeIdx);
+		} else {
+			throw new ToAlertException(ErrorCode.UMGMT01);
+		} 
+		
+		return mgmtfeeRepository.selectMgmtfeeByMgmtfeeIdx(mgmtfeeIdx);
+	}
+
+	@Override
+	@Scheduled(cron = "0 0 18 * * *")
+	public void procedureMgmtOverDue() {
+		// 연체료 계산하는 배치 메서드, 매일 18시 00분에 돈다. 시연할땐 시간 조정
+		System.out.println("배치시작");
+		// 납기일이 지난  전체 미납 관리비 가져온다.
+		List<Mgmtfee> mgmtfeeList = mgmtfeeRepository.selectMgmtfeeListByAll();
+		
+		for (int i = 0; i < mgmtfeeList.size(); i++) {
+			String mgmtfeeIdx = mgmtfeeList.get(i).getMgmtfeeIdx();
+			// 관리비번호 프로시저로 보낸다.
+			System.out.println(mgmtfeeIdx+"배치수행");
+			mgmtfeeRepository.procedureMgmtOverDue(mgmtfeeIdx);
+		}
+		
 	}
 
 
