@@ -5,7 +5,7 @@
     
     <mapper namespace="com.kh.aboo.user.manager.model.repository.AdminRepository">
     <!-- 선영 세대 목록 가져오기-->
-	<select id="selectauthorityList" resultType="generation">
+	<select id="selectAuthorityList" resultType="generation">
 		select GENERATION_IDX,BUILDING,NUM,ID,PASSWORD,REG_DATE
 		from(
 			select rownum rnum, g.* 
