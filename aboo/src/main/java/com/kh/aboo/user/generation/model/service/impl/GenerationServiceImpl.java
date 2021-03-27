@@ -144,5 +144,12 @@ public class GenerationServiceImpl implements GenerationService {
 		return generationRepository.selectGeneration(generation);
 	}
 
+	@Override
+	public int updateGenerationModify(Generation generation) {
+		String password = generation.getPassword();
+		generation.setPassword(encoder.encode(password));
+		return generationRepository.updateGenerationModify(generation);
+	}
+
 	
 }

@@ -59,7 +59,7 @@
       <div class="container">
         <div class="row block-9 justify-content-center">
           <div class="col-md-6">
-            <form:form action="/mypage/modifyupdate" modelAttribute ="generation">
+            <form:form id = "modifyForm" action="/mypage/modifyupdate" method="post" modelAttribute ="generation">
               <div class="form-group">
                 <input type="text" readonly="readonly" class="form-control" name = "id" value = "${selectGeneration.id}" >
               </div>
@@ -68,9 +68,10 @@
               </div>
               <div class="form-group">
                 <input type="text" class="form-control password" id = "password_2"  name = "password" placeholder="비밀번호확인">
-              	<span id="success" style="display: none; color: #1E90FF">비밀번호가 일치합니다.</span>
-			    <span id="danger" style="display: none; color: #DC143C;">비밀번호가 일치하지 않습니다.</span>
-              	<form:errors path="password" cssClass=".validator"/>
+              	<div id="success" style="display: none; color: #1E90FF; font-size: 1vw;" >비밀번호가 일치합니다.</div>
+			    <div id="danger" style="display: none; color: #DC143C; font-size: 1vw;">비밀번호가 일치하지 않습니다.</div>
+			    <div id ="passwordConfirm"></div>
+              	<div><form:errors path="password" cssClass="validator"/></div>
               </div>
               <div class="form-group">
                 <input type="text" readonly="readonly" name ="building" value = "${selectGeneration.building}" class="form-control" >
@@ -99,6 +100,8 @@
 
     
     <script>
+     let flg = false;
+    
     $('.password').focusout(function () {
         var pwd1 = $("#password_1").val();
         var pwd2 = $("#password_2").val();
@@ -109,12 +112,41 @@
             if (pwd1 == pwd2) {
                 $("#success").css('display', 'inline-block');
                 $("#danger").css('display', 'none');
+                flg = true;
             } else {
                 $("#success").css('display', 'none');
                 $("#danger").css('display', 'inline-block');
+				flg = false;
             }
         }
     });
+    
+
+    document.querySelector('#modifyForm').addEventListener('submit',(e)=>{
+	   let password_1 = document.querySelector("#password_1").value;
+	   let password_2 = document.querySelector("#password_2").value;
+		
+ 	   let regExp = /^(?!.*[ㄱ-힣])(?=.*\W)(?=.*\d)(?=.*[a-zA-Z])(?=.{8,})/;
+ 	   
+ 	   if(!(regExp.test(password_1) || regExp.test(password_2))){
+ 		   //form의 데이터 전송을 막음
+ 		   e.preventDefault();
+ 		   passwordConfirm.innerHTML = '비밀번호는 숫자,영문자,특수문자 조합의 8글자 이상인 문자열입니다.1111111111111111111111111';
+ 		   password_1.value='';
+ 		   password_1.value='';
+
+ 	   }
+ 	   
+ 	   	if (!flg) {
+           	document.querySelector("#danger").innerText = '비밀번호 노일치'
+  		   	e.preventDefault();
+
+
+		}
+ 	   
+    }); 
+    
+   
 	</script>
     
 	<footer class="ftco-footer ftco-bg-dark ftco-section">

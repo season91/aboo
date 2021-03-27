@@ -26,7 +26,6 @@ import com.kh.aboo.user.generation.model.service.GenerationService;
 import com.kh.aboo.user.generation.model.vo.Generation;
 import com.kh.aboo.user.generation.validator.GenerationValidator;
 import com.kh.aboo.user.generationWon.model.vo.GenerationWon;
-import com.kh.aboo.user.manager.model.vo.Admin;
 
 @Controller
 public class GenerationController {
@@ -225,17 +224,19 @@ public class GenerationController {
 	@PostMapping("/mypage/modifyupdate")
 	public String modifyInfo(@Valid Generation generationInfo , Errors errors,
 			@SessionAttribute(name="generation")Generation generation, Model model) {
-		
-		System.out.println(generation);
+				
 		Generation selectGeneration = generationService.selectGeneration(generation);
-		System.out.println(selectGeneration);
 		if (errors.hasErrors()) {
 			model.addAttribute("selectGeneration", selectGeneration);
 			return "mypage/modifyInfo";
 		}
 		
-		System.out.println(generationInfo);
-		return "";
+		generationInfo.setGenerationIdx(selectGeneration.getGenerationIdx());		
+		generationService.updateGenerationModify(generationInfo);
+		
+		model.addAttribute("alertMsg", "수정되었습니다.");
+		model.addAttribute("url", "/login");	
+		return "common/result";
 	}
 	
 	

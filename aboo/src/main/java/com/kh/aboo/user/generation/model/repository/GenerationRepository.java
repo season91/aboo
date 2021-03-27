@@ -35,19 +35,26 @@ public interface GenerationRepository {
 	//세대원 추가 페이지 리스트
 	List<GenerationWon> selectGenerationWonList(Map<String,Object> generationMap);
 	
+	//세대 총 수
 	@Select("select count(*) from TB_GENERATION_WON where IS_DEL = 0 and GENERATION_IDX = #{generationIdx}")
 	int selectContentCnt(String generationIdx);
 
+	//세대원 수정
 	@Update("update TB_GENERATION_WON set NAME = #{name} , tell = #{tell} where generation_won_idx = #{generationWonIdx}")
 	int updateGenerationWonModify(GenerationWon generationWon);
 	
+	//세대원 삭제
 	@Update("update TB_GENERATION_WON set is_del = 1 where generation_won_idx = #{generationWonIdx}")
 	int updateGenerationWonDelete(GenerationWon generationWon);
 	
+	//세대원 추가
 	@Insert("insert into TB_GENERATION_WON(GENERATION_WON_IDX,GENERATION_IDX,TELL,NAME) values(SC_GENERATIONW_IDX.nextval,#{generationIdx},#{tell},#{name})")
 	int insertGenerationWonAdd(GenerationWon generationWon);
 	
+	//세대 전체 조회
 	@Select("select * from TB_GENERATION where GENERATION_IDX = #{generationIdx}")
 	Generation selectGeneration(Generation generation);
+	
+	int updateGenerationModify(Generation generation);
 }
 

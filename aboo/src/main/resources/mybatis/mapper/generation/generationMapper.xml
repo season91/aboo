@@ -21,7 +21,30 @@
     		
     		
     		
-    		
+    <update id="updateGenerationModify">
+     update TB_GENERATION 
+     <set>
+     <if test="password != null">
+     PASSWORD = #{password}
+     </if>
+     <if test="regDate != null">
+     , REG_DATE = #{regDate}
+     </if>
+     <if test="building != null">
+     , BUILDING = #{building}
+     </if>
+     <if test="num != null">
+     , NUM = #{num}
+     </if>
+     <if test="email != null">
+     , EMAIL = #{email}
+     </if>
+     <if test="tell != null">
+     , TELL = #{tell}
+     </if>
+     </set>
+   	 where GENERATION_IDX = #{generationIdx}
+    </update>		
     		
     		
     		
