@@ -1,5 +1,6 @@
 package com.kh.aboo.user.generation.controller;
 
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -37,18 +38,18 @@ public class GenerationController {
 
 	private final GenerationService generationService;
 	private final GenerationValidator generationValidator;
-	
-	public GenerationController(GenerationService generationService,GenerationValidator generationValidator) {
+
+	public GenerationController(GenerationService generationService, GenerationValidator generationValidator) {
 		this.generationService = generationService;
 		this.generationValidator = generationValidator;
 	}
-	
-	@InitBinder
+
+	@InitBinder(value = "generationValid")
 	public void initBinder(WebDataBinder webDataBinder) {
 		webDataBinder.addValidators(generationValidator);
 
 	}
-	
+
 	@GetMapping("login")
 	public String login() {
 		return "generation/login";
@@ -92,12 +93,12 @@ public class GenerationController {
 			return "fail";
 		} else {
 
-			String authPath = UUID.randomUUID().toString().replace("-", "");
-			authPath = authPath.substring(0, 10);
+			String authPathId = UUID.randomUUID().toString().replace("-", "");
+			authPathId = authPathId.substring(0, 10);
 
-			session.setAttribute("authPath", authPath);
+			session.setAttribute("authPathId", authPathId);
 			session.setAttribute("findGeneration", findGeneration);
-			generationService.authenticationIdMail(findGeneration, authPath);
+			generationService.authenticationIdMail(findGeneration, authPathId);
 			return "success";
 		}
 
@@ -106,10 +107,10 @@ public class GenerationController {
 	@GetMapping("authenticationid")
 	public String authenticationId(@RequestParam String certifiedNum, HttpSession session, Model model) {
 
-		String authPath = (String) session.getAttribute("authPath");
+		String authPathId = (String) session.getAttribute("authPathId");
 		Generation findGeneration = (Generation) session.getAttribute("findGeneration");
 
-		if (!certifiedNum.equals(authPath)) {
+		if (!certifiedNum.equals(authPathId)) {
 			throw new ToAlertException(ErrorCode.AH01);
 		}
 
@@ -145,7 +146,7 @@ public class GenerationController {
 
 			System.out.println("임시 번호 : " + password);
 			generationService.authenticationPasswordMail(findGeneration, password); // 메일 보내기
-
+			
 			return "success";
 
 		}
@@ -153,13 +154,15 @@ public class GenerationController {
 	}
 
 	@GetMapping("/mypage/generationwon")
-	public String addGenerationWon(@RequestParam(defaultValue = "1") int page,
-			@SessionAttribute(name = "generation", required = false) Generation generation, Model model) {
-
-		model.addAllAttributes(generationService.selectGenerationWonList(page, generation.getGenerationIdx()));
+	public String generationWon(@RequestParam(defaultValue = "1") int page,
+			@SessionAttribute(name = "generation", required = false) Generation generationInfo, Model model) {
+		
+		model.addAllAttributes(generationService.selectGenerationWonList(page, generationInfo.getGenerationIdx()));
+		
 		return "mypage/generationWon";
 	}
 
+	
 	@PostMapping("/mypage/generationwonmodify")
 	@ResponseBody
 	public String generationWonModify(@RequestBody GenerationWon generationWon) {
@@ -172,8 +175,6 @@ public class GenerationController {
 
 	}
 
-	
-	
 	@PostMapping("/mypage/generationwondelete")
 	@ResponseBody
 	public String generationWonDelete(@RequestBody GenerationWon generationWon) {
@@ -186,20 +187,17 @@ public class GenerationController {
 		return "fail";
 
 	}
-	
-	
-	
+
 	@PostMapping("/mypage/generationwonadd")
 	@ResponseBody
 	public String generationWonAdd(@RequestBody GenerationWon generationWon,
 			@SessionAttribute(name = "generation") Generation generation) {
 
-		
 		generationWon.setGenerationIdx(generation.getGenerationIdx());
-		//추가하는 세대정보를 넣어준다
+		// 추가하는 세대정보를 넣어준다
 		System.out.println(generationWon);
 		int res = generationService.insertGenerationWonAdd(generationWon);
-		
+
 		System.out.println(res);
 		if (res > 0) {
 			return "success";
@@ -207,41 +205,73 @@ public class GenerationController {
 		return "fail";
 
 	}
-	
-	
+
 	@GetMapping("/mypage/modifyinfo")
-	public String modifyInfo(@SessionAttribute(name="generation")Generation generation, Model model) {
-		
-		
+	public String modifyInfo(@SessionAttribute(name = "generation") Generation generation, Model model) {
+
 		Generation selectGeneration = generationService.selectGeneration(generation);
 		System.out.println(selectGeneration);
-		
+
 		model.addAttribute("selectGeneration", selectGeneration);
 		return "mypage/modifyInfo";
 	}
-	
-	
+
 	@PostMapping("/mypage/modifyupdate")
-	public String modifyInfo(@Valid Generation generationInfo , Errors errors,
-			@SessionAttribute(name="generation")Generation generation, Model model) {
-				
+	public String modifyInfo(@Valid Generation generationValid, Errors errors,
+			@SessionAttribute(name = "generation") Generation generation, Model model) {
+
 		Generation selectGeneration = generationService.selectGeneration(generation);
 		if (errors.hasErrors()) {
 			model.addAttribute("selectGeneration", selectGeneration);
 			return "mypage/modifyInfo";
 		}
-		
-		generationInfo.setGenerationIdx(selectGeneration.getGenerationIdx());		
-		generationService.updateGenerationModify(generationInfo);
-		
+
+		generationValid.setGenerationIdx(selectGeneration.getGenerationIdx());
+		generationService.updateGenerationModify(generationValid);
+
 		model.addAttribute("alertMsg", "수정되었습니다.");
-		model.addAttribute("url", "/login");	
+		model.addAttribute("url", "/login");
 		return "common/result";
 	}
-	
-	
-	
-	
+
+	// 이메일 인증
+	@PostMapping("/mypage/modifyemailimpl")
+	@ResponseBody
+	public String modifyEmailImpl(@RequestBody Generation generationInfo, HttpSession session) {
+
+		String authPathEmail = UUID.randomUUID().toString().replace("-", "");
+		authPathEmail = authPathEmail.substring(0, 10);
+
+		session.setAttribute("authPathEmail", authPathEmail);
+		session.setAttribute("findGeneration", generationInfo);
+		generationService.authenticationEmail(generationInfo, authPathEmail);
+
+		System.out.println(generationInfo);
+
+		return "success";
+
+	}
+
+	// 이메일 인증
+	@PostMapping("/mypage/authenticationemail")
+	@ResponseBody
+	public String authenticationEmail(@RequestBody Map<String, Object> info, HttpSession session) {
+
+		String certifiedNum = (String) info.get("certifiedNum");
+		String authPathEmail = (String) session.getAttribute("authPathEmail");
+		System.out.println(certifiedNum);
+		
+		if (!certifiedNum.equals(authPathEmail)) {
+			return "fail";
+		}
+		
+		Generation generation = (Generation) session.getAttribute("generation");
+		String email = (String) info.get("email");
+		generation.setEmail(email);
+		generationService.updateGenerationEmail(generation);
+		return "success";
+	}
+
 	// 세대 추가 메서드 이거 쓰세용
 	// 세대 더미 용
 	@GetMapping("generation/add")

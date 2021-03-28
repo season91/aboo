@@ -16,7 +16,7 @@ public interface GenerationService {
 	Generation selectFindId(Generation generation);
 	
 	//아이디 찾기 메일
-	void authenticationIdMail(Generation generation ,String authPath);
+	void authenticationIdMail(Generation generation ,String authPathId);
 	
 	//비밀번호 찾기 전 확인
 	Generation selectFindPassword(Generation generation);
@@ -24,7 +24,7 @@ public interface GenerationService {
 	//비밀번호 찾기 메일
 	void authenticationPasswordMail(Generation generation, String password);
 	
-	//선영 어드민 세대 리스트
+	//선영  세대 리스트
 	Map<String,Object> selectGenerationWonList(int currentPage,String apartmentIdx);
 
 	//세대원 수정
@@ -37,4 +37,11 @@ public interface GenerationService {
 	Generation selectGeneration(Generation generation);
 	
 	int updateGenerationModify(Generation generation);
+	
+	//이메일 인증
+	void authenticationEmail(Generation generation ,String authPathEmail);
+	
+	//이메일 인증 성공시 이메일 업데이트
+	int updateGenerationEmail(Generation generation);
+
 }

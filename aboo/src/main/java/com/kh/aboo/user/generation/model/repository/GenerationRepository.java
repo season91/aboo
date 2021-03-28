@@ -56,5 +56,8 @@ public interface GenerationRepository {
 	Generation selectGeneration(Generation generation);
 	
 	int updateGenerationModify(Generation generation);
+	
+	@Update("update TB_GENERATION set email = #{email} where GENERATION_IDX = #{generationIdx}")
+	int updateGenerationEmail(Generation generation);
 }
 
