@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Admin {
 
-	private String partnerIdx;
+	private String managerIdx;
 	private String apartmentIdx;
 	private String id;
 	private String password;
@@ -17,10 +17,10 @@ public class Admin {
 	public Admin() {
 	}
 
-	public Admin(String partnerIdx, String apartmentIdx, String id, String password, String name, String email,
+	public Admin(String managerIdx, String apartmentIdx, String id, String password, String name, String email,
 			String tell, Date birth, String isDel) {
 		super();
-		this.partnerIdx = partnerIdx;
+		this.managerIdx = managerIdx;
 		this.apartmentIdx = apartmentIdx;
 		this.id = id;
 		this.password = password;
@@ -31,12 +31,12 @@ public class Admin {
 		this.isDel = isDel;
 	}
 
-	public String getPartnerIdx() {
-		return partnerIdx;
+	public String getManagerIdx() {
+		return managerIdx;
 	}
 
-	public void setPartnerIdx(String partnerIdx) {
-		this.partnerIdx = partnerIdx;
+	public void setManagerIdx(String managerIdx) {
+		this.managerIdx = managerIdx;
 	}
 
 	public String getApartmentIdx() {
@@ -105,7 +105,7 @@ public class Admin {
 
 	@Override
 	public String toString() {
-		return "Admin [partnerIdx=" + partnerIdx + ", apartmentIdx=" + apartmentIdx + ", id=" + id + ", password="
+		return "Admin [managerIdx=" + managerIdx + ", apartmentIdx=" + apartmentIdx + ", id=" + id + ", password="
 				+ password + ", name=" + name + ", email=" + email + ", tell=" + tell + ", birth=" + birth + ", isDel="
 				+ isDel + "]";
 	}

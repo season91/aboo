@@ -67,7 +67,7 @@
                 <input type="text" class="form-control password"  id = "password_1"  placeholder="비밀번호"> 
               </div>
               <div class="form-group">
-                <input type="text" class="form-control password" id = "password_2"  name = "password" placeholder="비밀번호확인">
+                <input type="text" class="form-control password" id = "password_2"  name = "password" placeholder="비밀번호 확인">
 			    <div id = "pass" style="font-size: 1vw;"></div> <!--비밀번호 일치-->
 			    <div id ="passwordConfirm" class = "validator"></div> <!--프론트 패스워드 유효성-->
               	<div><form:errors path="password" cssClass="validator"/></div><!--백 패스워드 유효성  -->

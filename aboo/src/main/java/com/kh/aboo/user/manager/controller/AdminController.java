@@ -4,12 +4,16 @@ package com.kh.aboo.user.manager.controller;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +28,7 @@ import com.kh.aboo.common.util.ramdom.Ramdom;
 import com.kh.aboo.user.generation.model.vo.Generation;
 import com.kh.aboo.user.manager.model.service.AdminService;
 import com.kh.aboo.user.manager.model.vo.Admin;
+import com.kh.aboo.user.manager.validator.AdminValidator;
 
 @Controller
 @RequestMapping("admin")
@@ -35,11 +40,20 @@ public class AdminController {
 	Ramdom random = new Ramdom();
 	
 	private final AdminService adminService;
-
-	public AdminController(AdminService adminService) {
+	private final AdminValidator adminValidator;
+	
+	public AdminController(AdminService adminService, AdminValidator adminValidator) {
 		this.adminService = adminService;
+		this.adminValidator = adminValidator;
 	}
 
+	@InitBinder
+	public void initBinder(WebDataBinder webDataBinder) {
+		webDataBinder.addValidators(adminValidator);
+
+	}
+	
+	
 	// 선영
 	@GetMapping("index")
 	public String admin() {
@@ -176,6 +190,58 @@ public class AdminController {
 		}
 
 	}
+	
+	@GetMapping("/mypage/modifyinfo")
+	public String modifyInfo(@SessionAttribute(name = "admin") Admin admin, Model model) {
+
+		Admin selectAdmin = adminService.selectAdmin(admin);
+		System.out.println(selectAdmin);
+
+		model.addAttribute("selectAdmin", selectAdmin);
+		return "admin/mypage/modifyInfo";
+		
+	}
+	
+	
+	@PostMapping("/mypage/modifyupdate")
+	public String modifyInfo(@Valid Admin adminValid, Errors errors,
+			@SessionAttribute(name = "admin") Admin admin, Model model) {
+
+		Admin selectAdmin = adminService.selectAdmin(admin);
+		if (errors.hasErrors()) {
+			model.addAttribute("selectAdmin", selectAdmin);
+			return "admin/mypage/modifyInfo";
+		}
+
+		adminValid.setManagerIdx(admin.getManagerIdx());
+		adminService.updateAdminModify(adminValid);
+
+		model.addAttribute("alertMsg", "수정되었습니다.");
+		model.addAttribute("url", "/admin/login");
+		return "common/result";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	// 선영 어드민 추가 메서드 이거 쓰세용
 	@GetMapping("add")

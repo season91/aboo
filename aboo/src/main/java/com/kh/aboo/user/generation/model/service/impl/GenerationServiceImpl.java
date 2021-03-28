@@ -135,7 +135,7 @@ public class GenerationServiceImpl implements GenerationService {
 		return generationRepository.insertGenerationWonAdd(generationWon);
 	}
 	
-	//세대 전체 검색
+	//세대 정보
 	@Override
 	public Generation selectGeneration(Generation generation) {
 		return generationRepository.selectGeneration(generation);

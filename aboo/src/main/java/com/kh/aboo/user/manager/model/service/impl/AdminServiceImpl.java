@@ -141,4 +141,16 @@ public class AdminServiceImpl implements AdminService {
 		adminRepository.updateFindPassword(admin);
 
 	}
+
+	@Override
+	public Admin selectAdmin(Admin admin) {
+		return adminRepository.selectAdmin(admin);
+	}
+
+	@Override
+	public int updateAdminModify(Admin admin) {
+		String password = admin.getPassword();
+		admin.setPassword(encoder.encode(password));
+		return adminRepository.updateAdminModify(admin);
+	}
 }

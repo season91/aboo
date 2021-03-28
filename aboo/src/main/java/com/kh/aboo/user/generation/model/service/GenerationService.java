@@ -34,6 +34,7 @@ public interface GenerationService {
 	
 	int insertGenerationWonAdd(GenerationWon generationWon);
 
+	//세대 정보
 	Generation selectGeneration(Generation generation);
 	
 	int updateGenerationModify(Generation generation);

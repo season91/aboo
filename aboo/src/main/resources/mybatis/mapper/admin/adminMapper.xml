@@ -18,4 +18,21 @@
 		
 	</select>
 
+
+    <update id="updateAdminModify">
+     update TB_MANAGER	 
+     <set>
+     <if test="password != null">
+     PASSWORD = #{password}
+     </if>
+     <if test="email != null">
+     , EMAIL = #{email}
+     </if>
+     <if test="tell != null">
+     , TELL = #{tell}
+     </if>
+     </set>
+   	 where MANAGER_IDX = #{managerIdx}
+    </update>	
+    
 </mapper>

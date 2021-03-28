@@ -44,7 +44,7 @@ public class GenerationController {
 		this.generationValidator = generationValidator;
 	}
 
-	@InitBinder(value = "generationValid")
+	@InitBinder
 	public void initBinder(WebDataBinder webDataBinder) {
 		webDataBinder.addValidators(generationValidator);
 

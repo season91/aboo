@@ -29,4 +29,10 @@ public interface AdminService {
 	
 	//비밀번호 찾기 메일
 	void authenticationPasswordMail(Admin admin, String password);
+	
+	//어드민 정보 
+	Admin selectAdmin(Admin admin);
+
+	int updateAdminModify(Admin admin);
+
 }
