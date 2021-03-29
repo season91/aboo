@@ -51,120 +51,44 @@
     <section class="ftco-section bg-light">
       <div class="container">
         <div class="row">
-        	<c:forEach items="${interiorBrd}" var="interiorBrd">
-                <div class="col-md-4 ftco-animate">
-					<div class="blog-entry">
-					  <a href="blog-single.html" class="block-20" style="background-image: url('${interiorBrd.intThumbnail}');">
-					  </a>
-					  <div class="text d-flex py-4">
-					    <div class="meta mb-3">
-					      <div><a href="#">${interiorBrd.intRegDate}</a></div>
-					      <div><a href="#">${interiorBrd.intWriter}</a></div>
-					      <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-					    </div>
-					    <div class="desc pl-3">
-					      <h3 class="heading"><a href="#">${interiorBrd.intTitle}</a></h3>
-					    </div>
-					  </div>
-					</div>
-            	</div>
+        	<c:forEach items="${interiorBrd}" var="interiorBrd" varStatus="status">
+        		<c:choose>
+        			<c:when test="${interiorBrd.intIsPrivate == 0}">
+        				<div class="col-md-4 ftco-animate">
+							<div class="blog-entry">
+							  <a href="/board/interior/intdetail?intPostNo=${interiorBrd.intPostNo}" class="block-20" style="background-image: url('${interiorBrd.intThumbnail}');"></a>
+							  <div class="text d-flex py-4">
+							    <div class="meta mb-3">
+							      <div><a href="/board/interior/intdetail?intPostNo=${interiorBrd.intPostNo}">${interiorBrd.intRegDate}</a></div>
+							      <div><a href="/board/interior/intdetail?intPostNo=${interiorBrd.intPostNo}">${interiorBrd.intWriter}</a></div>
+							      <div><a href="/board/interior/intdetail?intPostNo=${interiorBrd.intPostNo}" class="meta-chat"><span class="icon-chat"></span> ${intCmtCntList[status.index]}</a></div>
+							    </div>
+							    <div class="desc pl-3">
+							      <h3 class="heading"><a href="/board/interior/intdetail?intPostNo=${interiorBrd.intPostNo}">${interiorBrd.intTitle}</a></h3>
+							    </div>
+							  </div>
+							</div>
+		            	</div>
+        			</c:when>
+        			<c:otherwise>
+        				<div class="col-md-4 ftco-animate">
+							<div class="blog-entry">
+							  <a href="/board/interior/intdetail?intPostNo=${interiorBrd.intPostNo}" class="block-20" style="background-image: url('../../../resources/abooimg/nopreviewimg.jpg');"></a>
+							  <div class="text d-flex py-4">
+							    <div class="meta mb-3">
+							      <div><a href="/board/interior/intdetail?intPostNo=${interiorBrd.intPostNo}">${interiorBrd.intRegDate}</a></div>
+							      <div><a href="/board/interior/intdetail?intPostNo=${interiorBrd.intPostNo}">${interiorBrd.intWriter}</a></div>
+							      <div><a href="/board/interior/intdetail?intPostNo=${interiorBrd.intPostNo}" class="meta-chat"><span class="icon-chat"></span> ${intCmtCntList[status.index]}</a></div>
+							    </div>
+							    <div class="desc pl-3">
+							      <h3 class="heading"><a href="/board/interior/intdetail?intPostNo=${interiorBrd.intPostNo}">비공개 처리 된 게시물입니다.</a></h3>
+							    </div>
+							  </div>
+							</div>
+		            	</div>
+        			</c:otherwise>
+        		</c:choose>
             </c:forEach>
-            <!-- <div class="col-md-4 ftco-animate">
-              <div class="blog-entry">
-                <a href="blog-single.html" class="block-20" style="background-image: url('../../../../resources/images/image_1.jpg');">
-                </a>
-                <div class="text d-flex py-4">
-                  <div class="meta mb-3">
-                    <div><a href="#">Sep. 20, 2018</a></div>
-                    <div><a href="#">Admin</a></div>
-                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                  </div>
-                  <div class="desc pl-3">
-                    <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-          <div class="col-md-4 ftco-animate">
-            <div class="blog-entry">
-              <a href="blog-single.html" class="block-20" style="background-image: url('../../../../resources/images/image_2.jpg');">
-              </a>
-              <div class="text d-flex py-4">
-                <div class="meta mb-3">
-                  <div><a href="#">Sep. 20, 2018</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                </div>
-                <div class="desc pl-3">
-	                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-	              </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 ftco-animate">
-            <div class="blog-entry">
-              <a href="blog-single.html" class="block-20" style="background-image: url('../../../../resources/images/image_3.jpg');">
-              </a>
-              <div class="text d-flex py-4">
-                <div class="meta mb-3">
-                  <div><a href="#">Sep. 20, 2018</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                </div>
-                <div class="desc pl-3">
-	                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-	              </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 ftco-animate">
-            <div class="blog-entry">
-              <a href="blog-single.html" class="block-20" style="background-image: url('../../../../resources/images/image_4.jpg');">
-              </a>
-              <div class="text d-flex py-4">
-                <div class="meta mb-3">
-                  <div><a href="#">Sep. 20, 2018</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                </div>
-                <div class="desc pl-3">
-	                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-	              </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 ftco-animate">
-            <div class="blog-entry">
-              <a href="blog-single.html" class="block-20" style="background-image: url('../../../../resources/images/image_5.jpg');">
-              </a>
-              <div class="text d-flex py-4">
-                <div class="meta mb-3">
-                  <div><a href="#">Sep. 20, 2018</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                </div>
-                <div class="desc pl-3">
-	                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-	              </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 ftco-animate">
-            <div class="blog-entry">
-              <a href="blog-single.html" class="block-20" style="background-image: url('../../../../resources/images/image_6.jpg');">
-              </a>
-              <div class="text d-flex py-4">
-                <div class="meta mb-3">
-                  <div><a href="#">Sep. 20, 2018</a></div>
-                  <div><a href="#">Admin</a></div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                </div>
-                <div class="desc pl-3">
-	                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-	              </div>
-              </div>
-            </div>
-          </div>
         </div>
         
         <div class="container d-flex justify-content-end">
@@ -179,7 +103,7 @@
 		</div>
         
         <div class="container text-center d-flex justify-content-end mt-0">
-	      <a href="#" class="center-block btn btn-primary p-3 px-xl-4 py-xl-2 btn-sm" style="background: linear-gradient(45deg, #12e6ca 0%, #8be55d 100%); border: none; color: white !important;">글쓰기</a>
+	      <a href="${context}/board/interior/intupload" class="center-block btn btn-primary p-3 px-xl-4 py-xl-2 btn-sm" style="background: linear-gradient(45deg, #12e6ca 0%, #8be55d 100%); border: none; color: white !important;">글쓰기</a>
 	    </div>
         
         <div class="row mt-5">
@@ -191,10 +115,10 @@
 	                <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
 	                   <c:choose>
 	                      <c:when test="${paging.currentPage eq page}">
-	                         <li class="active"><a href="${context}/board/${paging.type}/intlist?page=${page}"><span>${page}</span></a></li>
+	                         <li class="active"><a href="${context}/board/${paging.type}/intlist?page=${page}">${page}</a></li>
 	                      </c:when>
 	                      <c:otherwise>
-	                         <li><a href="${context}/board/${paging.type}?page=${page}/intlist"><span>${page}</span></a></li>
+	                         <li><a href="${context}/board/${paging.type}/intlist?page=${page}">${page}</a></li>
 	                      </c:otherwise>
 	                   </c:choose>
 	              	 </c:forEach>
