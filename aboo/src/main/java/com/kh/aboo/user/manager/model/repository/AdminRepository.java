@@ -42,12 +42,23 @@ public interface AdminRepository {
 	@Select("update TB_MANAGER set PASSWORD = #{password} where ID = #{id}")
 	public void updateFindPassword(Admin admin);
 	
+	//어드민 정보불러오기
 	@Select("select * from TB_MANAGER where MANAGER_IDX = #{managerIdx}")
 	Admin selectAdmin(Admin admin);
 	
+	//정보 업데이트
 	int updateAdminModify(Admin admin);
-
 	
+	//이메일인증 업데이트 
 	@Update("update TB_MANAGER set email = #{email} where MANAGER_IDX = #{managerIdx}")
 	int updateAdminEmail(Admin admin);
+	
+	//세대 초기화
+	@Update("update TB_GENERATION set IS_DEL = 1 where GENERATION_IDX =#{generationIdx}")
+	int resetGeneration(Generation generation);
+	
+	//세대 초기화 후 새로 생성
+	@Insert("@Insert into TB_GENERATION(GENERATION_IDX,APARTMENT_IDX,BUILDING,NUM,ID,PASSWORD) value(SC_GENERATION_IDX.nextval,#{apartmentIdx},#{building},${num},#{id},#{password})")
+	int resetInsertGeneration(Generation generation);
+	
 }	

@@ -17,6 +17,7 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
@@ -142,11 +143,15 @@ public class AdminServiceImpl implements AdminService {
 
 	}
 
+	
+	//어드민 정보 불러오기
 	@Override
 	public Admin selectAdmin(Admin admin) {
 		return adminRepository.selectAdmin(admin);
 	}
 
+	
+	//정보 업데이트
 	@Override
 	public int updateAdminModify(Admin admin) {
 		String password = admin.getPassword();
@@ -154,6 +159,7 @@ public class AdminServiceImpl implements AdminService {
 		return adminRepository.updateAdminModify(admin);
 	}
 
+	//이메일 인증 이메일 보내기
 	@Override
 	public void authenticationEmail(Admin admin, String authPathEmail) {
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
@@ -168,8 +174,17 @@ public class AdminServiceImpl implements AdminService {
 		mail.send(admin.getEmail(), "이메일 인증 메일", message);		
 	}
 	
+	//이메일 업데이트
 	@Override
 	public int updateAdminEmail(Admin admin) {
 		return adminRepository.updateAdminEmail(admin);
+	}
+
+	
+	//세대 초기화 하기
+	@Override
+	public void updateResetGeneration(Generation generation) {
+		 adminRepository.resetGeneration(generation);				
+		 adminRepository.insertGeneration(generation);
 	}
 }

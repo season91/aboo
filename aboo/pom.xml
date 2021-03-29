@@ -272,17 +272,6 @@
 		    <version>4.1.2</version>
 		</dependency>
 		
-		
-		<!--validator-->
-		<!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
-		<dependency>
-		    <groupId>javax.validation</groupId>
-		    <artifactId>validation-api</artifactId>
-		    <version>2.0.1.Final</version>
-		</dependency>
-		
-		
-		
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>

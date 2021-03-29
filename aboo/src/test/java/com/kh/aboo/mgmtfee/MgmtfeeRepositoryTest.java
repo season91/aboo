@@ -34,8 +34,8 @@ public class MgmtfeeRepositoryTest {
 	   
 	   @Test
 	   public void selectGenerationIdx() {
-		   String building = "101";
-		   String num = "101";
+		   String building = "104";
+		   String num = "405";
 		   String apartmentIdx = "100000";
 		   Generation inpu = new Generation();
 		   inpu.setBuilding(building);;
@@ -77,7 +77,7 @@ public class MgmtfeeRepositoryTest {
 //		   for (int i = 0; i < list.size(); i++) {
 //			 System.out.println(list.get(i));
 //		}
-		   String mgmtfeeIdx = "100996";
+		   String mgmtfeeIdx = "100984";
 		   mgmtfeeRepository.procedureMgmtOverDue(mgmtfeeIdx);
 	   }
 

@@ -215,7 +215,7 @@
                            </label>
                          </div>
                        </td>
-                       <td><a href="/mypage/mymgmtfee?${mgmtfee.mgmtfeeIdx }"> ${mgmtfee.mgmtfeeIdx}</a> </td>
+                       <td><a href="/mypage/mymgmtfee/detail?mgmtfeeidx=${mgmtfee.mgmtfeeIdx }"> ${mgmtfee.mgmtfeeIdx}</a> </td>
                        <td> ${generationList[status.index].building }동 ${generationList[status.index].num}호</td>
                        <td> ${mgmtfee.dueDate } </td>
                        <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${mgmtfee.periodPayment}"/> </td>
@@ -240,29 +240,28 @@
           <div class="row d-flex card-body ">
 	          <div class="col text-center">
 	            <div class="block-27">
-	              <ul>
-	                <li><a href="/admin/${paging.type }">&lt;&lt;</a></li>
-	                <li><a href="/admin/${paging.type }?page=${paging.prev}">&lt;</a></li>
-	                <c:choose>
+	               <ul>
+	                <li><a href="/admin/${paging.type }?standard=isPayment">&lt;&lt;</a></li>
+	                <li><a href="/admin/${paging.type }?page=${paging.prev}&standard=isPayment">&lt;</a></li>
+	                 <c:choose>
 	                	<c:when test="${paging.lastPage eq 0 }">
 	                		<li><a href="/admin/${paging.type }"><span>1</span></a></li>
 	                	</c:when>
 	                	<c:otherwise>
-	                		<c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
-		                      <c:choose>
-		                         <c:when test="${paging.currentPage eq page}">
-		                            <li class="active"><a href="/admin/${paging.type }?page=${page}"><span>${page}</span></a></li>
-		                         </c:when>
-		                         <c:otherwise>
-		                            <li><a href="/admin/${paging.type }?page=${page}"><span>${page}</span></a></li>
-		                         </c:otherwise>
-		                      </c:choose>
-		                 	 </c:forEach> 
-	                	</c:otherwise>
-	                </c:choose>
-	                 
-	                <li><a href="/admin/${paging.type }?page=${paging.next}">&gt;</a></li>
-	                <li><a href="/admin/${paging.type }?page=${paging.lastPage }">&gt;&gt;</a></li>
+		                 <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
+	                      <c:choose>
+	                         <c:when test="${paging.currentPage eq page}">
+	                            <li class="active"><a href="/admin/${paging.type }?page=${page}&standard=isPayment">${page}</a></li>
+	                         </c:when>
+	                         <c:otherwise>
+	                            <li><a href="/admin/${paging.type }?page=${page}&standard=isPayment">${page}</a></li>
+	                         </c:otherwise>
+	                      </c:choose>
+	                 	 </c:forEach>
+                 	 </c:otherwise>
+	                </c:choose> 
+	                <li><a href="/admin/${paging.type }?page=${paging.next}&standard=isPayment">&gt;</a></li>
+	                <li><a href="/admin/${paging.type }?page=${paging.lastPage }&standard=isPayment">&gt;&gt;</a></li>
 	              </ul>
 	            </div>
 	          </div>

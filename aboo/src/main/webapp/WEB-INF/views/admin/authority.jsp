@@ -158,7 +158,7 @@
 		                    <div class="table-responsive">
 		                        <table class="table tablesorter " id="">
 		                            <thead class=" text-primary">
-		                                <th>인덱스</th>
+		                                <th>번호</th>
 		                                <th>동 </th>
 		                                <th>호</th>
 		                                <th>아이디</th>
@@ -166,12 +166,14 @@
 		                            </thead>
 		                            <tbody>
 										<c:forEach items="${authorityList}" var="authority">
-											<tr>
+											<tr  onclick="openModal(this)" data-toggle="modal" data-target="#modifyModal">
 											    <td>${authority.generationIdx}</td>
 											    <td>${authority.building}</td>
 											    <td>${authority.num}</td>
 											   	<td>${authority.id}</td>
 											    <td>${authority.regDate}</td>
+											    <td><input type="hidden" id = "tell" value="${authority.tell}"></td>
+											    <td><input type="hidden" id = "email" value="${authority.email}"></td>
 											 </tr>
 									    </c:forEach>
 		                            </tbody>
@@ -285,11 +287,11 @@
             <form action="">
        	      <div class="form-group">
                 <label for="name">동</label>
-    			<input type="text" id = "building" name = "building" class="form-control text-dark" id="d" placeholder="동을 입력하세요">
+    			<input type="text" id = "addBuilding" name = "building" class="form-control text-dark" id="d" placeholder="동을 입력하세요">
               </div>             
               <div class="form-group">
                 <label for="name">호</label>
-    			<input type="text" id = "num" name = "num" class="form-control text-dark" id="h" placeholder="호를 입력하세요">
+    			<input type="text" id = "addNum" name = "num" class="form-control text-dark" id="h" placeholder="호를 입력하세요">
               </div>  
               </form>    
             </div>
@@ -300,6 +302,50 @@
           </div>
         </div>
       </div>
+      
+      <!-- 세대원 수정 Modal -->
+      <div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title text-dark" id="myModalLabel">세대 수정</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+    			<input type="hidden" class="form-control" id="modifyGenerationIdx"><!--generationIdx 숨겨두기-->
+       	      <div class="form-group">
+                <label for="name">동</label>
+    			<input type="text" class="form-control text-dark" id="modifyBuilding">
+              </div>             
+              <div class="form-group">
+                <label for="name">호</label>
+    			<input type="text" class="form-control text-dark" id="modifyNum">
+              </div>
+              <div class="form-group">
+                <label for="name">아이디</label>
+    			<input type="text" class="form-control text-dark" id="modifyId">
+              </div>             
+              <div class="form-group">
+                <label for="name">전화번호</label>
+    			<input type="text" class="form-control text-dark" id="modifyTell">
+              </div>
+              <div class="form-group">
+                <label for="name">전화번호</label>
+    			<input type="text" class="form-control text-dark" id="modityEmail">
+              </div> 
+               <div class="form-group">
+                <label for="name">입주일</label>
+    			<input type="text" class="form-control text-dark" id="modifyRegDate">
+              </div>    
+            </div>
+            <div class="modal-footer">
+              <button type="button" id = "closeModity" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-danger" onclick="del() ">초기화</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
       
     <!--   Core JS Files   -->
     <script src="../../../resources/js/admin/core/jquery.min.js"></script>
@@ -427,10 +473,6 @@
           });
         });
       });
-  	$('.modal').on('hidden.bs.modal', function (e) {
-	    console.log('modal close');
-	  $(this).find('form')[0].reset()
-	});
     </script>
     
     <script>
@@ -440,17 +482,13 @@
 
       });
     </script>
-  
-	
-   <script type="text/javascript">
-      $('#add').modal(options)
-   </script>
+
    
    <!-- 세대 추가 자바스크립트 -->
    <script type="text/javascript">
    let add = () => {
-	  let building = document.querySelector("#building").value;
-	  let num = document.querySelector("#num").value;
+	  let building = document.querySelector("#addBuilding").value;
+	  let num = document.querySelector("#addNum").value;
 	  console.dir(building);
 	  console.dir(num);
 	  
@@ -482,5 +520,66 @@
      }
    
    </script>
+   
+   <script type="text/javascript">
+	let openModal = (info) => {
+		   $('#modifyModal').show();
+		   	  console.dir(info)
+			  let generationIdx = info.cells[0].innerHTML;
+			  let building = info.cells[1].innerHTML;
+			  let num = info.cells[2].innerHTML;
+			  let id = info.cells[3].innerHTML;
+			  let regDate = info.cells[4].innerHTML;
+			  let tell = info.cells[5].children[0].defaultValue
+			  let email = info.cells[6].children[0].defaultValue
+			  
+			  document.querySelector("#modifyGenerationIdx").value = generationIdx;
+			  document.querySelector("#modifyBuilding").value = building;
+			  document.querySelector("#modifyNum").value = num;
+			  document.querySelector("#modifyId").value = id;
+			  document.querySelector("#modifyRegDate").value = regDate;
+			  document.querySelector("#modifyTell").value = tell;
+			  document.querySelector("#modityEmail").value = email; 
+		}
+   </script>
+   
+   	<script type="text/javascript">
+	let del = () => {
+		
+		let	result = confirm('정말 초기화하시겠습니까?')
+		if (result) {
+         const url = '/admin/authoritydelete';
+         let paramObj = new Object();
+         paramObj.generationIdx = document.querySelector("#modifyGenerationIdx").value;
+         paramObj.building = document.querySelector("#modifyBuilding").value;
+         paramObj.num = document.querySelector("#modifyNum").value;
+         paramObj.id = document.querySelector("#modifyId").value;
+
+         let headerObj = new Headers();
+         headerObj.append("content-type","application/json");
+         fetch(url,{
+            method:"post",
+            headers:headerObj,
+            body:JSON.stringify(paramObj)
+         }).then(response => {
+            if(response.ok){
+               return response.text();   
+            }
+            throw new AsyncPageError(response.text());
+         }).then((text) => {
+            if(text == 'success'){
+          		alert("초기화에 성공하였습니다.")
+          		location.href = "/admin/authority"
+            }else{
+          		alert("초기화에 실패하였습니다.")
+            }
+         }).catch(error => {
+            error.alertMessage();
+         });	
+         
+		 }
+		}
+ 		
+	</script>
 </body>
 </html>

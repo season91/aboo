@@ -14,16 +14,61 @@
 	</insert>
 	
 	<select id="selectMgmtfeeList" resultType="mgmtfee">
-	select m.*, g.id as generation_info 
-	from tb_mgmtfee m JOIN tb_generation g on (m.generation_idx = g.generation_idx) 
-	where m.apartment_idx = #{apartmentIdx}
+		select * from (
+			select rownum rnum, b.* from (
+				select * from tb_mgmtfee m JOIN tb_generation g on (m.generation_idx = g.generation_idx) 
+				<where>
+					<choose>
+						<when test="searchType == 'apartmentIdx'">
+							m.apartment_idx = #{apartmentIdx} and m.is_del = 0 
+						</when>
+						<when test="searchType == 'mgmtfeeIdx'">
+							m.apartment_idx = #{apartmentIdx} and m.mgmtfee_idx = #{mgmtfeeIdx} 
+						</when>
+						<when test="searchType == 'generationIdx'">
+							m.apartment_idx = #{apartmentIdx} and m.generation_idx = #{generationIdx} 
+						</when>
+						<when test="searchType == 'isPayment'">
+							m.apartment_idx = #{apartmentIdx} and m.is_payment = 0 
+						</when>
+						<when test="searchType == 'dueDate'">
+							m.apartment_idx = #{apartmentIdx} and m.due_date = #{dueDate} and m.is_del = 0 
+						</when>
+					</choose>
+				</where>
+				order by mgmtfee_idx desc ) b 
+			) where rnum between #{paging.queryStart} and #{paging.queryEnd}
+	</select>
+	
+	<select id="selectContentCnt" resultType="int">
+		select count(*) from tb_mgmtfee 
+		<where>
+			<choose>
+				<when test="searchType == 'apartmentIdx'">
+					apartment_idx = #{apartmentIdx} and is_del = 0
+				</when>
+				<when test="searchType == 'mgmtfeeIdx'">
+					apartment_idx = #{apartmentIdx} and mgmtfee_idx = #{mgmtfeeIdx}
+				</when>
+				<when test="searchType == 'generationIdx'">
+					apartment_idx = #{apartmentIdx} and generation_idx = #{generationIdx}
+				</when>
+				<when test="searchType == 'isPayment'">
+					apartment_idx = #{apartmentIdx} and is_payment = 0 
+				</when>
+				<when test="searchType == 'dueDate'">
+					apartment_idx = #{apartmentIdx} and due_date = #{dueDate}
+				</when>
+			</choose>
+		</where>
 	</select>
 	
 	<update id="updateMgmtfee">
 		update tb_mgmtfee 
 		set GNRL_MGMT_FEE=#{gnrlMgmtFee}, CLEAN_FEE = #{cleanFee}, ELVTR_MNFEE = #{elvtrMnfee}, GEN_ELCTR = #{genElctr}, 
-		COMON_ELCTR = #{comonElctr}, GEN_WATER =  #{genWater}, SEWER = #{sewer}, EXPENSES = #{expenses}, GEN_REDUCTION = #{genReduction} 
-		where MGMTFEE_IDX = #{mgmtfeeIdx}
+		COMON_ELCTR = #{comonElctr}, GEN_WATER =  #{genWater}, SEWER = #{sewer}, EXPENSES = #{expenses}, GEN_REDUCTION = #{genReduction}, 
+		MGMT_START_DATE = #{mgmtStartDate}, MGMT_END_DATE =  #{mgmtEndDate}, MGMT_WRITE_DATE =  #{mgmtWriteDate}, is_payment = #{isPayment} 
+		where MGMTFEE_IDX = #{mgmtfeeIdx} and GENERATION_IDX = #{generationIdx} and is_del = 0
 	</update>
 	
 	<update id="procedureUpdatePeriodPayment" statementType="CALLABLE">

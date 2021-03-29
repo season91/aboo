@@ -48,7 +48,7 @@ public class AdminController {
 		this.adminValidator = adminValidator;
 	}
 
-	@InitBinder(value = "")
+	@InitBinder(value = "admin")
 	public void initBinder(WebDataBinder webDataBinder) {
 		webDataBinder.addValidators(adminValidator);
 
@@ -235,7 +235,6 @@ public class AdminController {
 		session.setAttribute("authPathEmail", authPathEmail);
 		adminService.authenticationEmail(adminInfo, authPathEmail);
 
-		System.out.println(adminInfo);
 
 		return "success";
 
@@ -250,7 +249,6 @@ public class AdminController {
 
 		String certifiedNum = (String) info.get("certifiedNum");
 		String authPathEmail = (String) session.getAttribute("authPathEmail");
-		System.out.println(certifiedNum);
 		
 		if (!certifiedNum.equals(authPathEmail)) {
 			return "fail";
@@ -269,6 +267,19 @@ public class AdminController {
 	
 	
 	
+	// 세대 초기화
+	@PostMapping("authoritydelete")
+	@ResponseBody
+	public String authorityDelete(@RequestBody Generation GenerationInfo, @SessionAttribute("admin")Admin admin) {
+		System.out.println(GenerationInfo);
+		
+		String apartmentIdx = admin.getApartmentIdx();
+		GenerationInfo.setApartmentIdx(apartmentIdx);
+		adminService.updateResetGeneration(GenerationInfo);
+		
+		return "success";
+		
+	}
 	
 	
 	

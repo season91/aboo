@@ -54,24 +54,34 @@
 	            <c:choose>
 	            	<c:when test="${mgmtfee != null }">
 	            		<span class="price"><span class="number">관리비 고지서</span></span>
-			            <span class="price"><span class="number">${mgmtfee.periodPayment}</span></span>
+			            <c:choose>
+	            			<c:when test="${mgmtfeeOverdue != null }">
+	            				<span class="price"><span class="number period-payment"><fmt:formatNumber type="number" maxFractionDigits="3" value="${mgmtfee.periodPayment + mgmtfeeOverdue.overdueFee}"/> </span></span>
+	            			</c:when>
+	            			<c:otherwise>
+	            				<span class="price"><span class="number period-payment"><fmt:formatNumber type="number" maxFractionDigits="3" value="${mgmtfee.periodPayment}"/></span></span>
+	            			</c:otherwise>
+	            		</c:choose>
 			            <span class="excerpt d-block"><strong>관리비 작성일 </strong> ${mgmtfee.mgmtWriteDate }</span>
 			            <span class="excerpt d-block"><strong>관리기간 </strong>${mgmtfee.mgmtStartDate } ~ ${mgmtfee.mgmtEndDate}</span>
 			            <ul class="pricing-text mb-4">
-			              <li><strong>일반관리비</strong> ${mgmtfee.gnrlMgmtFee}</li>
-			              <li><strong>청소비</strong> ${mgmtfee.cleanFee }</li>
-			              <li><strong>승강기유지비</strong> ${mgmtfee.elvtrMnfee }</li>
-			              <li><strong>세대전기료</strong> ${mgmtfee.genElctr }</li>
-			              <li><strong>공동전기료</strong> ${mgmtfee.comonElctr }</li>
-			              <li><strong>세대수도료</strong> ${mgmtfee.genWater }</li>
-			              <li><strong>하수도료</strong> ${mgmtfee.sewer }</li>
-			              <li><strong>경비비</strong> ${mgmtfee.expenses }</li>
-			              <li><strong>세대감면액</strong> ${mgmtfee.genReduction }</li>
-			              <li><strong>납기내 금액</strong> ${mgmtfee.periodPayment }</li>
-			              <li><strong>납기일</strong> ${mgmtfee.dueDate }</li>
+			               <li><strong>일반관리비 </strong><fmt:formatNumber type="number" maxFractionDigits="3" value="${mgmtfee.gnrlMgmtFee}"/></li>
+			              <li><strong>청소비 </strong><fmt:formatNumber type="number" maxFractionDigits="3" value="${mgmtfee.cleanFee}"/> </li>
+			              <li><strong>승강기유지비 </strong><fmt:formatNumber type="number" maxFractionDigits="3" value="${mgmtfee.elvtrMnfee}"/> </li>
+			              <li><strong>세대전기료 </strong><fmt:formatNumber type="number" maxFractionDigits="3" value="${mgmtfee.genElctr}"/> </li>
+			              <li><strong>공동전기료 </strong><fmt:formatNumber type="number" maxFractionDigits="3" value="${mgmtfee.comonElctr}"/> </li>
+			              <li><strong>세대수도료 </strong><fmt:formatNumber type="number" maxFractionDigits="3" value="${mgmtfee.genWater}"/> </li>
+			              <li><strong>하수도료 </strong><fmt:formatNumber type="number" maxFractionDigits="3" value="${mgmtfee.sewer}"/> </li>
+			              <li><strong>경비비 </strong><fmt:formatNumber type="number" maxFractionDigits="3" value="${mgmtfee.expenses}"/></li>
+			              <li><strong>세대감면액 </strong><fmt:formatNumber type="number" maxFractionDigits="3" value="${mgmtfee.genReduction}"/></li>
+			              <c:if test="${mgmtfeeOverdue != null }">
+			              	<li class="overdue-fee"><strong>연체료 </strong><fmt:formatNumber type="number" maxFractionDigits="3" value="${mgmtfeeOverdue.overdueFee}"/> </li>
+			              </c:if>
+			              <li><strong>납기내 금액 </strong><fmt:formatNumber type="number" maxFractionDigits="3" value="${mgmtfee.periodPayment}"/></li>
+			              <li><strong>납기일 </strong> ${mgmtfee.dueDate }</li>
 			              <li>납부기한을 넘겨 납부하면 연체료가 일할계산되어 다음달 관리비에 포함됩니다.</li>
 			            </ul>
-				          <a href="#" class="btn btn-primary d-block px-3 py-3 mb-4">결제하기</a>
+				          <a href="#" class="btn btn-primary d-block px-3 py-3 mb-4 btn-payment" onclick="payment()">결제하기</a>
 	            	</c:when>
 	            	<c:otherwise>
 	            		<span class="price"><span class="number">조회내역이 없습니다.</span></span>
@@ -178,6 +188,15 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="../../../resources/js/generation/google-map.js"></script>
   <script src="../../../resources/js/generation/main.js"></script>
+  <script type="text/javascript">
+  /* 선영아 여기야! */
+  	function payment() {
+		let test = $('.period-payment');
+		let test2 = $('.overdue-fee');
+		console.dir(test);
+		console.dir(test2);
+	}
+  </script>
     
 </body>
 </html>

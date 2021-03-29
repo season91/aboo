@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.aboo.admin.mgmtfee.model.repository.MgmtfeeRepository;
 import com.kh.aboo.admin.mgmtfee.model.service.MgmtfeeService;
 import com.kh.aboo.admin.mgmtfee.model.vo.Mgmtfee;
+import com.kh.aboo.admin.mgmtfee.model.vo.MgmtfeeOverdue;
 import com.kh.aboo.common.code.ErrorCode;
 import com.kh.aboo.common.exception.ToAlertException;
 import com.kh.aboo.common.util.paging.Paging;
@@ -152,6 +153,14 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 			mgmtfee.setMgmtWriteDate(Date.valueOf(list.get(15)));
 			
 			System.out.println(mgmtfee.toString());
+			
+			// 납부일 기준 이미 삽입한 내역이 있다면 이미 등록된 고지월임을 알려준다.
+			int res = mgmtfeeRepository.selectMgmtfeeByGenerationIdxAndDueDate(mgmtfee);
+			if (res == 0) {
+				mgmtfeeRepository.insertMgmtfee(mgmtfee);
+			} else {
+				throw new ToAlertException(ErrorCode.SMGMT02);
+			}
 
 			mgmtfeeRepository.insertMgmtfee(mgmtfee);
 			mgmtfeeList.add(mgmtfee);
@@ -175,28 +184,23 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 	}
 
 	@Override
-	public Map<String, Object> selectMgmtfeeList(int currentPage, String apartmentIdx) {
+	public Map<String, Object> selectMgmtfeeList(int currentPage, Map<String, Object> searchMap) {
+		//페이징처리
 		Paging paging = Paging.builder()
 				.currentPage(currentPage)
 				.blockCnt(5)
 				.cntPerPage(10)
 				.type("mgmtfee")
-				.total(mgmtfeeRepository.selectContentCnt(apartmentIdx))
+				.total(mgmtfeeRepository.selectContentCnt(searchMap))
 				.build();
-
 		System.out.println(paging.toString());
-		// 반환할 맵
-		Map<String, Object> commandMap = new HashMap<>();
-		
 		// paing 세대조건 정보 넣을 맵
-		Map<String, Object> generationMap = new HashMap<>();
-		generationMap.put("paging", paging);
-		generationMap.put("apartmentIdx", apartmentIdx);
+		searchMap.put("paging", paging);
 		
-		List<Mgmtfee> mgmtfeeList = mgmtfeeRepository.selectMgmtfeeList(generationMap);
-		
-		commandMap.put("paging", paging);
-		commandMap.put("mgmtfeeList", mgmtfeeList);
+		// 페이징정보 포함해서 페이징에 뿌려줄 리스트 받아온다.
+		List<Mgmtfee> mgmtfeeList = mgmtfeeRepository.selectMgmtfeeList(searchMap);
+		searchMap.put("mgmtfeeList", mgmtfeeList);
+		System.out.println("mgmtfeeList"+mgmtfeeList);
 		
 		// 관리비번호 기준  세대정보 가져오자.
 		List<Generation> generationList = new ArrayList<>();
@@ -205,9 +209,9 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 			generationList.add(mgmtfeeRepository.selectGenerationByGenerationIdx(generationIdx));
 		}
 		
-		commandMap.put("generationList", generationList);
-		
-		return commandMap;
+		searchMap.put("generationList", generationList);
+		System.out.println("searchMap"+searchMap);
+		return searchMap;
 	}
 
 	@Override
@@ -224,6 +228,7 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 
 	@Override
 	public Mgmtfee updateMgmtfee(Mgmtfee mgmtfee) {
+		// TODO Auto-generated method stub
 		String mgmtfeeIdx = mgmtfee.getMgmtfeeIdx();
 		int res = mgmtfeeRepository.updateMgmtfee(mgmtfee);
 		//납부금액 업데이트
@@ -252,6 +257,31 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 			mgmtfeeRepository.procedureMgmtOverDue(mgmtfeeIdx);
 		}
 		
+	}
+
+	@Override
+	public int updateMgmtfeeIsDel(String mgmtfeeIdx) {
+		// TODO Auto-generated method stub
+		return mgmtfeeRepository.updateMgmtfeeIsDel(mgmtfeeIdx);
+
+	}
+
+	@Override
+	public MgmtfeeOverdue selectMgmtfeeOverdue(String mgmtfeeIdx) {
+		// TODO Auto-generated method stub
+		return mgmtfeeRepository.selectMgmtfeeOverdue(mgmtfeeIdx);
+	}
+
+	@Override
+	public int updateMgmtfeeOverdue(MgmtfeeOverdue mgmtfeeOverdue) {
+		// TODO Auto-generated method stub
+		return mgmtfeeRepository.updateMgmtfeeOverdue(mgmtfeeOverdue);
+	}
+
+	@Override
+	public Generation selectGenerationByBuildingAndNum(Generation generation) {
+		// TODO Auto-generated method stub
+		return mgmtfeeRepository.selectGenerationByBuildingAndNum(generation);
 	}
 
 
