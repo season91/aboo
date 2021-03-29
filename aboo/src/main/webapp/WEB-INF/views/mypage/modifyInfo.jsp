@@ -96,57 +96,6 @@
       </div>
     </section>
     
-
-    
-    <script>
-     let flg = false;
-    
-    $('.password').focusout(function () {
-        var pwd1 = $("#password_1").val();
-        var pwd2 = $("#password_2").val();
-
-        if (pwd1 != '' && pwd2 == '') {
-            null;
-        } else if (pwd1 != "" || pwd2 != "") {
-            if (pwd1 == pwd2) {
-                document.querySelector("#pass").style.color='blue'
-                pass.innerHTML = '비밀번호가 일치합니다';
-                flg = true;
-            } else {
-                document.querySelector("#pass").style.color='red'
-                pass.innerHTML = '비밀번호가 일치하지않습니다';
-				flg = false;
-            }
-        }
-    });
-    
-
-   /*  document.querySelector('#modifyForm').addEventListener('submit',(e)=>{
-	   let password_1 = document.querySelector("#password_1").value;
-	   let password_2 = document.querySelector("#password_2").value;
-		
- 	   let regExp = /^(?!.*[ㄱ-힣])(?=.*\W)(?=.*\d)(?=.*[a-zA-Z])(?=.{8,})/;
- 	   
- 	   if(!(regExp.test(password_1) || regExp.test(password_2))){
- 		   //form의 데이터 전송을 막음
- 		   e.preventDefault();
- 		   passwordConfirm.innerHTML = '비밀번호는 숫자,영문자,특수문자 조합의 8글자 이상인 문자열입니다2.';
- 		   password_1.value='';
- 		   password_1.value='';
-
- 	   }
- 	   
- 	   	if (!flg) {
-           	document.querySelector("#pass").innerHTML = '비밀번호가 일치 하지않습니다'
-  		   	e.preventDefault();
-
-
-		}
- 	   
-    });  */
-    
-   	</script>
-    
 	<footer class="ftco-footer ftco-bg-dark ftco-section">
 	      <div class="container">
 	        <div class="row mb-5">
@@ -262,6 +211,57 @@
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
+
+
+    <script>
+     let flg = false;
+    
+    $('.password').focusout(function () {
+        var pwd1 = $("#password_1").val();
+        var pwd2 = $("#password_2").val();
+
+        if (pwd1 != '' && pwd2 == '') {
+            null;
+        } else if (pwd1 != "" || pwd2 != "") {
+            if (pwd1 == pwd2) {
+                document.querySelector("#pass").style.color='blue'
+                pass.innerHTML = '비밀번호가 일치합니다';
+                flg = true;
+            } else {
+                document.querySelector("#pass").style.color='red'
+                pass.innerHTML = '비밀번호가 일치하지않습니다';
+				flg = false;
+            }
+        }
+    });
+    
+
+     document.querySelector('#modifyForm').addEventListener('submit',(e)=>{
+	   let password_1 = document.querySelector("#password_1").value;
+	   let password_2 = document.querySelector("#password_2").value;
+		
+ 	   let regExp = /^(?!.*[ㄱ-힣])(?=.*\W)(?=.*\d)(?=.*[a-zA-Z])(?=.{8,})/;
+ 	   
+ 	   if(!(regExp.test(password_1) || regExp.test(password_2))){
+ 		   //form의 데이터 전송을 막음
+ 		   e.preventDefault();
+ 		   passwordConfirm.innerHTML = '비밀번호는 숫자,영문자,특수문자 조합의 8글자 이상인 문자열입니다2.';
+ 		   password_1.value='';
+ 		   password_1.value='';
+
+ 	   }
+ 	   
+ 	   	if (!flg) {
+           	document.querySelector("#pass").innerHTML = '비밀번호가 일치 하지않습니다'
+  		   	e.preventDefault();
+
+
+		}
+ 	   
+    });  
+    
+   	</script>
+   	
 	<script type="text/javascript">
       let emailSend = () => {
     	  let email = document.querySelector("#email").value;

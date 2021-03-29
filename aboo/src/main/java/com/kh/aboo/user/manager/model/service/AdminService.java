@@ -40,4 +40,8 @@ public interface AdminService {
 	
 	//이메일 인증 성공시 이메일 업데이트
 	int updateAdminEmail(Admin admin);
+	
+	//세대 초기화
+	void updateResetGeneration(Generation generation);
+
 }

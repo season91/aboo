@@ -6,11 +6,11 @@
     <mapper namespace="com.kh.aboo.user.manager.model.repository.AdminRepository">
     <!-- 선영 세대 목록 가져오기-->
 	<select id="selectAuthorityList" resultType="generation">
-		select GENERATION_IDX,BUILDING,NUM,ID,PASSWORD,REG_DATE
+		select GENERATION_IDX, APARTMENT_IDX, TELL, REG_DATE, EMAIL, BUILDING, NUM, ID
 		from(
 			select rownum rnum, g.* 
 			from(
-				select GENERATION_IDX,BUILDING,NUM,ID,PASSWORD,REG_DATE 
+				select GENERATION_IDX, APARTMENT_IDX, TELL, REG_DATE, EMAIL, BUILDING, NUM, ID
 				from TB_GENERATION where is_del = 0 and APARTMENT_IDX = #{apartmentIdx}
 				order by GENERATION_IDX asc
 				) g
