@@ -19,7 +19,14 @@
 	          <li class="nav-item"><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
 	          <li class="nav-item active"><a class="nav-link" href="/board/info/infolist">Board</a></li>
 	          <li class="nav-item"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
-	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>
+	          <c:choose>
+	          <c:when test="${sessionScope.generation == null}">
+	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
+	          </c:when>
+	          <c:when test="${sessionScope.generation != null}">
+	          <li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>	          
+	          </c:when>
+	          </c:choose>
 	        </ul>
 	      </div>
 	    </div>
@@ -78,28 +85,47 @@
                     </thead>
                    
                     <tbody>
- 						 <c:forEach items="${infoBoard}" var="infoBoard">
-                      <tr>
-                        <td>
-                         ${infoBoard.bIdx}
-                        </td>
-                        <td>
-                         ${infoBoard.bCategory}
-                        </td>
-                       
-                        <td>
-                         <a href="${context}/board/info/detail?bIdx=${infoBoard.bIdx}" class="text-dark">
-                          ${infoBoard.bTitle}
-                         </a>
-                        </td>
-                        
-                        <td>
-                           ${infoBoard.bWriter}
-                        </td>
-                        <td class="text-center">
-                          ${infoBoard.bWdate}
-                        </td>
-                      </tr>
+ 					<c:forEach items="${infoBoard}" var="infoBoard">
+ 						<c:choose>
+        					<c:when test="${infoBoard.bIsDel == 0 && infoBoard.apartmentIdx == generation.apartmentIdx}">
+		                      <tr>
+		                        <td>
+		                         ${infoBoard.bIdx}
+		                        </td>
+		                        <td>
+		                         ${infoBoard.bCategory}
+		                        </td>
+		                        <c:choose>
+        							<c:when test="${infoBoard.bIsPrivate == 0}">
+				                        <td>
+				                         <a href="${context}/board/info/detail?bIdx=${infoBoard.bIdx}" class="text-dark">
+				                          ${infoBoard.bTitle}
+				                          </a>
+				                          <a href="${context}/board/info/detail?bIdx=${infoBoard.bIdx}" class="meta-chat text-dark">
+				                          <span class="icon-chat"></span>3
+				                          </a>
+				                         
+				                         
+				                        </td>
+				                     </c:when>
+				                     <c:otherwise>
+				                     	<td>
+				                     		비공개 처리된 게시물입니다.
+				                     	</td>
+				                     </c:otherwise>
+				                     
+				                     
+				                 </c:choose>
+		                        
+		                        <td>
+		                           ${infoBoard.bWriter}
+		                        </td>
+		                        <td class="text-center">
+		                          ${infoBoard.bWdate}
+		                        </td>
+		                      </tr>
+                     	 		</c:when>
+                      		</c:choose>
     					</c:forEach>
                     </tbody>
                    

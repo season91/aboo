@@ -17,9 +17,10 @@
 	Configure the location of uploaded files. See the following article for more details:
 	http://docs.cksource.com/CKFinder_2.x/Developers_Guide/Java/Configuration/baseURL_and_baseDir
 	-->
-	<!-- <baseDir>C:\\CODE\\final_aboo\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\aboo\\resources\\ckstorage</baseDir> -->
+	<!-- 희원 baseDir -->
+	<baseDir>C:\CODE\final_aboo\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\aboo\resources\ckstorage</baseDir>
 	<!-- 민희 baseDir -->
-	<baseDir>E:\CODE\aboo\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\aboo\resources\ckstorage</baseDir>
+<!-- 	<baseDir>E:\CODE\aboo\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\aboo\resources\ckstorage</baseDir> -->
 	<baseURL>/resources/ckstorage</baseURL>
 	<licenseKey></licenseKey>
 	<licenseName></licenseName>

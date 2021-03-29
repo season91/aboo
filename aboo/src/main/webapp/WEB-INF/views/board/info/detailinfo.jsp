@@ -19,7 +19,14 @@
 	          <li class="nav-item"><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
 	          <li class="nav-item active"><a class="nav-link" href="/board/info/infolist">Board</a></li>
 	          <li class="nav-item"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
-	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>
+	         <c:choose>
+	          <c:when test="${sessionScope.generation == null}">
+	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
+	          </c:when>
+	          <c:when test="${sessionScope.generation != null}">
+	          <li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>	          
+	          </c:when>
+	          </c:choose>
 	        </ul>
 	      </div>
 	    </div>
@@ -51,27 +58,53 @@
           			<span class="mr-4">${infoBoard.bWriter}</span>
           			<i class="fas fa-clock align-self-center mr-2"></i>
           			<span>${infoBoard.bWdate}</span>
-          			<div class="d-flex justify-content-end ml-4">
-          				<a href="#" class="mr-4"><i class="fas fa-ban" style="color: #666666;"></i></a>
-		            	<a href="${context}/board/info/editinfo?bIdx=${infoBoard.bIdx}" class="mr-4"><i class="fas fa-pen" style="color: #666666;"></i></a>
-		            	<a href="#" class="mr-4"><i class="fas fa-trash" style="color: #666666;"></i></a>
-		            	<a href="/board/info/listinfo" class="mr-4"><i class="fas fa-list-ul" style="color: #666666;"></i></a>
-		            </div>
+          			<c:choose>
+          				<c:when test="${sessionScope.generation.generationIdx == infoBoard.generationIdx}">
+		          			<div class="d-flex justify-content-end ml-4">
+				            	<a href="${context}/board/info/editinfo?bIdx=${infoBoard.bIdx}" class="mr-4"><i class="fas fa-pen" style="color: #666666;"></i></a>
+				            	<a onclick="privateInfo();" class="mr-4"><i class="fas fa-ban" style="color: #666666;"></i></a>
+				            	<a onclick="deleteInfo();" class="mr-4"><i class="fas fa-trash" style="color: #666666;"></i></a>
+				            	<a href="/board/info/listinfo" class="mr-4"><i class="fas fa-list-ul" style="color: #666666;"></i></a>
+				            </div>
+		            	</c:when>
+<%-- 		            	<c:when test="${sessionScope.admin != null}">
+		          			<div class="d-flex justify-content-end ml-4">
+		          				
+				            	<a href="/board/info/listinfo" class="mr-4"><i class="fas fa-list-ul" style="color: #666666;"></i></a>
+				            </div>
+		            	</c:when> --%>
+		            	<c:otherwise>
+		            		<div class="d-flex justify-content-end ml-4">
+		          				
+				            	<a href="/board/info/listinfo" class="mr-4"><i class="fas fa-list-ul" style="color: #666666;"></i></a>
+				            </div>
+		            	</c:otherwise>
+		            </c:choose>
           		</div>
           	</div>
           	<hr>
-            <p>${infoBoard.bContent}</p>
+			<c:choose>
+          		<c:when test="${infoBoard.bIsPrivate == 0}">
+           			<p>${infoBoard.bContent}</p>
+            	</c:when>
+            	<c:otherwise>
+            		<p>비공개 처리된 게시물입니다.</p>
+            	</c:otherwise>
+            	
+            </c:choose>
+
             <div class="pt-5 mt-5">
               <h3 class="mb-5">6 Comments</h3>
               <ul class="comment-list">
+              <c:forEach items="${infoCmtList}" var="infoCmtList">
                 <li class="comment">
                   <div class="vcard bio">
-                    <img src="../../../../resources/images/user.jpg" alt="Image placeholder">
+                   <img src="../../../../resources/abooimg/user.jpg" alt="Image placeholder">
                   </div>
                   <div class="comment-body">
-                    <h3>101동 901호</h3>
-                    <div class="meta">Sept. 24, 2018 at 2:21pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                    <h3>${infoCmtList.cWriter}</h3>
+                    <div class="meta">${infoCmtList.cWdate}</div>
+                    <p>${infoCmtList.cContent}</p>
                     <p>
                     	<a href="#" class="mr-4"><i class="fas fa-ban" style="color: #666666;"></i></a>
 		            	<a href="#" class="mr-4"><i class="fas fa-pen" style="color: #666666;"></i></a>
@@ -79,99 +112,22 @@
                     </p>
                   </div>
                 </li>
+			 </c:forEach>
 
-                <li class="comment">
-                  <div class="vcard bio">
-                    <img src="../../../../resources/images/user.jpg" alt="Image placeholder">
-                  </div>
-                  <div class="comment-body">
-                    <h3>101동 901호</h3>
-                    <div class="meta">Sept. 24, 2018 at 2:21pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                    <p>
-                    	<a href="#" class="mr-4"><i class="fas fa-ban" style="color: #666666;"></i></a>
-		            	<a href="#" class="mr-4"><i class="fas fa-pen" style="color: #666666;"></i></a>
-		            	<a href="#" class="mr-4"><i class="fas fa-trash" style="color: #666666;"></i></a>
-                    </p>
-                  </div>
-                </li>
-                
-                <li class="comment">
-                  <div class="vcard bio">
-                    <img src="../../../../resources/images/user.jpg" alt="Image placeholder">
-                  </div>
-                  <div class="comment-body">
-                    <h3>101동 901호</h3>
-                    <div class="meta">Sept. 24, 2018 at 2:21pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                    <p>
-                    	<a href="#" class="mr-4"><i class="fas fa-ban" style="color: #666666;"></i></a>
-		            	<a href="#" class="mr-4"><i class="fas fa-pen" style="color: #666666;"></i></a>
-		            	<a href="#" class="mr-4"><i class="fas fa-trash" style="color: #666666;"></i></a>
-                    </p>
-                  </div>
-                </li>
-                
-                <li class="comment">
-                  <div class="vcard bio">
-                    <img src="../../../../resources/images/user.jpg" alt="Image placeholder">
-                  </div>
-                  <div class="comment-body">
-                    <h3>101동 901호</h3>
-                    <div class="meta">Sept. 24, 2018 at 2:21pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                    <p>
-                    	<a href="#" class="mr-4"><i class="fas fa-ban" style="color: #666666;"></i></a>
-		            	<a href="#" class="mr-4"><i class="fas fa-pen" style="color: #666666;"></i></a>
-		            	<a href="#" class="mr-4"><i class="fas fa-trash" style="color: #666666;"></i></a>
-                    </p>
-                  </div>
-                </li>
-                
-                <li class="comment">
-                  <div class="vcard bio">
-                    <img src="../../../../resources/images/user.jpg" alt="Image placeholder">
-                  </div>
-                  <div class="comment-body">
-                    <h3>101동 901호</h3>
-                    <div class="meta">Sept. 24, 2018 at 2:21pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                    <p>
-                    	<a href="#" class="mr-4"><i class="fas fa-ban" style="color: #666666;"></i></a>
-		            	<a href="#" class="mr-4"><i class="fas fa-pen" style="color: #666666;"></i></a>
-		            	<a href="#" class="mr-4"><i class="fas fa-trash" style="color: #666666;"></i></a>
-                    </p>
-                  </div>
-                </li>
-
-                <li class="comment">
-                  <div class="vcard bio">
-                    <img src="../../../../resources/images/user.jpg" alt="Image placeholder">
-                  </div>
-                  <div class="comment-body">
-                    <h3>101동 901호</h3>
-                    <div class="meta">Sept. 24, 2018 at 2:21pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                    <p>
-                    	<a href="#" class="mr-4"><i class="fas fa-ban" style="color: #666666;"></i></a>
-		            	<a href="#" class="mr-4"><i class="fas fa-pen" style="color: #666666;"></i></a>
-		            	<a href="#" class="mr-4"><i class="fas fa-trash" style="color: #666666;"></i></a>
-                    </p>
-                  </div>
-                </li>
               </ul>
               <!-- END comment-list -->
               
               <div class="comment-form-wrap pt-5">
                 <h3 class="mb-5">Leave a comment</h3>
-                <form action="#" class="p-5 bg-light">
+                <form action="${context}/board/info/uploadinfocmt" method="post" class="p-5 bg-light">
 
                   <div class="form-group">
-
-                    <textarea name="" id="message" cols="30" rows="5" class="form-control"></textarea>
+					<input type="hidden" name="bIdx" value="${infoBoard.bIdx}">
+					<input type="hidden" name="generationIdx" value="${generation.generationIdx}">
+                    <textarea name="cContent" id="message" cols="30" rows="5" class="form-control"></textarea>
                   </div>
                   <div class="form-group">
-                    <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
+                    <input type="submit" value="등록하기" class="btn py-3 px-4 btn-primary">
                   </div>
 
                 </form>
@@ -274,6 +230,55 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="../../../resources/js/generation/google-map.js"></script>
   <script src="../../../resources/js/generation/main.js"></script>
+  
+  <script type="text/javascript">
+  
+  let deleteInfo = () => {
+		let bIdx = ${infoBoard.bIdx};
+		if(confirm("게시물을 삭제하시겠습니까?")){
+			fetch("/board/info/deleteinfo?bIdx=" + bIdx,{
+	  			method:"GET"
+	  		})
+	  		.then(response => response.text())
+	  		.then(text => {
+	  			if(text == 'success'){
+	  				alert("게시물이 삭제되었습니다.");
+					location.href = "/board/info/listinfo";
+	  			}else{
+	  				alert("게시물 삭제 중 에러가 발생했습니다.");
+	  				location.href = "/board/info/detail?bIdx=" + bIdx;
+	  			}
+	  		})
+		}else{
+			alert("취소되었습니다.");
+		}
+	}
+  
+  let privateInfo = () => {
+	  
+	  let bIdx = ${infoBoard.bIdx};
+		if(confirm("게시물을 비공개 처리하시겠습니까?")){
+			fetch("/board/info/privateinfo?bIdx=" + bIdx,{
+	  			method:"GET"
+	  		})
+	  		.then(response => response.text())
+	  		.then(text => {
+	  			if(text == 'success'){
+	  				alert("게시물이 비공개 처리되었습니다.");
+					location.href = "/board/info/listinfo";
+	  			}else{
+	  				alert("게시물 비공개 처리 중 에러가 발생했습니다.");
+	  				location.href = "/board/info/detail?bIdx=" + bIdx;
+	  			}
+	  		})
+		}else{
+			alert("취소되었습니다.");
+		}
+	  
+  }
+  
+  
+  </script>
     
 </body>
 </html>

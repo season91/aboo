@@ -17,7 +17,14 @@
 	          <li class="nav-item"><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
 	          <li class="nav-item active"><a class="nav-link" href="/board/info/infolist">Board</a></li>
 	          <li class="nav-item"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
-	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>
+	          <c:choose>
+	          <c:when test="${sessionScope.generation == null}">
+	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
+	          </c:when>
+	          <c:when test="${sessionScope.generation != null}">
+	          <li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>	          
+	          </c:when>
+	          </c:choose>
 	        </ul>
 	      </div>
 	    </div>
@@ -46,7 +53,7 @@
             <h2 class="h4 pl-4">정보 & 질문 게시판</h2>
             <p class="h6 mt-3 pl-4">게시글 작성</p>
 
-             <form action="${context}/board/info/editimpl" method="post" enctype="multipart/form-data">
+             <form action="${context}/board/info/editimpl?bIdx=${infoBoard.bIdx}" method="post" enctype="multipart/form-data">
 
             <div class="card-body mt-4">
             

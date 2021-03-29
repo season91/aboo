@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.aboo.board.info.model.repository.InfoRepository;
 import com.kh.aboo.board.info.model.service.InfoService;
 import com.kh.aboo.board.info.model.vo.InfoBoard;
+import com.kh.aboo.board.info.model.vo.InfoCmt;
 import com.kh.aboo.common.code.ErrorCode;
 import com.kh.aboo.common.exception.ToAlertException;
 import com.kh.aboo.common.util.file.FileUtil;
@@ -27,29 +28,16 @@ public class InfoServiceImpl implements InfoService{
 	}
 
 	@Override
-	@Transactional
-	public int insertInfoBoard(InfoBoard infoBoard, List<MultipartFile> files) {
-		
-		FileUtil fileUtil = new FileUtil();
+	public int insertInfoBoard(InfoBoard infoBoard) {
 		int res=infoRepository.insertInfoBoard(infoBoard);
 
-		
-		try {
-			
-			List<FileVo> fileList = fileUtil.fileUpload(files);
-			for (FileVo fileVo : fileList) {
-				infoRepository.insertFile(fileVo);
-			}
-		} catch (Exception e) {
-			throw new ToAlertException(ErrorCode.IB01,e);
-		}
 		
 		return res;
 		
 	}
 
 	@Override
-	public Map<String, Object> selectInfoBoardList(int currentPage) {
+	public Map<String, Object> selectInfoBoardList(int currentPage,String apartmentIdx) {
 
 		
 		Paging paging = Paging.builder()
@@ -57,7 +45,7 @@ public class InfoServiceImpl implements InfoService{
 				.blockCnt(5)
 				.cntPerPage(10)
 				.type("infoBoard")
-				.total(infoRepository.selectInfoContentCnt())
+				.total(infoRepository.selectInfoContentCnt(apartmentIdx))
 				.build();
 		System.out.println(paging.toString());
 	
@@ -73,7 +61,7 @@ public class InfoServiceImpl implements InfoService{
 	public Map<String, Object> selectInfoBoardDetail(String bIdx) {
 
 		InfoBoard infoBoard = infoRepository.selectInfoBoardDetail(bIdx);
-		List<FileVo> files = infoRepository.selectFileWithBdIdx(bIdx);
+		List<FileVo> files = infoRepository.selectFileWithBIdx(bIdx);
 		
 		Map<String,Object> commandMap = new HashMap<String, Object>();
 		commandMap.put("infoBoard",infoBoard);
@@ -83,11 +71,41 @@ public class InfoServiceImpl implements InfoService{
 	}
 
 	@Override
-	public int UpdateInfoBoard(InfoBoard infoBoard,String bIdx) {
+	public int updateInfoBoard(InfoBoard infoBoard) {
 		
-		int res = infoRepository.UpdateInfoBoard(infoBoard, bIdx);
+		int res = infoRepository.updateInfoBoard(infoBoard);
 			
 		return res;
+	}
+
+	@Override
+	public int deleteInfoBoard(String bIdx, String apartmentIdx) {
+		
+		return infoRepository.deleteInfoBoard(bIdx, apartmentIdx);
+	}
+
+	@Override
+	public int updateInfoPrivate(String bIdx) {
+		
+		return infoRepository.updateInfoPrivate(bIdx);
+	}
+
+	@Override
+	public int insertInfoCmt(InfoCmt infoCmt) {
+		
+		return infoRepository.insertInfoCmt(infoCmt);
+	}
+
+	@Override
+	public List<InfoCmt> selectInfoCmtList(String bIdx) {
+		
+		return infoRepository.selectInfoCmtList(bIdx);
+	}
+
+	@Override
+	public int selectInfoCmtcnt(String bIdx) {
+		
+		return infoRepository.selectInfoCmtcnt(bIdx);
 	}
 
 }
