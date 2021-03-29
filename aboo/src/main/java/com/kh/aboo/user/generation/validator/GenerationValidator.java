@@ -21,7 +21,7 @@ public class GenerationValidator implements Validator{
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return Generation.class.equals(clazz);
+		return Generation.class.equals(clazz); 
 	}
 
 	@Override
@@ -31,11 +31,9 @@ public class GenerationValidator implements Validator{
 		
 		
 		if (!pattern.matcher(generation.getPassword()).find()) {
-			errors.rejectValue("password","error.password","비밀번호는 숫자,영문자,특수문자 조합의 8글자 이상인 문자열입니다.");
+			errors.rejectValue("password","error.password","비밀번호는 숫자,영문자,특수문자 조합의 8글자 이상인 문자열입니다1.");
 		}
-		
-		
-		
+			
 	}
 	
 

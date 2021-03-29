@@ -34,7 +34,7 @@ public interface GenerationRepository {
 		
 	//세대원 추가 페이지 리스트
 	List<GenerationWon> selectGenerationWonList(Map<String,Object> generationMap);
-	
+
 	//세대 총 수
 	@Select("select count(*) from TB_GENERATION_WON where IS_DEL = 0 and GENERATION_IDX = #{generationIdx}")
 	int selectContentCnt(String generationIdx);

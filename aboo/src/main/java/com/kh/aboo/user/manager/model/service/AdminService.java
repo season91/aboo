@@ -8,7 +8,7 @@ import com.kh.aboo.user.manager.model.vo.Admin;
 
 public interface AdminService {
 	//선영 로그인
-	Admin selectGenerationForAuth(Admin admin);
+	Admin selectAdminForAuth(Admin admin);
 
 	void insertAdmin(Admin admin);
 
@@ -35,4 +35,9 @@ public interface AdminService {
 
 	int updateAdminModify(Admin admin);
 
+	//이메일 인증
+	void authenticationEmail(Admin admin ,String authPathEmail);
+	
+	//이메일 인증 성공시 이메일 업데이트
+	int updateAdminEmail(Admin admin);
 }

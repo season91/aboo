@@ -121,7 +121,7 @@
     });
     
 
-    document.querySelector('#modifyForm').addEventListener('submit',(e)=>{
+   /*  document.querySelector('#modifyForm').addEventListener('submit',(e)=>{
 	   let password_1 = document.querySelector("#password_1").value;
 	   let password_2 = document.querySelector("#password_2").value;
 		
@@ -143,7 +143,7 @@
 
 		}
  	   
-    }); 
+    });  */
     
    	</script>
     

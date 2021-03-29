@@ -333,7 +333,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">확인</button>
+              <button type="button" class="btn btn-primary"  onclick="certifiedNum()">확인</button>
             </div>
           </div>
         </div>
@@ -513,7 +513,7 @@
  	   }
  	   
  	   	if (!flg) {
-           	document.querySelector("#pass").innerHTML = '비밀번호가 일치 하지않습니다'
+           	document.querySelector("#pass").innerHTML = '비밀번호가 일치하지않습니다'
   		   	e.preventDefault();
 
 
@@ -557,7 +557,39 @@
 
    </script>
    
-  
+  <script type="text/javascript">
+      let certifiedNum = () => {
+    	  
+          const url = '/admin/mypage/authenticationemail';
+           
+          let paramObj = new Object();
+          paramObj.certifiedNum = document.querySelector("#certifiedNum").value;
+          paramObj.email = document.querySelector("#email").value;
+          let headerObj = new Headers();
+          headerObj.append("content-type","application/json");
+          fetch(url,{
+             method:"post",
+             headers:headerObj,
+             body:JSON.stringify(paramObj)
+          }).then(response => {
+             if(response.ok){
+                return response.text();    
+             }
+             throw new AsyncPageError(response.text());
+          }).then((text) => {
+             if(text == 'fail'){ 
+                alert('정확한 인증번호를 입력해주세요')
+             }else{ 
+                 alert('이메일 인증에 성공하였습니다.');
+                 location.href = "/admin/mypage/modifyinfo"
+             }
+          }).catch(error => {
+             error.alertMessage();
+          }); 
+       }
+
+   </script>
+   
    <script type="text/javascript">
       $('#tellModal').modal(options)
    </script>

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.kh.aboo.user.generation.model.vo.Generation;
 import com.kh.aboo.user.manager.model.vo.Admin;
@@ -15,7 +16,7 @@ public interface AdminRepository {
 
 	
 	@Select("select * from TB_MANAGER where ID = #{Id} and IS_DEL = 0")
-	public Admin selectGenerationForAuth(String Id);
+	public Admin selectAdminForAuth(String Id);
 	
 	@Insert("insert into TB_MANAGER(MANAGER_IDX,APARTMENT_IDX,ID,PASSWORD,NAME,EMAIL,TELL,BIRTH) values(SC_MANAGER_IDX.nextval,'100000',#{id},#{password},#{name},#{email},#{tell},#{birth})")
 	public int insertAdmin(Admin admin);
@@ -46,4 +47,7 @@ public interface AdminRepository {
 	
 	int updateAdminModify(Admin admin);
 
+	
+	@Update("update TB_MANAGER set email = #{email} where MANAGER_IDX = #{managerIdx}")
+	int updateAdminEmail(Admin admin);
 }	

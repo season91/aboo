@@ -1,6 +1,7 @@
 package com.kh.aboo.user.manager.controller;
 
 
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -47,7 +48,7 @@ public class AdminController {
 		this.adminValidator = adminValidator;
 	}
 
-	@InitBinder
+	@InitBinder(value = "")
 	public void initBinder(WebDataBinder webDataBinder) {
 		webDataBinder.addValidators(adminValidator);
 
@@ -79,9 +80,9 @@ public class AdminController {
 	public String loginimpl(@RequestBody Admin adminInfo, HttpSession session) {
 
 		// adminInfo : 받아와서 맵핑 해주는 객체 이름
-		// admin : 진짜 generation 정보가 담긴 객체 이름
+		// admin : 진짜 admin 정보가 담긴 객체 이름
 
-		Admin admin = adminService.selectGenerationForAuth(adminInfo);
+		Admin admin = adminService.selectAdminForAuth(adminInfo);
 		if (admin == null) {
 			return "fail";
 		}
@@ -223,11 +224,44 @@ public class AdminController {
 	
 	
 	
+	// 이메일 인증
+	@PostMapping("/mypage/modifyemailimpl")
+	@ResponseBody
+	public String modifyEmailImpl(@RequestBody Admin adminInfo, HttpSession session) {
+
+		String authPathEmail = UUID.randomUUID().toString().replace("-", "");
+		authPathEmail = authPathEmail.substring(0, 10);
+
+		session.setAttribute("authPathEmail", authPathEmail);
+		adminService.authenticationEmail(adminInfo, authPathEmail);
+
+		System.out.println(adminInfo);
+
+		return "success";
+
+	}
 	
 	
 	
-	
-	
+	// 이메일 인증
+	@PostMapping("/mypage/authenticationemail")
+	@ResponseBody
+	public String authenticationEmail(@RequestBody Map<String, Object> info, HttpSession session) {
+
+		String certifiedNum = (String) info.get("certifiedNum");
+		String authPathEmail = (String) session.getAttribute("authPathEmail");
+		System.out.println(certifiedNum);
+		
+		if (!certifiedNum.equals(authPathEmail)) {
+			return "fail";
+		}
+		
+		Admin admin = (Admin) session.getAttribute("admin");
+		String email = (String) info.get("email");
+		admin.setEmail(email);
+		adminService.updateAdminEmail(admin);
+		return "success";
+	}
 	
 	
 	

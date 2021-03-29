@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import com.kh.aboo.common.code.ErrorCode;
+import com.kh.aboo.common.code.ErrorCode; 
 import com.kh.aboo.common.exception.ToAlertException;
 import com.kh.aboo.common.util.ramdom.Ramdom;
 import com.kh.aboo.user.generation.model.service.GenerationService;
@@ -44,10 +44,9 @@ public class GenerationController {
 		this.generationValidator = generationValidator;
 	}
 
-	@InitBinder
+	@InitBinder("generation")
 	public void initBinder(WebDataBinder webDataBinder) {
 		webDataBinder.addValidators(generationValidator);
-
 	}
 
 	@GetMapping("login")
@@ -158,7 +157,6 @@ public class GenerationController {
 			@SessionAttribute(name = "generation", required = false) Generation generationInfo, Model model) {
 		
 		model.addAllAttributes(generationService.selectGenerationWonList(page, generationInfo.getGenerationIdx()));
-		
 		return "mypage/generationWon";
 	}
 
@@ -215,6 +213,7 @@ public class GenerationController {
 		model.addAttribute("selectGeneration", selectGeneration);
 		return "mypage/modifyInfo";
 	}
+
 
 	@PostMapping("/mypage/modifyupdate")
 	public String modifyInfo(@Valid Generation generationValid, Errors errors,
