@@ -61,20 +61,18 @@ public class GenerationServiceImpl implements GenerationService {
 	}
 
 	@Override
-	public void authenticationIdMail(Generation generation, String authPath) {
+	public void authenticationIdMail(Generation generation, String authPathId) {
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
 		body.add("mail-template", "findid");
 		body.add("id", generation.getId());
-		body.add("authPath", authPath);
+		body.add("authPath", authPathId);
 		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(Configcode.DOMAIN + "/mail")
 				.header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE).body(body);
 		
 		ResponseEntity<String> response = http.exchange(request, String.class);
 		String message = response.getBody();
 		mail.send(generation.getEmail(), "메일", message);
-				
-		
-		
+					
 	}
 
 	@Override
@@ -112,7 +110,6 @@ public class GenerationServiceImpl implements GenerationService {
 		Map<String, Object> generationMap = new HashMap<String, Object>();
 		generationMap.put("paging", paging);
 		generationMap.put("generationIdx", generationIdx);
-		System.out.println("paging" + paging.toString());
 
 		commandMap.put("paging", paging);
 		commandMap.put("generationWonList", generationRepository.selectGenerationWonList(generationMap));
@@ -138,7 +135,7 @@ public class GenerationServiceImpl implements GenerationService {
 		return generationRepository.insertGenerationWonAdd(generationWon);
 	}
 	
-	//세대원 전체 검색
+	//세대 정보
 	@Override
 	public Generation selectGeneration(Generation generation) {
 		return generationRepository.selectGeneration(generation);
@@ -149,6 +146,25 @@ public class GenerationServiceImpl implements GenerationService {
 		String password = generation.getPassword();
 		generation.setPassword(encoder.encode(password));
 		return generationRepository.updateGenerationModify(generation);
+	}
+
+	@Override
+	public void authenticationEmail(Generation generation, String authPathEmail) {
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
+		body.add("mail-template", "email");
+		body.add("id", generation.getId());
+		body.add("authPath", authPathEmail);
+		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(Configcode.DOMAIN + "/mail")
+				.header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE).body(body);
+		
+		ResponseEntity<String> response = http.exchange(request, String.class);
+		String message = response.getBody();
+		mail.send(generation.getEmail(), "이메일 인증 메일", message);		
+	}
+
+	@Override
+	public int updateGenerationEmail(Generation generation) {
+		return generationRepository.updateGenerationEmail(generation);
 	}
 
 	

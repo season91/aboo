@@ -87,8 +87,8 @@
 					<div id = "certifiedBox" class="form-group" style="display: none;">
 						<form action="/authenticationid" method="get">
 						<div class= "d-flex justify-content-between">
-								<input type="text" class="form-control col-md-10" id="certifiedNum" name="certifiedNum" placeholder="인증번호">
-								<button class = "btn btn-primary px-xl-3 py-xl-1 ">확인</button>
+							<input type="text" class="form-control col-md-10" id="certifiedNum" name="certifiedNum" placeholder="인증번호">
+							<button class = "btn btn-primary px-xl-3 py-xl-1 ">확인</button>
 						</div>
 						</form>
 					</div>

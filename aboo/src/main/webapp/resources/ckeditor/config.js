@@ -36,6 +36,9 @@ CKEDITOR.editorConfig = function( config ) {
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 	
+	// placeholder
+	config.extraPlugins = 'editorplaceholder'; 
+	
 	//imageupload 21.03.25
 	config.filebrowserBrowseUrl = "../ckfinder/ckfinder.html";
     config.filebrowserFlashBrowseUrl = "../ckfinder/ckfinder.html?type=Flash";

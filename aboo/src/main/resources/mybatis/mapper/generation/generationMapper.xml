@@ -27,15 +27,6 @@
      <if test="password != null">
      PASSWORD = #{password}
      </if>
-     <if test="regDate != null">
-     , REG_DATE = #{regDate}
-     </if>
-     <if test="building != null">
-     , BUILDING = #{building}
-     </if>
-     <if test="num != null">
-     , NUM = #{num}
-     </if>
      <if test="email != null">
      , EMAIL = #{email}
      </if>

@@ -58,9 +58,9 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public Admin selectGenerationForAuth(Admin admin) {
+	public Admin selectAdminForAuth(Admin admin) {
 
-		Admin authInfo = adminRepository.selectGenerationForAuth(admin.getId());
+		Admin authInfo = adminRepository.selectAdminForAuth(admin.getId());
 		if (authInfo == null || !encoder.matches(admin.getPassword(), authInfo.getPassword())) {
 			return null;
 		}
@@ -140,5 +140,36 @@ public class AdminServiceImpl implements AdminService {
 		admin.setPassword(encoder.encode(password));
 		adminRepository.updateFindPassword(admin);
 
+	}
+
+	@Override
+	public Admin selectAdmin(Admin admin) {
+		return adminRepository.selectAdmin(admin);
+	}
+
+	@Override
+	public int updateAdminModify(Admin admin) {
+		String password = admin.getPassword();
+		admin.setPassword(encoder.encode(password));
+		return adminRepository.updateAdminModify(admin);
+	}
+
+	@Override
+	public void authenticationEmail(Admin admin, String authPathEmail) {
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
+		body.add("mail-template", "email");
+		body.add("id", admin.getId());
+		body.add("authPath", authPathEmail);
+		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(Configcode.DOMAIN + "/mail")
+				.header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE).body(body);
+		
+		ResponseEntity<String> response = http.exchange(request, String.class);
+		String message = response.getBody();
+		mail.send(admin.getEmail(), "이메일 인증 메일", message);		
+	}
+	
+	@Override
+	public int updateAdminEmail(Admin admin) {
+		return adminRepository.updateAdminEmail(admin);
 	}
 }

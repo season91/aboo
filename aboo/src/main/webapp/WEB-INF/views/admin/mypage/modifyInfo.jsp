@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -193,26 +194,29 @@
 	      <div class="container">
 	        <div class="row block-9 justify-content-center">
 	          <div class="col-md-6">
-	            <form action="#">
+	            <form:form id = "modifyForm" action="/admin/mypage/modifyupdate" method="post" modelAttribute ="admin">
 	              <div class="form-group">
-	                <input type="text" readonly="readonly" class="form-control" placeholder="아이디">
+	                <input type="text" readonly="readonly" class="form-control" id = "id" value="${selectAdmin.id}" >
 	              </div>
 	              <div class="form-group">
-	                <input type="text" class="form-control" placeholder="비밀번호"> 
+	                <input type="text" class="form-control password" id = "password_1" placeholder="비밀번호"> 
 	              </div>
 	              <div class="form-group">
-	                <input type="text" class="form-control" placeholder="비밀번호확인">
+	                <input type="text" class="form-control password" id = "password_2" name = "password" placeholder="비밀번호 확인">
+				    <div id = "pass" style="font-size: 1vw;"></div> <!--비밀번호 일치-->
+				    <div id ="passwordConfirm" class = "validator"></div> <!--프론트 패스워드 유효성-->
+	              	<div><form:errors path="password" cssClass="validator"/></div><!--백 패스워드 유효성  -->	                
 	              </div>
 	              <div class="form-group d-flex justify-content-between">
-	                <input type="text" class="form-control col-md-10" placeholder="전화번호"><button type="button" class="btn btn-primary px-xl-3 py-xl-1" data-toggle="modal" data-target="#tellModal">인증</button>              
+	                <input type="text" class="form-control col-md-10" readonly="readonly" name = "tell" value = "${selectAdmin.tell}" ><button type="button" class="btn btn-primary px-xl-3 py-xl-1" data-toggle="modal" data-target="#tellModal">인증</button>              
 	              </div>
 	              <div class="form-group d-flex justify-content-between">
-	                <input type="text" class="form-control col-md-10" placeholder="이메일"><button type="button" class="btn btn-primary px-xl-3 py-xl-1" data-toggle="modal" data-target="#emailModal">인증</button>
+	                <input type="text" class="form-control col-md-10"  readonly="readonly" name = "email" value = "${selectAdmin.email}"><button type="button" class="btn btn-primary px-xl-3 py-xl-1" data-toggle="modal" data-target="#emailModal">인증</button>
 	              </div>
 	              <div class="form-group">
 	                <input type="submit" value="수정완료" class="btn btn-primary py-3 px-5 col-sm-12" >
 	              </div>
-	            </form>                    
+	            </form:form>                    
 	          </div>
 	        </div>
 	      </div>
@@ -316,17 +320,20 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title text-dark" id="myModalLabel">발송된 메일 코드</h4>
+              <h4 class="modal-title text-dark" id="myModalLabel">이메일 인증</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
+            <div class="form-group d-flex justify-content-between">
+                <input type="text" class="form-control col-md-10" id = "email"><button type="button" class="btn btn-primary px-xl-3 py-xl-1" onclick="emailSend()">발송</button>
+              </div>
        	      <div class="form-group">
-                <input type="text" class="form-control"> 
+                <input type="text" class="form-control" id = "certifiedNum"> 
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">확인</button>
+              <button type="button" class="btn btn-primary"  onclick="certifiedNum()">확인</button>
             </div>
           </div>
         </div>
@@ -457,6 +464,7 @@
         });
       });
     </script>
+
     <script>
       $(document).ready(function() {
         // Javascript method's body can be found in assets/js/demos.js
@@ -465,6 +473,123 @@
       });
     </script>
     
+    
+     <script>
+     let flg = false;
+    
+    $('.password').focusout(function () {
+        var pwd1 = $("#password_1").val();
+        var pwd2 = $("#password_2").val();
+
+        if (pwd1 != '' && pwd2 == '') {
+            null;
+        } else if (pwd1 != "" || pwd2 != "") {
+            if (pwd1 == pwd2) {
+                document.querySelector("#pass").style.color='blue'
+                pass.innerHTML = '비밀번호가 일치합니다';
+                flg = true;
+            } else {
+                document.querySelector("#pass").style.color='red'
+                pass.innerHTML = '비밀번호가 일치하지않습니다';
+				flg = false;
+            }
+        }
+    });
+    
+
+    document.querySelector('#modifyForm').addEventListener('submit',(e)=>{
+	   let password_1 = document.querySelector("#password_1").value;
+	   let password_2 = document.querySelector("#password_2").value;
+		
+ 	   let regExp = /^(?!.*[ㄱ-힣])(?=.*\W)(?=.*\d)(?=.*[a-zA-Z])(?=.{8,})/;
+ 	   
+ 	   if(!(regExp.test(password_1) || regExp.test(password_2))){
+ 		   //form의 데이터 전송을 막음
+ 		   e.preventDefault();
+ 		   passwordConfirm.innerHTML = '비밀번호는 숫자,영문자,특수문자 조합의 8글자 이상인 문자열입니다2.';
+ 		   password_1.value='';
+ 		   password_1.value='';
+
+ 	   }
+ 	   
+ 	   	if (!flg) {
+           	document.querySelector("#pass").innerHTML = '비밀번호가 일치하지않습니다'
+  		   	e.preventDefault();
+
+
+		}
+ 	   
+    }); 
+    
+   	</script>
+   	
+    <script type="text/javascript">
+      let emailSend = () => {
+    	  let email = document.querySelector("#email").value;
+    	  console.dir(email);
+    	  
+          const url = '/admin/mypage/modifyemailimpl';
+           
+          let paramObj = new Object();
+          paramObj.email = document.querySelector("#email").value;
+          let headerObj = new Headers();
+          headerObj.append("content-type","application/json");
+          fetch(url,{
+             method:"post",
+             headers:headerObj,
+             body:JSON.stringify(paramObj)
+          }).then(response => {
+             if(response.ok){
+                return response.text();    
+             }
+             throw new AsyncPageError(response.text());
+          }).then((text) => {
+             if(text == 'fail'){ 
+                alert('실패')
+             }else{ 
+                 alert('메일이 발송되었습니다.');
+
+             }
+          }).catch(error => {
+             error.alertMessage();
+          }); 
+       }
+
+   </script>
+   
+  <script type="text/javascript">
+      let certifiedNum = () => {
+    	  
+          const url = '/admin/mypage/authenticationemail';
+           
+          let paramObj = new Object();
+          paramObj.certifiedNum = document.querySelector("#certifiedNum").value;
+          paramObj.email = document.querySelector("#email").value;
+          let headerObj = new Headers();
+          headerObj.append("content-type","application/json");
+          fetch(url,{
+             method:"post",
+             headers:headerObj,
+             body:JSON.stringify(paramObj)
+          }).then(response => {
+             if(response.ok){
+                return response.text();    
+             }
+             throw new AsyncPageError(response.text());
+          }).then((text) => {
+             if(text == 'fail'){ 
+                alert('정확한 인증번호를 입력해주세요')
+             }else{ 
+                 alert('이메일 인증에 성공하였습니다.');
+                 location.href = "/admin/mypage/modifyinfo"
+             }
+          }).catch(error => {
+             error.alertMessage();
+          }); 
+       }
+
+   </script>
+   
    <script type="text/javascript">
       $('#tellModal').modal(options)
    </script>

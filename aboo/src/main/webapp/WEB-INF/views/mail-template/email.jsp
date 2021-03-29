@@ -8,6 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	인증번호는 ${authPath} 입니다 정확하게 입력해주세요
+	이메일 인증번호는 ${authPath} 입니다 정확하게 입력해주세요
 </body>
 </html>

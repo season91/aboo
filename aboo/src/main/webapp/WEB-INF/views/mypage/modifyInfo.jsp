@@ -67,11 +67,10 @@
                 <input type="text" class="form-control password"  id = "password_1"  placeholder="비밀번호"> 
               </div>
               <div class="form-group">
-                <input type="text" class="form-control password" id = "password_2"  name = "password" placeholder="비밀번호확인">
-              	<div id="success" style="display: none; color: #1E90FF; font-size: 1vw;" >비밀번호가 일치합니다.</div>
-			    <div id="danger" style="display: none; color: #DC143C; font-size: 1vw;">비밀번호가 일치하지 않습니다.</div>
-			    <div id ="passwordConfirm"></div>
-              	<div><form:errors path="password" cssClass="validator"/></div>
+                <input type="text" class="form-control password" id = "password_2"  name = "password" placeholder="비밀번호 확인">
+			    <div id = "pass" style="font-size: 1vw;"></div> <!--비밀번호 일치-->
+			    <div id ="passwordConfirm" class = "validator"></div> <!--프론트 패스워드 유효성-->
+              	<div><form:errors path="password" cssClass="validator"/></div><!--백 패스워드 유효성  -->
               </div>
               <div class="form-group">
                 <input type="text" readonly="readonly" name ="building" value = "${selectGeneration.building}" class="form-control" >
@@ -80,10 +79,10 @@
                 <input type="text" readonly="readonly" name = "num" value = "${selectGeneration.num}" class="form-control" >
               </div>
               <div class="form-group d-flex justify-content-between">
-                <input type="text" class="form-control col-md-10" name = "tell" placeholder="전화번호"><button type="button" class="btn btn-primary px-xl-3 py-xl-1" data-toggle="modal" data-target="#tellModal">인증</button>              
+                <input type="text" class="form-control col-md-10" name = "tell" readonly="readonly" value = "${selectGeneration.tell}"><button type="button" class="btn btn-primary px-xl-3 py-xl-1" data-toggle="modal" data-target="#tellModal">인증</button>              
               </div>
               <div class="form-group d-flex justify-content-between">
-                <input type="text" class="form-control col-md-10" name = "email" placeholder="이메일"><button type="button" class="btn btn-primary px-xl-3 py-xl-1" data-toggle="modal" data-target="#emailModal">인증</button>
+                <input type="text" class="form-control col-md-10"  name = "email" readonly="readonly" value = "${selectGeneration.email}"><button type="button" class="btn btn-primary px-xl-3 py-xl-1" data-toggle="modal" data-target="#emailModal">인증</button>
               </div>
               <div class="form-group">
                 <input type="text" readonly="readonly" class="form-control" name = "regDate" value = "${selectGeneration.regDate}" >
@@ -110,19 +109,19 @@
             null;
         } else if (pwd1 != "" || pwd2 != "") {
             if (pwd1 == pwd2) {
-                $("#success").css('display', 'inline-block');
-                $("#danger").css('display', 'none');
+                document.querySelector("#pass").style.color='blue'
+                pass.innerHTML = '비밀번호가 일치합니다';
                 flg = true;
             } else {
-                $("#success").css('display', 'none');
-                $("#danger").css('display', 'inline-block');
+                document.querySelector("#pass").style.color='red'
+                pass.innerHTML = '비밀번호가 일치하지않습니다';
 				flg = false;
             }
         }
     });
     
 
-    document.querySelector('#modifyForm').addEventListener('submit',(e)=>{
+   /*  document.querySelector('#modifyForm').addEventListener('submit',(e)=>{
 	   let password_1 = document.querySelector("#password_1").value;
 	   let password_2 = document.querySelector("#password_2").value;
 		
@@ -131,23 +130,22 @@
  	   if(!(regExp.test(password_1) || regExp.test(password_2))){
  		   //form의 데이터 전송을 막음
  		   e.preventDefault();
- 		   passwordConfirm.innerHTML = '비밀번호는 숫자,영문자,특수문자 조합의 8글자 이상인 문자열입니다.1111111111111111111111111';
+ 		   passwordConfirm.innerHTML = '비밀번호는 숫자,영문자,특수문자 조합의 8글자 이상인 문자열입니다2.';
  		   password_1.value='';
  		   password_1.value='';
 
  	   }
  	   
  	   	if (!flg) {
-           	document.querySelector("#danger").innerText = '비밀번호 노일치'
+           	document.querySelector("#pass").innerHTML = '비밀번호가 일치 하지않습니다'
   		   	e.preventDefault();
 
 
 		}
  	   
-    }); 
+    });  */
     
-   
-	</script>
+   	</script>
     
 	<footer class="ftco-footer ftco-bg-dark ftco-section">
 	      <div class="container">
@@ -243,23 +241,93 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title" id="myModalLabel">발송된 메일 코드</h4>
+              <h4 class="modal-title" id="myModalLabel">이메일 인증</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
+            <div class="form-group d-flex justify-content-between">
+                <input type="text" class="form-control col-md-10" id = "email"><button type="button" class="btn btn-primary px-xl-3 py-xl-1" onclick="emailSend()">발송</button>
+              </div>
        	      <div class="form-group">
-                <input type="text" class="form-control"> 
+                <input type="text" class="form-control" id = "certifiedNum"> 
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">확인</button>
+              <button type="button" class="btn btn-primary" onclick="certifiedNum()">확인</button>
             </div>
           </div>
         </div>
       </div>
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+	<script type="text/javascript">
+      let emailSend = () => {
+    	  let email = document.querySelector("#email").value;
+    	  console.dir(email);
+    	  
+          const url = '/mypage/modifyemailimpl';
+           
+          let paramObj = new Object();
+          paramObj.email = document.querySelector("#email").value;
+          let headerObj = new Headers();
+          headerObj.append("content-type","application/json");
+          fetch(url,{
+             method:"post",
+             headers:headerObj,
+             body:JSON.stringify(paramObj)
+          }).then(response => {
+             if(response.ok){
+                return response.text();    
+             }
+             throw new AsyncPageError(response.text());
+          }).then((text) => {
+             if(text == 'fail'){ 
+                alert('실패')
+             }else{ 
+                 alert('메일이 발송되었습니다.');
+
+             }
+          }).catch(error => {
+             error.alertMessage();
+          }); 
+       }
+
+   </script>
+
+	<script type="text/javascript">
+      let certifiedNum = () => {
+    	  
+          const url = '/mypage/authenticationemail';
+           
+          let paramObj = new Object();
+          paramObj.certifiedNum = document.querySelector("#certifiedNum").value;
+          paramObj.email = document.querySelector("#email").value;
+          let headerObj = new Headers();
+          headerObj.append("content-type","application/json");
+          fetch(url,{
+             method:"post",
+             headers:headerObj,
+             body:JSON.stringify(paramObj)
+          }).then(response => {
+             if(response.ok){
+                return response.text();    
+             }
+             throw new AsyncPageError(response.text());
+          }).then((text) => {
+             if(text == 'fail'){ 
+                alert('정확한 인증번호를 입력해주세요')
+             }else{ 
+                 alert('이메일 인증에 성공하였습니다.');
+                 location.href = "/mypage/modifyinfo"
+             }
+          }).catch(error => {
+             error.alertMessage();
+          }); 
+       }
+
+   </script>
 
    <script type="text/javascript">
       $('#tellModal').modal(options)
