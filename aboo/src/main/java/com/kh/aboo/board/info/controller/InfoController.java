@@ -2,6 +2,7 @@ package com.kh.aboo.board.info.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,8 +37,13 @@ public class InfoController {
 	};
 	
 	//희원
-	@GetMapping("detailinfo")
-	public void detailInfo() {};
+	@GetMapping("detail")
+	public String detailInfo(String bIdx, Model model) {
+		System.out.println(bIdx);
+		model.addAllAttributes(infoService.selectInfoBoardDetail(bIdx));
+		return "board/info/detailinfo";
+		
+	};
 	
 	//희원
 	@GetMapping("addinfo")
@@ -74,7 +80,35 @@ public class InfoController {
 	
 	//희원
 	@GetMapping("editinfo")
-	public void editInfo() {};
+	public String editInfo(String bIdx, Model model) {
+		
+		
+		System.out.println(bIdx);
+		model.addAllAttributes(infoService.selectInfoBoardDetail(bIdx));
+		return "board/info/editinfo";
+	};
+	
+	@PostMapping("editimpl")
+	public String editimpl(@RequestParam List<MultipartFile> files
+			,InfoBoard infoBoard, String bIdx
+			,@SessionAttribute(name="generation", required = false)
+			Generation generation,
+			Model model) {
+		
+		
+		
+		int res = infoService.UpdateInfoBoard(infoBoard,bIdx);
+
+		if(res > 0) {
+			model.addAttribute("alertMsg", "게시물이 수정되었습니다.");
+			model.addAttribute("url", "/board/info/listinfo");
+		}else {
+			model.addAttribute("alertMsg", "게시물을 수정하는 도중 에러가 발생했습니다.");
+			model.addAttribute("url", "/board/info/listinfo" );
+		}
+		
+		return "common/result";
+	};
 	
 	
 }

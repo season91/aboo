@@ -13,4 +13,5 @@ public interface InfoService {
 	public int insertInfoBoard (InfoBoard infoBoard, List<MultipartFile> files );
 	public Map<String,Object> selectInfoBoardList(int currentPage);
 	public Map<String,Object> selectInfoBoardDetail(String bIdx);
+	public int UpdateInfoBoard(InfoBoard infoBoard,String bIdx);
 }
