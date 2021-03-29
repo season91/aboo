@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.kh.aboo.admin.mgmtfee.model.vo.Mgmtfee;
+import com.kh.aboo.admin.mgmtfee.model.vo.MgmtfeeOverdue;
 import com.kh.aboo.mypage.mymgmtfee.model.service.MyMgmtfeeService;
 import com.kh.aboo.user.generation.model.vo.Generation;
 
@@ -40,10 +41,15 @@ public class MyMgmtfeeController {
 		Mgmtfee mgmtfee = myMgmtfeeService.selectMyMgmtfeeByMgmtfeeIdx(mgmtfeeidx);
 		Map<String,Object> mgmtdate = myMgmtfeeService.selectMyMgmtfeeDate(mgmtfeeidx);
 
+		// 연체료정보도 보내준다
+		MgmtfeeOverdue mgmtfeeOverdue = myMgmtfeeService.selectMyMgmtfeeOverdue(mgmtfeeidx);
+		if (mgmtfeeOverdue != null) {
+			model.addAttribute(mgmtfeeOverdue);
+			System.out.println("연체있다"+mgmtfeeOverdue);
+		}
+		
 		model.addAttribute(mgmtfee);
 		model.addAttribute("mgmtdate",mgmtdate);
-		System.out.println(mgmtdate.get("YEAR"));
-		System.out.println(mgmtdate.get("MONTH"));
 	};
 	
 	// 아영

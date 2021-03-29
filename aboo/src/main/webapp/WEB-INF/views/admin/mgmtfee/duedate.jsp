@@ -215,7 +215,7 @@
                            </label>
                          </div>
                        </td>
-                       <td><a href="/mypage/mymgmtfee?${mgmtfee.mgmtfeeIdx }"> ${mgmtfee.mgmtfeeIdx}</a> </td>
+                       <td><a href="/mypage/mymgmtfee/deatil?mgmtfeeidx=?${mgmtfee.mgmtfeeIdx }"> ${mgmtfee.mgmtfeeIdx}</a> </td>
                        <td> ${generationList[status.index].building }동 ${generationList[status.index].num}호</td>
                        <td> ${mgmtfee.dueDate } </td>
                        <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${mgmtfee.periodPayment}"/> </td>
@@ -241,28 +241,27 @@
 	          <div class="col text-center">
 	            <div class="block-27">
 	              <ul>
-	                <li><a href="/admin/${paging.type }">&lt;&lt;</a></li>
-	                <li><a href="/admin/${paging.type }?page=${paging.prev}">&lt;</a></li>
-	                <c:choose>
-	                	<c:when test="${paging.lastPage eq 0 }">
-	                		<li><a href="/admin/${paging.type }"><span>1</span></a></li>
-	                	</c:when>
-	                	<c:otherwise>
-	                		<c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
-		                      <c:choose>
-		                         <c:when test="${paging.currentPage eq page}">
-		                            <li class="active"><a href="/admin/${paging.type }?page=${page}"><span>${page}</span></a></li>
-		                         </c:when>
-		                         <c:otherwise>
-		                            <li><a href="/admin/${paging.type }?page=${page}"><span>${page}</span></a></li>
-		                         </c:otherwise>
-		                      </c:choose>
-		                 	 </c:forEach> 
-	                	</c:otherwise>
+	                <li><a href="/admin/${paging.type }?standard=dueDate&keyword=${keyword}">&lt;&lt;</a></li>
+	                <li><a href="/admin/${paging.type }?page=${paging.prev}&standard=dueDate&keyword=${keyword}">&lt;</a></li>
+              	  <c:choose>
+                	<c:when test="${paging.lastPage eq 0 }">
+                		<li><a href="/admin/${paging.type }"><span>1</span></a></li>
+                	</c:when>
+                	<c:otherwise>
+	                 <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
+                      <c:choose>
+                         <c:when test="${paging.currentPage eq page}">
+                            <li class="active"><a href="/admin/${paging.type }?page=${page}&standard=dueDate&keyword=${keyword}">${page}</a></li>
+                         </c:when>
+                         <c:otherwise>
+                            <li><a href="/admin/${paging.type }?page=${page}&standard=dueDate&keyword=${keyword}">${page}</a></li>
+                         </c:otherwise>
+                      </c:choose>
+                 	 </c:forEach> 
+                 	 </c:otherwise>
 	                </c:choose>
-	                 
-	                <li><a href="/admin/${paging.type }?page=${paging.next}">&gt;</a></li>
-	                <li><a href="/admin/${paging.type }?page=${paging.lastPage }">&gt;&gt;</a></li>
+	                <li><a href="/admin/${paging.type }?page=${paging.next}&standard=dueDate&keyword=${keyword}">&gt;</a></li>
+	                <li><a href="/admin/${paging.type }?page=${paging.lastPage }&standard=dueDate&keyword=${keyword}">&gt;&gt;</a></li>
 	              </ul>
 	            </div>
 	          </div>

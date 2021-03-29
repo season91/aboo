@@ -26,7 +26,7 @@ public class MyMgmtfeeRepositoryTest {
 	@Test
 	public void selectMyMgmtfeeList() {
 		Map<String, Object> generationMap = new HashMap<>();
-		String generationIdx = "100304";
+		String generationIdx = "100296";
 		Paging paging = Paging.builder()
 				.currentPage(1)
 				.blockCnt(5)

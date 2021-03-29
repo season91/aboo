@@ -84,9 +84,16 @@
 		                        		<td>완료</td>
 		                        	</c:otherwise>
 		                        </c:choose>
-						        <td>${mymgmtfee.periodPayment }</td>
-						        <td>연체금액</td>
-						        <td>납부일자</td>
+						        <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${mymgmtfee.periodPayment }"/> </td>
+						        <c:choose>
+						        	<c:when test="${myMgmtfeeOverdueList[status.index].overdueFee eq null}">
+						        		<td>0</td>
+						        	</c:when>
+						        	<c:otherwise>
+						        		<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${myMgmtfeeOverdueList[status.index].overdueFee }"/></td>
+						        	</c:otherwise>
+						        </c:choose>
+						        <td>${mymgmtfee.dueDate}</td>
 						      </tr>
 						    </c:forEach>
 						    </tbody>
