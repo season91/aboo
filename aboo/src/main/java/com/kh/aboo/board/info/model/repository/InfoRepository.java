@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.kh.aboo.board.info.model.vo.InfoBoard;
 import com.kh.aboo.common.util.file.FileVo;
@@ -33,5 +34,8 @@ public interface InfoRepository {
 	List<FileVo> selectFileWithBIdx(String bIdx);
 	
 	@Select("select * from tb_file where type_idx = #{bdIdx}")
-	List<FileVo> selectFileWithBdIdx(String bdIdx);
+	List<FileVo> selectFileWithBdIdx(String bIdx);
+	
+	@Update("update tb_inf_qst_brd set b_title = #{bTitle}, b_content = #{bContent}, b_category = #{bCategory} where b_idx = #{bIdx}")
+	int UpdateInfoBoard(InfoBoard infoBoard,String bIdx);
 }

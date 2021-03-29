@@ -88,7 +88,7 @@
                         </td>
                        
                         <td>
-                         <a href="/board/info/detailinfo" class="text-dark">
+                         <a href="${context}/board/info/detail?bIdx=${infoBoard.bIdx}" class="text-dark">
                           ${infoBoard.bTitle}
                          </a>
                         </td>
@@ -120,10 +120,10 @@
 	                <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
 	                   <c:choose>
 	                      <c:when test="${paging.currentPage eq page}">
-	                         <li class="active"><a href="${context}/board/${paging.type}/listinfo?page=${page}"><span>${page}</span></a></li>
+	                         <li class="active"><a href="${context}/board/${paging.type}/listinfo?page=${page}">${page}</a></li>
 	                      </c:when>
 	                      <c:otherwise>
-	                         <li><a href="${context}/board/${paging.type}?page=${page}/listinfo"><span>${page}</span></a></li>
+	                         <li><a href="${context}/board/${paging.type}?page=${page}/listinfo">${page}</a></li>
 	                      </c:otherwise>
 	                   </c:choose>
 	              	 </c:forEach>

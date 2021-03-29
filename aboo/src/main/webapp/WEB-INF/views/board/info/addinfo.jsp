@@ -57,7 +57,7 @@
 							  <option value="정보">정보</option>
 							  <option value="질문">질문</option>
 							</select>
->
+
                    </div>
                    
                    <div class="row block-9">

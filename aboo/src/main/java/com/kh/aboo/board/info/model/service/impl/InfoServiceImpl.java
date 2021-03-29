@@ -79,7 +79,15 @@ public class InfoServiceImpl implements InfoService{
 		commandMap.put("infoBoard",infoBoard);
 		commandMap.put("files", files);
 
-		return null;
+		return  commandMap;
+	}
+
+	@Override
+	public int UpdateInfoBoard(InfoBoard infoBoard,String bIdx) {
+		
+		int res = infoRepository.UpdateInfoBoard(infoBoard, bIdx);
+			
+		return res;
 	}
 
 }
