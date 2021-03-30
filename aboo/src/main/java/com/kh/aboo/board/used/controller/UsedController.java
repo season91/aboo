@@ -1,5 +1,7 @@
 package com.kh.aboo.board.used.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.aboo.board.model.repository.BoardRepository;
 import com.kh.aboo.board.model.service.BoardService;
@@ -37,12 +40,9 @@ public class UsedController {
 
 		if (generation != null) {
 			model.addAllAttributes(usedService.selectUsedBrdList(page, generation.getApartmentIdx()));
-			System.out
-					.println(model.addAllAttributes(usedService.selectUsedBrdList(page, generation.getApartmentIdx())));
 
 		} else {
 			model.addAllAttributes(usedService.selectUsedBrdList(page, admin.getApartmentIdx()));
-			System.out.println(model.addAllAttributes(usedService.selectUsedBrdList(page, admin.getApartmentIdx())));
 
 		}
 
@@ -52,10 +52,9 @@ public class UsedController {
 	@GetMapping("useddetail")
 	public String usedDetail(String usedIdx, Model model) {
 
+		model.addAllAttributes(usedService.selectUsedDetail(usedIdx));
 		System.out.println(usedService.selectUsedDetail(usedIdx));
-		UsedBrd usedBrd = usedService.selectUsedDetail(usedIdx);
-		model.addAttribute("UsedBrd", usedBrd);
-
+			
 		return "board/used/usedDetail";
 
 	}
@@ -105,6 +104,30 @@ public class UsedController {
 		System.out.println(usedBrdInfo);
 
 		return "";
+	}
+
+	@GetMapping("usedupload")
+	public String usedUpload() {
+
+		return "board/used/usedUpload";
+	}
+
+	@PostMapping("useduploadimpl")
+	public String usedUploadimpl(@RequestParam List<MultipartFile> files, UsedBrd usedBrd,
+			@SessionAttribute(name = "generation", required = false) Generation generation,Model model) {
+
+		String generationIdx = generation.getGenerationIdx();
+		String apartmentIdx = generation.getApartmentIdx();
+		String usedWriter = generation.getBuilding() + "동" + generation.getNum() + "호";
+		usedBrd.setUsedWriter(usedWriter); // 닉네임 처럼 게시판 작성자
+		usedBrd.setGenerationIdx(generationIdx);
+		usedBrd.setApartmentIdx(apartmentIdx);
+
+		usedService.insertUsedBrd(usedBrd, files);
+		
+		model.addAttribute("alertMsg", "게시물 등록에 성공하였습니다.");
+		model.addAttribute("url", "/board/used/usedlist");
+		return "common/result";
 	}
 
 }

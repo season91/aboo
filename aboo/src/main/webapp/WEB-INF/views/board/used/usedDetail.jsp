@@ -90,6 +90,7 @@
           		</div>
           	</div>
           	<hr>
+          	<div><img src="/file${files[0].savePath}${files[0].renameFileName}"></div>
           	<c:choose>
           		<c:when test="${UsedBrd.isPrivate == 0}">
           			${UsedBrd.usedContent}

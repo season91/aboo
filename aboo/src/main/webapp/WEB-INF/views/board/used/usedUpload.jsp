@@ -3,6 +3,9 @@
 <%@ include file="/WEB-INF/views/include/generationhead.jsp" %>
 <!DOCTYPE html>
 <html>
+<head>
+	<script type="text/javascript" src="../../../../resources/ckeditor/ckeditor.js"></script>
+</head>
   <body>
     
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -41,93 +44,54 @@
 
             <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
               <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Info</a></span> <span>Used</span></p>
-	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">used</h1>
+	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Interior</h1>
             </div>
           </div>
         </div>
       </div>
     </section>
   
-    <section class="ftco-section bg-light">
+    <section class="ftco-section contact-section ftco-degree-bg">
       <div class="container">
-        <div class="row">
-        	<c:forEach items="${usedBrdList}" var="usedBrd" varStatus="status">
-        		<c:choose>
-        			<c:when test="${usedBrd.isPrivate == 0}">
-        				<div class="col-md-4 ftco-animate">
-							<div class="blog-entry">
-							  <a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="block-20"></a>
-							  <div class="text d-flex py-4">
-							    <div class="meta mb-3">
-							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">${usedBrd.usedRegDate}</a></div>
-							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">${usedBrd.usedWriter}</a></div>
-							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="meta-chat"><span class="icon-chat"></span> ${intCmtCntList[status.index]}1</a></div>
-							    </div>
-							    <div class="desc pl-3">
-							      <h3 class="heading"><a href="/board/interior/intdetail?intPostNo=${usedBrd.usedIdx}">${usedBrd.usedTitle}</a></h3>
-							    </div>
-							  </div>
-							</div>
-		            	</div>
-        			</c:when>
-        			<c:otherwise>
-        				<div class="col-md-4 ftco-animate">
-							<div class="blog-entry">
-							  <a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="block-20"></a>
-							  <div class="text d-flex py-4">
-							    <div class="meta mb-3">
-							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">${usedBrd.usedRegDate}</a></div>
-							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">${usedBrd.usedWriter}</a></div>
-							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="meta-chat"><span class="icon-chat"></span> ${intCmtCntList[status.index]}1</a></div>
-							    </div> <!--비공개 처리하면 못보게 할건지 -->
-							    <div class="desc pl-3">
-							      <h3 class="heading"><a href="/board/interior/intdetail?intPostNo=${usedBrd.usedIdx}">비공개 처리된 게시물 입니다</a></h3>
-							    </div>
-							  </div>
-							</div>
-		            	</div>
-        			</c:otherwise>
-        		</c:choose>
-            </c:forEach>
-        </div>
-        
-        <div class="container d-flex justify-content-end">
-			<form action="#" class="search-form" style="width: 40%;">
-	          <div class="form-group mb-0">
-	            <div class="icon" style="cursor: pointer;">
-	            	<a class="icon-search"></a>
-	            </div>
-	            <input type="text" class="form-control" placeholder="제목을 입력하세요.">
-	          </div>
-         </form>
-		</div>
-        
-        <div class="container text-center d-flex justify-content-end mt-0">
-	      <a href="/board/used/usedupload" class="center-block btn btn-primary p-3 px-xl-4 py-xl-2 btn-sm" style="background: linear-gradient(45deg, #12e6ca 0%, #8be55d 100%); border: none; color: white !important;">글쓰기</a>
-	    </div>
-        
-        <div class="row mt-5">
-          <div class="col text-center">
-            <div class="block-27">
-              <ul>
-                <li><a href="/board/used/usedlist">&lt;&lt;</a></li>
-                <li><a href="/board/used/usedlist?page=${paging.prev}">&lt;</a></li>
-	                <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
-	                   <c:choose>
-	                      <c:when test="${paging.currentPage eq page}">
-	                         <li class="active"><a href="/board/used/usedlist?page=${page}">${page}</a></li>
-	                      </c:when>
-	                      <c:otherwise>
-	                         <li><a href="/board/used/usedlist?page=${page}">${page}</a></li>
-	                      </c:otherwise>
-	                   </c:choose>
-	              	 </c:forEach>
-                <li><a href="/board/used/usedlist?page=${paging.next}">&gt;</a></li>
-                <li><a href="/board/used/usedlist?page=${paging.lastPage}">&gt;&gt;</a></li>
-              </ul>
-            </div>
+        <div class="row d-flex mb-4 contact-info">
+          <div class="col-md-12 mb-4">
+            <h2 class="h4">중고 게시판</h2>
+          </div>
+          <div class="w-100"></div>
+          <div class="col-md-12 w-100">
+            <p>게시글 작성</p>
           </div>
         </div>
+        <form action="/board/used/useduploadimpl" method="post" enctype="multipart/form-data">
+        	<div class="p-2 bg-light mt-1">
+	        	<div class="row block-9 d-flex justify-content-center text-center">
+		          <div class="col-md-11">
+		              <div class="form-group mb-0 d-flex w-80">
+		                <span class="col-md-3 align-self-center text-left">제목</span><input type="text" class="form-control" name="usedTitle" required="required" placeholder="제목을 입력해주세요.">
+		              </div>
+		          </div>
+		        </div>
+	        </div>
+	        <div class="p-3 bg-light mt-3">
+	        	<div class="row block-9 d-flex justify-content-center text-center">
+		          <div class="col-md-11">
+		              <div class="form-group m-0">
+		              	<textarea class="form-control" id="p_content" name="usedContent" required="required"></textarea>
+		              	<script type="text/javascript">
+							CKEDITOR.replace('p_content', {
+								height: 500
+								, editorplaceholder: '인테리어에 관한 내용을 입력해주세요.'});
+							CKEDITOR.config.resize_enabled = false;
+						</script>
+		              </div>
+		          </div>
+		        </div>
+	        </div>
+	       	<input class = "ml-5 mt-2" type="file" name ="files">
+	        <div class="form-group mt-3 text-center">
+              <input type="submit" value="등록하기" class="btn btn-primary py-3 px-5">
+            </div>
+        </form>
       </div>
     </section>
 

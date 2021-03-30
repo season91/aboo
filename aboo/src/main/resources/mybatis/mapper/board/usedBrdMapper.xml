@@ -20,8 +20,24 @@
 	
 	
 	
-	
-	
+	<insert id= "insertUsedBrdFile">
+		insert into TB_FILE(F_IDX,TYPE_IDX,ORIGIN_FILE_NAME,RENAME_FILE_NAME,SAVE_PATH) 
+		values(
+		SC_FILE_IDX.nextval,
+		<!-- bd_idx -->
+		<choose>
+			<when test="typeIdx != null">
+				#{typeIdx},
+			</when>
+			<otherwise>
+				SC_USED_IDX.currval,
+			</otherwise>
+		</choose>
+		#{originFileName},
+		#{renameFileName},
+		#{savePath})
+	</insert>
+		
 	
 	
 	

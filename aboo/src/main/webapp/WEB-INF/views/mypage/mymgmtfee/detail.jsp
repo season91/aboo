@@ -268,15 +268,16 @@
             buyer_postcode: '123-456',
             m_redirect_url: 'https://www.yourdomain.com/payments/complete'
             /*
-            모바일 결제시,
-            결제가 끝나고 랜딩되는 URL을 지정
+		            모바일 결제시,
+		            결제가 끝나고 랜딩되는 URL을 지정
             (카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐)
             */
         }, function (rsp) {
             console.log(rsp);
             if (rsp.success) {
-           /*   var msg = '결제가 완료되었습니다.';
-                msg += '고유ID : ' + rsp.imp_uid;
+           	    var msg = '결제가 완료되었습니다.';
+             /*
+           	    msg += '고유ID : ' + rsp.imp_uid;
                 msg += '상점 거래ID : ' + rsp.merchant_uid;
                 msg += '결제 금액 : ' + rsp.paid_amount;
                 msg += '카드 승인번호 : ' + rsp.apply_num;
