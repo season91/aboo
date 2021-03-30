@@ -66,7 +66,7 @@ public class MyMgmtfeeController {
 
 	
 	//선영 결제
-	@PostMapping("payment")
+	@PostMapping("mymgmtfee/payment")
 	@ResponseBody
 	public String payment(@RequestBody MgmtfeePayment mgmtfeePayment) {
 		int res = myMgmtfeeService.insertPayment(mgmtfeePayment);

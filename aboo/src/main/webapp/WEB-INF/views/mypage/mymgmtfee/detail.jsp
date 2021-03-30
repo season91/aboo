@@ -301,7 +301,7 @@
   	
 	let payment = (method,amount) => {
 		
-	    const url = '/mypage/payment';
+	    const url = '/mypage/mymgmtfee/payment';
 	    let paramObj = new Object(); 
 	    paramObj.mgmtfeeIdx = mgmtfeeIdx; /* 고지서 번호 */
 	    paramObj.paymentMethod = method; /* 결제수단 */
@@ -322,6 +322,7 @@
 	    }).then((text) => {
 	       if(text == 'success'){
 	     		alert("결제 성공하였습니다.")
+	     		location.href = "/mypage/mymgmtfee";
 	       }else{
 	     		alert("결제 실패하였습니다.")
 	       }
