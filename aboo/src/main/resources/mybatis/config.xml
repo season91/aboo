@@ -20,6 +20,7 @@
 		<typeAlias type="com.kh.aboo.board.interior.model.vo.InteriorBrd" alias="interiorBrd"/>
 		<typeAlias type="com.kh.aboo.board.info.model.vo.InfoBoard" alias="infoBoard"/>
 		<typeAlias type="com.kh.aboo.board.used.model.vo.UsedBrd" alias="UsedBrd"/>
+		<typeAlias type="com.kh.aboo.admin.vote.model.vo.VoteMng" alias="voteMng"/>
 	</typeAliases>
 
 <!-- 3. 작성쿼리 root등록을 위한 경로 설정. 맨아래에 있어야 한다.-->
@@ -32,6 +33,7 @@
 		<mapper resource="mybatis/mapper/board/interiorBrdMapper.xml"/>
 		<mapper resource="mybatis/mapper/board/infoBrdMapper.xml"/>
 		<mapper resource="mybatis/mapper/board/usedBrdMapper.xml"/>
+		<mapper resource="mybatis/mapper/myapt/voteMngMapper.xml"/>
 	</mappers>
 
 
