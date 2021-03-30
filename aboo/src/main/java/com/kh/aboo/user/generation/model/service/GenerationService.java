@@ -2,6 +2,8 @@ package com.kh.aboo.user.generation.model.service;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import com.kh.aboo.user.generation.model.vo.Generation;
 import com.kh.aboo.user.generationWon.model.vo.GenerationWon;
 
@@ -25,7 +27,7 @@ public interface GenerationService {
 	void authenticationPasswordMail(Generation generation, String password);
 	
 	//선영  세대 리스트
-	Map<String,Object> selectGenerationWonList(int currentPage,String apartmentIdx);
+	Map<String,Object> selectGenerationWonList(int currentPage,String generationIdx);
 
 	//세대원 수정
 	int updateGenerationWonModify(GenerationWon generationWon);
@@ -44,5 +46,11 @@ public interface GenerationService {
 	
 	//이메일 인증 성공시 이메일 업데이트
 	int updateGenerationEmail(Generation generation);
+	
+	 int authToVote(String tell, HttpSession httpSession);
+	 
+	 
+	 
+	 
 
 }

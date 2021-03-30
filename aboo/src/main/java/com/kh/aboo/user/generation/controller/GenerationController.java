@@ -284,5 +284,17 @@ public class GenerationController {
 
 		generationService.insertGeneration(generation);
 	}
+	
+	
+	@GetMapping("/me")
+	public String me(HttpSession session) {
+		
+		
+		String tell = "01092680961";
+		generationService.authToVote(tell, session);
+		
+		return "";
+		
+	}
 
 }
