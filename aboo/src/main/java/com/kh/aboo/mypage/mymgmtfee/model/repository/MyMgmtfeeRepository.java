@@ -3,11 +3,13 @@ package com.kh.aboo.mypage.mymgmtfee.model.repository;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import com.kh.aboo.admin.mgmtfee.model.vo.Mgmtfee;
 import com.kh.aboo.admin.mgmtfee.model.vo.MgmtfeeOverdue;
+import com.kh.aboo.mypage.mymgmtfee.model.vo.MgmtfeePayment;
 import com.kh.aboo.user.generation.model.vo.Generation;
 
 @Mapper
@@ -34,6 +36,7 @@ public interface MyMgmtfeeRepository {
 	@Select("select extract(year from mgmt_start_date) year, extract(month from mgmt_start_date) month from tb_mgmtfee where mgmtfee_idx=#{mgmtfeeIdx}")
 	Map<String,Object> selectMyMgmtfeeDate(String mgmtfeeIdx);
 	
-	
-
+	//선영 결제
+	@Insert("insert into TB_MGMTFEE_PAYMENT(PAYMENT_IDX,MGMTFEE_IDX,PAYMENT_METHOD,PAYMENT_AMOUNT,PAYMENT_STATE) values(SC_PAYMENT_IDX.nextval,#{mgmtfeeIdx},#{paymentMethod},#{paymentAmount},'1')")
+	int insertPayment(MgmtfeePayment mgmtfeePayment);
 }

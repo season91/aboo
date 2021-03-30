@@ -184,7 +184,7 @@ public class GenerationServiceImpl implements GenerationService {
 	public int authToVote(String tell, HttpSession httpSession) {
 
 		String method = "POST";
-		String url = "/sms/v2/services//messages";
+		String url = "/sms/v2/services/서비스 아이디/messages";
 		String timestamp = Long.toString(System.currentTimeMillis());
 		String accessKey = "";
 		String secretKey = "";
@@ -212,7 +212,7 @@ public class GenerationServiceImpl implements GenerationService {
 			String body = params.toString();
 
 			RequestEntity<String> request = RequestEntity
-					.post("https://sens.apigw.ntruss.com/sms/v2/services//messages")
+					.post("https://sens.apigw.ntruss.com/sms/v2/services/서비스 아이디/messages")
 					.headers(header).body(body);
 
 			ResponseEntity<String> response = http.exchange(request, String.class);
@@ -244,6 +244,7 @@ public class GenerationServiceImpl implements GenerationService {
 		return certNum;
 	}
 
+	//인증키 암호화
 	public String makeSignature(String url, String timestamp, String method, String accessKey, String secretKey) {
 		String space = " ";
 		String newLine = "\n";

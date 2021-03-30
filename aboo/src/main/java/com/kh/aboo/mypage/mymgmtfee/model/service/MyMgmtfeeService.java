@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.kh.aboo.admin.mgmtfee.model.vo.Mgmtfee;
 import com.kh.aboo.admin.mgmtfee.model.vo.MgmtfeeOverdue;
+import com.kh.aboo.mypage.mymgmtfee.model.vo.MgmtfeePayment;
 
 public interface MyMgmtfeeService {
 
@@ -21,6 +22,7 @@ public interface MyMgmtfeeService {
 	// 2. 고지월로 제공을 위한 조회
 	Map<String,Object> selectMyMgmtfeeDate(String mgmtfeeIdx);
 	
-	
+	//선영 결제
+	int insertPayment(MgmtfeePayment mgmtfeePayment);
 
 }

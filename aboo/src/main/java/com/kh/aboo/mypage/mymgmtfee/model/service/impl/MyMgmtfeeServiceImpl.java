@@ -12,6 +12,7 @@ import com.kh.aboo.admin.mgmtfee.model.vo.MgmtfeeOverdue;
 import com.kh.aboo.common.util.paging.Paging;
 import com.kh.aboo.mypage.mymgmtfee.model.repository.MyMgmtfeeRepository;
 import com.kh.aboo.mypage.mymgmtfee.model.service.MyMgmtfeeService;
+import com.kh.aboo.mypage.mymgmtfee.model.vo.MgmtfeePayment;
 
 @Service
 public class MyMgmtfeeServiceImpl implements MyMgmtfeeService {
@@ -70,6 +71,13 @@ public class MyMgmtfeeServiceImpl implements MyMgmtfeeService {
 	@Override
 	public Map<String, Object> selectMyMgmtfeeDate(String mgmtfeeIdx) {
 		return myMgmtfeeRepository.selectMyMgmtfeeDate(mgmtfeeIdx);
+	}
+
+
+	//선영 결제
+	@Override
+	public int insertPayment(MgmtfeePayment mgmtfeePayment) {
+		return myMgmtfeeRepository.insertPayment(mgmtfeePayment);
 	}
 
 
