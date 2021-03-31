@@ -48,13 +48,13 @@
               <p>Mgmtfee</p>
             </a>
           </li>
-          <li class="active ">
+          <li>
             <a href="./notifications.html">
               <i class="tim-icons icon-bus-front-12"></i>
               <p>Vehicle</p>
             </a>
           </li>
-          <li>
+          <li class="active ">
             <a href="./user.html">
               <i class="tim-icons icon-calendar-60"></i>
               <p>Schedule</p>
@@ -150,8 +150,11 @@
                 <div class="table-responsive">
                   <table class="table tablesorter" id="">
                     <thead class=" text-primary">
+                      <th >
+                        시작 날짜
+                      </th>
                       <th>
-                        날짜
+                        마감 날짜
                       </th>
                       <th>
                         일정내용
@@ -159,10 +162,13 @@
                       </thead>
                     <tbody>
                       <tr>
-                        <td>
+                      	<td id="startDate">
                            2021.03.10
                         </td>
-                        <td>
+                        <td id="endDate">
+                           2021.03.10
+                        </td>
+                        <td id="schContent">
                         	<span class="d-flex justify-content-between">
                            아파트 도색작업
                            <span style="font-size:1.1vw">
@@ -173,90 +179,7 @@
                         </td>
                         
                       </tr>
-                      <tr>
-                        <td>
-                           2021.03.10
-                        </td>
-                        <td>
-                        	<span class="d-flex justify-content-between">
-                           아파트 도색작업
-                           <span style="font-size:1.1vw">
-                           <i class="tim-icons icon-pencil mr-2"></i>
-                           <i class="tim-icons icon-trash-simple"></i>
-                        	</span>
-                        	</span>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                           2021.03.10
-                        </td>
-                        <td>
-                        	<span class="d-flex justify-content-between">
-                           아파트 도색작업
-                           <span style="font-size:1.1vw">
-                           <i class="tim-icons icon-pencil mr-2"></i>
-                           <i class="tim-icons icon-trash-simple"></i>
-                        	</span>
-                        	</span>
-                        </td>
-                      </tr>
-                      <tr>
-                         <td>
-                           2021.03.10
-                        </td>
-                        <td>
-                        	<span class="d-flex justify-content-between">
-                           아파트 도색작업
-                           <span style="font-size:1.1vw">
-                           <i class="tim-icons icon-pencil mr-2"></i>
-                           <i class="tim-icons icon-trash-simple"></i>
-                        	</span>
-                        	</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                           2021.03.10
-                        </td>
-                        <td>
-                        	<span class="d-flex justify-content-between">
-                           아파트 도색작업
-                           <span style="font-size:1.1vw">
-                           <i class="tim-icons icon-pencil mr-2"></i>
-                           <i class="tim-icons icon-trash-simple"></i>
-                        	</span>
-                        	</span>
-                        </td>
-                      </tr>
-                      <tr>
-                       <td>
-                           2021.03.10
-                        </td>
-                        <td>
-                        	<span class="d-flex justify-content-between">
-                           아파트 도색작업
-                           <span style="font-size:1.1vw">
-                           <i class="tim-icons icon-pencil mr-2"></i>
-                           <i class="tim-icons icon-trash-simple"></i>
-                        	</span>
-                        	</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                           2021.03.10
-                        </td>
-                        <td>
-                        	<span class="d-flex justify-content-between">
-                           아파트 도색작업
-                           <span style="font-size:1.1vw">
-                           <i class="tim-icons icon-pencil mr-2"></i>
-                           <i class="tim-icons icon-trash-simple"></i>
-                        	</span>
-                        	</span>
-                        </td>
-                      </tr>
+
                     </tbody>
                   </table>
                   <div class="card-footer d-flex justify-content-end">
@@ -305,29 +228,21 @@
            <!-- 일정추가 모달창 -->
             
          <div class="modal bg-lg" id="schedule_add_modal">
- 		<div class="modal-dialog bg-dark" role="document">
-        	<div class="modal-content modal-content bg-dark border-white">
-            	<div class="modal-header bg-dark">
+ 		<div class="modal-dialog" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675);" role="document">
+        	<div class="modal-content modal-content border-white" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675);">
+            	<div class="modal-header" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675);">
                 	<h5 class="modal-title text-light" >일정 추가</h5>
                     <button type="button" id="btn_add_close" class="close">
                     <span aria-hidden="true">&times;</span></button>
                 </div>
-                <form>
+                <form action="${context}/admin/schedule/addscheduleimpl" method="post">
                 	<div class="modal-body">        	
-                    		<div class="form-group row">
-                            	<div class="col-sm-3 mb-3 mb-sm-0 d-flex align-items-center">
-                                	<h6 class="font-weight-bold">아파트 이름</h6>
-                                </div>
-                            	<div class="col-sm-9">
-                                	<input type="text" class="form-control rounded bg-white text-dark" id="apt_id"></input>
-                                </div>
-                            </div>
                     		<div class="form-group row">
                             	<div class="col-sm-3 mb-3 mb-sm-0 d-flex align-items-center">
                                 	<h6 class="font-weight-bold">일정 시작</h6>
                                 </div>
                                 <div class="col-sm-9">
-                                	<input type="date" id="start_date"class="form-control form-control-user h6 rounded bg-white text-dark"></input>
+                                	<input type="date" name="scheduleSdate" id="scheduleSdate"class="form-control form-control-user h6 rounded bg-white text-dark"></input>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -335,7 +250,7 @@
                                 	<h6 class="font-weight-bold">일정 마감</h6>
                                 </div>
                                 <div class="col-sm-9">
-                                	<input type="date" id="dead_Line"class="form-control form-control-user h6 rounded bg-white text-dark"></input>
+                                	<input type="date" name="scheduleEdate" id="scheduleEdate"class="form-control form-control-user h6 rounded bg-white text-dark"></input>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -344,12 +259,12 @@
 	                           	 <h6 class="font-weight-bold">일정 내용</h6>
 	                            </div>
 	                            <div class="col-sm-9">
-	                    	 	 	<textarea class="form-control col-sm-9 bg-white text-dark rounded"  id="sch_content" style="height: 300px; resize: none;" wrap="hard"  cols="15"></textarea>
+	                    	 	 	<textarea class="form-control col-sm-9 bg-white text-dark rounded"  id="scheduleCon" name="scheduleCon" style="height: 300px; resize: none;" wrap="hard"  cols="15"></textarea>
 	                   			</div>
 	                   		</div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" onclick="add();">완료</button>
+                        <button type="submit" class="btn btn-primary">추가하기</button>
                    </div>
                 </form>
             </div>
@@ -500,6 +415,11 @@
 
     	$('#schedule_add_modal').hide();
     });
+    
+	//일정 수정
+	
+	//일정 삭제
+    
     </script>
 </body>
 </html>

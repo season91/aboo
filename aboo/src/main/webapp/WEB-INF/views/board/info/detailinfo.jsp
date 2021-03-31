@@ -20,12 +20,12 @@
 	          <li class="nav-item active"><a class="nav-link" href="/board/info/infolist">Board</a></li>
 	          <li class="nav-item"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
 	         <c:choose>
-	          <c:when test="${sessionScope.generation == null}">
-	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
-	          </c:when>
-	          <c:when test="${sessionScope.generation != null}">
-	          <li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>	          
-	          </c:when>
+		         <c:when test="${sessionScope.generation == null}">
+		          	<li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
+		         </c:when>
+		         <c:when test="${sessionScope.generation != null}">
+		         	<li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>	          
+		         </c:when>
 	          </c:choose>
 	        </ul>
 	      </div>
@@ -62,17 +62,16 @@
           				<c:when test="${sessionScope.generation.generationIdx == infoBoard.generationIdx}">
 		          			<div class="d-flex justify-content-end ml-4">
 				            	<a href="${context}/board/info/editinfo?bIdx=${infoBoard.bIdx}" class="mr-4"><i class="fas fa-pen" style="color: #666666;"></i></a>
-				            	<a onclick="privateInfo();" class="mr-4"><i class="fas fa-ban" style="color: #666666;"></i></a>
 				            	<a onclick="deleteInfo();" class="mr-4"><i class="fas fa-trash" style="color: #666666;"></i></a>
 				            	<a href="/board/info/listinfo" class="mr-4"><i class="fas fa-list-ul" style="color: #666666;"></i></a>
 				            </div>
 		            	</c:when>
-<%-- 		            	<c:when test="${sessionScope.admin != null}">
+ 		            	<c:when test="${sessionScope.admin != null}">
 		          			<div class="d-flex justify-content-end ml-4">
 		          				
 				            	<a href="/board/info/listinfo" class="mr-4"><i class="fas fa-list-ul" style="color: #666666;"></i></a>
 				            </div>
-		            	</c:when> --%>
+		            	</c:when>
 		            	<c:otherwise>
 		            		<div class="d-flex justify-content-end ml-4">
 		          				
@@ -94,22 +93,61 @@
             </c:choose>
 
             <div class="pt-5 mt-5">
-              <h3 class="mb-5">6 Comments</h3>
+              <h3 class="mb-5">${infoCmtCnt} Comments</h3>
               <ul class="comment-list">
               <c:forEach items="${infoCmtList}" var="infoCmtList">
-                <li class="comment">
+                <li class="comment" id="infoCmt">
+                  <div class="vcard bio">
+                   <img src="../../../../resources/abooimg/user.jpg" alt="Image placeholder">
+                  </div>
+                  <c:choose>
+                 	<c:when test="${infoCmtList.cIsPrivate == 0}">
+		                 <div class="comment-body">
+		                   <h3>${infoCmtList.cWriter}</h3>
+		                   <div class="meta">${infoCmtList.cWdate}</div>
+		                    <p>${infoCmtList.cContent}</p>
+		                    <c:choose>
+		                    	<c:when test="${sessionScope.admin != null}">
+				                    <p>
+				                    	<a onclick="infoCmtPrivate(${infoCmtList.cIdx});" class="mr-4"><i class="fas fa-ban" style="color: #666666;"></i></a>
+						            	
+				                    </p>
+		                    	</c:when>
+		                    	<c:when test="${generation.generationIdx == infoCmtList.generationIdx}">
+		                    		<p>
+		                    			<a onclick="infoCmtEdit();" class="mr-4"><i class="fas fa-pen" style="color: #666666;"></i></a>
+				            			<a onclick="infoCmtdel(${infoCmtList.cIdx});" class="mr-4"><i class="fas fa-trash" style="color: #666666;"></i></a>
+		                    		</p>
+		                    	</c:when>
+		                    </c:choose>
+		                 </div>
+                  	</c:when>
+                  	<c:otherwise>
+                  		비공개 처리된 댓글입니다.
+                  	</c:otherwise>
+                  </c:choose>
+                </li>
+                
+                <li class="comment" id="infoCmtEdit" style="display:none">
                   <div class="vcard bio">
                    <img src="../../../../resources/abooimg/user.jpg" alt="Image placeholder">
                   </div>
                   <div class="comment-body">
                     <h3>${infoCmtList.cWriter}</h3>
                     <div class="meta">${infoCmtList.cWdate}</div>
-                    <p>${infoCmtList.cContent}</p>
-                    <p>
-                    	<a href="#" class="mr-4"><i class="fas fa-ban" style="color: #666666;"></i></a>
-		            	<a href="#" class="mr-4"><i class="fas fa-pen" style="color: #666666;"></i></a>
-		            	<a href="#" class="mr-4"><i class="fas fa-trash" style="color: #666666;"></i></a>
-                    </p>
+                    
+                    <form action="${context}/board/info/infocmtedit" method="post" class="p-5 bg-light">
+
+		                  <div class="form-group">
+							<input type="hidden" name="bIdx" value="${infoBoard.bIdx}">
+							<input type="hidden" name="cIdx" value="${infoCmtList.cIdx}">
+		                    <textarea name="cContent" id="message" cols="30" rows="5" class="form-control">${infoCmtList.cContent}</textarea>
+		                  </div>
+		                  <div class="form-group">
+		                    <input type="submit" value="등록하기" class="btn py-3 px-4 btn-primary">
+		                  </div>
+	
+	                </form>
                   </div>
                 </li>
 			 </c:forEach>
@@ -276,6 +314,64 @@
 		}
 	  
   }
+  
+  let infoCmtPrivate = (cIdx) => {
+	  
+	  let bIdx = ${infoBoard.bIdx};
+		if(confirm("댓글을 비공개 처리 하시겠습니까?")){
+			fetch("/board/info/infocmtdel?cIdx=" + cIdx,{
+	  			method:"GET"
+	  		})
+	  		.then(response => response.text())
+	  		.then(text => {
+	  			if(text == 'success'){
+	  				alert("댓글이 삭제되었습니다.");
+					location.href = "/board/info/detail?bIdx=" + bIdx;
+	  			}else{
+	  				alert("댓글 삭제 중 에러가 발생했습니다.");
+	  				location.href = "/board/info/detail?bIdx=" + bIdx;
+	  			}
+	  		})
+		}else{
+			alert("취소되었습니다.");
+		}
+	  
+  }
+  
+  let infoCmtEdit = () => {
+	  
+	  document.querySelector('#infoCmtEdit').style.display = 'block';
+	  document.querySelector('#infoCmt').style.display = 'none';
+	  
+  }
+  
+  let infoCmtdel = (cIdx) => {
+		let bIdx = ${infoBoard.bIdx};
+		if(confirm("댓글을 삭제하시겠습니까?")){
+			fetch("/board/info/infocmtdel?cIdx=" + cIdx,{
+	  			method:"GET"
+	  		})
+	  		.then(response => response.text())
+	  		.then(text => {
+	  			if(text == 'success'){
+	  				alert("댓글이 삭제되었습니다.");
+					location.href = "/board/info/detail?bIdx=" + bIdx;
+	  			}else{
+	  				alert("댓글 삭제 중 에러가 발생했습니다.");
+	  				location.href = "/board/info/detail?bIdx=" + bIdx;
+	  			}
+	  		})
+		}else{
+			alert("취소되었습니다.");
+		}
+	  
+  }
+  
+  
+  
+
+  
+  
   
   
   </script>

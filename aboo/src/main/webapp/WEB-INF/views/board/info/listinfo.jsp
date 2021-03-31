@@ -101,9 +101,7 @@
 				                         <a href="${context}/board/info/detail?bIdx=${infoBoard.bIdx}" class="text-dark">
 				                          ${infoBoard.bTitle}
 				                          </a>
-				                          <a href="${context}/board/info/detail?bIdx=${infoBoard.bIdx}" class="meta-chat text-dark">
-				                          <span class="icon-chat"></span>3
-				                          </a>
+
 				                         
 				                         
 				                        </td>

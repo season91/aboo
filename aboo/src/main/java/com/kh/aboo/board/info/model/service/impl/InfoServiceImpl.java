@@ -108,4 +108,22 @@ public class InfoServiceImpl implements InfoService{
 		return infoRepository.selectInfoCmtcnt(bIdx);
 	}
 
+	@Override
+	public int updateInfoCmt(InfoCmt infoCmt) {
+
+		return infoRepository.updateInfoCmt(infoCmt);
+	}
+
+	@Override
+	public int deleteInfoCmt(String cIdx) {
+		
+		return infoRepository.deleteInfoCmt(cIdx);
+	}
+
+	@Override
+	public int UpdateInfoCmtprivate(String cIdx) {
+		
+		return infoRepository.UpdateInfoCmtprivate(cIdx);
+	}
+
 }

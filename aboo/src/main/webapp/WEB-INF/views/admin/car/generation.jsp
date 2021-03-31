@@ -142,14 +142,12 @@
       
 		
       <div class="content">
-      	 
            <div class="row">
           <div class="col-md-12">
             <div class="card ">
               <div class="card-header">
                 <h3 class="title">차량 권한 등록</h3>
               </div>
-              
               <div class="col-md-12">
                 <div class="places-buttons">
                   <div class="row col-md-12">
@@ -164,25 +162,31 @@
                     <div class="col-lg-12 ml-auto mr-auto">
                       <div class="row">
                         <div class="col-md-4">
-                          <button type="button" class="btn btn-primary btn-block vehicleAdd" data-toggle="modal" data-target="#addVehicleModal" data-whatever="차량 등록">차량 등록</button>
+                          <button type="button" class="btn btn-primary btn-block carAdd" data-toggle="modal" data-target="#addcarModal" >차량 등록</button>
                         </div>
                         <div class="col-md-4">
-                         <button type="button" class="btn btn-primary btn-block vehicleModify" data-toggle="modal" data-target="#modifyVehicleModal" data-whatever="차량 수정">차량 수정</button>
+                         <button type="button" class="btn btn-primary btn-block carModify" data-toggle="modal" data-target="#modifycarModal">차량 수정</button>
                         </div>
                          <div class="col-md-4">
-                         <button type="button" class="btn btn-primary btn-block vehicleDelete" data-toggle="modal" data-target="#deleteVehicleModal" data-whatever="차량 삭제" >차량 삭제</button>
+                         <button type="button" class="btn btn-primary btn-block carDelete" data-toggle="modal" data-target="#deletecarModal">차량 삭제</button>
                         </div>
                          <div class="col-md-4">
-                         <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#vehicleNumberModal" data-whatever="차량번호로 검색">차량번호로 검색</button>
+                         <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#carNumberModal"">차량번호로 검색</button>
                         </div>
                         <div class="col-md-4">
-                          <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#geneIdxModal"  data-whatever="세대정보로 검색">세대정보로 검색</button>
+                          <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#geneIdxModal" >세대정보로 검색</button>
+                        </div>
+                         <div class="col-md-4">
+                         <form action="${context }/admin/car/application">
+                          <button type="submit" class="btn btn-primary btn-block">차량 신청 보기</button>
+                         </form>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
           </div>
+              
               
               <div class="card-body">
                 <div class="table-responsive">
@@ -199,180 +203,28 @@
                             </label>
                           </div>
                       </th>
-                       <th>
-                        관리번호
-                      </th>
-                      <th>
-                        세대정보
-                      </th>
-                      <th>
-                        등록 여부
-                      </th>
-                      <th class="text-center">
-                        등록 차량 대수
-                      </th>
+                       <th>관리번호</th>
+                      <th>세대정보</th>
+                      <th>차량번호</th>
                     </thead>
                     <tbody>
-                      <tr>
-                      	<td>
+                      <c:forEach items="${carList}" var="car" varStatus="status">
+                     <tr>
+                       <td>
                           <div class="form-check">
                             <label class="form-check-label">
-                              <input class="form-check-input vehicle" type="checkbox" value="" name="vehicle">
+                              <input class="form-check-input car" type="checkbox" value="">
                               <span class="form-check-sign">
                                 <span class="check"></span>
                               </span>
                             </label>
                           </div>
                         </td>
-                        <td id="vehicle-idx">C100000</td>
-                        <td id="gene-idx">103동 906호</td>
-                        <td>등록</td>
-                        <td class="text-center">2대</td>
-                      </tr>
-                      <tr>
-                     	 <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input vehicle" type="checkbox" value="" name="vehicle">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>
-                          C100001
-                        </td>
-                        <td>
-                          103동 905호
-                        </td>
-                        <td>
-                          미등록
-                        </td>
-                        <td class="text-center">
-                          -
-                        </td>
-                      </tr>
-                      <tr>
-                      	<td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input vehicle" type="checkbox" value="" name="vehicle">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                         <td>
-                          C100002
-                        </td>
-                        <td>
-                          103동 904호
-                        </td>
-                        <td>
-                          등록
-                        </td>
-                        <td class="text-center">
-                          1대
-                        </td>
-                      </tr>
-                      <tr>
-                      	<td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input vehicle" type="checkbox" value=""name="vehicle">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                         <td>
-                          C100003
-                        </td>
-                        <td>
-                          103동 905호
-                        </td>
-                        <td>
-                          등록
-                        </td>
-                        <td class="text-center">
-                          1대
-                        </td>
-                      </tr>
-                      <tr>
-                      	<td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input vehicle" type="checkbox" value="" name="vehicle">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                         <td>
-                          C100004
-                        </td>
-                        <td>
-                          103동 903호
-                        </td>
-                        <td>
-                          등록
-                        </td>
-                        <td class="text-center">
-                          1대
-                        </td>
-                      </tr>
-                      <tr>
-                      	<td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input vehicle" type="checkbox" value="" name="vehicle">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                         <td>
-                          C100005
-                        </td>
-                        <td>
-                          103동 902호
-                        </td>
-                        <td>
-                          미등록
-                        </td>
-                        <td class="text-center">
-                          -
-                        </td>
-                      </tr>
-                      <tr>
-                      	<td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input vehicle" type="checkbox" value="" name="vehicle">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                         <td>
-                          C100006
-                        </td>
-                        <td>
-                          103동 901호
-                        </td>
-                        <td>
-                          미등록
-                        </td>
-                        <td class="text-center">
-                          -
-                        </td>
-                      </tr>
+                        <td>${car.carIdx}</td>
+                        <td> ${generationList[status.index].building }-${generationList[status.index].num}</td>
+                        <td> ${car.carNumber } </td>
+                       </tr>
+                    </c:forEach>
                     </tbody>
                   </table>
                 </div>
@@ -383,13 +235,27 @@
 	          <div class="col text-center">
 	            <div class="block-27">
 	              <ul>
-	                <li><a href="#">&lt;</a></li>
-	                <li class="active"><span>1</span></li>
-	                <li><a href="#">2</a></li>
-	                <li><a href="#">3</a></li>
-	                <li><a href="#">4</a></li>
-	                <li><a href="#">5</a></li>
-	                <li><a href="#">&gt;</a></li>
+	                <li><a href="/admin/${paging.type }?standard=generationInfo&keyword=${keyword}">&lt;&lt;</a></li>
+	                <li><a href="/admin/${paging.type }?page=${paging.prev}&standard=generationInfo&keyword=${keyword}">&lt;</a></li>
+              	  <c:choose>
+                	<c:when test="${paging.lastPage eq 0 }">
+                		<li><a href="/admin/${paging.type }?standard=generationInfo&keyword=${keyword}"><span>1</span></a></li>
+                	</c:when>
+                	<c:otherwise>
+	                 <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
+                      <c:choose>
+                         <c:when test="${paging.currentPage eq page}">
+                            <li class="active"><a href="/admin/${paging.type }?page=${page}&standard=generationInfo&keyword=${keyword}">${page}</a></li>
+                         </c:when>
+                         <c:otherwise>
+                            <li><a href="/admin/${paging.type }?page=${page}&standard=generationInfo&keyword=${keyword}">${page}</a></li>
+                         </c:otherwise>
+                      </c:choose>
+                 	 </c:forEach> 
+                 	 </c:otherwise>
+	                </c:choose>
+	                <li><a href="/admin/${paging.type }?page=${paging.next}&standard=generationInfo&keyword=${keyword}">&gt;</a></li>
+	                <li><a href="/admin/${paging.type }?page=${paging.lastPage }&standard=generationInfo&keyword=${keyword}">&gt;&gt;</a></li>
 	              </ul>
 	            </div>
 	          </div>
@@ -430,76 +296,78 @@
     
     <!-- 모달 구현 -->
     <!-- 차량등록 모달 -->
-    
-    <div class="modal fade" id="addVehicleModal" tabindex="-1" role="dialog" aria-labelledby="addVehicleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675); color:white;">
-	      <div class="modal-header">
-	       	<h4 class="modal-title" id="addVehicleModalLabel">차량 등록</h4>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	      </div>
-	      <div class="modal-body">
-	        <form>
+   
+    <div class="modal fade" id="addcarModal" tabindex="-1" role="dialog" aria-labelledby="addcarModalModalLabel" aria-hidden="true">
+       <div class="modal-dialog" role="document">
+         <div class="modal-content" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675); color:white;">
+           <div class="modal-header">
+           	<h4 class="modal-title" id="addcarModalLabel">차량 등록</h4>
+            	 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i class="tim-icons icon-simple-remove"></i>
+              </button>
+           </div>
+           <div class="modal-body">
+	        <form action="${context }/admin/caradd">
 	          <div class="form-group">
 	            <label for="recipient-name" class="control-label">세대 정보(동)</label>
-	            <input type="text" class="form-control" id="add-generation-bulding">
+	            <input type="text" class="form-control" name="building">
 	          </div>
 	          <div class="form-group">
 	            <label for="recipient-name" class="control-label">세대 정보(호수)</label>
-	            <input type="text" class="form-control" id="add-generation-number">
+	            <input type="text" class="form-control" name="num">
 	          </div>
 	          <div class="form-group">
 	            <label for="recipient-name" class="control-label">차량 번호</label>
-	            <input type="text" class="form-control" id="add-vehicle-number">
+	            <input type="text" class="form-control" name="carNumber">
 	          </div>
+	          <div class="modal-footer">
+	           <button type="submit" class="btn btn-primary" >등록하기</button>
+	           <button type="button" class="btn btn-default" data-dismiss="modal">취소하기</button>
+	           </div>
 	        </form>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">취소하기</button>
-	        <button type="button" class="btn btn-primary btn-add-vehicle" data-dismiss="modal">등록하기</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
+      		</div>
+         </div>
+       </div>
+     </div>
 	
 	<!-- 차량 수정 모달 -->
-	<div class="modal fade" id="modifyVehicleModal" tabindex="-1" role="dialog" aria-labelledby="modifyVehicleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="modifycarModal" tabindex="-1" role="dialog" aria-labelledby="modifycarModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675); color:white;">
 	      <div class="modal-header">
-	       	<h4 class="modal-title" id="modifyVehicleModalLabel">차량 수정</h4>
+	       	<h4 class="modal-title" id="modifycarModalLabel">차량 수정</h4>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	      </div>
 	      <div class="modal-body">
-	        <form>
+	        <form action="${context }/admin/carmodify">
 	          <div class="form-group">
-	            <label for="recipient-name" class="control-label">세대 정보(동)</label>
-	            <input type="text" class="form-control" id="modify-generation-bulding">
+	            <label for="recipient-name" class="control-label">차량 관리 번호</label>
+	            <input type="text" class="form-control" readonly="readonly" id="modify-car-idx"  name="carIdx">
 	          </div>
 	          <div class="form-group">
-	            <label for="recipient-name" class="control-label">세대 정보(호수)</label>
-	            <input type="text" class="form-control" id="modify-generation-number">
+	            <label for="recipient-name" class="control-label">세대 정보</label>
+	            <input type="text" class="form-control" readonly="readonly" id="modify-car-info" name="generationInfo">
 	          </div>
 	          <div class="form-group">
 	            <label for="recipient-name" class="control-label">차량 번호</label>
-	            <input type="text" class="form-control" id="modify-vehicle-number">
+	            <input type="text" class="form-control" id="modify-car-number" placeholder="차량번호를 입력하세요.(예: 123가4567)" name="carNumber">
 	          </div>
+	            <div class="modal-footer">
+		      	<button type="submit" class="btn btn-primary">수정하기</button>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">취소하기</button>
+		      </div>
 	        </form>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">취소하기</button>
-	        <button type="button" class="btn btn-primary btn-modify-vehicle" data-dismiss="modal">수정하기</button>
 	      </div>
 	    </div>
 	  </div>
 	</div>
 	
 	<!-- 차량 삭제 모달 -->
-	<div class="modal fade" id="deleteVehicleModal" tabindex="-1" role="dialog" aria-labelledby="deleteVehicleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="deletecarModal" tabindex="-1" role="dialog" aria-labelledby="deletecarModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675); color:white;">
 	      <div class="modal-header">
-	       	<h4 class="modal-title" id="deleteVehicleModalLabel">차량 삭제</h4>
+	       	<h4 class="modal-title" id="deletecarModalLabel">차량 삭제</h4>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	      </div>
 	      <div class="modal-body">
@@ -507,37 +375,37 @@
 	          <div class="form-group">
 	            <label for="recipient-name" class="control-label">총 <span id="result"></span> 건을 정말 삭제하시겠습니까?</label>
 	          </div>
+	          <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">취소하기</button>
+		        <button type="button" class="btn btn-primary btn-delete-car" >삭제하기</button>
+		      </div>
 	        </form>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">취소하기</button>
-	        <button type="button" class="btn btn-primary btn-delete-vehicle" data-dismiss="modal">삭제하기</button>
 	      </div>
 	    </div>
 	  </div>
 	</div>
 	
 	
-	<div class="modal fade" id="vehicleNumberModal" tabindex="-1" role="dialog" aria-labelledby="vehicleNumberModalLabel" aria-hidden="true">
+	<div class="modal fade" id="carNumberModal" tabindex="-1" role="dialog" aria-labelledby="carNumberModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675); color:white;">
             <div class="modal-header">
-            	<h4 class="modal-title" id="vehicleNumberModalLabel">차량번호로 검색</h4>
+            	<h4 class="modal-title" id="carNumberModalLabel">차량번호로 검색</h4>
              	 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	                <i class="tim-icons icon-simple-remove"></i>
 	              </button>
             </div>
             <div class="modal-body">
-	        <form>
+	        <form action="${context }/admin/car">
 	          <div class="form-group">
-	           <input type="text" class="form-control vehicle-keyword" id="inlineFormInputGroup" placeholder="차량번호로 검색">
+	           <input type="hidden" name="standard" value="carNumber">
+	           <input type="text" class="form-control" name="keyword" id="inlineFormInputGroup" placeholder="차량번호로 검색">
 	          </div>
+	          <div class="modal-footer">
+             <button type="submit" class="btn btn-primary">검색</button>
+            </div>
 	        </form>
 	      </div>
-	      
-            <div class="modal-footer">
-            <button type="button" class="btn btn-primary btn-search-vehicleNumber" data-dismiss="modal">검색</button>
-            </div>
           </div>
         </div>
       </div>
@@ -553,24 +421,23 @@
 	              </button>
             </div>
             <div class="modal-body">
-	        <form>
+	        <form action="${context }/admin/car">
 	          <div class="form-group">
-	           <input type="text" class="form-control generation-ketword" id="inlineFormInputGroup" placeholder="세대정보로 검색 (103-906)">
+	          	<input type="hidden" name="standard" value="generationInfo">
+	           <input type="text" class="form-control"  name="keyword" id="inlineFormInputGroup" placeholder="세대정보로 검색 (103-906)">
 	          </div>
+	           <div class="modal-footer">
+	            <button type="submit" class="btn btn-primary">검색</button>
+	            </div>
 	        </form>
 	      </div>
-	      
-            <div class="modal-footer">
-            <button type="button" class="btn btn-primary btn-search-generationIdx" data-dismiss="modal">검색</button>
-            </div>
           </div>
         </div>
       </div>
       
-      
     
     <!--   Core JS Files   -->
-    <script src="../../../resources/js/admin/vehicle.js"></script>
+    <script src="../../../resources/js/admin/car.js"></script>
     <script src="../../../resources/js/admin/core/jquery.min.js"></script>
     <script src="../../../resources/js/admin/core/popper.min.js"></script>
     <script src="../../../resources/js/admin/core/bootstrap.min.js"></script>

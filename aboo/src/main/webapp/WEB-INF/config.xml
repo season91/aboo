@@ -18,9 +18,11 @@
 	http://docs.cksource.com/CKFinder_2.x/Developers_Guide/Java/Configuration/baseURL_and_baseDir
 	-->
 	<!-- 희원 baseDir -->
-	<baseDir>C:\CODE\final_aboo\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\aboo\resources\ckstorage</baseDir>
-	<!-- 민희 baseDir -->
+<!--	<baseDir>C:\CODE\final_aboo\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\aboo\resources\ckstorage</baseDir>
+-->	<!-- 민희 baseDir -->
 <!-- 	<baseDir>E:\CODE\aboo\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\aboo\resources\ckstorage</baseDir> -->
+	<!--아영 baseDir-->
+	<baseDir>C:\CODE\kh-aboo-dev\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\aboo\resources\ckstorage</baseDir>
 	<baseURL>/resources/ckstorage</baseURL>
 	<licenseKey></licenseKey>
 	<licenseName></licenseName>

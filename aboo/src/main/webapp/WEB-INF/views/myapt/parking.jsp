@@ -44,8 +44,9 @@
     	<div class="container">
     		<div class="row justify-content-center mb-5 pb-5">
     			<div class="col-md-7 text-center heading-section ftco-animate">
-		            <span class="subheading">2021년 3월 17일</span>
-		            <h2 class="mb-4"><strong>현재 주차 가능 대수 126대 입니다.</strong></h2>
+		           <span class="subheading parking-date"></span>
+		            <h2 class="mb-4"><strong>현재 주차 가능 대수 ${possibleParking}대 입니다.</strong></h2>
+		            <p>우리 아파트 주차가능한 대수는 총 ${totalParking }대 입니다.</p>
 		            <p>주차 등록을 원하시는 세대는 하단 링크를 통해 신청하시기 바랍니다.</p>
 		            <p>기타 문의사항은 관리자에게 문의하시기 바랍니다.</p>
          		</div>
@@ -53,7 +54,7 @@
     		<div class="row">
 	          	<div class="col-md-12 nav-link-wrap mb-5 pb-md-5 pb-sm-1 ftco-animate">
 		            <div class="nav ftco-animate nav-pills justify-content-center text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-		              <a class="nav-link active" id="v-pills-nextgen-tab" data-toggle="pill" href="#v-pills-nextgen" role="tab" aria-controls="v-pills-nextgen" aria-selected="true">차량 등록 신청</a>
+		              <a class="nav-link active" id="v-pills-nextgen-tab"  href="${context }/myapt/parking/application" >차량 등록 신청</a>
 		              <a class="nav-link" id="v-pills-performance-tab" data-toggle="pill" href="#v-pills-performance" role="tab" aria-controls="v-pills-performance" aria-selected="false">관리자 문의</a>
 		              <a class="nav-link" id="v-pills-effect-tab" data-toggle="pill" href="#v-pills-effect" role="tab" aria-controls="v-pills-effect" aria-selected="false">내 등록 차량</a>
 		            </div>
@@ -61,7 +62,8 @@
         	</div>
     	</div>
     </section>
-<footer class="ftco-footer ftco-bg-dark ftco-section">
+
+	<footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container">
         <div class="row mb-5">
           <div class="col-md">
@@ -153,6 +155,17 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="../../../resources/js/generation/google-map.js"></script>
   <script src="../../../resources/js/generation/main.js"></script>
+  <script type="text/javascript">
+ 	 $('.modal').on('hidden.bs.modal', function (e) {
+	    $(this).find('form')[0].reset()
+	});
+
+	$(document).ready(function(){
+		  let date = new Date();
+		  let year = date.getFullYear() + '년 ' + (date.getMonth()+1) + '월 '+date.getDate() + '일 ' +date.getHours() + '시 '+ date.getMinutes() + '분';  
+		  document.querySelector('.parking-date').innerHTML = year;
+	})
+  </script>
     
 </body>
 </html>
