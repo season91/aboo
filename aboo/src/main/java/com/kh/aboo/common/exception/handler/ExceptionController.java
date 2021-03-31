@@ -23,7 +23,7 @@ public class ExceptionController {
 	Logger logger = LoggerFactory.getLogger(ExceptionController.class);
 
 	// 우리가 구현해놓은 CustomException을 받아서 처리할 것 (즉, throw ToAlertException 인 경우 다 이렇게 처리될 것)
-	@ResponseStatus(code = HttpStatus.NOT_FOUND)
+	@ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR) 
 	@ExceptionHandler(CustomException.class)
 	public String businessExceptionHandler(CustomException e, Model model) {
 		model.addAttribute("alertMsg", e.error.errMsg());

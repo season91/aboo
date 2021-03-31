@@ -31,7 +31,7 @@ public interface CarService {
 	Generation selectGenerationByBuildingAndNum(Generation generation);
 	
 	// 2. QR코드 생성 & DB 등록한다.
-	String insertAndQRWrite(String generationIdx,Car car);
+	String insertAndQRWrite(Car car);
 	
 	// 3. 차량등록 신청건 등록을 위한 조회
 	CarApplication selectCarApplication(String applicationIdx);

@@ -188,11 +188,11 @@ public class MgmtfeeController {
 		// 업데이트내역이 있다면 수정완료, 없다면 실패안내. mgmt update는 프로시저라 int로 판단안함. 
 		if(updateMgmtefee != null) {
 			model.addAttribute("alertMsg", "수정이 완료되었습니다.");
-			model.addAttribute("url", "/admin/mgmtfeemodify?mgmtfeeidx="+mgmtfee.getMgmtfeeIdx());
+			model.addAttribute("url", "/admin/mgmtfee/modify?mgmtfeeidx="+mgmtfee.getMgmtfeeIdx());
 			model.addAttribute("mgmtfee",updateMgmtefee);
 		} else {
 			model.addAttribute("alertMsg", "수정이 실패하였습니다.");
-			model.addAttribute("url", "/admin/mgmtfeemodify?mgmtfeeidx="+mgmtfee.getMgmtfeeIdx());
+			model.addAttribute("url", "/admin/mgmtfee/modify?mgmtfeeidx="+mgmtfee.getMgmtfeeIdx());
 		}
 		return "common/result";
 	}

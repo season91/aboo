@@ -163,21 +163,20 @@
                   <div class="row ">
                     <div class="col-lg-12 ml-auto mr-auto">
                       <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                          <form action="${context }/admin/car/application">
-                           <input type="hidden" name="standard" value="wait">
-                           <button type="submit" class="btn btn-success btn-block waitCnt" data-toggle="modal" >대기 상태만 보기</button>
+                           <button type="submit" class="btn btn-success btn-block waitCnt" data-toggle="modal" >전체 상태 보기</button>
                          </form>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                          <button type="button" class="btn btn-success btn-block approvalCnt" data-toggle="modal" data-target="#approvalcarModal">차량 등록 신청 승인</button>
                         </div>
-                         <div class="col-md-4">
+                         <div class="col-md-">
                          <button type="button" class="btn btn-success btn-block rejectCnt" data-toggle="modal" data-target="#rejectcarModal">차량 등록 신청 반려</button>
                         </div>
-                         <div class="col-md-4">
-	                         <form action="${context }/admin/car">
-	                          <button type="submit" class="btn btn-success btn-block" data-toggle="modal">차량 등록 현황 보기</button>
+                         <div class="col-md-3">
+                         <form action="${context }/admin/car">
+                          <button type="submit" class="btn btn-success btn-block" data-toggle="modal">차량 등록 현황 보기</button>
                          </form>
                         </div>
                       </div>
@@ -201,7 +200,7 @@
                             </label>
                           </div>
                       </th>
-                       <th>신청번호</th>
+                       <th>관리번호</th>
                       <th>세대정보</th>
                       <th>차량번호</th>
                       <th>신청일</th>
@@ -247,27 +246,27 @@
 	          <div class="col text-center">
 	            <div class="block-27">
 	              <ul>
-	                <li><a href="/admin/${paging.type }/application">&lt;&lt;</a></li>
-	                <li><a href="/admin/${paging.type }/application?page=${paging.prev}">&lt;</a></li>
+	                <li><a href="/admin/${paging.type }?standard=wait">&lt;&lt;</a></li>
+	                <li><a href="/admin/${paging.type }?page=${paging.prev}&standard=wait">&lt;</a></li>
                 	 <c:choose>
 	                	<c:when test="${paging.lastPage eq 0 }">
-	                		<li><a href="/admin/${paging.type }/application">1</a></li>
+	                		<li><a href="/admin/${paging.type }&standard=wait">1</a></li>
 	                	</c:when>
                 	<c:otherwise>
 	                 <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
                       <c:choose>
                          <c:when test="${paging.currentPage eq page}">
-                            <li class="active"><a href="/admin/${paging.type }/application?page=${page}">${page}</a></li>
+                            <li class="active"><a href="/admin/${paging.type }?page=${page}&standard=wait">${page}</a></li>
                          </c:when>
                          <c:otherwise>
-                            <li><a href="/admin/${paging.type }/application?page=${page}">${page}</a></li>
+                            <li><a href="/admin/${paging.type }?page=${page}&standard=wait">${page}</a></li>
                          </c:otherwise>
                       </c:choose>
                  	 </c:forEach> 
                  	  </c:otherwise>
 	                </c:choose>
-	                <li><a href="/admin/${paging.type }/application?page=${paging.next}">&gt;</a></li>
-	                <li><a href="/admin/${paging.type }/application?page=${paging.lastPage }">&gt;&gt;</a></li>
+	                <li><a href="/admin/${paging.type }?page=${paging.next}&standard=wait">&gt;</a></li>
+	                <li><a href="/admin/${paging.type }?page=${paging.lastPage }&standard=wait">&gt;&gt;</a></li>
 	              </ul>
 	            </div>
 	          </div>
@@ -306,6 +305,8 @@
     </div>
     
     <!-- 모달 구현 -->
+	
+	<!-- 차량 삭제 모달 -->
 	<div class="modal fade" id="rejectcarModal" tabindex="-1" role="dialog" aria-labelledby="rejectcarModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675); color:white;">
@@ -328,7 +329,7 @@
 	  </div>
 	</div>
 	
-	<!-- 차량 삭제 모달 -->
+	<!-- 차량 승인 모달 -->
 	<div class="modal fade" id="approvalcarModal" tabindex="-1" role="dialog" aria-labelledby="deletecarModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675); color:white;">
