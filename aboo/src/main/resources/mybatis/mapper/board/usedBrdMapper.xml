@@ -13,7 +13,7 @@
          from(
             select USED_IDX, APARTMENT_IDX,USED_TITLE,USED_CONTENT,USED_WRITER,USED_REG_DATE,IS_DEL,IS_TRNSC,IS_PRIVATE,GENERATION_IDX
             from TB_USED_BRD where IS_DEL = 0 and APARTMENT_IDX = #{apartmentIdx}
-            order by USED_IDX asc
+            order by USED_IDX desc
          ) b
       ) where rnum between #{paging.queryStart} and #{paging.queryEnd}	
 	</select>
@@ -30,7 +30,7 @@
 				#{typeIdx},
 			</when>
 			<otherwise>
-				SC_USED_IDX.currval,
+				'u'||SC_USED_IDX.currval,
 			</otherwise>
 		</choose>
 		#{originFileName},
@@ -39,7 +39,13 @@
 	</insert>
 		
 	
-	
+	<update id= "updateUsedBrdFileModify">
+		update TB_FILE set 
+		ORIGIN_FILE_NAME = #{fileVo.originFileName},
+		RENAME_FILE_NAME =#{fileVo.renameFileName},
+		SAVE_PATH = #{fileVo.savePath},
+		REG_DATE = SYSDATE where TYPE_IDX =#{usedIdx}
+	</update>
 	
 	
 	

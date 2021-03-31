@@ -1,6 +1,5 @@
 package com.kh.aboo.user.manager.controller;
 
-
 import java.util.Map;
 import java.util.UUID;
 
@@ -37,12 +36,12 @@ public class AdminController {
 
 	@Autowired
 	private PasswordEncoder encoder;
-	
+
 	Ramdom random = new Ramdom();
-	
+
 	private final AdminService adminService;
 	private final AdminValidator adminValidator;
-	
+
 	public AdminController(AdminService adminService, AdminValidator adminValidator) {
 		this.adminService = adminService;
 		this.adminValidator = adminValidator;
@@ -53,8 +52,7 @@ public class AdminController {
 		webDataBinder.addValidators(adminValidator);
 
 	}
-	
-	
+
 	// 선영
 	@GetMapping("index")
 	public String admin() {
@@ -103,16 +101,15 @@ public class AdminController {
 
 	// 선영
 	@PostMapping("authorityadd")
-	@ResponseBody
-	public String authorityAdd(@RequestBody Generation generationInfo,
-			@SessionAttribute(name = "admin", required = false) Admin admin) {
+	public String authorityAdd(Generation generationInfo,
+			@SessionAttribute(name = "admin", required = false) Admin admin, Model model) {
 
-		int res = adminService.insertGeneration(generationInfo, admin.getApartmentIdx());
+		adminService.insertGeneration(generationInfo, admin.getApartmentIdx());
+		
+		model.addAttribute("alertMsg", "추가 되었습니다.");
+		model.addAttribute("url", "/admin/authority");
+		return "common/result";
 
-		if (res == 0) {
-			throw new ToAlertException(ErrorCode.AUTH01);
-		}
-		return "susesse";
 	}
 
 	// 선영
@@ -132,36 +129,40 @@ public class AdminController {
 			return "fail";
 		} else {
 
-			String authPath = UUID.randomUUID().toString().replace("-", "");
-			authPath = authPath.substring(0, 10);
+			String authPathId = UUID.randomUUID().toString().replace("-", "");
+			authPathId = authPathId.substring(0, 10);
 
-			session.setAttribute("authPath", authPath);
+			session.setAttribute("authPathId", authPathId);
 			session.setAttribute("findAdmin", findAdmin);
-			adminService.authenticationIdMail(adminInfo, authPath);
+			adminService.authenticationIdMail(adminInfo, authPathId);
 			return "success";
 		}
 
 	}
 
 	@GetMapping("authenticationid")
+	@ResponseBody
 	public String authenticationId(@RequestParam String certifiedNum, HttpSession session, Model model) {
 
-		String authPath = (String) session.getAttribute("authPath");
-		Admin findAdmin = (Admin) session.getAttribute("findAdmin");
+		String authPathId = (String) session.getAttribute("authPathId");
 
-		if (!certifiedNum.equals(authPath)) {
-			throw new ToAlertException(ErrorCode.AAH01);
+		System.out.println("아이디 인증번호" + authPathId);
+
+		if (!certifiedNum.equals(authPathId)) {
+			return "fail";
 		}
 
-		model.addAttribute("url", "/admin/findidresult");
-		model.addAttribute("findAdmin", findAdmin);
-
-		return "common/result";
+		return "success";
 
 	}
 
 	@GetMapping("findidresult")
-	public String findidResult() {
+	public String findidResult(HttpSession session, Model model) {
+
+		Admin findAdmin = (Admin) session.getAttribute("findAdmin");
+
+		model.addAttribute("findAdmin", findAdmin);
+
 		return "/admin/findIdResult";
 	}
 
@@ -175,7 +176,7 @@ public class AdminController {
 	@ResponseBody
 	public String findPasswordImpl(@RequestBody Admin adminInfo, HttpSession session, Model model) {
 
-		Admin findAdmin= adminService.selectFindPassword(adminInfo);
+		Admin findAdmin = adminService.selectFindPassword(adminInfo);
 		System.out.println(findAdmin);
 		if (findAdmin == null) {
 			return "fail";
@@ -184,6 +185,7 @@ public class AdminController {
 			String password = random.randomPw();
 
 			System.out.println("임시 번호 : " + password);
+
 			adminService.authenticationPasswordMail(findAdmin, password); // 메일 보내기
 
 			return "success";
@@ -191,7 +193,7 @@ public class AdminController {
 		}
 
 	}
-	
+
 	@GetMapping("/mypage/modifyinfo")
 	public String modifyInfo(@SessionAttribute(name = "admin") Admin admin, Model model) {
 
@@ -200,13 +202,12 @@ public class AdminController {
 
 		model.addAttribute("selectAdmin", selectAdmin);
 		return "admin/mypage/modifyInfo";
-		
+
 	}
-	
-	
+
 	@PostMapping("/mypage/modifyupdate")
-	public String modifyInfo(@Valid Admin adminValid, Errors errors,
-			@SessionAttribute(name = "admin") Admin admin, Model model) {
+	public String modifyInfo(@Valid Admin adminValid, Errors errors, @SessionAttribute(name = "admin") Admin admin,
+			Model model) {
 
 		Admin selectAdmin = adminService.selectAdmin(admin);
 		if (errors.hasErrors()) {
@@ -221,9 +222,7 @@ public class AdminController {
 		model.addAttribute("url", "/admin/login");
 		return "common/result";
 	}
-	
-	
-	
+
 	// 이메일 인증
 	@PostMapping("/mypage/modifyemailimpl")
 	@ResponseBody
@@ -235,13 +234,10 @@ public class AdminController {
 		session.setAttribute("authPathEmail", authPathEmail);
 		adminService.authenticationEmail(adminInfo, authPathEmail);
 
-
 		return "success";
 
 	}
-	
-	
-	
+
 	// 이메일 인증
 	@PostMapping("/mypage/authenticationemail")
 	@ResponseBody
@@ -249,44 +245,43 @@ public class AdminController {
 
 		String certifiedNum = (String) info.get("certifiedNum");
 		String authPathEmail = (String) session.getAttribute("authPathEmail");
-		
+
 		if (!certifiedNum.equals(authPathEmail)) {
 			return "fail";
 		}
-		
+
 		Admin admin = (Admin) session.getAttribute("admin");
 		String email = (String) info.get("email");
 		admin.setEmail(email);
 		adminService.updateAdminEmail(admin);
 		return "success";
 	}
-	
-	
-	
-	
-	
-	
-	
+
 	// 세대 초기화
-	@PostMapping("authoritydelete")
+	@PostMapping("authorityreset")
 	@ResponseBody
-	public String authorityDelete(@RequestBody Generation GenerationInfo, @SessionAttribute("admin")Admin admin) {
+	public String authorityReset(@RequestBody Generation GenerationInfo, @SessionAttribute("admin") Admin admin) {
 		System.out.println(GenerationInfo);
-		
+
 		String apartmentIdx = admin.getApartmentIdx();
 		GenerationInfo.setApartmentIdx(apartmentIdx);
+
 		adminService.updateResetGeneration(GenerationInfo);
-		
+
 		return "success";
-		
+
 	}
-	
-	
-	
-	
-	
-	
-	
+
+	// 세대 삭제
+	@PostMapping("authoritydelete")
+	@ResponseBody
+	public String authorityDelete(@RequestBody Generation GenerationInfo) {
+
+		adminService.updateDeleteGeneration(GenerationInfo);
+
+		return "success";
+
+	}
 
 	// 선영 어드민 추가 메서드 이거 쓰세용
 	@GetMapping("add")

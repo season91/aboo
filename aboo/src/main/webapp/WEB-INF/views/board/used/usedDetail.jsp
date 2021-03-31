@@ -91,13 +91,15 @@
           	</div>
           	<hr>
           	<div>
-	          	<c:if test="${!empty files}">
-	          		<img src="/file/${files[0].savePath}${files[0].renameFileName}">
-	          	</c:if>
+          		<div class = "d-flex justify-content-center" >
+	          		<img class = "imgCenter detailImg" src="/file/${files.savePath}${files.renameFileName}">
+				</div>
           	</div>
           	<c:choose>
           		<c:when test="${UsedBrd.isPrivate == 0}">
-          			${UsedBrd.usedContent}
+          			<div class ="mt-5 mb-5">
+          				${UsedBrd.usedContent}
+          			</div>
           		</c:when>
           		<c:otherwise>
           			<div class="mt-5 mb-5 text-center">

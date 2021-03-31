@@ -37,6 +37,5 @@
 				order by bd_idx desc where IS_DEL = 0 and APARTMENT_IDX = #{apartmentIdx}
 				) b
 			) where rnum between #{queryStart} and #{queryEnd}
-		
 	</select>
 </mapper>

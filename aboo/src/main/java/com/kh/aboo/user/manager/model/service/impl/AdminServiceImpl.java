@@ -103,11 +103,11 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void authenticationIdMail(Admin admin, String authPath) {
+	public void authenticationIdMail(Admin admin, String authPathId) {
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
-		body.add("mail-template", "adminid");
+		body.add("mail-template", "findid");
 		body.add("id", admin.getId());
-		body.add("authPath", authPath);
+		body.add("authPath", authPathId);
 		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(Configcode.DOMAIN + "/mail")
 				.header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE).body(body);
 
@@ -143,15 +143,13 @@ public class AdminServiceImpl implements AdminService {
 
 	}
 
-	
-	//어드민 정보 불러오기
+	// 어드민 정보 불러오기
 	@Override
 	public Admin selectAdmin(Admin admin) {
 		return adminRepository.selectAdmin(admin);
 	}
 
-	
-	//정보 업데이트
+	// 정보 업데이트
 	@Override
 	public int updateAdminModify(Admin admin) {
 		String password = admin.getPassword();
@@ -159,7 +157,7 @@ public class AdminServiceImpl implements AdminService {
 		return adminRepository.updateAdminModify(admin);
 	}
 
-	//이메일 인증 이메일 보내기
+	// 이메일 인증 이메일 보내기
 	@Override
 	public void authenticationEmail(Admin admin, String authPathEmail) {
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
@@ -168,23 +166,29 @@ public class AdminServiceImpl implements AdminService {
 		body.add("authPath", authPathEmail);
 		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(Configcode.DOMAIN + "/mail")
 				.header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE).body(body);
-		
+
 		ResponseEntity<String> response = http.exchange(request, String.class);
 		String message = response.getBody();
-		mail.send(admin.getEmail(), "이메일 인증 메일", message);		
+		mail.send(admin.getEmail(), "이메일 인증 메일", message);
 	}
-	
-	//이메일 업데이트
+
+	// 이메일 업데이트
 	@Override
 	public int updateAdminEmail(Admin admin) {
 		return adminRepository.updateAdminEmail(admin);
 	}
 
-	
-	//세대 초기화 하기
+	// 세대 초기화 하기
 	@Override
 	public void updateResetGeneration(Generation generation) {
-		 adminRepository.resetGeneration(generation);	
-		 adminRepository.insertGeneration(generation);
+		adminRepository.updateDeleteGeneration(generation);
+		generation.setPassword(encoder.encode("123"));
+		adminRepository.insertGeneration(generation);
+	}
+
+	// 세대 삭제 하기
+	@Override
+	public void updateDeleteGeneration(Generation generation) {
+		adminRepository.updateDeleteGeneration(generation);
 	}
 }

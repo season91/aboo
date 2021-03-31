@@ -1,9 +1,12 @@
 package com.kh.aboo.board.used.model.service.impl;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,21 +39,28 @@ public class UsedServiceImpl implements UsedService {
 		usedMap.put("paging", paging);
 		usedMap.put("apartmentIdx", apartmentIdx);
 
-		commandMap.put("paging", paging);
-		commandMap.put("usedBrdList", usedRepository.selectUsedBrdList(usedMap));
+		List<UsedBrd> usedBrdList = usedRepository.selectUsedBrdList(usedMap);
+		List<FileVo> fileList = new ArrayList<FileVo>();
 
+		for (UsedBrd usedBrd : usedBrdList) {
+			fileList.add(usedRepository.selectFileWithusedIdx(usedBrd.getUsedIdx())); // null이 오는데 add에 왜담김 ??;;
+		}
+
+		commandMap.put("paging", paging);
+		commandMap.put("fileList", fileList);
+		commandMap.put("usedBrdList", usedRepository.selectUsedBrdList(usedMap));
 		return commandMap;
 	}
 
 	@Override
 	public Map<String, Object> selectUsedDetail(String usedIdx) {
 		UsedBrd usedBrd = usedRepository.selectUsedDetail(usedIdx);
-		List<FileVo> files = usedRepository.selectFileWithusedIdx(usedIdx);
-	
-		Map<String,Object> commandMap = new HashMap<String, Object>();
-		commandMap.put("UsedBrd",usedBrd);
+		FileVo files = usedRepository.selectFileWithusedIdx(usedIdx);
+
+		Map<String, Object> commandMap = new HashMap<String, Object>();
+		commandMap.put("UsedBrd", usedBrd);
 		commandMap.put("files", files);
-		
+
 		return commandMap;
 	}
 
@@ -78,7 +88,6 @@ public class UsedServiceImpl implements UsedService {
 		try {
 			List<FileVo> fiList = fileUtil.fileUpload(files);
 
-			System.out.println("fiList" + fiList);
 			for (FileVo fileVo : fiList) {
 				usedRepository.insertUsedBrdFile(fileVo);
 			}
@@ -87,5 +96,29 @@ public class UsedServiceImpl implements UsedService {
 
 		}
 
+	}
+	
+	@Override
+	public void updateUsedBrdFileModify(UsedBrd usedBrd, List<MultipartFile> files) {
+		
+		FileUtil fileUtil = new FileUtil();
+		Map<String,Object> commandMap = new HashedMap<>();
+		
+		usedRepository.updateUsedBrdModify(usedBrd);
+		
+
+		try {
+			List<FileVo> fiList = fileUtil.fileUpload(files);
+			commandMap.put("usedIdx",usedBrd.getUsedIdx()); //게시물 번호
+			
+			for (FileVo fileVo : fiList) {
+				System.out.println("파일이 도나염 ? @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + fileVo);
+				commandMap.put("fileVo", fileVo);
+				usedRepository.updateUsedBrdFileModify(commandMap); //게시물 사진
+			}
+
+		} catch (Exception e) {
+			throw new ToAlertException(ErrorCode.IB01, e);
+		}
 	}
 }

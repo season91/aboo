@@ -32,13 +32,13 @@ public interface GenerationRepository {
 	@Update("update TB_GENERATION set PASSWORD = #{password} where ID = #{id}")
 	public int updateFindPassword(Generation generation);
 		
-	//세대원 추가 페이지 리스트
+	//세대원  페이지 리스트
 	List<GenerationWon> selectGenerationWonList(Map<String,Object> generationMap);
 
-	//세대 총 수
+	//세대원 총 수
 	@Select("select count(*) from TB_GENERATION_WON where IS_DEL = 0 and GENERATION_IDX = #{generationIdx}")
 	int selectContentCnt(String generationIdx);
-
+	
 	//세대원 수정
 	@Update("update TB_GENERATION_WON set NAME = #{name} , tell = #{tell} where generation_won_idx = #{generationWonIdx}")
 	int updateGenerationWonModify(GenerationWon generationWon);

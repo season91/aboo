@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import com.kh.aboo.common.code.ErrorCode; 
+import com.kh.aboo.common.code.ErrorCode;
 import com.kh.aboo.common.exception.ToAlertException;
 import com.kh.aboo.common.util.ramdom.Ramdom;
 import com.kh.aboo.user.generation.model.service.GenerationService;
@@ -104,30 +104,27 @@ public class GenerationController {
 	}
 
 	@GetMapping("authenticationid")
+	@ResponseBody
 	public String authenticationId(@RequestParam String certifiedNum, HttpSession session, Model model) {
 
 		String authPathId = (String) session.getAttribute("authPathId");
-		Generation findGeneration = (Generation) session.getAttribute("findGeneration");
-		System.out.println("아이디 인증번호"+ authPathId);
+
+		System.out.println("아이디 인증번호" + authPathId);
+
 		if (!certifiedNum.equals(authPathId)) {
-			model.addAttribute("back", "back");
-			model.addAttribute("alertMsg", "다시 입력하세요.");
-			//throw new ToAlertException(ErrorCode.AH01);
+			return "fail";
+
 		}
 
-		model.addAttribute("url", "/findidresult");
-		model.addAttribute("findGeneration", findGeneration);
-
-		return "common/result";
+		return "success";
 
 	}
 
 	@GetMapping("findidresult")
-	public String findidResult(HttpSession session,Model model) {
-		
-		
-		
-		
+	public String findidResult(HttpSession session, Model model) {
+		Generation findGeneration = (Generation) session.getAttribute("findGeneration");
+
+		model.addAttribute("findGeneration", findGeneration);
 		return "generation/findIdResult";
 	}
 
@@ -151,7 +148,7 @@ public class GenerationController {
 
 			System.out.println("임시 번호 : " + password);
 			generationService.authenticationPasswordMail(findGeneration, password); // 메일 보내기
-			
+
 			return "success";
 
 		}
@@ -161,12 +158,11 @@ public class GenerationController {
 	@GetMapping("/mypage/generationwon")
 	public String generationWon(@RequestParam(defaultValue = "1") int page,
 			@SessionAttribute(name = "generation", required = false) Generation generationInfo, Model model) {
-		
+
 		model.addAllAttributes(generationService.selectGenerationWonList(page, generationInfo.getGenerationIdx()));
 		return "mypage/generationWon";
 	}
 
-	
 	@PostMapping("/mypage/generationwonmodify")
 	@ResponseBody
 	public String generationWonModify(@RequestBody GenerationWon generationWon) {
@@ -200,13 +196,19 @@ public class GenerationController {
 		generationWon.setGenerationIdx(generation.getGenerationIdx());
 		// 추가하는 세대정보를 넣어준다
 		System.out.println(generationWon);
-		int res = generationService.insertGenerationWonAdd(generationWon);
 
-		System.out.println(res);
-		if (res > 0) {
+		int cnt = generationService.selectGenerationWonCnt(generation);
+		System.out.println(cnt);
+		
+		if (cnt >= 5) {
+			return "fail";
+		
+		} else {
+			
+			generationService.insertGenerationWonAdd(generationWon);
 			return "success";
+
 		}
-		return "fail";
 
 	}
 
@@ -219,7 +221,6 @@ public class GenerationController {
 		model.addAttribute("selectGeneration", selectGeneration);
 		return "mypage/modifyInfo";
 	}
-
 
 	@PostMapping("/mypage/modifyupdate")
 	public String modifyInfo(@Valid Generation generationValid, Errors errors,
@@ -235,7 +236,7 @@ public class GenerationController {
 		generationService.updateGenerationModify(generationValid);
 
 		model.addAttribute("alertMsg", "수정되었습니다.");
-		model.addAttribute("url", "/login");
+		model.addAttribute("url", "/mypage/modifyinfo");
 		return "common/result";
 	}
 
@@ -265,11 +266,11 @@ public class GenerationController {
 		String certifiedNum = (String) info.get("certifiedNum");
 		String authPathEmail = (String) session.getAttribute("authPathEmail");
 		System.out.println(certifiedNum);
-		
+
 		if (!certifiedNum.equals(authPathEmail)) {
 			return "fail";
 		}
-		
+
 		Generation generation = (Generation) session.getAttribute("generation");
 		String email = (String) info.get("email");
 		generation.setEmail(email);
@@ -290,17 +291,15 @@ public class GenerationController {
 
 		generationService.insertGeneration(generation);
 	}
-	
-	
+
 	@GetMapping("/me")
 	public String me(HttpSession session) {
-		
-		
+
 		String tell = "01092680961";
 		generationService.authToVote(tell, session);
-		
+
 		return "";
-		
+
 	}
 
 }
