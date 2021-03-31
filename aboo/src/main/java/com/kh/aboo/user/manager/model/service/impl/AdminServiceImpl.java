@@ -184,7 +184,7 @@ public class AdminServiceImpl implements AdminService {
 	//세대 초기화 하기
 	@Override
 	public void updateResetGeneration(Generation generation) {
-		 adminRepository.resetGeneration(generation);				
+		 adminRepository.resetGeneration(generation);	
 		 adminRepository.insertGeneration(generation);
 	}
 }

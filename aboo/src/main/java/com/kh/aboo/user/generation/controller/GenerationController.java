@@ -108,7 +108,7 @@ public class GenerationController {
 
 		String authPathId = (String) session.getAttribute("authPathId");
 		Generation findGeneration = (Generation) session.getAttribute("findGeneration");
-
+		System.out.println("아이디 인증번호"+ authPathId);
 		if (!certifiedNum.equals(authPathId)) {
 			throw new ToAlertException(ErrorCode.AH01);
 		}
@@ -121,7 +121,11 @@ public class GenerationController {
 	}
 
 	@GetMapping("findidresult")
-	public String findidResult() {
+	public String findidResult(HttpSession session,Model model) {
+		
+		
+		
+		
 		return "generation/findIdResult";
 	}
 
