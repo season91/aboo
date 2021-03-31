@@ -34,7 +34,7 @@
 			from(
 				select bd_idx, user_id, title, reg_date 
 				from tb_board 
-				order by bd_idx desc
+				order by bd_idx desc where IS_DEL = 0 and APARTMENT_IDX = #{apartmentIdx}
 				) b
 			) where rnum between #{queryStart} and #{queryEnd}
 		

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.kh.aboo.admin.car.model.repository.CarRepository">
+	
+	<select id="selectContentCnt" resultType="int">
+		select count(*) from tb_car
+		<where>
+			<choose>
+				<when test="searchType == 'apartmentIdx'">
+					apartment_idx = #{apartmentIdx} and is_del = 0
+				</when>
+				<when test="searchType == 'carNumber'">
+					apartment_idx = #{apartmentIdx} and car_number = #{carNumber}
+				</when>
+				<when test="searchType == 'generationIdx'">
+					apartment_idx = #{apartmentIdx} and generation_idx = #{generationIdx}
+				</when>
+			</choose>
+		</where>	
+	</select>
+	
+	<select id="selectCarList" resultType="car">
+		select * from (
+			select rownum rnum, b.* from (
+				select * from tb_car c JOIN tb_generation g on (c.generation_idx = g.generation_idx) 
+				<where>
+					<choose>
+						<when test="searchType == 'apartmentIdx'">
+							c.apartment_idx = #{apartmentIdx} and c.is_del = 0 
+						</when>
+						<when test="searchType == 'carNumber'">
+							c.apartment_idx = #{apartmentIdx} and c.car_number = #{carNumber} 
+						</when>
+						<when test="searchType == 'generationIdx'">
+							c.apartment_idx = #{apartmentIdx} and c.generation_idx = #{generationIdx} 
+						</when>
+					</choose>
+				</where>
+				order by car_IDX desc ) b 
+			) where rnum between #{paging.queryStart} and #{paging.queryEnd}
+	</select>
+	
+	<update id="procedureIsInCarUpdate" statementType="CALLABLE">
+		{call pl_is_in_car_update(#{carIdx, mode=IN})}
+	</update>
+	
+	<select id="selectApplicationContentCnt" resultType="int">
+		select count(*) from tb_car_application where apartment_idx = #{apartmentIdx}
+	</select>
+	
+	<select id="selectCarApplicationList" resultType="carApplication">
+		select * from (
+			select rownum rnum, b.* from (
+				select * from tb_car_application where apartment_idx = #{apartmentIdx} 
+				order by application_idx desc ) b 
+			) where rnum between 1 and 10
+	</select>
+	
+	</mapper>

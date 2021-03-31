@@ -15,7 +15,7 @@
       <div class="sidebar-wrapper">
         <div class="logo">
           <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-            <img src="../../../resources/images/logo_w.png">
+            <img src="../../../resources/abooimg/logo_w.png">
           </a>
           <a href="http://www.creative-tim.com" class="simple-text logo-normal">
             ADMIN
@@ -28,7 +28,7 @@
               <p>Mypage</p>
             </a>
           </li>
-          <li>
+          <li class="active">
             <a href="./dashboard.html">
               <i class="tim-icons icon-tap-02"></i>
               <p>Vote</p>
@@ -46,7 +46,7 @@
               <p>Mgmtfee</p>
             </a>
           </li>
-          <li class="active ">
+          <li>
             <a href="./notifications.html">
               <i class="tim-icons icon-bus-front-12"></i>
               <p>Vehicle</p>
@@ -140,7 +140,7 @@
       <div class="content">
         <div class="row">
           <div class="col-md-8" style="flex: 0 0 100% !important; max-width: 100% !important;">
-          	<form>
+          	<form action="/admin/vote/makevoteimpl" method="post" enctype="multipart/form-data">
             <div class="card">
               <div class="card-header">
                 <h5 class="title">투표 만들기</h5>
@@ -150,7 +150,7 @@
               		<div class="col-md-12">
                       <div class="form-group">
                         <label>제목</label>
-                        <input type="text" class="form-control" placeholder="제목을 입력해주세요.">
+                        <input type="text" class="form-control" name="voteTitle" required="required" placeholder="제목을 입력해주세요.">
                       </div>
                     </div>
               	</div>
@@ -163,9 +163,9 @@
                       <div class="form-group">
                         <label>투표 기간</label>
                         <div class="d-flex">
-                        	<input type="date" class="form-control">
+                        	<input type="date" class="form-control" name="voteBeginDate" required="required">
                         	<div class="ml-5 mr-5 font-weight-bold align-self-center" style="color: rgba(255, 255, 255, 0.8); font-size: 1.3rem">&#126;</div>
-                        	<input type="date" class="form-control">
+                        	<input type="date" class="form-control" name="voteEndDate" required="required">
                         </div>
                       </div>
                     </div>
@@ -174,7 +174,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>안건 내용</label>
-                        <textarea class="form-control" id="p_content"></textarea>
+                        <textarea class="form-control" id="p_content" name="voteContent" required="required"></textarea>
 		              	<script type="text/javascript">
 							CKEDITOR.replace('p_content', {height: 400, editorplaceholder: '안건 내용에 대한 설명을 입력해주세요.'});
 							CKEDITOR.config.resize_enabled = false;
@@ -187,7 +187,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>선택지</label>
-                        <input type="text" class="form-control" placeholder="선택지를 ','로 구분하여 입력해주세요.">
+                        <input type="text" class="form-control" name="voteItem" required="required" placeholder="선택지를 ','로 구분하여 입력해주세요.">
                         <small class="text-danger pl-1" style="display: block;">선택지는 ','로 구분하여 작성해주세요.</small>
                         <small class="text-danger pl-1" style="display: block;">ex) 1번 보기,2번 보기,3번보기</small>
                       </div>
@@ -207,18 +207,13 @@
           <nav>
             <ul>
               <li>
-                <a href="https://www.creative-tim.com">
-                  Creative Tim
-                </a>
-              </li>
-              <li>
-                <a href="http://presentation.creative-tim.com">
+                <a href="/aboutus">
                   About Us
                 </a>
               </li>
               <li>
-                <a href="http://blog.creative-tim.com">
-                  Blog
+                <a href="/index">
+                  to generation
                 </a>
               </li>
             </ul>
@@ -228,7 +223,7 @@
             <script>
               document.write(new Date().getFullYear())
             </script> made with <i class="tim-icons icon-heart-2"></i> by
-            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+            <a href="https://www.creative-tim.com" target="_blank">aboo</a> for a better apartment.
           </div>
       </footer>
       </div>

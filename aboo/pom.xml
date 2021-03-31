@@ -272,6 +272,18 @@
 		    <version>4.1.2</version>
 		</dependency>
 		
+		<!-- * QR코드 생성을 위한 zxing 라이브러리 -->
+		<dependency> 
+			<groupId>com.google.zxing</groupId> 
+			<artifactId>core</artifactId> 
+			<version>3.4.0</version> 
+		</dependency>
+		<dependency>
+		    <groupId>com.google.zxing</groupId>
+		    <artifactId>javase</artifactId>
+		    <version>3.4.0</version>
+		</dependency>
+		
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
