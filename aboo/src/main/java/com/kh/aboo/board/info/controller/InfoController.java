@@ -194,14 +194,54 @@ public class InfoController {
 		return "common/result";
 		
 	}
-	
-	//댓글 리스트 뽑아오기
-	
+
 	//댓글 수정하기
+	@PostMapping("infocmtedit")
+	public String infoCmtEdit(InfoCmt infoCmt, Model model) {
+		
+		int res = infoService.updateInfoCmt(infoCmt);
+		
+		if(res > 0) {
+			model.addAttribute("alertMsg", "댓글이 수정되었습니다.");
+			model.addAttribute("url", "/board/info/detail?bIdx=" + infoCmt.getbIdx());
+		}else {
+			model.addAttribute("alertMsg", "댓글 수정에 실패하였습니다.");
+			model.addAttribute("url", "/board/info/detail?bIdx=" + infoCmt.getbIdx());
+		}
+		
+		return "common/result";
+	}
 	
 	//댓글 삭제하기
+	@GetMapping("infocmtdel")
+	@ResponseBody
+	public String infoCmtDel(String cIdx) {
+		
+		System.out.println(cIdx);
+		
+		int res = infoService.deleteInfoCmt(cIdx);
+		
+		if(res>0) {
+			return "success";		
+		}else {
+			return "fail";
+		}
+	}
 	
 	//댓글 비공개처리
+	@GetMapping("infocmtprivate")
+	@ResponseBody
+	public String infoCmtPrivate(String cIdx) {
+		
+		int res = infoService.UpdateInfoCmtprivate(cIdx);
+		
+		if(res>0) {
+			return "success";		
+		}else {
+			return "fail";
+		}
+		
+	}
 	
 	
 }

@@ -154,12 +154,25 @@
   			defaultView: 'dayGridMonth', defaultDate: new Date(), 
   			header: { 
   				left: 'prev,next today', 
-  				center: 'title', 
-  				right: '' 
+  				center: 'ddddd', 
+  				right: '',
+  				eventColor: 'black',
+  				eventTextColor: 'white'
   				}, 
+  				
+  				events: [
+  		  			{
+  		  				title:'All Day Event',
+  		  				start: new Date('2021,03,30')
+  		  			},
+  		  		
+  		  			
+  		  		]
   			}); 
   		calendar.render(); 
   	});
+
+
 
   </script>
   <script src="../../../resources/js/calendar/fullcalendar.js"></script>

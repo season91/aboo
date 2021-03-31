@@ -22,4 +22,7 @@ public interface InfoService {
 	int insertInfoCmt(InfoCmt infoCmt);
 	List<InfoCmt> selectInfoCmtList(String bIdx); 
 	int selectInfoCmtcnt(String bIdx);
+	int updateInfoCmt(InfoCmt infoCmt);
+	int deleteInfoCmt(String cIdx);
+	int UpdateInfoCmtprivate(String cIdx);
 }

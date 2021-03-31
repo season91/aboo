@@ -68,10 +68,16 @@ public interface InfoRepository {
 	int selectInfoCmtcnt(String bIdx);
 	
 	//댓글 수정하기
+	@Update("update tb_inf_qst_brd_comment set c_content = #{cContent} where c_idx = #{cIdx} and b_idx = #{bIdx}")
+	int updateInfoCmt(InfoCmt infoCmt);
 	
 	//댓글 삭제하기
+	@Update("update tb_inf_qst_brd_comment set c_isdel = 1 where c_idx = #{cIdx}")
+	int deleteInfoCmt(@Param(value = "cIdx")String cIdx);
 	
 	//댓글 비공개처리
+	@Update("update tb_inf_qst_brd_comment set c_isprivate = 1 where c_idx = #{cIdx}")
+	int UpdateInfoCmtprivate(@Param(value = "cIdx")String cIdx);
 	
 	
 
