@@ -110,7 +110,9 @@ public class GenerationController {
 		Generation findGeneration = (Generation) session.getAttribute("findGeneration");
 
 		if (!certifiedNum.equals(authPathId)) {
-			throw new ToAlertException(ErrorCode.AH01);
+			model.addAttribute("back", "back");
+			model.addAttribute("alertMsg", "다시 입력하세요.");
+			//throw new ToAlertException(ErrorCode.AH01);
 		}
 
 		model.addAttribute("url", "/findidresult");
