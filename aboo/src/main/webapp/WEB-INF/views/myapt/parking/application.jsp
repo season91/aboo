@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <body>
-	   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
 	      <a class="navbar-brand" href="/index">ABOO</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,9 +14,9 @@
 	        <ul class="navbar-nav ml-auto">
 	          <li class="nav-item"><a href="/index" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
-	          <li class="nav-item"><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
+	          <li class="nav-item active"><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
 	          <li class="nav-item"><a class="nav-link" href="/board/info/listinfo">Board</a></li>
-	          <li class="nav-item active"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
+	          <li class="nav-item"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
 	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>
 	        </ul>
 	      </div>
@@ -25,46 +25,59 @@
     <!-- END nav -->
 
     <section class="home-slider owl-carousel">
-      <div class="slider-item bread-item" style="background-image:url(../../../resources/abooimg/logo_w.png);" data-stellar-background-ratio="0.5">
+      <div class="slider-item bread-item" style="background-image: url(../../../resources/abooimg/logo_w.png);" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container-fluid">
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
 
             <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/mypage/myalarm">My alarm</a></span><span class="mr-2"><a href="/mypage/myvehicle">My Management Fee</a></span><span class="mr-2"><a href="/mypage/modifyinfo">My Information</a></span><span class="mr-2"><a href="/mypage/writelist">My write list</a></span></p>
-	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">My vehicle</h1>
+              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Vote</a></span> <span>Schedule</span></p>
+	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Parking Application</h1>
             </div>
           </div>
         </div>
       </div>
     </section>
-
+    
+    <section class="ftco-domain">
+    	<div class="container">
+    		<div class="row d-flex">
+    			<div class="col-lg-5 heading-white mb-4 mb-sm-4 mb-lg-0 ftco-animate">
+    				<h2>차량 등록 신청</h2>
+    				<p>오른쪽에 차량번호를 입력해주세요.</p>
+    				<p>세대당 2대만 신청 가능합니다.</p>
+    			</div>
+    			<div class="col-lg-7 ftco-wrap ftco-animate">
+    		<form action="${context }/myapt/parking/applicationimpl" class="domain-form d-flex">
+              <div class="form-group domain-name">
+                <input type="text" class="form-control name px-4" name="aplctCarNumber" placeholder="차량번호를 입력해주세요. (예 : 123가4567)" maxlength="8">
+              </div>
+              <div class="form-group domain-select d-flex">
+                <button type="submit" class="search-domain btn btn-primary text-center" >신청하기</button>
+	            </div>
+            </form>
+    			</div>
+    		</div>
+    	</div>
+    </section>
+    
     <section class="ftco-section">
-    	<div class="container d-flex flex-column justify-content-center align-items-center">
-   		 <div class="col-md-7 text-center heading-section ftco-animate">
-            <h2 class="mb-4">현재 등록하신 차량은 2대 입니다.</h2>
-            <p>차량 추가 등록을 원하시는 세대는 관리자에게 신청하시기 바랍니다.</p>
-            <p>추가 등록은 세대당 최대 2대 이며, 2대 이상은 등록 불가능 합니다.</p>
-          </div>
-    		<div class="row col-md-10 d-flex justify-content-center">
-    			<div class="col-md-5 text-center ftco-animate">
-    				<div class="steps">
-    					<div class="icon mb-3 d-flex justify-content-center align-items-center">
-    						<span><i class="fas fa-car"></i></span>
-    					</div>
-    					<p>차량번호 123가 1234</p>
-    					<p>등록일 2018년 10월 17일</p>
-    				</div>
-    			</div>
-    			<div class="col-md-5 text-center ftco-animate">
-    				<div class="steps">
-    					<div class="icon mb-3 d-flex justify-content-center align-items-center">
-    						<span><i class="fas fa-car"></i></span>
-    					</div>
-    					<p>차량번호 456나 5678</p>
-    					<p>등록일 2020년 1월 11일</p>
-    				</div>
-    			</div>
+    	<div class="container">
+    		<div class="row justify-content-center">
+    			<div class="col-md-5 text-center heading-section ftco-animate">
+    				<c:choose>
+    					<c:when test="${carApplicationList eq null}">
+    						<p>차량 등록 신청한 건이 없습니다.</p>
+    					</c:when>
+    					<c:otherwise>
+    						<p>차량 등록 신청 진행 중인 건이 있습니다.</p>
+		           			 <p>처리까지 3~4일 소요됩니다.</p>
+		           			 <c:forEach items="${carApplicationList}" var="car">
+		           			 <p>신청 차량 번호 : ${car.aplctCarNumber }</p>
+		           			 </c:forEach>
+    					</c:otherwise>
+    				</c:choose>
+         		</div>
     		</div>
     	</div>
     </section>
@@ -136,7 +149,7 @@
         </div>
       </div>
     </footer>
-  
+    
     
   
 

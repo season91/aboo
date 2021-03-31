@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <body>
-	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
 	      <a class="navbar-brand" href="/index">ABOO</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,17 +17,7 @@
 	          <li class="nav-item"><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
 	          <li class="nav-item"><a class="nav-link" href="/board/info/listinfo">Board</a></li>
 	          <li class="nav-item active"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
-	           <c:choose>
-		          <c:when test="${sessionScope.generation == null and sessionScope.admin == null}">
-		          	<li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
-		          </c:when>
-		          <c:when test="${sessionScope.generation != null}">
-		          	<li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>	          
-		          </c:when>
-                  <c:when test="${sessionScope.admin != null}">
-                    <li class="nav-item cta"><a href="/admin/logout" class="nav-link"><span>Logout</span></a></li>	
-                  </c:when>		                    
-	          </c:choose>
+	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>
 	        </ul>
 	      </div>
 	    </div>
@@ -41,88 +31,42 @@
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
 
             <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/mypage/myalarm">My alarm</a></span><span class="mr-2"><a href="/mypage/mycar">My Car</a></span><span class="mr-2"><a href="/mypage/modifyinfo">My Information</a></span><span class="mr-2"><a href="/mypage/writelist">My write list</a></span></p>
-	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Management Fee</h1>
+              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/mypage/myalarm">My alarm</a></span><span class="mr-2"><a href="/mypage/myvehicle">My Management Fee</a></span><span class="mr-2"><a href="/mypage/modifyinfo">My Information</a></span><span class="mr-2"><a href="/mypage/writelist">My write list</a></span></p>
+	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">My Car</h1>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-     <section class="ftco-section">
-    	<div class="container">
-    		<div class="row justify-content-center mb-5">
-          <div class="col-md-7 text-center heading-section ftco-animate">
-            <h2 class="mb-4">${generation.building}동 ${generation.num }호 관리비 내역</h2>
-            <p>월별 관리비 고지 현황입니다.</p>
-            <p>미납시 고지월 납부상태를 통해 결제페이지로 이동하실 수 있습니다.</p>
-            <p>상세내역은 고지월을 통해 조회하실 수 있습니다.</p>
+    <section class="ftco-section">
+    	<div class="container d-flex flex-column justify-content-center align-items-center">
+   		 <div class="col-md-7 text-center heading-section ftco-animate">
+            <h2 class="mb-4">현재 등록하신 차량은 ${fn:length(carList)}대 입니다.</h2>
+            <p>차량 추가 등록을 원하시는 세대는 관리자에게 신청하시기 바랍니다.</p>
+            <p>추가 등록은 세대당 최대 2대 이며, 2대 이상은 등록 불가능 합니다.</p>
           </div>
-        </div>
-    		<div class="row">
-    			<div class="col-md-12 ftco-animate">
-    				<div class="table-responsive">
-	    				<table class="table">
-						    <thead class="thead-primary">
-						      <tr>
-						        <th>${mgmtfeeMonth}고지일</th>
-						        <th>납부상태</th>
-						        <th>납부금액</th>
-						        <th>연체금액</th>
-						        <th>납부일</th>
-						      </tr>
-						    </thead>
-						    <tbody>
-						    <c:forEach items="${myMgmtfeeList }" var="mymgmtfee" varStatus="status">
-						    	<tr>
-						        <td><a href="/mypage/mymgmtfee/detail?mgmtfeeidx=${mymgmtfee.mgmtfeeIdx}">${mymgmtfee.mgmtWriteDate }</a></td>
-						        <c:choose>
-		                        	<c:when test="${mymgmtfee.isPayment eq 0}">
-		                        		<td>미납</td>
-		                        	</c:when>
-		                        	<c:otherwise>
-		                        		<td>완료</td>
-		                        	</c:otherwise>
-		                        </c:choose>
-						        <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${mymgmtfee.periodPayment }"/> </td>
-						        <c:choose>
-						        	<c:when test="${myMgmtfeeOverdueList[status.index].overdueFee eq null}">
-						        		<td>0</td>
-						        	</c:when>
-						        	<c:otherwise>
-						        		<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${myMgmtfeeOverdueList[status.index].overdueFee }"/></td>
-						        	</c:otherwise>
-						        </c:choose>
-						        <td>${mymgmtfee.dueDate}</td>
-						      </tr>
-						    </c:forEach>
-						    </tbody>
-						  </table>
-					  </div>
-    			</div>
+    		<div class="row col-md-10 d-flex justify-content-center">
+    			<c:forEach items="${carList }" var="car">
+	    			<div class="col-md-5 text-center ftco-animate">
+	    				<div class="steps">
+	    					 <div class="block-21 mb-4 d-flex justify-content-center align-items-center">
+				                <a href="${context }/mypage/mycarqrdownload?path=${car.carQR}" class="blog-img mr-10 mycar-qr" style="background-image: url(${car.carQR });"></a>
+				              </div>
+	
+	    					<p>차량번호 : ${car.carNumber }</p>
+	    					<c:choose>
+	    						<c:when test="${car.isInCar eq 1 }">
+	    						  <p>주차 상태 : 입차</p>
+	    						</c:when>
+	    						<c:otherwise>
+	    							<p>주차 상태 : 출차</p>
+	    						</c:otherwise>
+	    					</c:choose>
+	    				</div>
+	    			</div>
+	    		</c:forEach>
     		</div>
-    		<div class="row mt-5">
-	          <div class="col text-center">
-	            <div class="block-27">
-	              <ul>
-	                <li><a href="/mypage/${paging.type }">&lt;&lt;</a></li>
-	                <li><a href="/mypage/${paging.type }?page=${paging.prev}">&lt;</a></li>
-	                 <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
-                      <c:choose>
-                         <c:when test="${paging.currentPage eq page}">
-                            <li class="active"><a href="/mypage/${paging.type }?page=${page}"><span>${page}</span></a></li>
-                         </c:when>
-                         <c:otherwise>
-                            <li><a href="/mypage/${paging.type }?page=${page}"><span>${page}</span></a></li>
-                         </c:otherwise>
-                      </c:choose>
-                 	 </c:forEach> 
-	                <li><a href="/mypage/${paging.type }?page=${paging.next}">&gt;</a></li>
-	                <li><a href="/mypage/${paging.type }?page=${paging.lastPage }">&gt;&gt;</a></li>
-	              </ul>
-	            </div>
-	          </div>
-	        </div>
     	</div>
     </section>
 
@@ -193,8 +137,9 @@
         </div>
       </div>
     </footer>
+  
     
-    
+  
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>

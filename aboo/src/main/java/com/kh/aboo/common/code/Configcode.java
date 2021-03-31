@@ -8,7 +8,11 @@ public enum Configcode {
 	// 파일저장을 내부에 해버리면 배포할때 다 날라간다, 꼭 외부 파일경로 지정해서 업로드해주자!
 	//UPLOAD_PATH("C:\\CODE\\kh-aboo\\aboo\\upload\\");
 	// UPLOAD_PATH("C:\\CODE\\kh-aboo\\aboo\\upload\\"); //아영 맥
-	 UPLOAD_PATH("C:\\final\\abooWorkspace\\aboo\\resources\\upload\\"); //선영 윈도우
+	// 아영 QR코드 관련 경로
+	QRCODE_PATH("/resources/ckstorage/"),
+	QRCODE_PULLPATH("C:\\CODE\\kh-aboo-dev\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\aboo\\resources\\ckstorage\\"),
+	UPLOAD_PATH("C:\\final\\abooWorkspace\\aboo\\resources\\upload\\"); //선영 윈도우
+	
 	public String desc;
 
 	private Configcode(String desc) {

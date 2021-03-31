@@ -3,9 +3,14 @@
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
  <%@ taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+ <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 <!DOCTYPE html>
 <html>
-<%-- 모든 페이지에서 공통적으로 사용할 헤더정보를 담은 헤더태그! --%>
+<%-- 모든 페이지에서 공통적으로 사용할 헤더정보를 담은 헤더태그! 
+core : jstl 사용
+form : form 사용 (errors 내보낼때?)
+fmt : format 사용 (숫자 콤마때문에 추가함)
+functions : List size 때문에 추가함.--%>
 <head>
 <meta charset="UTF-8">
 <%-- admin! --%>
