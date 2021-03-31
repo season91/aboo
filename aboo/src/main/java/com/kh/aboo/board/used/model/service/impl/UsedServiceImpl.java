@@ -1,6 +1,5 @@
 package com.kh.aboo.board.used.model.service.impl;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,9 +9,11 @@ import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.aboo.board.used.model.repository.UsedCmtRepository;
 import com.kh.aboo.board.used.model.repository.UsedRepository;
 import com.kh.aboo.board.used.model.service.UsedService;
 import com.kh.aboo.board.used.model.vo.UsedBrd;
+import com.kh.aboo.board.used.model.vo.UsedCmt;
 import com.kh.aboo.common.code.ErrorCode;
 import com.kh.aboo.common.exception.ToAlertException;
 import com.kh.aboo.common.util.file.FileUtil;
@@ -23,9 +24,11 @@ import com.kh.aboo.common.util.paging.Paging;
 public class UsedServiceImpl implements UsedService {
 
 	private final UsedRepository usedRepository;
-
-	public UsedServiceImpl(UsedRepository usedRepository) {
+	private final UsedCmtRepository usedCmtRepository;
+	
+	public UsedServiceImpl(UsedRepository usedRepository, UsedCmtRepository usedCmtRepository) {
 		this.usedRepository = usedRepository;
+		this.usedCmtRepository = usedCmtRepository;
 	}
 
 	@Override
@@ -120,5 +123,32 @@ public class UsedServiceImpl implements UsedService {
 		} catch (Exception e) {
 			throw new ToAlertException(ErrorCode.IB01, e);
 		}
+	}
+
+	@Override
+	public int insertUsedBrdCmtUpload(UsedCmt usedCmt) {
+		return usedCmtRepository.insertUsedBrdCmtUpload(usedCmt);
+	}
+	
+	@Override
+	public List<UsedCmt> selectUsedBrdCmt(String usedIdx) {
+		return usedCmtRepository.selectUsedBrdCmt(usedIdx);
+	}
+	
+	@Override
+	public int selectUsedBrdCmtCnt(String usedIdx) {
+		return usedCmtRepository.selectUsedBrdCmtCnt(usedIdx);
+	}
+	@Override
+	public int updateUsedBrdCmt(UsedCmt usedCmt) {
+		return usedCmtRepository.updateUsedBrdCmt(usedCmt);
+	}
+	@Override
+	public int updateUsedBrdCmtDelete(String usedCmtIdx) {
+		return usedCmtRepository.updateUsedBrdCmtDelete(usedCmtIdx);
+	}
+	@Override
+	public int updateUsedBrdCmtPrivate(String usedCmtIdx) {
+		return usedCmtRepository.updateUsedBrdCmtPrivate(usedCmtIdx);
 	}
 }

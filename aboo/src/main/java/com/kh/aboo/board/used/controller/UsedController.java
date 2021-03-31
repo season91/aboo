@@ -18,6 +18,7 @@ import com.kh.aboo.board.model.repository.BoardRepository;
 import com.kh.aboo.board.model.service.BoardService;
 import com.kh.aboo.board.used.model.service.UsedService;
 import com.kh.aboo.board.used.model.vo.UsedBrd;
+import com.kh.aboo.board.used.model.vo.UsedCmt;
 import com.kh.aboo.user.generation.model.vo.Generation;
 import com.kh.aboo.user.manager.model.vo.Admin;
 import com.sun.org.apache.xpath.internal.operations.Mod;
@@ -52,8 +53,8 @@ public class UsedController {
 	public String usedDetail(String usedIdx, Model model) {
 
 		model.addAllAttributes(usedService.selectUsedDetail(usedIdx));
-		System.out.println(usedService.selectUsedDetail(usedIdx));
-
+		model.addAttribute("usedBrdCmtList", usedService.selectUsedBrdCmt(usedIdx));
+		model.addAttribute("usedBrdCmtCnt", usedService.selectUsedBrdCmtCnt(usedIdx));
 		return "board/used/usedDetail";
 
 	}
@@ -129,6 +130,61 @@ public class UsedController {
 		model.addAttribute("alertMsg", "게시물 등록에 성공하였습니다.");
 		model.addAttribute("url", "/board/used/usedlist");
 		return "common/result";
+	}
+
+	@PostMapping("usedcmtupload")
+	public String usedCmtUpload(UsedCmt usedCmt,
+			@SessionAttribute(name = "generation", required = false) Generation generation, Model model) {
+
+		String usedCmtWriter = generation.getBuilding() + "동" + generation.getNum() + "호";
+		usedCmt.setUsedCmtWriter(usedCmtWriter);
+		usedService.insertUsedBrdCmtUpload(usedCmt);
+
+		model.addAttribute("alertMsg", "댓글 등록에 성공하였습니다.");
+		model.addAttribute("url", "/board/used/useddetail?usedIdx=" + usedCmt.getUsedIdx());
+		return "common/result";
+
+	}
+
+	@PostMapping("usedbrdcmtmodify")
+	public String usedBrdCmtModify(UsedCmt usedCmt, UsedBrd usedBrd, Model model) {
+
+		usedService.updateUsedBrdCmt(usedCmt);
+
+		model.addAttribute("alertMsg", "댓글 등록에 성공하였습니다.");
+		model.addAttribute("url", "/board/used/useddetail?usedIdx=" + usedCmt.getUsedIdx());
+		return "common/result";
+	}
+
+	@GetMapping("usedbrdcmtdelete")
+	@ResponseBody
+	public String usedBrdCmtDelete(String usedCmtIdx, Model model) {
+
+		int res = usedService.updateUsedBrdCmtDelete(usedCmtIdx);
+
+		if (res > 0) {
+
+			return "success";
+		} else {
+			return "fail";
+		}
+
+	}
+
+	@GetMapping("usedbrdcmtprivate")
+	@ResponseBody
+	public String usedBrdCmtPrivate(String usedCmtIdx, Model model) {
+
+		int res = usedService.updateUsedBrdCmtPrivate(usedCmtIdx);
+
+		if (res > 0) {
+
+			return "success";
+			
+		} else {
+			return "fail";
+		}
+
 	}
 
 }

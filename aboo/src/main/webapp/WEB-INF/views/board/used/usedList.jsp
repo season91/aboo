@@ -61,10 +61,10 @@
 							    <div class="meta mb-3">
 							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">${usedBrd.usedRegDate}</a></div>
 							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">${usedBrd.usedWriter}</a></div>
-							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="meta-chat"><span class="icon-chat"></span> ${intCmtCntList[status.index]}1</a></div>
+							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="meta-chat"><span class="icon-chat"></span>1</a></div>
 							    </div>
 							    <div class="desc pl-3">
-							      <h3 class="heading"><a href="/board/interior/intdetail?intPostNo=${usedBrd.usedIdx}">${usedBrd.usedTitle}</a></h3>
+							      <h3 class="heading"><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">${usedBrd.usedTitle}</a></h3>
 							    </div>
 							  </div>
 							</div>
@@ -78,10 +78,10 @@
 							    <div class="meta mb-3">
 							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">${usedBrd.usedRegDate}</a></div>
 							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">${usedBrd.usedWriter}</a></div>
-							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="meta-chat"><span class="icon-chat"></span> ${intCmtCntList[status.index]}1</a></div>
+							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="meta-chat"><span class="icon-chat"></span>1</a></div>
 							    </div> <!--비공개 처리하면 못보게 할건지 -->
 							    <div class="desc pl-3">
-							      <h3 class="heading"><a href="/board/interior/intdetail?intPostNo=${usedBrd.usedIdx}">비공개 처리된 게시물 입니다</a></h3>
+							      <h3 class="heading"><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">비공개 처리된 게시물 입니다</a></h3>
 							    </div>
 							  </div>
 							</div>
@@ -97,13 +97,13 @@
 	            <div class="icon" style="cursor: pointer;">
 	            	<a class="icon-search"></a>
 	            </div>
-	            <input type="text" class="form-control" placeholder="제목을 입력하세요.">
+	            <input type="text" class="form-control" placeholder="키워드를 입력하세요.">
 	          </div>
          </form>
 		</div>
         
         <div class="container text-center d-flex justify-content-end mt-0">
-	      <a href="/board/used/usedupload" class="center-block btn btn-primary p-3 px-xl-4 py-xl-2 btn-sm" style="background: linear-gradient(45deg, #12e6ca 0%, #8be55d 100%); border: none; color: white !important;">글쓰기</a>
+	      <a href="/board/used/usedupload" class="center-block btn btn-primary p-3 px-xl-4 py-xl-2 btn-sm" style="background: linear-gradient(45deg, #4174d0 0%, #5dbfe5 100%); border: none; color: white !important;">글쓰기</a>
 	    </div>
         
         <div class="row mt-5">
