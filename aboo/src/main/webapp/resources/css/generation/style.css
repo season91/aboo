@@ -9395,3 +9395,14 @@ textarea.form-control {
 color: red;
 font-size: 1vw;
 }
+
+.imgCenter{
+background-position: center;
+background-size: cover;
+}
+
+
+.detailImg{
+width: 95%;
+height: 70vh;
+}

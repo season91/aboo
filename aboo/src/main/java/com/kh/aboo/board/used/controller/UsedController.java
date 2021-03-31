@@ -40,7 +40,6 @@ public class UsedController {
 
 		if (generation != null) {
 			model.addAllAttributes(usedService.selectUsedBrdList(page, generation.getApartmentIdx()));
-
 		} else {
 			model.addAllAttributes(usedService.selectUsedBrdList(page, admin.getApartmentIdx()));
 
@@ -54,7 +53,7 @@ public class UsedController {
 
 		model.addAllAttributes(usedService.selectUsedDetail(usedIdx));
 		System.out.println(usedService.selectUsedDetail(usedIdx));
-			
+
 		return "board/used/usedDetail";
 
 	}
@@ -100,21 +99,23 @@ public class UsedController {
 	}
 
 	@PostMapping("usedmodifyimpl")
-	public String usedmodifyImpl(UsedBrd usedBrdInfo, Model model) {
-		System.out.println(usedBrdInfo);
+	public String usedmodifyImpl(@RequestParam List<MultipartFile> files, UsedBrd usedBrd, Model model) {
 
-		return "";
+		usedService.updateUsedBrdFileModify(usedBrd, files);
+
+		model.addAttribute("alertMsg", "게시물 수정에 성공하였습니다.");
+		model.addAttribute("url", "/board/used/usedlist");
+		return "common/result";
 	}
 
 	@GetMapping("usedupload")
 	public String usedUpload() {
-
 		return "board/used/usedUpload";
 	}
 
 	@PostMapping("useduploadimpl")
 	public String usedUploadimpl(@RequestParam List<MultipartFile> files, UsedBrd usedBrd,
-			@SessionAttribute(name = "generation", required = false) Generation generation,Model model) {
+			@SessionAttribute(name = "generation", required = false) Generation generation, Model model) {
 
 		String generationIdx = generation.getGenerationIdx();
 		String apartmentIdx = generation.getApartmentIdx();
@@ -124,7 +125,7 @@ public class UsedController {
 		usedBrd.setApartmentIdx(apartmentIdx);
 
 		usedService.insertUsedBrd(usedBrd, files);
-		
+
 		model.addAttribute("alertMsg", "게시물 등록에 성공하였습니다.");
 		model.addAttribute("url", "/board/used/usedlist");
 		return "common/result";

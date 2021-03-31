@@ -44,4 +44,7 @@ public interface AdminService {
 	//세대 초기화
 	void updateResetGeneration(Generation generation);
 
+	//세대 삭제
+	void updateDeleteGeneration(Generation generation);
+
 }

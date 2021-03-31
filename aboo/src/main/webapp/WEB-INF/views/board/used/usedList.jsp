@@ -56,7 +56,7 @@
         			<c:when test="${usedBrd.isPrivate == 0}">
         				<div class="col-md-4 ftco-animate">
 							<div class="blog-entry">
-							  <a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="block-20"></a>
+							  <a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="block-20"><img class= "w-100 h-100 imgCenter"src="/file/${fileList[status.index].savePath}${fileList[status.index].renameFileName}"></a>
 							  <div class="text d-flex py-4">
 							    <div class="meta mb-3">
 							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">${usedBrd.usedRegDate}</a></div>
@@ -204,7 +204,7 @@
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
-
+	
   <script src="../../../../resources/js/generation/jquery.min.js"></script>
   <script src="../../../../resources/js/generation/jquery-migrate-3.0.1.min.js"></script>
   <script src="../../../../resources/js/generation/popper.min.js"></script>

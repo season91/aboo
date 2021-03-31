@@ -181,7 +181,7 @@
               </div>             
               <div class="form-group">
                 <label for="name">전화번호</label>
-    			<input type="text" class="form-control" id="addTell" class = "addTell" placeholder="전화번호를 입력하세요">
+    			<input type="text" class="form-control" id="addTell" class = "addTell"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="11" placeholder="전화번호를 입력하세요">
               </div>      
             </div>
             <div class="modal-footer">
@@ -208,8 +208,8 @@
               </div>             
               <div class="form-group">
                 <label for="name">전화번호</label>
-    			<input type="text" class="form-control" id="modityTell" class= "modityTell" >
-    			<input type="hidden" id = "modifyGenerationWonIdx" class = "modifyGenerationWonIdx" name = "generationWonIdx">
+    			<input type="text" class="form-control" id="modityTell" class= "modityTell" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="11" >
+    			<input type="hidden" id = "modifyGenerationWonIdx" class = "modifyGenerationWonIdx"  name = "generationWonIdx">
               </div>     
             </div>
             <div class="modal-footer">

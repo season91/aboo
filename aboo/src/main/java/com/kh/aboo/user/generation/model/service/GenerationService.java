@@ -47,7 +47,10 @@ public interface GenerationService {
 	//이메일 인증 성공시 이메일 업데이트
 	int updateGenerationEmail(Generation generation);
 	
-	 int authToVote(String tell, HttpSession httpSession);
+	//세대원 수 확인
+	int selectGenerationWonCnt(Generation generation);
+	
+	int authToVote(String tell, HttpSession httpSession);
 	 
 	 
 	 

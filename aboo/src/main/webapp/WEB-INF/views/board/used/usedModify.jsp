@@ -62,7 +62,7 @@
             <p>게시글 수정</p>
           </div>
         </div>
-        <form action="/board/used/usedmodifyimpl" method="post" enctype="multipart/form-data">
+        <form id = "modifyForm" action="/board/used/usedmodifyimpl" method="post" enctype="multipart/form-data">
         	<div class="p-2 bg-light mt-1">
 	        	<div class="row block-9 d-flex justify-content-center text-center">
 		          <div class="col-md-11">
@@ -88,6 +88,7 @@
 				
 		        </div>
 	        </div>
+	       	<input class = "ml-5 mt-2" type="file" name ="files" id="file" accept='image/jpg,image/jpeg,image/gif,image/png'>
 	        <div class="form-group mt-3 text-center">
               <input type="submit" value="수정하기" class="btn btn-primary py-3 px-5">
             </div>
@@ -167,6 +168,7 @@
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
 
 
   <script src="../../../../resources/js/generation/jquery.min.js"></script>
