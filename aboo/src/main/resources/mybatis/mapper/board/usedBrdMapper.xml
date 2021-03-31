@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.kh.aboo.board.used.model.repository.UsedRepository">
+	
+	
+	<select id="selectUsedBrdList" resultType="usedBrd">
+	      select USED_IDX, APARTMENT_IDX,USED_TITLE,USED_CONTENT,USED_WRITER,USED_REG_DATE,IS_DEL,IS_TRNSC,IS_PRIVATE,GENERATION_IDX
+      from(
+         select rownum rnum, b.*
+         from(
+            select USED_IDX, APARTMENT_IDX,USED_TITLE,USED_CONTENT,USED_WRITER,USED_REG_DATE,IS_DEL,IS_TRNSC,IS_PRIVATE,GENERATION_IDX
+            from TB_USED_BRD where IS_DEL = 0 and APARTMENT_IDX = #{apartmentIdx}
+            order by USED_IDX asc
+         ) b
+      ) where rnum between #{paging.queryStart} and #{paging.queryEnd}	
+	</select>
+	
+	
+	
+	<insert id= "insertUsedBrdFile">
+		insert into TB_FILE(F_IDX,TYPE_IDX,ORIGIN_FILE_NAME,RENAME_FILE_NAME,SAVE_PATH) 
+		values(
+		SC_FILE_IDX.nextval,
+		<!-- bd_idx -->
+		<choose>
+			<when test="typeIdx != null">
+				#{typeIdx},
+			</when>
+			<otherwise>
+				SC_USED_IDX.currval,
+			</otherwise>
+		</choose>
+		#{originFileName},
+		#{renameFileName},
+		#{savePath})
+	</insert>
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

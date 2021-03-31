@@ -49,5 +49,48 @@ id="WebApp_ID" version="3.1">
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	<!-- CKFINDER START -->
+	<servlet>
+	  <servlet-name>ConnectorServlet</servlet-name>
+	  <servlet-class>com.ckfinder.connector.ConnectorServlet</servlet-class>
+	  <init-param>
+	      <param-name>XMLConfig</param-name>
+	      <param-value>/WEB-INF/config.xml</param-value>
+	  </init-param>
+	  <init-param>
+	      <param-name>debug</param-name>
+	      <param-value>false</param-value>
+	  </init-param>
+	  <load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+	  <servlet-name>ConnectorServlet</servlet-name>
+	  <url-pattern>/ckfinder/core/connector/java/connector.java</url-pattern>
+	</servlet-mapping> 
+	<servlet-mapping>
+	  <servlet-name>ConnectorServlet</servlet-name>
+	  <url-pattern>/board/ckfinder/core/connector/java/connector.java</url-pattern>
+	</servlet-mapping> 
+	<servlet-mapping>
+	  <servlet-name>ConnectorServlet</servlet-name>
+	  <url-pattern>/admin/ckfinder/core/connector/java/connector.java</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+	  <servlet-name>ConnectorServlet</servlet-name>
+	  <url-pattern>/car/ckfinder/core/connector/java/connector.java</url-pattern>
+	</servlet-mapping>
+	<!-- CKFINDER END -->
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/views/common/404_error_page.jsp</location>
+	</error-page>
+	<error-page>
+		<!-- response상태 코드에 따라 에러페이지로 이동-->
+		<error-code>500</error-code>
+		<location>/WEB-INF/views/common/500_error_page.jsp</location>
+	</error-page>
 
 </web-app>

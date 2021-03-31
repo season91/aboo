@@ -86,6 +86,12 @@
 		    <artifactId>osdt_cert</artifactId>
 		    <version>19.7.0.0</version>
 		</dependency>
+		<!-- ucp -->
+		<dependency>
+		    <groupId>com.oracle.database.jdbc</groupId>
+		    <artifactId>ucp</artifactId>
+		    <version>19.7.0.0</version>
+		</dependency>
 		
 		<!-- AOP -->
 		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
@@ -252,6 +258,30 @@
 		    <groupId>org.jsoup</groupId>
 		    <artifactId>jsoup</artifactId>
 		    <version>1.13.1</version>
+		</dependency>
+				
+		<!-- 엑셀 업로드 라이브러리 -->
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>4.1.2</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-ooxml</artifactId>
+		    <version>4.1.2</version>
+		</dependency>
+		
+		<!-- * QR코드 생성을 위한 zxing 라이브러리 -->
+		<dependency> 
+			<groupId>com.google.zxing</groupId> 
+			<artifactId>core</artifactId> 
+			<version>3.4.0</version> 
+		</dependency>
+		<dependency>
+		    <groupId>com.google.zxing</groupId>
+		    <artifactId>javase</artifactId>
+		    <version>3.4.0</version>
 		</dependency>
 		
 		<!-- Test -->

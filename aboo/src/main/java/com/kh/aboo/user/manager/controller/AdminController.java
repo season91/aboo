@@ -1,0 +1,308 @@
+package com.kh.aboo.user.manager.controller;
+
+
+import java.util.Map;
+import java.util.UUID;
+
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+
+import com.kh.aboo.common.code.ErrorCode;
+import com.kh.aboo.common.exception.ToAlertException;
+
+import com.kh.aboo.common.util.ramdom.Ramdom;
+import com.kh.aboo.user.generation.model.vo.Generation;
+import com.kh.aboo.user.manager.model.service.AdminService;
+import com.kh.aboo.user.manager.model.vo.Admin;
+import com.kh.aboo.user.manager.validator.AdminValidator;
+
+@Controller
+@RequestMapping("admin")
+public class AdminController {
+
+	@Autowired
+	private PasswordEncoder encoder;
+	
+	Ramdom random = new Ramdom();
+	
+	private final AdminService adminService;
+	private final AdminValidator adminValidator;
+	
+	public AdminController(AdminService adminService, AdminValidator adminValidator) {
+		this.adminService = adminService;
+		this.adminValidator = adminValidator;
+	}
+
+	@InitBinder(value = "admin")
+	public void initBinder(WebDataBinder webDataBinder) {
+		webDataBinder.addValidators(adminValidator);
+
+	}
+	
+	
+	// 선영
+	@GetMapping("index")
+	public String admin() {
+		return "admin/index";
+	}
+
+	// 선영
+	@GetMapping("login")
+	public String login() {
+		return "admin/login";
+	}
+
+	// 선영
+	@GetMapping("logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("admin");
+		return "redirect:/admin/index";
+	}
+
+	// 선영
+	@PostMapping("loginimpl")
+	@ResponseBody
+	public String loginimpl(@RequestBody Admin adminInfo, HttpSession session) {
+
+		// adminInfo : 받아와서 맵핑 해주는 객체 이름
+		// admin : 진짜 admin 정보가 담긴 객체 이름
+
+		Admin admin = adminService.selectAdminForAuth(adminInfo);
+		if (admin == null) {
+			return "fail";
+		}
+		session.setAttribute("admin", admin);
+		return "sussece";
+
+	}
+
+	// 선영
+	@GetMapping("authority")
+	public String adminAuthority(@RequestParam(defaultValue = "1") int page,
+			@SessionAttribute(name = "admin", required = false) Admin admin, Model model) {
+
+		model.addAllAttributes(adminService.selectAuthorityList(page, admin.getApartmentIdx()));
+
+		return "admin/authority";
+	}
+
+	// 선영
+	@PostMapping("authorityadd")
+	@ResponseBody
+	public String authorityAdd(@RequestBody Generation generationInfo,
+			@SessionAttribute(name = "admin", required = false) Admin admin) {
+
+		int res = adminService.insertGeneration(generationInfo, admin.getApartmentIdx());
+
+		if (res == 0) {
+			throw new ToAlertException(ErrorCode.AUTH01);
+		}
+		return "susesse";
+	}
+
+	// 선영
+	@GetMapping("findid")
+	public String findId() {
+		return "admin/findId";
+	}
+
+	@PostMapping("findidimpl")
+	@ResponseBody
+	public String findidImpl(@RequestBody Admin adminInfo, HttpSession session) {
+		System.out.println(adminInfo);
+
+		Admin findAdmin = adminService.selectfindId(adminInfo);
+
+		if (findAdmin == null) {
+			return "fail";
+		} else {
+
+			String authPath = UUID.randomUUID().toString().replace("-", "");
+			authPath = authPath.substring(0, 10);
+
+			session.setAttribute("authPath", authPath);
+			session.setAttribute("findAdmin", findAdmin);
+			adminService.authenticationIdMail(adminInfo, authPath);
+			return "success";
+		}
+
+	}
+
+	@GetMapping("authenticationid")
+	public String authenticationId(@RequestParam String certifiedNum, HttpSession session, Model model) {
+
+		String authPath = (String) session.getAttribute("authPath");
+		Admin findAdmin = (Admin) session.getAttribute("findAdmin");
+
+		if (!certifiedNum.equals(authPath)) {
+			throw new ToAlertException(ErrorCode.AAH01);
+		}
+
+		model.addAttribute("url", "/admin/findidresult");
+		model.addAttribute("findAdmin", findAdmin);
+
+		return "common/result";
+
+	}
+
+	@GetMapping("findidresult")
+	public String findidResult() {
+		return "/admin/findIdResult";
+	}
+
+	@GetMapping("findpassword")
+	public String findPassword() {
+		return "admin/findPassword";
+	}
+
+	// 선영 임시 비밀번호 발급과 DB변경
+	@PostMapping("findpasswordimpl")
+	@ResponseBody
+	public String findPasswordImpl(@RequestBody Admin adminInfo, HttpSession session, Model model) {
+
+		Admin findAdmin= adminService.selectFindPassword(adminInfo);
+		System.out.println(findAdmin);
+		if (findAdmin == null) {
+			return "fail";
+		} else {
+
+			String password = random.randomPw();
+
+			System.out.println("임시 번호 : " + password);
+			adminService.authenticationPasswordMail(findAdmin, password); // 메일 보내기
+
+			return "success";
+
+		}
+
+	}
+	
+	@GetMapping("/mypage/modifyinfo")
+	public String modifyInfo(@SessionAttribute(name = "admin") Admin admin, Model model) {
+
+		Admin selectAdmin = adminService.selectAdmin(admin);
+		System.out.println(selectAdmin);
+
+		model.addAttribute("selectAdmin", selectAdmin);
+		return "admin/mypage/modifyInfo";
+		
+	}
+	
+	
+	@PostMapping("/mypage/modifyupdate")
+	public String modifyInfo(@Valid Admin adminValid, Errors errors,
+			@SessionAttribute(name = "admin") Admin admin, Model model) {
+
+		Admin selectAdmin = adminService.selectAdmin(admin);
+		if (errors.hasErrors()) {
+			model.addAttribute("selectAdmin", selectAdmin);
+			return "admin/mypage/modifyInfo";
+		}
+
+		adminValid.setManagerIdx(admin.getManagerIdx());
+		adminService.updateAdminModify(adminValid);
+
+		model.addAttribute("alertMsg", "수정되었습니다.");
+		model.addAttribute("url", "/admin/login");
+		return "common/result";
+	}
+	
+	
+	
+	// 이메일 인증
+	@PostMapping("/mypage/modifyemailimpl")
+	@ResponseBody
+	public String modifyEmailImpl(@RequestBody Admin adminInfo, HttpSession session) {
+
+		String authPathEmail = UUID.randomUUID().toString().replace("-", "");
+		authPathEmail = authPathEmail.substring(0, 10);
+
+		session.setAttribute("authPathEmail", authPathEmail);
+		adminService.authenticationEmail(adminInfo, authPathEmail);
+
+
+		return "success";
+
+	}
+	
+	
+	
+	// 이메일 인증
+	@PostMapping("/mypage/authenticationemail")
+	@ResponseBody
+	public String authenticationEmail(@RequestBody Map<String, Object> info, HttpSession session) {
+
+		String certifiedNum = (String) info.get("certifiedNum");
+		String authPathEmail = (String) session.getAttribute("authPathEmail");
+		
+		if (!certifiedNum.equals(authPathEmail)) {
+			return "fail";
+		}
+		
+		Admin admin = (Admin) session.getAttribute("admin");
+		String email = (String) info.get("email");
+		admin.setEmail(email);
+		adminService.updateAdminEmail(admin);
+		return "success";
+	}
+	
+	
+	
+	
+	
+	
+	
+	// 세대 초기화
+	@PostMapping("authoritydelete")
+	@ResponseBody
+	public String authorityDelete(@RequestBody Generation GenerationInfo, @SessionAttribute("admin")Admin admin) {
+		System.out.println(GenerationInfo);
+		
+		String apartmentIdx = admin.getApartmentIdx();
+		GenerationInfo.setApartmentIdx(apartmentIdx);
+		adminService.updateResetGeneration(GenerationInfo);
+		
+		return "success";
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+
+	// 선영 어드민 추가 메서드 이거 쓰세용
+	@GetMapping("add")
+	public void adminAdd() {
+		Admin admin = new Admin();
+		admin.setId("admin3");
+		admin.setPassword(encoder.encode("admin3"));
+		admin.setName("어드민3");
+		admin.setTell("010-9268-0961");
+		admin.setEmail("psuny1031@naver.com");
+		String birth = "2000-02-28";
+		java.sql.Date birthday = java.sql.Date.valueOf(birth);
+		admin.setBirth(birthday);
+		System.out.println(admin);
+
+		adminService.insertAdmin(admin);
+	}
+
+}
