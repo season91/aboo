@@ -25,7 +25,7 @@ public interface InfoRepository {
 	int insertFile(FileVo file);
 	
 	//페이징처리 된 정보게시판 글목록 불러오기
-	List<InfoBoard> selectInfoBoardList(Paging paging);
+	List<InfoBoard> selectInfoBoardList(@Param(value = "queryStart") int queryStart, @Param(value = "queryEnd") int queryEnd,@Param(value = "apartmentIdx")  String apartmentIdx);
 	
 	//정보게시판 글 갯수 불러오기
 	@Select("select count(*) from tb_inf_qst_brd where apartment_idx = #{apartmentIdx}")

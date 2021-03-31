@@ -60,7 +60,7 @@
             <h2 class="h1">아파트 일정</h2>
           </div>
           <div class="d-flex justify-content-center col-md-12">
-          <h5>위례 35단지</h5>
+          <h5>${aptName}</h5>
           </div>
           <div class="w-100"></div>
         </div>
@@ -69,7 +69,15 @@
           	</div>
 
         </div>
+        <c:choose>
+        	<c:when test="${admin != null}">
+        <div class="nav ftco-animate nav-pills d-flex justify-content-end" aria-orientation="vertical">	
+                  <a class="nav-link pl-4 pr-4 mt-4" href="/admin/schedule/addschedule">일정관리</a>
+                </div>
+             </c:when>
+        </c:choose>
         </div>
+        	
     </section>
 
     <footer class="ftco-footer ftco-bg-dark ftco-section">

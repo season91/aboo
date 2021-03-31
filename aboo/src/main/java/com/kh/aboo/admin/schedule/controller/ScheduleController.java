@@ -1,15 +1,19 @@
 package com.kh.aboo.admin.schedule.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.kh.aboo.admin.schedule.model.service.ScheduleService;
 import com.kh.aboo.admin.schedule.model.vo.Schedule;
 import com.kh.aboo.board.info.model.service.InfoService;
+import com.kh.aboo.user.generation.model.vo.Generation;
 import com.kh.aboo.user.manager.model.vo.Admin;
 
 @Controller
@@ -23,15 +27,22 @@ public class ScheduleController {
 	}
 	
 	@GetMapping("addschedule")
-	public String schedule() {
-		return "admin/schedule";
+	public String schedule(@RequestParam(defaultValue = "1") int page,HttpSession session,Model model) {
+		
+		Admin admin = (Admin) session.getAttribute("admin");
+
+			
+			String apartmentIdx = admin.getApartmentIdx();
+			model.addAllAttributes(scheduleService.selectScheduleList(page, apartmentIdx));
+			
+			return "admin/schedule";
 	}
 	
 	@PostMapping("addscheduleimpl")
 	public String addScheduleImpl(@SessionAttribute(name = "admin", required = false) Admin admin,Schedule schedule,Model model) {
 		
 		//나중에 세션값으로 바꾸기
-		schedule.setApartmentIdx("100000");
+		schedule.setApartmentIdx(admin.getApartmentIdx());
 		
 		int res = scheduleService.insertSchedule(schedule);
 		
@@ -45,5 +56,6 @@ public class ScheduleController {
 		
 		return "common/result";
 	}
+	
 
 }
