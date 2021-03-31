@@ -51,7 +51,7 @@
           <li class="active ">
             <a href="/admin/vehicle">
               <i class="tim-icons icon-bus-front-12"></i>
-              <p>Vehicle</p>
+              <p>Car</p>
             </a>
           </li>
           <li>

@@ -25,19 +25,16 @@ public class ParkingController {
 
 	@GetMapping("/myapt/parking")
 	public void parking(@SessionAttribute(name = "generation", required = false) Generation generation, Model model) {
-		String apartmentIdx = generation.getApartmentIdx();
-		
 		// 주차가능대수 조회
-		Map<String, Object> parkingMap = parkingService.possibleParking(apartmentIdx);
+		Map<String, Object> parkingMap = parkingService.possibleParking(generation.getApartmentIdx());
 		model.addAllAttributes(parkingMap);
 	}
 	
 	// 차량신청
 	@GetMapping("/myapt/parking/application")
 	public void carApplication(@SessionAttribute(name = "generation", required = false) Generation generation, Model model){
-		String generationIdx= generation.getGenerationIdx();
 		// 신청한 내역이 있는지 확인한다.
-		List<CarApplication> carApplicationCheck = parkingService.selectCarApplicationByGenerationIdx(generationIdx);
+		List<CarApplication> carApplicationCheck = parkingService.selectCarApplicationByGenerationIdx(generation.getGenerationIdx());
 		System.out.println(carApplicationCheck);
 		if(carApplicationCheck != null && carApplicationCheck.size() > 0) {
 			model.addAttribute("carApplicationList",carApplicationCheck);
@@ -47,10 +44,9 @@ public class ParkingController {
 
 	@GetMapping("/myapt/parking/applicationimpl")
 	public String carApplicationImpl(@RequestParam String aplctCarNumber, @SessionAttribute(name = "generation", required = false) Generation generation, Model model){
-		String generationIdx= generation.getGenerationIdx();
 		CarApplication carApplication = new CarApplication();
-		carApplication.setApartmentIdx("100000");
-		carApplication.setGenerationIdx(generationIdx);
+		carApplication.setApartmentIdx(generation.getApartmentIdx());
+		carApplication.setGenerationIdx(generation.getGenerationIdx());
 		carApplication.setAplctCarNumber(aplctCarNumber);
 		
 		// 신청 온 차량번호 검증한다..?
