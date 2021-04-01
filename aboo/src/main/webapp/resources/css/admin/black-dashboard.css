@@ -6033,3 +6033,23 @@ table.tablesorter thead tr .headerSortDown {
 }
 
 /*# sourceMappingURL=dashboard-free.css.map */
+
+
+
+
+
+/* 선영 css Zone */
+.validator{
+color: red;
+font-size: 1vw;
+margin-top: 5px;
+}
+
+.bg-sun{
+	background-color:#263148;
+
+}
+
+.modal-bg-sun{
+	background-color: #1a1e34;
+}

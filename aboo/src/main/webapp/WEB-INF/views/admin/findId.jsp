@@ -284,7 +284,7 @@
       	let certified = () => {
     	  let certifiedNum = document.querySelector("#certifiedNum").value;
     	  	
-  	  			fetch("/admin/authenticationid?certifiedNum="+certifiedNum,{
+  	  			fetch("/admin/authid?certifiedNum="+certifiedNum,{
   	  				method:"GET"
   	  			})
   	  			.then(response => response.text())
