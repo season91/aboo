@@ -67,7 +67,7 @@
             </a>
           </li>
           <li>
-            <a href="/admin/bdin">
+            <a href="/bdmin/login">
               <i class="tim-icons icon-key-25"></i>
               <p>BDIN</p>
             </a>

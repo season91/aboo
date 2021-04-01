@@ -13,6 +13,8 @@ public enum ErrorCode {
 	AUTH02("이미 인증이 만료된 링크입니다."),
 	MAIL01("메일 발송 중 에러가 발생했습ㅂ니다."),
 	API01("API통신 도중 에러가 발생하였습니다."),
+	AUTH04("해당 페이지는 직원만 접근가능합니다.", "/bdmin/login"),
+	AUTH05("해당 페이지는 관리자만 접근가능합니다.", "/admin/login"),
 	ER01("EXCEL 업로드 중 에러가 발생했습니다.","/admin/mgmtfee"),
 	UMGMT01("관리비 수정중 에러가 발생했습니다","/admin/mgmtfee"),
 	AUTH03("해당 아파트는 관리대상이 아닙니다.","/admin/index"),
