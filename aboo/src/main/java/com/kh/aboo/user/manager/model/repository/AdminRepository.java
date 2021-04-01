@@ -61,5 +61,7 @@ public interface AdminRepository {
 	@Select("select SEPARATOR from TB_APARTMENT where APARTMENT_IDX = #{apartmentIdx} ")
 	String selectApartmentBySeparator(String apartmentIdx);
 	
-
+	//휴대폰 정보수정
+	@Update("update TB_MANAGER set TELL = #{tell} where MANAGER_IDX = #{managerIdx}")
+	int updateAdminTell(Admin admin);
 }	

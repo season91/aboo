@@ -7,7 +7,7 @@ public class Apartment {
 	private String apartmentAddress;
 	private String apartmentLat;
 	private String apartmentLng;
-	private String parking;
+	private String apartmentParking;
 	private String separator;
 
 	public Apartment() {
@@ -15,14 +15,14 @@ public class Apartment {
 	}
 
 	public Apartment(String apartmentIdx, String apartmentName, String apartmentAddress, String apartmentLat,
-			String apartmentLng, String parking, String separator) {
+			String apartmentLng, String apartmentParking, String separator) {
 		super();
 		this.apartmentIdx = apartmentIdx;
 		this.apartmentName = apartmentName;
 		this.apartmentAddress = apartmentAddress;
 		this.apartmentLat = apartmentLat;
 		this.apartmentLng = apartmentLng;
-		this.parking = parking;
+		this.apartmentParking = apartmentParking;
 		this.separator = separator;
 	}
 
@@ -66,12 +66,12 @@ public class Apartment {
 		this.apartmentLng = apartmentLng;
 	}
 
-	public String getParking() {
-		return parking;
+	public String getApartmentParking() {
+		return apartmentParking;
 	}
 
-	public void setParking(String parking) {
-		this.parking = parking;
+	public void setApartmentParking(String apartmentParking) {
+		this.apartmentParking = apartmentParking;
 	}
 
 	public String getSeparator() {
@@ -85,8 +85,8 @@ public class Apartment {
 	@Override
 	public String toString() {
 		return "Apartment [apartmentIdx=" + apartmentIdx + ", apartmentName=" + apartmentName + ", apartmentAddress="
-				+ apartmentAddress + ", apartmentLat=" + apartmentLat + ", apartmentLng=" + apartmentLng + ", parking="
-				+ parking + ", separator=" + separator + "]";
+				+ apartmentAddress + ", apartmentLat=" + apartmentLat + ", apartmentLng=" + apartmentLng
+				+ ", apartmentParking=" + apartmentParking + ", separator=" + separator + "]";
 	}
 
 }

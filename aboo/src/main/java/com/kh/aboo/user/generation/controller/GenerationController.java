@@ -122,7 +122,7 @@ public class GenerationController {
 	}
 
 	@GetMapping("findidresult")
-	public String findidResult(HttpSession session, Model model) {
+	public String findIdResult(HttpSession session, Model model) {
 		Generation findGeneration = (Generation) session.getAttribute("findGeneration");
 
 		model.addAttribute("findGeneration", findGeneration);
@@ -237,7 +237,7 @@ public class GenerationController {
 		generationService.updateGenerationModify(generationValid);
 
 		model.addAttribute("alertMsg", "수정되었습니다.");
-		model.addAttribute("url", "/login");
+		model.addAttribute("url", "/mypage/modifyinfo");
 		return "common/result";
 	}
 
@@ -264,7 +264,6 @@ public class GenerationController {
 
 		String certifiedNum = (String) info.get("certifiedNum");
 		String authPathEmail = (String) session.getAttribute("authPathEmail");
-		System.out.println(certifiedNum);
 
 		if (!certifiedNum.equals(authPathEmail)) {
 			return "fail";
@@ -282,7 +281,7 @@ public class GenerationController {
 	@ResponseBody
 	public String modifyTellImpl(@RequestBody Generation generationInfo, HttpSession session) {
 
-
+		System.out.println(generationInfo);
 		int res = generationService.authTell(generationInfo.getTell(), session);
 
 		if (res != 202) {

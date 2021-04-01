@@ -15,7 +15,7 @@
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active"><a href="/index" class="nav-link">Home</a></li>
+	          <li class="nav-item"><a href="/index" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
 	          <li class="nav-item "><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
 	          <li class="nav-item"><a class="nav-link" href="/board/info/infolist">Board</a></li>
@@ -77,7 +77,7 @@
               </div>
               <div class="form-group">
                 <input type="text" class="form-control password" id = "password_2"  name = "password" placeholder="비밀번호 확인">
-			    <div id = "pass" style="font-size: 1vw;"></div> <!--비밀번호 일치-->
+			    <div id = "pass" class = "validator"></div> <!--비밀번호 일치-->
               </div>
               <div class="form-group d-flex">
 	            <div class="col-md-3 bg-primary text-white d-flex justify-content-center align-items-center">동</div>
@@ -186,7 +186,7 @@
             </div>
             <div class="modal-body">
             <div class="form-group d-flex justify-content-between">
-                <input type="text" class="form-control col-md-10" id = "tell" placeholder="휴대폰 번호를 입력하세요."><button type="button" class="btn btn-primary px-xl-3 py-xl-1" onclick="tellSend()">발송</button>
+                <input type="text" class="form-control col-md-10" id = "tell" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="11" placeholder="휴대폰 번호를 입력하세요."><button type="button" class="btn btn-primary px-xl-3 py-xl-1" onclick="tellSend()">발송</button>
               </div>
        	      <div class="form-group">
                 <input type="text" class="form-control" id = "certifiedPNum" placeholder="인증번호를 입력하세요."> 
@@ -268,7 +268,7 @@
  	   
  	   	if (!flg) {
            	document.querySelector("#pass").innerHTML = '비밀번호가 일치 하지않습니다'
-  		   	e.preventDefault();
+           	e.preventDefault();
 
 
 		}

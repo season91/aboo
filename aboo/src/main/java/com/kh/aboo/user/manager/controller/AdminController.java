@@ -105,7 +105,7 @@ public class AdminController {
 			@SessionAttribute(name = "admin", required = false) Admin admin, Model model) {
 
 		adminService.insertGeneration(generationInfo, admin.getApartmentIdx());
-		
+
 		model.addAttribute("alertMsg", "추가 되었습니다.");
 		model.addAttribute("url", "/admin/authority");
 		return "common/result";
@@ -120,7 +120,7 @@ public class AdminController {
 
 	@PostMapping("findidimpl")
 	@ResponseBody
-	public String findidImpl(@RequestBody Admin adminInfo, HttpSession session) {
+	public String findIdImpl(@RequestBody Admin adminInfo, HttpSession session) {
 		System.out.println(adminInfo);
 
 		Admin findAdmin = adminService.selectfindId(adminInfo);
@@ -134,15 +134,15 @@ public class AdminController {
 
 			session.setAttribute("authPathId", authPathId);
 			session.setAttribute("findAdmin", findAdmin);
-			adminService.authenticationIdMail(adminInfo, authPathId);
+			adminService.findIdEmail(adminInfo, authPathId);
 			return "success";
 		}
 
 	}
 
-	@GetMapping("authenticationid")
+	@GetMapping("authid")
 	@ResponseBody
-	public String authenticationId(@RequestParam String certifiedNum, HttpSession session, Model model) {
+	public String authId(@RequestParam String certifiedNum, HttpSession session, Model model) {
 
 		String authPathId = (String) session.getAttribute("authPathId");
 
@@ -157,7 +157,7 @@ public class AdminController {
 	}
 
 	@GetMapping("findidresult")
-	public String findidResult(HttpSession session, Model model) {
+	public String findIdResult(HttpSession session, Model model) {
 
 		Admin findAdmin = (Admin) session.getAttribute("findAdmin");
 
@@ -186,7 +186,7 @@ public class AdminController {
 
 			System.out.println("임시 번호 : " + password);
 
-			adminService.authenticationPasswordMail(findAdmin, password); // 메일 보내기
+			adminService.findPasswordEmail(findAdmin, password); // 메일 보내기
 
 			return "success";
 
@@ -219,7 +219,7 @@ public class AdminController {
 		adminService.updateAdminModify(adminValid);
 
 		model.addAttribute("alertMsg", "수정되었습니다.");
-		model.addAttribute("url", "/admin/login");
+		model.addAttribute("url", "/admin/mypage/modifyinfo");
 		return "common/result";
 	}
 
@@ -232,16 +232,16 @@ public class AdminController {
 		authPathEmail = authPathEmail.substring(0, 10);
 
 		session.setAttribute("authPathEmail", authPathEmail);
-		adminService.authenticationEmail(adminInfo, authPathEmail);
+		adminService.authEmail(adminInfo, authPathEmail);
 
 		return "success";
 
 	}
 
 	// 이메일 인증
-	@PostMapping("/mypage/authenticationemail")
+	@PostMapping("/mypage/authemail")
 	@ResponseBody
-	public String authenticationEmail(@RequestBody Map<String, Object> info, HttpSession session) {
+	public String authEmail(@RequestBody Map<String, Object> info, HttpSession session) {
 
 		String certifiedNum = (String) info.get("certifiedNum");
 		String authPathEmail = (String) session.getAttribute("authPathEmail");
@@ -257,6 +257,68 @@ public class AdminController {
 		return "success";
 	}
 
+	
+	// 번호 인증
+	@PostMapping("/mypage/modifytellimpl")
+	@ResponseBody
+	public String modifyTellImpl(@RequestBody Admin adminInfo, HttpSession session) {
+
+		int res = adminService.authTell(adminInfo.getTell(), session);
+
+		if (res != 202) {
+			
+			return "fail";
+		}
+
+		return "success";
+
+	}
+
+	// 번호 인증
+	@PostMapping("/mypage/authtell")
+	@ResponseBody
+	public String authTell(@RequestBody Map<String, Object> info, HttpSession session) {
+		String certifiedPNum = (String) info.get("certifiedPNum");
+		String authPathTell = (String) session.getAttribute("authPathTell");
+
+		if (!certifiedPNum.equals(authPathTell)) {
+			return "fail";
+		}
+
+		Admin admin = (Admin) session.getAttribute("admin");
+		String tell = (String) info.get("tell");
+		admin.setTell(tell);
+		adminService.updateAdminTell(admin);
+		return "success";
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// 세대 초기화
 	@PostMapping("authorityreset")
 	@ResponseBody

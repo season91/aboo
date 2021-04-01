@@ -184,7 +184,7 @@ public class GenerationServiceImpl implements GenerationService {
 	public int authTell(String tell, HttpSession httpSession) {
 
 		String method = "POST";
-		String url = "아이디";
+		String url = "/sms/v2/services//messages";
 		String timestamp = Long.toString(System.currentTimeMillis());
 		String accessKey = "";
 		String secretKey = "";
@@ -212,7 +212,7 @@ public class GenerationServiceImpl implements GenerationService {
 			String body = params.toString();
 
 			RequestEntity<String> request = RequestEntity
-					.post("https://sens.apigw.ntruss.com/sms/v2/services/아이디/messages")
+					.post("https://sens.apigw.ntruss.com/sms/v2/services//messages")
 					.headers(header).body(body);
 
 			ResponseEntity<String> response = http.exchange(request, String.class);
