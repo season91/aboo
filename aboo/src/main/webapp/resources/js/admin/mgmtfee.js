@@ -57,6 +57,7 @@
 				alert('삭제에 성공했습니다.');
 				return location.href="/admin/mgmtfee";
 			}
+			throw new AsyncPageError(response.text()); 
 		})
 		.catch(error =>{
 			error.alertMessage();
