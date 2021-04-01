@@ -141,21 +141,19 @@
       <!-- End Navbar -->
       
 		
-      <div class="content">
-      	 
-           <div class="row">
+     <div class="content">
+        <div class="row">
           <div class="col-md-12">
             <div class="card ">
               <div class="card-header">
-                <h3 class="title">차량 권한 등록</h3>
+                <h3 class="title">차량 등록 신청 확인</h3>
               </div>
-              
               <div class="col-md-12">
                 <div class="places-buttons">
                   <div class="row col-md-12">
                     <div class="col-md-6 ml-auto mr-auto text-center">
                       <h4 class="card-title">
-                       	세대정보 검색
+                       	차량 등록 신청 검색
                         <p class="category">조회 조건을 선택하세요.</p>
                       </h4>
                     </div>
@@ -163,18 +161,25 @@
                   <div class="row ">
                     <div class="col-lg-12 ml-auto mr-auto">
                       <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                          <form action="${context }/admin/car/application">
-                           <button type="submit" class="btn btn-success btn-block waitCnt" data-toggle="modal" >전체 상태 보기</button>
+                           <input type="hidden" name="standard" value="wait">
+                           <button type="submit" class="btn btn-success btn-block waitCnt" data-toggle="modal" >대기 상태만 보기</button>
                          </form>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                          <button type="button" class="btn btn-success btn-block approvalCnt" data-toggle="modal" data-target="#approvalcarModal">차량 등록 신청 승인</button>
                         </div>
-                         <div class="col-md-">
+                         <div class="col-md-4">
                          <button type="button" class="btn btn-success btn-block rejectCnt" data-toggle="modal" data-target="#rejectcarModal">차량 등록 신청 반려</button>
                         </div>
-                         <div class="col-md-3">
+                        <div class="col-md-4">
+                         <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#carNumberModal">차량번호로 검색</button>
+                        </div>
+                        <div class="col-md-4">
+                          <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#geneIdxModal" >세대정보로 검색</button>
+                        </div>
+                         <div class="col-md-4">
                          <form action="${context }/admin/car">
                           <button type="submit" class="btn btn-success btn-block" data-toggle="modal">차량 등록 현황 보기</button>
                          </form>
@@ -184,6 +189,7 @@
                   </div>
                 </div>
           </div>
+          
               
               <div class="card-body">
                 <div class="table-responsive">
@@ -351,6 +357,56 @@
 	    </div>
 	  </div>
 	</div>
+	
+	<div class="modal fade" id="carNumberModal" tabindex="-1" role="dialog" aria-labelledby="carNumberModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675); color:white;">
+            <div class="modal-header">
+            	<h4 class="modal-title" id="carNumberModalLabel">차량번호로 검색</h4>
+             	 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                <i class="tim-icons icon-simple-remove"></i>
+	              </button>
+            </div>
+            <div class="modal-body">
+	        <form action="${context }/admin/car/application">
+	          <div class="form-group">
+	           <input type="hidden" name="standard" value="carNumber">
+	           <input type="text" class="form-control" name="keyword" id="inlineFormInputGroup" placeholder="차량번호로 검색">
+	          </div>
+	          <div class="modal-footer">
+             <button type="submit" class="btn btn-primary">검색</button>
+            </div>
+	        </form>
+	      </div>
+          </div>
+        </div>
+      </div>
+      
+      
+      <div class="modal fade" id="geneIdxModal" tabindex="-1" role="dialog" aria-labelledby="geneIdxModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675); color:white;">
+            <div class="modal-header">
+            	<h4 class="modal-title" id="geneIdxModalLabel">세대정보로 검색</h4>
+             	 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                <i class="tim-icons icon-simple-remove"></i>
+	              </button>
+            </div>
+            <div class="modal-body">
+	        <form action="${context }/admin/car/application">
+	          <div class="form-group">
+	          	<input type="hidden" name="standard" value="generationInfo">
+	           <input type="text" class="form-control"  name="keyword" id="inlineFormInputGroup" placeholder="세대정보로 검색 (103-906)">
+	          </div>
+	           <div class="modal-footer">
+	            <button type="submit" class="btn btn-primary">검색</button>
+	            </div>
+	        </form>
+	      </div>
+          </div>
+        </div>
+      </div>
+	
 	
     
     <!--   Core JS Files   -->

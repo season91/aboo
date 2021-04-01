@@ -57,6 +57,12 @@
 				<when test="searchType == 'wait'">
 					apartment_idx = #{apartmentIdx} and is_process = 0
 				</when>
+				<when test="searchType == 'carNumber'">
+					apartment_idx = #{apartmentIdx} and aplct_car_number = #{carNumber}
+				</when>
+				<when test="searchType == 'generationIdx'">
+					apartment_idx = #{apartmentIdx} and generation_idx = #{generationIdx}
+				</when>
 			</choose>
 		</where>
 	</select>
@@ -72,6 +78,12 @@
 						</when>
 						<when test="searchType == 'wait'">
 							apartment_idx = #{apartmentIdx} and is_process = 0
+						</when>
+						<when test="searchType == 'carNumber'">
+							apartment_idx = #{apartmentIdx} and aplct_car_number = #{carNumber}
+						</when>
+						<when test="searchType == 'generationIdx'">
+							apartment_idx = #{apartmentIdx} and generation_idx = #{generationIdx} 
 						</when>
 					</choose>
 				</where>
