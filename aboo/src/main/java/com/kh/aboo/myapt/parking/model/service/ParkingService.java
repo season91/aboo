@@ -3,6 +3,7 @@ package com.kh.aboo.myapt.parking.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.aboo.admin.car.model.vo.Car;
 import com.kh.aboo.admin.car.model.vo.CarApplication;
 
 public interface ParkingService {
@@ -16,4 +17,10 @@ public interface ParkingService {
 	
 	// 2. 등록내역 있는지 확인하기
 	List<CarApplication> selectCarApplicationByGenerationIdx(String generationIdx);
+	
+	// 3. 신청가능상태인지 확인하기
+	Car selectCarByApplicationInfo(CarApplication carApplication);
+	
+	// 4. 신청 전 신청한내역이 있는지 확인한다
+	CarApplication selectCarApplication(CarApplication carApplication);
 }

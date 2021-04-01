@@ -17,7 +17,14 @@
 	          <li class="nav-item active"><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
 	          <li class="nav-item"><a class="nav-link" href="/board/info/listinfo">Board</a></li>
 	          <li class="nav-item"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
-	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>
+	           <c:choose>
+	          <c:when test="${sessionScope.generation == null}">
+	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
+	          </c:when>
+	          <c:when test="${sessionScope.generation != null}">
+	          <li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>	          
+	          </c:when>
+	          </c:choose>
 	        </ul>
 	      </div>
 	    </div>
@@ -45,42 +52,41 @@
     			<div class="col-lg-5 heading-white mb-4 mb-sm-4 mb-lg-0 ftco-animate">
     				<h2>차량 등록 신청</h2>
     				<p>오른쪽에 차량번호를 입력해주세요.</p>
-    				<p>세대당 2대만 신청 가능합니다.</p>
+    				<p>세대당 2대만 등록 가능합니다.</p>
     			</div>
     			<div class="col-lg-7 ftco-wrap ftco-animate">
-    		<form action="${context }/myapt/parking/applicationimpl" class="domain-form d-flex">
+    		<form:form modelAttribute="carApplication" action="${context }/myapt/parking/applicationimpl" method="post" class="domain-form d-flex">
               <div class="form-group domain-name">
-                <input type="text" class="form-control name px-4" name="aplctCarNumber" placeholder="차량번호를 입력해주세요. (예 : 123가4567)" maxlength="8">
+                <input type="text" class="form-control name px-4" name="aplctCarNumber" placeholder="예 : 123가4567" maxlength="8">
               </div>
               <div class="form-group domain-select d-flex">
                 <button type="submit" class="search-domain btn btn-primary text-center" >신청하기</button>
 	            </div>
-            </form>
+	          <form:errors path="aplctCarNumber" cssClass="heading-white"></form:errors>
+            </form:form>
     			</div>
     		</div>
     	</div>
     </section>
     
-    <section class="ftco-section">
-    	<div class="container">
-    		<div class="row justify-content-center">
-    			<div class="col-md-5 text-center heading-section ftco-animate">
-    				<c:choose>
-    					<c:when test="${carApplicationList eq null}">
-    						<p>차량 등록 신청한 건이 없습니다.</p>
-    					</c:when>
-    					<c:otherwise>
-    						<p>차량 등록 신청 진행 중인 건이 있습니다.</p>
-		           			 <p>처리까지 3~4일 소요됩니다.</p>
-		           			 <c:forEach items="${carApplicationList}" var="car">
-		           			 <p>신청 차량 번호 : ${car.aplctCarNumber }</p>
-		           			 </c:forEach>
-    					</c:otherwise>
-    				</c:choose>
-         		</div>
-    		</div>
-    	</div>
-    </section>
+    <c:choose>
+		<c:when test="${carApplicationList != null}">
+		<section class="ftco-section">
+	    	<div class="container">
+	    		<div class="row justify-content-center">
+	    			<div class="col-md-5 text-center heading-section ftco-animate">
+	    				<p>차량 등록 신청 진행 중인 건이 있습니다.</p>
+		      			 <p>처리까지 3~4일 소요됩니다.</p>
+		      			 <c:forEach items="${carApplicationList}" var="car">
+		      			 <p>신청 차량 번호 : ${car.aplctCarNumber }</p>
+		      			 </c:forEach>
+	         		</div>
+	    		</div>
+	    	</div>
+	    </section>
+		</c:when>
+	</c:choose>
+    
 
     <footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container">
