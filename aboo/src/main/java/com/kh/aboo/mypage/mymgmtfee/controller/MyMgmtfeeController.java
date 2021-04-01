@@ -59,12 +59,6 @@ public class MyMgmtfeeController {
 		model.addAttribute("mgmtdate", mgmtdate);
 	};
 
-	// 아영
-	@GetMapping("myvehicle")
-	public void myvehicle() {
-	};
-
-	
 	//선영 결제
 	@PostMapping("mymgmtfee/payment")
 	@ResponseBody

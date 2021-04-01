@@ -37,6 +37,10 @@ public interface MyMgmtfeeRepository {
 	Map<String,Object> selectMyMgmtfeeDate(String mgmtfeeIdx);
 	
 	//선영 결제
-	@Insert("insert into TB_MGMTFEE_PAYMENT(PAYMENT_IDX,MGMTFEE_IDX,PAYMENT_METHOD,PAYMENT_AMOUNT,PAYMENT_STATE) values(SC_PAYMENT_IDX.nextval,#{mgmtfeeIdx},#{paymentMethod},#{paymentAmount},'1')")
 	int insertPayment(MgmtfeePayment mgmtfeePayment);
+	
+	// 위에메서드 아래꺼로 교체하면됩니당~!
+	// 프로시저 결제
+	// 선영 결제 성공시 결제테이블 insert하고 아영 관리비 update하는 프로시저.
+	void procedurePaymentInsert(MgmtfeePayment mgmtfeePayment);
 }

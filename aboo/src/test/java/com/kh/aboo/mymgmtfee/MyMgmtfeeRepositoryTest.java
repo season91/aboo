@@ -14,6 +14,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.kh.aboo.admin.mgmtfee.model.vo.Mgmtfee;
 import com.kh.aboo.common.util.paging.Paging;
 import com.kh.aboo.mypage.mymgmtfee.model.repository.MyMgmtfeeRepository;
+import com.kh.aboo.mypage.mymgmtfee.model.vo.MgmtfeePayment;
 
 @WebAppConfiguration 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -42,4 +43,15 @@ public class MyMgmtfeeRepositoryTest {
 		System.out.println(myMgmtfeeList);
 	}
 
+	@Test
+	public void procedurePaymentInsert() {
+		MgmtfeePayment mgmtfeePayment = new MgmtfeePayment();
+		
+		mgmtfeePayment.setMgmtfeeIdx("100974");
+		mgmtfeePayment.setPaymentMethod("bigcard");
+		mgmtfeePayment.setPaymentAmount("2000");
+		
+		myMgmtfeeRepository.procedurePaymentInsert(mgmtfeePayment);
+				
+	}
 }
