@@ -17,7 +17,7 @@
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a href="/index" class="nav-link">Home</a></li>
+					<li class="nav-item active"><a href="/index" class="nav-link">Home</a></li>
 					<li class="nav-item"><a href="/about" class="nav-link">About</a></li>
 					<li class="nav-item "><a href="/myapt/schedule"
 						class="nav-link">MyApt</a></li>
@@ -53,14 +53,8 @@
 				<div
 					class="row slider-text align-items-center justify-content-center"
 					data-scrollax-parent="true">
-					<div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate"
-						data-scrollax=" properties: { translateY: '70%' }">
-						<p class="breadcrumbs"
-							data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
-							<span class="mr-2"><a href="index.html">FindId</a></span> <span>FindPasswrod</span>
-						</p>
-						<h1 class="mb-3 bread"
-							data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Mypage</h1>
+					<div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+						<h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Home</h1>
 					</div>
 				</div>
 			</div>
@@ -70,7 +64,7 @@
 	<section class="ftco-section contact-section ftco-degree-bg">
 		<h4 class="text-center mb-4">아이디 찾기</h4>
 		<div class="d-flex justify-content-center">
-			<div>아래정보를 입력하시면 아이디를 인증번호를 발송해드립니다</div>
+			<div>아래정보를 입력하시면 메일로 인증번호를 발송해드립니다</div>
 		</div>
 		<div class="container">
 			<div class="row block-9 justify-content-center">
@@ -97,7 +91,7 @@
 					</div>
 					<div class="col-sm-12 d-flex justify-content-center">
 						<div>
-							<a href="/mypage/findid">아이디 찾기</a> | <a href="/mypage/findpassword">비밀번호 찾기</a>
+							<a href="/findid">아이디 찾기</a> | <a href="/findpassword">비밀번호 찾기</a>
 						</div>
 					</div>
 				</div>
@@ -243,7 +237,7 @@
       let certified = () => {
     	  let certifiedNum = document.querySelector("#certifiedNum").value;
     	  	
-  	  			fetch("/authenticationid?certifiedNum="+certifiedNum,{
+  	  			fetch("/authid?certifiedNum="+certifiedNum,{
   	  				method:"GET"
   	  			})
   	  			.then(response => response.text())

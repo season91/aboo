@@ -55,9 +55,15 @@ public interface GenerationRepository {
 	@Select("select * from TB_GENERATION where GENERATION_IDX = #{generationIdx}")
 	Generation selectGeneration(Generation generation);
 	
+	//정보수정
 	int updateGenerationModify(Generation generation);
 	
+	//이메일 정보수정
 	@Update("update TB_GENERATION set email = #{email} where GENERATION_IDX = #{generationIdx}")
 	int updateGenerationEmail(Generation generation);
+	
+	//휴대폰 정보수정
+	@Update("update TB_GENERATION set TELL = #{tell} where GENERATION_IDX = #{generationIdx}")
+	int updateGenerationTell(Generation generation);
 }
 

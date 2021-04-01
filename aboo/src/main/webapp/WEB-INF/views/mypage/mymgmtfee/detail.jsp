@@ -253,9 +253,7 @@
             /*
             merchant_uid에 경우
             https://docs.iamport.kr/implementation/payment
-            위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
-            참고하세요.
-            나중에 포스팅 해볼게요.
+
             */
             name: '주문명:관리비고지서',
             //결제창에서 보여질 이름
@@ -322,10 +320,8 @@
 	       throw new AsyncPageError(response.text());
 	    }).then((text) => {
 	       if(text == 'success'){
-	     		alert("결제 성공하였습니다.")
 	     		location.href = "/mypage/mymgmtfee";
 	       }else{
-	     		alert("결제 실패하였습니다.")
 	       }
 	    }).catch(error => {
 	       error.alertMessage();

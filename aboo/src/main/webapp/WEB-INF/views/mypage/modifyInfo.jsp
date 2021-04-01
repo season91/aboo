@@ -19,7 +19,7 @@
 	          <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
 	          <li class="nav-item "><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
 	          <li class="nav-item"><a class="nav-link" href="/board/info/infolist">Board</a></li>
-	          <li class="nav-item "><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
+	          <li class="nav-item active"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
 	          <c:choose>
 		          <c:when test="${sessionScope.generation == null}">
 		          	<li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
@@ -46,8 +46,14 @@
         <div class="container-fluid">
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
             <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span>Contact</span></p>
-	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Contact</h1>
+ 				<p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">	
+	 				<span class="mr-2"><a href="/mypage/myalarm">My alarm</a></span>
+	 				<span class="mr-2"><a href="/mypage/mycar">My Car</a></span>
+	 				<span class="mr-2"><a href="/mypage/mymgmtfee">Management Fee</a></span>
+	 				<span class="mr-2"><a href="/mypage/generationwon">Generation won</a></span>
+	 				<span class="mr-2"><a href="/mypage/writelist">My write list</a></span>
+ 				</p>
+	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">My Information</h1>
             </div>
           </div>
         </div>
@@ -60,35 +66,41 @@
         <div class="row block-9 justify-content-center">
           <div class="col-md-6">
             <form:form id = "modifyForm" action="/mypage/modifyupdate" method="post" modelAttribute ="generation">
-              <div class="form-group">
-                <input type="text" readonly="readonly" class="form-control" name = "id" value = "${selectGeneration.id}" >
+              <div class="form-group d-flex">
+	              <div class="col-md-3 bg-primary text-white d-flex justify-content-center align-items-center">아이디</div>
+	                <input type="text" readonly="readonly" class="form-control" name = "id" value = "${selectGeneration.id}" >
               </div>
               <div class="form-group">
                 <input type="text" class="form-control password"  id = "password_1"  placeholder="비밀번호"> 
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control password" id = "password_2"  name = "password" placeholder="비밀번호 확인">
-			    <div id = "pass" style="font-size: 1vw;"></div> <!--비밀번호 일치-->
 			    <div id ="passwordConfirm" class = "validator"></div> <!--프론트 패스워드 유효성-->
               	<div><form:errors path="password" cssClass="validator"/></div><!--백 패스워드 유효성  -->
               </div>
               <div class="form-group">
+                <input type="text" class="form-control password" id = "password_2"  name = "password" placeholder="비밀번호 확인">
+			    <div id = "pass" style="font-size: 1vw;"></div> <!--비밀번호 일치-->
+              </div>
+              <div class="form-group d-flex">
+	            <div class="col-md-3 bg-primary text-white d-flex justify-content-center align-items-center">동</div>
                 <input type="text" readonly="readonly" name ="building" value = "${selectGeneration.building}" class="form-control" >
               </div>
-              <div class="form-group">
+              <div class="form-group d-flex">
+	            <div class="col-md-3 bg-primary text-white d-flex justify-content-center align-items-center">호</div>
                 <input type="text" readonly="readonly" name = "num" value = "${selectGeneration.num}" class="form-control" >
               </div>
               <div class="form-group d-flex justify-content-between">
-                <input type="text" class="form-control col-md-10" name = "tell" readonly="readonly" value = "${selectGeneration.tell}"><button type="button" class="btn btn-primary px-xl-3 py-xl-1" data-toggle="modal" data-target="#tellModal">인증</button>              
+	              <div class="col-md-3 bg-primary text-white d-flex justify-content-center align-items-center">휴대폰</div>
+                <input type="text" class="form-control col-md-7" name = "tell" readonly="readonly" value = "${selectGeneration.tell}"><button type="button" class="btn btn-primary px-xl-3 py-xl-1" data-toggle="modal" data-target="#tellModal">인증</button>              
               </div>
               <div class="form-group d-flex justify-content-between">
-                <input type="text" class="form-control col-md-10"  name = "email" readonly="readonly" value = "${selectGeneration.email}"><button type="button" class="btn btn-primary px-xl-3 py-xl-1" data-toggle="modal" data-target="#emailModal">인증</button>
+	              <div class="col-md-3 bg-primary text-white d-flex justify-content-center align-items-center">이메일</div>
+                <input type="text" class="form-control col-md-7"  name = "email" readonly="readonly" value = "${selectGeneration.email}"><button type="button" class="btn btn-primary px-xl-3 py-xl-1" data-toggle="modal" data-target="#emailModal">인증</button>
               </div>
-              <div class="form-group">
+              <div class="form-group d-flex">
+	            <div class="col-md-3 bg-primary text-white d-flex justify-content-center align-items-center">입주일</div>
                 <input type="text" readonly="readonly" class="form-control" name = "regDate" value = "${selectGeneration.regDate}" >
               </div>
               <div class="form-group">
-                <input type="submit" value="수정완료" class="btn btn-primary py-3 px-5 col-sm-12" >
+                <input type="submit" value="수정완료" class="btn btn-primary mt-2 py-3 px-5 col-sm-12" >
               </div>
             </form:form>                              
           </div>
@@ -169,17 +181,20 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title" id="myModalLabel">인증번호</h4>
+              <h4 class="modal-title" id="myModalLabel">휴대폰 인증</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
+            <div class="form-group d-flex justify-content-between">
+                <input type="text" class="form-control col-md-10" id = "tell" placeholder="휴대폰 번호를 입력하세요."><button type="button" class="btn btn-primary px-xl-3 py-xl-1" onclick="tellSend()">발송</button>
+              </div>
        	      <div class="form-group">
-                <input type="text" class="form-control"> 
+                <input type="text" class="form-control" id = "certifiedPNum" placeholder="인증번호를 입력하세요."> 
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">확인</button>
+              <button type="button" class="btn btn-primary" onclick="certifiedPNum()">확인</button>
             </div>
           </div>
         </div>
@@ -195,10 +210,10 @@
             </div>
             <div class="modal-body">
             <div class="form-group d-flex justify-content-between">
-                <input type="text" class="form-control col-md-10" id = "email"><button type="button" class="btn btn-primary px-xl-3 py-xl-1" onclick="emailSend()">발송</button>
+                <input type="text" class="form-control col-md-10" id = "email" placeholder="이메일을 입력하세요."><button type="button" class="btn btn-primary px-xl-3 py-xl-1" onclick="emailSend()">발송</button>
               </div>
        	      <div class="form-group">
-                <input type="text" class="form-control" id = "certifiedNum"> 
+                <input type="text" class="form-control" id = "certifiedNum" placeholder="인증번호를 입력하세요."> 
               </div>
             </div>
             <div class="modal-footer">
@@ -262,6 +277,7 @@
     
    	</script>
    	
+   	<!-- 이메일 인증번호 보내기 -->
 	<script type="text/javascript">
       let emailSend = () => {
     	  let email = document.querySelector("#email").value;
@@ -295,11 +311,48 @@
        }
 
    </script>
+   
+   <!-- 전화번호 인증번호 보내기 -->
+   	<script type="text/javascript">
+      let tellSend = () => {
+    	  let tell = document.querySelector("#tell").value;
+    	  console.dir(tell);
+    	  
+          const url = '/mypage/modifytellimpl';
+           
+          let paramObj = new Object();
+          paramObj.tell = document.querySelector("#tell").value;
+          let headerObj = new Headers();
+          headerObj.append("content-type","application/json");
+          fetch(url,{
+             method:"post",
+             headers:headerObj,
+             body:JSON.stringify(paramObj)
+          }).then(response => {
+             if(response.ok){
+                return response.text();    
+             }
+             throw new AsyncPageError(response.text());
+          }).then((text) => {
+             if(text == 'fail'){ 
+                alert('실패')
+             }else{ 
+                 alert('메일이 발송되었습니다.');
 
+             }
+          }).catch(error => {
+             error.alertMessage();
+          }); 
+       }
+
+   </script>
+   
+   
+   <!--이메일 인증번호 확인 -->
 	<script type="text/javascript">
       let certifiedNum = () => {
     	  
-          const url = '/mypage/authenticationemail';
+          const url = '/mypage/authemail';
            
           let paramObj = new Object();
           paramObj.certifiedNum = document.querySelector("#certifiedNum").value;
@@ -320,6 +373,41 @@
                 alert('정확한 인증번호를 입력해주세요')
              }else{ 
                  alert('이메일 인증에 성공하였습니다.');
+                 location.href = "/mypage/modifyinfo"
+             }
+          }).catch(error => {
+             error.alertMessage();
+          }); 
+       }
+
+   </script>
+   
+   
+    <!--전화번호 인증번호 확인 -->
+	<script type="text/javascript">
+      let certifiedPNum = () => {
+    	  
+          const url = '/mypage/authtell';
+           
+          let paramObj = new Object();
+          paramObj.certifiedPNum = document.querySelector("#certifiedPNum").value;
+          paramObj.tell = document.querySelector("#tell").value;
+          let headerObj = new Headers();
+          headerObj.append("content-type","application/json");
+          fetch(url,{
+             method:"post",
+             headers:headerObj,
+             body:JSON.stringify(paramObj)
+          }).then(response => {
+             if(response.ok){
+                return response.text();    
+             }
+             throw new AsyncPageError(response.text());
+          }).then((text) => {
+             if(text == 'fail'){ 
+                alert('정확한 인증번호를 입력해주세요')
+             }else{ 
+                 alert('휴대폰 인증에 성공하였습니다.');
                  location.href = "/mypage/modifyinfo"
              }
           }).catch(error => {

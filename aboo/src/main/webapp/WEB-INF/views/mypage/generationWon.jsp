@@ -6,26 +6,37 @@
 <body>
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="index.html">WebHost</a>
+	      <a class="navbar-brand" href="/index">ABOO</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-	          <li class="nav-item active"><a href="domain.html" class="nav-link">Domain</a></li>
-	          <li class="nav-item"><a class="nav-link" href="hosting.html">Hosting</a></li>
-	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-	          <li class="nav-item cta"><a href="contact.html" class="nav-link"><span>Get started</span></a></li>
+	          <li class="nav-item"><a href="/index" class="nav-link">Home</a></li>
+	          <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+	          <li class="nav-item "><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
+	          <li class="nav-item"><a class="nav-link" href="/board/info/infolist">Board</a></li>
+	          <li class="nav-item active"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
+	          <c:choose>
+		          <c:when test="${sessionScope.generation == null}">
+		          	<li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
+		          </c:when>
+		          <c:when test="${sessionScope.generation != null}">
+		          	<li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>	          
+		          </c:when>
+		          <c:when test="${sessionScope.admin == null}">
+		          	<li class="nav-item cta"><a href="/login" class="nav-link"><span>Admin Login</span></a></li>	          
+		          </c:when>
+		          <c:when test="${sessionScope.admin != null}">
+		          	<li class="nav-item cta"><a href="/login" class="nav-link"><span>Admin Logout</span></a></li>	          
+		          </c:when>
+	          </c:choose>
 	        </ul>
 	      </div>
 	    </div>
 	  </nav>
     <!-- END nav -->
-
     <section class="home-slider owl-carousel">
       <div class="slider-item bread-item" style="background-image: url(images/bg_1.jpg);" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
@@ -33,8 +44,14 @@
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
 
             <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span>Domain</span></p>
-	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Domain Hosting</h1>
+ 				<p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">		
+	 				<span class="mr-2"><a href="/mypage/myalarm">My alarm</a></span>
+	 				<span class="mr-2"><a href="/mypage/mycar">My Car</a></span>
+	 				<span class="mr-2"><a href="/mypage/mymgmtfee">Management Fee</a></span>
+	 				<span class="mr-2"><a href="/mypage/modifyinfo">My Information</a></span>
+	 				<span class="mr-2"><a href="/mypage/writelist">My write list</a></span>
+ 				</p>
+	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Generation won</h1>
             </div>
           </div>
         </div>
@@ -46,11 +63,11 @@
     	<div class="container">
     		<div class="row justify-content-center mb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
-     	  <h4 class = "text-center mb-4">개인정보 수정</h4>
+     	  <h4 class = "text-center mb-4">세대원 관리</h4>
           </div>
         </div>
         	<div class = "d-flex justify-content-end">
-				<button class = "btn px-xl-5 py-xl-2" style="color: #fff !important; background: linear-gradient(45deg, #12e6ca 0%, #8be55d 100%); margin-bottom: 1%;"  data-toggle="modal" data-target="#addModal">추가</button>
+				<button class = "btn px-xl-5 py-xl-2" style="color: #fff !important; background: linear-gradient(45deg, #6c9fdf 0%, #82c5f4 100%); margin-bottom: 1%;"  data-toggle="modal" data-target="#addModal">추가</button>
         	</div>
     		<div class="row">
     			<div class="col-md-12 ftco-animate">

@@ -18,13 +18,13 @@ public interface GenerationService {
 	Generation selectFindId(Generation generation);
 	
 	//아이디 찾기 메일
-	void authenticationIdMail(Generation generation ,String authPathId);
+	void findIdEmail(Generation generation ,String authPathId);
 	
 	//비밀번호 찾기 전 확인
 	Generation selectFindPassword(Generation generation);
 	
 	//비밀번호 찾기 메일
-	void authenticationPasswordMail(Generation generation, String password);
+	void findPasswordEmail(Generation generation, String password);
 	
 	//선영  세대 리스트
 	Map<String,Object> selectGenerationWonList(int currentPage,String generationIdx);
@@ -42,7 +42,7 @@ public interface GenerationService {
 	int updateGenerationModify(Generation generation);
 	
 	//이메일 인증
-	void authenticationEmail(Generation generation ,String authPathEmail);
+	void authEmail(Generation generation ,String authPathEmail);
 	
 	//이메일 인증 성공시 이메일 업데이트
 	int updateGenerationEmail(Generation generation);
@@ -50,9 +50,10 @@ public interface GenerationService {
 	//세대원 수 확인
 	int selectGenerationWonCnt(Generation generation);
 	
-	int authToVote(String tell, HttpSession httpSession);
+	int authTell(String tell, HttpSession httpSession);
 	 
-	 
+	//휴대폰 인증 성공시 이메일 업데이트
+	int updateGenerationTell(Generation generation);
 	 
 	 
 

@@ -97,15 +97,16 @@ public class GenerationController {
 
 			session.setAttribute("authPathId", authPathId);
 			session.setAttribute("findGeneration", findGeneration);
-			generationService.authenticationIdMail(findGeneration, authPathId);
+			
+			generationService.findIdEmail(findGeneration, authPathId);
 			return "success";
 		}
 
 	}
 
-	@GetMapping("authenticationid")
+	@GetMapping("authid")
 	@ResponseBody
-	public String authenticationId(@RequestParam String certifiedNum, HttpSession session, Model model) {
+	public String authId(@RequestParam String certifiedNum, HttpSession session, Model model) {
 
 		String authPathId = (String) session.getAttribute("authPathId");
 
@@ -147,7 +148,7 @@ public class GenerationController {
 			String password = random.randomPw();
 
 			System.out.println("임시 번호 : " + password);
-			generationService.authenticationPasswordMail(findGeneration, password); // 메일 보내기
+			generationService.findPasswordEmail(findGeneration, password); // 메일 보내기
 
 			return "success";
 
@@ -199,12 +200,12 @@ public class GenerationController {
 
 		int cnt = generationService.selectGenerationWonCnt(generation);
 		System.out.println(cnt);
-		
+
 		if (cnt >= 5) {
 			return "fail";
-		
+
 		} else {
-			
+
 			generationService.insertGenerationWonAdd(generationWon);
 			return "success";
 
@@ -236,7 +237,7 @@ public class GenerationController {
 		generationService.updateGenerationModify(generationValid);
 
 		model.addAttribute("alertMsg", "수정되었습니다.");
-		model.addAttribute("url", "/mypage/modifyinfo");
+		model.addAttribute("url", "/login");
 		return "common/result";
 	}
 
@@ -249,19 +250,17 @@ public class GenerationController {
 		authPathEmail = authPathEmail.substring(0, 10);
 
 		session.setAttribute("authPathEmail", authPathEmail);
-		session.setAttribute("findGeneration", generationInfo);
-		generationService.authenticationEmail(generationInfo, authPathEmail);
-
-		System.out.println(generationInfo);
+		
+		generationService.authEmail(generationInfo, authPathEmail);
 
 		return "success";
 
 	}
 
 	// 이메일 인증
-	@PostMapping("/mypage/authenticationemail")
+	@PostMapping("/mypage/authemail")
 	@ResponseBody
-	public String authenticationEmail(@RequestBody Map<String, Object> info, HttpSession session) {
+	public String authEmail(@RequestBody Map<String, Object> info, HttpSession session) {
 
 		String certifiedNum = (String) info.get("certifiedNum");
 		String authPathEmail = (String) session.getAttribute("authPathEmail");
@@ -278,6 +277,42 @@ public class GenerationController {
 		return "success";
 	}
 
+	// 휴대폰 인증
+	@PostMapping("/mypage/modifytellimpl")
+	@ResponseBody
+	public String modifyTellImpl(@RequestBody Generation generationInfo, HttpSession session) {
+
+
+		int res = generationService.authTell(generationInfo.getTell(), session);
+
+		if (res != 202) {
+			
+			return "fail";
+		}
+
+		return "success";
+	}
+
+	// 휴대폰 인증
+	@PostMapping("/mypage/authtell")
+	@ResponseBody
+	public String authTell(@RequestBody Map<String, Object> info, HttpSession session) {
+
+		String certifiedPNum = (String) info.get("certifiedPNum");
+		String authPathTell = (String) session.getAttribute("authPathTell");
+		System.out.println(certifiedPNum);
+
+		if (!certifiedPNum.equals(authPathTell)) {
+			return "fail";
+		}
+
+		Generation generation = (Generation) session.getAttribute("generation");
+		String tell = (String) info.get("tell");
+		generation.setTell(tell);
+		generationService.updateGenerationTell(generation);
+		return "success";
+	}
+
 	// 세대 추가 메서드 이거 쓰세용
 	// 세대 더미 용
 	@GetMapping("generation/add")
@@ -290,16 +325,6 @@ public class GenerationController {
 		generation.setNum(num);
 
 		generationService.insertGeneration(generation);
-	}
-
-	@GetMapping("/me")
-	public String me(HttpSession session) {
-
-		String tell = "01092680961";
-		generationService.authToVote(tell, session);
-
-		return "";
-
 	}
 
 }

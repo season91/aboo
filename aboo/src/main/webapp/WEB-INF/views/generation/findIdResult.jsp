@@ -18,7 +18,7 @@
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a href="/index" class="nav-link">Home</a></li>
+					<li class="nav-item active"><a href="/index" class="nav-link">Home</a></li>
 					<li class="nav-item"><a href="/about" class="nav-link">About</a></li>
 					<li class="nav-item "><a href="/myapt/schedule"
 						class="nav-link">MyApt</a></li>
@@ -54,14 +54,8 @@
 				<div
 					class="row slider-text align-items-center justify-content-center"
 					data-scrollax-parent="true">
-					<div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate"
-						data-scrollax=" properties: { translateY: '70%' }">
-						<p class="breadcrumbs"
-							data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
-							<span class="mr-2"><a href="index.html">Home</a></span> <span>Contact</span>
-						</p>
-						<h1 class="mb-3 bread"
-							data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Contact</h1>
+					<div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+						<h1 class="mb-3 bread"data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Home</h1>
 					</div>
 				</div>
 			</div>
