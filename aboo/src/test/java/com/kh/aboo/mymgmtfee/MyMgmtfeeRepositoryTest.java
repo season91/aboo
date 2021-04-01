@@ -48,9 +48,9 @@ public class MyMgmtfeeRepositoryTest {
 	public void procedurePaymentInsert() {
 		MgmtfeePayment mgmtfeePayment = new MgmtfeePayment();
 		
-		mgmtfeePayment.setMgmtfeeIdx("100974");
-		mgmtfeePayment.setPaymentMethod("bigcard");
-		mgmtfeePayment.setPaymentAmount("2000");
+		mgmtfeePayment.setMgmtfeeIdx("100970");
+		mgmtfeePayment.setPaymentMethod("card");
+		mgmtfeePayment.setPaymentAmount("123");
 		
 		myMgmtfeeRepository.procedurePaymentInsert(mgmtfeePayment);
 				

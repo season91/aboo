@@ -3,14 +3,12 @@ package com.kh.aboo.mypage.mymgmtfee.model.repository;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import com.kh.aboo.admin.mgmtfee.model.vo.Mgmtfee;
 import com.kh.aboo.admin.mgmtfee.model.vo.MgmtfeeOverdue;
 import com.kh.aboo.mypage.mymgmtfee.model.vo.MgmtfeePayment;
-import com.kh.aboo.user.generation.model.vo.Generation;
 
 @Mapper
 public interface MyMgmtfeeRepository {
@@ -35,10 +33,7 @@ public interface MyMgmtfeeRepository {
 	// 2. 고지월로만 조회
 	@Select("select extract(year from mgmt_start_date) year, extract(month from mgmt_start_date) month from tb_mgmtfee where mgmtfee_idx=#{mgmtfeeIdx}")
 	Map<String,Object> selectMyMgmtfeeDate(String mgmtfeeIdx);
-	
-	//선영 결제
-	int insertPayment(MgmtfeePayment mgmtfeePayment);
-	
+		
 	// 위에메서드 아래꺼로 교체하면됩니당~!
 	// 프로시저 결제
 	// 선영 결제 성공시 결제테이블 insert하고 아영 관리비 update하는 프로시저.

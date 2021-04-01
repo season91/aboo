@@ -77,7 +77,7 @@ public class MyMgmtfeeServiceImpl implements MyMgmtfeeService {
 	//선영 결제
 	@Override
 	public void insertPayment(MgmtfeePayment mgmtfeePayment) {
-		 myMgmtfeeRepository.procedureInsertPayment(mgmtfeePayment);
+		 myMgmtfeeRepository.procedurePaymentInsert(mgmtfeePayment);
 	}
 
 
