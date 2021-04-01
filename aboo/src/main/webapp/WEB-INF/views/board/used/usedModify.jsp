@@ -62,13 +62,27 @@
             <p>게시글 수정</p>
           </div>
         </div>
+        
         <form id = "modifyForm" action="/board/used/usedmodifyimpl" method="post" enctype="multipart/form-data">
         	<div class="p-2 bg-light mt-1">
 	        	<div class="row block-9 d-flex justify-content-center text-center">
 		          <div class="col-md-11">
 		              <div class="form-group mb-0 d-flex w-80">
+		                    <select class="btn dropdown-toggle p-3" name="isTrnsc">
+							  <option value="0">판매 중</option>
+							  <option value="1">판매 완료</option>
+							</select>
+		              </div>
+		          </div>
+		        </div>
+	        </div>
+        	
+        	<div class="p-2 bg-light mt-1">
+	        	<div class="row block-9 d-flex justify-content-center text-center">
+		          <div class="col-md-11">
+		              <div class="form-group mb-0 d-flex w-80">
 		              	<input type="hidden" name="usedIdx" value="${usedBrd.usedIdx}">
-		                <span class="col-md-3 align-self-center text-left">제목</span><input type="text" class="form-control" name="usedTitle" required="required" placeholder="제목을 입력해주세요." value="${usedBrd.usedTitle}">
+		                <span class="col-md-3 align-self-center text-left">제목</span><input type="text" class="form-control" name="usedTitle" required="required" maxlength="20"  placeholder="제목을 입력해주세요." value="${usedBrd.usedTitle}">
 		              </div>
 		          </div>
 		        </div>

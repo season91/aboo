@@ -67,7 +67,7 @@
 	        	<div class="row block-9 d-flex justify-content-center text-center">
 		          <div class="col-md-11">
 		              <div class="form-group mb-0 d-flex w-80">
-		                <span class="col-md-3 align-self-center text-left">제목</span><input type="text" class="form-control" name="usedTitle" required="required" placeholder="제목을 입력해주세요.">
+		                <span class="col-md-3 align-self-center text-left">제목</span><input type="text" class="form-control" name="usedTitle" maxlength="20" required="required" placeholder="제목을 입력해주세요.">
 		              </div>
 		          </div>
 		        </div>

@@ -17,18 +17,20 @@ public interface UsedRepository {
 
 	List<UsedBrd> selectUsedBrdList(Map<String, Object> usedMap);
 
-	@Select("select count(*) from TB_USED_BRD")
-	int selectUsedBrdCnt();
+	@Select("select count(*) from TB_USED_BRD where IS_DEL = 0 and APARTMENT_IDX = #{apartmentIdx}")
+	int selectUsedBrdCnt(String apartmentIdx);
 
 	@Select("select * from TB_USED_BRD where USED_IDX = #{usedIdx} and IS_DEL = 0")
 	UsedBrd selectUsedDetail(String usedIdx);
-
 	
 	@Update("update TB_USED_BRD set IS_PRIVATE = 1 where USED_IDX = #{usedIdx}")
 	int updateUsedPrivate(String usedIdx);
 	
 	@Update("update TB_USED_BRD set IS_DEL = 1 where USED_IDX = #{usedIdx}")
 	int updateUsedDelete(String usedIdx);
+	
+	@Update("update TB_FILE set IS_DEL = 1 where TYPE_IDX = #{usedIdx}")
+	int updateUsedFileDelete(String usedIdx);
 	
 	@Select("select * from TB_USED_BRD where USED_IDX = #{usedIdx}")
 	UsedBrd selectUsedIdx(String usedIdx);
@@ -46,7 +48,7 @@ public interface UsedRepository {
 
 	
 	//게시물 수정
-	@Update("update TB_USED_BRD set USED_TITLE = #{usedTitle}, USED_CONTENT = #{usedContent}, USED_REG_DATE = SYSDATE where USED_IDX =#{usedIdx}")
+	@Update("update TB_USED_BRD set USED_TITLE = #{usedTitle}, USED_CONTENT = #{usedContent}, USED_REG_DATE = SYSDATE, IS_TRNSC = #{isTrnsc} where USED_IDX =#{usedIdx} ")
 	int updateUsedBrdModify(UsedBrd usedBrd);
 	
 	int updateUsedBrdFileModify(Map<String,Object> commandMap);
