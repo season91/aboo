@@ -67,9 +67,15 @@
             </a>
           </li>
           <li>
-            <a href="/admin/bdin">
+           <a href="/admin/notice">
+              <i class="tim-icons icon-volume-98"></i>
+              <p>notice</p>
+            </a>
+          </li>
+          <li>
+            <a href="/bdmin/login">
               <i class="tim-icons icon-key-25"></i>
-              <p>BDIN</p>
+              <p>BDMIN</p>
             </a>
           </li>
         </ul>

@@ -20,7 +20,7 @@
             <img src="../../../resources/abooimg/logo_w.png">
           </a>
           <a href="/admin/index" class="simple-text logo-normal">
-            ADMIN
+            BDMIN
           </a>
         </div>
         <ul class="nav">
@@ -51,7 +51,7 @@
           <li>
             <a href="/admin/vehicle">
               <i class="tim-icons icon-bus-front-12"></i>
-              <p>Vehicle</p>
+              <p>Car</p>
             </a>
           </li>
           <li>
@@ -67,11 +67,20 @@
             </a>
           </li>
           <li>
-            <a href="/admin/bdin">
-              <i class="tim-icons icon-key-25"></i>
-              <p>BDIN</p>
-            </a>
-          </li>
+          <a href="/admin/notice">
+            <i class="tim-icons icon-key-25"></i>
+      		 <p>notice</p>
+      		</a>
+      	 </li>
+	
+	       	<c:if test="${sessionScope.bdmin != null}">
+	       	<li>
+	       	<a href="/bdmin/apartment">
+	         	<i class="tim-icons icon-key-25"></i>
+	  			 <p>BDIN</p>
+	  	    </a>
+	  		</li>
+	       	</c:if>
         </ul>
       </div>
     </div>
@@ -87,7 +96,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Management Fee</a>
+            <a class="navbar-brand" href="#pablo">BDMIN - manager authority</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -112,11 +121,11 @@
                   <div class="dropdown-divider"></div>
                   <li class="nav-link">
                   <c:choose>
-                  	<c:when test="${sessionScope.admin == null}">
-                    	<a href="/admin/login" class="nav-item dropdown-item">Log in</a>
+                  	<c:when test="${sessionScope.bdmin == null}">
+                    	<a href="/bdmin/logout" class="nav-item dropdown-item">Log in</a>
                   	</c:when>
-                  	<c:when test="${sessionScope.admin != null}">
-                    	<a href="/admin/logout" class="nav-item dropdown-item">Log out</a>
+                  	<c:when test="${sessionScope.bdmin != null}">
+                    	<a href="/bdmin/logout" class="nav-item dropdown-item">Log out</a>
                   	</c:when>
                   </c:choose>
                   </li>
@@ -135,17 +144,15 @@
           <div class="col-md-12">
             <div class="card ">
               <div class="card-header">
-                <h3 class="title">세대별 관리비 고지 내역</h3>
+                <h3 class="title">Manager 권한 관리</h3>
               </div>
-              
               <div class="col-md-12">
                 <div class="places-buttons">
                   <div class="row">
                     <div class="col-md-6 ml-auto mr-auto text-center">
                       <h4 class="card-title">
-                       	고지서 상세 검색
+                       	Manager 검색
                         <p class="category">조회 조건을 선택하세요.
-                        <br>산출금액은 연체료 미포함 금액입니다.</p>
                       </h4>
                     </div>
                   </div>
@@ -153,26 +160,19 @@
                     <div class="col-lg-16 ml-auto mr-auto">
                       <div class="row">
                         <div class="col-md-3">
-                        <form action="${context }/admin/mgmtfee">
-                          <button type="submit" class="btn btn-primary btn-block btn-nopayment" id="isPayment">미납상태만 보기
-                          <input type="hidden" name="standard" value="isPayment">
-                          </button>
-                          </form>
+                          <button type="button" class="btn btn-warning btn-block managerAdd" data-toggle="modal" data-target="#addmanagerModal" >관리자 신규 등록</button>
                         </div>
-                        <div class="col-md-3 dropdown">
-                          <button class="btn btn-primary btn-block" id="search-button" data-toggle="modal" data-target="#mgmtfeeDueDateModal">고지 월별 보기</button>
+                        <div class="col-md-4">
+                         <button type="button" class="btn btn-warning btn-block managerModify" data-toggle="modal" data-target="#modifymanageModal">관리자 정보 수정</button>
                         </div>
-                        <div class="col-md-3">
-                          <button class="btn btn-primary btn-block" id="search-button" data-toggle="modal" data-target="#mgmtfeeNumberModal">관리비번호로 검색</button>
+                         <div class="col-md-4">
+                         <button type="button" class="btn btn-warning btn-block managerDelete" data-toggle="modal" data-target="#deletemanageModal">관리자 삭제</button>
                         </div>
                         <div class="col-md-3">
-                          <button class="btn btn-primary btn-block" id="search-button" data-toggle="modal" data-target="#generationInfoModal">세대정보로 검색</button>
+                          <button type="button" class="btn btn-warning btn-block" id="search-button" data-toggle="modal" data-target="#nameModal">관리자 이름 검색</button>
                         </div>
-                         <div class="col-md-3">
-                          <button class="btn btn-primary btn-block" id="mgmtfee-upload" data-toggle="modal" data-target="#mgmtfeeUploadrModal">관리비 업로드</button>
-                        </div>
-                         <div class="col-md-3">
-                         <button class="btn btn-primary btn-block mgmtfeeDelete" data-toggle="modal" data-target="#mgmtfeeDeleteModal" >관리비 삭제</button>
+                        <div class="col-md-3">
+                          <button type="button" class="btn btn-warning btn-block" id="search-button" data-toggle="modal" data-target="#apartmentModal">아파트 명으로 검색</button>
                         </div>
                       </div>
                     </div>
@@ -187,47 +187,40 @@
                    <th>
                      <div class="form-check checkAll" id="checkAll">
                          <label class="form-check-label">
-                           <input class="form-check-input allmgmtfee" type="checkbox" value="">
+                           <input class="form-check-input allmanager" type="checkbox" value="">
                            <span class="form-check-sign">
                              <span class="check"></span>
                            </span>
                          </label>
                        </div>
                    </th>
-                   <th>관리비번호</th>
-                   <th>세대정보</th>
-                   <th>관리비 고지월 </th>
-                   <th>산출금액</th>
-                   <th>납부상태</th>
+                   <th>번호</th>
+                   <th>아파트명</th>
+                   <th>이름</th>
+                   <th>전화번호</th>
+                   <th>아이디</th>
                    <th>이동</th>
                  </thead>
                  <tbody>
                   
-            	<c:forEach items="${mgmtfeeList}" var="mgmtfee" varStatus="status">
+            	<c:forEach items="${managerList}" var="manager" varStatus="status">
                    <tr>
                    	 <td>
                          <div class="form-check">
                            <label class="form-check-label">
-                             <input class="form-check-input mgmtfee" type="checkbox" value="" name="mgmtfee">
+                             <input class="form-check-input manager" type="checkbox" value="" name="mgmtfee">
                              <span class="form-check-sign">
                                <span class="check"></span>
                              </span>
                            </label>
                          </div>
                        </td>
-                       <td><a href="/mypage/mymgmtfee?${mgmtfee.mgmtfeeIdx }"> ${mgmtfee.mgmtfeeIdx}</a> </td>
-                       <td> ${generationList[status.index].building }동 ${generationList[status.index].num}호</td>
-                       <td> ${mgmtfee.dueDate } </td>
-                       <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${mgmtfee.periodPayment}"/> </td>
-                       <c:choose>
-                       	<c:when test="${mgmtfee.isPayment eq 0}">
-                       		<td>미납</td>
-                       	</c:when>
-                       	<c:otherwise>
-                       		<td>완료</td>
-                       	</c:otherwise>
-                       </c:choose>
-                       <td> <a href="/admin/mgmtfee/modify?mgmtfeeidx=${mgmtfee.mgmtfeeIdx}">수정/삭제</a></td>
+                       <td> ${manager.managerIdx}</td>
+                       <td> ${apartmentName } </td>
+                       <td>${manager.name }</td>
+                       <td> ${manager.tell }</td>
+                       <td> ${manager.id} </td>
+                       <td> 상세정보</td>
                       </tr>
                    </c:forEach>
               		
@@ -241,28 +234,28 @@
 	          <div class="col text-center">
 	            <div class="block-27">
 	              <ul>
-	                <li><a href="/admin/${paging.type }">&lt;&lt;</a></li>
-	                <li><a href="/admin/${paging.type }?page=${paging.prev}">&lt;</a></li>
+	                <li><a href="/bdmin/${paging.type }">&lt;&lt;</a></li>
+	                <li><a href="/bdmin/${paging.type }?page=${paging.prev}">&lt;</a></li>
 	                <c:choose>
 	                	<c:when test="${paging.lastPage eq 0 }">
-	                		<li><a href="/admin/${paging.type }">1</a></li>
+	                		<li><a href="/bdmin/${paging.type }">1</a></li>
 	                	</c:when>
 	                	<c:otherwise>
 	                		<c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
 		                      <c:choose>
 		                         <c:when test="${paging.currentPage eq page}">
-		                            <li class="active"><a href="/admin/${paging.type }?page=${page}">${page}</a></li>
+		                            <li class="active"><a href="/bdmin/${paging.type }?page=${page}">${page}</a></li>
 		                         </c:when>
 		                         <c:otherwise>
-		                            <li><a href="/admin/${paging.type }?page=${page}">${page}</a></li>
+		                            <li><a href="/bdmin/${paging.type }?page=${page}">${page}</a></li>
 		                         </c:otherwise>
 		                      </c:choose>
 		                 	 </c:forEach> 
 	                	</c:otherwise>
 	                </c:choose>
 	                 
-	                <li><a href="/admin/${paging.type }?page=${paging.next}">&gt;</a></li>
-	                <li><a href="/admin/${paging.type }?page=${paging.lastPage }">&gt;&gt;</a></li>
+	                <li><a href="/bdmin/${paging.type }?page=${paging.next}">&gt;</a></li>
+	                <li><a href="/bdmin/${paging.type }?page=${paging.lastPage }">&gt;&gt;</a></li>
 	              </ul>
 	            </div>
 	          </div>
