@@ -156,25 +156,36 @@
   <script type="text/javascript">
   
   	document.addEventListener('DOMContentLoaded', function() { 
+  		
+  		
   		var calendarEl = document.getElementById('calendar'); 
   		var calendar = new FullCalendar.Calendar(calendarEl, {
   			plugins: [ 'interaction', 'dayGrid', 'timeGrid' ], 
   			defaultView: 'dayGridMonth', defaultDate: new Date(), 
   			header: { 
-  				left: 'prev,next today', 
-  				center: 'ddddd', 
-  				right: '',
-  				eventColor: 'black',
-  				eventTextColor: 'white'
+  				left: 'prev,next',
+  			    center: 'title',
+  				right: 'today',
+
   				}, 
-  				
+
   				events: [
-  		  			{
-  		  				title:'All Day Event',
-  		  				start: new Date('2021,03,30')
-  		  			},
-  		  		
-  		  			
+
+  			  		<c:forEach items="${schedule}" var="schedule">
+  			  		{
+
+  						title : '${schedule.scheduleCon}',
+  						start : new Date('${schedule.scheduleSdate}'),
+  						end : new Date('${schedule.scheduleEdate}'),
+  			  			backgroundColor: "#FF6699",
+  			  			borderColor : "#FF6699",
+               			textColor : "#ffffff"
+  			  		},
+
+  					</c:forEach>
+
+  						
+
   		  		]
   			}); 
   		calendar.render(); 

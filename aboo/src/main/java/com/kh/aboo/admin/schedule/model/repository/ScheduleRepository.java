@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.kh.aboo.admin.schedule.model.vo.Schedule;
 import com.kh.aboo.board.info.model.vo.InfoBoard;
@@ -28,5 +29,13 @@ public interface ScheduleRepository {
 	//아파트명 불러오기
 	@Select("select apartment_name from tb_apartment where apartment_idx = #{apartmentIdx}")
 	String selectAptNameByIdx(String apartmentIdx);
+	
+	//일정 수정
+	@Update("update tb_schedule set schedule_con = #{scheduleCon},schedule_sdate = #{scheduleSdate},schedule_edate = #{scheduleEdate} where schedule_idx=#{scheduleIdx}")
+	int updateSchedule(Schedule schedule);
+	
+	//일정 삭제
+	@Update("update tb_schedule set is_leave = 1 where schedule_idx = #{scheduleIdx}")
+	int deleteSchedule(String scheduleIdx);
 
 }

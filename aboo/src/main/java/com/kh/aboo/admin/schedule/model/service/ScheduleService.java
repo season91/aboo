@@ -11,5 +11,10 @@ public interface ScheduleService {
 	Map<String,Object> selectScheduleList(int currentPage,String apartmentIdx);
 	
 	String selectAptNameByIdx(String apartmentIdx);
+	
+	int updateSchedule(Schedule schedule);
+	
+	int deleteSchedule(String scheduleIdx);
+
 
 }

@@ -29,7 +29,7 @@ public class AptScheduleController {
 		Admin admin = (Admin) session.getAttribute("admin");
 
 		if(admin != null) {
-			String apartmentIdx = generation.getApartmentIdx();
+			String apartmentIdx = admin.getApartmentIdx();
 			model.addAllAttributes(scheduleService.selectScheduleList(page, apartmentIdx));
 			model.addAttribute("aptName",scheduleService.selectAptNameByIdx(apartmentIdx));
 			System.out.println(scheduleService.selectAptNameByIdx(apartmentIdx));

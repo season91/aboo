@@ -51,6 +51,18 @@ public class ScheduleServiceImpl implements ScheduleService{
 		
 		return aptName;
 	}
+
+	@Override
+	public int updateSchedule(Schedule schedule) {
+
+		return scheduleRepository.updateSchedule(schedule);
+	}
+
+	@Override
+	public int deleteSchedule(String scheduleIdx) {
+		
+		return scheduleRepository.deleteSchedule(scheduleIdx);
+	}
 	
 	
 
