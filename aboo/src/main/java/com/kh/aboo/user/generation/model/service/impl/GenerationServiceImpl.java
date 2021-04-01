@@ -269,4 +269,9 @@ public class GenerationServiceImpl implements GenerationService {
 
 	}
 
+	@Override
+	public int selectGenerationWonCnt(Generation generation) {
+		return generationRepository.selectContentCnt(generation.getGenerationIdx());
+	}
+
 }

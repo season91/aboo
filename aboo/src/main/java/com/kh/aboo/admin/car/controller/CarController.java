@@ -74,18 +74,53 @@ public class CarController {
 	
 	// 2. 입주자 차량등록 신청건 페이징처리하기
 	@GetMapping("admin/car/application")
-	public String carApplication(@RequestParam(defaultValue = "1") int page,@SessionAttribute(name = "admin", required = false) Admin admin, Model model) {
+	public String carApplication(@RequestParam(defaultValue = "1") int page,@SessionAttribute(name = "admin", required = false) Admin admin, @RequestParam(defaultValue = "apartmentIdx") String standard, @RequestParam(defaultValue = "apartmentIdx") String keyword, Model model) {
 		String apartmentIdx = admin.getApartmentIdx();
-		
-		Map<String, Object> searchMap = new HashMap<String, Object>();
-		searchMap.put("apartmentIdx", apartmentIdx);
+		String link ="";
+		Map<String, Object> applicationMap = new HashMap<String, Object>();
+		applicationMap.put("apartmentIdx", apartmentIdx);
 
-		model.addAllAttributes(carService.selectCarApplicationList(page, searchMap));
-		return "admin/car/application";
+		switch (standard) {
+		case "apartmentIdx" :
+			// 기본페이징
+			applicationMap.put("searchType", "apartmentIdx");
+			break;
+		case "wait" :
+			// 미납 조회
+			applicationMap.put("searchType", "wait");
+			link = "wait";
+			break;
+		case "carNumber":
+			// 차량번호 검색
+			applicationMap.put("searchType", "carNumber");
+			applicationMap.put("carNumber", keyword);
+			link = "number";
+			model.addAttribute("keyword",keyword);
+			break;
+		case "generationInfo":
+			// 세대정보로 검색
+			Generation generation = new Generation();
+			String[] generationInfo = keyword.split("-");
+			generation.setApartmentIdx(apartmentIdx);
+			generation.setBuilding(generationInfo[0]);
+			generation.setNum(generationInfo[1]);
+			System.out.println(generation);
+			// 조회된 세대관리번호를 map에 담아준다.
+			
+			String generationIdx = carService.selectGenerationByBuildingAndNum(generation).getGenerationIdx();
+			applicationMap.put("searchType", "generationIdx");
+			applicationMap.put("generationIdx", generationIdx);
+			link = "generation";
+			model.addAttribute("keyword",keyword);
+			break;
+		}
+		
+		model.addAllAttributes(carService.selectCarApplicationList(page, applicationMap));
+		return "admin/car/application"+link;
 	}
 	
 	@GetMapping("admin/caradd")
-	public String vehicleAdd(@RequestParam String building, @SessionAttribute(name = "admin", required = false) Admin admin, @RequestParam String num, @RequestParam String carNumber, Model model){
+	public String carAdd(@RequestParam String building, @SessionAttribute(name = "admin", required = false) Admin admin, @RequestParam String num, @RequestParam String carNumber, Model model){
 		// 전달받은 아파트번호,동,호수 정보로 Generation 가져온다.
 		Generation generationInfo = new Generation();
 		generationInfo.setApartmentIdx(admin.getApartmentIdx());
@@ -101,7 +136,7 @@ public class CarController {
 		car.setCarNumber(carNumber);
 		car.setCarQR(Configcode.QRCODE_PATH.desc);
 		
-		String res = carService.insertAndQRWrite(generation.getGenerationIdx(), car);
+		String res = carService.insertAndQRWrite(car);
 		model.addAttribute("alertMsg", res);
 		model.addAttribute("url", "car");
 
@@ -116,40 +151,48 @@ public class CarController {
 			int res = carService.deleteCar(caridx.get(i));
 			// 삭제 되었다면 완료, 아니면 실패
 			if(res == 0) {
-				throw new ToAlertException(ErrorCode.DM01);
+				throw new ToAlertException(ErrorCode.DC01);
 			}
 		}
 	}
 	
-	// 비동기, 차량 승인
-	@GetMapping("admin/carapplcation/approval")
+	// 비동기, 차량 승인. 비동기통신 1건이면 상관없는데 (ToAlert안쓰고 메시지로 처리가능하지만, 배열인경우 에러발동시켜야 중단하고 alert로 넘어갈 수 있다.)
+	@GetMapping("admin/carapplication/approval")
 	@ResponseBody
-	public void carApplicationImpl(@RequestParam List<String> applicationidx) {
-		// 1. 승인하면 처리상태 바꿔준다
+	public void carApplicationApproval(@RequestParam List<String> applicationidx) {
+		String resStr = "";
+		// 1. 전달받은 파라미터 배열을 하나씩 열어서 기존에 있는 차량정보인지 확인후 QR생성하고 처리 승인되게 한다.
 		for (int i = 0; i < applicationidx.size() ; i++) {
-			int res = carService.updateCarApplicationApproval(applicationidx.get(i));
-			// 삭제 되었다면 완료, 아니면 실패
-			if(res == 0) {
-				throw new ToAlertException(ErrorCode.DM01);
-			}
-			
-			// 2. QR코드 생성하고 차량 DB에 넣어준다.
-			// applicationidx 로 신청정보 가져와 생성해준다
+			System.out.println(applicationidx.get(i)+"번째 처리중");
+			// 2. CarApplication가 미처리건인지 확인한다.QR코드 생성하고 차량 DB에 넣어준다.
+			// applicationidx 로 신청정보 가져와 대기중인 CarApplication 를 완성시킨다.
+			// 만약 이미 처리된건이라면 update문이 0을 반환하여 null이 반환되면서 해당 if문은 넘어가게 된다.
 			CarApplication carApplication = carService.selectCarApplication(applicationidx.get(i));
+			if(carApplication != null) {
+				// 유효한 신청이라면 QR코드를 생성해준다.
+				Car car = new Car();
+				car.setGenerationIdx(carApplication.getGenerationIdx());
+				car.setApartmentIdx(carApplication.getApartmentIdx());
+				car.setCarNumber(carApplication.getAplctCarNumber());
+				car.setCarQR(Configcode.QRCODE_PATH.desc);
+				
+				resStr = carService.insertAndQRWrite(car);
+				
+			} 
+			System.out.println("QR추가완료?"+resStr);
 			
-			Car car = new Car();
-			car.setGenerationIdx(carApplication.getGenerationIdx());
-			car.setApartmentIdx(carApplication.getApartmentIdx());
-			car.setCarNumber(carApplication.getAplctCarNumber());
-			car.setCarQR(Configcode.QRCODE_PATH.desc);
-			
-			carService.insertAndQRWrite(carApplication.getGenerationIdx(), car);
+			//3. QR코드가 생성이 되었다면 신청을 승인 처리해준다. 생성되지않았다면 승인처리 하지않고 에러 발동시킨다.
+			if(resStr.equals("등록되었습니다.")) {
+				int res = carService.updateCarApplicationApproval(applicationidx.get(i));
+				System.out.println(res);
+			} else {
+				throw new ToAlertException(ErrorCode.IAC01);
+			}
 		}
-
 	}
 	
-	// 비동기, 차량 삭제 (신청 반려)
-	@GetMapping("admin/carapplcation/reject")
+	// 비동기, 차량 삭제 (신청 반려). 비동기통신 1건이면 상관없는데 (ToAlert안쓰고 메시지로 처리가능하지만, 배열인경우 에러발동시켜야 중단하고 alert로 넘어갈 수 있다.)
+	@GetMapping("admin/carapplication/reject")
 	@ResponseBody
 	public void carApplicationDelete(@RequestParam List<String> applicationidx) {
 		// 1. 반려하면 처리상태 바꿔준다
@@ -157,12 +200,11 @@ public class CarController {
 			int res = carService.updateCarApplicationReject(applicationidx.get(i));
 			// 반려 되었다면 완료, 아니면 실패
 			if(res == 0) {
-				throw new ToAlertException(ErrorCode.DM01);
+				throw new ToAlertException(ErrorCode.DAC01);
 			}
 		}
 
 	}
-	
 	
 	// 차량 수정
 	@GetMapping("admin/carmodify")

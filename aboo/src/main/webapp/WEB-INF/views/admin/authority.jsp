@@ -284,20 +284,20 @@
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-            <form action="">
+            <form action="/admin/authorityadd" method="post">
        	      <div class="form-group">
                 <label for="name">동</label>
-    			<input type="text" id = "addBuilding" name = "building" class="form-control text-dark" id="d" placeholder="동을 입력하세요">
+    			<input type="text" id = "addBuilding" name = "building" class="form-control text-dark" required="required" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="동을 입력하세요">
               </div>             
               <div class="form-group">
                 <label for="name">호</label>
-    			<input type="text" id = "addNum" name = "num" class="form-control text-dark" id="h" placeholder="호를 입력하세요">
+    			<input type="text" id = "addNum" name = "num" class="form-control text-dark" required="required" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="호를 입력하세요">
               </div>  
-              </form>    
-            </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" onclick="add()">확인</button>
+              <button type="submit" class="btn btn-primary" >확인</button>
+            </div>
+              </form>    
             </div>
           </div>
         </div>
@@ -312,35 +312,37 @@
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-    			<input type="hidden" class="form-control" id="modifyGenerationIdx"><!--generationIdx 숨겨두기-->
+    			<input type="hidden" class="form-control " id="modifyGenerationIdx"><!--generationIdx 숨겨두기-->
        	      <div class="form-group">
                 <label for="name">동</label>
-    			<input type="text" class="form-control text-dark" id="modifyBuilding">
+    			<input type="text" class="form-control text-dark bg-white"  readonly="readonly"   id="modifyBuilding">
               </div>             
               <div class="form-group">
                 <label for="name">호</label>
-    			<input type="text" class="form-control text-dark" id="modifyNum">
+    			<input type="text" class="form-control text-dark bg-white" readonly="readonly" id="modifyNum">
               </div>
               <div class="form-group">
                 <label for="name">아이디</label>
-    			<input type="text" class="form-control text-dark" id="modifyId">
+    			<input type="text" class="form-control text-dark bg-white" readonly="readonly" id="modifyId">
               </div>             
               <div class="form-group">
                 <label for="name">전화번호</label>
-    			<input type="text" class="form-control text-dark" id="modifyTell">
+    			<input type="text" class="form-control text-dark bg-white" readonly="readonly" id="modifyTell">
               </div>
               <div class="form-group">
                 <label for="name">전화번호</label>
-    			<input type="text" class="form-control text-dark" id="modityEmail">
+    			<input type="text" class="form-control text-dark bg-white" readonly="readonly" id="modityEmail">
               </div> 
                <div class="form-group">
                 <label for="name">입주일</label>
-    			<input type="text" class="form-control text-dark" id="modifyRegDate">
+    			<b><input type="text" class="form-control text-dark bg-white" readonly="readonly" id="modifyRegDate"></b>
               </div>    
             </div>
             <div class="modal-footer">
               <button type="button" id = "closeModity" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-danger" onclick="del() ">초기화</button>
+              <button type="button" class="btn btn-info" onclick="reset() ">초기화</button>
+              <button type="button" class="btn btn-danger" onclick="del() ">삭제</button>
+              
             </div>
           </div>
         </div>
@@ -483,48 +485,10 @@
       });
     </script>
 
-   
-   <!-- 세대 추가 자바스크립트 -->
-   <script type="text/javascript">
-   let add = () => {
-	  let building = document.querySelector("#addBuilding").value;
-	  let num = document.querySelector("#addNum").value;
-	  console.dir(building);
-	  console.dir(num);
-	  
-	  const url = '/admin/authorityadd';
-	  let paramObj = new Object();
-	  
-	   paramObj.building = building;
-       paramObj.num = num;
-       let headerObj = new Headers();
-       headerObj.append("content-type","application/json");
-       fetch(url,{
-           method:"post",
-           headers:headerObj,
-           body:JSON.stringify(paramObj)
-        }).then(response => {
-           if(response.ok){
-              return response.text();   
-           }
-           throw new AsyncPageError(response.text());
-        }).then((text) => {
-           if(text == 'susesse'){
-         		alert("세대 추가 완료")
-				location.href = "/admin/authority"
-           }else{
-           }
-        }).catch(error => {
-           error.alertMessage();
-        });
-     }
-   
-   </script>
-   
-   <script type="text/javascript">
+
+    <script type="text/javascript"> /*모달에 값 넣기*/
 	let openModal = (info) => {
 		   $('#modifyModal').show();
-		   	  console.dir(info)
 			  let generationIdx = info.cells[0].innerHTML;
 			  let building = info.cells[1].innerHTML;
 			  let num = info.cells[2].innerHTML;
@@ -532,7 +496,8 @@
 			  let regDate = info.cells[4].innerHTML;
 			  let tell = info.cells[5].children[0].defaultValue
 			  let email = info.cells[6].children[0].defaultValue
-			  
+		   	  console.dir(generationIdx)
+
 			  document.querySelector("#modifyGenerationIdx").value = generationIdx;
 			  document.querySelector("#modifyBuilding").value = building;
 			  document.querySelector("#modifyNum").value = num;
@@ -543,12 +508,12 @@
 		}
    </script>
    
-   	<script type="text/javascript">
-	let del = () => {
+   	<script type="text/javascript"> /*초기화*/
+	let reset = () => {
 		
 		let	result = confirm('정말 초기화하시겠습니까?')
 		if (result) {
-         const url = '/admin/authoritydelete';
+         const url = '/admin/authorityreset';
          let paramObj = new Object();
          paramObj.generationIdx = document.querySelector("#modifyGenerationIdx").value;
          paramObj.building = document.querySelector("#modifyBuilding").value;
@@ -581,5 +546,50 @@
 		}
  		
 	</script>
+	
+	<script type="text/javascript"> /*삭제*/
+	let del = () => {
+		
+		let	result = confirm('정말 삭제 하시겠습니까?')
+		if (result) {
+         const url = '/admin/authoritydelete';
+         let paramObj = new Object();
+         paramObj.generationIdx = document.querySelector("#modifyGenerationIdx").value;
+
+         let headerObj = new Headers();
+         headerObj.append("content-type","application/json");
+         fetch(url,{
+            method:"post",
+            headers:headerObj,
+            body:JSON.stringify(paramObj)
+         }).then(response => {
+            if(response.ok){
+               return response.text();   
+            }
+            throw new AsyncPageError(response.text());
+         }).then((text) => {
+            if(text == 'success'){
+          		alert("삭제에 성공하였습니다.")
+          		location.href = "/admin/authority"
+            }else{
+          		alert("삭제에 실패하였습니다.")
+            }
+         }).catch(error => {
+            error.alertMessage();
+         });	
+         
+		 }
+		}
+ 		
+	</script>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </body>
 </html>

@@ -41,7 +41,7 @@
 
             <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
               <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Info</a></span> <span>Used</span></p>
-	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Interior</h1>
+	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Used</h1>
             </div>
           </div>
         </div>
@@ -55,7 +55,13 @@
           	<div class="d-flex justify-content-between">
           		<c:choose>
           		<c:when test="${UsedBrd.isPrivate == 0}">
-          			<h2 class="mb-3">${UsedBrd.usedTitle}</h2>
+          		<h4>
+	          		<c:choose>
+		          		<c:when test="${UsedBrd.isTrnsc == 0}">[거래 중]</c:when>
+		          		<c:otherwise>[거래 완료]</c:otherwise>
+	          		</c:choose>
+          		${UsedBrd.usedTitle}
+          		</h4>
           		</c:when>
           		<c:otherwise>
           			<div class="mt-5 mb-5 text-center">
@@ -71,13 +77,13 @@
           				<c:when test="${sessionScope.generation.generationIdx == UsedBrd.generationIdx}">
           					<div class="d-flex justify-content-end ml-4">
 	          					<a href="/board/used/usedmodify?usedIdx=${UsedBrd.usedIdx}" class="mr-4" style="cursor: pointer;"><i class="fas fa-pen" style="color: #666666;"></i></a>
-				            	<a onclick="usedDelete(${UsedBrd.usedIdx})" class="mr-4" style="cursor: pointer;"><i class="fas fa-trash" style="color: #666666;"></i></a>
-				            	<a href="/board/interior/intlist" class="mr-4" style="cursor: pointer;"><i class="fas fa-list-ul" style="color: #666666;"></i></a>
+						        <a onclick="usedDelete()" class="mr-4" style="cursor: pointer;"><i class="fas fa-trash" style="color: #666666;"></i></a>
+				            	<a href="/board/used/usedlist" class="mr-4" style="cursor: pointer;"><i class="fas fa-list-ul" style="color: #666666;"></i></a>
 			            	</div>
           				</c:when>
           				<c:when test="${sessionScope.admin != null}">
           					<div class="d-flex justify-content-end ml-4">
-	          					<a onclick="usedPrivate(${UsedBrd.usedIdx})" class="mr-4" style="cursor: pointer;"><i class="fas fa-ban" style="color: #666666;"></i></a>
+	          					<a onclick="usedPrivate()" class="mr-4" style="cursor: pointer;"><i class="fas fa-ban" style="color: #666666;"></i></a>
 	          					<a href="/board/used/usedlist" class="mr-4" style="cursor: pointer;"><i class="fas fa-list-ul" style="color: #666666;"></i></a>
           					</div>
           				</c:when>
@@ -90,14 +96,17 @@
           		</div>
           	</div>
           	<hr>
-          	<div>
-	          	<c:if test="${!empty files}">
-	          		<img src="/file/${files[0].savePath}${files[0].renameFileName}">
-	          	</c:if>
-          	</div>
+
           	<c:choose>
           		<c:when test="${UsedBrd.isPrivate == 0}">
-          			${UsedBrd.usedContent}
+		          	<div>
+		          		<div class = "d-flex justify-content-center" >
+			          		<img class = "imgCenter detailImg" src="/file/${files.savePath}${files.renameFileName}">
+						</div>
+		          	</div>          		
+          			<div class ="mt-5 mb-5">
+          				${UsedBrd.usedContent}
+          			</div>
           		</c:when>
           		<c:otherwise>
           			<div class="mt-5 mb-5 text-center">
@@ -106,34 +115,35 @@
           		</c:otherwise>
           	</c:choose>
             <div class="pt-5 mt-5">
-              <h3 class="mb-5">${intCmtCnt} Comments</h3>
+              <h3 class="mb-5">${usedBrdCmtCnt} Comments</h3>
               <ul class="comment-list">
                 <c:choose>
-                	<c:when test="${intCmtCnt == 0}">
+                	<c:when test="${usedBrdCmtCnt == 0}">
                 		<li class="comment">작성된 댓글이 없습니다.</li>
                 	</c:when>
                 	<c:otherwise>
-              			<c:forEach items="${intCmtList}" var="intCmt">
-			                <li class="comment" id="intCmtOriginal">
+              			<c:forEach items="${usedBrdCmtList}" var="usedBrdCmt">
+              			
+			                <li class="comment" id="usedBrdCmt">
 			                  	<div class="vcard bio">
 			                      <img src="../../../../resources/abooimg/user.jpg" alt="Image placeholder">
 			                    </div>
 			                    <div class="comment-body">
-			                      <h3>${intCmt.intCmtWriter}</h3>
-			                      <div class="meta">${intCmt.intCmtRegDate}</div>
+			                      <h3>${usedBrdCmt.usedCmtWriter}</h3>
+			                      <div class="meta">${usedBrdCmt.usedCmtRegDate}</div>
 			                      <c:choose>
-			                      	<c:when test="${intCmt.intCmtIsPrivate == 0}">
-			                      		<p>${intCmt.intCmtContent}</p>
+			                      	<c:when test="${usedBrdCmt.isPrivate == 0}">
+			                      		<p>${usedBrdCmt.usedCmtContent}</p>
 			                      		<c:choose>
-				                      	    <c:when test="${sessionScope.generation.generationIdx == intCmt.generationIdx}">
+				                      	    <c:when test="${sessionScope.generation.generationIdx == usedBrdCmt.generationIdx}">
 				                      	  	    <p>
-				                        	      <a onclick="intCmtModify()" class="mr-4" style="cursor: pointer;"><i class="fas fa-pen" style="color: #666666;"></i></a>
-						                  	      <a onclick="intCmtDelete(${intCmt.intCmtNo})" class="mr-4" style="cursor: pointer;"><i class="fas fa-trash" style="color: #666666;"></i></a>
+				                        	      <a onclick="usedBrdCmtModify()" class="mr-4" style="cursor: pointer;"><i class="fas fa-pen" style="color: #666666;"></i></a>
+						                  	      <a onclick="usedCmtDelete(${usedBrdCmt.usedCmtIdx})" class="mr-4" style="cursor: pointer;"><i class="fas fa-trash" style="color: #666666;"></i></a>
 				                          	    </p>
 				                        	</c:when>
 				                        	<c:when test="${sessionScope.admin != null}">
 				                        		<p>
-				                        		  <a onclick="intCmtPrivate(${intCmt.intCmtNo})" class="mr-4" style="cursor: pointer;"><i class="fas fa-ban" style="color: #666666;"></i></a>
+				                        		  <a onclick="usedCmtPrivate(${usedBrdCmt.usedCmtIdx})" class="mr-4" style="cursor: pointer;"><i class="fas fa-ban" style="color: #666666;"></i></a>
 				                        		</p>
 				                        	</c:when>
 				                      </c:choose>
@@ -144,23 +154,25 @@
 			                      </c:choose>
 			                    </div>
 			                </li>
-			                <li class="comment" id="intCmtModify" style="display: none;">
+			                
+			                <li class="comment" id="usedBrdCmtModify" style="display: none;">
 			                  	<div class="vcard bio">
 			                      <img src="../../../../resources/abooimg/user.jpg" alt="Image placeholder">
 			                    </div>
 			                    <div class="comment-body">
-			                      <h3>${intCmt.intCmtWriter}</h3>
-			                      <div class="meta">${intCmt.intCmtRegDate}</div>
-			                      <form action="/board/interior/intcmtmodify" method="post" enctype="multipart/form-data">
-			                      	<input style="display: none;" name="intCmtNo" value="${intCmt.intCmtNo}">
-			                      	<input style="display: none;" name="intPostNo" value="${intCmt.intPostNo}">
-			                      	<textarea name="intCmtContent" class="w-100" rows="5" style="resize: none;">${intCmt.intCmtContent}</textarea>
+			                      <h3>${usedBrdCmt.usedCmtWriter}</h3>
+			                      <div class="meta">${usedBrdCmt.usedCmtRegDate}</div>
+			                      <form action="/board/used/usedbrdcmtmodify" method="post">
+			                      	<input style="display: none;" name="usedCmtIdx" value="${usedBrdCmt.usedCmtIdx}">
+			                      	<input style="display: none;" name="usedIdx" value="${usedBrdCmt.usedIdx}">
+			                      	<textarea name="usedCmtContent" class="w-100" rows="5" style="resize: none;">${usedBrdCmt.usedCmtContent}</textarea>
 			                      	<p>
 			                      	  <input type="submit" value="수정하기" class="btn py-2 px-3 btn-primary">
 			                      	</p>
 			                      </form>
 			                    </div>
 			                </li>
+			                
 		                </c:forEach>
                 	</c:otherwise>
                 </c:choose>
@@ -169,12 +181,12 @@
               
               <div class="comment-form-wrap pt-5">
                 <h3 class="mb-5">Leave a comment</h3>
-                <form action="/board/interior/intcmtupload" method="post" enctype="multipart/form-data" class="p-5 bg-light">
+                <form action="/board/used/usedcmtupload" method="post" class="p-5 bg-light">
                   <div class="form-group">
                     <label for="message">Message</label>
                     <input style="display: none;" name="generationIdx" value="${sessionScope.generation.generationIdx}">
-                    <input style="display: none;" name="intPostNo" value="${interiorBrd.intPostNo}">
-                    <textarea name="intCmtContent" id="intCmtContent" cols="30" rows="10" class="form-control"></textarea>
+                    <input style="display: none;" name="usedIdx" value="${UsedBrd.usedIdx}">
+                    <textarea name="usedCmtContent" id="usedCmtContent" cols="30" rows="10" class="form-control"></textarea>
                   </div>
                   <div class="form-group">
                     <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
@@ -282,11 +294,19 @@
   <script src="../../../../resources/js/generation/google-map.js"></script>
   <script src="../../../../resources/js/generation/main.js"></script>
   
+  <script>
   
+   let usedBrdCmtModify = () => {
+  		document.querySelector('#usedBrdCmt').style.display = "none";
+  		document.querySelector('#usedBrdCmtModify').style.display = "block";
+  	}
+  </script>
   
     <script type="text/javascript"> 
-  	let usedDelete = (usedIdx) => {
+  	let usedDelete = () => {
 
+  		let usedIdx = '${UsedBrd.usedIdx}';
+  		
   		if(confirm("정말 삭제 하시겠습니까?")){
   			fetch("/board/used/useddelete?usedIdx=" + usedIdx,{
   	  			method:"GET"
@@ -311,9 +331,10 @@
   
   
   <script type="text/javascript"> 
-  	let usedPrivate = (usedIdx) => {
+  	let usedPrivate = () => {
+  		
+  		let usedIdx = '${UsedBrd.usedIdx}';
 
-		
   		if(confirm("정말 비공개 처리하시겠습니까?")){
   			fetch("/board/used/usedprivate?usedIdx=" + usedIdx,{
   	  			method:"GET"
@@ -334,6 +355,74 @@
 
   	}
   </script>
+    
+
+
+    
+    <script type="text/javascript"> 
+  	let usedCmtDelete = (usedCmtIdx) => {
+  		
+  		let usedIdx = '${UsedBrd.usedIdx}';
+
+  		if(confirm("정말 삭제 하시겠습니까?")){
+  			fetch("/board/used/usedbrdcmtdelete?usedCmtIdx=" + usedCmtIdx,{
+  	  			method:"GET"
+  	  		})
+  	  		.then(response => response.text())
+  	  		.then(text => {
+  	  			if(text == 'success'){
+  	  				alert("댓글 삭제 되었습니다.");
+					location.href = "/board/used/useddetail?usedIdx="+usedIdx;
+  	  			}else{
+  	  				alert("댓글 삭제 중 에러가 발생했습니다.");
+  	  				location.href = "/board/used/useddetail?usedIdx="+usedIdx;
+  	  			}
+  	  		})
+  		}else{
+  			
+  		}
+
+  	}
+  </script>
+    
+    
+        <script type="text/javascript"> 
+  	let usedCmtPrivate = (usedCmtIdx) => {
+  		
+  		let usedIdx = '${UsedBrd.usedIdx}';
+
+  		if(confirm("정말 비공개 하시겠습니까?")){
+  			fetch("/board/used/usedbrdcmtprivate?usedCmtIdx=" + usedCmtIdx,{
+  	  			method:"GET"
+  	  		})
+  	  		.then(response => response.text())
+  	  		.then(text => {
+  	  			if(text == 'success'){
+  	  				alert("댓글 비공개 되었습니다.");
+  	  				location.href = "/board/used/useddetail?usedIdx="+usedIdx;
+  	  			}else{
+  	  				alert("댓글 비공개 중 에러가 발생했습니다.");
+  	  				location.href = "/board/used/useddetail?usedIdx="+usedIdx;
+  	  			}
+  	  		})
+  		}else{
+  			
+  		}
+
+  	}
+  </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
   </body>
 </html>

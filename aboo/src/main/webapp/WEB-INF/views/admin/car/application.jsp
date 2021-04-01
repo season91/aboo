@@ -51,7 +51,7 @@
           <li class="active ">
             <a href="/admin/car">
               <i class="tim-icons icon-bus-front-12"></i>
-              <p>car</p>
+              <p>Car</p>
             </a>
           </li>
           <li>
@@ -87,7 +87,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">car</a>
+            <a class="navbar-brand" href="#pablo">Car</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -139,23 +139,19 @@
         </div>
       </div>
       <!-- End Navbar -->
-      
-		
       <div class="content">
-      	 
-           <div class="row">
+        <div class="row">
           <div class="col-md-12">
             <div class="card ">
               <div class="card-header">
-                <h3 class="title">차량 권한 등록</h3>
+                <h3 class="title">차량 등록 신청 확인</h3>
               </div>
-              
               <div class="col-md-12">
                 <div class="places-buttons">
                   <div class="row col-md-12">
                     <div class="col-md-6 ml-auto mr-auto text-center">
                       <h4 class="card-title">
-                       	세대정보 검색
+                       	차량 등록 신청 검색
                         <p class="category">조회 조건을 선택하세요.</p>
                       </h4>
                     </div>
@@ -164,19 +160,22 @@
                     <div class="col-lg-12 ml-auto mr-auto">
                       <div class="row">
                         <div class="col-md-4">
-                          <button type="button" class="btn btn-primary btn-block carAdd" data-toggle="modal" data-target="#addcarModal" >차량 등록</button>
+                         <form action="${context }/admin/car/application">
+                           <input type="hidden" name="standard" value="wait">
+                           <button type="submit" class="btn btn-success btn-block waitCnt" data-toggle="modal" >대기 상태만 보기</button>
+                         </form>
                         </div>
                         <div class="col-md-4">
                          <button type="button" class="btn btn-success btn-block approvalCnt" data-toggle="modal" data-target="#approvalcarModal">차량 등록 신청 승인</button>
                         </div>
                          <div class="col-md-4">
-                         <button type="button" class="btn btn-primary btn-block rejectCnt" data-toggle="modal" data-target="#rejectcarModal">차량 등록 신청 반려</button>
-                        </div>
-                         <div class="col-md-4">
-                         <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#carNumberModal">차량번호로 검색</button>
+                         <button type="button" class="btn btn-success btn-block rejectCnt" data-toggle="modal" data-target="#rejectcarModal">차량 등록 신청 반려</button>
                         </div>
                         <div class="col-md-4">
-                          <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#geneIdxModal" >세대정보로 검색</button>
+                         <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#carNumberModal">차량번호로 검색</button>
+                        </div>
+                        <div class="col-md-4">
+                          <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#geneIdxModal" >세대정보로 검색</button>
                         </div>
                          <div class="col-md-4">
                          <form action="${context }/admin/car">
@@ -204,7 +203,7 @@
                             </label>
                           </div>
                       </th>
-                       <th>관리번호</th>
+                       <th>신청번호</th>
                       <th>세대정보</th>
                       <th>차량번호</th>
                       <th>신청일</th>
@@ -250,27 +249,27 @@
 	          <div class="col text-center">
 	            <div class="block-27">
 	              <ul>
-	                <li><a href="/admin/${paging.type }">&lt;&lt;</a></li>
-	                <li><a href="/admin/${paging.type }?page=${paging.prev}">&lt;</a></li>
+	                <li><a href="/admin/${paging.type }/application">&lt;&lt;</a></li>
+	                <li><a href="/admin/${paging.type }/application?page=${paging.prev}">&lt;</a></li>
                 	 <c:choose>
 	                	<c:when test="${paging.lastPage eq 0 }">
-	                		<li><a href="/admin/${paging.type }"><span>1</span></a></li>
+	                		<li><a href="/admin/${paging.type }/application">1</a></li>
 	                	</c:when>
                 	<c:otherwise>
 	                 <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
                       <c:choose>
                          <c:when test="${paging.currentPage eq page}">
-                            <li class="active"><a href="/admin/${paging.type }?page=${page}">${page}</a></li>
+                            <li class="active"><a href="/admin/${paging.type }/application?page=${page}">${page}</a></li>
                          </c:when>
                          <c:otherwise>
-                            <li><a href="/admin/${paging.type }?page=${page}">${page}</a></li>
+                            <li><a href="/admin/${paging.type }/application?page=${page}">${page}</a></li>
                          </c:otherwise>
                       </c:choose>
                  	 </c:forEach> 
                  	  </c:otherwise>
 	                </c:choose>
-	                <li><a href="/admin/${paging.type }?page=${paging.next}">&gt;</a></li>
-	                <li><a href="/admin/${paging.type }?page=${paging.lastPage }">&gt;&gt;</a></li>
+	                <li><a href="/admin/${paging.type }/application?page=${paging.next}">&gt;</a></li>
+	                <li><a href="/admin/${paging.type }/application?page=${paging.lastPage }">&gt;&gt;</a></li>
 	              </ul>
 	            </div>
 	          </div>
@@ -309,74 +308,6 @@
     </div>
     
     <!-- 모달 구현 -->
-    <!-- 차량등록 모달 -->
-    
-    <div class="modal fade" id="addcarModal" tabindex="-1" role="dialog" aria-labelledby="addcarModalModalLabel" aria-hidden="true">
-       <div class="modal-dialog" role="document">
-         <div class="modal-content" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675); color:white;">
-           <div class="modal-header">
-           	<h4 class="modal-title" id="addcarModalLabel">차량 등록</h4>
-            	 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <i class="tim-icons icon-simple-remove"></i>
-              </button>
-           </div>
-           <div class="modal-body">
-	        <form action="${context }/admin/caradd">
-	          <div class="form-group">
-	            <label for="recipient-name" class="control-label">세대 정보(동)</label>
-	            <input type="text" class="form-control" name="building">
-	          </div>
-	          <div class="form-group">
-	            <label for="recipient-name" class="control-label">세대 정보(호수)</label>
-	            <input type="text" class="form-control" name="num">
-	          </div>
-	          <div class="form-group">
-	            <label for="recipient-name" class="control-label">차량 번호</label>
-	            <input type="text" class="form-control" name="carNumber">
-	          </div>
-	          <div class="modal-footer">
-	           <button type="submit" class="btn btn-primary" >등록하기</button>
-	           <button type="button" class="btn btn-default" data-dismiss="modal">취소하기</button>
-	           </div>
-	        </form>
-      		</div>
-         </div>
-       </div>
-     </div>
-	
-	<!-- 차량 수정 모달 -->
-	<div class="modal fade" id="modifycarModal" tabindex="-1" role="dialog" aria-labelledby="modifycarModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675); color:white;">
-	      <div class="modal-header">
-	       	<h4 class="modal-title" id="modifycarModalLabel">차량 수정</h4>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	      </div>
-	      <div class="modal-body">
-	        <form action="${context }/admin/carmodify">
-	          <div class="form-group">
-	            <label for="recipient-name" class="control-label">차량 관리 번호</label>
-	            <input type="text" class="form-control" readonly="readonly" id="modify-car-idx"  name="carIdx">
-	          </div>
-	          <div class="form-group">
-	            <label for="recipient-name" class="control-label">세대 정보</label>
-	            <input type="text" class="form-control" readonly="readonly" id="modify-car-info" name="generationInfo">
-	          </div>
-	          <div class="form-group">
-	            <label for="recipient-name" class="control-label">차량 번호</label>
-	            <input type="text" class="form-control" id="modify-car-number" placeholder="차량번호를 입력하세요.(예: 123가4567)" name="carNumber">
-	          </div>
-	            <div class="modal-footer">
-		      	<button type="submit" class="btn btn-primary">수정하기</button>
-		        <button type="button" class="btn btn-default" data-dismiss="modal">취소하기</button>
-		      </div>
-	        </form>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	
-	<!-- 차량 삭제 모달 -->
 	<div class="modal fade" id="rejectcarModal" tabindex="-1" role="dialog" aria-labelledby="rejectcarModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675); color:white;">
@@ -399,7 +330,7 @@
 	  </div>
 	</div>
 	
-	<!-- 차량 삭제 모달 -->
+
 	<div class="modal fade" id="approvalcarModal" tabindex="-1" role="dialog" aria-labelledby="deletecarModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675); color:white;">
@@ -435,7 +366,8 @@
             <div class="modal-body">
 	        <form action="${context }/admin/car/application">
 	          <div class="form-group">
-	           <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="차량번호로 검색">
+	           <input type="hidden" name="standard" value="carNumber">
+	           <input type="text" class="form-control" name="keyword" id="inlineFormInputGroup" placeholder="차량번호로 검색">
 	          </div>
 	          <div class="modal-footer">
              <button type="submit" class="btn btn-primary">검색</button>
@@ -457,7 +389,7 @@
 	              </button>
             </div>
             <div class="modal-body">
-	        <form action="${context }/admin/car">
+	        <form action="${context }/admin/car/application">
 	          <div class="form-group">
 	          	<input type="hidden" name="standard" value="generationInfo">
 	           <input type="text" class="form-control"  name="keyword" id="inlineFormInputGroup" placeholder="세대정보로 검색 (103-906)">
@@ -470,8 +402,7 @@
           </div>
         </div>
       </div>
-      
-      
+	
     
     <!--   Core JS Files   -->
     <script src="../../../resources/js/admin/carapplication.js"></script>

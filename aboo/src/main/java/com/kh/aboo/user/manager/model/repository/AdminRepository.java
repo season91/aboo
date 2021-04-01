@@ -55,10 +55,11 @@ public interface AdminRepository {
 	
 	//세대 초기화
 	@Update("update TB_GENERATION set IS_DEL = 1 where GENERATION_IDX =#{generationIdx}")
-	int resetGeneration(Generation generation);
+	int updateDeleteGeneration(Generation generation);
 	
-	//세대 초기화 후 새로 생성
-	@Insert("@Insert into TB_GENERATION(GENERATION_IDX,APARTMENT_IDX,BUILDING,NUM,ID,PASSWORD) value(SC_GENERATION_IDX.nextval,#{apartmentIdx},#{building},${num},#{id},#{password})")
-	int resetInsertGeneration(Generation generation);
+	//어드민 아파트 시권스의 구분자 찾기
+	@Select("select SEPARATOR from TB_APARTMENT where APARTMENT_IDX = #{apartmentIdx} ")
+	String selectApartmentBySeparator(String apartmentIdx);
 	
+
 }	

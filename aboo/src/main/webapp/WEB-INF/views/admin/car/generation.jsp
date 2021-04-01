@@ -51,7 +51,7 @@
           <li class="active ">
             <a href="/admin/vehicle">
               <i class="tim-icons icon-bus-front-12"></i>
-              <p>Vehicle</p>
+              <p>Car</p>
             </a>
           </li>
           <li>
@@ -87,7 +87,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Vehicle</a>
+            <a class="navbar-brand" href="#pablo">Car</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -196,7 +196,7 @@
                       <th>
                         <div class="form-check checkAll" id="checkAll">
                             <label class="form-check-label">
-                              <input class="form-check-input allvehicle" type="checkbox" value="">
+                              <input class="form-check-input allcar" type="checkbox" value="">
                               <span class="form-check-sign">
                                 <span class="check"></span>
                               </span>

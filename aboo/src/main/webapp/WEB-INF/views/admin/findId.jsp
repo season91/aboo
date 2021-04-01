@@ -163,12 +163,10 @@
                     <input type="text" class="form-control" id = "email" name = "email" placeholder="이메일">
                   </div>
 					<div id = "certifiedBox" class="form-group" style="display: none;">
-						<form action="/admin/authenticationid" method="get">
 						<div class= "d-flex justify-content-between">
 							<input type="text" class="form-control col-md-10" id="certifiedNum" name="certifiedNum" placeholder="인증번호">
-							<button class = "btn btn-primary px-xl-3 py-xl-1">확인</button>
+							<button class = "btn btn-primary px-xl-3 py-xl-1" onclick="certified()">확인</button>
 						</div>
-						</form>
 					</div>
                   <div class="form-group">
                     <input type="submit" value="확인" class="btn btn-primary py-3 px-5 col-sm-12" onclick="emailSend()">
@@ -280,6 +278,34 @@
 	       }
 	
 	   </script>
+	   
+	   
+	   	<script type="text/javascript">
+      	let certified = () => {
+    	  let certifiedNum = document.querySelector("#certifiedNum").value;
+    	  	
+  	  			fetch("/admin/authenticationid?certifiedNum="+certifiedNum,{
+  	  				method:"GET"
+  	  			})
+  	  			.then(response => response.text())
+  	  			.then(text => {
+  	  				if(text == 'success'){
+  	  					alert("인증이 완료되었습니다.");
+  	  					location.href = "/admin/findidresult";
+  	  				}else{
+  	  					alert("인증번호를 다시 확인해주세요.");
+  	  				}
+  	  			})
+  	  		
+	   	};
+	   </script>
+	   
+	   
+	   
+	   
+	   
+	   
+	   
    
     <!--   Core JS Files   -->
     <script src="../../../resources/js/admin/core/jquery.min.js"></script>

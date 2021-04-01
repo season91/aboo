@@ -56,15 +56,23 @@
         			<c:when test="${usedBrd.isPrivate == 0}">
         				<div class="col-md-4 ftco-animate">
 							<div class="blog-entry">
-							  <a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="block-20"></a>
+							  <a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="block-20"><img class= "w-100 h-100 imgCenter"src="/file/${fileList[status.index].savePath}${fileList[status.index].renameFileName}"></a>
 							  <div class="text d-flex py-4">
 							    <div class="meta mb-3">
 							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">${usedBrd.usedRegDate}</a></div>
 							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">${usedBrd.usedWriter}</a></div>
-							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="meta-chat"><span class="icon-chat"></span> ${intCmtCntList[status.index]}1</a></div>
+							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="meta-chat"><span class="icon-chat"></span>1</a></div>
 							    </div>
 							    <div class="desc pl-3">
-							      <h3 class="heading"><a href="/board/interior/intdetail?intPostNo=${usedBrd.usedIdx}">${usedBrd.usedTitle}</a></h3>
+							    <div class= "heading w-100" style="word-break: break-all; text-overflow: ellipsis;">
+							      <a  href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">
+						          		<c:choose>
+							          		<c:when test="${usedBrd.isTrnsc == 0}">[거래 중]</c:when>
+							          		<c:otherwise>[거래 완료]</c:otherwise>
+						          		</c:choose>
+							      ${usedBrd.usedTitle}
+							      </a>	
+							      </div> 	
 							    </div>
 							  </div>
 							</div>
@@ -73,15 +81,15 @@
         			<c:otherwise>
         				<div class="col-md-4 ftco-animate">
 							<div class="blog-entry">
-							  <a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="block-20"></a>
+							  <a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="block-20"><img class= "w-100 h-100 imgCenter" src="/file/${fileList[status.index].savePath}${fileList[status.index].renameFileName}Nob" onerror="this.src='../../../resources/abooimg/nopreviewimg.jpg'"></a>
 							  <div class="text d-flex py-4">
 							    <div class="meta mb-3">
 							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">${usedBrd.usedRegDate}</a></div>
 							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">${usedBrd.usedWriter}</a></div>
-							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="meta-chat"><span class="icon-chat"></span> ${intCmtCntList[status.index]}1</a></div>
+							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="meta-chat"><span class="icon-chat"></span>1</a></div>
 							    </div> <!--비공개 처리하면 못보게 할건지 -->
 							    <div class="desc pl-3">
-							      <h3 class="heading"><a href="/board/interior/intdetail?intPostNo=${usedBrd.usedIdx}">비공개 처리된 게시물 입니다</a></h3>
+							      <h3 class="heading"><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">비공개 처리된 게시물 입니다</a></h3>
 							    </div>
 							  </div>
 							</div>
@@ -97,13 +105,13 @@
 	            <div class="icon" style="cursor: pointer;">
 	            	<a class="icon-search"></a>
 	            </div>
-	            <input type="text" class="form-control" placeholder="제목을 입력하세요.">
+	            <input type="text" class="form-control" placeholder="키워드를 입력하세요.">
 	          </div>
          </form>
 		</div>
         
         <div class="container text-center d-flex justify-content-end mt-0">
-	      <a href="/board/used/usedupload" class="center-block btn btn-primary p-3 px-xl-4 py-xl-2 btn-sm" style="background: linear-gradient(45deg, #12e6ca 0%, #8be55d 100%); border: none; color: white !important;">글쓰기</a>
+	      <a href="/board/used/usedupload" class="center-block btn btn-primary p-3 px-xl-4 py-xl-2 btn-sm" style="background: linear-gradient(45deg, #4174d0 0%, #5dbfe5 100%); border: none; color: white !important;">글쓰기</a>
 	    </div>
         
         <div class="row mt-5">
@@ -204,7 +212,7 @@
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
-
+	
   <script src="../../../../resources/js/generation/jquery.min.js"></script>
   <script src="../../../../resources/js/generation/jquery-migrate-3.0.1.min.js"></script>
   <script src="../../../../resources/js/generation/popper.min.js"></script>
