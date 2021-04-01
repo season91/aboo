@@ -48,7 +48,7 @@ public interface UsedRepository {
 
 	
 	//게시물 수정
-	@Update("update TB_USED_BRD set USED_TITLE = #{usedTitle}, USED_CONTENT = #{usedContent}, USED_REG_DATE = SYSDATE where USED_IDX =#{usedIdx}")
+	@Update("update TB_USED_BRD set USED_TITLE = #{usedTitle}, USED_CONTENT = #{usedContent}, USED_REG_DATE = SYSDATE, IS_TRNSC = #{isTrnsc} where USED_IDX =#{usedIdx} ")
 	int updateUsedBrdModify(UsedBrd usedBrd);
 	
 	int updateUsedBrdFileModify(Map<String,Object> commandMap);

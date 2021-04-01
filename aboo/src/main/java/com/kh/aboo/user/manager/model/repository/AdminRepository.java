@@ -57,5 +57,9 @@ public interface AdminRepository {
 	@Update("update TB_GENERATION set IS_DEL = 1 where GENERATION_IDX =#{generationIdx}")
 	int updateDeleteGeneration(Generation generation);
 	
+	//어드민 아파트 시권스의 구분자 찾기
+	@Select("select SEPARATOR from TB_APARTMENT where APARTMENT_IDX = #{apartmentIdx} ")
+	String selectApartmentBySeparator(String apartmentIdx);
+	
 
 }	

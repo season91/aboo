@@ -72,8 +72,8 @@ public class AdminServiceImpl implements AdminService {
 	// 선영 어드민 세대 추가
 	@Override
 	public int insertGeneration(Generation generation, String apartmentIdx) {
-
-		String id = generation.getBuilding() + "d" + generation.getNum() + "h";
+		String Separator = adminRepository.selectApartmentBySeparator(apartmentIdx); //아파트 구분자
+		String id = Separator + generation.getBuilding() + "d" + generation.getNum() + "h";
 		generation.setId(id);
 		generation.setPassword(encoder.encode("123"));
 		generation.setApartmentIdx(apartmentIdx);
