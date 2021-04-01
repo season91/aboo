@@ -14,6 +14,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.kh.aboo.admin.mgmtfee.model.vo.Mgmtfee;
 import com.kh.aboo.common.util.paging.Paging;
 import com.kh.aboo.mypage.mymgmtfee.model.repository.MyMgmtfeeRepository;
+import com.kh.aboo.mypage.mymgmtfee.model.vo.MgmtfeePayment;
 
 @WebAppConfiguration 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -23,7 +24,7 @@ public class MyMgmtfeeRepositoryTest {
 	@Autowired
 	MyMgmtfeeRepository myMgmtfeeRepository;
 	
-	@Test
+	/* @Test */
 	public void selectMyMgmtfeeList() {
 		Map<String, Object> generationMap = new HashMap<>();
 		String generationIdx = "100296";
@@ -41,5 +42,6 @@ public class MyMgmtfeeRepositoryTest {
 		List<Mgmtfee> myMgmtfeeList = myMgmtfeeRepository.selectMyMgmtfeeList(generationMap);
 		System.out.println(myMgmtfeeList);
 	}
+	
 
 }

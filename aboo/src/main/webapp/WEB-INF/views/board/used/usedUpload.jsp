@@ -87,7 +87,7 @@
 		          </div>
 		        </div>
 	        </div>
-	       	<input class = "ml-5 mt-2" type="file" name ="files" id="file" accept='image/jpg,image/jpeg,image/gif,image/png' onChange="chk(this)">
+	       	<input class = "ml-6 mt-2" type="file" name ="files" id="file" accept='image/jpg,image/jpeg,image/gif,image/png' onChange="chk(this)">
 	        <div class="form-group mt-3 text-center">
               <input type="submit" value="등록하기" class="btn btn-primary py-3 px-5">
             </div>

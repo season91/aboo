@@ -64,16 +64,15 @@ public class MyMgmtfeeController {
 	public void myvehicle() {
 	};
 
-	
-	//선영 결제
+	// 선영 결제
 	@PostMapping("mymgmtfee/payment")
 	@ResponseBody
 	public String payment(@RequestBody MgmtfeePayment mgmtfeePayment) {
-		int res = myMgmtfeeService.insertPayment(mgmtfeePayment);
-		if (res > 0) {
-			return "success";
-		}
-		return "fail";
+		
+		myMgmtfeeService.insertPayment(mgmtfeePayment);
+		
+		return "success";
+
 	}
 
 }
