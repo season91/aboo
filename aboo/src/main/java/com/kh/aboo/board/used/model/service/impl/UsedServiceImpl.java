@@ -34,7 +34,7 @@ public class UsedServiceImpl implements UsedService {
 	@Override
 	public Map<String, Object> selectUsedBrdList(int currentPage, String apartmentIdx) {
 		Paging paging = Paging.builder().currentPage(currentPage).blockCnt(5).cntPerPage(6).type("board")
-				.total(usedRepository.selectUsedBrdCnt()).build();
+				.total(usedRepository.selectUsedBrdCnt(apartmentIdx)).build();
 
 		Map<String, Object> commandMap = new HashMap<String, Object>();
 		Map<String, Object> usedMap = new HashMap<String, Object>();
@@ -47,6 +47,11 @@ public class UsedServiceImpl implements UsedService {
 
 		for (UsedBrd usedBrd : usedBrdList) {
 			fileList.add(usedRepository.selectFileWithusedIdx(usedBrd.getUsedIdx())); // null이 오는데 add에 왜담김 ??;;
+			System.out.println("게시판"+ usedBrd.getUsedIdx());
+			for (FileVo fileVo : fileList) {
+				System.out.println("파일"+ fileVo.getTypeIdx());
+
+			}
 		}
 
 		commandMap.put("paging", paging);
@@ -73,8 +78,9 @@ public class UsedServiceImpl implements UsedService {
 	}
 
 	@Override
-	public int updateUsedDelete(String usedIdx) {
-		return usedRepository.updateUsedDelete(usedIdx);
+	public void updateUsedDelete(String usedIdx) {
+		usedRepository.updateUsedDelete(usedIdx);
+		usedRepository.updateUsedFileDelete(usedIdx);
 	}
 
 	@Override

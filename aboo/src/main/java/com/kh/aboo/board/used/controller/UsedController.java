@@ -76,13 +76,10 @@ public class UsedController {
 	@ResponseBody
 	public String usedDelete(String usedIdx, Model model) {
 
-		int res = usedService.updateUsedDelete(usedIdx);
+		usedService.updateUsedDelete(usedIdx);
 
-		if (res > 0) {
-			return "success";
-		}
+		return "success";
 
-		return "fail";
 	}
 
 	@GetMapping("usedmodify")
@@ -151,7 +148,7 @@ public class UsedController {
 
 		usedService.updateUsedBrdCmt(usedCmt);
 
-		model.addAttribute("alertMsg", "댓글 등록에 성공하였습니다.");
+		model.addAttribute("alertMsg", "댓글 수정에 성공하였습니다.");
 		model.addAttribute("url", "/board/used/useddetail?usedIdx=" + usedCmt.getUsedIdx());
 		return "common/result";
 	}
@@ -180,7 +177,7 @@ public class UsedController {
 		if (res > 0) {
 
 			return "success";
-			
+
 		} else {
 			return "fail";
 		}

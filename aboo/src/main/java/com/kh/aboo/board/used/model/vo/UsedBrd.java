@@ -9,7 +9,7 @@ public class UsedBrd {
 	private String usedWriter;
 	private String usedRegDate;
 	private String isDel;
-	private String isTransc;
+	private String isTrnsc;
 	private String isPrivate;
 	private String generationIdx;
 
@@ -18,7 +18,7 @@ public class UsedBrd {
 	}
 
 	public UsedBrd(String usedIdx, String apartmentIdx, String usedTitle, String usedContent, String usedWriter,
-			String usedRegDate, String isDel, String isTransc, String isPrivate, String generationIdx) {
+			String usedRegDate, String isDel, String isTrnsc, String isPrivate, String generationIdx) {
 		super();
 		this.usedIdx = usedIdx;
 		this.apartmentIdx = apartmentIdx;
@@ -27,7 +27,7 @@ public class UsedBrd {
 		this.usedWriter = usedWriter;
 		this.usedRegDate = usedRegDate;
 		this.isDel = isDel;
-		this.isTransc = isTransc;
+		this.isTrnsc = isTrnsc;
 		this.isPrivate = isPrivate;
 		this.generationIdx = generationIdx;
 	}
@@ -88,12 +88,12 @@ public class UsedBrd {
 		this.isDel = isDel;
 	}
 
-	public String getIsTransc() {
-		return isTransc;
+	public String getIsTrnsc() {
+		return isTrnsc;
 	}
 
-	public void setIsTransc(String isTransc) {
-		this.isTransc = isTransc;
+	public void setIsTrnsc(String isTrnsc) {
+		this.isTrnsc = isTrnsc;
 	}
 
 	public String getIsPrivate() {
@@ -116,8 +116,9 @@ public class UsedBrd {
 	public String toString() {
 		return "UsedBrd [usedIdx=" + usedIdx + ", apartmentIdx=" + apartmentIdx + ", usedTitle=" + usedTitle
 				+ ", usedContent=" + usedContent + ", usedWriter=" + usedWriter + ", usedRegDate=" + usedRegDate
-				+ ", isDel=" + isDel + ", isTransc=" + isTransc + ", isPrivate=" + isPrivate + ", generationIdx="
+				+ ", isDel=" + isDel + ", isTrnsc=" + isTrnsc + ", isPrivate=" + isPrivate + ", generationIdx="
 				+ generationIdx + "]";
 	}
+	
 
 }

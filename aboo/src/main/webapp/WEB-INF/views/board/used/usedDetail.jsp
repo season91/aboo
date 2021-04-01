@@ -55,7 +55,13 @@
           	<div class="d-flex justify-content-between">
           		<c:choose>
           		<c:when test="${UsedBrd.isPrivate == 0}">
-          			<h2 class="mb-3">${UsedBrd.usedTitle}</h2>
+          		<h4>
+	          		<c:choose>
+		          		<c:when test="${UsedBrd.isTrnsc == 0}">[거래 중]</c:when>
+		          		<c:otherwise>[거래 완료]</c:otherwise>
+	          		</c:choose>
+          		${UsedBrd.usedTitle}
+          		</h4>
           		</c:when>
           		<c:otherwise>
           			<div class="mt-5 mb-5 text-center">
@@ -71,13 +77,13 @@
           				<c:when test="${sessionScope.generation.generationIdx == UsedBrd.generationIdx}">
           					<div class="d-flex justify-content-end ml-4">
 	          					<a href="/board/used/usedmodify?usedIdx=${UsedBrd.usedIdx}" class="mr-4" style="cursor: pointer;"><i class="fas fa-pen" style="color: #666666;"></i></a>
-				            	<a onclick="usedDelete(${UsedBrd.usedIdx})" class="mr-4" style="cursor: pointer;"><i class="fas fa-trash" style="color: #666666;"></i></a>
+						        <a onclick="usedDelete()" class="mr-4" style="cursor: pointer;"><i class="fas fa-trash" style="color: #666666;"></i></a>
 				            	<a href="/board/used/usedlist" class="mr-4" style="cursor: pointer;"><i class="fas fa-list-ul" style="color: #666666;"></i></a>
 			            	</div>
           				</c:when>
           				<c:when test="${sessionScope.admin != null}">
           					<div class="d-flex justify-content-end ml-4">
-	          					<a onclick="usedPrivate(${UsedBrd.usedIdx})" class="mr-4" style="cursor: pointer;"><i class="fas fa-ban" style="color: #666666;"></i></a>
+	          					<a onclick="usedPrivate()" class="mr-4" style="cursor: pointer;"><i class="fas fa-ban" style="color: #666666;"></i></a>
 	          					<a href="/board/used/usedlist" class="mr-4" style="cursor: pointer;"><i class="fas fa-list-ul" style="color: #666666;"></i></a>
           					</div>
           				</c:when>
@@ -90,13 +96,14 @@
           		</div>
           	</div>
           	<hr>
-          	<div>
-          		<div class = "d-flex justify-content-center" >
-	          		<img class = "imgCenter detailImg" src="/file/${files.savePath}${files.renameFileName}">
-				</div>
-          	</div>
+
           	<c:choose>
           		<c:when test="${UsedBrd.isPrivate == 0}">
+		          	<div>
+		          		<div class = "d-flex justify-content-center" >
+			          		<img class = "imgCenter detailImg" src="/file/${files.savePath}${files.renameFileName}">
+						</div>
+		          	</div>          		
           			<div class ="mt-5 mb-5">
           				${UsedBrd.usedContent}
           			</div>
@@ -296,8 +303,10 @@
   </script>
   
     <script type="text/javascript"> 
-  	let usedDelete = (usedIdx) => {
+  	let usedDelete = () => {
 
+  		let usedIdx = '${UsedBrd.usedIdx}';
+  		
   		if(confirm("정말 삭제 하시겠습니까?")){
   			fetch("/board/used/useddelete?usedIdx=" + usedIdx,{
   	  			method:"GET"
@@ -322,9 +331,10 @@
   
   
   <script type="text/javascript"> 
-  	let usedPrivate = (usedIdx) => {
+  	let usedPrivate = () => {
+  		
+  		let usedIdx = '${UsedBrd.usedIdx}';
 
-		
   		if(confirm("정말 비공개 처리하시겠습니까?")){
   			fetch("/board/used/usedprivate?usedIdx=" + usedIdx,{
   	  			method:"GET"
@@ -351,6 +361,8 @@
     
     <script type="text/javascript"> 
   	let usedCmtDelete = (usedCmtIdx) => {
+  		
+  		let usedIdx = '${UsedBrd.usedIdx}';
 
   		if(confirm("정말 삭제 하시겠습니까?")){
   			fetch("/board/used/usedbrdcmtdelete?usedCmtIdx=" + usedCmtIdx,{
@@ -360,10 +372,10 @@
   	  		.then(text => {
   	  			if(text == 'success'){
   	  				alert("댓글 삭제 되었습니다.");
-					location.href = "/board/used/usedlist";
+					location.href = "/board/used/useddetail?usedIdx="+usedIdx;
   	  			}else{
   	  				alert("댓글 삭제 중 에러가 발생했습니다.");
-  	  				location.href = "/board/used/usedlist";
+  	  				location.href = "/board/used/useddetail?usedIdx="+usedIdx;
   	  			}
   	  		})
   		}else{
@@ -376,6 +388,8 @@
     
         <script type="text/javascript"> 
   	let usedCmtPrivate = (usedCmtIdx) => {
+  		
+  		let usedIdx = '${UsedBrd.usedIdx}';
 
   		if(confirm("정말 비공개 하시겠습니까?")){
   			fetch("/board/used/usedbrdcmtprivate?usedCmtIdx=" + usedCmtIdx,{
@@ -385,10 +399,10 @@
   	  		.then(text => {
   	  			if(text == 'success'){
   	  				alert("댓글 비공개 되었습니다.");
-					location.href = "/board/used/usedlist";
+  	  				location.href = "/board/used/useddetail?usedIdx="+usedIdx;
   	  			}else{
   	  				alert("댓글 비공개 중 에러가 발생했습니다.");
-  	  				location.href = "/board/used/usedlist";
+  	  				location.href = "/board/used/useddetail?usedIdx="+usedIdx;
   	  			}
   	  		})
   		}else{

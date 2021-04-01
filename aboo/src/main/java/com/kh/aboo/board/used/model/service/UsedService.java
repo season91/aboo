@@ -17,7 +17,7 @@ public interface UsedService {
 
 	int updateUsedPrivate(String usedIdx);
 
-	int updateUsedDelete(String usedIdx);
+	void updateUsedDelete(String usedIdx);
 
 	UsedBrd selectUsedIdx(String usedIdx);
 

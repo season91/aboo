@@ -68,7 +68,7 @@
 		          <div class="col-md-11">
 		              <div class="form-group mb-0 d-flex w-80">
 		              	<input type="hidden" name="usedIdx" value="${usedBrd.usedIdx}">
-		                <span class="col-md-3 align-self-center text-left">제목</span><input type="text" class="form-control" name="usedTitle" required="required" placeholder="제목을 입력해주세요." value="${usedBrd.usedTitle}">
+		                <span class="col-md-3 align-self-center text-left">제목</span><input type="text" class="form-control" name="usedTitle" required="required" maxlength="20"  placeholder="제목을 입력해주세요." value="${usedBrd.usedTitle}">
 		              </div>
 		          </div>
 		        </div>

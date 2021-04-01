@@ -64,7 +64,15 @@
 							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="meta-chat"><span class="icon-chat"></span>1</a></div>
 							    </div>
 							    <div class="desc pl-3">
-							      <h3 class="heading"><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">${usedBrd.usedTitle}</a></h3>
+							    <div class= "heading w-100" style="word-break: break-all; text-overflow: ellipsis;">
+							      <a  href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">
+						          		<c:choose>
+							          		<c:when test="${usedBrd.isTrnsc == 0}">[거래 중]</c:when>
+							          		<c:otherwise>[거래 완료]</c:otherwise>
+						          		</c:choose>
+							      ${usedBrd.usedTitle}
+							      </a>	
+							      </div> 	
 							    </div>
 							  </div>
 							</div>
@@ -73,7 +81,7 @@
         			<c:otherwise>
         				<div class="col-md-4 ftco-animate">
 							<div class="blog-entry">
-							  <a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="block-20"></a>
+							  <a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="block-20"><img class= "w-100 h-100 imgCenter" src="/file/${fileList[status.index].savePath}${fileList[status.index].renameFileName}Nob" onerror="this.src='../../../resources/abooimg/nopreviewimg.jpg'"></a>
 							  <div class="text d-flex py-4">
 							    <div class="meta mb-3">
 							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">${usedBrd.usedRegDate}</a></div>
