@@ -59,6 +59,12 @@
           			<i class="fas fa-clock align-self-center mr-2"></i>
           			<span>${infoBoard.bWdate}</span>
           			<c:choose>
+          			 	<c:when test="${sessionScope.admin != null}">
+		          			<div class="d-flex justify-content-end ml-4">
+		          				<a onclick="privateInfo()" class="mr-4" style="cursor: pointer;"><i class="fas fa-ban" style="color: #666666;"></i></a>
+				            	<a href="/board/info/listinfo" class="mr-4"><i class="fas fa-list-ul" style="color: #666666;"></i></a>
+				            </div>
+		            	</c:when>
           				<c:when test="${sessionScope.generation.generationIdx == infoBoard.generationIdx}">
 		          			<div class="d-flex justify-content-end ml-4">
 				            	<a href="${context}/board/info/editinfo?bIdx=${infoBoard.bIdx}" class="mr-4"><i class="fas fa-pen" style="color: #666666;"></i></a>
@@ -66,12 +72,7 @@
 				            	<a href="/board/info/listinfo" class="mr-4"><i class="fas fa-list-ul" style="color: #666666;"></i></a>
 				            </div>
 		            	</c:when>
- 		            	<c:when test="${sessionScope.admin != null}">
-		          			<div class="d-flex justify-content-end ml-4">
-		          				
-				            	<a href="/board/info/listinfo" class="mr-4"><i class="fas fa-list-ul" style="color: #666666;"></i></a>
-				            </div>
-		            	</c:when>
+
 		            	<c:otherwise>
 		            		<div class="d-flex justify-content-end ml-4">
 		          				
@@ -319,7 +320,7 @@
 	  
 	  let bIdx = ${infoBoard.bIdx};
 		if(confirm("댓글을 비공개 처리 하시겠습니까?")){
-			fetch("/board/info/infocmtdel?cIdx=" + cIdx,{
+			fetch("/board/info/infocmtprivate?cIdx=" + cIdx,{
 	  			method:"GET"
 	  		})
 	  		.then(response => response.text())

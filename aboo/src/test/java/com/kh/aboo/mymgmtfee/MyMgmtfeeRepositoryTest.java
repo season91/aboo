@@ -24,7 +24,7 @@ public class MyMgmtfeeRepositoryTest {
 	@Autowired
 	MyMgmtfeeRepository myMgmtfeeRepository;
 	
-	@Test
+	/* @Test */
 	public void selectMyMgmtfeeList() {
 		Map<String, Object> generationMap = new HashMap<>();
 		String generationIdx = "100296";
@@ -42,6 +42,7 @@ public class MyMgmtfeeRepositoryTest {
 		List<Mgmtfee> myMgmtfeeList = myMgmtfeeRepository.selectMyMgmtfeeList(generationMap);
 		System.out.println(myMgmtfeeList);
 	}
+	
 
 	@Test
 	public void procedurePaymentInsert() {

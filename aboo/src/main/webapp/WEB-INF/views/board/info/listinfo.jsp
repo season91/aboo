@@ -49,8 +49,8 @@
   
     <section class="ftco-section bg-light">
       <div class="container">
-        <div class="row border pt-5 pb-5">
-         <div class="col-md-12 mb-4 ">
+        <div class=" pt-5 pb-5 w-100">
+         <div class=" mb-4 ">
             <div class="card-body ">
              <div class=" d-flex justify-content-between">
              <h2 class="h4">정보 & 질문 게시판</h2>
@@ -86,8 +86,6 @@
                    
                     <tbody>
  					<c:forEach items="${infoBoard}" var="infoBoard">
- 						<c:choose>
-        					<c:when test="${infoBoard.bIsDel == 0 && infoBoard.apartmentIdx == generation.apartmentIdx}">
 		                      <tr>
 		                        <td>
 		                         ${infoBoard.bIdx}
@@ -122,8 +120,7 @@
 		                          ${infoBoard.bWdate}
 		                        </td>
 		                      </tr>
-                     	 		</c:when>
-                      		</c:choose>
+
     					</c:forEach>
                     </tbody>
                    

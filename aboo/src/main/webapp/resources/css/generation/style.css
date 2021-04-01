@@ -9390,7 +9390,7 @@ textarea.form-control {
     stroke-dashoffset: -136px; } }
     
     
-/* 선영 validator css */
+/* 선영  css Zone */
 .validator{
 color: red;
 font-size: 1vw;
@@ -9406,3 +9406,6 @@ background-size: cover;
 width: 90%;
 height: 70vh;
 }
+
+.ml-6{
+  margin-left : 4rem !important; }
