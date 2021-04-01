@@ -66,26 +66,18 @@
               <p>Chat</p>
             </a>
           </li>
-          <li>
-          <a href="/admin/chat">
-            <i class="tim-icons icon-key-25"></i>
-      			 <p>notice</p>
-      		</a>
-      	 </li>
-      	  <li>
-            <c:choose>
-           	<c:when test="${sessionScope.bdmin == null}">
-
-           	</c:when>
-           	<c:when test="${sessionScope.bdmin != null}">
-           		 <a href="/admin/bdin">
-             	<i class="tim-icons icon-key-25"></i>
-      			 <p>BDIN</p>
-      			  </a>
-           	</c:when>
-          </c:choose>
+         <li>
+           <a href="/admin/notice">
+              <i class="tim-icons icon-volume-98"></i>
+              <p>notice</p>
+            </a>
           </li>
-	     
+          <li>
+            <a href="/bdmin/login">
+              <i class="tim-icons icon-key-25"></i>
+              <p>BDMIN</p>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
