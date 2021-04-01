@@ -28,7 +28,7 @@ public interface InfoRepository {
 	List<InfoBoard> selectInfoBoardList(@Param(value = "queryStart") int queryStart, @Param(value = "queryEnd") int queryEnd,@Param(value = "apartmentIdx")  String apartmentIdx);
 	
 	//정보게시판 글 갯수 불러오기
-	@Select("select count(*) from tb_inf_qst_brd where apartment_idx = #{apartmentIdx}")
+	@Select("select count(*) from tb_inf_qst_brd where apartment_idx = #{apartmentIdx} and b_isdel = 0")
 	int selectInfoContentCnt(String apartmentIdx);
 	
 	//글번호로 게시글 불러오기

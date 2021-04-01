@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import com.kh.aboo.admin.schedule.model.service.ScheduleService;
 import com.kh.aboo.admin.schedule.model.vo.Schedule;
 import com.kh.aboo.board.info.model.service.InfoService;
+import com.kh.aboo.common.code.AlarmCode;
+import com.kh.aboo.mypage.myalarm.model.service.MyAlarmService;
 import com.kh.aboo.user.generation.model.vo.Generation;
 import com.kh.aboo.user.manager.model.vo.Admin;
 
@@ -23,9 +25,11 @@ import com.kh.aboo.user.manager.model.vo.Admin;
 public class ScheduleController {
 	
 	private final ScheduleService scheduleService;
+	private final MyAlarmService myAlarmService;
 	
-	public ScheduleController(ScheduleService scheduleService) {
+	public ScheduleController(ScheduleService scheduleService,MyAlarmService myAlarmService) {
 		this.scheduleService = scheduleService;
+		this.myAlarmService = myAlarmService;
 	}
 	
 	@GetMapping("addschedule")
@@ -47,8 +51,11 @@ public class ScheduleController {
 		schedule.setApartmentIdx(admin.getApartmentIdx());
 		
 		int res = scheduleService.insertSchedule(schedule);
+
 		
 		if(res > 0) {
+			myAlarmService.insertAptAlarm("'" + schedule.getScheduleCon() + "' " + AlarmCode.ADD_SCHEDULE, schedule.getApartmentIdx());
+			System.out.println(AlarmCode.ADD_SCHEDULE);
 			model.addAttribute("alertMsg", "일정이 등록되었습니다.");
 			model.addAttribute("url", "/admin/schedule/addschedule");
 		}else {

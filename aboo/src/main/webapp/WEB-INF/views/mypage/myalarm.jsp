@@ -60,7 +60,7 @@
                 <div class="col-md-12">
             <div class="card ">
               <div class="card-header">
-                <h5 class="card-title text-center text-dark">위례 LH35단지 3501동 1311호</h6>
+                <h6 class="card-title text-center text-dark">${aptName} ${building}</h6>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
@@ -72,69 +72,17 @@
 
                     </thead>
                     <tbody>
+                    <c:forEach items='${alarmList}' var="alarmList" begin='0' end='9'>
                       <tr>
                         <td>
-                          2021.03.10
+                          ${alarmList.issueDate}
                         </td>
                         <td>
-                          '분리수거 날짜 변경' 투표가 추가되었습니다.
+                          ${alarmList.issueContent}
                         </td>
        
                       </tr>
-                      <tr>
-                        <td>
-                          2021.03.10
-                        </td>
-                        <td>
-                          '분리수거 날짜 변경' 투표가 추가되었습니다.
-                        </td>
-                       
-                      </tr>
-                      <tr>
-                        <td>
-                         2021.03.10
-                        </td>
-                        <td>
-                          '분리수거 날짜 변경' 투표가 추가되었습니다.
-                        </td>
-
-                      </tr>
-                      <tr>
-                        <td>
-                          2021.03.10
-                        </td>
-                        <td>
-                          '분리수거 날짜 변경' 투표가 추가되었습니다.
-                        </td>
-
-                      </tr>
-                      <tr>
-                        <td>
-                          2021.03.10
-                        </td>
-                        <td>
-                          '분리수거 날짜 변경' 투표가 추가되었습니다.
-                        </td>
-
-                      </tr>
-                      <tr>
-                        <td>
-                          2021.03.10
-                        </td>
-                        <td>
-                          '분리수거 날짜 변경' 투표가 추가되었습니다.
-                        </td>
-
-                      </tr>
-                      <tr>
-                        <td>
-                          2021.03.10
-                        </td>
-                        <td>
-                          '분리수거 날짜 변경' 투표가 추가되었습니다.
-                        </td>
-
-                      </tr>
+                     </c:forEach>
                     </tbody>
                   </table>
                 </div>
