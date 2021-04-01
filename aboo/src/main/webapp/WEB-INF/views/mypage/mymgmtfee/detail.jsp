@@ -225,7 +225,7 @@
   	
 	$("#check_module").click(function () {
         var IMP = window.IMP; // 생략가능
-        IMP.init('imp71306117');
+        IMP.init('');
         // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
         // i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
         IMP.request_pay({
