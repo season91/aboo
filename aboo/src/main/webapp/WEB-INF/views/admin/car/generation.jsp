@@ -196,7 +196,7 @@
                       <th>
                         <div class="form-check checkAll" id="checkAll">
                             <label class="form-check-label">
-                              <input class="form-check-input allvehicle" type="checkbox" value="">
+                              <input class="form-check-input allcar" type="checkbox" value="">
                               <span class="form-check-sign">
                                 <span class="check"></span>
                               </span>

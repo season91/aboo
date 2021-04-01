@@ -60,7 +60,7 @@
             <h2 class="h1">아파트 일정</h2>
           </div>
           <div class="d-flex justify-content-center col-md-12">
-          <h5>위례 35단지</h5>
+          <h5>${aptName}</h5>
           </div>
           <div class="w-100"></div>
         </div>
@@ -69,7 +69,15 @@
           	</div>
 
         </div>
+        <c:choose>
+        	<c:when test="${admin != null}">
+        <div class="nav ftco-animate nav-pills d-flex justify-content-end" aria-orientation="vertical">	
+                  <a class="nav-link pl-4 pr-4 mt-4" href="/admin/schedule/addschedule">일정관리</a>
+                </div>
+             </c:when>
+        </c:choose>
         </div>
+        	
     </section>
 
     <footer class="ftco-footer ftco-bg-dark ftco-section">
@@ -148,25 +156,36 @@
   <script type="text/javascript">
   
   	document.addEventListener('DOMContentLoaded', function() { 
+  		
+  		
   		var calendarEl = document.getElementById('calendar'); 
   		var calendar = new FullCalendar.Calendar(calendarEl, {
   			plugins: [ 'interaction', 'dayGrid', 'timeGrid' ], 
   			defaultView: 'dayGridMonth', defaultDate: new Date(), 
   			header: { 
-  				left: 'prev,next today', 
-  				center: 'ddddd', 
-  				right: '',
-  				eventColor: 'black',
-  				eventTextColor: 'white'
+  				left: 'prev,next',
+  			    center: 'title',
+  				right: 'today',
+
   				}, 
-  				
+
   				events: [
-  		  			{
-  		  				title:'All Day Event',
-  		  				start: new Date('2021,03,30')
-  		  			},
-  		  		
-  		  			
+
+  			  		<c:forEach items="${schedule}" var="schedule">
+  			  		{
+
+  						title : '${schedule.scheduleCon}',
+  						start : new Date('${schedule.scheduleSdate}'),
+  						end : new Date('${schedule.scheduleEdate}'),
+  			  			backgroundColor: "#FF6699",
+  			  			borderColor : "#FF6699",
+               			textColor : "#ffffff"
+  			  		},
+
+  					</c:forEach>
+
+  						
+
   		  		]
   			}); 
   		calendar.render(); 

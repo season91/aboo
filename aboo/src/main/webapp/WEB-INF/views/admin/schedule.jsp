@@ -161,25 +161,20 @@
                       </th>
                       </thead>
                     <tbody>
-                      <tr>
-                      	<td id="startDate">
-                           2021.03.10
-                        </td>
-                        <td id="endDate">
-                           2021.03.10
-                        </td>
+                    <c:forEach items="${schedule}" var="schedule" varStatus="status">
+                      <tr id="schedule${status.index}">
+                      	<td id="startDate">${schedule.scheduleSdate}</td>
+                        <td id="endDate">${schedule.scheduleEdate}</td>
                         <td id="schContent">
-                        	<span class="d-flex justify-content-between">
-                           아파트 도색작업
-                           <span style="font-size:1.1vw">
-                           <i class="tim-icons icon-pencil mr-2"></i>
-                           <i class="tim-icons icon-trash-simple"></i>
+                        	<span class="d-flex justify-content-between">${schedule.scheduleCon}<span style="font-size:1.1vw">
+                            <a onclick="modifyschedule(${schedule.scheduleIdx},this);"><i class="tim-icons icon-pencil mr-2"></i></a>
+                            <a onclick="deleteschedule(${schedule.scheduleIdx});"><i class="tim-icons icon-trash-simple"></i></a>
                         	</span>
                         	</span>
                         </td>
                         
                       </tr>
-
+					</c:forEach>
                     </tbody>
                   </table>
                   <div class="card-footer d-flex justify-content-end">
@@ -190,6 +185,30 @@
               </div>
                
              
+       </div>
+       <div class="row mt-5 d-flex card-body ">
+             <div class="col text-center">
+               <div class="block-27">
+                 <ul>
+                   <li><a href="${context}/admin/${paging.type}/addschedule">&lt;&lt;</a></li>
+               		 <li><a href="${context}/admin/${paging.type}/addschedule?page=${paging.prev}">&lt;</a></li>
+		                <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
+		                   <c:choose>
+		                      <c:when test="${paging.currentPage eq page}">
+		                         <li class="active"><a href="${context}/admin/${paging.type}/addschedule?page=${page}">${page}</a></li>
+		                      </c:when>
+		                      <c:otherwise>
+		                         <li><a href="${context}/admin/${paging.type}?page=${page}/addschedule">${page}</a></li>
+		                      </c:otherwise>
+		                   </c:choose>
+		              	 </c:forEach>
+               		  <li><a href="${context}/admin/${paging.type}/addschedule?page=${paging.next}">&gt;</a></li>
+               		<li><a href="${context}/admin/${paging.type}/addschedule?page=${paging.lastPage}">&gt;&gt;</a></li>
+                 </ul>
+               </div>
+             </div>
+           </div>
+       </div>
        </div>
        </div>
             </div>
@@ -267,6 +286,52 @@
                         <button type="submit" class="btn btn-primary">추가하기</button>
                    </div>
                 </form>
+            </div>
+        </div>
+     </div>
+     
+     <!-- 일정수정 모달창 -->
+       <div class="modal bg-lg" id="schedule_modify_modal">
+ 		<div class="modal-dialog" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675);" role="document">
+        	<div class="modal-content modal-content border-white" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675);">
+            	<div class="modal-header" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675);">
+                	<h5 class="modal-title text-light" >일정 수정</h5>
+                    <button type="button" id="btn_modify_close" class="close">
+                    <span aria-hidden="true">&times;</span></button>
+                </div>
+ 
+                	<div class="modal-body">        	
+                    		<div class="form-group row">
+                            	<div class="col-sm-3 mb-3 mb-sm-0 d-flex align-items-center">
+                                	<h6 class="font-weight-bold">일정 시작</h6>
+                                </div>
+                                <div class="col-sm-9">
+                                	<input type="date" name="scheduleSdate" id="modifyScheduleSdate" class="form-control form-control-user h6 rounded bg-white text-dark"></input>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                            	<div class="col-sm-3 mb-3 mb-sm-0 d-flex align-items-center">
+                                	<h6 class="font-weight-bold">일정 마감</h6>
+                                </div>
+                                <div class="col-sm-9">
+                                	<input type="date" name="scheduleEdate" id="modifyScheduleEdate"class="form-control form-control-user h6 rounded bg-white text-dark"></input>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                            	<div class="col-sm-3 mb-3 mb-sm-0 d-flex align-items-center">
+	                            
+	                           	 <h6 class="font-weight-bold">일정 내용</h6>
+	                            </div>
+	                            <div class="col-sm-9">
+	                    	 	 	<textarea class="form-control col-sm-9 bg-white text-dark rounded"  id="modifyScheduleCon" name="scheduleCon" style="height: 300px; resize: none;" wrap="hard"  cols="15"></textarea>
+	                   			</div>
+	                   			<input type="hidden" id="scheduleIdx">
+	                   		</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="modify();" class="btn btn-primary">수정하기</button>
+                   </div>
+
             </div>
         </div>
      </div>
@@ -418,7 +483,91 @@
     
 	//일정 수정
 	
+	let modifyschedule = (scheduleIdx,sch) => {
+    	$('#schedule_modify_modal').show();
+
+    	
+    	let schedule = sch.parentElement.parentElement.parentElement.parentElement;
+    	let scheduleSdate = schedule.cells[0].innerHTML;
+    	let scheduleEdate = schedule.cells[1].innerHTML;
+    	let scheduleCon = schedule.cells[2].innerText;
+
+    	document.querySelector('#modifyScheduleSdate').value = scheduleSdate;
+    	document.querySelector('#modifyScheduleEdate').value = scheduleEdate;
+    	document.querySelector('#modifyScheduleCon').value = scheduleCon;
+    	document.querySelector('#scheduleIdx').value = scheduleIdx;
+    	
+    		
+    }
+	
+	let modify = () =>{
+		
+		let scheduleIdx = document.querySelector('#scheduleIdx').value;
+		let scheduleSdate = document.querySelector('#modifyScheduleSdate').value;
+		let scheduleEdate = document.querySelector('#modifyScheduleEdate').value;
+		let scheduleCon = document.querySelector('#modifyScheduleCon').value;
+		
+		
+		if(confirm("일정을 수정하시겠습니까?")){
+			let paramObj = new Object();
+	        paramObj.scheduleIdx = scheduleIdx;
+	        paramObj.scheduleSdate = scheduleSdate;
+	        paramObj.scheduleEdate = scheduleEdate;
+	        paramObj.scheduleCon = scheduleCon;
+	        let headerObj = new Headers();
+	        headerObj.append("content-type","application/json");
+			fetch("/admin/schedule/modifyschedule" ,{
+	  			method:"post",
+	  			headers:headerObj,
+	  	        body:JSON.stringify(paramObj)
+	  		})
+	  		.then(response => response.text())
+	  		.then(text => {
+	  			if(text == 'success'){
+	  				alert("일정이 수정 되었습니다.");
+					location.href = "/admin/schedule/addschedule";
+	  			}else{
+	  				alert("일정 수정 중 에러가 발생하였습니다.");
+	  				location.href = "/admin/schedule/addschedule";
+	  			}
+	  		})
+		}else{
+			alert("취소되었습니다.");
+		}
+		
+		
+	}
+	
+	
+	
 	//일정 삭제
+	
+	let deleteschedule = (scheduleIdx) => {
+
+		if(confirm("일정을 삭제하시겠습니까?")){
+			fetch("/admin/schedule/deleteschedule?scheduleIdx=" + scheduleIdx,{
+	  			method:"GET"
+	  		})
+	  		.then(response => response.text())
+	  		.then(text => {
+	  			if(text == 'success'){
+	  				alert("일정이 삭제되었습니다.");
+					location.href = "/admin/schedule/addschedule";
+	  			}else{
+	  				alert("일정 삭제 중 에러가 발생했습니다.");
+	  				location.href = "/admin/schedule/addschedule";
+	  			}
+	  		})
+		}else{
+			alert("취소되었습니다.");
+		}
+	  
+  }
+	
+	$('#btn_modify_close').click(function(e) {
+
+	    $('#schedule_modify_modal').hide();
+	});
     
     </script>
 </body>
