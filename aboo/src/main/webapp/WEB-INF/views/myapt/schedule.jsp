@@ -178,7 +178,7 @@
   						start : new Date('${schedule.scheduleSdate}'),
   						end : new Date('${schedule.scheduleEdate}'),
   			  			backgroundColor: "#FF6699",
-  			  			borderColor : "#FF6699",
+  			  			borderColor : "#ffffff",
                			textColor : "#ffffff"
   			  		},
 

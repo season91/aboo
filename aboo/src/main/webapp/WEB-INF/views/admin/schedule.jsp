@@ -101,10 +101,6 @@
                   <div class="photo">
                     <img src="../../resources/img/anime3.png">
                   </div>
-                  <b class="caret d-none d-lg-block d-xl-block"></b>
-                  <p class="d-lg-none">
-                    Log out / Login
-                  </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link">
@@ -115,7 +111,14 @@
                   </li>
                   <div class="dropdown-divider"></div>
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Log out</a>
+                  <c:choose>
+                  	<c:when test="${sessionScope.admin == null}">
+                    	<a href="/admin/login" class="nav-item dropdown-item">Log in</a>
+                  	</c:when>
+                  	<c:when test="${sessionScope.admin != null}">
+                    	<a href="/admin/logout" class="nav-item dropdown-item">Log out</a>
+                  	</c:when>
+                  </c:choose>
                   </li>
                 </ul>
               </li>
@@ -198,7 +201,7 @@
 		                         <li class="active"><a href="${context}/admin/${paging.type}/addschedule?page=${page}">${page}</a></li>
 		                      </c:when>
 		                      <c:otherwise>
-		                         <li><a href="${context}/admin/${paging.type}?page=${page}/addschedule">${page}</a></li>
+		                         <li><a href="${context}/admin/${paging.type}/addschedule?page=${page}">${page}</a></li>
 		                      </c:otherwise>
 		                   </c:choose>
 		              	 </c:forEach>

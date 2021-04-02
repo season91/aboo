@@ -23,7 +23,7 @@ public interface ScheduleRepository {
 	List<InfoBoard> selectScheduleList(@Param(value = "queryStart") int queryStart, @Param(value = "queryEnd") int queryEnd,@Param(value = "apartmentIdx")  String apartmentIdx);
 	
 	//일정 갯수 가져오기
-	@Select("select count(*) from tb_schedule where apartment_idx = #{apartmentIdx}")
+	@Select("select count(*) from tb_schedule where apartment_idx = #{apartmentIdx} and is_leave = 0")
 	int selectScheduleCnt(String apartmentIdx);
 	
 	//아파트명 불러오기
