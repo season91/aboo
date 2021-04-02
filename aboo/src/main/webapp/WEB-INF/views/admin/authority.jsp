@@ -130,43 +130,35 @@
           </div>
         </div>
       </nav>
-      <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="SEARCH">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <i class="tim-icons icon-simple-remove"></i>
-              </button>
-            </div>
-            <div class="modal-footer">
-            </div>
-          </div>
-        </div>
-      </div>
+
       <!-- End Navbar -->
 			  <div class="content">
 		    <div class="row">
 		        <div class="col-md-12">
 					
-					<div class= "w-100 d-flex justify-content-end"><button class="btn btn-primary px-xl-5 py-xl-2 mb-2" data-toggle="modal" data-target="#add">추가</button></div>
+					<div class= "w-100 d-flex justify-content-end">				
+						<button class="btn btn-primary px-xl-5 py-xl-2 mb-2" data-toggle="modal" data-target="#add">추가</button>
+						<button class="btn btn-info px-xl-5 py-xl-2 mb-2" data-toggle="modal" data-target="#search">검색</button>
+					</div>
 		            <div class="card ">
-		                <div class="card-header">
+		                <div class="card-header d-flex justify-content-between">
 		                    <h4 class="card-title">세대관리</h4>
 		                </div>
 		                <div class="card-body">
 		                    <div class="table-responsive">
 		                        <table class="table tablesorter " id="">
 		                            <thead class=" text-primary">
-		                                <th>번호</th>
-		                                <th>동 </th>
-		                                <th>호</th>
-		                                <th>아이디</th>
-		                                <th>입주일</th>
+			                            <tr>
+			                                <th>번호</th>
+			                                <th>동 </th>
+			                                <th>호</th>
+			                                <th>아이디</th>
+			                                <th>입주일</th>
+			                            </tr>
 		                            </thead>
 		                            <tbody>
 										<c:forEach items="${authorityList}" var="authority">
-											<tr  onclick="openModal(this)" data-toggle="modal" data-target="#modifyModal">
+											<tr onclick="openModal(this)" data-toggle="modal" data-target="#modifyModal">
 											    <td>${authority.generationIdx}</td>
 											    <td>${authority.building}</td>
 											    <td>${authority.num}</td>
@@ -234,46 +226,7 @@
       </footer>
       </div>
     </div>
-    <div class="fixed-plugin">
-      <div class="dropdown show-dropdown">
-        <a href="#" data-toggle="dropdown">
-          <i class="fa fa-cog fa-2x"> </i>
-        </a>
-        <ul class="dropdown-menu">
-          <li class="header-title"> Sidebar Background</li>
-          <li class="adjustments-line">
-            <a href="javascript:void(0)" class="switch-trigger background-color">
-              <div class="badge-colors text-center">
-                <span class="badge filter badge-primary active" data-color="primary"></span>
-                <span class="badge filter badge-blue" data-color="blue"></span>
-                <span class="badge filter badge-green" data-color="green"></span>
-              </div>
-              <div class="clearfix"></div>
-            </a>
-          </li>
-          <li class="adjustments-line text-center color-change">
-            <span class="color-label">LIGHT MODE</span>
-            <span class="badge light-badge mr-2"></span>
-            <span class="badge dark-badge ml-2"></span>
-            <span class="color-label">DARK MODE</span>
-          </li>
-          <li class="button-container">
-            <a href="https://www.creative-tim.com/product/black-dashboard" target="_blank" class="btn btn-primary btn-block btn-round">Download Now</a>
-            <a href="https://demos.creative-tim.com/black-dashboard/docs/1.0/getting-started/introduction.html" target="_blank" class="btn btn-default btn-block btn-round">
-              Documentation
-            </a>
-          </li>
-          <li class="header-title">Thank you for 95 shares!</li>
-          <li class="button-container text-center">
-            <button id="twitter" class="btn btn-round btn-info"><i class="fab fa-twitter"></i> &middot; 45</button>
-            <button id="facebook" class="btn btn-round btn-info"><i class="fab fa-facebook-f"></i> &middot; 50</button>
-            <br>
-            <br>
-            <a class="github-button" href="https://github.com/creativetimofficial/black-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ntkme/github-buttons on GitHub">Star</a>
-          </li>
-        </ul>
-      </div>
-    </div>
+
     
       <!-- 세대원 추가  Modal -->
       <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -294,7 +247,7 @@
     			<input type="text" id = "addNum" name = "num" class="form-control text-dark" required="required" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="호를 입력하세요">
               </div>  
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" id = "closeAdd" class="btn btn-default" data-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary" >확인</button>
             </div>
               </form>    
@@ -302,6 +255,37 @@
           </div>
         </div>
       </div>
+      
+      <!-- 세대원 검색  Modal -->
+      <div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title text-dark" id="myModalLabel">세대 검색</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+            <form action="/admin/authority" method="post">
+       	      <div class="form-group">
+                <label for="name">세대를 검색하세요(000-000)</label>
+                <div class = "d-flex justify-content-between">
+                	<input type="hidden" name="kind" value="generation">
+    				<input type="text" id = "searchBuilding" name = "searchBuilding" class="form-control text-dark col-md-5" required="required" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+    				<p class = "text-dark" style="font-size: 1.5vw;"><i class="fas fa-window-minimize"></i></p>
+    				<input type="text" id = "searchNum" name = "searchNum" class="form-control text-dark col-md-5" required="required" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+              	</div>
+              </div>             
+            <div class="modal-footer">
+              <button type="button" id = "closeSearch" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" >확인</button>
+            </div>
+              </form>    
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
       
       <!-- 세대원 수정 Modal -->
       <div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -583,8 +567,21 @@
  		
 	</script>
 	
+	<!-- 모달 Close 초기화 -->
+	<script type="text/javascript">
 	
-	
+		$('#closeAdd').click(function(e) {
+		   $('#addBuilding').val(" ");
+		   $('#addNum').val(" ");
+		   $('#add').hide();
+		});		
+		
+		$('#closeSearch').click(function(e) {
+			   $('#keyword').val(" ");
+			   $('#search').hide();
+			});
+		
+	</script>
 	
 	
 	

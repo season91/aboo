@@ -190,14 +190,15 @@
       <div class="content">
 		<section class="ftco-section contact-section ftco-degree-bg">
     	<div style="height: 10vh"></div>
-     	<h4 class = "text-center mb-4">개인정보 수정</h4>
+    	<div class = "card">
+     	<h4 class = "text-center mt-4 mb-4">개인정보 수정</h4>
 	      <div class="container">
 	        <div class="row block-9 justify-content-center">
 	          <div class="col-md-6">
 	            <form:form id = "modifyForm" action="/admin/mypage/modifyupdate" method="post" modelAttribute ="admin">
-	              <div class="form-group d-flex">
+	              <div class="form-group d-flex justify-content-between">
 	              	<div class="col-md-3  text-white d-flex justify-content-center align-items-center bg-sun">아이디</div>
-	                <input type="text" readonly="readonly" class="form-control" id = "id" value="${selectAdmin.id}" >
+	                <input type="text" readonly="readonly" class="form-control" id = "id" value="${selectAdmin.id}" style="width: 26vw">
 	              </div>
 	              <div class="form-group">
 	                <input type="text" class="form-control password" id = "password_1" placeholder="비밀번호"> 
@@ -216,12 +217,13 @@
 	              <div class="col-md-3  text-white d-flex justify-content-center align-items-center bg-sun">이메일</div>
 	                <input type="text" class="form-control col-md-7"  readonly="readonly" name = "email" value = "${selectAdmin.email}"><button type="button" class="btn btn-primary px-xl-3 py-xl-1" data-toggle="modal" data-target="#emailModal">인증</button>
 	              </div>
-	              <div class="form-group">
+	              <div class="form-group mt-4 mb-4">
 	                <input type="submit" value="수정완료" class="btn btn-primary mt-2 py-3 px-5 col-sm-12" >
 	              </div>
 	            </form:form>                    
 	          </div>
 	        </div>
+	      </div>
 	      </div>
 	    </section>
       </div>
@@ -683,13 +685,6 @@
 
    </script>
    
-   <script type="text/javascript">
-      $('#tellModal').modal(options)
-   </script>
-   
-   <script type="text/javascript">
-      $('#emailModal').modal(options)
-   </script>
     
 </body>
 </html>

@@ -94,18 +94,14 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public Map<String, Object> selectAuthorityList(int currentPage, String apartmentIdx) {
+	public Map<String, Object> selectAuthorityList(int currentPage, Map<String, Object> searchMap) {
 		Paging paging = Paging.builder().currentPage(currentPage).blockCnt(5).cntPerPage(5).type("board")
-				.total(adminRepository.selectContentCnt(apartmentIdx)).build();
-
+				.total(adminRepository.selectContentCnt(searchMap)).build();
+		
 		Map<String, Object> commandMap = new HashMap<String, Object>();
-		Map<String, Object> authorityMap = new HashMap<String, Object>();
-		authorityMap.put("paging", paging);
-		authorityMap.put("apartmentIdx", apartmentIdx);
-		System.out.println("paging" + paging.toString());
 
-		commandMap.put("paging", paging);
-		commandMap.put("authorityList", adminRepository.selectAuthorityList(authorityMap));
+		searchMap.put("paging",paging);
+		commandMap.put("authorityList", adminRepository.selectAuthorityList(searchMap));
 
 		return commandMap;
 	}
@@ -297,6 +293,7 @@ public class AdminServiceImpl implements AdminService {
 	public int updateAdminTell(Admin admin) {
 		return adminRepository.updateAdminTell(admin);
 	}
+
 	
 	
 }

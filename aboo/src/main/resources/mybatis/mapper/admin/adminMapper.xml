@@ -11,11 +11,30 @@
 			select rownum rnum, g.* 
 			from(
 				select GENERATION_IDX, APARTMENT_IDX, TELL, REG_DATE, EMAIL, BUILDING, NUM, ID
-				from TB_GENERATION where is_del = 0 and APARTMENT_IDX = #{apartmentIdx}
+				from TB_GENERATION 
+				<where>
+				<choose>
+				<when test="searchType == 'apartmentIdx'">
+					APARTMENT_IDX = #{apartmentIdx} and
+				</when>
+				</choose>
+				</where>
+				APARTMENT_IDX = #{apartmentIdx}
 				order by GENERATION_IDX asc
 				) g
 			) where rnum between #{paging.queryStart} and #{paging.queryEnd}
 		
+	</select>
+	
+	<select id="selectContentCnt" resultType="int">
+		select count(*) from TB_GENERATION 
+		<where>
+			<choose>
+				<when test="searchType == 'apartmentIdx'">
+					GENERATION_IDX = #{apartmentIdx} and is_del = 0
+				</when>
+			</choose>
+		</where>
 	</select>
 
 

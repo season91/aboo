@@ -194,15 +194,15 @@
             <div class="modal-body">
        	      <div class="form-group">
                 <label for="name">이름</label>
-    			<input type="text" class="form-control" id="addName" class= "addName" placeholder="이름을 입력하세요">
+    			<input type="text" class="form-control addName" id="addName" placeholder="이름을 입력하세요">
               </div>             
               <div class="form-group">
                 <label for="name">전화번호</label>
-    			<input type="text" class="form-control" id="addTell" class = "addTell"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="11" placeholder="전화번호를 입력하세요">
+    			<input type="text" class="form-control addTell" id="addTell"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="11" placeholder="전화번호를 입력하세요">
               </div>      
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" id = "closeAdd" class="btn btn-default" data-dismiss="modal">Close</button>
               <button type="button" class="btn btn-primary" onclick="add()">확인</button>
             </div>
           </div>
@@ -390,14 +390,6 @@
 	</script>
 	
 	
-	
-	
-	<script type="text/javascript">
-	$('#closeModity').click(function(e) {
-	   $('#modify').hide();
-	});
-	
-	</script>
 
   <script src="../../../resources/js/generation/jquery.min.js"></script>
   <script src="../../../resources/js/generation/jquery-migrate-3.0.1.min.js"></script>
