@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.kh.aboo.admin.mgmtfee.model.vo.Mgmtfee;
 import com.kh.aboo.admin.mgmtfee.model.vo.MgmtfeeOverdue;
+import com.kh.aboo.common.code.AlarmCode;
+import com.kh.aboo.mypage.myalarm.model.service.MyAlarmService;
 import com.kh.aboo.mypage.mymgmtfee.model.service.MyMgmtfeeService;
 import com.kh.aboo.mypage.mymgmtfee.model.vo.MgmtfeePayment;
 import com.kh.aboo.user.generation.model.vo.Generation;
@@ -23,9 +25,11 @@ import com.kh.aboo.user.generation.model.vo.Generation;
 public class MyMgmtfeeController {
 
 	private final MyMgmtfeeService myMgmtfeeService;
+	private final MyAlarmService myAlarmService;
 
-	public MyMgmtfeeController(MyMgmtfeeService myMgmtfeeService) {
+	public MyMgmtfeeController(MyMgmtfeeService myMgmtfeeService, MyAlarmService myAlarmService) {
 		this.myMgmtfeeService = myMgmtfeeService;
+		this.myAlarmService = myAlarmService;
 	}
 
 	// 페이징
@@ -63,9 +67,9 @@ public class MyMgmtfeeController {
 	@PostMapping("mymgmtfee/payment")
 	@ResponseBody
 	public String payment(@RequestBody MgmtfeePayment mgmtfeePayment) {
-		
-		myMgmtfeeService.insertPayment(mgmtfeePayment);
-		
+		String generationIdx = myMgmtfeeService.selectPaymentGenerationIdx(mgmtfeePayment.getMgmtfeeIdx());
+		myAlarmService.insertPvAlarm(AlarmCode.PAY_MGMTFEE+"",generationIdx);
+		myMgmtfeeService.insertPayment(mgmtfeePayment); 
 		return "success";
 
 	}

@@ -116,10 +116,8 @@
 
                 <div class="Button" style=" padding: 18px 18px 18px 18px;">
                     <a href="http://localhost:9393/index">
-                        <button
-                            style="background-color: #2CCBC3; width:100%; min-width:100%;border: 1px none; border-radius: 4px;padding: 18px; font-size: 16px;cursor: pointer;">
-                            <p style="text-decoration: none;color: #FFFFFF; font-weight: bold; text-align: center; ">
-                                ABOO 홈페이지</span>
+                        <button style="background-color: #2CCBC3; width:100%; min-width:100%;border: 1px none; border-radius: 4px;  height:8vh; font-size: 16px;cursor: pointer;">
+                            	<p style="text-decoration: none;color: #FFFFFF; font-weight: bold; text-align: center; ">ABOO 홈페이지</p>
                         </button>
                     </a>
                 </div>

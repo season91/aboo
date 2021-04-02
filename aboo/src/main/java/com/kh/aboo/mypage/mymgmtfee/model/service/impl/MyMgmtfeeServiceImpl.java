@@ -81,4 +81,10 @@ public class MyMgmtfeeServiceImpl implements MyMgmtfeeService {
 	}
 
 
+	@Override
+	public String selectPaymentGenerationIdx(String mgmtfeeIdx) {
+		return myMgmtfeeRepository.selectPaymentGenerationIdx(mgmtfeeIdx);
+	}
+
+
 }
