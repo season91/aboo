@@ -22,7 +22,7 @@ public interface MyMgmtfeeRepository {
 	List<Mgmtfee> selectMyMgmtfeeList(Map<String, Object> commandMap);
 	
 	// 3. 연체료 가져오는 쿼리
-	@Select("select * from tb_mgmtfee_overdue where mgmtfee_idx = #{mgmtfeeIdx} and is_del = 0")
+	@Select("select * from tb_mgmtfee_overdue where mgmtfee_idx = #{mgmtfeeIdx}")
 	MgmtfeeOverdue selectMyMgmtfeeOverdue(String mgmtfeeIdx);
 		
 	// [관리비 상세 페이지]

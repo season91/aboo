@@ -139,7 +139,6 @@ public class CarController {
 		car.setGenerationIdx(generation.getGenerationIdx());
 		car.setApartmentIdx(generation.getApartmentIdx());
 		car.setCarNumber(carNumber);
-		car.setCarQR(Configcode.QRCODE_PATH.desc);
 		
 		String res = carService.insertAndQRWrite(car);
 		

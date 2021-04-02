@@ -25,7 +25,7 @@ public interface CarRepository {
 	
 	// [QR코드]
 	// 1. DB에 넣어주기
-	@Insert("insert into tb_car(car_idx, apartment_idx, generation_idx, car_number, car_qr) values (sc_car_idx.nextval, #{apartmentIdx}, #{generationIdx}, #{carNumber}, #{carQR}||'c'||sc_car_idx.currval||'.jpg')")
+	@Insert("insert into tb_car(car_idx, apartment_idx, generation_idx, car_number, car_qr) values (sc_car_idx.nextval, #{apartmentIdx}, #{generationIdx}, #{carNumber}, 'c'||sc_car_idx.currval||'.jpg')")
 	int insertCar(Car car);
 	
 	// 2. 넣기전에 이 세대 2건이상 있는지 확인한다.
@@ -38,7 +38,7 @@ public interface CarRepository {
 	
 	// [차량 등록]
 	// 1. 차량등록을 위해 입력받은 동,호수정보로 세대정보 가져오기
-	@Select("select * from tb_generation where building = #{building} and num = #{num} and is_del = 0")
+	@Select("select * from tb_generation where building = #{building} and num = #{num} and is_del = 0 and apartment_idx = #{apartmentIdx}")
 	Generation selectGenerationByBuildingAndNum(Generation generation);
 	
 	// [차량목록- 페이징, 글목록(동적쿼리)]

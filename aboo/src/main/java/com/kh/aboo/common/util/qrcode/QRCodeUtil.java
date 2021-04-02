@@ -20,7 +20,7 @@ public class QRCodeUtil {
 		try {
 			BitMatrix bm = writer.encode(url, BarcodeFormat.QR_CODE, 300, 300);
 			// ck에디터 경로에 저장한다.
-			String filePath = Configcode.QRCODE_PULLPATH.desc;
+			String filePath = Configcode.QRCODE_PATH.desc;
 			File path = new File(filePath);
 			if(!path.exists()) {
 				path.mkdirs();
