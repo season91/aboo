@@ -22,18 +22,22 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.aboo.admin.mgmtfee.model.service.MgmtfeeService;
 import com.kh.aboo.admin.mgmtfee.model.vo.Mgmtfee;
 import com.kh.aboo.admin.mgmtfee.model.vo.MgmtfeeOverdue;
+import com.kh.aboo.common.code.AlarmCode;
 import com.kh.aboo.common.code.ErrorCode;
 import com.kh.aboo.common.exception.ToAlertException;
 import com.kh.aboo.common.util.file.FileUtil;
+import com.kh.aboo.mypage.myalarm.model.service.MyAlarmService;
 import com.kh.aboo.user.generation.model.vo.Generation;
 import com.kh.aboo.user.manager.model.vo.Admin;
 
 @Controller
 public class MgmtfeeController {
 	private final MgmtfeeService mgmtfeeService;
+	private final MyAlarmService myAlarmService;
 
-	public MgmtfeeController(MgmtfeeService mgmtfeeService) {
+	public MgmtfeeController(MgmtfeeService mgmtfeeService, MyAlarmService myAlarmService) {
 		this.mgmtfeeService = mgmtfeeService;
+		this.myAlarmService = myAlarmService;
 	}
 
 	// 페이징처리
@@ -109,6 +113,12 @@ public class MgmtfeeController {
 			System.out.println("실패유");
 			return "fail";
 		}
+		System.out.println("컨트롤러리스트"+mgmtfeeList);
+		// 성공시 알람넣어주기.
+		for (int i = 0; i < mgmtfeeList.size(); i++) {
+			System.out.println("알람보낼세대관리번호"+mgmtfeeList.get(i));
+			myAlarmService.insertPvAlarm("8월 "+AlarmCode.ADD_MGMTFEE, mgmtfeeList.get(i).getGenerationIdx());
+		}
 		
 		return "success";
 
@@ -155,6 +165,7 @@ public class MgmtfeeController {
 		
 		// 둘다 조회가 되었다면 내역 넘기고, 둘중 하나라도 조회내역이없다면 에러 발동한다.
 		if(mgmtfee != null && generation != null) {
+			
 			model.addAttribute(mgmtfee);
 			model.addAttribute(generation);
 			model.addAttribute("overdue",mgmtfeeService.selectMgmtfeeOverdue(mgmtfee.getMgmtfeeIdx()));
@@ -187,6 +198,8 @@ public class MgmtfeeController {
 		Mgmtfee updateMgmtefee = mgmtfeeService.updateMgmtfee(mgmtfee);
 		// 업데이트내역이 있다면 수정완료, 없다면 실패안내. mgmt update는 프로시저라 int로 판단안함. 
 		if(updateMgmtefee != null) {
+			System.out.println("모야몇번찍히는겨");
+			myAlarmService.insertPvAlarm(AlarmCode.MODIFY_MGMTFEE+"", mgmtfee.getGenerationIdx());
 			model.addAttribute("alertMsg", "수정이 완료되었습니다.");
 			model.addAttribute("url", "/admin/mgmtfee/modify?mgmtfeeidx="+mgmtfee.getMgmtfeeIdx());
 			model.addAttribute("mgmtfee",updateMgmtefee);

@@ -117,7 +117,7 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 	@Override
 	public List<Mgmtfee> insertMgmtfee(Map<String, Object> commandMap,String apartmentIdx) {
 		List<Mgmtfee> mgmtfeeList = new ArrayList<>();
-		Mgmtfee mgmtfee = new Mgmtfee();
+		Mgmtfee mgmtfee;
 		for (String	key : commandMap.keySet()) {
 			//System.out.println(commandMap.get(key));
 			List<String> list = (List<String>) commandMap.get(key);
@@ -135,6 +135,7 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 			
 			Generation generation = mgmtfeeRepository.selectGenerationIdx(generationInfo);
 
+			mgmtfee = new Mgmtfee();
 			mgmtfee.setApartmentIdx(apartmentIdx);
 			mgmtfee.setGenerationIdx(generation.getGenerationIdx());
 			mgmtfee.setGnrlMgmtFee(list.get(2));
@@ -151,9 +152,7 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 			mgmtfee.setMgmtStartDate(Date.valueOf(list.get(13)));
 			mgmtfee.setMgmtEndDate(Date.valueOf(list.get(14)));
 			mgmtfee.setMgmtWriteDate(Date.valueOf(list.get(15)));
-			
-			System.out.println(mgmtfee.toString());
-			
+
 			// 납부일 기준 이미 삽입한 내역이 있다면 이미 등록된 고지월임을 알려준다.
 			int res = mgmtfeeRepository.selectMgmtfeeByGenerationIdxAndDueDate(mgmtfee);
 			if (res == 0) {
@@ -162,11 +161,11 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 				throw new ToAlertException(ErrorCode.SMGMT02);
 			}
 
-			mgmtfeeRepository.insertMgmtfee(mgmtfee);
 			mgmtfeeList.add(mgmtfee);
+
 		}
 		
-		
+		System.out.println("서비스 리스트" + mgmtfeeList);
 		return mgmtfeeList;
 	}
 

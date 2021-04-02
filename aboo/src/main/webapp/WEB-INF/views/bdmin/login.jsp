@@ -67,7 +67,7 @@
             </a>
           </li>
          <li>
-           <a href="/admin/notice">
+           <a href="/bdmin/notice/noticelist">
               <i class="tim-icons icon-volume-98"></i>
               <p>notice</p>
             </a>
@@ -122,10 +122,10 @@
                   <div class="dropdown-divider"></div>
                   <li class="nav-link">
                   <c:choose>
-                  	<c:when test="${sessionScope.admin == null}">
+                  	<c:when test="${sessionScope.bdmin == null}">
                     	<a href="/admin/login" class="nav-item dropdown-item">Log in</a>
                   	</c:when>
-                  	<c:when test="${sessionScope.admin != null}">
+                  	<c:when test="${sessionScope.bdmin != null}">
                     	<a href="/admin/logout" class="nav-item dropdown-item">Log out</a>
                   	</c:when>
                   </c:choose>

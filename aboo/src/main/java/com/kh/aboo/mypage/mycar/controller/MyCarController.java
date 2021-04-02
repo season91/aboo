@@ -43,7 +43,7 @@ public class MyCarController {
 		// 파일명만 나오게 잘라준다. path : QR경로이다.
 		String fileName = path.replace(Configcode.QRCODE_PATH.desc, "");
 		// 실제 저장된 곳으로 지정한다.
-		String originPath = Configcode.QRCODE_PULLPATH.desc;
+		String originPath = Configcode.QRCODE_PATH.desc;
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentDisposition(ContentDisposition.builder("attachment").filename(fileName, Charset.forName("UTF-8"))

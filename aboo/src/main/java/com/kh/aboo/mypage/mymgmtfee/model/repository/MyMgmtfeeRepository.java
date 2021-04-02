@@ -15,7 +15,7 @@ public interface MyMgmtfeeRepository {
 	
 	// [관리비 페이지 페이징처리]
 	// 1. total 개수 세는 쿼리
-	@Select("select count(*) from tb_mgmtfee where generation_idx = #{generationIdx}")
+	@Select("select count(*) from tb_mgmtfee where generation_idx = #{generationIdx} and is_del = 0")
 	int selectContentCnt(String generationIdx);
 
 	// 2. 관리비 리스트 가져오는 쿼리

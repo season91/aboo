@@ -35,9 +35,7 @@ public class MyAlarmController {
 		List<MyAlarm> myAlarmList = new ArrayList<>();
 		myAlarmList	= myAlarmService.selectIssue(generation.getGenerationIdx(), generation.getApartmentIdx());
 		
-		for (MyAlarm myAlarm : myAlarmList) {
-			System.out.println(myAlarm.toString());
-		}
+
 		model.addAttribute("alarmList",myAlarmList);
 		model.addAttribute("building",generation.getBuilding() + "동 " + generation.getNum() + "호");
 		model.addAttribute("aptName",scheduleService.selectAptNameByIdx(generation.getApartmentIdx()));

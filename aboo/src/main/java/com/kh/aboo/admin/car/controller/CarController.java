@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import com.kh.aboo.admin.car.model.service.CarService;
 import com.kh.aboo.admin.car.model.vo.Car;
 import com.kh.aboo.admin.car.model.vo.CarApplication;
+import com.kh.aboo.common.code.AlarmCode;
 import com.kh.aboo.common.code.Configcode;
 import com.kh.aboo.common.code.ErrorCode;
 import com.kh.aboo.common.exception.ToAlertException;
+import com.kh.aboo.mypage.myalarm.model.service.MyAlarmService;
 import com.kh.aboo.user.generation.model.vo.Generation;
 import com.kh.aboo.user.manager.model.vo.Admin;
 
@@ -24,9 +26,11 @@ import com.kh.aboo.user.manager.model.vo.Admin;
 public class CarController {
 	
 	private final CarService carService;
+	private final MyAlarmService myAlarmService;
 	
-	public CarController(CarService carService) {
+	public CarController(CarService carService,  MyAlarmService myAlarmService) {
 		this.carService = carService;
+		this.myAlarmService = myAlarmService;
 	}
 
 	// 1.일반 페이징처리하기
@@ -119,6 +123,7 @@ public class CarController {
 		return "admin/car/application"+link;
 	}
 	
+	// 건별등록
 	@GetMapping("admin/caradd")
 	public String carAdd(@RequestParam String building, @SessionAttribute(name = "admin", required = false) Admin admin, @RequestParam String num, @RequestParam String carNumber, Model model){
 		// 전달받은 아파트번호,동,호수 정보로 Generation 가져온다.
@@ -134,9 +139,10 @@ public class CarController {
 		car.setGenerationIdx(generation.getGenerationIdx());
 		car.setApartmentIdx(generation.getApartmentIdx());
 		car.setCarNumber(carNumber);
-		car.setCarQR(Configcode.QRCODE_PATH.desc);
 		
 		String res = carService.insertAndQRWrite(car);
+		
+		myAlarmService.insertPvAlarm("'" + car.getCarNumber() + "' " +AlarmCode.ADD_CAR+"", car.getGenerationIdx());
 		model.addAttribute("alertMsg", res);
 		model.addAttribute("url", "car");
 
@@ -168,6 +174,7 @@ public class CarController {
 			// applicationidx 로 신청정보 가져와 대기중인 CarApplication 를 완성시킨다.
 			// 만약 이미 처리된건이라면 update문이 0을 반환하여 null이 반환되면서 해당 if문은 넘어가게 된다.
 			CarApplication carApplication = carService.selectCarApplication(applicationidx.get(i));
+			
 			if(carApplication != null) {
 				// 유효한 신청이라면 QR코드를 생성해준다.
 				Car car = new Car();
@@ -183,7 +190,9 @@ public class CarController {
 			
 			//3. QR코드가 생성이 되었다면 신청을 승인 처리해준다. 생성되지않았다면 승인처리 하지않고 에러 발동시킨다.
 			if(resStr.equals("등록되었습니다.")) {
+				System.out.println("여긴 성공시 도는건데 왜도낭?");
 				int res = carService.updateCarApplicationApproval(applicationidx.get(i));
+				myAlarmService.insertPvAlarm("'" + carApplication.getAplctCarNumber() + "' " +AlarmCode.ADD_CAR, carApplication.getGenerationIdx());
 				System.out.println(res);
 			} else {
 				throw new ToAlertException(ErrorCode.IAC01);
