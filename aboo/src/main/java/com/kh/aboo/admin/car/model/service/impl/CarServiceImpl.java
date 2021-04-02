@@ -1,6 +1,7 @@
 package com.kh.aboo.admin.car.model.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -72,9 +73,48 @@ public class CarServiceImpl implements CarService{
 		
 		return "등록되었습니다.";
 	}
+	
+	public Map<String, Object> searchMap(String apartmentIdx, String standard, String keyword){
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("apartmentIdx", apartmentIdx);
+		searchMap.put("keyword", keyword);
+		switch (standard) {
+		case "apartmentIdx":
+			// 기본 페이징
+			searchMap.put("searchType", "apartmentIdx");
+			break;
+		case "carNumber":
+			// 차량번호 검색
+			searchMap.put("searchType", "carNumber");
+			searchMap.put("link", "carnumber");
+			break;
+		case "generationInfo":
+			// 세대정보로 검색, 101-101 이런식으로 입력이되서 동수 호수로 분리하고 세대관리번호 가져와서 넣어준다.
+			Generation generation = new Generation();
+			String[] generationInfo = keyword.split("-");
+			generation.setApartmentIdx(apartmentIdx);
+			generation.setBuilding(generationInfo[0]);
+			generation.setNum(generationInfo[1]);
+			System.out.println(generation);
+			
+			// 조회된 세대관리번호를 map에 담아준다.
+			String generationIdx = selectGenerationByBuildingAndNum(generation).getGenerationIdx();
+			searchMap.put("searchType", "generationInfo");
+			searchMap.put("generationInfo", generationIdx);
+			break;
+		case "wait" :
+			// 차량등록신청 대기건
+			searchMap.put("searchType", "wait");
+			break;
+		}
+		
+		return searchMap;
+	}
+	
 
 	@Override
-	public Map<String, Object> selectCarList(int currentPage, Map<String, Object> searchMap) {
+	public Map<String, Object> selectCarList(int currentPage, String apartmentIdx, String standard, String keyword) {
+		Map<String, Object> searchMap = searchMap(apartmentIdx, standard, keyword);
 		//페이징처리
 		Paging paging = Paging.builder()
 				.currentPage(currentPage)
@@ -107,7 +147,9 @@ public class CarServiceImpl implements CarService{
 
 
 	@Override
-	public Map<String, Object> selectCarApplicationList(int currentPage, Map<String, Object> applicationMap) {
+	public Map<String, Object> selectCarApplicationList(int currentPage, String apartmentIdx, String standard, String keyword) {
+		Map<String, Object> applicationMap = searchMap(apartmentIdx, standard, keyword);
+		
 		Paging paging = Paging.builder()
 				.currentPage(currentPage)
 				.blockCnt(5)
@@ -136,8 +178,6 @@ public class CarServiceImpl implements CarService{
 		System.out.println("applicationMap" + applicationMap);
 		return applicationMap;
 	}
-
-	
 
 
 	@Override

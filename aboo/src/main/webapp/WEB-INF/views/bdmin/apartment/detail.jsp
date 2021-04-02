@@ -49,7 +49,7 @@
             </a>
           </li>
           <li>
-            <a href="/admin/vehicle">
+            <a href="/admin/car">
               <i class="tim-icons icon-bus-front-12"></i>
               <p>Car</p>
             </a>
@@ -96,7 +96,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">BDMIN - apartment list</a>
+            <a class="navbar-brand" href="#pablo">BDMIN - apartment detail</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -137,142 +137,53 @@
         </div>
       </nav>
       
-      
-     <div class="content">
-           <div class="row">
+      <div class="content">
+        <div class="row">
           <div class="col-md-12">
-            <div class="card ">
+            <div class="card">
               <div class="card-header">
-                <h3 class="title">Apart 현황</h3>
+                <h3 class="title">아파트 상세정보</h3>
               </div>
-              <div class="col-md-12">
-                <div class="places-buttons">
-                  <div class="row">
-                    <div class="col-md-6 ml-auto mr-auto text-center">
-                      <h4 class="card-title">
-                       	Apart 검색
-                        <p class="category">조회 조건을 선택하세요.
-                      </h4>
+                	  
+              <div class="card-body">
+                  <form id="form-apart" action="${context}/bdmin/apartment/modify" method="post">
+                  <h4 class="title"> 1. 아파트 정보</h4>
+                  	<div class="row">
+                  		<div class="col-md-3 pr-md-1">
+	                      <div class="form-group">
+	                        <label>아파트 관리번호 </label>
+	                        <input type="text" class="form-control"name="apartmentIdx" readonly="readonly" value="${apartment.apartmentIdx }">
+	                      </div>
+	                    </div>
+	                    <div class="col-md-3 pr-md-1">
+	                      <div class="form-group">
+	                        <label>아파트 이름</label>
+	                        <input type="text" class="form-control"name="apartmentName" placeholder="예 : 반포자이, 산이리대주파크빌" value="${apartment.apartmentName }">
+	                      </div>
+	                    </div>
+	                    <div class="col-md-3 pl-md-1">
+	                      <div class="form-group">
+	                        <label for="exampleInputEmail1">아파트 주소</label>
+	                        <input type="button" class="form-control" value="주소 검색" onclick="searchAdress()">
+	                        <input type="tel" class="form-control" readonly="readonly" id="address" name="apartmentAddress" value="${apartment.apartmentAddress }">
+	                      </div>
+	                    </div>
+	                    <div class="col-md-3 px-md-1">
+	                      <div class="form-group">
+	                        <label>주차 가능 대수</label>
+	                        <input type="text" class="form-control" name="apartmentParking" placeholder="아파트 주차가능 대수" value=${apartment.apartmentParking }>
+	                      </div>
+	                    </div>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-12 ml-auto mr-auto">
-                      <div class="row ">
-                        <div class="col-md-3">
-                          <button type="button" class="btn btn-warning btn-block" id="search-button" data-toggle="modal" data-target="#nameModal">아파트 명으로 검색</button>
-                        </div>
-                        <div class="col-md-3">
-                        <form action="${context }/bdmin/apartment/contactuslist">
-                          <button type="submit" class="btn btn-warning btn-block" id="search-button" data-toggle="modal" data-target="#apartmentModal">입점 문의건 보기</button>
-                        </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-          </div>
-          
-       	 <div class="card-body">
-             <div class="table-responsive">
-               <table class="table tablesorter " id="">
-                 <thead class=" text-primary">
-                   <th>관리번호</th>
-                   <th>아파트명</th>
-                   <th>아파트 주소</th>
-                   <th>주차가능 대수</th>
-                   <th>상세보기</th>
-                 </thead>
-                 <tbody>
-                  
-            	<c:forEach items="${apartList}" var="apart" varStatus="status">
-                   <tr>
-                       <td> ${apart.apartmentIdx}</td>
-                       <td> ${apart.apartmentName } </td>
-                       <td> ${apart.apartmentAddress }</td>
-                       <td> ${apart.apartmentParking} </td>
-                       <td> <a href="${context }/bdmin/apartment/detail?apartmentIdx=${apart.apartmentIdx}">상세정보</a></td>
-                      </tr>
-                   </c:forEach>
-              		
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+                	<div class="card-footer" style="display: flex; justify-content: space-around;">
+		                <button type="submit" class="btn btn-fill btn-success">수정하기</button>
+		                <button type="button" class="btn btn-fill btn-warning">삭제하기</button>
+                	</div>
+                </form>
+			</div>
             </div>
           </div>
-          
-          <c:choose>
-          	<c:when test="${searchType eq 'basic' }">
-          	<div class="row d-flex card-body ">
-	          <div class="col text-center">
-	            <div class="block-27">
-	              <ul>
-	                <li><a href="/bdmin/${paging.type }">&lt;&lt;</a></li>
-	                <li><a href="/bdmin/${paging.type }?page=${paging.prev}">&lt;</a></li>
-	                <c:choose>
-	                	<c:when test="${paging.lastPage eq 0 }">
-	                		<li><a href="/bdmin/${paging.type }">1</a></li>
-	                	</c:when>
-	                	<c:otherwise>
-	                		<c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
-		                      <c:choose>
-		                         <c:when test="${paging.currentPage eq page}">
-		                            <li class="active"><a href="/bdmin/${paging.type }?page=${page}">${page}</a></li>
-		                         </c:when>
-		                         <c:otherwise>
-		                            <li><a href="/bdmin/${paging.type }?page=${page}">${page}</a></li>
-		                         </c:otherwise>
-		                      </c:choose>
-		                 	 </c:forEach> 
-	                	</c:otherwise>
-	                </c:choose>
-	                 
-	                <li><a href="/bdmin/${paging.type }?page=${paging.next}">&gt;</a></li>
-	                <li><a href="/bdmin/${paging.type }?page=${paging.lastPage }">&gt;&gt;</a></li>
-	              </ul>
-	            </div>
-	          </div>
-	        </div>
-          	</c:when>
-          	
-          	<c:otherwise>
-          	
-          	 <div class="row d-flex card-body ">
-	          <div class="col text-center">
-	            <div class="block-27">
-	              <ul>
-	                <li><a href="/bdmin/${paging.type }?standard=${searchType }&keyword=${keyword}">&lt;&lt;</a></li>
-	                <li><a href="/bdmin/${paging.type }?page=${paging.prev}&standard=${searchType }&keyword=${keyword}">&lt;</a></li>
-	                <c:choose>
-	                	<c:when test="${paging.lastPage eq 0 }">
-	                		<li><a href="/bdmin/${paging.type }?standard=${searchType }&keyword=${keyword}">1</a></li>
-	                	</c:when>
-	                	<c:otherwise>
-	                		<c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
-		                      <c:choose>
-		                         <c:when test="${paging.currentPage eq page}">
-		                            <li class="active"><a href="/bdmin/${paging.type }?page=${page}&standard=${searchType }&keyword=${keyword}">${page}</a></li>
-		                         </c:when>
-		                         <c:otherwise>
-		                            <li><a href="/bdmin/${paging.type }?page=${page}&standard=${searchType }&keyword=${keyword}">${page}</a></li>
-		                         </c:otherwise>
-		                      </c:choose>
-		                 	 </c:forEach> 
-	                	</c:otherwise>
-	                </c:choose>
-	                <li><a href="/bdmin/${paging.type }?page=${paging.next}&standard=${searchType }&keyword=${keyword}">&gt;</a></li>
-	                <li><a href="/bdmin/${paging.type }?page=${paging.lastPage }&standard=${searchType }&keyword=${keyword}">&gt;&gt;</a></li>
-	              </ul>
-	            </div>
-	          </div>
-	        </div>
-          	
-          	</c:otherwise>
-          	
-          </c:choose>
-    	</div>
-    	</div>
-        </div>
+      </div>
       </div>
 
 
@@ -303,34 +214,11 @@
       </div>
     </div>
     
-    
-    <div class="modal fade" id="nameModal" tabindex="-1" role="dialog" aria-labelledby="nameModalLabel" aria-hidden="true">
-       <div class="modal-dialog" role="document">
-         <div class="modal-content" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675); color:white;">
-           <div class="modal-header">
-           	<h4 class="modal-title" id="nameModalLabel">아파트 명으로 검색 검색</h4>
-            	 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <i class="tim-icons icon-simple-remove"></i>
-              </button>
-           </div>
-           <div class="modal-body">
-        <form action="${context }/bdmin/apartment">
-          <div class="form-group">
-          <input type="hidden" name="standard" value="apartmentName">
-           <input type="text" class="form-control mgmtfee-keyword" id="inlineFormInputGroup" name="keyword" placeholder="아파트 이름으로 검색하세요.">
-          </div>
-          <div class="modal-footer">
-           <button type="submit" class="btn btn-warning">검색</button>
-           </div>
-        </form>
-      </div>
-         </div>
-       </div>
-     </div>
-     
+   
      
    
     <!--   Core JS Files   -->
+    <script src="../../../resources/js/admin/mgmtfee.js"></script>
     <script src="../../../resources/js/admin/core/jquery.min.js"></script>
     <script src="../../../resources/js/admin/core/popper.min.js"></script>
     <script src="../../../resources/js/admin/core/bootstrap.min.js"></script>
@@ -468,5 +356,58 @@
 
       });
     </script>
+    
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script>
+	function searchAdress() {
+		 new daum.Postcode({
+		        oncomplete: function(data) {
+		        	// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+	                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                var addr = ''; // 주소 변수
+	                var extraAddr = ''; // 참고항목 변수
+
+	                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                    addr = data.roadname;
+	                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                    addr = data.bname;
+	                }
+
+	                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+	                if(data.userSelectedType === 'R'){
+	                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                        extraAddr += data.bname;
+	                    }
+	                    // 건물명이 있고, 공동주택일 경우 추가한다.
+	                    if(data.buildingName !== '' && data.apartment === 'Y'){
+	                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                    }
+	                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	                    if(extraAddr !== ''){
+	                        extraAddr = ' (' + extraAddr + ')';
+	                    }
+	                    // 조합된 참고항목을 해당 필드에 넣는다.
+	                    document.getElementById("address").value = extraAddr;
+	                
+	                } else {
+	                    document.getElementById("address").value = '';
+	                }
+
+	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                document.getElementById('address').value = data.zonecode;
+	                document.getElementById("address").value = addr;
+	                // 커서를 상세주소 필드로 이동한다.
+	                document.getElementById("address").focus();
+		        }
+		 }).open();
+		
+	}
+	   
+	</script>
 </body>
 </html>

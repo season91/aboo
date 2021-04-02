@@ -12,8 +12,6 @@
 
 <!-- 2. 경로 별칭 지정-->
 	<typeAliases>
-		<typeAlias type="com.kh.aboo.member.model.vo.Member" alias="member"/>
-		<typeAlias type="com.kh.aboo.board.model.vo.Board" alias="board"/>
 		<typeAlias type="com.kh.aboo.user.generation.model.vo.Generation" alias="generation"/>
 		<typeAlias type="com.kh.aboo.admin.mgmtfee.model.vo.Mgmtfee" alias="mgmtfee"/>
 		<typeAlias type="com.kh.aboo.user.generationWon.model.vo.GenerationWon" alias="generationWon"/>
@@ -26,12 +24,12 @@
 		<typeAlias type="com.kh.aboo.admin.schedule.model.vo.Schedule" alias="schedule"/>
 		<typeAlias type="com.kh.aboo.bdmin.model.vo.Bdmin" alias="bdmin"/>
 		<typeAlias type="com.kh.aboo.board.used.model.vo.UsedBrd" alias="usedBrd"/>
-		
+		<typeAlias type="com.kh.aboo.bdmin.model.vo.ApartApplication" alias="apartApplication"/>
+		<typeAlias type="com.kh.aboo.user.apartment.model.vo.Apartment" alias="apartment"/>
 	</typeAliases>
 
 <!-- 3. 작성쿼리 root등록을 위한 경로 설정. 맨아래에 있어야 한다.-->
 	<mappers>
-		<mapper resource="mybatis/mapper/board/boardMapper.xml"/>
 		<mapper resource="mybatis/mapper/admin/adminMapper.xml"/>
 		<mapper resource="mybatis/mapper/mgmtfee/mgmtfeeMapper.xml"/>
 		<mapper resource="mybatis/mapper/mymgmtfee/mymgmtfeeMapper.xml"/>
@@ -43,6 +41,7 @@
 		<mapper resource="mybatis/mapper/car/carMapper.xml"/>
 		<mapper resource="mybatis/mapper/admin/scheduleMapper.xml"/>
 		<mapper resource="mybatis/mapper/mypage/writeListMapper.xml"/>
+		<mapper resource="mybatis/mapper/bdmin/bdminMapper.xml"/>
 	</mappers>
 
 

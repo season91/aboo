@@ -13,10 +13,10 @@
 					apartment_idx = #{apartmentIdx}  and is_del = 0 
 				</when>
 				<when test="searchType == 'carNumber'">
-					apartment_idx = #{apartmentIdx} and car_number = #{carNumber}  and is_del = 0 
+					apartment_idx = #{apartmentIdx} and car_number = #{keyword}  and is_del = 0 
 				</when>
-				<when test="searchType == 'generationIdx'">
-					apartment_idx = #{apartmentIdx} and generation_idx = #{generationIdx} and is_del = 0 
+				<when test="searchType == 'generationInfo'">
+					apartment_idx = #{apartmentIdx} and generation_idx = #{generationInfo} and is_del = 0 
 				</when>
 			</choose>
 		</where>	
@@ -32,10 +32,10 @@
 							c.apartment_idx = #{apartmentIdx} and c.is_del = 0 
 						</when>
 						<when test="searchType == 'carNumber'">
-							c.apartment_idx = #{apartmentIdx} and c.car_number = #{carNumber} and c.is_del = 0 
+							c.apartment_idx = #{apartmentIdx} and c.car_number = #{keyword} and c.is_del = 0 
 						</when>
-						<when test="searchType == 'generationIdx'">
-							c.apartment_idx = #{apartmentIdx} and c.generation_idx = #{generationIdx} and c.is_del = 0 
+						<when test="searchType == 'generationInfo'">
+							c.apartment_idx = #{apartmentIdx} and c.generation_idx = #{generationInfo} and c.is_del = 0 
 						</when>
 					</choose>
 				</where>
@@ -58,10 +58,10 @@
 					apartment_idx = #{apartmentIdx} and is_process = 0
 				</when>
 				<when test="searchType == 'carNumber'">
-					apartment_idx = #{apartmentIdx} and aplct_car_number = #{carNumber}
+					apartment_idx = #{apartmentIdx} and aplct_car_number = #{keyword}
 				</when>
-				<when test="searchType == 'generationIdx'">
-					apartment_idx = #{apartmentIdx} and generation_idx = #{generationIdx}
+				<when test="searchType == 'generationInfo'">
+					apartment_idx = #{apartmentIdx} and generation_idx = #{generationInfo}
 				</when>
 			</choose>
 		</where>
@@ -80,10 +80,10 @@
 							apartment_idx = #{apartmentIdx} and is_process = 0
 						</when>
 						<when test="searchType == 'carNumber'">
-							apartment_idx = #{apartmentIdx} and aplct_car_number = #{carNumber}
+							apartment_idx = #{apartmentIdx} and aplct_car_number = #{keyword}
 						</when>
-						<when test="searchType == 'generationIdx'">
-							apartment_idx = #{apartmentIdx} and generation_idx = #{generationIdx} 
+						<when test="searchType == 'generationInfo'">
+							apartment_idx = #{apartmentIdx} and generation_idx = #{generationInfo} 
 						</when>
 					</choose>
 				</where>

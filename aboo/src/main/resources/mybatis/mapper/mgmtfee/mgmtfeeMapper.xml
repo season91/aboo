@@ -23,16 +23,16 @@
 							m.apartment_idx = #{apartmentIdx} and m.is_del = 0 
 						</when>
 						<when test="searchType == 'mgmtfeeIdx'">
-							m.apartment_idx = #{apartmentIdx} and m.mgmtfee_idx = #{mgmtfeeIdx} 
+							m.apartment_idx = #{apartmentIdx} and m.mgmtfee_idx = #{keyword} and m.is_del = 0 
 						</when>
-						<when test="searchType == 'generationIdx'">
-							m.apartment_idx = #{apartmentIdx} and m.generation_idx = #{generationIdx} 
+						<when test="searchType == 'generationInfo'">
+							m.apartment_idx = #{apartmentIdx} and m.generation_idx = #{generationInfo} and m.is_del = 0 
 						</when>
 						<when test="searchType == 'isPayment'">
-							m.apartment_idx = #{apartmentIdx} and m.is_payment = 0 
+							m.apartment_idx = #{apartmentIdx} and m.is_payment = 0 and m.is_del = 0 
 						</when>
 						<when test="searchType == 'dueDate'">
-							m.apartment_idx = #{apartmentIdx} and m.due_date = #{dueDate} and m.is_del = 0 
+							m.apartment_idx = #{apartmentIdx} and m.due_date = #{keyword} and m.is_del = 0 
 						</when>
 					</choose>
 				</where>
@@ -48,16 +48,16 @@
 					apartment_idx = #{apartmentIdx} and is_del = 0
 				</when>
 				<when test="searchType == 'mgmtfeeIdx'">
-					apartment_idx = #{apartmentIdx} and mgmtfee_idx = #{mgmtfeeIdx}
+					apartment_idx = #{apartmentIdx} and mgmtfee_idx = #{keyword} and is_del = 0
 				</when>
-				<when test="searchType == 'generationIdx'">
-					apartment_idx = #{apartmentIdx} and generation_idx = #{generationIdx}
+				<when test="searchType == 'generationInfo'">
+					apartment_idx = #{apartmentIdx} and generation_idx = #{generationInfo} and is_del = 0
 				</when>
 				<when test="searchType == 'isPayment'">
-					apartment_idx = #{apartmentIdx} and is_payment = 0 
+					apartment_idx = #{apartmentIdx} and is_payment = 0 and is_del = 0
 				</when>
 				<when test="searchType == 'dueDate'">
-					apartment_idx = #{apartmentIdx} and due_date = #{dueDate}
+					apartment_idx = #{apartmentIdx} and due_date = #{keyword} and is_del = 0
 				</when>
 			</choose>
 		</where>
