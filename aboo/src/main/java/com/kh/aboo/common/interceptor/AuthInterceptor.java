@@ -37,17 +37,6 @@ public class AuthInterceptor implements HandlerInterceptor{
 					throw new ToAlertException(ErrorCode.AUTH04);
 				}
 				break;
-			case "admin" : //아파트 관리자 
-				switch(uriArr[2]){
-				case "mgmtfee" : //관리비
-					if(session.getAttribute("admin") == null)
-					throw new ToAlertException(ErrorCode.AUTH05);
-				case "car" : //차량
-					if(session.getAttribute("admin") == null)
-					throw new ToAlertException(ErrorCode.AUTH05);
-				}
-				break;
-			
 			}
 		}
 		return true;

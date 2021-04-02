@@ -9,7 +9,7 @@
 		select * from(
 			select rownum rnum, b.* from(
 				select * from tb_mgmtfee m join tb_generation g on (m.generation_idx = g.generation_idx)
-				where m.generation_idx = #{generationIdx} order by due_date desc
+				where m.generation_idx = #{generationIdx} and m.is_del = 0 order by due_date desc
 				) 
 			b ) where rnum between #{paging.queryStart} and #{paging.queryEnd}
 	</select>
