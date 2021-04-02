@@ -27,10 +27,12 @@ public class MyAlarmController {
 		this.scheduleService = scheduleService;
 	}
 	
+	//알람리스트 불러오기
 	@GetMapping("myalarm")
 	public String myAlarm(HttpSession session,Model model) {
 		
 		Generation generation = (Generation) session.getAttribute("generation");
+		
 		
 		List<MyAlarm> myAlarmList = new ArrayList<>();
 		myAlarmList	= myAlarmService.selectIssue(generation.getGenerationIdx(), generation.getApartmentIdx());
@@ -42,5 +44,10 @@ public class MyAlarmController {
 		
 		return "mypage/myalarm";
 	};
+	
+
+	
+	
+	
 
 }

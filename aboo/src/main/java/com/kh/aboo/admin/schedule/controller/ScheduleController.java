@@ -54,7 +54,7 @@ public class ScheduleController {
 
 		
 		if(res > 0) {
-			myAlarmService.insertAptAlarm("'" + schedule.getScheduleCon() + "' " + AlarmCode.ADD_VOTE, admin.getApartmentIdx());
+			myAlarmService.insertAptAlarm("'" + schedule.getScheduleCon() + "' " + AlarmCode.ADD_SCHEDULE, admin.getApartmentIdx());
 			System.out.println(AlarmCode.ADD_SCHEDULE);
 			model.addAttribute("alertMsg", "일정이 등록되었습니다.");
 			model.addAttribute("url", "/admin/schedule/addschedule");
