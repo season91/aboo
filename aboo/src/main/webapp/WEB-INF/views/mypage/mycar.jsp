@@ -51,7 +51,7 @@
 	    			<div class="col-md-5 text-center ftco-animate">
 	    				<div class="steps">
 	    					 <div class="block-21 mb-4 d-flex justify-content-center align-items-center">
-				                <a href="${context }/mypage/mycarqrdownload?path=${car.carQR}" class="blog-img mr-10 mycar-qr" style="background-image: url(${car.carQR });"></a>
+				                <a href="${context }/mypage/mycarqrdownload?path=${car.carQR}" class="blog-img mr-10 mycar-qr" style="background-image: url(/qr/${car.carQR });"></a>
 				              </div>
 	
 	    					<p>차량번호 : ${car.carNumber }</p>
