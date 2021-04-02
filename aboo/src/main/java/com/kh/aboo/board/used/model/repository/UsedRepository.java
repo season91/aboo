@@ -17,8 +17,7 @@ public interface UsedRepository {
 
 	List<UsedBrd> selectUsedBrdList(Map<String, Object> usedMap);
 
-	@Select("select count(*) from TB_USED_BRD where IS_DEL = 0 and APARTMENT_IDX = #{apartmentIdx}")
-	int selectUsedBrdCnt(String apartmentIdx);
+	int selectUsedBrdCnt(Map<String,Object> searchMap);
 
 	@Select("select * from TB_USED_BRD where USED_IDX = #{usedIdx} and IS_DEL = 0")
 	UsedBrd selectUsedDetail(String usedIdx);

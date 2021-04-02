@@ -49,7 +49,15 @@
     </section>
   
     <section class="ftco-section bg-light">
-      <div class="container">
+    <div>
+      <div class = "container d-flex" style="height: 10vh; background-color:#fafafa !important ;margin-left: 5vw">
+      <form action="/board/used/usedlist">  
+            <input type="hidden" name="kind" value="trnsc">
+			<label> 판매 중 : <input type="radio" name="keyword" value="0"></label>
+			<label> 판매 완료 : <input type="radio" name="keyword" value="1"></label>
+			<button style="border: none; background-color:#fafafa !important ;outline: none;"><i class="fas fa-search"></i></button>
+		</form> 
+      </div>
         <div class="row">
         	<c:forEach items="${usedBrdList}" var="usedBrd" varStatus="status">
         		<c:choose>
@@ -100,12 +108,13 @@
         </div>
         
         <div class="container d-flex justify-content-end">
-			<form action="#" class="search-form" style="width: 40%;">
+			<form action="/board/used/usedlist" class="search-form" style="width: 40%;">
 	          <div class="form-group mb-0">
 	            <div class="icon" style="cursor: pointer;">
-	            	<a class="icon-search"></a>
+	            	<button class = "bg-white" style="border: none; outline: none;"><a class="icon-search"></a></button>
 	            </div>
-	            <input type="text" class="form-control" placeholder="키워드를 입력하세요.">
+                <input type="hidden" name="kind" value="search">
+	            <input type="text" class="form-control" name ="keyword" placeholder="키워드를 입력하세요.">
 	          </div>
          </form>
 		</div>
@@ -114,28 +123,81 @@
 	      <a href="/board/used/usedupload" class="center-block btn btn-primary p-3 px-xl-4 py-xl-2 btn-sm" style="background: linear-gradient(45deg, #4174d0 0%, #5dbfe5 100%); border: none; color: white !important;">글쓰기</a>
 	    </div>
         
+		<c:choose>
+        <c:when test="${searchType eq 'apartmentIdx'}">        
         <div class="row mt-5">
           <div class="col text-center">
             <div class="block-27">
               <ul>
                 <li><a href="/board/used/usedlist">&lt;&lt;</a></li>
                 <li><a href="/board/used/usedlist?page=${paging.prev}">&lt;</a></li>
-	                <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
-	                   <c:choose>
-	                      <c:when test="${paging.currentPage eq page}">
-	                         <li class="active"><a href="/board/used/usedlist?page=${page}">${page}</a></li>
-	                      </c:when>
-	                      <c:otherwise>
-	                         <li><a href="/board/used/usedlist?page=${page}">${page}</a></li>
-	                      </c:otherwise>
-	                   </c:choose>
-	              	 </c:forEach>
+	                
+	                <c:choose>
+		                <c:when test="${paging.lastPage eq 0 }">
+			            	<li class="active"><a href="/board/used/usedlist?page=${page}">1</a></li>
+		                </c:when>
+		                <c:otherwise>	               
+			                <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
+			                   <c:choose>
+			                      <c:when test="${paging.currentPage eq page}">
+			                         <li class="active"><a href="/board/used/usedlist?page=${page}">${page}</a></li>
+			                      </c:when>
+			                      <c:otherwise>
+			                         <li><a href="/board/used/usedlist?page=${page}">${page}</a></li>
+			                      </c:otherwise>
+			                   </c:choose>
+			              	 </c:forEach>
+		              	 </c:otherwise>
+	              </c:choose>	 
+	              
                 <li><a href="/board/used/usedlist?page=${paging.next}">&gt;</a></li>
                 <li><a href="/board/used/usedlist?page=${paging.lastPage}">&gt;&gt;</a></li>
               </ul>
             </div>
           </div>
         </div>
+        </c:when>
+        
+        <c:otherwise>
+        <div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+              <ul>
+                <li><a href="/board/used/usedlist?kind=${searchType}&keyword=${keyword}">&lt;&lt;</a></li>
+                <li><a href="/board/used/usedlist?page=${paging.prev}&kind=${searchType}&keyword=${keyword}">&lt;</a></li>
+	                
+	                <c:choose>
+		                <c:when test="${paging.lastPage eq 0 }">
+			            	<li class="active"><a href="/board/used/usedlist?page=${page}&kind=${searchType}&keyword=${keyword}">1</a></li>
+		                </c:when>
+		                <c:otherwise>	               
+			                <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
+			                   <c:choose>
+			                      <c:when test="${paging.currentPage eq page}">
+			                         <li class="active"><a href="/board/used/usedlist?page=${page}$kind=${searchType}&keyword=${keyword}">${page}</a></li>
+			                      </c:when>
+			                      <c:otherwise>
+			                         <li><a href="/board/used/usedlist?page=${page}&kind=${searchType}&keyword=${keyword}">${page}</a></li>
+			                      </c:otherwise>
+			                   </c:choose>
+			              	 </c:forEach>
+		              	 </c:otherwise>
+	              </c:choose>	 
+	              
+                <li><a href="/board/used/usedlist?page=${paging.next}&kind=${searchType}&keyword=${keyword}">&gt;</a></li>
+                <li><a href="/board/used/usedlist?page=${paging.lastPage}&kind=${searchType}&keyword=${keyword}">&gt;&gt;</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        </c:otherwise>
+        </c:choose>
+        
+        
+        
+        
+        
+        
       </div>
     </section>
 

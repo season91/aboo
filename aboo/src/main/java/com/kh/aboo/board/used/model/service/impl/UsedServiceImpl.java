@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import com.kh.aboo.common.exception.ToAlertException;
 import com.kh.aboo.common.util.file.FileUtil;
 import com.kh.aboo.common.util.file.FileVo;
 import com.kh.aboo.common.util.paging.Paging;
+import com.kh.aboo.user.generation.model.vo.Generation;
 
 @Service
 public class UsedServiceImpl implements UsedService {
@@ -31,18 +33,43 @@ public class UsedServiceImpl implements UsedService {
 		this.usedCmtRepository = usedCmtRepository;
 	}
 
+	
+	public Map<String, Object> searchMap(String apartmentIdx, String kind, String keyword) {
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+
+		searchMap.put("apartmentIdx", apartmentIdx);
+		searchMap.put("keyword", keyword);
+
+		switch (kind) {
+		case "apartmentIdx":
+			// 기본 페이징
+			searchMap.put("searchType", "apartmentIdx");
+			break;
+		case "search":
+			// 키워드로 검색
+			searchMap.put("searchType", "search");			
+			break;
+		case "trnsc":
+			// 키워드로 검색
+			searchMap.put("searchType", "trnsc");			
+			break;
+
+		}
+
+		return searchMap;
+	}
+	
+	
 	@Override
-	public Map<String, Object> selectUsedBrdList(int currentPage, String apartmentIdx) {
+	public Map<String, Object> selectUsedBrdList(int currentPage, String apartmentIdx,String kind, String keyword) {
+		Map<String, Object> searchMap = searchMap(apartmentIdx, kind, keyword);
+		
 		Paging paging = Paging.builder().currentPage(currentPage).blockCnt(5).cntPerPage(6).type("board")
-				.total(usedRepository.selectUsedBrdCnt(apartmentIdx)).build();
+				.total(usedRepository.selectUsedBrdCnt(searchMap)).build();
 
-		Map<String, Object> commandMap = new HashMap<String, Object>();
-		Map<String, Object> usedMap = new HashMap<String, Object>();
+		searchMap.put("paging",paging);
 
-		usedMap.put("paging", paging);
-		usedMap.put("apartmentIdx", apartmentIdx);
-
-		List<UsedBrd> usedBrdList = usedRepository.selectUsedBrdList(usedMap);
+		List<UsedBrd> usedBrdList = usedRepository.selectUsedBrdList(searchMap);
 		List<FileVo> fileList = new ArrayList<FileVo>();
 
 		for (UsedBrd usedBrd : usedBrdList) {
@@ -54,10 +81,9 @@ public class UsedServiceImpl implements UsedService {
 			}
 		}
 
-		commandMap.put("paging", paging);
-		commandMap.put("fileList", fileList);
-		commandMap.put("usedBrdList", usedRepository.selectUsedBrdList(usedMap));
-		return commandMap;
+		searchMap.put("fileList", fileList);
+		searchMap.put("usedBrdList", usedRepository.selectUsedBrdList(searchMap));
+		return searchMap;
 	}
 
 	@Override
