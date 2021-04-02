@@ -25,6 +25,7 @@
 		<typeAlias type="com.kh.aboo.admin.car.model.vo.CarApplication" alias="carApplication"/>
 		<typeAlias type="com.kh.aboo.admin.schedule.model.vo.Schedule" alias="schedule"/>
 		<typeAlias type="com.kh.aboo.bdmin.model.vo.Bdmin" alias="bdmin"/>
+		<typeAlias type="com.kh.aboo.board.used.model.vo.UsedBrd" alias="usedBrd"/>
 		
 	</typeAliases>
 
@@ -41,6 +42,7 @@
 		<mapper resource="mybatis/mapper/myapt/voteMngMapper.xml"/>
 		<mapper resource="mybatis/mapper/car/carMapper.xml"/>
 		<mapper resource="mybatis/mapper/admin/scheduleMapper.xml"/>
+		<mapper resource="mybatis/mapper/mypage/writeListMapper.xml"/>
 	</mappers>
 
 

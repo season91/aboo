@@ -4,10 +4,9 @@
 <!DOCTYPE html>
 <html>
   <body>
-    
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="/index">ABOO</a>
+	      <a class="navbar-brand" href="index.html">WebHost</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -17,8 +16,8 @@
 	          <li class="nav-item"><a href="/index" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
-	          <li class="nav-item active"><a class="nav-link" href="/board/info/listinfo">Board</a></li>
-	          <li class="nav-item"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
+	          <li class="nav-item"><a class="nav-link" href="/board/info/listinfo">Board</a></li>
+	          <li class="nav-item active"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
 	          <c:choose>
 	          <c:when test="${sessionScope.generation == null}">
 	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
@@ -34,114 +33,116 @@
     <!-- END nav -->
 
     <section class="home-slider owl-carousel">
-      <div class="slider-item bread-item" style="background-image: url(../../../resources/abooimg/logo_w.png);" data-stellar-background-ratio="0.5">
+      <div class="slider-item bread-item" style="background-image: url(../../../../resources/images/bg_1.jpg);" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container-fluid">
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
 
             <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Info</a></span> <span>Used</span></p>
-	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Interior</h1>
+              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/mypage/myalarm">My alarm</a></span><span class="mr-2"><a href="/mypage/myvehicle">My Management Fee</a></span><span class="mr-2"><a href="/mypage/modifyinfo">My Information</a></span><span class="mr-2"><a href="/mypage/writelist/myinfolist">My write list</a></span></p>
+	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">My write list</h1>
             </div>
           </div>
         </div>
       </div>
     </section>
   
-    <section class="ftco-section bg-light">
-      <c:choose>
-      	<c:when test="${!empty interiorBrd}">
-      		<div class="container">
-		        <div class="row">
-		        	<c:forEach items="${interiorBrd}" var="interiorBrd" varStatus="status">
-		        		<c:choose>
-		        			<c:when test="${interiorBrd.intIsPrivate == 0}">
-		        				<div class="col-md-4 ftco-animate">
-									<div class="blog-entry">
-									  <a href="/board/interior/intdetail?intPostNo=${interiorBrd.intPostNo}" class="block-20" style="background-image: url('${interiorBrd.intThumbnail}');"></a>
-									  <div class="text d-flex py-4">
-									    <div class="meta mb-3">
-									      <div><a href="/board/interior/intdetail?intPostNo=${interiorBrd.intPostNo}">${interiorBrd.intRegDate}</a></div>
-									      <div><a href="/board/interior/intdetail?intPostNo=${interiorBrd.intPostNo}">${interiorBrd.intWriter}</a></div>
-									      <div><a href="/board/interior/intdetail?intPostNo=${interiorBrd.intPostNo}" class="meta-chat"><span class="icon-chat"></span> ${intCmtCntList[status.index]}</a></div>
-									    </div>
-									    <div class="desc pl-3">
-									      <h3 class="heading"><a href="/board/interior/intdetail?intPostNo=${interiorBrd.intPostNo}">${interiorBrd.intTitle}</a></h3>
-									    </div>
-									  </div>
-									</div>
-				            	</div>
-		        			</c:when>
-		        			<c:otherwise>
-		        				<div class="col-md-4 ftco-animate">
-									<div class="blog-entry">
-									  <a href="/board/interior/intdetail?intPostNo=${interiorBrd.intPostNo}" class="block-20" style="background-image: url('../../../resources/abooimg/nopreviewimg.jpg');"></a>
-									  <div class="text d-flex py-4">
-									    <div class="meta mb-3">
-									      <div><a href="/board/interior/intdetail?intPostNo=${interiorBrd.intPostNo}">${interiorBrd.intRegDate}</a></div>
-									      <div><a href="/board/interior/intdetail?intPostNo=${interiorBrd.intPostNo}">${interiorBrd.intWriter}</a></div>
-									      <div><a href="/board/interior/intdetail?intPostNo=${interiorBrd.intPostNo}" class="meta-chat"><span class="icon-chat"></span> ${intCmtCntList[status.index]}</a></div>
-									    </div>
-									    <div class="desc pl-3">
-									      <h3 class="heading"><a href="/board/interior/intdetail?intPostNo=${interiorBrd.intPostNo}">비공개 처리 된 게시물입니다.</a></h3>
-									    </div>
-									  </div>
-									</div>
-				            	</div>
-		        			</c:otherwise>
-		        		</c:choose>
-		            </c:forEach>
-		        </div>
-		        
-		        <div class="container d-flex justify-content-end">
-			          <form class="search-form" style="width: 40%;">
-			          <div class="form-group mb-0">
-			            <div class="icon" style="cursor: pointer;">
-			            	<a id="intSearchIcon" class="icon-search"></a>
-			            </div>
-			            <input type="text" id="intSearch" name="intSearch" class="form-control" placeholder="제목을 입력하세요.">
-			         </div>
-			        </form>
-				</div>
-		        
-		        <div class="container text-center d-flex justify-content-end mt-0">
-			      <a href="${context}/board/interior/intupload" class="center-block btn btn-primary p-3 px-xl-4 py-xl-2 btn-sm" style="background: linear-gradient(45deg, #12e6ca 0%, #8be55d 100%); border: none; color: white !important;">글쓰기</a>
-			    </div>
-		        
-		        <div class="row mt-5">
+    <section class="ftco-section">
+    	<c:choose>
+    		<c:when test="${!empty board}">
+    			<div class="container">
+		    		<div class="row justify-content-center mb-5">
+			          <div class="col-md-7 text-center heading-section ftco-animate">
+			            <h2 class="mb-4">내가 작성한 글</h2>
+			            <p>정보&질문, 인테리어, 중고 게시판에서 작성한 나의 글 목록입니다.</p>
+			          </div>
+			        </div>
+		    		<div class="row">
+		    			<div class="dropdown mb-4 pl-md-3">
+						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+						    정보&질문
+						    <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+						    <li role="presentation"><a class="d-block text-muted" role="menuitem" tabindex="-1" href="/mypage/writelist/myinfolist">정보&질문</a></li>
+						    <li role="presentation"><a class="d-block text-muted" role="menuitem" tabindex="-1" href="/mypage/writelist/myinteriorlist">인테리어</a></li>
+						    <li role="presentation"><a class="d-block text-muted" role="menuitem" tabindex="-1" href="/mypage/writelist/myusedlist">중고</a></li>
+						  </ul>
+						</div>
+		    			<div class="col-md-12 ftco-animate">
+		    				<div class="table-responsive">
+			    				<table class="table">
+								    <thead class="thead-primary">
+								      <tr>
+								        <th class="w-15">글 번호</th>
+								        <th class="w-15">게시판</th>
+								        <th class="w-50">제목</th>
+								        <th class="w-20">작성 날짜</th>
+								      </tr>
+								    </thead>
+								    <tbody>
+								      <c:forEach items="${board}" var="board">
+								      	  <tr>
+									        <td>${board.bIdx}</td>
+									        <td>정보&질문</td>
+									        <td><a href="/board/info/detailinfo?bIdx=${board.bIdx}" style="cursor: pointer; color: black;">${board.bTitle}</a></td>
+									        <td>${board.bWdate}</td>
+									      </tr>
+								      </c:forEach>
+								    </tbody>
+								  </table>
+							  </div>
+		    			</div>
+		    		</div>
+		    	</div>
+		    	<div class="row mt-5">
 		          <div class="col text-center">
 		            <div class="block-27">
 		              <ul>
-		                <li><a href="${context}/board/${paging.type}/intlist">&lt;&lt;</a></li>
-		                <li><a href="${context}/board/${paging.type}/intlist?page=${paging.prev}">&lt;</a></li>
+		                <li><a href="${context}/mypage/writelist/${paging.type}">&lt;&lt;</a></li>
+		                <li><a href="${context}/mypage/writelist/${paging.type}?page=${paging.prev}">&lt;</a></li>
 			                <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
 			                   <c:choose>
 			                      <c:when test="${paging.currentPage eq page}">
-			                         <li class="active"><a href="${context}/board/${paging.type}/intlist?page=${page}">${page}</a></li>
+			                         <li class="active"><a href="${context}/mypage/writelist/${paging.type}?page=${page}">${page}</a></li>
 			                      </c:when>
 			                      <c:otherwise>
-			                         <li><a href="${context}/board/${paging.type}/intlist?page=${page}">${page}</a></li>
+			                         <li><a href="${context}/mypage/writelist/${paging.type}?page=${page}">${page}</a></li>
 			                      </c:otherwise>
 			                   </c:choose>
 			              	 </c:forEach>
-		                <li><a href="${context}/board/${paging.type}/intlist?page=${paging.next}">&gt;</a></li>
-		                <li><a href="${context}/board/${paging.type}/intlist?page=${paging.lastPage}">&gt;&gt;</a></li>
+		                <li><a href="${context}/mypage/writelist/${paging.type}?page=${paging.next}">&gt;</a></li>
+		                <li><a href="${context}/mypage/writelist/${paging.type}?page=${paging.lastPage}">&gt;&gt;</a></li>
 		              </ul>
 		            </div>
 		          </div>
 		        </div>
-		      </div>
-      	</c:when>
-      	<c:otherwise>
-      		<div class="container">
-      			<div class="mt-5 mb-5 text-center">작성된 게시글이 없습니다.</div>
-      			
-      			<div class="container text-center d-flex justify-content-end mt-0">
-			      <a href="${context}/board/interior/intupload" class="center-block btn btn-primary p-3 px-xl-4 py-xl-2 btn-sm" style="background: linear-gradient(45deg, #12e6ca 0%, #8be55d 100%); border: none; color: white !important;">글쓰기</a>
-			    </div>
-      		</div>
-      	</c:otherwise>
-      </c:choose>
+    		</c:when>
+    		<c:otherwise>
+    			<div class="container">
+		    		<div class="row justify-content-center mb-5">
+			          <div class="col-md-7 text-center heading-section ftco-animate">
+			            <h2 class="mb-4">내가 작성한 글</h2>
+			            <p>정보&질문, 인테리어, 중고 게시판에서 작성한 나의 글 목록입니다.</p>
+			          </div>
+			        </div>
+			        <div class="row">
+			        	<div class="dropdown mb-4 pl-md-3">
+						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+						    정보&질문
+						    <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+						    <li role="presentation"><a class="d-block text-muted" role="menuitem" tabindex="-1" href="/mypage/writelist/myinfolist">정보&질문</a></li>
+						    <li role="presentation"><a class="d-block text-muted" role="menuitem" tabindex="-1" href="/mypage/writelist/myintlist">인테리어</a></li>
+						    <li role="presentation"><a class="d-block text-muted" role="menuitem" tabindex="-1" href="/mypage/writelist/myusedlist">중고</a></li>
+						  </ul>
+						</div>
+			        </div>
+			        <div class="mt-5 mb-5 text-center">아직 작성한 글이 없습니다.</div>
+		    	</div>
+    		</c:otherwise>
+    	</c:choose>
     </section>
 
     <footer class="ftco-footer ftco-bg-dark ftco-section">
@@ -235,18 +236,6 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="../../../../resources/js/generation/google-map.js"></script>
   <script src="../../../../resources/js/generation/main.js"></script>
-  
-  <script type="text/javascript">
-  	document.querySelector('#intSearchIcon').addEventListener('click', (e)=>{
-		let keyword = document.querySelector('#intSearch').value;
-		
-		if(keyword){
-  			location.href = '/board/interior/intsearch?intSearch=' + keyword;
-  		}else{
-  			alert("검색할 게시글 제목을 입력해주세요.");
-  		}
-	})
-  </script>
     
   </body>
 </html>
