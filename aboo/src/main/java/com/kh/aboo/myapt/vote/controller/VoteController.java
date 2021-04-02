@@ -40,8 +40,24 @@ public class VoteController {
 			, HttpSession session) {
 		Generation generation = (Generation) session.getAttribute("generation");
 		Admin admin = (Admin) session.getAttribute("admin");
+		List<String> ifParticipate = new ArrayList<>();
+		String isDone;
 		
 		if(generation != null) {
+			List<VoteMng> voteMngList = new ArrayList<>();
+			voteMngList = (List<VoteMng>) adminVoteService.selectVoteMngList(page, generation.getApartmentIdx()).get("voteMng");
+			for (VoteMng voteMng : voteMngList) {
+				int res = voteService.selectIfParticipate(generation.getGenerationIdx(), voteMng.getVoteNo());
+				if(res != 0) {
+					isDone = "참여";
+				}else {
+					isDone = "미참여";
+				}
+				
+				ifParticipate.add(isDone);
+			}
+			
+			model.addAttribute("ifParticipate", ifParticipate);
 			model.addAllAttributes(adminVoteService.selectVoteMngList(page, generation.getApartmentIdx()));
 		}else {
 			model.addAllAttributes(adminVoteService.selectVoteMngList(page, admin.getApartmentIdx()));
@@ -63,12 +79,13 @@ public class VoteController {
 		}
 		
 		if(voteMng.getVoteIsFinish() != 0) {
-			List<Double> turnoutList = voteService.calculateTurnout(voteNo);
-			double maxTurnout = Collections.max(turnoutList);
-			int idxOfMax = turnoutList.indexOf(maxTurnout);
+			List<Double> turnoutList = (List<Double>) voteService.calculateTurnout(voteNo).get("turnoutList"); //득표율
+			List<Integer> voteOnWhatList = (List<Integer>) voteService.calculateTurnout(voteNo).get("voteOnWhatList"); //득표수
+			int voteGenCnt = (int) voteService.calculateTurnout(voteNo).get("voteGenCnt"); //전체 표 수
+			
 			model.addAttribute("turnoutList", turnoutList);
-			model.addAttribute("maxTurnout", maxTurnout);
-			model.addAttribute("idxOfMax", idxOfMax);
+			model.addAttribute("voteOnWhatList", voteOnWhatList);
+			model.addAttribute("voteGenCnt", voteGenCnt);
 		}
 		
 		model.addAttribute("voteMng", voteMng);
@@ -179,6 +196,42 @@ public class VoteController {
 		}
 		
 		return "common/result";
+	}
+	
+	@GetMapping("votesearch")
+	public String voteSearch(String voteSearch
+			, @RequestParam(defaultValue = "1") int page
+			, Model model
+			, HttpSession session) {
+		Generation generation = (Generation) session.getAttribute("generation");
+		Admin admin = (Admin) session.getAttribute("admin");
+		session.setAttribute("voteSearch", voteSearch);
+		List<String> ifParticipate = new ArrayList<>();
+		String isDone;
+		
+		if(generation != null) {
+			List<VoteMng> voteMngList = new ArrayList<>();
+			voteMngList = (List<VoteMng>) adminVoteService.selectVoteMngSearchList(page, generation.getApartmentIdx(), voteSearch).get("voteMng");
+			for (VoteMng voteMng : voteMngList) {
+				int res = voteService.selectIfParticipate(generation.getGenerationIdx(), voteMng.getVoteNo());
+				if(res != 0) {
+					isDone = "참여";
+				}else {
+					isDone = "미참여";
+				}
+				
+				ifParticipate.add(isDone);
+			}
+			
+			model.addAttribute("ifParticipate", ifParticipate);
+			model.addAllAttributes(adminVoteService.selectVoteMngSearchList(page, generation.getApartmentIdx(), voteSearch));
+			model.addAttribute("voteSearch", voteSearch);
+		}else {
+			model.addAllAttributes(adminVoteService.selectVoteMngSearchList(page, admin.getApartmentIdx(), voteSearch));
+			model.addAttribute("voteSearch", voteSearch);
+		}
+		
+		return "myapt/vote/votesearch";
 	}
 	
 }

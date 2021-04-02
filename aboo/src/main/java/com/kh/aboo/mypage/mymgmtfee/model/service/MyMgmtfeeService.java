@@ -25,4 +25,5 @@ public interface MyMgmtfeeService {
 	//선영 결제
 	void insertPayment(MgmtfeePayment mgmtfeePayment);
 
+	String selectPaymentGenerationIdx(String mgmtfeeIdx);
 }

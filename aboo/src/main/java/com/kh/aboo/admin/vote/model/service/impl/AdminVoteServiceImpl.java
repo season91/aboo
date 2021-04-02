@@ -3,6 +3,7 @@ package com.kh.aboo.admin.vote.model.service.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.kh.aboo.admin.vote.model.repository.VoteMngRepository;
@@ -64,6 +65,29 @@ public class AdminVoteServiceImpl implements AdminVoteService {
 	@Override
 	public void deleteVoteGen(String voteNo) {
 		voteMngRepository.deleteVoteGen(voteNo);
+	}
+
+	@Override
+	public Map<String, Object> selectVoteMngSearchList(int currentPage, String apartmentIdx, String voteSearch) {
+		Paging paging = Paging.builder()
+				.currentPage(currentPage)
+				.blockCnt(5)
+				.cntPerPage(10)
+				.type("vote")
+				.total(voteMngRepository.selectVoteMngSearchCnt(apartmentIdx, voteSearch))
+				.build();
+		
+		Map<String, Object> commandMap = new HashMap<>();
+		commandMap.put("paging", paging);
+		commandMap.put("voteMng", voteMngRepository.selectVoteMngSearchList(paging.getQueryStart(), paging.getQueryEnd(), apartmentIdx, voteSearch));
+		
+		return commandMap;
+	}
+
+	@Override
+	@Scheduled(cron = "0 40 * * * *")
+	public void updateVoteIsFinishBatch() {
+		voteMngRepository.updateVoteIsFinishBatch();
 	}
 	
 }

@@ -20,7 +20,7 @@ public interface VoteMngRepository {
 	
 	List<VoteMng> selectVoteMngList(@Param(value = "queryStart") int queryStart, @Param(value = "queryEnd") int queryEnd, @Param(value = "apartmentIdx") String apartmentIdx);
 	
-	@Select("select count(*) from tb_vote_mng where apartment_idx = #{apartmentIdx}")
+	@Select("select count(*) from tb_vote_mng where apartment_idx = #{apartmentIdx} and vote_is_del = 0")
 	int selectVoteMngCnt(@Param(value = "apartmentIdx") String apartmentIdx);
 	
 	@Select("select * from tb_vote_mng where vote_no = #{voteNo} and vote_is_del = 0")
@@ -38,5 +38,13 @@ public interface VoteMngRepository {
 	
 	@Delete("delete from tb_vote_gen where vote_no = #{voteNo}")
 	void deleteVoteGen(@Param(value = "voteNo") String voteNo);
+	
+	List<VoteMng> selectVoteMngSearchList(@Param(value = "queryStart") int queryStart, @Param(value = "queryEnd") int queryEnd, @Param(value = "apartmentIdx") String apartmentIdx, @Param(value = "voteSearch") String voteSearch);
+	
+	@Select("select count(*) from (select replace(vote_title, ' ', '') p from tb_vote_mng where vote_is_del = 0 and apartment_idx = #{apartmentIdx}) where p like '%'||#{voteSearch}||'%'")
+	int selectVoteMngSearchCnt(@Param(value = "apartmentIdx") String apartmentIdx, @Param(value = "voteSearch") String voteSearch);
+	
+	@Update("update tb_vote_mng set vote_is_finish = 1 where vote_end_date < sysdate and vote_is_finish = 0")
+	void updateVoteIsFinishBatch();
 	
 }

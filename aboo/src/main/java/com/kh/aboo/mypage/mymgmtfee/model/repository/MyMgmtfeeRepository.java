@@ -38,4 +38,7 @@ public interface MyMgmtfeeRepository {
 	// 프로시저 결제
 	// 선영 결제 성공시 결제테이블 insert하고 아영 관리비 update하는 프로시저.
 	void procedurePaymentInsert(MgmtfeePayment mgmtfeePayment);
+	
+	@Select("select GENERATION_IDX from TB_MGMTFEE where MGMTFEE_IDX = #{mgmtfeeIdx}")
+	String selectPaymentGenerationIdx(String mgmtfeeIdx);
 }
