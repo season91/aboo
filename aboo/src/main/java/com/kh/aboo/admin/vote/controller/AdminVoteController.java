@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.aboo.admin.vote.model.service.AdminVoteService;
 import com.kh.aboo.admin.vote.model.vo.VoteMng;
+import com.kh.aboo.common.code.AlarmCode;
 import com.kh.aboo.mypage.myalarm.model.service.MyAlarmService;
 import com.kh.aboo.user.manager.model.vo.Admin;
 
@@ -45,7 +46,7 @@ public class AdminVoteController {
 		
 		int res = adminVoteService.insertVoteMng(voteMng);
 		if(res > 0) {
-			//myAlarmService.insertAptAlarm("'" + voteMng.getVoteTitle() + "' " + AlarmCode.ADD_VOTE, admin.getApartmentIdx());
+			myAlarmService.insertAptAlarm("'" + voteMng.getVoteTitle() + "' " + AlarmCode.ADD_VOTE, admin.getApartmentIdx());
 			model.addAttribute("alertMsg", "투표가 생성되었습니다.");
 			model.addAttribute("url", "/myapt/vote/votelist");
 		}else {
