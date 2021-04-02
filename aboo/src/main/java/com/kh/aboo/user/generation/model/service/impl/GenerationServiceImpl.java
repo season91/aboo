@@ -84,7 +84,7 @@ public class GenerationServiceImpl implements GenerationService {
 
 		ResponseEntity<String> response = http.exchange(request, String.class);
 		String message = response.getBody();
-		mail.send(generation.getEmail(), "메일", message);
+		mail.send(generation.getEmail(), "❗ [ABOO:아파트를 부탁해] 아이디 인증번호 발급", message);
 
 	}
 
@@ -106,9 +106,8 @@ public class GenerationServiceImpl implements GenerationService {
 
 		ResponseEntity<String> response = http.exchange(request, String.class);
 		String message = response.getBody();
-		mail.send(generation.getEmail(), "메일", message);
+		mail.send(generation.getEmail(), "❗ [ABOO:아파트를 부탁해] 임시 비밀번호 발급", message);
 
-		System.out.println("바뀔번호");
 		generation.setPassword(encoder.encode(password));
 		generationRepository.updateFindPassword(generation);
 
@@ -172,7 +171,7 @@ public class GenerationServiceImpl implements GenerationService {
 
 		ResponseEntity<String> response = http.exchange(request, String.class);
 		String message = response.getBody();
-		mail.send(generation.getEmail(), "이메일 인증 메일", message);
+		mail.send(generation.getEmail(), "❗[ABOO:아파트를 부탁해] 이메일 인증번호 발급", message);
 	}
 
 	@Override

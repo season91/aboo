@@ -3,6 +3,7 @@
 <%@ include file="/WEB-INF/views/include/generationhead.jsp"%>
 <!DOCTYPE html>
 <html>
+
 <body>
 
 	<nav
@@ -63,12 +64,18 @@
 	</section>
 
 	<section class="ftco-section contact-section ftco-degree-bg">
-		<h4 class="text-center mb-4">회원님의 아이디는</h4>
+	<div style="height: 40vh;background-color: #f3f3f3; display: flex; flex-direction: column; justify-content: center;">
+	
+		<h4 class="text-center" style="">회원님의 아이디는</h4>
 		<div class="container">
 			<div class="row block-9 justify-content-center">
-				<b>${findGeneration.id}</b>입니다 감사합니다.
+				<b id = "id" style="display: none;">${findGeneration.id}</b>입니다. 감사합니다. 
+				<div id = "idOpenBnt" style="border: none;padding-left:5px ;cursor: pointer;"  onclick="idOpen()" ><i class="fas fa-lock"></i></div>
+				<div id = "idCloseBnt" style="display : none;  border: none; padding-left:5px ;pacursor: pointer;"  onclick="idClose()" ><i class="fas fa-lock-open"></i></div>
 			</div>
 		</div>
+		
+	</div>	
 	</section>
 
 	<footer class="ftco-footer ftco-bg-dark ftco-section">
@@ -170,7 +177,24 @@
 				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
 	</div>
 
-
+	<script type="text/javascript">
+	 let idOpen = () =>{
+		 document.querySelector("#idOpenBnt").style.display = 'none';
+		 document.querySelector("#id").style.display = '';
+		 document.querySelector("#idCloseBnt").style.display = '';
+		 
+	 }
+	
+	 let idClose = () =>{
+		 document.querySelector("#idOpenBnt").style.display = '';
+		 document.querySelector("#id").style.display = 'none';
+		 document.querySelector("#idCloseBnt").style.display = 'none';
+		 
+	 }
+	
+	
+	
+	</script>
 
    
 	<script src="../../../resources/js/generation/jquery.min.js"></script>

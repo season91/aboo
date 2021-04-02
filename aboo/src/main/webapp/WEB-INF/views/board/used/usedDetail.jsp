@@ -124,7 +124,7 @@
                 	<c:otherwise>
               			<c:forEach items="${usedBrdCmtList}" var="usedBrdCmt">
               			
-			                <li class="comment" id="usedBrdCmt">
+			                <li class="comment" id="usedBrdCmt${usedBrdCmt.usedCmtIdx}">
 			                  	<div class="vcard bio">
 			                      <img src="../../../../resources/abooimg/user.jpg" alt="Image placeholder">
 			                    </div>
@@ -137,7 +137,7 @@
 			                      		<c:choose>
 				                      	    <c:when test="${sessionScope.generation.generationIdx == usedBrdCmt.generationIdx}">
 				                      	  	    <p>
-				                        	      <a onclick="usedBrdCmtModify()" class="mr-4" style="cursor: pointer;"><i class="fas fa-pen" style="color: #666666;"></i></a>
+				                        	      <a onclick="usedBrdCmtModify(${usedBrdCmt.usedCmtIdx})" class="mr-4" style="cursor: pointer;"><i class="fas fa-pen" style="color: #666666;"></i></a>
 						                  	      <a onclick="usedCmtDelete(${usedBrdCmt.usedCmtIdx})" class="mr-4" style="cursor: pointer;"><i class="fas fa-trash" style="color: #666666;"></i></a>
 				                          	    </p>
 				                        	</c:when>
@@ -155,7 +155,7 @@
 			                    </div>
 			                </li>
 			                
-			                <li class="comment" id="usedBrdCmtModify" style="display: none;">
+			                <li class="comment" id="usedBrdCmtModify${usedBrdCmt.usedCmtIdx}" style="display: none;">
 			                  	<div class="vcard bio">
 			                      <img src="../../../../resources/abooimg/user.jpg" alt="Image placeholder">
 			                    </div>
@@ -294,13 +294,7 @@
   <script src="../../../../resources/js/generation/google-map.js"></script>
   <script src="../../../../resources/js/generation/main.js"></script>
   
-  <script>
-  
-   let usedBrdCmtModify = () => {
-  		document.querySelector('#usedBrdCmt').style.display = "none";
-  		document.querySelector('#usedBrdCmtModify').style.display = "block";
-  	}
-  </script>
+
   
     <script type="text/javascript"> 
   	let usedDelete = () => {
@@ -355,7 +349,14 @@
 
   	}
   </script>
+  
     
+    <script>
+    	let usedBrdCmtModify = (usedCmtIdx) => {
+      		document.querySelector('#usedBrdCmt' + usedCmtIdx).style.display = "none";
+      		document.querySelector('#usedBrdCmtModify' + usedCmtIdx).style.display = "block";
+      	}
+  	</script>
 
 
     

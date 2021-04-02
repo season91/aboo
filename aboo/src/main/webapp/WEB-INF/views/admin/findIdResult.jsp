@@ -148,11 +148,15 @@
       <!-- End Navbar -->
       <div class="content d-flex flex-column justify-content-center">
     	<div style="height: 10vh"></div>
-		<h4 class="text-center mb-4">회원님의 아이디는</h4>
+		<div style="height: 40vh;background-color: #1e1e2d; display: flex; flex-direction: column; justify-content: center;">
+		<h4 class="text-center" style="">회원님의 아이디는</h4>
 		<div class="container">
-			<div class="row block-9 justify-content-center">
-				<b>${findAdmin.id}</b>입니다 감사합니다.
+			<div class="row block-9 justify-content-center" style="color: #9e9e9e">
+				<b class= "text-white" id = "id" style="display: none;">${findAdmin.id}</b>&nbsp;입니다. 감사합니다. 
+				<div id = "idOpenBnt" style="border: none;padding-left:5px ;cursor: pointer;"  onclick="idOpen()" ><i class="fas fa-lock"></i></div>
+				<div id = "idCloseBnt" style="display : none;  border: none; padding-left:5px ;pacursor: pointer;"  onclick="idClose()" ><i class="fas fa-lock-open"></i></div>
 			</div>
+		</div>
 		</div>
       </div>
       <footer class="footer">
@@ -227,38 +231,22 @@
       </div>
     </div>
   
-	   <script type="text/javascript">
-	      let emailSend = () => {
-	          const url = '/admin/mypage/findidimpl';
-	          
-	          let paramObj = new Object();
-	          paramObj.name = document.querySelector("#name").value;
-	          paramObj.email = document.querySelector("#email").value;
-	          
-	          let headerObj = new Headers();
-	          headerObj.append("content-type","application/json");
-	          fetch(url,{
-	             method:"post",
-	             headers:headerObj,
-	             body:JSON.stringify(paramObj)
-	          }).then(response => {
-	             if(response.ok){
-	                return response.text();    
-	             }
-	             throw new AsyncPageError(response.text());
-	          }).then((text) => {
-	             if(text == 'fail'){ 
-	                alert('존재하지 않는 사용자입니다.')
-	             }else{ 
-	                 alert('메일이 발송되었습니다.');
-	                 document.querySelector("#certifiedBox").style.display = ''
-	             }
-	          }).catch(error => {
-	             error.alertMessage();
-	          });
-	       }
+	<script type="text/javascript">
+	 let idOpen = () =>{
+		 document.querySelector("#idOpenBnt").style.display = 'none';
+		 document.querySelector("#id").style.display = '';
+		 document.querySelector("#idCloseBnt").style.display = '';
+		 
+	 }
 	
-	   </script>
+	 let idClose = () =>{
+		 document.querySelector("#idOpenBnt").style.display = '';
+		 document.querySelector("#id").style.display = 'none';
+		 document.querySelector("#idCloseBnt").style.display = 'none';
+		 
+	 }
+	
+	</script>
    
     <!--   Core JS Files   -->
     <script src="../../../resources/js/admin/core/jquery.min.js"></script>

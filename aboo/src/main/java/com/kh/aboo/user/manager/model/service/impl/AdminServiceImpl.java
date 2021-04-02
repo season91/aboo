@@ -126,7 +126,7 @@ public class AdminServiceImpl implements AdminService {
 
 		ResponseEntity<String> response = http.exchange(request, String.class);
 		String message = response.getBody();
-		mail.send(admin.getEmail(), "메일", message);
+		mail.send(admin.getEmail(), "❗ [ABOO:아파트를 부탁해] 아이디 인증번호 발급", message);
 
 	}
 
@@ -148,9 +148,8 @@ public class AdminServiceImpl implements AdminService {
 
 		ResponseEntity<String> response = http.exchange(request, String.class);
 		String message = response.getBody();
-		mail.send(admin.getEmail(), "메일", message);
+		mail.send(admin.getEmail(), "❗ [ABOO:아파트를 부탁해] 임시 비밀번호 발급", message);
 
-		System.out.println("바뀔번호");
 		admin.setPassword(encoder.encode(password));
 		adminRepository.updateFindPassword(admin);
 
@@ -182,7 +181,7 @@ public class AdminServiceImpl implements AdminService {
 
 		ResponseEntity<String> response = http.exchange(request, String.class);
 		String message = response.getBody();
-		mail.send(admin.getEmail(), "이메일 인증 메일", message);
+		mail.send(admin.getEmail(), "❗ [ABOO:아파트를 부탁해] 이메일 인증번호 발급", message);
 	}
 
 	// 이메일 업데이트

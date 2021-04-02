@@ -151,7 +151,7 @@
     	<h4 class = "text-center mb-4">비밀번호 찾기</h4>
 	    <div class="ftco-section contact-section ftco-degree-bg">
 	     <div class = "d-flex justify-content-center">
-	     	<p class= "text-secondary">아래정보를 입력하시면 임시 비밀번호를 메일로 발송해드립니다</p>
+	     	<p class= "text-secondary">아래정보를 입력하시면 메일로 임시 비밀번호를 발송해드립니다</p>
 	     </div>
 	      <div class="container">
 	        <div class="row block-9 justify-content-center">
