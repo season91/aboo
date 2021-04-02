@@ -37,6 +37,46 @@ public class AuthInterceptor implements HandlerInterceptor{
 					throw new ToAlertException(ErrorCode.AUTH04);
 				}
 				break;
+				
+			case "admin": //아파트 관리자
+				switch (uriArr[2]) {
+				case "mypage":
+					switch (uriArr[3]) {
+					case "modifyinfo": 
+						if(session.getAttribute("admin") == null)
+						throw new ToAlertException(ErrorCode.AUTH07);			
+							
+					}
+					break;
+				case "authority": 
+					if(session.getAttribute("admin") == null)
+						throw new ToAlertException(ErrorCode.AUTH07);			
+				}
+				break;
+								
+			case "mypage": //generation
+				switch (uriArr[2]) {
+				case "modifyinfo":
+					if(session.getAttribute("generation") == null)
+					throw new ToAlertException(ErrorCode.AUTH06);			
+				case "generationwon":
+					if(session.getAttribute("generation") == null)
+					throw new ToAlertException(ErrorCode.AUTH06);
+				}
+				break;
+				
+				
+			case "board": //generation
+				switch (uriArr[2]) {
+				case "used":
+					switch (uriArr[3]) {
+					case "usedlist":
+						if(session.getAttribute("generation") == null && session.getAttribute("admin") == null)
+						throw new ToAlertException(ErrorCode.AUTH06);	
+					}
+					break;
+				}
+				break;
 			}
 		}
 		return true;

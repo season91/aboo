@@ -6,6 +6,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 
 import javax.crypto.Mac;
@@ -113,12 +114,9 @@ public class AdminServiceImpl implements AdminService {
 			generation.setNum(buildingAndNum[1]);		
 			generation.setApartmentIdx(apartmentIdx);
 			
-			String generationIdx = adminRepository.selectGenerationByBuildingAndNum(generation).getGenerationIdx();
-			
-			if (generationIdx == null) {
-				generationIdx = "0";
-			}
-			
+			//null이면 0을 반환
+			String generationIdx = Optional.ofNullable(adminRepository.selectGenerationByBuildingAndNum(generation)).orElse("0");
+						
 			searchMap.put("searchType", "generation");
 			searchMap.put("generationIdx",generationIdx);
 			
@@ -328,5 +326,6 @@ public class AdminServiceImpl implements AdminService {
 	public int updateAdminTell(Admin admin) {
 		return adminRepository.updateAdminTell(admin);
 	}
+
 
 }

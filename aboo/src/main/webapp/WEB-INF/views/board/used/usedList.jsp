@@ -87,7 +87,7 @@
 							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">${usedBrd.usedRegDate}</a></div>
 							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">${usedBrd.usedWriter}</a></div>
 							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="meta-chat"><span class="icon-chat"></span>1</a></div>
-							    </div> <!--비공개 처리하면 못보게 할건지 -->
+							    </div>
 							    <div class="desc pl-3">
 							      <h3 class="heading"><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">비공개 처리된 게시물 입니다</a></h3>
 							    </div>

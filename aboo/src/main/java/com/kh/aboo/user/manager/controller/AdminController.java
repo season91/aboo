@@ -100,8 +100,9 @@ public class AdminController {
 			,Model model) {
 		
 		String apartmentIdx = admin.getApartmentIdx();
-		
+	
 		model.addAllAttributes(adminService.selectAuthorityList(page,apartmentIdx,kind,keyword));
+
 
 		return "admin/authority";
 	}
@@ -301,31 +302,7 @@ public class AdminController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	// 세대 초기화
 	@PostMapping("authorityreset")
 	@ResponseBody

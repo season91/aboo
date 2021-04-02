@@ -30,8 +30,9 @@ public interface AdminRepository {
 	List<Generation> selectAuthorityList(Map<String,Object> authorityMap);
 		
 	//세대 검색 세대 찾기
-	@Select("select * from tb_generation where apartment_idx = #{apartmentIdx} and building = #{building} and num = #{num}")
-	Generation selectGenerationByBuildingAndNum(Generation generation);
+	@Select("select generation_idx from tb_generation where apartment_idx = #{apartmentIdx} and building = #{building} and num = #{num} and IS_DEL = 0")
+	String selectGenerationByBuildingAndNum(Generation generation);
+	
 	
 	//아이디 메일 전에 있는 어드민인지 체크
 	@Select("select * from TB_MANAGER where name = #{name} and EMAIL = #{email}")

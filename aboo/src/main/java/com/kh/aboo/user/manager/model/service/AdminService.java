@@ -19,7 +19,7 @@ public interface AdminService {
 
 	//선영 어드민 세대 리스트
 	public Map<String,Object> selectAuthorityList(int currentPage, String apartmentIdx, String kind, String keyword);
-	
+
 	//아이디 찾기 전 확인
 	Admin selectfindId(Admin admin);
 	

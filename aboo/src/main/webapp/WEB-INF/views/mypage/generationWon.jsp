@@ -95,16 +95,23 @@
 				            <ul>
 						        <li><a href="/mypage/generationwon" class="nav first">&lt;&lt;</a></li>
 						        <li><a href="/mypage/generationwon?page=${paging.prev}">&lt;</a></li>
-						         <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">					         
-							         <c:choose>
-							         	<c:when test="${paging.currentPage eq page}">
-					         		  		<li class = "active"><a href="/mypage/generationwon?page=${page}">${page}</a></li>
-							         	</c:when>
-							         	<c:otherwise>
-					         		  		<li><a href="/mypage/generationwon?page=${page}">${page}</a></li>
-							         	</c:otherwise>
-							         </c:choose>
-				         		 </c:forEach>
+						         <c:choose>
+							         <c:when test="${paging.lastPage eq 0 }">
+							         	<li class = "active"><a href="/mypage/generationwon?page=${page}">1</a></li>
+							         </c:when>
+							         <c:otherwise>
+								         <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">					         
+									         <c:choose>
+									         	<c:when test="${paging.currentPage eq page}">
+							         		  		<li class = "active"><a href="/mypage/generationwon?page=${page}">${page}</a></li>
+									         	</c:when>
+									         	<c:otherwise>
+							         		  		<li><a href="/mypage/generationwon?page=${page}">${page}</a></li>
+									         	</c:otherwise>
+									         </c:choose>
+						         		 </c:forEach>
+					         		 </c:otherwise>
+				         		</c:choose>
 						        <li><a href="/mypage/generationwon?page=${paging.next}">&gt;</a></li>
 						        <li>
 		 	   	 				 <a href="/mypage/generationwon?page=${paging.lastPage}">&gt;&gt;</a>
