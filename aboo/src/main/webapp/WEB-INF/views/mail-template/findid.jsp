@@ -74,18 +74,17 @@
     <!--머리글-->
     <div class="templateContainer" style="max-width: 600px; margin: 0 auto;">
         <div class="content" style="background-color:white ; width: 100%; height: auto;">
-            <div class="contentHeader" style="padding: 9px 0px 0px;">
-                <div class="HeaderTop">
-                    <img src="https://gallery.mailchimp.com/731d9dc52ede566a21ddbb6a4/images/99ea7608-c055-4132-904d-7d695f1f841e.png"
-                        alt="">
-                </div>
-
-                <div class="HeaderMiddle" style="width: 100%;  ">
-                    <p style="font-size: 10px; color: #ACABAB; padding: 0px 18px 9px;" class="HeaderMiddleText">ABOO를
-                        이용해 주셔서 감사합니다.
-                        더욱 편리한 서비스를 제공하기 위해 항상 최선을 다하겠습니다.</p>
-                </div>
-
+            <div class="contentHeader" style="padding: 9px 0px 0px; margin-left: 10px;">
+            	<div style="display: flex;">
+	                <div class="HeaderTop">
+	                    <img  style="height: 7vh; width: 5vw;" src="https://postfiles.pstatic.net/MjAyMTA0MDJfMjAz/MDAxNjE3MzM0MTY0NDI5.HUB1sHczF56YK32-pnbMlXXRAS-tiVgUtoTu5477HSog.VJ0eYygCvEDLXPxVdHBgoGDIpDWA3rC--ipMKwXXykog.PNG.psuny1031/logo_b.png?type=w773" alt="">
+	                </div>
+	
+                    <div class="HeaderMiddle" style="width: 100%; display: flex; flex-direction: column; justify-content: flex-end;">
+                        <div class="HeaderMiddleText" style="font-size: 10px; color: #ACABAB; padding: 0px 0px 5px;">
+                            ABOO를 이용해 주셔서 감사합니다. 더욱 편리한 서비스를 제공하기 위해 항상 최선을 다하겠습니다.</div>
+                    </div>
+				</div>
                 <div class="HeaderBottom" style="padding: 2px 18px;">
                     <div style="border-top: 2px solid #eaeaea; width: 100%; min-width: 100%;"></div>
                 </div>
@@ -108,7 +107,7 @@
                 <div class="MiddleSub" style="padding: 9px 18px 9px;">
                     <p style='font-size: 14px; font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; color: #202020; line-height: 150%;'
                         class="MiddleSubText">
-                        [ ${authPath} ]인증번호를 정확하게 입력해주세요.
+                        [ ${authPath} ]인증번호를 정확하게 입력해주세요.</p>
                         <br>
                         <br>
 

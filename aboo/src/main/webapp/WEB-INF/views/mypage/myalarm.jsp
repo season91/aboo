@@ -49,25 +49,19 @@
     
        <section class="ftco-section contact-section ftco-degree-bg">
       <div class="container">
-        <div class="row d-flex mb-3 contact-info">
-          <div class="col-md-12 mb-4 d-flex justify-content-center">
-            <h2 class="h1">My Alarm</h2>
-          </div>
-          <div class="w-100"></div>
-        </div>
-          <div class="col-md-12 d-flex justify-content-center">
-
-                <div class="col-md-12">
-            <div class="card ">
-              <div class="card-header">
-                <h6 class="card-title text-center text-dark">${aptName} ${building}</h6>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table tablesorter " id="">
-                    <thead class=" text-black-50">
-						<th>날짜</th>
-                        <th>알림내역</th>
+        <div class="row justify-content-center mb-5">
+			<div class="col-md-7 text-center heading-section ftco-animate">
+			      <h2 class="mb-4">My Alarm</h2>
+			         <p>${aptName} ${building}</p>
+			 </div>
+		</div>
+		<div class="row">
+		   <div class="col-md-12 ftco-animate">
+		      <div class="table-responsive">
+                 <table class="table tablesorter " id="">
+                   <thead class=" text-black-50">
+					<th>날짜</th>
+                    <th>알림내역</th>
 
 
                     </thead>
@@ -89,10 +83,7 @@
               </div>
             </div>
           </div>
- 
-          </div>
 
-        </div>
     </section>
 
       <footer class="ftco-footer ftco-bg-dark ftco-section">
