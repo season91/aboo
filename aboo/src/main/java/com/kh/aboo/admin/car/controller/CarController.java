@@ -1,8 +1,6 @@
 package com.kh.aboo.admin.car.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,92 +33,16 @@ public class CarController {
 
 	// 1.일반 페이징처리하기
 	@GetMapping("admin/car")
-	public String car(@RequestParam(defaultValue = "1") int page, @SessionAttribute(name = "admin", required = false) Admin admin,  @RequestParam(defaultValue = "apartmentIdx") String standard, @RequestParam(defaultValue = "apartmentIdx") String keyword, Model model) {
+	public void car(@RequestParam(defaultValue = "1") int page, @SessionAttribute(name = "admin", required = false) Admin admin,  @RequestParam(defaultValue = "apartmentIdx") String standard, @RequestParam(defaultValue = "apartmentIdx") String keyword, Model model) {
 		String apartmentIdx = admin.getApartmentIdx();
-		
-		Map<String, Object> searchMap = new HashMap<String, Object>();
-		searchMap.put("apartmentIdx", apartmentIdx);
-		String link = "";
-		// 페이징 처리타입 3개
-		switch (standard) {
-		case "apartmentIdx":
-			// 기본 페이징
-			searchMap.put("searchType", "apartmentIdx");
-			break;
-		case "carNumber":
-			// 차량번호 검색
-			searchMap.put("searchType", "carNumber");
-			searchMap.put("carNumber", keyword);
-			link = "/carnumber";
-			model.addAttribute("keyword",keyword);
-			break;
-		case "generationInfo":
-			// 세대정보로 검색
-			Generation generation = new Generation();
-			String[] generationInfo = keyword.split("-");
-			generation.setApartmentIdx(apartmentIdx);
-			generation.setBuilding(generationInfo[0]);
-			generation.setNum(generationInfo[1]);
-			System.out.println(generation);
-			
-			// 조회된 세대관리번호를 map에 담아준다.
-			String generationIdx = carService.selectGenerationByBuildingAndNum(generation).getGenerationIdx();
-			searchMap.put("searchType", "generationIdx");
-			searchMap.put("generationIdx", generationIdx);
-			link = "/generation";
-			model.addAttribute("keyword",keyword);
-			break;
-		}
-		
-		model.addAllAttributes(carService.selectCarList(page, searchMap));
-		return "admin/car"+link;
+		model.addAllAttributes(carService.selectCarList(page, apartmentIdx, standard, keyword));
 	}
 	
 	// 2. 입주자 차량등록 신청건 페이징처리하기
 	@GetMapping("admin/car/application")
-	public String carApplication(@RequestParam(defaultValue = "1") int page,@SessionAttribute(name = "admin", required = false) Admin admin, @RequestParam(defaultValue = "apartmentIdx") String standard, @RequestParam(defaultValue = "apartmentIdx") String keyword, Model model) {
+	public void carApplication(@RequestParam(defaultValue = "1") int page,@SessionAttribute(name = "admin", required = false) Admin admin, @RequestParam(defaultValue = "apartmentIdx") String standard, @RequestParam(defaultValue = "apartmentIdx") String keyword, Model model) {
 		String apartmentIdx = admin.getApartmentIdx();
-		String link ="";
-		Map<String, Object> applicationMap = new HashMap<String, Object>();
-		applicationMap.put("apartmentIdx", apartmentIdx);
-
-		switch (standard) {
-		case "apartmentIdx" :
-			// 기본페이징
-			applicationMap.put("searchType", "apartmentIdx");
-			break;
-		case "wait" :
-			// 미납 조회
-			applicationMap.put("searchType", "wait");
-			link = "wait";
-			break;
-		case "carNumber":
-			// 차량번호 검색
-			applicationMap.put("searchType", "carNumber");
-			applicationMap.put("carNumber", keyword);
-			link = "number";
-			model.addAttribute("keyword",keyword);
-			break;
-		case "generationInfo":
-			// 세대정보로 검색
-			Generation generation = new Generation();
-			String[] generationInfo = keyword.split("-");
-			generation.setApartmentIdx(apartmentIdx);
-			generation.setBuilding(generationInfo[0]);
-			generation.setNum(generationInfo[1]);
-			System.out.println(generation);
-			// 조회된 세대관리번호를 map에 담아준다.
-			
-			String generationIdx = carService.selectGenerationByBuildingAndNum(generation).getGenerationIdx();
-			applicationMap.put("searchType", "generationIdx");
-			applicationMap.put("generationIdx", generationIdx);
-			link = "generation";
-			model.addAttribute("keyword",keyword);
-			break;
-		}
-		
-		model.addAllAttributes(carService.selectCarApplicationList(page, applicationMap));
-		return "admin/car/application"+link;
+		model.addAllAttributes(carService.selectCarApplicationList(page, apartmentIdx, standard, keyword));
 	}
 	
 	// 건별등록

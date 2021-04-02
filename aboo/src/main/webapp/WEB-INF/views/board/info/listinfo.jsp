@@ -63,8 +63,11 @@
                 </div>
               </form>
             </div>
-                <div class="table-responsive">
-                  <table class="table tablesorter " id="">
+  		<div class="row">
+		   <div class="col-md-12 ftco-animate">
+		      <div class="table-responsive">
+                 <table class="table tablesorter " id="">
+
                     <thead class=" text-primary">
                     
                       <th>

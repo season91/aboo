@@ -14,10 +14,10 @@ public interface CarService {
 	
 	// [관리자 차량확인 페이징]
 	// 1. 페이징 화면구현을 위한 List
-	Map<String, Object> selectCarList(int currentPage, Map<String, Object> searchMap);
+	Map<String, Object> selectCarList(int currentPage, String apartmentIdx, String standard, String keyword);
 	
 	// 2. 차량등록신청 페이징 List
-	Map<String, Object> selectCarApplicationList(int currentPage, Map<String, Object> applicationMap);
+	Map<String, Object> selectCarApplicationList(int currentPage,String apartmentIdx, String standard, String keyword);
 	
 	// [차량 신청 승인]
 	// 1. 승인시 isprocess update 해준다.

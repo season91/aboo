@@ -42,58 +42,13 @@ public class MgmtfeeController {
 
 	// 페이징처리
 	@GetMapping("admin/mgmtfee")
-	public String adminMgmtfee(@RequestParam(defaultValue = "1") int page, @SessionAttribute(name = "admin", required = false) Admin admin, @RequestParam(defaultValue = "apartmentIdx") String standard,  @RequestParam(defaultValue = "apartmentIdx") String keyword, Model model) {
+	public void adminMgmtfee(@RequestParam(defaultValue = "1") int page, @SessionAttribute(name = "admin", required = false) Admin admin, @RequestParam(defaultValue = "apartmentIdx") String standard,  @RequestParam(defaultValue = "apartmentIdx") String keyword, Model model) {
 		String apartmentIdx = admin.getApartmentIdx();
-		// 페이징 처리 타입 3개
-		// 아파트정보는 어차피 로그인유저꺼로 가져오니깐 처리타입을 3개로나눠 맵에담아보내자, 뭐
-		// 1. 키워드없는 경우
-		// 2. 키워드가 관리비인경우
-		// 3. 키워드가 세대정보인경우
-		// 4. 키워드가 미납인경우 
-		Map<String, Object> searchMap = new HashMap<String, Object>();
-		searchMap.put("apartmentIdx", apartmentIdx);
 
-		String link = "";
-		switch (standard) {
-		case "apartmentIdx":
-			// 기본 페이징
-			searchMap.put("searchType", "apartmentIdx");
-			break;
-		case "mgmtfeeIdx":
-			// 관리비번호로 조회 
-			searchMap.put("searchType", "mgmtfeeIdx");
-			searchMap.put("mgmtfeeIdx", keyword);
-			break;
-		case "generationInfo":
-			// 세대정보로 조회 
-			Generation generation = new Generation();
-			String[] generationInfo = keyword.split("-");
-			generation.setApartmentIdx(apartmentIdx);
-			generation.setBuilding(generationInfo[0]);
-			generation.setNum(generationInfo[1]);
-			System.out.println(generation);
-			
-			// 조회된 세대관리번호를 map에 담아준다.
-			String generationIdx = mgmtfeeService.selectGenerationByBuildingAndNum(generation).getGenerationIdx();
-			searchMap.put("searchType", "generationIdx");
-			searchMap.put("generationIdx", generationIdx);
-			break;
-		case "dueDate" :
-			// 납기일로 조회
-			searchMap.put("searchType", "dueDate");
-			searchMap.put("dueDate", keyword); 
-			link = "/duedate";
-			model.addAttribute("keyword", keyword);
-			break;
-		case "isPayment" :
-			// 미납 조회
-			searchMap.put("searchType", "isPayment");
-			link = "/nopayment";
-			break;
-		}
-		
-		model.addAllAttributes(mgmtfeeService.selectMgmtfeeList(page, searchMap));
-		return "admin/mgmtfee"+link;
+		// 반환형은 map이고 여기엔 검색기준, 세대정보, 검색값, 페이징, 검색결과list가 들어있다.
+		// 자세한건 service impl에 구현
+		// view에서는 페이징부분이 관건인데, choose문을 searchType을 이용해 페이징처리 분기를 나눈다.
+		model.addAllAttributes(mgmtfeeService.selectMgmtfeeList(page, apartmentIdx, standard, keyword));
 	};
 		
 

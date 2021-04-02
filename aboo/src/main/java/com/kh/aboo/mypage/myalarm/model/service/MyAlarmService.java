@@ -13,5 +13,6 @@ public interface MyAlarmService {
 	void insertPvAlarm(String issueContent,String generationIdx);
 	
 	List<MyAlarm> selectIssue(String generationIdx,String apartmentIdx);
+	
 
 }

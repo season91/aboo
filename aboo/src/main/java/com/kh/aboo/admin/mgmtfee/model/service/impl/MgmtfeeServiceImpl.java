@@ -181,9 +181,60 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 		
 		return commandMap;
 	}
+	
+	public Map<String, Object> searchMap(String apartmentIdx, String standard, String keyword){
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		// 페이징 처리 타입 3개
+		// 1. 키워드 없는 경우 - 기본페이징
+		// 2. 키워드가 관리비인경우 
+		// 3. 키워드가 세대정보인경우
+		// 4. 키워드가 납기일인 경우
+		// 5. 키워드가 미납인경우 
+		
+		// 공통으로 필요한 정보. 아파트관리번호랑 검색어.
+		// switch문으로 검색기준에 따라 서치타입을 정해준다.
+		// 이 서치타입 기준으로 동적쿼리 분기가 나뉘게 된다.
+		searchMap.put("apartmentIdx", apartmentIdx);
+		searchMap.put("keyword", keyword);
+		switch (standard) {
+		case "apartmentIdx":
+			// 기본 페이징
+			searchMap.put("searchType", "apartmentIdx");
+			break;
+		case "mgmtfeeIdx":
+			// 관리번호로 검색
+			searchMap.put("searchType", "mgmtfeeIdx");
+			break;
+		case "generationInfo":
+			// 세대정보로 검색, 101-101 이런식으로 입력이되서 동수 호수로 분리하고 세대관리번호 가져와서 넣어준다.
+			Generation generation = new Generation();
+			String[] generationInfo = keyword.split("-");
+			generation.setApartmentIdx(apartmentIdx);
+			generation.setBuilding(generationInfo[0]);
+			generation.setNum(generationInfo[1]);
+			System.out.println(generation);
+			
+			// 조회된 세대관리번호를 map에 담아준다.
+			String generationIdx = selectGenerationByBuildingAndNum(generation).getGenerationIdx();
+			searchMap.put("searchType", "generationInfo");
+			searchMap.put("generationInfo", generationIdx);
+			break;
+		case "dueDate" :
+			// 납기일로 조회
+			searchMap.put("searchType", "dueDate");
+			break;
+		case "isPayment" :
+			// 미납 조회
+			searchMap.put("searchType", "isPayment");
+			break;
+		}
+		
+		return searchMap;
+	}
 
 	@Override
-	public Map<String, Object> selectMgmtfeeList(int currentPage, Map<String, Object> searchMap) {
+	public Map<String, Object> selectMgmtfeeList(int currentPage,String apartmentIdx, String standard, String keyword) {
+		Map<String, Object> searchMap = searchMap(apartmentIdx,standard,keyword);
 		//페이징처리
 		Paging paging = Paging.builder()
 				.currentPage(currentPage)

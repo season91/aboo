@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.aboo.admin.vote.model.service.AdminVoteService;
 import com.kh.aboo.admin.vote.model.vo.VoteMng;
+import com.kh.aboo.common.code.AlarmCode;
+import com.kh.aboo.mypage.myalarm.model.service.MyAlarmService;
 import com.kh.aboo.user.manager.model.vo.Admin;
 
 @RequestMapping("admin/vote")
@@ -18,11 +20,11 @@ import com.kh.aboo.user.manager.model.vo.Admin;
 public class AdminVoteController {
 	
 	private final AdminVoteService adminVoteService;
-	//private final MyAlarmService myAlarmService;
+	private final MyAlarmService myAlarmService;
 	
-	public AdminVoteController(AdminVoteService adminVoteService/*, MyAlarmService myAlarmService*/) {
+	public AdminVoteController(AdminVoteService adminVoteService, MyAlarmService myAlarmService) {
 		this.adminVoteService = adminVoteService;
-		//this.myAlarmService = myAlarmService;
+		this.myAlarmService = myAlarmService;
 	}
 	
 	@GetMapping("makevote")
@@ -44,7 +46,7 @@ public class AdminVoteController {
 		
 		int res = adminVoteService.insertVoteMng(voteMng);
 		if(res > 0) {
-			//myAlarmService.insertAptAlarm("'" + voteMng.getVoteTitle() + "' " + AlarmCode.ADD_VOTE, admin.getApartmentIdx());
+			myAlarmService.insertAptAlarm("'" + voteMng.getVoteTitle() + "' " + AlarmCode.ADD_VOTE, admin.getApartmentIdx());
 			model.addAttribute("alertMsg", "투표가 생성되었습니다.");
 			model.addAttribute("url", "/myapt/vote/votelist");
 		}else {
@@ -78,11 +80,13 @@ public class AdminVoteController {
 	}
 	
 	@PostMapping("votemodifyimpl")
-	public String voteModifyImpl(VoteMng voteMng, Model model) {
+	public String voteModifyImpl(VoteMng voteMng, Model model, HttpSession session) {
+		Admin admin = (Admin) session.getAttribute("admin");
 		int res = adminVoteService.updateVoteMng(voteMng);
 		adminVoteService.deleteVoteGen(voteMng.getVoteNo());
 		
 		if(res > 0) {
+			myAlarmService.insertAptAlarm("'" + voteMng.getVoteTitle() + "' " + AlarmCode.MODIFY_VOTE, admin.getApartmentIdx());
 			model.addAttribute("alertMsg", "투표가 수정되었습니다.");
 			model.addAttribute("url", "/myapt/vote/votelist");
 		}else {

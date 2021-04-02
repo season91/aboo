@@ -237,7 +237,10 @@
               </div>
             </div>
           </div>
-          <div class="row d-flex card-body ">
+          
+          <c:choose>
+          	<c:when test="${searchType eq 'apartmentIdx'}">
+          	<div class="row d-flex card-body ">
 	          <div class="col text-center">
 	            <div class="block-27">
 	              <ul>
@@ -267,11 +270,79 @@
 	            </div>
 	          </div>
 	        </div>
-    	</div>
+          	</c:when>
+          	
+
+          	<c:when test="${searchType eq 'nopayment' }">
+          	<div class="row d-flex card-body ">
+	          <div class="col text-center">
+	            <div class="block-27">
+	               <ul>
+	                <li><a href="/admin/${paging.type }?standard=${searchType}">&lt;&lt;</a></li>
+	                <li><a href="/admin/${paging.type }?page=${paging.prev}&standard=${searchType}">&lt;</a></li>
+	                 <c:choose>
+	                	<c:when test="${paging.lastPage eq 0 }">
+	                		<li><a href="/admin/${paging.type }&standard=${searchType}"><span>1</span></a></li>
+	                	</c:when>
+	                	<c:otherwise>
+		                 <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
+	                      <c:choose>
+	                         <c:when test="${paging.currentPage eq page}">
+	                            <li class="active"><a href="/admin/${paging.type }?page=${page}&standard=${searchType}">${page}</a></li>
+	                         </c:when>
+	                         <c:otherwise>
+	                            <li><a href="/admin/${paging.type }?page=${page}&standard=${searchType}">${page}</a></li>
+	                         </c:otherwise>
+	                      </c:choose>
+	                 	 </c:forEach>
+                 	 </c:otherwise>
+	                </c:choose> 
+	                <li><a href="/admin/${paging.type }?page=${paging.next}&standard=${searchType}">&gt;</a></li>
+	                <li><a href="/admin/${paging.type }?page=${paging.lastPage }&standard=${searchType}">&gt;&gt;</a></li>
+	              </ul>
+	            </div>
+	          </div>
+	        </div>
+          	</c:when>
+          	
+          	<c:otherwise>
+          	
+          	<div class="row d-flex card-body ">
+	          <div class="col text-center">
+	            <div class="block-27">
+	              <ul>
+	                <li><a href="/admin/${paging.type }?standard=${searchType }&keyword=${keyword}">&lt;&lt;</a></li>
+	                <li><a href="/admin/${paging.type }?page=${paging.prev}&standard=${searchType }&keyword=${keyword}">&lt;</a></li>
+              	  <c:choose>
+                	<c:when test="${paging.lastPage eq 0 }">
+                		<li><a href="/admin/${paging.type }"><span>1</span></a></li>
+                	</c:when>
+                	<c:otherwise>
+	                 <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
+                      <c:choose>
+                         <c:when test="${paging.currentPage eq page}">
+                            <li class="active"><a href="/admin/${paging.type }?page=${page}&standard=${searchType }&keyword=${keyword}">${page}</a></li>
+                         </c:when>
+                         <c:otherwise>
+                            <li><a href="/admin/${paging.type }?page=${page}&standard=${searchType }&keyword=${keyword}">${page}</a></li>
+                         </c:otherwise>
+                      </c:choose>
+                 	 </c:forEach> 
+                 	 </c:otherwise>
+	                </c:choose>
+	                <li><a href="/admin/${paging.type }?page=${paging.next}&standard=${searchType }&keyword=${keyword}">&gt;</a></li>
+	                <li><a href="/admin/${paging.type }?page=${paging.lastPage }&standard=${searchType }&keyword=${keyword}">&gt;&gt;</a></li>
+	              </ul>
+	            </div>
+	          </div>
+	        </div>
+          	</c:otherwise>
+          </c:choose>
+          	</div>
     	</div>
         </div>
       </div>
-
+          
 
      <footer class="footer">
         <div class="container-fluid">

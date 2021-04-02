@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kh.aboo.board.model.repository.BoardRepository;
-import com.kh.aboo.board.model.service.BoardService;
 import com.kh.aboo.board.used.model.service.UsedService;
 import com.kh.aboo.board.used.model.vo.UsedBrd;
 import com.kh.aboo.board.used.model.vo.UsedCmt;
