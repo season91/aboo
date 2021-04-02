@@ -6,22 +6,20 @@
     <mapper namespace="com.kh.aboo.user.manager.model.repository.AdminRepository">
     <!-- 선영 세대 목록 가져오기-->
 	<select id="selectAuthorityList" resultType="generation">
-		select GENERATION_IDX, APARTMENT_IDX, TELL, REG_DATE, EMAIL, BUILDING, NUM, ID
-		from(
-			select rownum rnum, g.* 
-			from(
-				select GENERATION_IDX, APARTMENT_IDX, TELL, REG_DATE, EMAIL, BUILDING, NUM, ID
-				from TB_GENERATION 
+		select * from(
+			select rownum rnum, g.* from(
+				select * from TB_GENERATION 
 				<where>
-				<choose>
-				<when test="searchType == 'apartmentIdx'">
-					APARTMENT_IDX = #{apartmentIdx} and
-				</when>
-				</choose>
+					<choose>
+						<when test="searchType == 'apartmentIdx'">
+							APARTMENT_IDX = #{apartmentIdx} and is_del = 0
+						</when>
+						<when test="searchType == 'generation'">
+							APARTMENT_IDX = #{apartmentIdx} and GENERATION_IDX = #{generationIdx} and is_del = 0
+						</when>
+					</choose>
 				</where>
-				APARTMENT_IDX = #{apartmentIdx}
-				order by GENERATION_IDX asc
-				) g
+				order by GENERATION_IDX asc ) g
 			) where rnum between #{paging.queryStart} and #{paging.queryEnd}
 		
 	</select>
@@ -31,8 +29,11 @@
 		<where>
 			<choose>
 				<when test="searchType == 'apartmentIdx'">
-					GENERATION_IDX = #{apartmentIdx} and is_del = 0
+					apartment_idx = #{apartmentIdx} and is_del = 0
 				</when>
+				<when test="searchType == 'generation'">
+					apartment_idx = #{apartmentIdx} and generation_idx = #{generationIdx} and is_del = 0
+				</when>				
 			</choose>
 		</where>
 	</select>

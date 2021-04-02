@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -85,7 +86,7 @@ public class AdminServiceImpl implements AdminService {
 	// 선영 어드민 세대 추가
 	@Override
 	public int insertGeneration(Generation generation, String apartmentIdx) {
-		String Separator = adminRepository.selectApartmentBySeparator(apartmentIdx); //아파트 구분자
+		String Separator = adminRepository.selectApartmentBySeparator(apartmentIdx); // 아파트 구분자
 		String id = Separator + generation.getBuilding() + "d" + generation.getNum() + "h";
 		generation.setId(id);
 		generation.setPassword(encoder.encode("123"));
@@ -93,17 +94,52 @@ public class AdminServiceImpl implements AdminService {
 		return adminRepository.insertGeneration(generation);
 	}
 
+	public Map<String, Object> searchMap(String apartmentIdx, String kind, String keyword) {
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+
+		searchMap.put("apartmentIdx", apartmentIdx);
+		searchMap.put("keyword", keyword);
+
+		switch (kind) {
+		case "apartmentIdx":
+			// 기본 페이징
+			searchMap.put("searchType", "apartmentIdx");
+			break;
+		case "generation":
+			// 세대로 검색
+			Generation generation = new Generation();
+			String[] buildingAndNum = keyword.split("-");
+			generation.setBuilding(buildingAndNum[0]);
+			generation.setNum(buildingAndNum[1]);		
+			generation.setApartmentIdx(apartmentIdx);
+			
+			String generationIdx = adminRepository.selectGenerationByBuildingAndNum(generation).getGenerationIdx();
+			
+			if (generationIdx == null) {
+				generationIdx = "0";
+			}
+			
+			searchMap.put("searchType", "generation");
+			searchMap.put("generationIdx",generationIdx);
+			
+			break;
+
+		}
+
+		return searchMap;
+	}
+
 	@Override
-	public Map<String, Object> selectAuthorityList(int currentPage, Map<String, Object> searchMap) {
+	public Map<String, Object> selectAuthorityList(int currentPage, String apartmentIdx, String kind, String keyword) {
+		Map<String, Object> searchMap = searchMap(apartmentIdx, kind, keyword);
+
 		Paging paging = Paging.builder().currentPage(currentPage).blockCnt(5).cntPerPage(5).type("board")
 				.total(adminRepository.selectContentCnt(searchMap)).build();
-		
-		Map<String, Object> commandMap = new HashMap<String, Object>();
 
-		searchMap.put("paging",paging);
-		commandMap.put("authorityList", adminRepository.selectAuthorityList(searchMap));
+		searchMap.put("paging", paging);
+		searchMap.put("authorityList", adminRepository.selectAuthorityList(searchMap));
 
-		return commandMap;
+		return searchMap;
 	}
 
 	@Override
@@ -199,7 +235,7 @@ public class AdminServiceImpl implements AdminService {
 	public void updateDeleteGeneration(Generation generation) {
 		adminRepository.updateDeleteGeneration(generation);
 	}
-	
+
 	@Override
 	public int authTell(String tell, HttpSession httpSession) {
 
@@ -232,8 +268,7 @@ public class AdminServiceImpl implements AdminService {
 			String body = params.toString();
 
 			RequestEntity<String> request = RequestEntity
-					.post("https://sens.apigw.ntruss.com/sms/v2/services//messages")
-					.headers(header).body(body);
+					.post("https://sens.apigw.ntruss.com/sms/v2/services//messages").headers(header).body(body);
 
 			ResponseEntity<String> response = http.exchange(request, String.class);
 			return response.getStatusCodeValue();
@@ -264,7 +299,7 @@ public class AdminServiceImpl implements AdminService {
 		return certNum;
 	}
 
-	//인증키 암호화
+	// 인증키 암호화
 	public String makeSignature(String url, String timestamp, String method, String accessKey, String secretKey) {
 		String space = " ";
 		String newLine = "\n";
@@ -294,6 +329,4 @@ public class AdminServiceImpl implements AdminService {
 		return adminRepository.updateAdminTell(admin);
 	}
 
-	
-	
 }

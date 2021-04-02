@@ -18,7 +18,7 @@ public interface AdminService {
 	int insertGeneration(Generation generation, String apartmentIdx);
 
 	//선영 어드민 세대 리스트
-	public Map<String,Object> selectAuthorityList(int currentPage, Map<String, Object> searchMap);
+	public Map<String,Object> selectAuthorityList(int currentPage, String apartmentIdx, String kind, String keyword);
 	
 	//아이디 찾기 전 확인
 	Admin selectfindId(Admin admin);
@@ -34,6 +34,7 @@ public interface AdminService {
 	
 	//어드민 정보 
 	Admin selectAdmin(Admin admin);
+	
 
 	int updateAdminModify(Admin admin);
 

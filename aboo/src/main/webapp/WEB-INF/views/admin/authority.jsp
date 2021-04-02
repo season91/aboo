@@ -173,30 +173,63 @@
 		                    </div>
 		                </div>		
 		            </div>
+		            	<c:choose>
+          				<c:when test="${searchType eq 'apartmentIdx'}">
+							<div class="row d-flex">
+						    <div class="col text-center">
+						      <div class="block-27">
+						        <ul>
+						        <li><a href="/admin/authority" class="nav first">&lt;&lt;</a></li>
+						        <li><a href="/admin/authority?page=${paging.prev}">&lt;</a></li>
+						         <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">					         
+							         <c:choose>
+							         	<c:when test="${paging.currentPage eq page}">
+					         		  		<li class = "active"><a href="/admin/authority?page=${page}">${page}</a></li>
+							         	</c:when>
+							         	<c:otherwise>
+					         		  		<li><a href="/admin/authority?page=${page}">${page}</a></li>
+							         	</c:otherwise>
+							         </c:choose>
+				         		 </c:forEach>
+						        <li><a href="/admin/authority?page=${paging.next}">&gt;</a></li>
+						        <li>
+		 	   	 				 <a href="/admin/authority?page=${paging.lastPage}">&gt;&gt;</a>
+						         </li>
+						        </ul>
+						      </div>
+						    </div>
+						</div>	
+					</c:when>
+					
+					<c:otherwise>
 						<div class="row d-flex">
-					    <div class="col text-center">
-					      <div class="block-27">
-					        <ul>
-					        <li><a href="/admin/authority" class="nav first">&lt;&lt;</a></li>
-					        <li><a href="/admin/authority?page=${paging.prev}">&lt;</a></li>
-					         <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">					         
-						         <c:choose>
-						         	<c:when test="${paging.currentPage eq page}">
-				         		  		<li class = "active"><a href="/admin/authority?page=${page}">${page}</a></li>
-						         	</c:when>
-						         	<c:otherwise>
-				         		  		<li><a href="/admin/authority?page=${page}">${page}</a></li>
-						         	</c:otherwise>
-						         </c:choose>
-			         		 </c:forEach>
-					        <li><a href="/admin/authority?page=${paging.next}">&gt;</a></li>
-					        <li>
-	 	   	 				 <a href="/admin/authority?page=${paging.lastPage}">&gt;&gt;</a>
-					         </li>
-					        </ul>
-					      </div>
-					    </div>
-					</div>		        
+						    <div class="col text-center">
+						      <div class="block-27">
+						        <ul>
+						        <li><a href="/admin/authority?kind=${searchType}&keyword=${keyword}" class="nav first">&lt;&lt;</a></li>
+						        <li><a href="/admin/authority?page=${paging.prev}&kind=${searchType}&keyword=${keyword}">&lt;</a></li>
+						         <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">					         
+							         <c:choose>
+							         	<c:when test="${paging.currentPage eq page}">
+					         		  		<li class = "active"><a href="/admin/authority?page=${page}&kind=${searchType}&keyword=${keyword}">${page}</a></li>
+							         	</c:when>
+							         	<c:otherwise>
+					         		  		<li><a href="/admin/authority?page=${page}&kind=${searchType}&keyword=${keyword}">${page}</a></li>
+							         	</c:otherwise>
+							         </c:choose>
+				         		 </c:forEach>
+						        <li><a href="/admin/authority?page=${paging.next}&kind=${searchType}&keyword=${keyword}">&gt;</a></li>
+						        <li>
+		 	   	 				 <a href="/admin/authority?page=${paging.lastPage}&kind=${searchType}&keyword=${keyword}">&gt;&gt;</a>
+						         </li>
+						        </ul>
+						      </div>
+						    </div>
+						</div>	
+					</c:otherwise>
+					</c:choose>
+					
+						        
 		        </div>
 		    </div>
 		</div>
@@ -265,14 +298,12 @@
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-            <form action="/admin/authority" method="post">
+            <form action="/admin/authority" method="get">
        	      <div class="form-group">
                 <label for="name">세대를 검색하세요(000-000)</label>
                 <div class = "d-flex justify-content-between">
                 	<input type="hidden" name="kind" value="generation">
-    				<input type="text" id = "searchBuilding" name = "searchBuilding" class="form-control text-dark col-md-5" required="required" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
-    				<p class = "text-dark" style="font-size: 1.5vw;"><i class="fas fa-window-minimize"></i></p>
-    				<input type="text" id = "searchNum" name = "searchNum" class="form-control text-dark col-md-5" required="required" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+    				<input type="text" id = "keyword" name = "keyword" class="form-control text-dark">
               	</div>
               </div>             
             <div class="modal-footer">

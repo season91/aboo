@@ -1,6 +1,7 @@
 package com.kh.aboo.user.manager.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -92,24 +93,15 @@ public class AdminController {
 
 	// 선영
 	@GetMapping("authority")
-	public String adminAuthority(@RequestParam(defaultValue = "1") int page,
-			@SessionAttribute(name = "admin", required = false) Admin admin,
-			@RequestParam(defaultValue = "apartmentIdx") String kind,	
-			Model model) {
+	public String adminAuthority(@RequestParam(defaultValue = "1") int page
+			,@SessionAttribute(name = "admin", required = false) Admin admin
+			,@RequestParam(defaultValue = "apartmentIdx") String kind
+			,@RequestParam(defaultValue = "keyword") String keyword
+			,Model model) {
 		
-		Map<String, Object> searchMap = new HashMap<String, Object>();
-		searchMap.put("apartmentIdx", admin.getApartmentIdx()); //기본
+		String apartmentIdx = admin.getApartmentIdx();
 		
-		switch (kind) {
-		case "apartmentIdx" :
-			searchMap.put("searchType", "apartmentIdx");
-			break;
-		default:
-			break;
-		}
-		
-		
-		model.addAllAttributes(adminService.selectAuthorityList(page,searchMap));
+		model.addAllAttributes(adminService.selectAuthorityList(page,apartmentIdx,kind,keyword));
 
 		return "admin/authority";
 	}

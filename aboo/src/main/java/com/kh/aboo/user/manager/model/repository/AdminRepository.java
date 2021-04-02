@@ -29,6 +29,10 @@ public interface AdminRepository {
 	//세대 추가 페이지 리스트
 	List<Generation> selectAuthorityList(Map<String,Object> authorityMap);
 		
+	//세대 검색 세대 찾기
+	@Select("select * from tb_generation where apartment_idx = #{apartmentIdx} and building = #{building} and num = #{num}")
+	Generation selectGenerationByBuildingAndNum(Generation generation);
+	
 	//아이디 메일 전에 있는 어드민인지 체크
 	@Select("select * from TB_MANAGER where name = #{name} and EMAIL = #{email}")
 	public Admin selectFindId(Admin admin);
