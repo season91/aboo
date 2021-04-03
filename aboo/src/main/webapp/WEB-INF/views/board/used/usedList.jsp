@@ -53,8 +53,8 @@
       <div class = "container d-flex" style="height: 10vh; background-color:#fafafa !important ;margin-left: 5vw">
       <form action="/board/used/usedlist">  
             <input type="hidden" name="kind" value="trnsc">
-			<label> 판매 중 : <input type="radio" name="keyword" value="0"></label>
-			<label> 판매 완료 : <input type="radio" name="keyword" value="1"></label>
+			<label> 거래 중 : <input type="radio" name="keyword" value="0"></label>
+			<label> 거래 완료 : <input type="radio" name="keyword" value="1"></label>
 			<button style="border: none; background-color:#fafafa !important ;outline: none;"><i class="fas fa-search"></i></button>
 		</form> 
       </div>
