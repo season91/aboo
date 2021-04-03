@@ -1,7 +1,5 @@
 package com.kh.aboo.user.manager.controller;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -23,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import com.kh.aboo.common.code.ErrorCode;
-import com.kh.aboo.common.exception.ToAlertException;
 
 import com.kh.aboo.common.util.ramdom.Ramdom;
 import com.kh.aboo.user.generation.model.vo.Generation;

@@ -32,15 +32,19 @@ public class UsedController {
 	}
 
 	@GetMapping("usedlist")
-	public String usedList(@RequestParam(defaultValue = "1") int page, Model model, HttpSession session) {
+	public String usedList(@RequestParam(defaultValue = "1") int page
+			, @RequestParam(defaultValue = "apartmentIdx") String kind
+			,@RequestParam(defaultValue = "ㄱ") String keyword
+			, Model model
+			, HttpSession session) {
 
 		Generation generation = (Generation) session.getAttribute("generation");
 		Admin admin = (Admin) session.getAttribute("admin");
 
 		if (generation != null) {
-			model.addAllAttributes(usedService.selectUsedBrdList(page, generation.getApartmentIdx()));
+			model.addAllAttributes(usedService.selectUsedBrdList(page, generation.getApartmentIdx(), kind, keyword));
 		} else {
-			model.addAllAttributes(usedService.selectUsedBrdList(page, admin.getApartmentIdx()));
+			model.addAllAttributes(usedService.selectUsedBrdList(page, admin.getApartmentIdx(), kind, keyword));
 
 		}
 

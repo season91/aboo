@@ -11,7 +11,7 @@ import com.kh.aboo.common.util.file.FileVo;
 
 public interface UsedService {
 
-	Map<String, Object> selectUsedBrdList(int currentPage, String apartmentIdx);
+	Map<String, Object> selectUsedBrdList(int currentPage, String apartmentIdx, String kind, String keyword);
 
 	Map<String, Object> selectUsedDetail(String usedIdx);
 
