@@ -22,7 +22,7 @@
 					<li class="nav-item "><a href="/myapt/schedule"
 						class="nav-link">MyApt</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="/board/info/infolist">Board</a></li>
+						href="/board/info/listinfo">Board</a></li>
 					<li class="nav-item"><a href="/mypage/modifyinfo"
 						class="nav-link action">MyPage</a></li>
 					<c:choose>

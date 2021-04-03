@@ -24,7 +24,7 @@
 					<li class="nav-item "><a href="/myapt/schedule"
 						class="nav-link">MyApt</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="/board/info/infolist">Board</a></li>
+						href="/board/info/listinfo">Board</a></li>
 					<li class="nav-item"><a href="/mypage/modifyinfo"
 						class="nav-link">MyPage</a></li>
 					<c:choose>
@@ -64,7 +64,7 @@
 	</section>
 
 	<section class="ftco-section contact-section ftco-degree-bg">
-	<div style="height: 40vh;background-color: #f3f3f3; display: flex; flex-direction: column; justify-content: center;">
+	<div style="height: 40vh;background-color: #f7f7f7; display: flex; flex-direction: column; justify-content: center;">
 	
 		<h4 class="text-center" style="">회원님의 아이디는</h4>
 		<div class="container">

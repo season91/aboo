@@ -19,14 +19,20 @@
 	          <li class="nav-item"><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
 	          <li class="nav-item active"><a class="nav-link" href="/board/info/listinfo">Board</a></li>
 	          <li class="nav-item"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
-	          <c:choose>
-	          <c:when test="${sessionScope.generation == null}">
-	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
-	          </c:when>
-	          <c:when test="${sessionScope.generation != null}">
-	          <li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>	          
-	          </c:when>
-	          </c:choose>
+				
+					<c:choose>
+						<c:when
+							test="${sessionScope.generation == null and sessionScope.admin == null}">
+							<li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>
+						</c:when>
+						<c:when test="${sessionScope.generation != null}">
+							<li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>
+						</c:when>
+						<c:when test="${sessionScope.admin != null}">
+							<li class="nav-item cta"><a href="/admin/logout"
+								class="nav-link"><span>Logout</span></a></li>
+						</c:when>
+					</c:choose>
 	        </ul>
 	      </div>
 	    </div>
@@ -40,7 +46,7 @@
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
 
             <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Info</a></span> <span>Used</span></p>
+              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/board/info/listinfo">Info</a></span> <span><a href="/board/interior/intlist">Interior</a></span></span></p>
 	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">used</h1>
             </div>
           </div>
@@ -49,8 +55,8 @@
     </section>
   
     <section class="ftco-section bg-light">
-    <div>
-      <div class = "container d-flex" style="height: 10vh; background-color:#fafafa !important ;margin-left: 5vw">
+    <div class = "container">
+      <div class = "d-flex" style="height: 10vh; background-color:#fafafa !important ;margin-left: 5vw">
       <form action="/board/used/usedlist">  
             <input type="hidden" name="kind" value="trnsc">
 			<label> 거래 중 : <input type="radio" name="keyword" value="0"></label>
@@ -69,7 +75,7 @@
 							    <div class="meta mb-3">
 							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">${usedBrd.usedRegDate}</a></div>
 							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">${usedBrd.usedWriter}</a></div>
-							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="meta-chat"><span class="icon-chat"></span>1</a></div>
+							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="meta-chat"><span class="icon-chat"></span>${cmtList[status.index]}</a></div>
 							    </div>
 							    <div class="desc pl-3">
 							    <div class= "heading w-100" style="word-break: break-all; text-overflow: ellipsis;">
@@ -192,12 +198,7 @@
         </div>
         </c:otherwise>
         </c:choose>
-        
-        
-        
-        
-        
-        
+
       </div>
     </section>
 

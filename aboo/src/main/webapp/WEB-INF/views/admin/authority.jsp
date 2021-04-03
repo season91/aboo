@@ -138,7 +138,7 @@
 					
 					<div class= "w-100 d-flex justify-content-end">				
 						<button class="btn btn-primary px-xl-5 py-xl-2 mb-2" data-toggle="modal" data-target="#add">추가</button>
-						<button class="btn btn-info px-xl-5 py-xl-2 mb-2" data-toggle="modal" data-target="#search">검색</button>
+						<button class="btn btn-info px-xl-5 py-xl-2 ml-2 mb-2" data-toggle="modal" data-target="#search">검색</button>
 					</div>
 		            <div class="card ">
 		                <div class="card-header d-flex justify-content-between">
@@ -318,9 +318,14 @@
             <div class="modal-body">
             <form action="/admin/authority" method="get">
        	      <div class="form-group">
-                <label for="name">세대를 검색하세요(000-000)</label>
+       	      	<div id = "lableWrap" class = "d-flex flex-column">
+	                <label style="font-size: 1vw; color: #8a8a8a;" for="name">세대를 검색하세요 양식 : [000-000]</label>
+	                <label style="font-size: 1vw; color: #8a8a8a;" for="name">동을 검색하세요 양식 : [000]</label>
+	                <label style="font-weight: bold;"><input type="checkbox" id = "checkBuilding"> 동만 검색</label>
+                </div>
                 <div class = "d-flex justify-content-between">
-                	<input type="hidden" name="kind" value="generation">
+                	<input id = "building" type="hidden" name="none" value="building">
+                	<input id = "generation"  type="hidden" name="kind" value="generation">
     				<input type="text" id = "keyword" name = "keyword" class="form-control text-dark">
               	</div>
               </div>             
@@ -517,7 +522,25 @@
 
       });
     </script>
+    
+    <!-- 키워드 검색 체크시 input박스 바꿔주기 -->
+	<script type="text/javascript">
+		$("#checkBuilding").change(function(){         
+	        if($("#checkBuilding").is(":checked")){
+				console.dir("선택")
+				 document.querySelector("#generation").name = 'none';
+				 document.querySelector("#building").name = 'kind';
+	        }else{
+				console.dir("선택 안함")
+				 document.querySelector("#building").name = 'none';
+				 document.querySelector("#generation").name = 'kind';
+	        }
+	    });
 
+	
+	
+	
+	</script>
 
     <script type="text/javascript"> /*모달에 값 넣기*/
 	let openModal = (info) => {
@@ -622,12 +645,10 @@
 		$('#closeAdd').click(function(e) {
 		   $('#addBuilding').val(" ");
 		   $('#addNum').val(" ");
-		   $('#add').hide();
 		});		
 		
 		$('#closeSearch').click(function(e) {
 			   $('#keyword').val(" ");
-			   $('#search').hide();
 			});
 		
 	</script>

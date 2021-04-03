@@ -17,6 +17,9 @@
 						<when test="searchType == 'generation'">
 							APARTMENT_IDX = #{apartmentIdx} and GENERATION_IDX = #{generationIdx} and is_del = 0
 						</when>
+						<when test="searchType == 'building'">
+							APARTMENT_IDX = #{apartmentIdx} and building like '%'||#{keyword}||'%' and is_del = 0
+						</when>	
 					</choose>
 				</where>
 				order by GENERATION_IDX asc ) g
@@ -33,10 +36,14 @@
 				</when>
 				<when test="searchType == 'generation'">
 					apartment_idx = #{apartmentIdx} and generation_idx = #{generationIdx} and is_del = 0
-				</when>				
+				</when>		
+				<when test="searchType == 'building'">
+					APARTMENT_IDX = #{apartmentIdx} and building like '%'|| #{keyword} ||'%' and is_del = 0
+				</when>						
 			</choose>
 		</where>
 	</select>
+
 
 
 
