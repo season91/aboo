@@ -113,7 +113,7 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 		return commandMap;
 	}
 
-	// 아영 : 읽은 엑셀파일을 mgmtfee vo에 넣고 DB에 추가한다.
+	// 읽은 엑셀파일을 mgmtfee vo에 넣고 DB에 추가한다.
 	@Override
 	public List<Mgmtfee> insertMgmtfee(Map<String, Object> commandMap,String apartmentIdx) {
 		List<Mgmtfee> mgmtfeeList = new ArrayList<>();

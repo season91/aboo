@@ -162,7 +162,7 @@
                           <button type="button" class="btn btn-warning btn-block" id="search-button" data-toggle="modal" data-target="#nameModal">아파트 명으로 검색</button>
                         </div>
                         <div class="col-md-3">
-                        <form action="${context }/bdmin/apartment/contactuslist">
+                        <form action="${context }/bdmin/management/contactuslist">
                           <button type="submit" class="btn btn-warning btn-block" id="search-button" data-toggle="modal" data-target="#apartmentModal">입점 문의건 보기</button>
                         </form>
                         </div>
@@ -190,7 +190,7 @@
                        <td> ${apart.apartmentName } </td>
                        <td> ${apart.apartmentAddress }</td>
                        <td> ${apart.apartmentParking} </td>
-                       <td> <a href="${context }/bdmin/apartment/detail?apartmentIdx=${apart.apartmentIdx}">상세정보</a></td>
+                       <td> <a href="${context }/bdmin/management/apartmentdetail?apartmentIdx=${apart.apartmentIdx}">상세정보</a></td>
                       </tr>
                    </c:forEach>
               		
@@ -207,28 +207,28 @@
 	          <div class="col text-center">
 	            <div class="block-27">
 	              <ul>
-	                <li><a href="/bdmin/${paging.type }">&lt;&lt;</a></li>
-	                <li><a href="/bdmin/${paging.type }?page=${paging.prev}">&lt;</a></li>
+	                <li><a href="/bdmin/management/${paging.type }">&lt;&lt;</a></li>
+	                <li><a href="/bdmin/management/${paging.type }?page=${paging.prev}">&lt;</a></li>
 	                <c:choose>
 	                	<c:when test="${paging.lastPage eq 0 }">
-	                		<li><a href="/bdmin/${paging.type }">1</a></li>
+	                		<li><a href="/bdmin/management/${paging.type }">1</a></li>
 	                	</c:when>
 	                	<c:otherwise>
 	                		<c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
 		                      <c:choose>
 		                         <c:when test="${paging.currentPage eq page}">
-		                            <li class="active"><a href="/bdmin/${paging.type }?page=${page}">${page}</a></li>
+		                            <li class="active"><a href="/bdmin/management/${paging.type }?page=${page}">${page}</a></li>
 		                         </c:when>
 		                         <c:otherwise>
-		                            <li><a href="/bdmin/${paging.type }?page=${page}">${page}</a></li>
+		                            <li><a href="/bdmin/management/${paging.type }?page=${page}">${page}</a></li>
 		                         </c:otherwise>
 		                      </c:choose>
 		                 	 </c:forEach> 
 	                	</c:otherwise>
 	                </c:choose>
 	                 
-	                <li><a href="/bdmin/${paging.type }?page=${paging.next}">&gt;</a></li>
-	                <li><a href="/bdmin/${paging.type }?page=${paging.lastPage }">&gt;&gt;</a></li>
+	                <li><a href="/bdmin/management/${paging.type }?page=${paging.next}">&gt;</a></li>
+	                <li><a href="/bdmin/management/${paging.type }?page=${paging.lastPage }">&gt;&gt;</a></li>
 	              </ul>
 	            </div>
 	          </div>
@@ -241,27 +241,27 @@
 	          <div class="col text-center">
 	            <div class="block-27">
 	              <ul>
-	                <li><a href="/bdmin/${paging.type }?standard=${searchType }&keyword=${keyword}">&lt;&lt;</a></li>
-	                <li><a href="/bdmin/${paging.type }?page=${paging.prev}&standard=${searchType }&keyword=${keyword}">&lt;</a></li>
+	                <li><a href="/bdmin/management/${paging.type }?standard=${searchType }&keyword=${keyword}">&lt;&lt;</a></li>
+	                <li><a href="/bdmin/management/${paging.type }?page=${paging.prev}&standard=${searchType }&keyword=${keyword}">&lt;</a></li>
 	                <c:choose>
 	                	<c:when test="${paging.lastPage eq 0 }">
-	                		<li><a href="/bdmin/${paging.type }?standard=${searchType }&keyword=${keyword}">1</a></li>
+	                		<li><a href="/bdmin/management/${paging.type }?standard=${searchType }&keyword=${keyword}">1</a></li>
 	                	</c:when>
 	                	<c:otherwise>
 	                		<c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
 		                      <c:choose>
 		                         <c:when test="${paging.currentPage eq page}">
-		                            <li class="active"><a href="/bdmin/${paging.type }?page=${page}&standard=${searchType }&keyword=${keyword}">${page}</a></li>
+		                            <li class="active"><a href="/bdmin/management/${paging.type }?page=${page}&standard=${searchType }&keyword=${keyword}">${page}</a></li>
 		                         </c:when>
 		                         <c:otherwise>
-		                            <li><a href="/bdmin/${paging.type }?page=${page}&standard=${searchType }&keyword=${keyword}">${page}</a></li>
+		                            <li><a href="/bdmin/management/${paging.type }?page=${page}&standard=${searchType }&keyword=${keyword}">${page}</a></li>
 		                         </c:otherwise>
 		                      </c:choose>
 		                 	 </c:forEach> 
 	                	</c:otherwise>
 	                </c:choose>
-	                <li><a href="/bdmin/${paging.type }?page=${paging.next}&standard=${searchType }&keyword=${keyword}">&gt;</a></li>
-	                <li><a href="/bdmin/${paging.type }?page=${paging.lastPage }&standard=${searchType }&keyword=${keyword}">&gt;&gt;</a></li>
+	                <li><a href="/bdmin/management/${paging.type }?page=${paging.next}&standard=${searchType }&keyword=${keyword}">&gt;</a></li>
+	                <li><a href="/bdmin/management/${paging.type }?page=${paging.lastPage }&standard=${searchType }&keyword=${keyword}">&gt;&gt;</a></li>
 	              </ul>
 	            </div>
 	          </div>
@@ -314,7 +314,7 @@
               </button>
            </div>
            <div class="modal-body">
-        <form action="${context }/bdmin/apartment">
+        <form action="${context }/bdmin/management/apartment">
           <div class="form-group">
           <input type="hidden" name="standard" value="apartmentName">
            <input type="text" class="form-control mgmtfee-keyword" id="inlineFormInputGroup" name="keyword" placeholder="아파트 이름으로 검색하세요.">

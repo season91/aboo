@@ -1,4 +1,4 @@
-package com.kh.aboo.bdmin.model.vo;
+package com.kh.aboo.bdmin.management.model.vo;
 
 public class ApartApplication {
 

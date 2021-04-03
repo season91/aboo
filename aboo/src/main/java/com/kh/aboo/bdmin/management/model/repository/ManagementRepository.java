@@ -1,4 +1,4 @@
-package com.kh.aboo.bdmin.model.repository;
+package com.kh.aboo.bdmin.management.model.repository;
 
 import java.util.List;
 import java.util.Map;
@@ -8,12 +8,12 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import com.kh.aboo.bdmin.model.vo.ApartApplication;
-import com.kh.aboo.bdmin.model.vo.Bdmin;
+import com.kh.aboo.bdmin.management.model.vo.ApartApplication;
+import com.kh.aboo.bdmin.management.model.vo.Bdmin;
 import com.kh.aboo.user.apartment.model.vo.Apartment;
 
 @Mapper
-public interface BdminRepository {
+public interface ManagementRepository {
 	
 	// [로그인]
 	@Select("select * from tb_bdmin where id = #{id} and is_del = 0")

@@ -22,7 +22,7 @@ public class AuthInterceptor implements HandlerInterceptor{
 			switch (uriArr[1]) {
 			case "bdmin": //aboo 관리자
 				switch (uriArr[2]) {
-				case "apartment": //
+				case "management": //
 					if(session.getAttribute("bdmin") == null)
 					throw new ToAlertException(ErrorCode.AUTH04);			
 				case "managerinfo":
@@ -50,7 +50,13 @@ public class AuthInterceptor implements HandlerInterceptor{
 					break;
 				case "authority": 
 					if(session.getAttribute("admin") == null)
-						throw new ToAlertException(ErrorCode.AUTH07);			
+						throw new ToAlertException(ErrorCode.AUTH07);
+				case "mgmtfee" : //관리비
+					if(session.getAttribute("admin") == null)
+						throw new ToAlertException(ErrorCode.AUTH05);
+				case "car" : //차량
+					if(session.getAttribute("admin") == null)
+						throw new ToAlertException(ErrorCode.AUTH05);
 				}
 				break;
 								
