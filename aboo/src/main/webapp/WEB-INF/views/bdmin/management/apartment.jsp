@@ -42,14 +42,14 @@
               <p>Authority</p>
             </a>
           </li>
-          <li class="active ">
+          <li>
             <a href="/admin/mgmtfee">
               <i class="tim-icons icon-chart-bar-32"></i>
               <p>Management Fee</p>
             </a>
           </li>
           <li>
-            <a href="/admin/vehicle">
+            <a href="/admin/car">
               <i class="tim-icons icon-bus-front-12"></i>
               <p>Car</p>
             </a>
@@ -67,20 +67,23 @@
             </a>
           </li>
           <li>
-          <a href="/admin/notice">
-            <i class="tim-icons icon-key-25"></i>
-      		 <p>notice</p>
-      		</a>
-      	 </li>
-	
-	       	<c:if test="${sessionScope.bdmin != null}">
-	       	<li>
-	       	<a href="/bdmin/apartment">
-	         	<i class="tim-icons icon-key-25"></i>
-	  			 <p>BDIN</p>
+           <a href="/bdmin/notice/noticelist">
+              <i class="tim-icons icon-volume-98"></i>
+              <p>notice</p>
+            </a>
+          </li>
+	      <li  class="active ">
+	       	<a href="/bdmin/management/apartment">
+	         <i class="tim-icons icon-key-25"></i>
+	  		 <p>BDIN - apartment</p>
 	  	    </a>
-	  		</li>
-	       	</c:if>
+	  	 </li>
+	  	  <li  class=" ">
+	       	<a href="/bdmin/management/adminauthority">
+	         <i class="tim-icons icon-key-25"></i>
+	  		 <p>BDIN - manager</p>
+	  	    </a>
+	  	 </li>
         </ul>
       </div>
     </div>
@@ -145,6 +148,7 @@
               <div class="card-header">
                 <h3 class="title">Apart 현황</h3>
               </div>
+               
               <div class="col-md-12">
                 <div class="places-buttons">
                   <div class="row">
@@ -157,7 +161,7 @@
                   </div>
                   <div class="row">
                     <div class="col-lg-12 ml-auto mr-auto">
-                      <div class="row ">
+                      <div class="row" style="display: flex; justify-content: center">
                         <div class="col-md-3">
                           <button type="button" class="btn btn-warning btn-block" id="search-button" data-toggle="modal" data-target="#nameModal">아파트 명으로 검색</button>
                         </div>
@@ -170,8 +174,9 @@
                     </div>
                   </div>
                 </div>
+           
           </div>
-          
+         
        	 <div class="card-body">
              <div class="table-responsive">
                <table class="table tablesorter " id="">

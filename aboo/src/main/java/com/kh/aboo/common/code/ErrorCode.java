@@ -33,6 +33,7 @@ public enum ErrorCode {
 	SAC01("이미 처리된 신청건 입니다.", "/admin/car/application"),
 	DAC01("반려 처리 중 에러가 발생하였습니다.","/admin/car/application"),
 	UAC01("처리 상태 업데이트 중 에러 발생","/admin/car/application"),
+	IDCHECK01("중복아이디 입니다.","/bdmin/management/adminauthority"),
 	CD_404("존재하지 않는 경로입니다."),
 	AH01("잘못된 인증 번호입니다","/findid"),
 	AH02("존재하지 않는 사용자입니다."),

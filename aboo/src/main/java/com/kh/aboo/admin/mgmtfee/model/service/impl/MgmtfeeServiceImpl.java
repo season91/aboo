@@ -195,16 +195,9 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 		// switch문으로 검색기준에 따라 서치타입을 정해준다.
 		// 이 서치타입 기준으로 동적쿼리 분기가 나뉘게 된다.
 		searchMap.put("apartmentIdx", apartmentIdx);
+		searchMap.put("searchType", standard);
 		searchMap.put("keyword", keyword);
 		switch (standard) {
-		case "apartmentIdx":
-			// 기본 페이징
-			searchMap.put("searchType", "apartmentIdx");
-			break;
-		case "mgmtfeeIdx":
-			// 관리번호로 검색
-			searchMap.put("searchType", "mgmtfeeIdx");
-			break;
 		case "generationInfo":
 			// 세대정보로 검색, 101-101 이런식으로 입력이되서 동수 호수로 분리하고 세대관리번호 가져와서 넣어준다.
 			Generation generation = new Generation();
@@ -216,16 +209,7 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 			
 			// 조회된 세대관리번호를 map에 담아준다.
 			String generationIdx = selectGenerationByBuildingAndNum(generation).getGenerationIdx();
-			searchMap.put("searchType", "generationInfo");
 			searchMap.put("generationInfo", generationIdx);
-			break;
-		case "dueDate" :
-			// 납기일로 조회
-			searchMap.put("searchType", "dueDate");
-			break;
-		case "isPayment" :
-			// 미납 조회
-			searchMap.put("searchType", "isPayment");
 			break;
 		}
 		

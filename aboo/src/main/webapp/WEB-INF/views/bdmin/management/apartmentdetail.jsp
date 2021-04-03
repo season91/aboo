@@ -67,20 +67,17 @@
             </a>
           </li>
           <li>
-          <a href="/admin/notice">
-            <i class="tim-icons icon-key-25"></i>
-      		 <p>notice</p>
-      		</a>
-      	 </li>
-	
-	       	<c:if test="${sessionScope.bdmin != null}">
-	       	<li>
+           <a href="/bdmin/notice/noticelist">
+              <i class="tim-icons icon-volume-98"></i>
+              <p>notice</p>
+            </a>
+          </li>
+	      <li  class="active ">
 	       	<a href="/bdmin/apartment">
-	         	<i class="tim-icons icon-key-25"></i>
-	  			 <p>BDIN</p>
+	         <i class="tim-icons icon-key-25"></i>
+	  		 <p>BDIN</p>
 	  	    </a>
-	  		</li>
-	       	</c:if>
+	  	 </li>
         </ul>
       </div>
     </div>

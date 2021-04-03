@@ -27,6 +27,7 @@
 		<typeAlias type="com.kh.aboo.bdmin.management.model.vo.ApartApplication" alias="apartApplication"/>
 		<typeAlias type="com.kh.aboo.user.apartment.model.vo.Apartment" alias="apartment"/>
 		<typeAlias type="com.kh.aboo.bdmin.notice.model.vo.Notice" alias="notice"/>
+		<typeAlias type="com.kh.aboo.user.manager.model.vo.Admin" alias="admin"/>
 	</typeAliases>
 
 <!-- 3. 작성쿼리 root등록을 위한 경로 설정. 맨아래에 있어야 한다.-->
@@ -42,7 +43,7 @@
 		<mapper resource="mybatis/mapper/car/carMapper.xml"/>
 		<mapper resource="mybatis/mapper/admin/scheduleMapper.xml"/>
 		<mapper resource="mybatis/mapper/mypage/writeListMapper.xml"/>
-		<mapper resource="mybatis/mapper/bdmin/bdminMapper.xml"/>
+		<mapper resource="mybatis/mapper/bdmin/managementMapper.xml"/>
 		<mapper resource="mybatis/mapper/bdmin/noticeMapper.xml"/>
 	</mappers>
 

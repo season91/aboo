@@ -77,17 +77,9 @@ public class CarServiceImpl implements CarService{
 	public Map<String, Object> searchMap(String apartmentIdx, String standard, String keyword){
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		searchMap.put("apartmentIdx", apartmentIdx);
+		searchMap.put("searchType", standard);
 		searchMap.put("keyword", keyword);
 		switch (standard) {
-		case "apartmentIdx":
-			// 기본 페이징
-			searchMap.put("searchType", "apartmentIdx");
-			break;
-		case "carNumber":
-			// 차량번호 검색
-			searchMap.put("searchType", "carNumber");
-			searchMap.put("link", "carnumber");
-			break;
 		case "generationInfo":
 			// 세대정보로 검색, 101-101 이런식으로 입력이되서 동수 호수로 분리하고 세대관리번호 가져와서 넣어준다.
 			Generation generation = new Generation();
@@ -101,10 +93,6 @@ public class CarServiceImpl implements CarService{
 			String generationIdx = selectGenerationByBuildingAndNum(generation).getGenerationIdx();
 			searchMap.put("searchType", "generationInfo");
 			searchMap.put("generationInfo", generationIdx);
-			break;
-		case "wait" :
-			// 차량등록신청 대기건
-			searchMap.put("searchType", "wait");
 			break;
 		}
 		
