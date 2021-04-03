@@ -5,6 +5,7 @@ import java.util.Map;
 import com.kh.aboo.bdmin.management.model.vo.ApartApplication;
 import com.kh.aboo.bdmin.management.model.vo.Bdmin;
 import com.kh.aboo.user.apartment.model.vo.Apartment;
+import com.kh.aboo.user.manager.model.vo.Admin;
 
 public interface ManagementService {
 
@@ -12,10 +13,10 @@ public interface ManagementService {
 	
 	// [아파트 목록]
 	// 1. 페이징 화면 구현을 위한 list
-	Map<String, Object> selectApartList(int currentPage, String standard, String keyword);
+	Map<String, Object> selectApartList(int currentPage, Map<String, Object> searchMap);
 	
 	// 2. 서비스 신청서 보기 list
-	Map<String, Object> selectApartApplicationList(int currentPage, String standard, String keyword);
+	Map<String, Object> selectApartApplicationList(int currentPage, Map<String, Object> searchMap);
 	
 	// 3. 아파트 상세정보
 	Apartment selectApartment(String apartmentIdx);
@@ -30,6 +31,16 @@ public interface ManagementService {
 	// 2. 서비스 신청 처리
 	void procedureApartApplicationUpdate(ApartApplication apartApplication);
 	
-	//[입점신청서]
+	//[서비스신청서 작성]
 	int insertApartApplication(ApartApplication apartApplication);
+	
+	//[어드민 매니저 권한관리]
+	// 기본페이징
+	Map<String, Object> selectAdminList(int page, Map<String, Object> searchMap);
+	
+	int insertAdmin(Admin admin);
+
+	// 매니저 권한회수
+	int updateAdminIsDel(String managerIdx);
+
 }
