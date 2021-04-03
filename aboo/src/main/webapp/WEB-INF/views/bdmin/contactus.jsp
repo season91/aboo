@@ -86,32 +86,31 @@
 	                    <div class="col-md-2 pr-md-1">
 	                      <div class="form-group">
 	                        <label>아파트 이름(지역명과 같이 작성)</label>
-	                        <input type="text" class="form-control"name="aApartmentName" placeholder="예 : 반포자이, 산이리대주파크빌">
+	                        <input type="text" class="form-control"name="aApartmentName" placeholder="예 : 반포자이, 산이리대주파크빌" required="required">
 	                      </div>
 	                    </div>
 	                    <div class="col-md-2 px-md-1">
 	                      <div class="form-group">
 	                        <label>아파트 구분자(영문 3자)</label>
-	                        <input type="text" class="form-control" name="aSeparator" placeholder="예 : 반포자이 bxi " maxlength="3">
+	                        <input type="text" class="form-control" name="aSeparator" placeholder="예 : 반포자이 bxi " maxlength="3" required="required">
 	                      </div>
 	                    </div>
 	                    <div class="col-md-2 pl-md-1">
 	                      <div class="form-group">
 	                        <label for="exampleInputEmail1">아파트 주소</label>
-	                        <input type="button" class="form-control" value="주소 검색" onclick="searchAdress()">
-	                        <input type="tel" class="form-control" readonly="readonly" id="address" name="aApartmentAddress">
+	                        <input type="tel" class="form-control"  id="address" name="aApartmentAddress" onclick="searchAdress()" required="required">
 	                      </div>
 	                    </div>
 		                  <div class="col-md-2 px-md-1">
 	                      <div class="form-group">
 	                        <label>아파트 총 세대수</label>
-	                        <input type="text" class="form-control" name="aGenerationCnt" placeholder="아파트 총 세대수">
+	                        <input type="text" class="form-control" name="aGenerationCnt" placeholder="아파트 총 세대수" required="required">
 	                      </div>
 	                    </div>
 	                    <div class="col-md-2 px-md-1">
 	                      <div class="form-group">
 	                        <label>주차 가능 대수</label>
-	                        <input type="text" class="form-control" name="aParking" placeholder="아파트 주차가능 대수">
+	                        <input type="text" class="form-control" name="aParking" placeholder="아파트 주차가능 대수" required="required">
 	                      </div>
 	                    </div>
                     </div>
@@ -121,19 +120,19 @@
                   	<div class="col-md-3 pr-md-1">
                       <div class="form-group">
                         <label>신청 담당자 이름</label>
-                        <input type="text" class="form-control" name="aName" placeholder="김아부" >
+                        <input type="text" class="form-control" name="aName" placeholder="김아부" required="required">
                       </div>
                     </div>                 	
                      <div class="col-md-3 pr-md-1">
                       <div class="form-group">
                         <label>신청 담당자 연락처</label>
-                        <input type="tel" class="form-control" name="aTell" placeholder="-제외하고 입력하세요">
+                        <input type="tel" class="form-control" name="aTell" placeholder="-제외하고 입력하세요" required="required">
                       </div>
                     </div>                 	
                      <div class="col-md-3 pr-md-1">
                       <div class="form-group">
                         <label>신청 담당자 이메일</label>
-                        <input type="email" class="form-control" name="aEmail" placeholder="aboo@aboo.com" >
+                        <input type="email" class="form-control" name="aEmail" placeholder="aboo@aboo.com" required="required">
                       </div>
                     </div>                 	
                 	</div>

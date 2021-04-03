@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kh.aboo.bdmin.model.vo.Bdmin;
+import com.kh.aboo.bdmin.management.model.vo.Bdmin;
 import com.kh.aboo.bdmin.notice.model.service.NoticeService;
 import com.kh.aboo.bdmin.notice.model.vo.Notice;
 import com.kh.aboo.user.manager.model.vo.Admin;

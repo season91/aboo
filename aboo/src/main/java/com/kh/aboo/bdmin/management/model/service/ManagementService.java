@@ -1,12 +1,12 @@
-package com.kh.aboo.bdmin.model.service;
+package com.kh.aboo.bdmin.management.model.service;
 
 import java.util.Map;
 
-import com.kh.aboo.bdmin.model.vo.ApartApplication;
-import com.kh.aboo.bdmin.model.vo.Bdmin;
+import com.kh.aboo.bdmin.management.model.vo.ApartApplication;
+import com.kh.aboo.bdmin.management.model.vo.Bdmin;
 import com.kh.aboo.user.apartment.model.vo.Apartment;
 
-public interface BdminService {
+public interface ManagementService {
 
 	Bdmin selectBdminForAuth(Bdmin bdmin);
 	

@@ -22,9 +22,9 @@
 		<typeAlias type="com.kh.aboo.admin.car.model.vo.Car" alias="car"/>
 		<typeAlias type="com.kh.aboo.admin.car.model.vo.CarApplication" alias="carApplication"/>
 		<typeAlias type="com.kh.aboo.admin.schedule.model.vo.Schedule" alias="schedule"/>
-		<typeAlias type="com.kh.aboo.bdmin.model.vo.Bdmin" alias="bdmin"/>
+		<typeAlias type="com.kh.aboo.bdmin.management.model.vo.Bdmin" alias="bdmin"/>
 		<typeAlias type="com.kh.aboo.board.used.model.vo.UsedBrd" alias="usedBrd"/>
-		<typeAlias type="com.kh.aboo.bdmin.model.vo.ApartApplication" alias="apartApplication"/>
+		<typeAlias type="com.kh.aboo.bdmin.management.model.vo.ApartApplication" alias="apartApplication"/>
 		<typeAlias type="com.kh.aboo.user.apartment.model.vo.Apartment" alias="apartment"/>
 		<typeAlias type="com.kh.aboo.bdmin.notice.model.vo.Notice" alias="notice"/>
 	</typeAliases>

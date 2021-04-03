@@ -1,4 +1,4 @@
-package com.kh.aboo.bdmin.model.service.impl;
+package com.kh.aboo.bdmin.management.model.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -6,25 +6,25 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import com.kh.aboo.bdmin.model.repository.BdminRepository;
-import com.kh.aboo.bdmin.model.service.BdminService;
-import com.kh.aboo.bdmin.model.vo.ApartApplication;
-import com.kh.aboo.bdmin.model.vo.Bdmin;
+import com.kh.aboo.bdmin.management.model.repository.ManagementRepository;
+import com.kh.aboo.bdmin.management.model.service.ManagementService;
+import com.kh.aboo.bdmin.management.model.vo.ApartApplication;
+import com.kh.aboo.bdmin.management.model.vo.Bdmin;
 import com.kh.aboo.common.util.paging.Paging;
 import com.kh.aboo.user.apartment.model.vo.Apartment;
 
 @Service
-public class BdminServiceImpl implements BdminService{
+public class ManagementServiceImpl implements ManagementService{
 
-	private final BdminRepository bdminRepository;
+	private final ManagementRepository managementRepository;
 	
-	public BdminServiceImpl(BdminRepository bdminRepository) {
-		this.bdminRepository = bdminRepository;
+	public ManagementServiceImpl(ManagementRepository managementRepository) {
+		this.managementRepository = managementRepository;
 	}
 
 	@Override
 	public Bdmin selectBdminForAuth(Bdmin bdmin) {
-		Bdmin bdminInfo = bdminRepository.selectBdminForAuth(bdmin);
+		Bdmin bdminInfo = managementRepository.selectBdminForAuth(bdmin);
 		if(bdminInfo == null || !bdmin.getPassword().equals(bdminInfo.getPassword())) {
 			return null;
 		}
@@ -61,11 +61,11 @@ public class BdminServiceImpl implements BdminService{
 				.blockCnt(5)
 				.cntPerPage(10)
 				.type("apartment")
-				.total(bdminRepository.selectApartCnt(searchMap))
+				.total(managementRepository.selectApartCnt(searchMap))
 				.build();
 		System.out.println(paging.toString());
 		searchMap.put("paging", paging);
-		List<Apartment> apartList = bdminRepository.selectApartList(searchMap);
+		List<Apartment> apartList = managementRepository.selectApartList(searchMap);
 		searchMap.put("apartList", apartList);
 		
 		// TODO Auto-generated method stub
@@ -81,11 +81,11 @@ public class BdminServiceImpl implements BdminService{
 				.blockCnt(5)
 				.cntPerPage(10)
 				.type("apartment")
-				.total(bdminRepository.selectApartApplicationCnt(searchMap))
+				.total(managementRepository.selectApartApplicationCnt(searchMap))
 				.build();
 		System.out.println(paging.toString());
 		searchMap.put("paging", paging);
-		List<Apartment> apartApplicationList = bdminRepository.selectApartApplicationList(searchMap);
+		List<Apartment> apartApplicationList = managementRepository.selectApartApplicationList(searchMap);
 		searchMap.put("apartApplicationList", apartApplicationList);
 		
 		return searchMap;
@@ -93,29 +93,29 @@ public class BdminServiceImpl implements BdminService{
 
 	@Override
 	public Apartment selectApartment(String apartmentIdx) {
-		return bdminRepository.selectApartment(apartmentIdx);
+		return managementRepository.selectApartment(apartmentIdx);
 	}
 
 	@Override
 	public int updateApartment(Apartment apartment) {
-		return bdminRepository.updateApartment(apartment);
+		return managementRepository.updateApartment(apartment);
 	}
 
 	@Override
 	public ApartApplication selectApartApplication(String applicationIdx) {
-		return bdminRepository.selectApartApplication(applicationIdx);
+		return managementRepository.selectApartApplication(applicationIdx);
 	}
 
 
 
 	@Override
 	public int insertApartApplication(ApartApplication apartApplication) {
-		return bdminRepository.insertApartApplication(apartApplication);
+		return managementRepository.insertApartApplication(apartApplication);
 	}
 
 	@Override
 	public void procedureApartApplicationUpdate(ApartApplication apartApplication) {
-		bdminRepository.procedureApartApplicationUpdate(apartApplication);
+		managementRepository.procedureApartApplicationUpdate(apartApplication);
 		
 	}
 

@@ -242,7 +242,7 @@
 	          		alert("아이디와 비밀번호를 확인하세요")
 	            }else{
 	               <%-- 로그인에 성공하면 index페이지로 브라우저가 재요청 --%>
-	               location.href="/bdmin/apartment";
+	               location.href="/bdmin/management/apartment";
 	            }
 	         }).catch(error => {
 	            error.alertMessage();
