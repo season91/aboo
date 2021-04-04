@@ -16,7 +16,7 @@
 	          <li class="nav-item"><a href="/index" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
 	          <li class="nav-item "><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
-	          <li class="nav-item"><a class="nav-link" href="/board/info/infolist">Board</a></li>
+	          <li class="nav-item"><a class="nav-link" href="/board/info/listinfo">Board</a></li>
 	          <li class="nav-item active"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
 	          <c:choose>
 		          <c:when test="${sessionScope.generation == null}">

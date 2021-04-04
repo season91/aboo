@@ -197,7 +197,7 @@
 	          <div class="col-md-6">
 	            <form:form id = "modifyForm" action="/admin/mypage/modifyupdate" method="post" modelAttribute ="admin">
 	              <div class="form-group d-flex justify-content-between">
-	              	<div class="col-md-3  text-white d-flex justify-content-center align-items-center bg-sun">아이디</div>
+	              	<div class="col-md-3 text-6c757d d-flex justify-content-center align-items-center bg-sun">아이디</div>
 	                <input type="text" readonly="readonly" class="form-control" id = "id" value="${selectAdmin.id}" style="width: 26vw">
 	              </div>
 	              <div class="form-group">
@@ -210,12 +210,14 @@
 				    <div id = "pass" class = "validator"></div> <!--비밀번호 일치-->               
 	              </div>
 	              <div class="form-group d-flex justify-content-between">
-	            	<div class="col-md-3  text-white d-flex justify-content-center align-items-center bg-sun">휴대폰</div>
-	                <input type="text" class="form-control col-md-7" readonly="readonly" name = "tell" value = "${selectAdmin.tell}" ><button type="button" class="btn btn-primary px-xl-3 py-xl-1" data-toggle="modal" data-target="#tellModal">인증</button>              
+	            	<div class="col-md-3  text-6c757d d-flex justify-content-center align-items-center bg-sun">휴대폰</div>
+	                <input type="text" class="form-control col-md-7" readonly="readonly" name = "tell" value = "${selectAdmin.tell}" >
+	                <button type="button" class="btn btn-primary px-xl-3 py-xl-1 d-flex justify-content-center align-items-center" data-toggle="modal" data-target="#tellModal">인증</button>              
 	              </div>
 	              <div class="form-group d-flex justify-content-between">
-	              <div class="col-md-3  text-white d-flex justify-content-center align-items-center bg-sun">이메일</div>
-	                <input type="text" class="form-control col-md-7"  readonly="readonly" name = "email" value = "${selectAdmin.email}"><button type="button" class="btn btn-primary px-xl-3 py-xl-1" data-toggle="modal" data-target="#emailModal">인증</button>
+	              <div class="col-md-3  text-6c757d d-flex justify-content-center align-items-center bg-sun">이메일</div>
+	                <input type="text" class="form-control col-md-7"  readonly="readonly" name = "email" value = "${selectAdmin.email}">
+	                <button type="button" class="btn btn-primary px-xl-3 py-xl-1 d-flex justify-content-center align-items-center" data-toggle="modal" data-target="#emailModal">인증</button>
 	              </div>
 	              <div class="form-group mt-4 mb-4">
 	                <input type="submit" value="수정완료" class="btn btn-primary mt-2 py-3 px-5 col-sm-12" >
@@ -605,7 +607,7 @@
              if(text == 'fail'){ 
                 alert('실패')
              }else{ 
-                 alert('문자가 발송되었습니다.');
+                 alert('인증번호가 발송되었습니다.');
 
              }
           }).catch(error => {

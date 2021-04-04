@@ -111,7 +111,7 @@ public class AdminServiceImpl implements AdminService {
 			Generation generation = new Generation();
 			String[] buildingAndNum = keyword.split("-");
 			generation.setBuilding(buildingAndNum[0]);
-			generation.setNum(buildingAndNum[1]);		
+			generation.setNum(buildingAndNum[1]);
 			generation.setApartmentIdx(apartmentIdx);
 			
 			//null이면 0을 반환
@@ -120,6 +120,11 @@ public class AdminServiceImpl implements AdminService {
 			searchMap.put("searchType", "generation");
 			searchMap.put("generationIdx",generationIdx);
 			
+			break;
+			
+		case "building":
+			//키워드로 검색
+			searchMap.put("searchType", "building");			
 			break;
 
 		}

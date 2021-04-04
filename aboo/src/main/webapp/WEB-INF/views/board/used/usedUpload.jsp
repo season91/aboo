@@ -22,14 +22,20 @@
 	          <li class="nav-item"><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
 	          <li class="nav-item active"><a class="nav-link" href="/board/info/listinfo">Board</a></li>
 	          <li class="nav-item"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
-	          <c:choose>
-	          <c:when test="${sessionScope.generation == null}">
-	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
-	          </c:when>
-	          <c:when test="${sessionScope.generation != null}">
-	          <li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>	          
-	          </c:when>
-	          </c:choose>
+					
+					<c:choose>
+						<c:when
+							test="${sessionScope.generation == null and sessionScope.admin == null}">
+							<li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>
+						</c:when>
+						<c:when test="${sessionScope.generation != null}">
+							<li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>
+						</c:when>
+						<c:when test="${sessionScope.admin != null}">
+							<li class="nav-item cta"><a href="/admin/logout"
+								class="nav-link"><span>Logout</span></a></li>
+						</c:when>
+					</c:choose>
 	        </ul>
 	      </div>
 	    </div>
@@ -43,7 +49,7 @@
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
 
             <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Info</a></span> <span>Used</span></p>
+              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/board/info/listinfo">Info</a></span> <span><a href="/board/interior/intlist">Interior</a></span></span></p>
 	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Used</h1>
             </div>
           </div>

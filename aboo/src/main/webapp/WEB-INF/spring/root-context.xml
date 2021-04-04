@@ -9,7 +9,8 @@
 	<!-- 1. DB연동, 마이바티스 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		<property name="url" value="jdbc:oracle:thin:@abooDB_medium?TNS_ADMIN=C:\\CODE\\wallet\\Wallet_abooDB"/>
+		<!-- <property name="url" value="jdbc:oracle:thin:@abooDB_medium?TNS_ADMIN=C:\\CODE\\wallet\\Wallet_abooDB"/> -->
+		<property name="url" value="jdbc:oracle:thin:@abooDB_medium?TNS_ADMIN=/Users/choayoung91/Documents/CODE/wallet/Wallet_abooDB"/>
 		<property name="username" value="admin"/>
 		<property name="password" value="Aboo91939699"/>
 	</bean>

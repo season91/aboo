@@ -71,9 +71,11 @@ public class UsedServiceImpl implements UsedService {
 
 		List<UsedBrd> usedBrdList = usedRepository.selectUsedBrdList(searchMap);
 		List<FileVo> fileList = new ArrayList<FileVo>();
+		List<Integer> cmtList = new ArrayList<Integer>();
 
 		for (UsedBrd usedBrd : usedBrdList) {
 			fileList.add(usedRepository.selectFileWithusedIdx(usedBrd.getUsedIdx())); // null이 오는데 add에 왜담김 ??;;
+			cmtList.add(usedCmtRepository.selectUsedBrdCmtCnt(usedBrd.getUsedIdx()));
 			System.out.println("게시판"+ usedBrd.getUsedIdx());
 			for (FileVo fileVo : fileList) {
 				System.out.println("파일"+ fileVo.getTypeIdx());
@@ -82,6 +84,7 @@ public class UsedServiceImpl implements UsedService {
 		}
 
 		searchMap.put("fileList", fileList);
+		searchMap.put("cmtList", cmtList);
 		searchMap.put("usedBrdList", usedRepository.selectUsedBrdList(searchMap));
 		return searchMap;
 	}
