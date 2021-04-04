@@ -318,7 +318,7 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" id ="closeTell" class="btn btn-default" data-dismiss="modal">Close</button>
               <button type="button" class="btn btn-primary" onclick="certifiedPNum()">확인</button>
             </div>
           </div>
@@ -342,7 +342,7 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" id = "closeEmail" class="btn btn-default" data-dismiss="modal">Close</button>
               <button type="button" class="btn btn-primary"  onclick="certifiedNum()">확인</button>
             </div>
           </div>
@@ -687,6 +687,18 @@
 
    </script>
    
+   	<!-- 모달 Close 초기화 -->
+	<script type="text/javascript">
+	
+		$('#closeTell').click(function(e) {
+		   $('#certifiedPNum').val(" ");
+		});		
+		
+		$('#closeEmail').click(function(e) {
+			   $('#certifiedNum').val(" ");
+			});
+		
+	</script>
     
 </body>
 </html>

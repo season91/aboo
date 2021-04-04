@@ -17,7 +17,7 @@
       <div class="sidebar-wrapper">
         <div class="logo">
           <a href="/admin/index" class="simple-text logo-mini">
-            <img src="../../../resources/images/logo_w.png">
+            <img src="../../../resources/abooimg/logo_w.png">
           </a>
           <a href="/admin/index" class="simple-text logo-normal">
             ADMIN
@@ -67,7 +67,13 @@
             </a>
           </li>
           <li>
-            <a href="/admin/bdin">
+           <a href="/bdmin/notice/noticelist">
+              <i class="tim-icons icon-volume-98"></i>
+              <p>notice</p>
+            </a>
+          </li>
+          <li>
+            <a href="/bdmin/lgoin">
               <i class="tim-icons icon-key-25"></i>
               <p>BDIN</p>
             </a>
@@ -94,7 +100,7 @@
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navigation">
+         <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto ">
               <li class="dropdown nav-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
@@ -102,9 +108,6 @@
                     <img src="../../resources/img/anime3.png">
                   </div>
                   <b class="caret d-none d-lg-block d-xl-block"></b>
-                  <p class="d-lg-none">
-                    Log out / Login
-                  </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link">
@@ -115,7 +118,14 @@
                   </li>
                   <div class="dropdown-divider"></div>
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Log out</a>
+                  <c:choose>
+                  	<c:when test="${sessionScope.admin == null}">
+                    	<a href="/admin/login" class="nav-item dropdown-item">Log in</a>
+                  	</c:when>
+                  	<c:when test="${sessionScope.admin != null}">
+                    	<a href="/admin/logout" class="nav-item dropdown-item">Log out</a>
+                  	</c:when>
+                  </c:choose>
                   </li>
                 </ul>
               </li>
@@ -124,6 +134,7 @@
           </div>
         </div>
       </nav>
+      
       <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
