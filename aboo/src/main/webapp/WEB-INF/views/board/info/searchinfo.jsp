@@ -54,7 +54,7 @@
             <div class="card-body ">
              <div class=" d-flex justify-content-between">
              <h2 class="h4">정보 & 질문 게시판</h2>
-              <form action="${context}/board/info/search" class="search-form">
+              <form action="${context}/info/listinfo" class="search-form">
                 <div class="form-group">
                   <div class="icon">
                   	<button type="submit" class="icon-search bg-white border-0"></button>

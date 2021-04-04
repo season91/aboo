@@ -39,7 +39,7 @@ public class InfoController {
 
 	//희원 게시글 목록 페이지로 이동
 	@GetMapping("listinfo")
-	public String listInfo(@RequestParam(defaultValue = "1") int page, Model model,HttpSession session) {
+	public String listInfo(@RequestParam(defaultValue = "1") int page,Model model,HttpSession session) {
 		
 		Generation generation = (Generation) session.getAttribute("generation");
 		Admin admin = (Admin) session.getAttribute("admin");
@@ -47,23 +47,44 @@ public class InfoController {
 		if(admin != null) {
 			
 			String apartmentIdx = admin.getApartmentIdx();
-			model.addAllAttributes(infoService.selectInfoBoardList(page,apartmentIdx));
+			model.addAllAttributes(infoService.selectInfoBoardList(page, apartmentIdx));
+
+		}else {
 			
+			String apartmentIdx = generation.getApartmentIdx();
+			model.addAllAttributes(infoService.selectInfoBoardList(page,apartmentIdx));
+	
+		}
+		
+		return "board/info/listinfo";
+
+	}
+	
+	@GetMapping("search")
+	public String searchInfo(@RequestParam(defaultValue = "1") int page,String keyword,Model model,HttpSession session) {
+		
+		Generation generation = (Generation) session.getAttribute("generation");
+		Admin admin = (Admin) session.getAttribute("admin");
+		
+		if(admin != null) {
+			
+			String apartmentIdx = admin.getApartmentIdx();
+			model.addAllAttributes(infoService.selectInfoSearchList(page, apartmentIdx, keyword));
+
 			
 			
 		}else {
 			
 			String apartmentIdx = generation.getApartmentIdx();
 			model.addAllAttributes(infoService.selectInfoBoardList(page,apartmentIdx));
-			
-			
+
+				model.addAllAttributes(infoService.selectInfoSearchList(page, apartmentIdx, keyword));
+
 		}
 		
-		return "board/info/listinfo";
-		
-		
-		
-	};
+		return "board/info/searchinfo";
+
+	}
 	
 	//희원 게시글 상세페이지로 이동
 	@GetMapping("detail")
@@ -87,9 +108,7 @@ public class InfoController {
 	
 	//희원 게시글 업로드
 	@PostMapping("upload")
-	public String uploadBoard(
-			@RequestParam List<MultipartFile> files
-			,InfoBoard infoBoard
+	public String uploadBoard(InfoBoard infoBoard
 			,@SessionAttribute(name="generation", required = false)
 			Generation generation,
 			Model model
