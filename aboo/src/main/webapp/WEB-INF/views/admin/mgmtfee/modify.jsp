@@ -49,9 +49,9 @@
             </a>
           </li>
           <li>
-            <a href="/admin/vehicle">
+            <a href="/admin/car">
               <i class="tim-icons icon-bus-front-12"></i>
-              <p>Vehicle</p>
+              <p>Car</p>
             </a>
           </li>
           <li>
@@ -66,8 +66,14 @@
               <p>Chat</p>
             </a>
           </li>
+           <li>
+           <a href="/bdmin/notice/noticelist">
+              <i class="tim-icons icon-volume-98"></i>
+              <p>notice</p>
+            </a>
+          </li>
           <li>
-            <a href="/admin/bdin">
+            <a href="/bdmin/lgoin">
               <i class="tim-icons icon-key-25"></i>
               <p>BDIN</p>
             </a>
@@ -101,6 +107,7 @@
                   <div class="photo">
                     <img src="../../resources/img/anime3.png">
                   </div>
+                  <b class="caret d-none d-lg-block d-xl-block"></b>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link">

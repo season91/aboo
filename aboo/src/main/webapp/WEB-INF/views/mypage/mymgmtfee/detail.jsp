@@ -35,8 +35,8 @@
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
 
             <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/mypage/myalarm">My alarm</a></span><span class="mr-2"><a href="/mypage/myvehicle">My vehicle</a></span><span class="mr-2"><a href="/mypage/modifyinfo">My Information</a></span><span class="mr-2"><a href="/mypage/writelist">My write list</a></span></p>
-	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Management Fee detail</h1>
+              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/mypage/myalarm">My alarm</a></span><span class="mr-2"><a href="/mypage/mycar">My Car</a></span><span class="mr-2"><a href="/mypage/modifyinfo">My Information</a></span><span class="mr-2"><a href="/mypage/writelist/myinfolist">My write list</a></span></p>
+	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">My Management Fee detail</h1>
             </div>
           </div>
         </div>
@@ -86,21 +86,23 @@
 			              <li><strong>납기일 </strong> ${mgmtfee.dueDate }</li>
 			              <li>납부기한을 넘겨 납부하면 연체료가 일할계산되어 다음달 관리비에 포함됩니다.</li>
 			            </ul>
-				          <a class="btn btn-primary d-block px-3 py-3 mb-4 btn-payment" id = "check_module">결제하기</a>
+			            <c:if test="${mgmtfee.isPayment eq 0 }">
+			            	<a class="btn btn-primary d-block px-3 py-3 mb-4 btn-payment" id = "check_module">결제하기</a>
+			            </c:if>
 	            	</c:when>
 	            	<c:otherwise>
 	            		<span class="price"><span class="number">조회내역이 없습니다.</span></span>
 	            	</c:otherwise>
 	            </c:choose>
-		            
 	            </div>
 	          </div>
 	          <div class="row d-flex justify-content-center">
-	          	 <a href="/mypage/mymgmtfee" class="btn btn-primary btn-primary-2 p-3 px-xl-5 py-xl-3" style="background: linear-gradient(45deg, #56c8fb 0%, #627bed 100%); border: none;">목록으로</a>
-	          </div>
+		          	 <a href="/mypage/mymgmtfee" class="btn btn-primary btn-primary-2 p-3 px-xl-5 py-xl-3" style="background: linear-gradient(45deg, #56c8fb 0%, #627bed 100%); border: none;">목록으로</a>
+		          </div>
 	        </div>
 	      </div>
     	</div>
+    	
     </section>
 
     <footer class="ftco-footer ftco-bg-dark ftco-section">
