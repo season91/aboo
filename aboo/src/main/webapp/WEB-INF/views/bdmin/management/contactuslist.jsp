@@ -107,6 +107,7 @@
                   <div class="photo">
                     <img src="../../resources/img/anime3.png">
                   </div>
+                  <b class="caret d-none d-lg-block d-xl-block"></b>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link">
@@ -118,11 +119,11 @@
                   <div class="dropdown-divider"></div>
                   <li class="nav-link">
                   <c:choose>
-                  	<c:when test="${sessionScope.bdmin == null}">
-                    	<a href="/bdmin/logout" class="nav-item dropdown-item">Log in</a>
+                  	<c:when test="${sessionScope.admin == null}">
+                    	<a href="/admin/login" class="nav-item dropdown-item">Log in</a>
                   	</c:when>
-                  	<c:when test="${sessionScope.bdmin != null}">
-                    	<a href="/bdmin/logout" class="nav-item dropdown-item">Log out</a>
+                  	<c:when test="${sessionScope.admin != null}">
+                    	<a href="/admin/logout" class="nav-item dropdown-item">Log out</a>
                   	</c:when>
                   </c:choose>
                   </li>
@@ -133,7 +134,6 @@
           </div>
         </div>
       </nav>
-      
       
     <div class="content">
            <div class="row">
@@ -153,8 +153,8 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-lg-16 ml-auto mr-auto">
-                      <div class="row ">
+                    <div class="col-lg-12 ml-auto mr-auto">
+                      <div class="row " style="display: flex; justify-content: center">
                         <div class="col-md-3">
                           <button type="button" class="btn btn-success btn-block" id="search-button" data-toggle="modal" data-target="#nameModal">아파트 명으로 검색</button>
                         </div>

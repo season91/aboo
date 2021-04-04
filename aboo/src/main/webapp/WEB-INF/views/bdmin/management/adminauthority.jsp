@@ -106,13 +106,14 @@
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navigation">
+         <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto ">
               <li class="dropdown nav-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div class="photo">
                     <img src="../../resources/img/anime3.png">
                   </div>
+                  <b class="caret d-none d-lg-block d-xl-block"></b>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link">
@@ -124,11 +125,11 @@
                   <div class="dropdown-divider"></div>
                   <li class="nav-link">
                   <c:choose>
-                  	<c:when test="${sessionScope.bdmin == null}">
-                    	<a href="/bdmin/logout" class="nav-item dropdown-item">Log in</a>
+                  	<c:when test="${sessionScope.admin == null}">
+                    	<a href="/admin/login" class="nav-item dropdown-item">Log in</a>
                   	</c:when>
-                  	<c:when test="${sessionScope.bdmin != null}">
-                    	<a href="/bdmin/logout" class="nav-item dropdown-item">Log out</a>
+                  	<c:when test="${sessionScope.admin != null}">
+                    	<a href="/admin/logout" class="nav-item dropdown-item">Log out</a>
                   	</c:when>
                   </c:choose>
                   </li>
