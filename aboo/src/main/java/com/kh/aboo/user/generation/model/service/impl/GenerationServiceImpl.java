@@ -159,6 +159,11 @@ public class GenerationServiceImpl implements GenerationService {
 		generation.setPassword(encoder.encode(password));
 		return generationRepository.updateGenerationModify(generation);
 	}
+	
+	@Override
+	public int selectGenerationEmailCnt(Generation generation) {
+		return generationRepository.selectGenerationEmailCnt(generation);
+	}
 
 	@Override
 	public void authEmail(Generation generation, String authPathEmail) {
@@ -177,6 +182,11 @@ public class GenerationServiceImpl implements GenerationService {
 	@Override
 	public int updateGenerationEmail(Generation generation) {
 		return generationRepository.updateGenerationEmail(generation);
+	}
+	
+	@Override
+	public int selectGenerationTellCnt(Generation generation) {
+		return generationRepository.selectGenerationTellCnt(generation);
 	}
 
 	@Override

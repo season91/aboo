@@ -56,7 +56,7 @@
   
     <section class="ftco-section bg-light">
     <div class = "container">
-      <div class = "d-flex" style="height: 10vh; background-color:#fafafa !important ;margin-left: 5vw">
+      <div class = "d-flex" style="height: 10vh; background-color:#fafafa !important">
       <form action="/board/used/usedlist">  
             <input type="hidden" name="kind" value="trnsc">
 			<label> 거래 중 : <input type="radio" name="keyword" value="0"></label>
@@ -81,8 +81,8 @@
 							    <div class= "heading w-100" style="word-break: break-all; text-overflow: ellipsis;">
 							      <a  href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">
 						          		<c:choose>
-							          		<c:when test="${usedBrd.isTrnsc == 0}">[거래 중]</c:when>
-							          		<c:otherwise>[거래 완료]</c:otherwise>
+							          		<c:when test="${usedBrd.isTrnsc == 0}"><span style="color: blue;font-size: 1.5vw;">[거래 중]</span></c:when>
+							          		<c:otherwise><span style="color: red; font-size: 1.5vw;">[거래 완료]</span></c:otherwise>
 						          		</c:choose>
 							      ${usedBrd.usedTitle}
 							      </a>	

@@ -37,7 +37,10 @@ public enum ErrorCode {
 	CD_404("존재하지 않는 경로입니다."),
 	AH01("잘못된 인증 번호입니다","/findid"),
 	AH02("존재하지 않는 사용자입니다."),
-	AAH01("잘못된 인증 번호입니다","/admin/findid");
+	AAH01("잘못된 인증 번호입니다","/admin/findid"),
+	IDCHECK02("중복된 아이디 입니다. ","/admin/authority"),
+	AUTH08("이미 로그인된 사용자입니다.","/admin/index"),
+	AUTH09("이미 로그인된 사용자입니다.","/index");
 	
 	//result.jsp를 사용해 띄울 안내문구 
 	private String errMsg;

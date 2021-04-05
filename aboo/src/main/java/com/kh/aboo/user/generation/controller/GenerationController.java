@@ -246,9 +246,14 @@ public class GenerationController {
 	@ResponseBody
 	public String modifyEmailImpl(@RequestBody Generation generationInfo, HttpSession session) {
 
+		if (generationService.selectGenerationEmailCnt(generationInfo) > 0) {
+			return "fail";
+		}
+
 		String authPathEmail = UUID.randomUUID().toString().replace("-", "");
 		authPathEmail = authPathEmail.substring(0, 10);
 
+		
 		session.setAttribute("authPathEmail", authPathEmail);
 		
 		generationService.authEmail(generationInfo, authPathEmail);
@@ -281,13 +286,12 @@ public class GenerationController {
 	@ResponseBody
 	public String modifyTellImpl(@RequestBody Generation generationInfo, HttpSession session) {
 
-		System.out.println(generationInfo);
-		int res = generationService.authTell(generationInfo.getTell(), session);
-
-		if (res != 202) {
-			
+		
+		if (generationService.selectGenerationTellCnt(generationInfo) > 0) {
 			return "fail";
 		}
+		
+		generationService.authTell(generationInfo.getTell(), session);
 
 		return "success";
 	}

@@ -46,6 +46,20 @@
 		    <artifactId>spring-security-crypto</artifactId>
 		    <version>5.3.3.RELEASE</version>
 		</dependency>
+		
+		<!-- * 채팅을위한 웹소켓-->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-websocket</artifactId>
+		    <version>5.3.3</version>
+		</dependency>
+		<!-- * json -> object 사용을 위해 추가 -->
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20190722</version>
+		</dependency>
+		
 		<!-- 스프링 배치 -->
 		<!-- https://mvnrepository.com/artifact/org.springframework.batch/spring-batch-core -->
 		<dependency>

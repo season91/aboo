@@ -58,9 +58,17 @@ public interface GenerationRepository {
 	//정보수정
 	int updateGenerationModify(Generation generation);
 	
+	//이메일 보내기전 확인
+	@Select("select count(*) from TB_GENERATION where email = #{email}")
+	int selectGenerationEmailCnt(Generation generation);
+	
 	//이메일 정보수정
 	@Update("update TB_GENERATION set email = #{email} where GENERATION_IDX = #{generationIdx}")
 	int updateGenerationEmail(Generation generation);
+	
+	//휴대폰 보내기전 확인
+	@Select("select count(*) from TB_GENERATION where tell = #{tell}")
+	int selectGenerationTellCnt(Generation generation);
 	
 	//휴대폰 정보수정
 	@Update("update TB_GENERATION set TELL = #{tell} where GENERATION_IDX = #{generationIdx}")

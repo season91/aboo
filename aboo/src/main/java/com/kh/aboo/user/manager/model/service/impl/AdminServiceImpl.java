@@ -89,7 +89,13 @@ public class AdminServiceImpl implements AdminService {
 	public int insertGeneration(Generation generation, String apartmentIdx) {
 		String Separator = adminRepository.selectApartmentBySeparator(apartmentIdx); // 아파트 구분자
 		String id = Separator + generation.getBuilding() + "d" + generation.getNum() + "h";
+		
 		generation.setId(id);
+		
+		if (adminRepository.selectGenerationIdCnt(generation) > 0 ) {
+			throw new ToAlertException(ErrorCode.IDCHECK02); 
+		}
+			
 		generation.setPassword(encoder.encode("123"));
 		generation.setApartmentIdx(apartmentIdx);
 		return adminRepository.insertGeneration(generation);
@@ -204,6 +210,14 @@ public class AdminServiceImpl implements AdminService {
 		return adminRepository.updateAdminModify(admin);
 	}
 
+
+	//이메일 보내기전 수 확인
+	@Override
+	public int selectAdminEmailCnt(Admin admin) {
+		return adminRepository.selectAdminEmailCnt(admin);
+	}
+	
+
 	// 이메일 인증 이메일 보내기
 	@Override
 	public void authEmail(Admin admin, String authPathEmail) {
@@ -238,7 +252,16 @@ public class AdminServiceImpl implements AdminService {
 	public void updateDeleteGeneration(Generation generation) {
 		adminRepository.updateDeleteGeneration(generation);
 	}
+	
+	
+	//문자 보내기전  수 확인
+	@Override
+	public int selectAdminTellCnt(Admin admin) {
+		return adminRepository.selectAdminTellCnt(admin);
+	}
+	
 
+	//문자 발송
 	@Override
 	public int authTell(String tell, HttpSession httpSession) {
 
@@ -331,6 +354,7 @@ public class AdminServiceImpl implements AdminService {
 	public int updateAdminTell(Admin admin) {
 		return adminRepository.updateAdminTell(admin);
 	}
+
 
 
 }
