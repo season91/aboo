@@ -43,6 +43,9 @@ public interface GenerationService {
 	
 	//이메일 인증
 	void authEmail(Generation generation ,String authPathEmail);
+
+	//이메일 인증전 수 확인
+	int selectGenerationEmailCnt(Generation generation);
 	
 	//이메일 인증 성공시 이메일 업데이트
 	int updateGenerationEmail(Generation generation);
@@ -50,8 +53,12 @@ public interface GenerationService {
 	//세대원 수 확인
 	int selectGenerationWonCnt(Generation generation);
 	
+	//문자 인증번호
 	int authTell(String tell, HttpSession httpSession);
 	 
+	//문자 인증전 수 확인
+	int selectGenerationTellCnt(Generation generation);
+	
 	//휴대폰 인증 성공시 이메일 업데이트
 	int updateGenerationTell(Generation generation);
 	 

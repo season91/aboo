@@ -24,6 +24,9 @@ public interface AdminRepository {
 	@Insert("insert into TB_GENERATION(GENERATION_IDX,APARTMENT_IDX,ID,PASSWORD,BUILDING,NUM) values(SC_GENERATION_IDX.nextval,#{apartmentIdx},#{id},#{password},#{building},#{num})")
 	public int insertGeneration(Generation generation);
 	
+	@Select("select count(*) from TB_GENERATION where id = #{id}")
+	public int selectGenerationIdCnt(Generation generation);
+	
 	int selectContentCnt(Map<String,Object> searchMap);
 
 	//세대 추가 페이지 리스트
@@ -52,6 +55,10 @@ public interface AdminRepository {
 	//정보 업데이트
 	int updateAdminModify(Admin admin);
 	
+	//이메일 보내기전 확인
+	@Select("select count(*) from TB_MANAGER where email = #{email}")
+	int selectAdminEmailCnt(Admin admin);
+	
 	//이메일인증 업데이트 
 	@Update("update TB_MANAGER set email = #{email} where MANAGER_IDX = #{managerIdx}")
 	int updateAdminEmail(Admin admin);
@@ -67,4 +74,9 @@ public interface AdminRepository {
 	//휴대폰 정보수정
 	@Update("update TB_MANAGER set TELL = #{tell} where MANAGER_IDX = #{managerIdx}")
 	int updateAdminTell(Admin admin);
+	
+	//휴대폰번호 보내기전 확인
+	@Select("select count(*) from TB_MANAGER where tell = #{tell}")
+	int selectAdminTellCnt(Admin admin);
 }	
+

@@ -37,7 +37,10 @@ public interface AdminService {
 	
 
 	int updateAdminModify(Admin admin);
-
+	
+	//이메일 전 수 확인
+	int selectAdminEmailCnt(Admin admin);
+	
 	//이메일 인증
 	void authEmail(Admin admin ,String authPathEmail);
 	
@@ -49,7 +52,10 @@ public interface AdminService {
 
 	//세대 삭제
 	void updateDeleteGeneration(Generation generation);
-
+	
+	//문자 전 수 확인
+	int selectAdminTellCnt(Admin admin);
+	
 	//번호 인증
 	int authTell(String tell, HttpSession session);
 	
