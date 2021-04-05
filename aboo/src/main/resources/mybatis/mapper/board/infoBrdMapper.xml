@@ -18,4 +18,21 @@
 		) where rnum between #{queryStart} and #{queryEnd}
 	</select>
 	
+	<select id="selectInfoSearchList" resultType="infoBoard">
+		select *
+		from(
+			select rownum rnum, b.*
+			from(
+				select b_idx, apartment_idx, b_title, b_content, b_writer, b_wdate, b_isdel, b_isprivate 
+				from(
+					select b_idx, apartment_idx, b_title, b_content, b_writer, b_wdate, b_isdel, b_isprivate, replace(b_title, ' ', '') p 
+					from tb_inf_qst_brd
+					where apartment_idx = #{apartmentIdx} and b_isdel = 0) 
+				where p like '%'||#{keyword}||'%'
+				order by b_idx desc
+			) b
+		) where rnum between #{queryStart} and #{queryEnd}
+	
+	</select>
+	
 </mapper>
