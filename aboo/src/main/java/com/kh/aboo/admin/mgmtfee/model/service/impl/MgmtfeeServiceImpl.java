@@ -26,6 +26,7 @@ import com.kh.aboo.admin.mgmtfee.model.vo.MgmtfeeOverdue;
 import com.kh.aboo.common.code.ErrorCode;
 import com.kh.aboo.common.exception.ToAlertException;
 import com.kh.aboo.common.util.paging.Paging;
+import com.kh.aboo.user.generation.model.repository.GenerationRepository;
 import com.kh.aboo.user.generation.model.vo.Generation;
 
 @Service
@@ -314,7 +315,10 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 
 	@Override
 	public Generation selectGenerationByBuildingAndNum(Generation generation) {
-		// TODO Auto-generated method stub
+		if(mgmtfeeRepository.selectGenerationByBuildingAndNum(generation) == null) {
+			throw new ToAlertException(ErrorCode.SC03);
+			
+		}
 		return mgmtfeeRepository.selectGenerationByBuildingAndNum(generation);
 	}
 
