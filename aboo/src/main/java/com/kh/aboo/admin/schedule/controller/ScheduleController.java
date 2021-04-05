@@ -40,6 +40,7 @@ public class ScheduleController {
 			
 			String apartmentIdx = admin.getApartmentIdx();
 			model.addAllAttributes(scheduleService.selectScheduleList(page, apartmentIdx));
+			model.addAttribute("aptName",scheduleService.selectAptNameByIdx(apartmentIdx));
 			
 			return "admin/schedule";
 	}

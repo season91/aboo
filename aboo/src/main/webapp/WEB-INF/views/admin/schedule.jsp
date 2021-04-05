@@ -147,7 +147,7 @@
           <div class="col-md-12">
             <div class="card ">
               <div class="card-header d-flex justify-content-center mt-3">
-                <h3 class="card-title">위례 35단지 일정목록</h3>
+                <h3 class="card-title">${aptName} 일정목록</h3>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
