@@ -300,7 +300,7 @@
              throw new AsyncPageError(response.text());
           }).then((text) => {
              if(text == 'fail'){ 
-                alert('실패')
+                alert('중복된 이메일입니다.')
              }else{ 
                  alert('메일이 발송되었습니다.');
 
@@ -335,7 +335,7 @@
              throw new AsyncPageError(response.text());
           }).then((text) => {
              if(text == 'fail'){ 
-                alert('실패')
+                alert('중복된 휴대폰번호입니다.')
              }else{ 
                  alert('인증번호가 발송되었습니다.');
 

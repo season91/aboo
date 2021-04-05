@@ -232,9 +232,15 @@ public class AdminController {
 	@ResponseBody
 	public String modifyEmailImpl(@RequestBody Admin adminInfo, HttpSession session) {
 
+		if (adminService.selectAdminEmailCnt(adminInfo) > 0) {
+			return "fail";
+		}
+		
 		String authPathEmail = UUID.randomUUID().toString().replace("-", "");
 		authPathEmail = authPathEmail.substring(0, 10);
 
+		
+		
 		session.setAttribute("authPathEmail", authPathEmail);
 		adminService.authEmail(adminInfo, authPathEmail);
 
@@ -267,12 +273,12 @@ public class AdminController {
 	@ResponseBody
 	public String modifyTellImpl(@RequestBody Admin adminInfo, HttpSession session) {
 
-		int res = adminService.authTell(adminInfo.getTell(), session);
-
-		if (res != 202) {
-			
+		if (adminService.selectAdminTellCnt(adminInfo) > 0) {
 			return "fail";
 		}
+		
+		adminService.authTell(adminInfo.getTell(), session);
+
 
 		return "success";
 
