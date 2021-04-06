@@ -23,14 +23,8 @@ public class AdminIndexController {
 	
 	@GetMapping("admin/index")
 	public String admin(HttpSession session, Model model) {
-		Admin admin = (Admin) session.getAttribute("admin");
-		if(admin == null) {
-			return "admin/login";
-		}else {
-			//민희 공지사항 index로 보내기
-			List<Notice> noticeList = indexNoticeService.selectIndexNotice();
-			model.addAttribute("noticeList", noticeList);
-		}
+		List<Notice> noticeList = indexNoticeService.selectIndexNotice();
+		model.addAttribute("noticeList", noticeList);
 		
 		return "admin/index";
 	}
