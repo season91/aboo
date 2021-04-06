@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +26,9 @@ import com.kh.aboo.user.manager.model.vo.Admin;
 @Controller
 @RequestMapping("/bdmin")
 public class ManagementController {
+	
+	@Autowired
+	private PasswordEncoder encoder;
 	
 	private final ManagementService managementService;
 	
@@ -158,9 +163,9 @@ public class ManagementController {
 		String[] apartmentIndx = apartmentInfo.split("/");
 		// [0]은 아파트이름이고 [1]아파트 idx이다.
 		admin.setApartmentIdx(apartmentIndx[1]);
-		System.out.println(admin);
-		
+		admin.setPassword(encoder.encode(admin.getPassword()));
 		managementService.insertAdmin(admin);
+		
 		model.addAttribute("alertMsg", "권한부여가 되었습니다.");
 		model.addAttribute("url", "/bdmin/management/adminauthority");
 		return "common/result";

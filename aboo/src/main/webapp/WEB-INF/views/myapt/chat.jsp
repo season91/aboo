@@ -52,6 +52,7 @@
           <div class="col-md-12 pr-md-12">
               <div class="form-group">
                 <input type="text" class="form-control" id="name" readonly="readonly" placeholder="${sessionScope.generation.id}">
+                <input type="hidden" class="form-control" id="target" readonly="readonly" value="${sessionScope.generation.apartmentIdx}">
               </div>
               <div class="card-body" id="messageArea"  placeholder="대화내용이 없습니다.">
               </div>
@@ -150,7 +151,7 @@
 		// 메시지 전송
 		function sendMessage() {
 			let msg = {
-					target : "admin1",
+					target : $("#target").val(),
 					messeage : $("#message").val()
 			}
 			sock.send(JSON.stringify(msg));
