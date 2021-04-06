@@ -1,5 +1,6 @@
 package com.kh.aboo.admin.schedule.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.kh.aboo.admin.schedule.model.vo.Schedule;
@@ -15,6 +16,9 @@ public interface ScheduleService {
 	int updateSchedule(Schedule schedule);
 	
 	int deleteSchedule(String scheduleIdx);
+	
+	List<Schedule> selectScheduleByMonth();
+
 
 
 }

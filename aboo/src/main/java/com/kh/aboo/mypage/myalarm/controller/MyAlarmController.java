@@ -1,6 +1,10 @@
 package com.kh.aboo.mypage.myalarm.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -36,6 +40,23 @@ public class MyAlarmController {
 		
 		List<MyAlarm> myAlarmList = new ArrayList<>();
 		myAlarmList	= myAlarmService.selectIssue(generation.getGenerationIdx(), generation.getApartmentIdx());
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		for (MyAlarm myAlarm : myAlarmList) {
+			
+			try {
+				String issueDate = myAlarm.getIssueDate();
+				Date d = sdf.parse(issueDate);
+				issueDate = sdf.format(d);
+				myAlarm.setIssueDate(issueDate);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
 		
 
 		model.addAttribute("alarmList",myAlarmList);

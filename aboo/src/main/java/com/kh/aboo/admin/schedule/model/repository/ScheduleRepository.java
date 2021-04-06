@@ -37,5 +37,9 @@ public interface ScheduleRepository {
 	//일정 삭제
 	@Update("update tb_schedule set is_leave = 1 where schedule_idx = #{scheduleIdx}")
 	int deleteSchedule(String scheduleIdx);
+	
+	//admin index에 보여질 월별 일정내역
+	@Select("select * from tb_schedule where extract(month from sysdate) = extract(month from schedule_sdate)")
+	List<Schedule> selectScheduleByMonth();
 
 }
