@@ -27,6 +27,8 @@ public enum ErrorCode {
 	IQR01("QR코드 생성중 에러가 발생하였습니다.","/admin/car"),
 	IQR02("2건 다 등록되었거나 중복된 차량번호입니다.","/admin/car"),
 	IC01("이미 해당 세대에 등록된 차량번호입니다.", "/admin/car"),
+	SC03("존재하지 않는 세대정보입니다.", "/admin/mgmtfee"),
+	SC02("존재하지 않는 세대정보입니다.", "/admin/car"),
 	SC01("등록여부를 확인하세요.", "/admin/car"),
 	DC01("차량 삭제 중 에러가 발생했습니다.","/admin/car"),
 	IAC01("승인 처리 중 에러 발생","/admin/car/application"),

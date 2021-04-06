@@ -32,6 +32,11 @@ public class ParkingController {
 		this.parkingService = parkingService;
 		this.carApplicationValidator = carApplicationValidator;
 	}
+	
+	@GetMapping("/myapt/chat")
+	public void chatGenerationTest() {
+		
+	}
 
 	@InitBinder("carApplication")
 	public void initBinder(WebDataBinder webDataBinder) {
