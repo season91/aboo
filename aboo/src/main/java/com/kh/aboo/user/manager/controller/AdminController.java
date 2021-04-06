@@ -52,10 +52,10 @@ public class AdminController {
 	}
 
 	// 선영
-	@GetMapping("index")
+	/*@GetMapping("index")
 	public String admin() {
 		return "admin/index";
-	}
+	}*/
 
 	// 선영
 	@GetMapping("login")
