@@ -14,13 +14,13 @@
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
-     <div class="sidebar-wrapper">
+      <div class="sidebar-wrapper">
         <div class="logo">
-          <a href="/admin/index" class="simple-text logo-mini">
-            <img src="../../../resources/abooimg/logo_w.png">
+          <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+            CT
           </a>
-          <a href="/admin/index" class="simple-text logo-normal">
-            ADMIN
+          <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+            Creative Tim
           </a>
         </div>
         <ul class="nav">
@@ -66,8 +66,8 @@
               <p>Chat</p>
             </a>
           </li>
-          <li>
-           <a href="/admin/notice">
+         <li>
+           <a href="/bdmin/notice/noticelist">
               <i class="tim-icons icon-volume-98"></i>
               <p>notice</p>
             </a>
@@ -93,7 +93,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">ADMIN 페이지 입니다.</a>
+            <a class="navbar-brand" href="#pablo">Dashboard</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -102,12 +102,62 @@
           </button>
           <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto ">
+              <div class="search-bar input-group">
+                <!-- <input type="text" class="form-control" placeholder="Search...">
+      <div class="input-group-addon"><i class="tim-icons icon-zoom-split"></i></div> -->
+                <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal"><i class="tim-icons icon-zoom-split"></i></button>
+                <!-- You can choose types of search input -->
+              </div>
+              <!-- <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="SEARCH">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <i class="tim-icons icon-simple-remove"></i>
+          </button>
+        </div>
+
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div> -->
+              <li class="dropdown nav-item">
+                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                  <div class="notification d-none d-lg-block d-xl-block"></div>
+                  <i class="tim-icons icon-sound-wave"></i>
+                  <p class="d-lg-none">
+                    New Notifications
+                  </p>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
+                  <li class="nav-link">
+                    <a href="#" class="nav-item dropdown-item">Mike John responded to your email</a>
+                  </li>
+                  <li class="nav-link">
+                    <a href="#" class="nav-item dropdown-item">You have 5 more tasks</a>
+                  </li>
+                  <li class="nav-link">
+                    <a href="#" class="nav-item dropdown-item">Your friend Michael is in town</a>
+                  </li>
+                  <li class="nav-link">
+                    <a href="#" class="nav-item dropdown-item">Another notification</a>
+                  </li>
+                  <li class="nav-link">
+                    <a href="#" class="nav-item dropdown-item">Another one</a>
+                  </li>
+                </ul>
+              </li>
               <li class="dropdown nav-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div class="photo">
                     <img src="../../resources/img/anime3.png">
                   </div>
                   <b class="caret d-none d-lg-block d-xl-block"></b>
+                  <p class="d-lg-none">
+                    Log out
+                  </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link">
@@ -118,14 +168,7 @@
                   </li>
                   <div class="dropdown-divider"></div>
                   <li class="nav-link">
-                  <c:choose>
-                  	<c:when test="${sessionScope.admin == null}">
-                    	<a href="/admin/login" class="nav-item dropdown-item">Log in</a>
-                  	</c:when>
-                  	<c:when test="${sessionScope.admin != null}">
-                    	<a href="/admin/logout" class="nav-item dropdown-item">Log out</a>
-                  	</c:when>
-                  </c:choose>
+                    <a href="#" class="nav-item dropdown-item">Log out</a>
                   </li>
                 </ul>
               </li>
@@ -134,7 +177,20 @@
           </div>
         </div>
       </nav>
-      
+      <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="SEARCH">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i class="tim-icons icon-simple-remove"></i>
+              </button>
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- End Navbar -->
       <div class="content">
         <div class="row">
@@ -366,128 +422,39 @@
           <div class="col-lg-6 col-md-12">
             <div class="card ">
               <div class="card-header">
-                <h4 class="card-title"> Simple Table</h4>
+                <h4 class="card-title"> 공지사항</h4>
               </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table tablesorter " id="">
-                    <thead class=" text-primary">
-                      <th>
-                        Name
-                      </th>
-                      <th>
-                        Country
-                      </th>
-                      <th>
-                        City
-                      </th>
-                      <th class="text-center">
-                        Salary
-                      </th>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          Dakota Rice
-                        </td>
-                        <td>
-                          Niger
-                        </td>
-                        <td>
-                          Oud-Turnhout
-                        </td>
-                        <td class="text-center">
-                          $36,738
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Minerva Hooper
-                        </td>
-                        <td>
-                          Curaçao
-                        </td>
-                        <td>
-                          Sinaai-Waas
-                        </td>
-                        <td class="text-center">
-                          $23,789
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Sage Rodriguez
-                        </td>
-                        <td>
-                          Netherlands
-                        </td>
-                        <td>
-                          Baileux
-                        </td>
-                        <td class="text-center">
-                          $56,142
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Philip Chaney
-                        </td>
-                        <td>
-                          Korea, South
-                        </td>
-                        <td>
-                          Overland Park
-                        </td>
-                        <td class="text-center">
-                          $38,735
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Doris Greene
-                        </td>
-                        <td>
-                          Malawi
-                        </td>
-                        <td>
-                          Feldkirchen in Kärnten
-                        </td>
-                        <td class="text-center">
-                          $63,542
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Mason Porter
-                        </td>
-                        <td>
-                          Chile
-                        </td>
-                        <td>
-                          Gloucester
-                        </td>
-                        <td class="text-center">
-                          $78,615
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Jon Porter
-                        </td>
-                        <td>
-                          Portugal
-                        </td>
-                        <td>
-                          Gloucester
-                        </td>
-                        <td class="text-center">
-                          $98,615
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+              <c:choose>
+            	<c:when test="${!empty noticeList}">
+	              <div class="card-body">
+	                <div class="table-responsive">
+	                  <table class="table tablesorter " id="">
+	                    <thead class=" text-primary">
+	                      <th style="width: 20%;">공지번호</th>
+	                      <th style="width: 45%;">제목</th>
+	                      <th style="width: 20%;">작성일</th>
+	                      <th class="text-center" style="width: 15%;">작성자</th>
+	                    </thead>
+	                    <tbody>
+	                      <c:forEach items="${noticeList}" var="noticeList" begin="0" end="6">
+	                      	<tr>
+	                          <td>${noticeList.nNo}</td>
+	                          <td><a href="/bdmin/notice/noticedetail?nNo=${noticeList.nNo}" style="cursor: pointer; color: rgba(255, 255, 255, 0.8);">${noticeList.nTitle}</a></td>
+	                          <td>${noticeList.nRegDate}</td>
+	                          <td class="text-center">${noticeList.nWriter}</td>
+	                        </tr>
+	                      </c:forEach>
+	                    </tbody>
+	                  </table>
+	                </div>
+	              </div>
+            	</c:when>
+            	<c:otherwise>
+	              <div class="card-body">
+	                <div class="text-center" style="color: rgba(255, 255, 255, 0.8);">작성된 공지사항이 없습니다.</div>
+	              </div>
+            	</c:otherwise>
+            </c:choose>
             </div>
           </div>
         </div>
@@ -497,18 +464,13 @@
           <nav>
             <ul>
               <li>
-                <a href="https://www.creative-tim.com">
-                  Creative Tim
-                </a>
-              </li>
-              <li>
-                <a href="http://presentation.creative-tim.com">
+                <a href="/aboutus">
                   About Us
                 </a>
               </li>
               <li>
-                <a href="http://blog.creative-tim.com">
-                  Blog
+                <a href="/index">
+                  to generation
                 </a>
               </li>
             </ul>
@@ -518,7 +480,7 @@
             <script>
               document.write(new Date().getFullYear())
             </script> made with <i class="tim-icons icon-heart-2"></i> by
-            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+            <a href="https://www.creative-tim.com" target="_blank">aboo</a> for a better apartment.
           </div>
       </footer>
       </div>
