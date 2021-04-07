@@ -225,6 +225,7 @@
             </div>
           </div>
         </div>
+        
         <div class="row">
           <div class="col-lg-4">
             <div class="card card-chart">
@@ -239,6 +240,7 @@
               </div>
             </div>
           </div>
+       <!-- 
           <div class="col-lg-4">
             <div class="card card-chart">
               <div class="card-header ">
@@ -252,11 +254,37 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-4">
+           -->   
+      <input type="hidden" value="${usedList}" id="usedList">
+      <input type="hidden" value="${infoList}" id="infoList">
+      <input type="hidden" value="${intList}" id="intList">
+      <script type="text/javascript">
+      	
+      
+      
+      </script>
+          <div class="col-lg-8">
             <div class="card card-chart">
               <div class="card-header ">
-                <h5 class="card-category">Completed Tasks</h5>
-                <h3 class="card-title"><i class="tim-icons icon-send text-success "></i> 12,100K</h3>
+               <div class="row">
+                  <div class="col-sm-6 text-left">
+                    <h5 class="card-category">Community</h5>
+                    <h2 class="card-title">USED</h2>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+                      <label class="btn btn-sm btn-primary btn-simple active" id="0">
+                        <input type="radio" name="options" autocomplete="off" checked> USED
+                      </label>
+                      <label class="btn btn-sm btn-primary btn-simple " id="1">
+                        <input type="radio" name="options" autocomplete="off"> INFO
+                      </label>
+                      <label class="btn btn-sm btn-primary btn-simple " id="2">
+                        <input type="radio" name="options" autocomplete="off"> INT
+                      </label>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="card-body ">
                 <div class="chart-area">
@@ -266,6 +294,7 @@
             </div>
           </div>
         </div>
+        
         <div class="row">
            <div class="col-lg-6 col-md-12">
             <div class="card ">
@@ -408,6 +437,8 @@
           </li>
         </ul>
       </div>
+
+      
     </div>
     <!--   Core JS Files   -->
     <script src="../../../resources/js/admin/core/jquery.min.js"></script>
@@ -541,6 +572,11 @@
         demo.initDashboardPageCharts();
 
       });
+    </script>
+    
+    <script type="text/javascript">
+  	
+
     </script>
 </body>
 </html>

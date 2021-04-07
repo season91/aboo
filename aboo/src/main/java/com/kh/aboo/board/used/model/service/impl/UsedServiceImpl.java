@@ -27,13 +27,12 @@ public class UsedServiceImpl implements UsedService {
 
 	private final UsedRepository usedRepository;
 	private final UsedCmtRepository usedCmtRepository;
-	
+
 	public UsedServiceImpl(UsedRepository usedRepository, UsedCmtRepository usedCmtRepository) {
 		this.usedRepository = usedRepository;
 		this.usedCmtRepository = usedCmtRepository;
 	}
 
-	
 	public Map<String, Object> searchMap(String apartmentIdx, String kind, String keyword) {
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 
@@ -47,27 +46,26 @@ public class UsedServiceImpl implements UsedService {
 			break;
 		case "search":
 			// 키워드로 검색
-			searchMap.put("searchType", "search");			
+			searchMap.put("searchType", "search");
 			break;
 		case "trnsc":
 			// 키워드로 검색
-			searchMap.put("searchType", "trnsc");			
+			searchMap.put("searchType", "trnsc");
 			break;
 
 		}
 
 		return searchMap;
 	}
-	
-	
+
 	@Override
-	public Map<String, Object> selectUsedBrdList(int currentPage, String apartmentIdx,String kind, String keyword) {
+	public Map<String, Object> selectUsedBrdList(int currentPage, String apartmentIdx, String kind, String keyword) {
 		Map<String, Object> searchMap = searchMap(apartmentIdx, kind, keyword);
-		
+
 		Paging paging = Paging.builder().currentPage(currentPage).blockCnt(5).cntPerPage(6).type("board")
 				.total(usedRepository.selectUsedBrdCnt(searchMap)).build();
 
-		searchMap.put("paging",paging);
+		searchMap.put("paging", paging);
 
 		List<UsedBrd> usedBrdList = usedRepository.selectUsedBrdList(searchMap);
 		List<FileVo> fileList = new ArrayList<FileVo>();
@@ -76,9 +74,9 @@ public class UsedServiceImpl implements UsedService {
 		for (UsedBrd usedBrd : usedBrdList) {
 			fileList.add(usedRepository.selectFileWithusedIdx(usedBrd.getUsedIdx())); // null이 오는데 add에 왜담김 ??;;
 			cmtList.add(usedCmtRepository.selectUsedBrdCmtCnt(usedBrd.getUsedIdx()));
-			System.out.println("게시판"+ usedBrd.getUsedIdx());
+			System.out.println("게시판" + usedBrd.getUsedIdx());
 			for (FileVo fileVo : fileList) {
-				System.out.println("파일"+ fileVo.getTypeIdx());
+				System.out.println("파일" + fileVo.getTypeIdx());
 
 			}
 		}
@@ -135,24 +133,23 @@ public class UsedServiceImpl implements UsedService {
 		}
 
 	}
-	
+
 	@Override
 	public void updateUsedBrdFileModify(UsedBrd usedBrd, List<MultipartFile> files) {
-		
+
 		FileUtil fileUtil = new FileUtil();
-		Map<String,Object> commandMap = new HashedMap<>();
-		
+		Map<String, Object> commandMap = new HashedMap<>();
+
 		usedRepository.updateUsedBrdModify(usedBrd);
-		
 
 		try {
 			List<FileVo> fiList = fileUtil.fileUpload(files);
-			commandMap.put("usedIdx",usedBrd.getUsedIdx()); //게시물 번호
-			
+			commandMap.put("usedIdx", usedBrd.getUsedIdx()); // 게시물 번호
+
 			for (FileVo fileVo : fiList) {
 				System.out.println("파일이 도나염 ? @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + fileVo);
 				commandMap.put("fileVo", fileVo);
-				usedRepository.updateUsedBrdFileModify(commandMap); //게시물 사진
+				usedRepository.updateUsedBrdFileModify(commandMap); // 게시물 사진
 			}
 
 		} catch (Exception e) {
@@ -164,26 +161,41 @@ public class UsedServiceImpl implements UsedService {
 	public int insertUsedBrdCmtUpload(UsedCmt usedCmt) {
 		return usedCmtRepository.insertUsedBrdCmtUpload(usedCmt);
 	}
-	
+
 	@Override
 	public List<UsedCmt> selectUsedBrdCmt(String usedIdx) {
 		return usedCmtRepository.selectUsedBrdCmt(usedIdx);
 	}
-	
+
 	@Override
 	public int selectUsedBrdCmtCnt(String usedIdx) {
 		return usedCmtRepository.selectUsedBrdCmtCnt(usedIdx);
 	}
+
 	@Override
 	public int updateUsedBrdCmt(UsedCmt usedCmt) {
 		return usedCmtRepository.updateUsedBrdCmt(usedCmt);
 	}
+
 	@Override
 	public int updateUsedBrdCmtDelete(String usedCmtIdx) {
 		return usedCmtRepository.updateUsedBrdCmtDelete(usedCmtIdx);
 	}
+
 	@Override
 	public int updateUsedBrdCmtPrivate(String usedCmtIdx) {
 		return usedCmtRepository.updateUsedBrdCmtPrivate(usedCmtIdx);
+	}
+
+	public List<Map<String, Object>> selectUsedBrdYearCnt() {
+		return usedRepository.selectUsedBrdYearCnt();
+	}
+
+	public List<Map<String, Object>> selectInfoBrdYearCnt() {
+		return usedRepository.selectInfoBrdYearCnt();
+	}
+	
+	public List<Map<String, Object>> selectIntBrdYearCnt() {
+		return usedRepository.selectIntBrdYearCnt();
 	}
 }

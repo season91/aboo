@@ -37,5 +37,12 @@ public interface UsedService {
 	int updateUsedBrdCmtDelete(String usedCmtIdx);
 
 	int updateUsedBrdCmtPrivate(String usedCmtIdx);
+	
+	List<Map<String,Object>> selectUsedBrdYearCnt();
+	
+	List<Map<String,Object>> selectInfoBrdYearCnt();
+
+	List<Map<String,Object>> selectIntBrdYearCnt();
+
 
 }
