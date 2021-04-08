@@ -108,7 +108,7 @@ public class EchoHandler extends TextWebSocketHandler {
 		
 		//접속시에 접속자 정보 보여준다.
 		for (int i = 0; i < nameList.size(); i++) {
-			if(nameList.get(i).equals("admin1")) {
+			if(nameList.get(i).equals("100000")) {
 				//관리자라면 입장자 정보 받는다.
 				sessionList.get(i).sendMessage(new TextMessage("[안내] "+id+" 세대가 퇴장하셨습니다."));
 			}

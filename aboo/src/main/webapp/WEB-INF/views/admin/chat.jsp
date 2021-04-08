@@ -345,14 +345,14 @@
 			$('#message').val('')
 		});
 	
-		let sock = new SockJS("http://localhost:9393/echo/");
+		let sock = new SockJS("http://172.20.10.4:9393/echo/");
 		sock.onmessage = onMessage;
 		sock.onclose = onClose;
 		
 		// 메시지 전송
 		function sendMessage() {
 			let msg = {
-					target : $("#name").val(),
+					target : $("#name").val().trim(),
 					messeage : $("#message").val()
 			}
 			sock.send(JSON.stringify(msg));

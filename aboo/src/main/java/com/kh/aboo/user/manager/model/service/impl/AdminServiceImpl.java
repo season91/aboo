@@ -158,6 +158,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public void findIdEmail(Admin admin, String authPathId) {
+		System.out.println("메일오나용??");
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
 		body.add("mail-template", "findid");
 		body.add("id", admin.getId());
@@ -266,10 +267,10 @@ public class AdminServiceImpl implements AdminService {
 	public int authTell(String tell, HttpSession httpSession) {
 
 		String method = "POST";
-		String url = "/sms/v2/services//messages";
+		String url = "/sms/v2/services/ncp:sms:kr:265084223367:aboo/messages";
 		String timestamp = Long.toString(System.currentTimeMillis());
-		String accessKey = "";
-		String secretKey = "";
+		String accessKey = "LPnIQJHIKlcBN3dZOoNR";
+		String secretKey = "UoCz0OH0zgR5RA7YwiCnMPiVfOn7jJkwzL7K18kb";
 
 		String signature = makeSignature(url, timestamp, method, accessKey, secretKey);
 		HttpHeaders header = new HttpHeaders();
@@ -294,7 +295,7 @@ public class AdminServiceImpl implements AdminService {
 			String body = params.toString();
 
 			RequestEntity<String> request = RequestEntity
-					.post("https://sens.apigw.ntruss.com/sms/v2/services//messages").headers(header).body(body);
+					.post("https://sens.apigw.ntruss.com/sms/v2/services/ncp:sms:kr:265084223367:aboo/messages").headers(header).body(body);
 
 			ResponseEntity<String> response = http.exchange(request, String.class);
 			return response.getStatusCodeValue();
