@@ -18,7 +18,7 @@
             <img src="../../../resources/abooimg/logo_w.png">
           </a>
           <a href="/admin/index" class="simple-text logo-normal">
-            ADMIN
+            BDMIN
           </a>
         </div>
         <ul class="nav">
@@ -28,7 +28,7 @@
               <p>Mypage</p>
             </a>
           </li>
-          <li class="active">
+          <li>
             <a href="/admin/vote/makevote">
               <i class="tim-icons icon-tap-02"></i>
               <p>Vote</p>
