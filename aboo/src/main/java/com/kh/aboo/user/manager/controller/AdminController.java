@@ -67,7 +67,7 @@ public class AdminController {
 	@GetMapping("logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("admin");
-		return "redirect:/admin/login";
+		return "redirect:/admin/index";
 	}
 
 	// 선영

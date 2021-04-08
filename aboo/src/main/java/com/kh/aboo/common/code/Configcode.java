@@ -11,11 +11,8 @@ public enum Configcode {
 	// 아영 QR코드 관련 경로
 	//QRCODE_PATH("/resources/ckstorage/"),
 	//QRCODE_PULLPATH("C:\\CODE\\kh-aboo-dev\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\aboo\\resources\\ckstorage\\"),
-	//UPLOAD_PATH("C:\\final\\abooWorkspace\\aboo\\resources\\upload\\"), //선영 윈도우
-	///QRCODE_PATH("C:\\CODE\\kh-aboo-dev\\aboo\\resources\\qrcode\\"),
-	UPLOAD_PATH("/Users/choayoung91/Documents/CODE/kh-aboo/aboo/resources/upload/"), //아영 맥 
-	QRCODE_PATH("/Users/choayoung91/Documents/CODE/kh-aboo/aboo/resources/qrcode/"); //아영 맥
-	
+	UPLOAD_PATH("C:\\final\\abooWorkspace\\aboo\\resources\\upload\\"), //선영 윈도우
+	QRCODE_PATH("C:\\CODE\\kh-aboo-dev\\aboo\\resources\\qrcode\\"); //아영 윈도우, 저장할때 쓰는 경로
 	
 	public String desc;
 

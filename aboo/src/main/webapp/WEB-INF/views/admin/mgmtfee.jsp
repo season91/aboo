@@ -289,7 +289,7 @@
 	                <li><a href="/admin/${paging.type }?page=${paging.prev}&standard=${searchType}">&lt;</a></li>
 	                 <c:choose>
 	                	<c:when test="${paging.lastPage eq 0 }">
-	                		<li><a href="/admin/${paging.type }&standard=${searchType}">1</a></li>
+	                		<li><a href="/admin/${paging.type }&standard=${searchType}"><span>1</span></a></li>
 	                	</c:when>
 	                	<c:otherwise>
 		                 <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
@@ -322,7 +322,7 @@
 	                <li><a href="/admin/${paging.type }?page=${paging.prev}&standard=${searchType }&keyword=${keyword}">&lt;</a></li>
               	  <c:choose>
                 	<c:when test="${paging.lastPage eq 0 }">
-                		<li><a href="/admin/${paging.type }?standard=${searchType }&keyword=${keyword}">1</a></li>
+                		<li><a href="/admin/${paging.type }"><span>1</span></a></li>
                 	</c:when>
                 	<c:otherwise>
 	                 <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
