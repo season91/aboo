@@ -157,15 +157,19 @@
               <div class="card-header ">
                 <div class="row">
                   <div class="col-sm-6 text-left">
-                    <h5 class="card-category">Total Management Fee</h5>
-                    <h2 class="card-title">
-                    <script>
-		              document.write(new Date().getFullYear())
-		            </script>년 월별 관리비 고지서 발행 금액 </h2>
+                    <h5 class="card-category">Total Shipments</h5>
+                    <h2 class="card-title">Performance</h2>
                   </div>
                   <div class="col-sm-6">
                     <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
-                       <label class="btn btn-sm btn-primary btn-simple active" id="0"> (단위 : 만원)
+                      <label class="btn btn-sm btn-primary btn-simple active" id="0">
+                        <input type="radio" name="options" autocomplete="off" checked> Accounts
+                      </label>
+                      <label class="btn btn-sm btn-primary btn-simple " id="1">
+                        <input type="radio" name="options" autocomplete="off"> Purchases
+                      </label>
+                      <label class="btn btn-sm btn-primary btn-simple " id="2">
+                        <input type="radio" name="options" autocomplete="off"> Sessions
                       </label>
                     </div>
                   </div>
@@ -174,7 +178,6 @@
               <div class="card-body">
                 <div class="chart-area">
                   <canvas id="chartBig1"></canvas>
-                  <input type="hidden" id="list" value="${list}">
                 </div>
               </div>
             </div>
@@ -213,6 +216,11 @@
       <input type="hidden" value="${usedList}" id="usedList">
       <input type="hidden" value="${infoList}" id="infoList">
       <input type="hidden" value="${intList}" id="intList">
+      <script type="text/javascript">
+      	
+      
+      
+      </script>
           <div class="col-lg-8">
             <div class="card card-chart">
               <div class="card-header ">

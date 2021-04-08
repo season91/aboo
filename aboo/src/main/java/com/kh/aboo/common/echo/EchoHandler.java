@@ -89,6 +89,7 @@ public class EchoHandler extends TextWebSocketHandler {
 		for (int i = 0; i < sessionList.size(); i++) {
 			// 닉네임이 같다면 해당 i번째 세션에 보내준다
 			if(nameList.get(i).equals(target)  || sessionList.get(i).equals(session) || nameList.get(i).equals(adminId)) {
+				System.out.println(i);
 				sessionList.get(i).sendMessage(new TextMessage(nameList.get(fromIdx)+" : "+msg));
 			}
 			
