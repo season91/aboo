@@ -156,6 +156,7 @@ demo = {
       }
     };
 
+	/*아영 관리비 그래프 틀*/
     gradientChartOptionsConfigurationWithTooltipPurple = {
       maintainAspectRatio: false,
       legend: {
@@ -182,8 +183,8 @@ demo = {
             zeroLineColor: "transparent",
           },
           ticks: {
-            suggestedMin: 60,
-            suggestedMax: 125,
+            suggestedMin: 1000,
+            suggestedMax: 2000,
             padding: 20,
             fontColor: "#9a9a9a"
           }
@@ -435,10 +436,16 @@ demo = {
 
     });
 
+	/* 아영 그래프 내용 부분*/
+	let list = document.querySelector('#list').value;
+	list = list.replace('[','');
+	list = list.replace(']','');
+	list = list.replace(' ','');
+	list = list.split(',');
 
 
     var chart_labels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-    var chart_data = [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100];
+    var chart_data = list;
 
 
     var ctx = document.getElementById("chartBig1").getContext('2d');
