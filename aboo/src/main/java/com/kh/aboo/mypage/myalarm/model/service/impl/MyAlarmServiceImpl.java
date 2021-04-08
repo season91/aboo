@@ -133,7 +133,7 @@ public class MyAlarmServiceImpl implements MyAlarmService{
 		JSONArray messages = new JSONArray();
 		try {
 			params.put("type", "SMS");
-			params.put("from", "");
+			params.put("from", "01080034094");
 			params.put("content", "[ABOO:아파트를 부탁해] " + issueContent);
 			params2.put("to", tell);
 			messages.put(params2);
