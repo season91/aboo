@@ -59,6 +59,12 @@
           			<i class="fas fa-clock align-self-center mr-2"></i>
           			<span>${infoBoard.bWdate}</span>
           			<c:choose>
+          			 	<c:when test="${sessionScope.admin != null}">
+		          			<div class="d-flex justify-content-end ml-4">
+		          				<a onclick="privateInfo()" class="mr-4" style="cursor: pointer;"><i class="fas fa-ban" style="color: #666666;"></i></a>
+				            	<a href="/board/info/listinfo" class="mr-4"><i class="fas fa-list-ul" style="color: #666666;"></i></a>
+				            </div>
+		            	</c:when>
           				<c:when test="${sessionScope.generation.generationIdx == infoBoard.generationIdx}">
 		          			<div class="d-flex justify-content-end ml-4">
 				            	<a href="${context}/board/info/editinfo?bIdx=${infoBoard.bIdx}" class="mr-4"><i class="fas fa-pen" style="color: #666666;"></i></a>
@@ -66,12 +72,7 @@
 				            	<a href="/board/info/listinfo" class="mr-4"><i class="fas fa-list-ul" style="color: #666666;"></i></a>
 				            </div>
 		            	</c:when>
- 		            	<c:when test="${sessionScope.admin != null}">
-		          			<div class="d-flex justify-content-end ml-4">
-		          				
-				            	<a href="/board/info/listinfo" class="mr-4"><i class="fas fa-list-ul" style="color: #666666;"></i></a>
-				            </div>
-		            	</c:when>
+
 		            	<c:otherwise>
 		            		<div class="d-flex justify-content-end ml-4">
 		          				
@@ -115,7 +116,7 @@
 		                    	</c:when>
 		                    	<c:when test="${generation.generationIdx == infoCmtList.generationIdx}">
 		                    		<p>
-		                    			<a onclick="infoCmtEdit();" class="mr-4"><i class="fas fa-pen" style="color: #666666;"></i></a>
+		                    			<a onclick="infoCmtEdit(${infoCmtList.cIdx});" class="mr-4"><i class="fas fa-pen" style="color: #666666;"></i></a>
 				            			<a onclick="infoCmtdel(${infoCmtList.cIdx});" class="mr-4"><i class="fas fa-trash" style="color: #666666;"></i></a>
 		                    		</p>
 		                    	</c:when>
@@ -128,7 +129,7 @@
                   </c:choose>
                 </li>
                 
-                <li class="comment" id="infoCmtEdit" style="display:none">
+                <li class="comment" id="infoCmtEdit${infoCmtList.cIdx}" style="display:none">
                   <div class="vcard bio">
                    <img src="../../../../resources/abooimg/user.jpg" alt="Image placeholder">
                   </div>
@@ -138,14 +139,14 @@
                     
                     <form action="${context}/board/info/infocmtedit" method="post" class="p-5 bg-light">
 
-		                  <div class="form-group">
+
 							<input type="hidden" name="bIdx" value="${infoBoard.bIdx}">
 							<input type="hidden" name="cIdx" value="${infoCmtList.cIdx}">
 		                    <textarea name="cContent" id="message" cols="30" rows="5" class="form-control">${infoCmtList.cContent}</textarea>
-		                  </div>
-		                  <div class="form-group">
+
+		                  <p>
 		                    <input type="submit" value="등록하기" class="btn py-3 px-4 btn-primary">
-		                  </div>
+		                  </p>
 	
 	                </form>
                   </div>
@@ -216,6 +217,7 @@
                 <li><a href="/myapt/schedule" class="py-2 d-block">MyApt</a></li>
                 <li><a href="/baord/info/listinfo" class="py-2 d-block">Board</a></li>
                 <li><a href="/mypage/modifyinfo" class="py-2 d-block">MyPage</a></li>
+              	<li><a href="/bdmin/contactus" class="py-2 d-block">Contact us</a></li>
               </ul>
             </div>
           </div>
@@ -319,7 +321,7 @@
 	  
 	  let bIdx = ${infoBoard.bIdx};
 		if(confirm("댓글을 비공개 처리 하시겠습니까?")){
-			fetch("/board/info/infocmtdel?cIdx=" + cIdx,{
+			fetch("/board/info/infocmtprivate?cIdx=" + cIdx,{
 	  			method:"GET"
 	  		})
 	  		.then(response => response.text())
@@ -338,10 +340,10 @@
 	  
   }
   
-  let infoCmtEdit = () => {
+  let infoCmtEdit = (cIdx) => {
 	  
-	  document.querySelector('#infoCmtEdit').style.display = 'block';
-	  document.querySelector('#infoCmt').style.display = 'none';
+	  document.querySelector('#infoCmtEdit' + cIdx).style.display = 'block';
+	  document.querySelector('#infoCmt' + cIdx).style.display = 'none';
 	  
   }
   

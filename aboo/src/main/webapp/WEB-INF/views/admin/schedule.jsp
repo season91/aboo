@@ -17,7 +17,7 @@
       <div class="sidebar-wrapper">
         <div class="logo">
           <a href="/admin/index" class="simple-text logo-mini">
-            <img src="../../../resources/images/logo_w.png">
+            <img src="../../../resources/abooimg/logo_w.png">
           </a>
           <a href="/admin/index" class="simple-text logo-normal">
             ADMIN
@@ -25,51 +25,57 @@
         </div>
         <ul class="nav">
           <li >
-            <a href="./dashboard.html">
+            <a href="/admin/mypage/modifyinfo">
               <i class="tim-icons icon-badge"></i>
               <p>Mypage</p>
             </a>
           </li>
           <li>
-            <a href="./dashboard.html">
+            <a href="/admin/vote/makevote">
               <i class="tim-icons icon-tap-02"></i>
               <p>Vote</p>
             </a>
           </li>
           <li>
-            <a href="./icons.html">
+            <a href="/admin/authority">
               <i class="tim-icons icon-single-02"></i>
               <p>Authority</p>
             </a>
           </li>
           <li>
-            <a href="./map.html">
+            <a href="/admin/mgmtfee">
               <i class="tim-icons icon-chart-bar-32"></i>
-              <p>Mgmtfee</p>
+              <p>Management Fee</p>
             </a>
           </li>
           <li>
-            <a href="./notifications.html">
+            <a href="/admin/car">
               <i class="tim-icons icon-bus-front-12"></i>
-              <p>Vehicle</p>
+              <p>Car</p>
             </a>
           </li>
-          <li class="active ">
-            <a href="./user.html">
+          <li class="active">
+            <a href="/admin/schedule/addschedule">
               <i class="tim-icons icon-calendar-60"></i>
               <p>Schedule</p>
             </a>
           </li>
           <li>
-            <a href="./tables.html">
+            <a href="/admin/chat">
               <i class="tim-icons icon-chat-33"></i>
               <p>Chat</p>
             </a>
           </li>
+         <li>
+           <a href="/bdmin/notice/noticelist">
+              <i class="tim-icons icon-volume-98"></i>
+              <p>notice</p>
+            </a>
+          </li>
           <li>
-            <a href="./rtl.html">
+            <a href="/bdmin/login">
               <i class="tim-icons icon-key-25"></i>
-              <p>BDIN</p>
+              <p>BDMIN</p>
             </a>
           </li>
         </ul>
@@ -77,7 +83,7 @@
     </div>
     <div class="main-panel">
       <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent   ">
+     <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent   ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
             <div class="navbar-toggle d-inline">
@@ -87,35 +93,42 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Table List</a>
+            <a class="navbar-brand" href="#pablo">SCHEDULE</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
-            <div class="collapse navbar-collapse" id="navigation">
+             <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto ">
               <li class="dropdown nav-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div class="photo">
-                    <img src="../../resources/img/anime3.png">
+                    <img src="../../../../resources/img/anime3.png">
                   </div>
                   <b class="caret d-none d-lg-block d-xl-block"></b>
                   <p class="d-lg-none">
-                    Log out / Login
+                    Log out
                   </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Profile</a>
+                    <a href="${context }/admin/mypage/modifyinfo" class="nav-item dropdown-item">Profile</a>
                   </li>
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Settings</a>
+                    <a href="${context }/admin/chat" class="nav-item dropdown-item">1:1 chat</a>
                   </li>
                   <div class="dropdown-divider"></div>
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Log out</a>
+                   <c:choose>
+                  	<c:when test="${sessionScope.admin == null}">
+                    	<a href="/admin/login" class="nav-item dropdown-item">Log in</a>
+                  	</c:when>
+                  	<c:when test="${sessionScope.admin != null}">
+                    	<a href="/admin/logout" class="nav-item dropdown-item">Log out</a>
+                  	</c:when>
+                  </c:choose>
                   </li>
                 </ul>
               </li>
@@ -144,7 +157,7 @@
           <div class="col-md-12">
             <div class="card ">
               <div class="card-header d-flex justify-content-center mt-3">
-                <h3 class="card-title">위례 35단지 일정목록</h3>
+                <h3 class="card-title">${aptName} 일정목록</h3>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
@@ -161,25 +174,20 @@
                       </th>
                       </thead>
                     <tbody>
-                      <tr>
-                      	<td id="startDate">
-                           2021.03.10
-                        </td>
-                        <td id="endDate">
-                           2021.03.10
-                        </td>
+                    <c:forEach items="${schedule}" var="schedule" varStatus="status">
+                      <tr id="schedule${status.index}">
+                      	<td id="startDate">${schedule.scheduleSdate}</td>
+                        <td id="endDate">${schedule.scheduleEdate}</td>
                         <td id="schContent">
-                        	<span class="d-flex justify-content-between">
-                           아파트 도색작업
-                           <span style="font-size:1.1vw">
-                           <i class="tim-icons icon-pencil mr-2"></i>
-                           <i class="tim-icons icon-trash-simple"></i>
+                        	<span class="d-flex justify-content-between">${schedule.scheduleCon}<span style="font-size:1.1vw">
+                            <a onclick="modifyschedule(${schedule.scheduleIdx},this);"><i class="tim-icons icon-pencil mr-2"></i></a>
+                            <a onclick="deleteschedule(${schedule.scheduleIdx});"><i class="tim-icons icon-trash-simple"></i></a>
                         	</span>
                         	</span>
                         </td>
                         
                       </tr>
-
+					</c:forEach>
                     </tbody>
                   </table>
                   <div class="card-footer d-flex justify-content-end">
@@ -190,6 +198,30 @@
               </div>
                
              
+       </div>
+       <div class="row mt-5 d-flex card-body ">
+             <div class="col text-center">
+               <div class="block-27">
+                 <ul>
+                   <li><a href="${context}/admin/${paging.type}/addschedule">&lt;&lt;</a></li>
+               		 <li><a href="${context}/admin/${paging.type}/addschedule?page=${paging.prev}">&lt;</a></li>
+		                <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
+		                   <c:choose>
+		                      <c:when test="${paging.currentPage eq page}">
+		                         <li class="active"><a href="${context}/admin/${paging.type}/addschedule?page=${page}">${page}</a></li>
+		                      </c:when>
+		                      <c:otherwise>
+		                         <li><a href="${context}/admin/${paging.type}/addschedule?page=${page}">${page}</a></li>
+		                      </c:otherwise>
+		                   </c:choose>
+		              	 </c:forEach>
+               		  <li><a href="${context}/admin/${paging.type}/addschedule?page=${paging.next}">&gt;</a></li>
+               		<li><a href="${context}/admin/${paging.type}/addschedule?page=${paging.lastPage}">&gt;&gt;</a></li>
+                 </ul>
+               </div>
+             </div>
+           </div>
+       </div>
        </div>
        </div>
             </div>
@@ -259,7 +291,7 @@
 	                           	 <h6 class="font-weight-bold">일정 내용</h6>
 	                            </div>
 	                            <div class="col-sm-9">
-	                    	 	 	<textarea class="form-control col-sm-9 bg-white text-dark rounded"  id="scheduleCon" name="scheduleCon" style="height: 300px; resize: none;" wrap="hard"  cols="15"></textarea>
+	                    	 	 	<textarea class="form-control form-control-user h6 rounded bg-white text-dark"  id="scheduleCon" name="scheduleCon"></textarea>
 	                   			</div>
 	                   		</div>
                     </div>
@@ -267,6 +299,52 @@
                         <button type="submit" class="btn btn-primary">추가하기</button>
                    </div>
                 </form>
+            </div>
+        </div>
+     </div>
+     
+     <!-- 일정수정 모달창 -->
+       <div class="modal bg-lg" id="schedule_modify_modal">
+ 		<div class="modal-dialog" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675);" role="document">
+        	<div class="modal-content modal-content border-white" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675);">
+            	<div class="modal-header" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675);">
+                	<h5 class="modal-title text-light" >일정 수정</h5>
+                    <button type="button" id="btn_modify_close" class="close">
+                    <span aria-hidden="true">&times;</span></button>
+                </div>
+ 
+                	<div class="modal-body">        	
+                    		<div class="form-group row">
+                            	<div class="col-sm-3 mb-3 mb-sm-0 d-flex align-items-center">
+                                	<h6 class="font-weight-bold">일정 시작</h6>
+                                </div>
+                                <div class="col-sm-9">
+                                	<input type="date" name="scheduleSdate" id="modifyScheduleSdate" class="form-control form-control-user h6 rounded bg-white text-dark"></input>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                            	<div class="col-sm-3 mb-3 mb-sm-0 d-flex align-items-center">
+                                	<h6 class="font-weight-bold">일정 마감</h6>
+                                </div>
+                                <div class="col-sm-9">
+                                	<input type="date" name="scheduleEdate" id="modifyScheduleEdate"class="form-control form-control-user h6 rounded bg-white text-dark"></input>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                            	<div class="col-sm-3 mb-3 mb-sm-0 d-flex align-items-center">
+	                            
+	                           	 <h6 class="font-weight-bold">일정 내용</h6>
+	                            </div>
+	                            <div class="col-sm-9">
+	                    	 	 	<textarea class="form-control  form-control-user h6 rounded bg-white text-dark"  id="modifyScheduleCon" name="scheduleCon" ></textarea>
+	                   			</div>
+	                   			<input type="hidden" id="scheduleIdx">
+	                   		</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="modify();" class="btn btn-primary">수정하기</button>
+                   </div>
+
             </div>
         </div>
      </div>
@@ -418,7 +496,92 @@
     
 	//일정 수정
 	
+	let modifyschedule = (scheduleIdx,sch) => {
+    	$('#schedule_modify_modal').show();
+
+    	
+    	let schedule = sch.parentElement.parentElement.parentElement.parentElement;
+    	let scheduleSdate = schedule.cells[0].innerHTML;
+    	let scheduleEdate = schedule.cells[1].innerHTML;
+    	let scheduleCon = schedule.cells[2].innerText;
+
+    	document.querySelector('#modifyScheduleSdate').value = scheduleSdate;
+    	document.querySelector('#modifyScheduleEdate').value = scheduleEdate;
+    	document.querySelector('#modifyScheduleCon').value = scheduleCon;
+    	document.querySelector('#scheduleIdx').value = scheduleIdx;
+    	
+    		
+    }
+	
+	let modify = () =>{
+		
+		let scheduleIdx = document.querySelector('#scheduleIdx').value;
+		let scheduleSdate = document.querySelector('#modifyScheduleSdate').value;
+		let scheduleEdate = document.querySelector('#modifyScheduleEdate').value;
+		let scheduleCon = document.querySelector('#modifyScheduleCon').value;
+		scheduleCon = scheduleCon.replace(/(?:\r\n|\r|\n)/g,'');
+		
+		
+		if(confirm("일정을 수정하시겠습니까?")){
+			let paramObj = new Object();
+	        paramObj.scheduleIdx = scheduleIdx;
+	        paramObj.scheduleSdate = scheduleSdate;
+	        paramObj.scheduleEdate = scheduleEdate;
+	        paramObj.scheduleCon = scheduleCon;
+	        let headerObj = new Headers();
+	        headerObj.append("content-type","application/json");
+			fetch("/admin/schedule/modifyschedule" ,{
+	  			method:"post",
+	  			headers:headerObj,
+	  	        body:JSON.stringify(paramObj)
+	  		})
+	  		.then(response => response.text())
+	  		.then(text => {
+	  			if(text == 'success'){
+	  				alert("일정이 수정 되었습니다.");
+					location.href = "/admin/schedule/addschedule";
+	  			}else{
+	  				alert("일정 수정 중 에러가 발생하였습니다.");
+	  				location.href = "/admin/schedule/addschedule";
+	  			}
+	  		})
+		}else{
+			alert("취소되었습니다.");
+		}
+		
+		
+	}
+	
+	
+	
 	//일정 삭제
+	
+	let deleteschedule = (scheduleIdx) => {
+
+		if(confirm("일정을 삭제하시겠습니까?")){
+			fetch("/admin/schedule/deleteschedule?scheduleIdx=" + scheduleIdx,{
+	  			method:"GET"
+	  		})
+	  		.then(response => response.text())
+	  		.then(text => {
+	  			if(text == 'success'){
+	  				alert("일정이 삭제되었습니다.");
+					location.href = "/admin/schedule/addschedule";
+	  			}else{
+	  				alert("일정 삭제 중 에러가 발생했습니다.");
+	  				location.href = "/admin/schedule/addschedule";
+	  			}
+	  		})
+		}else{
+			alert("취소되었습니다.");
+		}
+	  
+  }
+	
+	$('#btn_modify_close').click(function(e) {
+
+	    $('#schedule_modify_modal').hide();
+	});
     
     </script>
 </body>

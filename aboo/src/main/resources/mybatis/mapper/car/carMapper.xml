@@ -10,13 +10,13 @@
 		<where>
 			<choose>
 				<when test="searchType == 'apartmentIdx'">
-					apartment_idx = #{apartmentIdx}
+					apartment_idx = #{apartmentIdx}  and is_del = 0 
 				</when>
 				<when test="searchType == 'carNumber'">
-					apartment_idx = #{apartmentIdx} and car_number = #{carNumber}
+					apartment_idx = #{apartmentIdx} and car_number = #{keyword}  and is_del = 0 
 				</when>
-				<when test="searchType == 'generationIdx'">
-					apartment_idx = #{apartmentIdx} and generation_idx = #{generationIdx}
+				<when test="searchType == 'generationInfo'">
+					apartment_idx = #{apartmentIdx} and generation_idx = #{generationInfo} and is_del = 0 
 				</when>
 			</choose>
 		</where>	
@@ -29,13 +29,13 @@
 				<where>
 					<choose>
 						<when test="searchType == 'apartmentIdx'">
-							c.apartment_idx = #{apartmentIdx} 
+							c.apartment_idx = #{apartmentIdx} and c.is_del = 0 
 						</when>
 						<when test="searchType == 'carNumber'">
-							c.apartment_idx = #{apartmentIdx} and c.car_number = #{carNumber} 
+							c.apartment_idx = #{apartmentIdx} and c.car_number = #{keyword} and c.is_del = 0 
 						</when>
-						<when test="searchType == 'generationIdx'">
-							c.apartment_idx = #{apartmentIdx} and c.generation_idx = #{generationIdx} 
+						<when test="searchType == 'generationInfo'">
+							c.apartment_idx = #{apartmentIdx} and c.generation_idx = #{generationInfo} and c.is_del = 0 
 						</when>
 					</choose>
 				</where>
@@ -48,13 +48,45 @@
 	</update>
 	
 	<select id="selectApplicationContentCnt" resultType="int">
-		select count(*) from tb_car_application where apartment_idx = #{apartmentIdx}
+		select count(*) from tb_car_application 
+		<where>
+			<choose>
+				<when test="searchType == 'apartmentIdx'">
+					apartment_idx = #{apartmentIdx} 
+				</when>
+				<when test="searchType == 'wait'">
+					apartment_idx = #{apartmentIdx} and is_process = 0
+				</when>
+				<when test="searchType == 'carNumber'">
+					apartment_idx = #{apartmentIdx} and aplct_car_number = #{keyword}
+				</when>
+				<when test="searchType == 'generationInfo'">
+					apartment_idx = #{apartmentIdx} and generation_idx = #{generationInfo}
+				</when>
+			</choose>
+		</where>
 	</select>
 	
 	<select id="selectCarApplicationList" resultType="carApplication">
 		select * from (
 			select rownum rnum, b.* from (
-				select * from tb_car_application where apartment_idx = #{apartmentIdx} 
+				select * from tb_car_application
+				<where>
+					<choose>
+						<when test="searchType == 'apartmentIdx'">
+							apartment_idx = #{apartmentIdx} 
+						</when>
+						<when test="searchType == 'wait'">
+							apartment_idx = #{apartmentIdx} and is_process = 0
+						</when>
+						<when test="searchType == 'carNumber'">
+							apartment_idx = #{apartmentIdx} and aplct_car_number = #{keyword}
+						</when>
+						<when test="searchType == 'generationInfo'">
+							apartment_idx = #{apartmentIdx} and generation_idx = #{generationInfo} 
+						</when>
+					</choose>
+				</where>
 				order by application_idx desc ) b 
 			) where rnum between #{paging.queryStart} and #{paging.queryEnd}
 	</select>

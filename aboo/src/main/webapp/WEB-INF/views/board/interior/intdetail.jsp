@@ -40,7 +40,7 @@
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
 
             <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Info</a></span> <span>Used</span></p>
+              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/board/info/listinfo">Info</a></span> <span><a href="/board/used/usedlist">Used</a></span></p>
 	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Interior</h1>
             </div>
           </div>
@@ -99,8 +99,8 @@
                 		<li class="comment">작성된 댓글이 없습니다.</li>
                 	</c:when>
                 	<c:otherwise>
-              			<c:forEach items="${intCmtList}" var="intCmt">
-			                <li class="comment" id="intCmtOriginal">
+              			<c:forEach items="${intCmtList}" var="intCmt" varStatus="status">
+			                <li class="comment" id="intCmtOriginal${intCmt.intCmtNo}">
 			                  	<div class="vcard bio">
 			                      <img src="../../../../resources/abooimg/user.jpg" alt="Image placeholder">
 			                    </div>
@@ -113,7 +113,7 @@
 			                      		<c:choose>
 				                      	    <c:when test="${sessionScope.generation.generationIdx == intCmt.generationIdx}">
 				                      	  	    <p>
-				                        	      <a onclick="intCmtModify()" class="mr-4" style="cursor: pointer;"><i class="fas fa-pen" style="color: #666666;"></i></a>
+				                        	      <a onclick="intCmtModify(${intCmt.intCmtNo})" class="mr-4" style="cursor: pointer;"><i class="fas fa-pen" style="color: #666666;"></i></a>
 						                  	      <a onclick="intCmtDelete(${intCmt.intCmtNo})" class="mr-4" style="cursor: pointer;"><i class="fas fa-trash" style="color: #666666;"></i></a>
 				                          	    </p>
 				                        	</c:when>
@@ -130,7 +130,7 @@
 			                      </c:choose>
 			                    </div>
 			                </li>
-			                <li class="comment" id="intCmtModify" style="display: none;">
+			                <li class="comment" id="intCmtModify${intCmt.intCmtNo}" style="display: none;">
 			                  	<div class="vcard bio">
 			                      <img src="../../../../resources/abooimg/user.jpg" alt="Image placeholder">
 			                    </div>
@@ -153,21 +153,27 @@
               </ul>
               <!-- END comment-list -->
               
-              <div class="comment-form-wrap pt-5">
-                <h3 class="mb-5">Leave a comment</h3>
-                <form action="/board/interior/intcmtupload" method="post" enctype="multipart/form-data" class="p-5 bg-light">
-                  <div class="form-group">
-                    <label for="message">Message</label>
-                    <input style="display: none;" name="generationIdx" value="${sessionScope.generation.generationIdx}">
-                    <input style="display: none;" name="intPostNo" value="${interiorBrd.intPostNo}">
-                    <textarea name="intCmtContent" id="intCmtContent" cols="30" rows="10" class="form-control"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
-                  </div>
-
-                </form>
-              </div>
+              <c:choose>
+              	<c:when test="${interiorBrd.intIsPrivate == 0}">
+              		<div class="comment-form-wrap pt-5">
+		                <h3 class="mb-5">Leave a comment</h3>
+		                <form action="/board/interior/intcmtupload" method="post" enctype="multipart/form-data" class="p-5 bg-light">
+		                  <div class="form-group">
+		                    <label for="message">Message</label>
+		                    <input style="display: none;" name="generationIdx" value="${sessionScope.generation.generationIdx}">
+		                    <input style="display: none;" name="intPostNo" value="${interiorBrd.intPostNo}">
+		                    <textarea name="intCmtContent" id="intCmtContent" cols="30" rows="10" class="form-control"></textarea>
+		                  </div>
+		                  <div class="form-group">
+		                    <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
+		                  </div>
+		
+		                </form>
+		              </div>
+              	</c:when>
+              	<c:otherwise></c:otherwise>
+              </c:choose>
+              
             </div>
 
           </div> <!-- .col-md-8 -->
@@ -214,6 +220,7 @@
                 <li><a href="/myapt/schedule" class="py-2 d-block">MyApt</a></li>
                 <li><a href="/baord/info/listinfo" class="py-2 d-block">Board</a></li>
                 <li><a href="/mypage/modifyinfo" class="py-2 d-block">MyPage</a></li>
+                <li><a href="/bdmin/contactus" class="py-2 d-block">Contact us</a></li>
               </ul>
             </div>
           </div>
@@ -311,9 +318,9 @@
   		}
   	}
   	
-  	let intCmtModify = () => {
-  		document.querySelector('#intCmtOriginal').style.display = "none";
-  		document.querySelector('#intCmtModify').style.display = "block";
+  	let intCmtModify = (intCmtNo) => {
+  		document.querySelector('#intCmtOriginal' + intCmtNo).style.display = "none";
+  		document.querySelector('#intCmtModify' + intCmtNo).style.display = "block";
   	}
   	
   	let intPrivate = () => {

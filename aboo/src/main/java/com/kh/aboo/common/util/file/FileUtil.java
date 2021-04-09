@@ -130,13 +130,13 @@ public class FileUtil {
 		
 		// 파일 내보내기
 		// 파일 명
-		String fileName = "test6.xlsx";
-		
-		File file = new File(fileName);
+		String fileName = "test7.xlsx";
+		System.out.println(fileName);
+		File fileDown = new File(fileName);
 		FileOutputStream fos = null;
-		if(!file.exists()) {
+		if(!fileDown.exists()) {
 			try {
-				fos = new FileOutputStream(file);
+				fos = new FileOutputStream(fileDown);
 				workbook.write(fos);
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
@@ -155,7 +155,7 @@ public class FileUtil {
 			}
 			
 		}
-		return file;
+		return fileDown;
 	}
 		
 }

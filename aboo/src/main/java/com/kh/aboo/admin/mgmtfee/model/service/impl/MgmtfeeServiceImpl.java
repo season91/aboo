@@ -26,6 +26,7 @@ import com.kh.aboo.admin.mgmtfee.model.vo.MgmtfeeOverdue;
 import com.kh.aboo.common.code.ErrorCode;
 import com.kh.aboo.common.exception.ToAlertException;
 import com.kh.aboo.common.util.paging.Paging;
+import com.kh.aboo.user.generation.model.repository.GenerationRepository;
 import com.kh.aboo.user.generation.model.vo.Generation;
 
 @Service
@@ -113,11 +114,11 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 		return commandMap;
 	}
 
-	// 아영 : 읽은 엑셀파일을 mgmtfee vo에 넣고 DB에 추가한다.
+	// 읽은 엑셀파일을 mgmtfee vo에 넣고 DB에 추가한다.
 	@Override
 	public List<Mgmtfee> insertMgmtfee(Map<String, Object> commandMap,String apartmentIdx) {
 		List<Mgmtfee> mgmtfeeList = new ArrayList<>();
-		Mgmtfee mgmtfee = new Mgmtfee();
+		Mgmtfee mgmtfee;
 		for (String	key : commandMap.keySet()) {
 			//System.out.println(commandMap.get(key));
 			List<String> list = (List<String>) commandMap.get(key);
@@ -135,6 +136,7 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 			
 			Generation generation = mgmtfeeRepository.selectGenerationIdx(generationInfo);
 
+			mgmtfee = new Mgmtfee();
 			mgmtfee.setApartmentIdx(apartmentIdx);
 			mgmtfee.setGenerationIdx(generation.getGenerationIdx());
 			mgmtfee.setGnrlMgmtFee(list.get(2));
@@ -151,9 +153,7 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 			mgmtfee.setMgmtStartDate(Date.valueOf(list.get(13)));
 			mgmtfee.setMgmtEndDate(Date.valueOf(list.get(14)));
 			mgmtfee.setMgmtWriteDate(Date.valueOf(list.get(15)));
-			
-			System.out.println(mgmtfee.toString());
-			
+
 			// 납부일 기준 이미 삽입한 내역이 있다면 이미 등록된 고지월임을 알려준다.
 			int res = mgmtfeeRepository.selectMgmtfeeByGenerationIdxAndDueDate(mgmtfee);
 			if (res == 0) {
@@ -162,11 +162,11 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 				throw new ToAlertException(ErrorCode.SMGMT02);
 			}
 
-			mgmtfeeRepository.insertMgmtfee(mgmtfee);
 			mgmtfeeList.add(mgmtfee);
+
 		}
 		
-		
+		System.out.println("서비스 리스트" + mgmtfeeList);
 		return mgmtfeeList;
 	}
 
@@ -182,9 +182,44 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 		
 		return commandMap;
 	}
+	
+	public Map<String, Object> searchMap(String apartmentIdx, String standard, String keyword){
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		// 페이징 처리 타입 3개
+		// 1. 키워드 없는 경우 - 기본페이징
+		// 2. 키워드가 관리비인경우 
+		// 3. 키워드가 세대정보인경우
+		// 4. 키워드가 납기일인 경우
+		// 5. 키워드가 미납인경우 
+		
+		// 공통으로 필요한 정보. 아파트관리번호랑 검색어.
+		// switch문으로 검색기준에 따라 서치타입을 정해준다.
+		// 이 서치타입 기준으로 동적쿼리 분기가 나뉘게 된다.
+		searchMap.put("apartmentIdx", apartmentIdx);
+		searchMap.put("searchType", standard);
+		searchMap.put("keyword", keyword);
+		switch (standard) {
+		case "generationInfo":
+			// 세대정보로 검색, 101-101 이런식으로 입력이되서 동수 호수로 분리하고 세대관리번호 가져와서 넣어준다.
+			Generation generation = new Generation();
+			String[] generationInfo = keyword.split("-");
+			generation.setApartmentIdx(apartmentIdx);
+			generation.setBuilding(generationInfo[0]);
+			generation.setNum(generationInfo[1]);
+			System.out.println(generation);
+			
+			// 조회된 세대관리번호를 map에 담아준다.
+			String generationIdx = selectGenerationByBuildingAndNum(generation).getGenerationIdx();
+			searchMap.put("generationInfo", generationIdx);
+			break;
+		}
+		
+		return searchMap;
+	}
 
 	@Override
-	public Map<String, Object> selectMgmtfeeList(int currentPage, Map<String, Object> searchMap) {
+	public Map<String, Object> selectMgmtfeeList(int currentPage,String apartmentIdx, String standard, String keyword) {
+		Map<String, Object> searchMap = searchMap(apartmentIdx,standard,keyword);
 		//페이징처리
 		Paging paging = Paging.builder()
 				.currentPage(currentPage)
@@ -280,7 +315,10 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 
 	@Override
 	public Generation selectGenerationByBuildingAndNum(Generation generation) {
-		// TODO Auto-generated method stub
+		if(mgmtfeeRepository.selectGenerationByBuildingAndNum(generation) == null) {
+			throw new ToAlertException(ErrorCode.SC03);
+			
+		}
 		return mgmtfeeRepository.selectGenerationByBuildingAndNum(generation);
 	}
 

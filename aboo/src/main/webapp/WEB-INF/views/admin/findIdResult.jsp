@@ -10,7 +10,7 @@
 
 <body class=" ">
   <div class="wrapper ">
-       <div class="sidebar">
+      <div class="sidebar">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
@@ -23,53 +23,59 @@
             ADMIN
           </a>
         </div>
-        <ul class="nav ">
-          <li class="active">
-            <a href="./dashboard.html">
+        <ul class="nav">
+          <li >
+            <a href="/admin/mypage/modifyinfo">
               <i class="tim-icons icon-badge"></i>
               <p>Mypage</p>
             </a>
           </li>
           <li>
-            <a href="./dashboard.html">
+            <a href="/admin/vote/makevote">
               <i class="tim-icons icon-tap-02"></i>
               <p>Vote</p>
             </a>
           </li>
-          <li>
+          <li >
             <a href="/admin/authority">
               <i class="tim-icons icon-single-02"></i>
               <p>Authority</p>
             </a>
           </li>
           <li>
-            <a href="./map.html">
+            <a href="/admin/mgmtfee">
               <i class="tim-icons icon-chart-bar-32"></i>
-              <p>Mgmtfee</p>
+              <p>Management Fee</p>
             </a>
           </li>
           <li>
-            <a href="./notifications.html">
+            <a href="/admin/car">
               <i class="tim-icons icon-bus-front-12"></i>
-              <p>Vehicle</p>
+              <p>Car</p>
             </a>
           </li>
-          <li>
-            <a href="./user.html">
+          <li >
+            <a href="/admin/schedule/addschedule">
               <i class="tim-icons icon-calendar-60"></i>
               <p>Schedule</p>
             </a>
           </li>
           <li>
-            <a href="./tables.html">
+            <a href="/admin/chat">
               <i class="tim-icons icon-chat-33"></i>
               <p>Chat</p>
             </a>
           </li>
+         <li>
+           <a href="/bdmin/notice/noticelist">
+              <i class="tim-icons icon-volume-98"></i>
+              <p>notice</p>
+            </a>
+          </li>
           <li>
-            <a href="./rtl.html">
+            <a href="/bdmin/login">
               <i class="tim-icons icon-key-25"></i>
-              <p>BDIN</p>
+              <p>BDMIN</p>
             </a>
           </li>
         </ul>
@@ -87,7 +93,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Table List</a>
+            <a class="navbar-brand" href="#pablo">FINDIDRESULT</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -108,10 +114,10 @@
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Profile</a>
+                    <a href="/admin/mypage/modifyinfo" class="nav-item dropdown-item">Profile</a>
                   </li>
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Settings</a>
+                    <a href="/admin/chat" class="nav-item dropdown-item">1:1 chat</a>
                   </li>
                   <div class="dropdown-divider"></div>
                   <li class="nav-link">
@@ -148,11 +154,15 @@
       <!-- End Navbar -->
       <div class="content d-flex flex-column justify-content-center">
     	<div style="height: 10vh"></div>
-		<h4 class="text-center mb-4">회원님의 아이디는</h4>
+		<div style="height: 40vh;background-color: #1e1e2d; display: flex; flex-direction: column; justify-content: center;">
+		<h4 class="text-center" style="">회원님의 아이디는</h4>
 		<div class="container">
-			<div class="row block-9 justify-content-center">
-				<b>${findAdmin.id}</b>입니다 감사합니다.
+			<div class="row block-9 justify-content-center" style="color: #9e9e9e">
+				<b class= "text-white" id = "id" style="display: none;">${findAdmin.id}</b>&nbsp;입니다. 감사합니다. 
+				<div id = "idOpenBnt" style="border: none;padding-left:5px ;cursor: pointer;"  onclick="idOpen()" ><i class="fas fa-lock"></i></div>
+				<div id = "idCloseBnt" style="display : none;  border: none; padding-left:5px ;pacursor: pointer;"  onclick="idClose()" ><i class="fas fa-lock-open"></i></div>
 			</div>
+		</div>
 		</div>
       </div>
       <footer class="footer">
@@ -227,38 +237,22 @@
       </div>
     </div>
   
-	   <script type="text/javascript">
-	      let emailSend = () => {
-	          const url = '/admin/mypage/findidimpl';
-	          
-	          let paramObj = new Object();
-	          paramObj.name = document.querySelector("#name").value;
-	          paramObj.email = document.querySelector("#email").value;
-	          
-	          let headerObj = new Headers();
-	          headerObj.append("content-type","application/json");
-	          fetch(url,{
-	             method:"post",
-	             headers:headerObj,
-	             body:JSON.stringify(paramObj)
-	          }).then(response => {
-	             if(response.ok){
-	                return response.text();    
-	             }
-	             throw new AsyncPageError(response.text());
-	          }).then((text) => {
-	             if(text == 'fail'){ 
-	                alert('존재하지 않는 사용자입니다.')
-	             }else{ 
-	                 alert('메일이 발송되었습니다.');
-	                 document.querySelector("#certifiedBox").style.display = ''
-	             }
-	          }).catch(error => {
-	             error.alertMessage();
-	          });
-	       }
+	<script type="text/javascript">
+	 let idOpen = () =>{
+		 document.querySelector("#idOpenBnt").style.display = 'none';
+		 document.querySelector("#id").style.display = '';
+		 document.querySelector("#idCloseBnt").style.display = '';
+		 
+	 }
 	
-	   </script>
+	 let idClose = () =>{
+		 document.querySelector("#idOpenBnt").style.display = '';
+		 document.querySelector("#id").style.display = 'none';
+		 document.querySelector("#idCloseBnt").style.display = 'none';
+		 
+	 }
+	
+	</script>
    
     <!--   Core JS Files   -->
     <script src="../../../resources/js/admin/core/jquery.min.js"></script>

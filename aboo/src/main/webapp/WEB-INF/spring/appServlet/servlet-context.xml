@@ -3,12 +3,14 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
 	xmlns:task="http://www.springframework.org/schema/task"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
@@ -44,6 +46,17 @@
 	
 	<!-- * 배치 어노테이션 사용을 위한 등록 -->
 	<task:annotation-driven/>
+	
+	<!-- * 채팅 -->
+	<websocket:handlers>
+		<websocket:mapping handler="echoHandler" path="/echo" />
+		<websocket:handshake-interceptors>
+		<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+		</websocket:handshake-interceptors>
+		<websocket:sockjs />
+	</websocket:handlers>
+    
+	<beans:bean id="echoHandler" class="com.kh.aboo.common.echo.EchoHandler"></beans:bean>
 	
 	<!-- * interceptor 등록 -->
 	<interceptors>

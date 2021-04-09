@@ -35,8 +35,8 @@
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
 
             <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/mypage/myalarm">My alarm</a></span><span class="mr-2"><a href="/mypage/myvehicle">My vehicle</a></span><span class="mr-2"><a href="/mypage/modifyinfo">My Information</a></span><span class="mr-2"><a href="/mypage/writelist">My write list</a></span></p>
-	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Management Fee detail</h1>
+              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/mypage/myalarm">My alarm</a></span><span class="mr-2"><a href="/mypage/mycar">My Car</a></span><span class="mr-2"><a href="/mypage/modifyinfo">My Information</a></span><span class="mr-2"><a href="/mypage/generationwon">Generation won</a></span><span class="mr-2"><a href="/mypage/writelist/myinfolist">My write list</a></span></p>
+	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">My Management Fee detail</h1>
             </div>
           </div>
         </div>
@@ -86,21 +86,23 @@
 			              <li><strong>납기일 </strong> ${mgmtfee.dueDate }</li>
 			              <li>납부기한을 넘겨 납부하면 연체료가 일할계산되어 다음달 관리비에 포함됩니다.</li>
 			            </ul>
-				          <a class="btn btn-primary d-block px-3 py-3 mb-4 btn-payment" id = "check_module">결제하기</a>
+			            <c:if test="${mgmtfee.isPayment eq 0 }">
+			            	<a class="btn btn-primary d-block px-3 py-3 mb-4 btn-payment" id = "check_module">결제하기</a>
+			            </c:if>
 	            	</c:when>
 	            	<c:otherwise>
 	            		<span class="price"><span class="number">조회내역이 없습니다.</span></span>
 	            	</c:otherwise>
 	            </c:choose>
-		            
 	            </div>
 	          </div>
 	          <div class="row d-flex justify-content-center">
-	          	 <a href="/mypage/mymgmtfee" class="btn btn-primary btn-primary-2 p-3 px-xl-5 py-xl-3" style="background: linear-gradient(45deg, #56c8fb 0%, #627bed 100%); border: none;">목록으로</a>
-	          </div>
+		          	 <a href="/mypage/mymgmtfee" class="btn btn-primary btn-primary-2 p-3 px-xl-5 py-xl-3" style="background: linear-gradient(45deg, #56c8fb 0%, #627bed 100%); border: none;">목록으로</a>
+		          </div>
 	        </div>
 	      </div>
     	</div>
+    	
     </section>
 
     <footer class="ftco-footer ftco-bg-dark ftco-section">
@@ -141,6 +143,7 @@
                 <li><a href="/myapt/schedule" class="py-2 d-block">MyApt</a></li>
                 <li><a href="/baord/info/listinfo" class="py-2 d-block">Board</a></li>
                 <li><a href="/mypage/modifyinfo" class="py-2 d-block">MyPage</a></li>
+                <li><a href="/bdmin/contactus" class="py-2 d-block">Contact us</a></li>
               </ul>
             </div>
           </div>
@@ -225,7 +228,7 @@
   	
 	$("#check_module").click(function () {
         var IMP = window.IMP; // 생략가능
-        IMP.init('');
+        IMP.init('imp71306117');
         // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
         // i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
         IMP.request_pay({
@@ -253,9 +256,7 @@
             /*
             merchant_uid에 경우
             https://docs.iamport.kr/implementation/payment
-            위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
-            참고하세요.
-            나중에 포스팅 해볼게요.
+
             */
             name: '주문명:관리비고지서',
             //결제창에서 보여질 이름
@@ -322,10 +323,8 @@
 	       throw new AsyncPageError(response.text());
 	    }).then((text) => {
 	       if(text == 'success'){
-	     		alert("결제 성공하였습니다.")
 	     		location.href = "/mypage/mymgmtfee";
 	       }else{
-	     		alert("결제 실패하였습니다.")
 	       }
 	    }).catch(error => {
 	       error.alertMessage();

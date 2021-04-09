@@ -49,9 +49,9 @@
             </a>
           </li>
           <li>
-            <a href="/admin/vehicle">
+            <a href="/admin/car">
               <i class="tim-icons icon-bus-front-12"></i>
-              <p>Vehicle</p>
+              <p>Car</p>
             </a>
           </li>
           <li>
@@ -66,10 +66,16 @@
               <p>Chat</p>
             </a>
           </li>
+           <li>
+           <a href="/bdmin/notice/noticelist">
+              <i class="tim-icons icon-volume-98"></i>
+              <p>notice</p>
+            </a>
+          </li>
           <li>
-            <a href="/admin/bdin">
+            <a href="/bdmin/login">
               <i class="tim-icons icon-key-25"></i>
-              <p>BDIN</p>
+              <p>BDMIN</p>
             </a>
           </li>
         </ul>
@@ -99,19 +105,23 @@
               <li class="dropdown nav-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div class="photo">
-                    <img src="../../resources/img/anime3.png">
+                    <img src="../../../../resources/img/anime3.png">
                   </div>
+                  <b class="caret d-none d-lg-block d-xl-block"></b>
+                  <p class="d-lg-none">
+                    Log out
+                  </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Profile</a>
+                    <a href="${context }/admin/mypage/modifyinfo" class="nav-item dropdown-item">Profile</a>
                   </li>
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Settings</a>
+                    <a href="${context }/admin/chat" class="nav-item dropdown-item">1:1 chat</a>
                   </li>
                   <div class="dropdown-divider"></div>
                   <li class="nav-link">
-                  <c:choose>
+                   <c:choose>
                   	<c:when test="${sessionScope.admin == null}">
                     	<a href="/admin/login" class="nav-item dropdown-item">Log in</a>
                   	</c:when>

@@ -24,9 +24,9 @@ public class CarRepositoryTest {
 	@Test
 	public void insertCar() {
 		Car car = new Car();
-		car.setGenerationIdx("100297");
+		car.setApartmentIdx("100000");
+		car.setGenerationIdx("100362");
 		car.setCarNumber("123허4568");
-		car.setCarQR("/resources/vehicle/");
 		System.out.println(carRepository.insertCar(car));
 		
 	};

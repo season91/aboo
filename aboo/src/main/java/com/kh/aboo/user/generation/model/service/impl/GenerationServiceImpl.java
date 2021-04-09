@@ -74,7 +74,7 @@ public class GenerationServiceImpl implements GenerationService {
 	}
 
 	@Override
-	public void authenticationIdMail(Generation generation, String authPathId) {
+	public void findIdEmail(Generation generation, String authPathId) {
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
 		body.add("mail-template", "findid");
 		body.add("id", generation.getId());
@@ -84,7 +84,7 @@ public class GenerationServiceImpl implements GenerationService {
 
 		ResponseEntity<String> response = http.exchange(request, String.class);
 		String message = response.getBody();
-		mail.send(generation.getEmail(), "메일", message);
+		mail.send(generation.getEmail(), "❗ [ABOO:아파트를 부탁해] 아이디 인증번호 발급", message);
 
 	}
 
@@ -94,7 +94,7 @@ public class GenerationServiceImpl implements GenerationService {
 	}
 
 	@Override
-	public void authenticationPasswordMail(Generation generation, String password) {
+	public void findPasswordEmail(Generation generation, String password) {
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
 		body.add("mail-template", "findpassword");
 		body.add("id", generation.getId());
@@ -106,9 +106,8 @@ public class GenerationServiceImpl implements GenerationService {
 
 		ResponseEntity<String> response = http.exchange(request, String.class);
 		String message = response.getBody();
-		mail.send(generation.getEmail(), "메일", message);
+		mail.send(generation.getEmail(), "❗ [ABOO:아파트를 부탁해] 임시 비밀번호 발급", message);
 
-		System.out.println("바뀔번호");
 		generation.setPassword(encoder.encode(password));
 		generationRepository.updateFindPassword(generation);
 
@@ -160,9 +159,14 @@ public class GenerationServiceImpl implements GenerationService {
 		generation.setPassword(encoder.encode(password));
 		return generationRepository.updateGenerationModify(generation);
 	}
+	
+	@Override
+	public int selectGenerationEmailCnt(Generation generation) {
+		return generationRepository.selectGenerationEmailCnt(generation);
+	}
 
 	@Override
-	public void authenticationEmail(Generation generation, String authPathEmail) {
+	public void authEmail(Generation generation, String authPathEmail) {
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
 		body.add("mail-template", "email");
 		body.add("id", generation.getId());
@@ -172,22 +176,27 @@ public class GenerationServiceImpl implements GenerationService {
 
 		ResponseEntity<String> response = http.exchange(request, String.class);
 		String message = response.getBody();
-		mail.send(generation.getEmail(), "이메일 인증 메일", message);
+		mail.send(generation.getEmail(), "❗[ABOO:아파트를 부탁해] 이메일 인증번호 발급", message);
 	}
 
 	@Override
 	public int updateGenerationEmail(Generation generation) {
 		return generationRepository.updateGenerationEmail(generation);
 	}
+	
+	@Override
+	public int selectGenerationTellCnt(Generation generation) {
+		return generationRepository.selectGenerationTellCnt(generation);
+	}
 
 	@Override
-	public int authToVote(String tell, HttpSession httpSession) {
+	public int authTell(String tell, HttpSession httpSession) {
 
 		String method = "POST";
-		String url = "/sms/v2/services/서비스 아이디/messages";
+		String url = "/sms/v2/services/ncp:sms:kr:265084223367:aboo/messages";
 		String timestamp = Long.toString(System.currentTimeMillis());
-		String accessKey = "";
-		String secretKey = "";
+		String accessKey = "LPnIQJHIKlcBN3dZOoNR";
+		String secretKey = "UoCz0OH0zgR5RA7YwiCnMPiVfOn7jJkwzL7K18kb";
 
 		String signature = makeSignature(url, timestamp, method, accessKey, secretKey);
 		HttpHeaders header = new HttpHeaders();
@@ -196,8 +205,8 @@ public class GenerationServiceImpl implements GenerationService {
 		header.add("x-ncp-iam-access-key", accessKey);
 		header.add("x-ncp-apigw-signature-v2", signature);
 
-		String certNum = makeCertNum();
-		httpSession.setAttribute("certNumToVote", certNum);
+		String authPathTell = makeCertNum();
+		httpSession.setAttribute("authPathTell", authPathTell);
 
 		JSONObject params = new JSONObject();
 		JSONObject params2 = new JSONObject();
@@ -205,14 +214,14 @@ public class GenerationServiceImpl implements GenerationService {
 		try {
 			params.put("type", "SMS");
 			params.put("from", "01092680961");
-			params.put("content", "[ABOO:아파트를 부탁해] 본인 확인을 위해 인증번호 [" + certNum + "]를 입력해주세요.");
+			params.put("content", "[ABOO:아파트를 부탁해] 본인 확인을 위해 인증번호 [" + authPathTell + "]를 입력해주세요.");
 			params2.put("to", tell);
 			messages.put(params2);
 			params.put("messages", messages);
 			String body = params.toString();
 
 			RequestEntity<String> request = RequestEntity
-					.post("https://sens.apigw.ntruss.com/sms/v2/services/서비스 아이디/messages")
+					.post("https://sens.apigw.ntruss.com/sms/v2/services/ncp:sms:kr:265084223367:aboo/messages")
 					.headers(header).body(body);
 
 			ResponseEntity<String> response = http.exchange(request, String.class);
@@ -267,6 +276,16 @@ public class GenerationServiceImpl implements GenerationService {
 
 		return encodeBase64String;
 
+	}
+
+	@Override
+	public int selectGenerationWonCnt(Generation generation) {
+		return generationRepository.selectContentCnt(generation.getGenerationIdx());
+	}
+
+	@Override
+	public int updateGenerationTell(Generation generation) {
+		return generationRepository.updateGenerationTell(generation);
 	}
 
 }

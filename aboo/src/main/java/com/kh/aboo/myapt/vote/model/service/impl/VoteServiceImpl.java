@@ -4,7 +4,9 @@ import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.crypto.Mac;
@@ -46,10 +48,10 @@ public class VoteServiceImpl implements VoteService {
 	@Override
 	public int authToVote(String tell, HttpSession session) {
 		String method = "POST";
-		String url = "";
+		String url = "/sms/v2/services/ncp:sms:kr:265114542753:aboo/messages";
 		String timestamp = Long.toString(System.currentTimeMillis());
-		String accessKey = "";
-		String secretKey = "";
+		String accessKey = "oLDcvFTXukjoZRHKLNyO";
+		String secretKey = "b0dMePC64t6D3UvMI87611xIp38vrBdby8TAujf4";
 		
 		String signature = makeSignature(url, timestamp, method, accessKey, secretKey);
 		HttpHeaders header = new HttpHeaders();
@@ -66,7 +68,7 @@ public class VoteServiceImpl implements VoteService {
 		JSONArray messages = new JSONArray();
 		try {
 			params.put("type", "SMS");
-			params.put("from", "");
+			params.put("from", "01028906219");
 			params.put("content", "[ABOO:아파트를 부탁해] 본인 확인을 위해 인증번호 [" + certNum + "]를 입력해주세요.");
 			params2.put("to", tell);
 			messages.put(params2);
@@ -75,7 +77,7 @@ public class VoteServiceImpl implements VoteService {
 			
 			RequestEntity<String> request = 
 					RequestEntity
-					.post("")
+					.post("https://sens.apigw.ntruss.com/sms/v2/services/ncp:sms:kr:265114542753:aboo/messages")
 					.headers(header)
 					.body(body);
 			
@@ -161,9 +163,10 @@ public class VoteServiceImpl implements VoteService {
 	}
 
 	@Override
-	public List<Double> calculateTurnout(String voteNo) {
+	public Map<String, Object> calculateTurnout(String voteNo) {
 		VoteMng voteMng = voteMngRepository.selectVoteMngByIdx(voteNo);
 		String[] voteOnWhatArr = voteMng.getVoteItem().split(",");
+		Map<String, Object> commandMap = new HashMap<>();
 		
 		int voteGenCnt = voteRepository.selectVoteGenCnt(voteNo); //총 투표 수
 		
@@ -183,7 +186,11 @@ public class VoteServiceImpl implements VoteService {
 			turnoutList.add(turnout);
 		}
 		
-		return turnoutList;
+		commandMap.put("turnoutList", turnoutList);
+		commandMap.put("voteOnWhatList", voteOnWhatList);
+		commandMap.put("voteGenCnt", voteGenCnt);
+		
+		return commandMap;
 	}
 
 	@Override

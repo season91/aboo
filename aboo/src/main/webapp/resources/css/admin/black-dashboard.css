@@ -6033,3 +6033,29 @@ table.tablesorter thead tr .headerSortDown {
 }
 
 /*# sourceMappingURL=dashboard-free.css.map */
+
+
+
+
+
+/* 선영 css Zone */
+.validator{
+color: red;
+font-size: 1vw;
+margin-top: 5px;
+}
+
+.bg-sun{
+	background-color:#263148;
+
+}
+
+.modal-bg-sun{
+	background-color: #1a1e34;
+}
+
+.text-6c757d{
+	color: #6c757d;
+	font-family: "Poppins";
+	font-size: 1vw;
+}

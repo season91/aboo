@@ -25,7 +25,7 @@ public interface MgmtfeeService {
 		
 	// [관리자페이지 페이징]
 	// 2. 페이징 화면 구현을 위한 list
-	Map<String, Object> selectMgmtfeeList(int currentPage, Map<String, Object> searchMap);
+	Map<String, Object> selectMgmtfeeList(int currentPage, String apartmentIdx, String standard, String keyword);
 
 	// 3. 동,호수로 세대정보가져온다.
 	Generation selectGenerationByBuildingAndNum(Generation generation);

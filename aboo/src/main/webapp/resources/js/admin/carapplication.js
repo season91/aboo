@@ -55,14 +55,15 @@
 		let headerObj = new Headers();
 		headerObj.append('content-type', "application/x-www-form-urlencoded");
 		
-		fetch("/admin/carapplcation/approval?applicationidx="+applicationIdx,{
+		fetch("/admin/carapplication/approval?applicationidx="+applicationIdx,{
 			method:"GET",
 			header : headerObj
-		}).then(response => {
+		}).then(response =>{
 			if(response.ok){
-				alert('등록 신청을 승인했습니다.');
-				return location.href="/admin/car/application";
+				alert('승인 처리가 되었습니다.');
+				location.href= '/admin/car/application';
 			}
+			throw new AsyncPageError(response.text()); 
 		})
 		.catch(error =>{
 			error.alertMessage();
@@ -84,14 +85,15 @@
 		let headerObj = new Headers();
 		headerObj.append('content-type', "application/x-www-form-urlencoded");
 		
-		fetch("/admin/carapplcation/reject?applicationidx="+applicationIdx,{
+		fetch("/admin/carapplication/reject?applicationidx="+applicationIdx,{
 			method:"GET",
 			header : headerObj
-		}).then(response => {
+		}).then(response =>{
 			if(response.ok){
-				alert('등록 신청을 반려했습니다.');
-				return location.href="/admin/car/application";
+				alert('반려 처리가 되었습니다');
+				location.href= '/admin/car/application';
 			}
+			throw new AsyncPageError(response.text()); 
 		})
 		.catch(error =>{
 			error.alertMessage();

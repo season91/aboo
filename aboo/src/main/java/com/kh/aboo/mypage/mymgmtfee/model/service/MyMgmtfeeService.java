@@ -23,6 +23,7 @@ public interface MyMgmtfeeService {
 	Map<String,Object> selectMyMgmtfeeDate(String mgmtfeeIdx);
 	
 	//선영 결제
-	int insertPayment(MgmtfeePayment mgmtfeePayment);
+	void insertPayment(MgmtfeePayment mgmtfeePayment);
 
+	String selectPaymentGenerationIdx(String mgmtfeeIdx);
 }

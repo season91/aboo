@@ -10,7 +10,7 @@
 
 <body class=" ">
   <div class="wrapper ">
-        <div class="sidebar">
+    <div class="sidebar">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
@@ -23,60 +23,66 @@
             ADMIN
           </a>
         </div>
-        <ul class="nav ">
-          <li class="active">
-            <a href="./dashboard.html">
+        <ul class="nav">
+          <li >
+            <a href="/admin/mypage/modifyinfo">
               <i class="tim-icons icon-badge"></i>
               <p>Mypage</p>
             </a>
           </li>
           <li>
-            <a href="./dashboard.html">
+            <a href="/admin/vote/makevote">
               <i class="tim-icons icon-tap-02"></i>
               <p>Vote</p>
             </a>
           </li>
-          <li>
+          <li >
             <a href="/admin/authority">
               <i class="tim-icons icon-single-02"></i>
               <p>Authority</p>
             </a>
           </li>
           <li>
-            <a href="./map.html">
+            <a href="/admin/mgmtfee">
               <i class="tim-icons icon-chart-bar-32"></i>
-              <p>Mgmtfee</p>
+              <p>Management Fee</p>
             </a>
           </li>
           <li>
-            <a href="./notifications.html">
+            <a href="/admin/car">
               <i class="tim-icons icon-bus-front-12"></i>
-              <p>Vehicle</p>
+              <p>Car</p>
             </a>
           </li>
-          <li>
-            <a href="./user.html">
+          <li >
+            <a href="/admin/schedule/addschedule">
               <i class="tim-icons icon-calendar-60"></i>
               <p>Schedule</p>
             </a>
           </li>
           <li>
-            <a href="./tables.html">
+            <a href="/admin/chat">
               <i class="tim-icons icon-chat-33"></i>
               <p>Chat</p>
             </a>
           </li>
+         <li>
+           <a href="/bdmin/notice/noticelist">
+              <i class="tim-icons icon-volume-98"></i>
+              <p>notice</p>
+            </a>
+          </li>
           <li>
-            <a href="./rtl.html">
+            <a href="/bdmin/login">
               <i class="tim-icons icon-key-25"></i>
-              <p>BDIN</p>
+              <p>BDMIN</p>
             </a>
           </li>
         </ul>
       </div>
     </div>
     <div class="main-panel">
-      <!-- Navbar -->
+     <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent   ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
@@ -87,7 +93,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Table List</a>
+            <a class="navbar-brand" href="#pablo">FINDPASSWORD</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -108,10 +114,10 @@
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Profile</a>
+                    <a href="/admin/mypage/modifyinfo" class="nav-item dropdown-item">Profile</a>
                   </li>
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Settings</a>
+                    <a href="/admin/chat" class="nav-item dropdown-item">1:1 chat</a>
                   </li>
                   <div class="dropdown-divider"></div>
                   <li class="nav-link">
@@ -151,7 +157,7 @@
     	<h4 class = "text-center mb-4">비밀번호 찾기</h4>
 	    <div class="ftco-section contact-section ftco-degree-bg">
 	     <div class = "d-flex justify-content-center">
-	     	<p class= "text-secondary">아래정보를 입력하시면 임시 비밀번호를 메일로 발송해드립니다</p>
+	     	<p class= "text-secondary">아래정보를 입력하시면 메일로 임시 비밀번호를 발송해드립니다</p>
 	     </div>
 	      <div class="container">
 	        <div class="row block-9 justify-content-center">
@@ -165,7 +171,7 @@
 	              <div class="form-group">
 	                <input type="submit" value="확인" class="btn btn-primary py-3 px-5 col-sm-12" onclick="emailSend()" >
 	              </div>
-	      		<div class = "col-sm-12 d-flex justify-content-center"><div><a href="#">아이디 찾기</a> | <a href="#">비밀번호 찾기</a></div></div> 
+	      		<div class = "col-sm-12 d-flex justify-content-center"><div><a href="/admin/findid">아이디 찾기</a> | <a href="/admin/findpassword">비밀번호 찾기</a></div></div> 
 	          </div>
 	        </div>
 	      </div>

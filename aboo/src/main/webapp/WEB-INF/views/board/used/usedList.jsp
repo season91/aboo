@@ -19,14 +19,20 @@
 	          <li class="nav-item"><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
 	          <li class="nav-item active"><a class="nav-link" href="/board/info/listinfo">Board</a></li>
 	          <li class="nav-item"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
-	          <c:choose>
-	          <c:when test="${sessionScope.generation == null}">
-	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
-	          </c:when>
-	          <c:when test="${sessionScope.generation != null}">
-	          <li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>	          
-	          </c:when>
-	          </c:choose>
+				
+					<c:choose>
+						<c:when
+							test="${sessionScope.generation == null and sessionScope.admin == null}">
+							<li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>
+						</c:when>
+						<c:when test="${sessionScope.generation != null}">
+							<li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>
+						</c:when>
+						<c:when test="${sessionScope.admin != null}">
+							<li class="nav-item cta"><a href="/admin/logout"
+								class="nav-link"><span>Logout</span></a></li>
+						</c:when>
+					</c:choose>
 	        </ul>
 	      </div>
 	    </div>
@@ -40,7 +46,7 @@
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
 
             <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Info</a></span> <span>Used</span></p>
+              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/board/info/listinfo">Info</a></span> <span><a href="/board/interior/intlist">Interior</a></span></span></p>
 	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">used</h1>
             </div>
           </div>
@@ -49,22 +55,38 @@
     </section>
   
     <section class="ftco-section bg-light">
-      <div class="container">
+    <div class = "container">
+      <div class = "d-flex" style="height: 10vh; background-color:#fafafa !important">
+      <form action="/board/used/usedlist">  
+            <input type="hidden" name="kind" value="trnsc">
+			<label> 거래 중 : <input type="radio" name="keyword" value="0"></label>
+			<label> 거래 완료 : <input type="radio" name="keyword" value="1"></label>
+			<button style="border: none; background-color:#fafafa !important ;outline: none;"><i class="fas fa-search"></i></button>
+		</form> 
+      </div>
         <div class="row">
         	<c:forEach items="${usedBrdList}" var="usedBrd" varStatus="status">
         		<c:choose>
         			<c:when test="${usedBrd.isPrivate == 0}">
         				<div class="col-md-4 ftco-animate">
 							<div class="blog-entry">
-							  <a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="block-20"></a>
+							  <a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="block-20"><img class= "w-100 h-100 imgCenter"src="/file/${fileList[status.index].savePath}${fileList[status.index].renameFileName}"></a>
 							  <div class="text d-flex py-4">
 							    <div class="meta mb-3">
 							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">${usedBrd.usedRegDate}</a></div>
 							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">${usedBrd.usedWriter}</a></div>
-							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="meta-chat"><span class="icon-chat"></span> ${intCmtCntList[status.index]}1</a></div>
+							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="meta-chat"><span class="icon-chat"></span>${cmtList[status.index]}</a></div>
 							    </div>
 							    <div class="desc pl-3">
-							      <h3 class="heading"><a href="/board/interior/intdetail?intPostNo=${usedBrd.usedIdx}">${usedBrd.usedTitle}</a></h3>
+							    <div class= "heading w-100" style="word-break: break-all; text-overflow: ellipsis;">
+							      <a  href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">
+						          		<c:choose>
+							          		<c:when test="${usedBrd.isTrnsc == 0}"><span style="color: blue;font-size: 1.5vw;">[거래 중]</span></c:when>
+							          		<c:otherwise><span style="color: red; font-size: 1.5vw;">[거래 완료]</span></c:otherwise>
+						          		</c:choose>
+							      ${usedBrd.usedTitle}
+							      </a>	
+							      </div> 	
 							    </div>
 							  </div>
 							</div>
@@ -73,15 +95,15 @@
         			<c:otherwise>
         				<div class="col-md-4 ftco-animate">
 							<div class="blog-entry">
-							  <a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="block-20"></a>
+							  <a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="block-20"><img class= "w-100 h-100 imgCenter" src="/file/${fileList[status.index].savePath}${fileList[status.index].renameFileName}Nob" onerror="this.src='../../../resources/abooimg/nopreviewimg.jpg'"></a>
 							  <div class="text d-flex py-4">
 							    <div class="meta mb-3">
 							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">${usedBrd.usedRegDate}</a></div>
 							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">${usedBrd.usedWriter}</a></div>
-							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="meta-chat"><span class="icon-chat"></span> ${intCmtCntList[status.index]}1</a></div>
-							    </div> <!--비공개 처리하면 못보게 할건지 -->
+							      <div><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}" class="meta-chat"><span class="icon-chat"></span>1</a></div>
+							    </div>
 							    <div class="desc pl-3">
-							      <h3 class="heading"><a href="/board/interior/intdetail?intPostNo=${usedBrd.usedIdx}">비공개 처리된 게시물 입니다</a></h3>
+							      <h3 class="heading"><a href="/board/used/useddetail?usedIdx=${usedBrd.usedIdx}">비공개 처리된 게시물 입니다</a></h3>
 							    </div>
 							  </div>
 							</div>
@@ -92,42 +114,91 @@
         </div>
         
         <div class="container d-flex justify-content-end">
-			<form action="#" class="search-form" style="width: 40%;">
+			<form action="/board/used/usedlist" class="search-form" style="width: 40%;">
 	          <div class="form-group mb-0">
 	            <div class="icon" style="cursor: pointer;">
-	            	<a class="icon-search"></a>
+	            	<button class = "bg-white" style="border: none; outline: none;"><a class="icon-search"></a></button>
 	            </div>
-	            <input type="text" class="form-control" placeholder="제목을 입력하세요.">
+                <input type="hidden" name="kind" value="search">
+	            <input type="text" class="form-control" name ="keyword" placeholder="키워드를 입력하세요.">
 	          </div>
          </form>
 		</div>
         
         <div class="container text-center d-flex justify-content-end mt-0">
-	      <a href="/board/used/usedupload" class="center-block btn btn-primary p-3 px-xl-4 py-xl-2 btn-sm" style="background: linear-gradient(45deg, #12e6ca 0%, #8be55d 100%); border: none; color: white !important;">글쓰기</a>
+	      <a href="/board/used/usedupload" class="center-block btn btn-primary p-3 px-xl-4 py-xl-2 btn-sm" style="background: linear-gradient(45deg, #4174d0 0%, #5dbfe5 100%); border: none; color: white !important;">글쓰기</a>
 	    </div>
         
+		<c:choose>
+        <c:when test="${searchType eq 'apartmentIdx'}">        
         <div class="row mt-5">
           <div class="col text-center">
             <div class="block-27">
               <ul>
                 <li><a href="/board/used/usedlist">&lt;&lt;</a></li>
                 <li><a href="/board/used/usedlist?page=${paging.prev}">&lt;</a></li>
-	                <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
-	                   <c:choose>
-	                      <c:when test="${paging.currentPage eq page}">
-	                         <li class="active"><a href="/board/used/usedlist?page=${page}">${page}</a></li>
-	                      </c:when>
-	                      <c:otherwise>
-	                         <li><a href="/board/used/usedlist?page=${page}">${page}</a></li>
-	                      </c:otherwise>
-	                   </c:choose>
-	              	 </c:forEach>
+	                
+	                <c:choose>
+		                <c:when test="${paging.lastPage eq 0 }">
+			            	<li class="active"><a href="/board/used/usedlist?page=${page}">1</a></li>
+		                </c:when>
+		                <c:otherwise>	               
+			                <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
+			                   <c:choose>
+			                      <c:when test="${paging.currentPage eq page}">
+			                         <li class="active"><a href="/board/used/usedlist?page=${page}">${page}</a></li>
+			                      </c:when>
+			                      <c:otherwise>
+			                         <li><a href="/board/used/usedlist?page=${page}">${page}</a></li>
+			                      </c:otherwise>
+			                   </c:choose>
+			              	 </c:forEach>
+		              	 </c:otherwise>
+	              </c:choose>	 
+	              
                 <li><a href="/board/used/usedlist?page=${paging.next}">&gt;</a></li>
                 <li><a href="/board/used/usedlist?page=${paging.lastPage}">&gt;&gt;</a></li>
               </ul>
             </div>
           </div>
         </div>
+        </c:when>
+        
+        <c:otherwise>
+        <div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+              <ul>
+                <li><a href="/board/used/usedlist?kind=${searchType}&keyword=${keyword}">&lt;&lt;</a></li>
+                <li><a href="/board/used/usedlist?page=${paging.prev}&kind=${searchType}&keyword=${keyword}">&lt;</a></li>
+	                
+	                <c:choose>
+		                <c:when test="${paging.lastPage eq 0 }">
+			            	<li class="active"><a href="/board/used/usedlist?page=${page}&kind=${searchType}&keyword=${keyword}">1</a></li>
+		                </c:when>
+		                <c:otherwise>	               
+			                <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
+			                   <c:choose>
+			                      <c:when test="${paging.currentPage eq page}">
+			                         <li class="active"><a href="/board/used/usedlist?page=${page}$kind=${searchType}&keyword=${keyword}">${page}</a></li>
+			                      </c:when>
+			                      <c:otherwise>
+			                         <li><a href="/board/used/usedlist?page=${page}&kind=${searchType}&keyword=${keyword}">${page}</a></li>
+			                      </c:otherwise>
+			                   </c:choose>
+			              	 </c:forEach>
+		              	 </c:otherwise>
+	              </c:choose>	 
+	              
+                <li><a href="/board/used/usedlist?page=${paging.next}&kind=${searchType}&keyword=${keyword}">&gt;</a></li>
+                <li><a href="/board/used/usedlist?page=${paging.lastPage}&kind=${searchType}&keyword=${keyword}">&gt;&gt;</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        </c:otherwise>
+        </c:choose>
+
       </div>
     </section>
 
@@ -204,7 +275,7 @@
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
-
+	
   <script src="../../../../resources/js/generation/jquery.min.js"></script>
   <script src="../../../../resources/js/generation/jquery-migrate-3.0.1.min.js"></script>
   <script src="../../../../resources/js/generation/popper.min.js"></script>

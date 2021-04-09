@@ -9,8 +9,13 @@
 		select * from(
 			select rownum rnum, b.* from(
 				select * from tb_mgmtfee m join tb_generation g on (m.generation_idx = g.generation_idx)
-				where m.generation_idx = #{generationIdx} order by due_date desc
+				where m.generation_idx = #{generationIdx} and m.is_del = 0 order by due_date desc
 				) 
 			b ) where rnum between #{paging.queryStart} and #{paging.queryEnd}
 	</select>
+	
+	<!-- update로 해도 돌아가긴 한다.-->
+	<insert id="procedurePaymentInsert" statementType="CALLABLE">
+		{call PL_PAYMENT_UPDATE(#{mgmtfeeIdx, mode=IN},#{paymentMethod, mode=IN},#{paymentAmount, mode=IN})}
+	</insert>	
 </mapper>

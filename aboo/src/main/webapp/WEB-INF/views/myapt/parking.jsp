@@ -18,7 +18,14 @@
 	          <li class="nav-item active"><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
 	          <li class="nav-item"><a class="nav-link" href="/board/info/listinfo">Board</a></li>
 	          <li class="nav-item"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
-	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>
+	          <c:choose>
+	          <c:when test="${sessionScope.generation == null}">
+	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
+	          </c:when>
+	          <c:when test="${sessionScope.generation != null}">
+	          <li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>	          
+	          </c:when>
+	          </c:choose>
 	        </ul>
 	      </div>
 	    </div>
@@ -32,7 +39,7 @@
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
 
             <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Vote</a></span> <span>Schedule</span></p>
+              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="${context }/myapt/vote/votelist">Vote</a></span> <span><a href="${context }/myapt/schedule">Schedule</a></span> <span><a href="${context }/myapt/institutions/institutions">Institutions</a></span></p>
 	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Parking</h1>
             </div>
           </div>
@@ -55,8 +62,8 @@
 	          	<div class="col-md-12 nav-link-wrap mb-5 pb-md-5 pb-sm-1 ftco-animate">
 		            <div class="nav ftco-animate nav-pills justify-content-center text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 		              <a class="nav-link active" id="v-pills-nextgen-tab"  href="${context }/myapt/parking/application" >차량 등록 신청</a>
-		              <a class="nav-link" id="v-pills-performance-tab" data-toggle="pill" href="#v-pills-performance" role="tab" aria-controls="v-pills-performance" aria-selected="false">관리자 문의</a>
-		              <a class="nav-link" id="v-pills-effect-tab" data-toggle="pill" href="#v-pills-effect" role="tab" aria-controls="v-pills-effect" aria-selected="false">내 등록 차량</a>
+		              <a class="nav-link" id="v-pills-performance-tab" href="${context }/myapt/chat" >관리자 문의</a>
+		              <a class="nav-link" id="v-pills-effect-tab"  href="${context }/mypage/mycar">내 등록 차량</a>
 		            </div>
 	         	</div>
         	</div>
@@ -101,6 +108,7 @@
                 <li><a href="/myapt/schedule" class="py-2 d-block">MyApt</a></li>
                 <li><a href="/baord/info/listinfo" class="py-2 d-block">Board</a></li>
                 <li><a href="/mypage/modifyinfo" class="py-2 d-block">MyPage</a></li>
+                <li><a href="/bdmin/contactus" class="py-2 d-block">Contact us</a></li>
               </ul>
             </div>
           </div>

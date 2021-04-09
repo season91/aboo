@@ -22,14 +22,20 @@
 	          <li class="nav-item"><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
 	          <li class="nav-item active"><a class="nav-link" href="/board/info/listinfo">Board</a></li>
 	          <li class="nav-item"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
-	          <c:choose>
-	          <c:when test="${sessionScope.generation == null}">
-	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
-	          </c:when>
-	          <c:when test="${sessionScope.generation != null}">
-	          <li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>	          
-	          </c:when>
-	          </c:choose>
+					
+					<c:choose>
+						<c:when
+							test="${sessionScope.generation == null and sessionScope.admin == null}">
+							<li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>
+						</c:when>
+						<c:when test="${sessionScope.generation != null}">
+							<li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>
+						</c:when>
+						<c:when test="${sessionScope.admin != null}">
+							<li class="nav-item cta"><a href="/admin/logout"
+								class="nav-link"><span>Logout</span></a></li>
+						</c:when>
+					</c:choose>
 	        </ul>
 	      </div>
 	    </div>
@@ -43,8 +49,8 @@
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
 
             <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Info</a></span> <span>Used</span></p>
-	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Interior</h1>
+              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/board/info/listinfo">Info</a></span> <span><a href="/board/interior/intlist">Interior</a></span></span></p>
+	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Used</h1>
             </div>
           </div>
         </div>
@@ -62,12 +68,12 @@
             <p>게시글 작성</p>
           </div>
         </div>
-        <form action="/board/used/useduploadimpl" method="post" enctype="multipart/form-data">
+        <form id = "writeForm" action="/board/used/useduploadimpl" method="post" enctype="multipart/form-data">
         	<div class="p-2 bg-light mt-1">
 	        	<div class="row block-9 d-flex justify-content-center text-center">
 		          <div class="col-md-11">
 		              <div class="form-group mb-0 d-flex w-80">
-		                <span class="col-md-3 align-self-center text-left">제목</span><input type="text" class="form-control" name="usedTitle" required="required" placeholder="제목을 입력해주세요.">
+		                <span class="col-md-3 align-self-center text-left">제목</span><input type="text" class="form-control" name="usedTitle" maxlength="20" required="required" placeholder="제목을 입력해주세요.">
 		              </div>
 		          </div>
 		        </div>
@@ -80,14 +86,14 @@
 		              	<script type="text/javascript">
 							CKEDITOR.replace('p_content', {
 								height: 500
-								, editorplaceholder: '인테리어에 관한 내용을 입력해주세요.'});
+								, editorplaceholder: '중고게시판에 관한 내용을 입력해주세요.'});
 							CKEDITOR.config.resize_enabled = false;
 						</script>
 		              </div>
 		          </div>
 		        </div>
 	        </div>
-	       	<input class = "ml-5 mt-2" type="file" name ="files">
+	       	<input class = "ml-6 mt-2" type="file" name ="files" id="file" accept='image/jpg,image/jpeg,image/gif,image/png' onChange="chk(this)">
 	        <div class="form-group mt-3 text-center">
               <input type="submit" value="등록하기" class="btn btn-primary py-3 px-5">
             </div>
@@ -168,7 +174,32 @@
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
-
+	<script>
+		let check = false;
+		let file = document.querySelector('#file');
+		
+		function chk(obj) {
+		    if (/(\.gif|\.jpg|\.jpeg|\.png)$/i.test(obj.value) == false) {
+		        alert("이미지 형식의 파일을 선택하십시오.");
+		        check = false;
+		        return;
+		    }else{
+		        check = true;
+		    }
+		}
+			
+		    document.querySelector('#writeForm').addEventListener('submit',(e) => {
+			    if (!check) {
+		    	console.dir(check)
+			         e.preventDefault();
+			          alert("사진 첨부는 필수입니다.");
+				      return;
+				}
+		    });
+		
+	</script>
+	
+	
   <script src="../../../../resources/js/generation/jquery.min.js"></script>
   <script src="../../../../resources/js/generation/jquery-migrate-3.0.1.min.js"></script>
   <script src="../../../../resources/js/generation/popper.min.js"></script>

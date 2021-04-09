@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.kh.aboo.bdmin.management.model.repository.ManagementRepository">
+	
+	<select id="selectApartCnt" resultType="int">
+		select count(*) from tb_apartment
+		<where>
+			<choose>
+				<when test="searchType == 'apartmentName'">
+					apartment_name like '%'||#{keyword}||'%'
+				</when>
+			</choose>
+		</where>
+	</select>
+	
+	<select id="selectApartList" resultType="apartment">
+		select * from (
+			select rownum rnum, b.* from (
+				select * from tb_apartment 
+				<where>
+					<choose>
+						<when test="searchType == 'apartmentName'">
+							apartment_name like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</where>
+				
+				order by apartment_IDX desc ) b 
+			) where rnum between #{paging.queryStart} and #{paging.queryEnd}
+	</select>
+	
+	<select id="selectApartApplicationCnt" resultType="int">
+		select count(*) from tb_apart_application 
+		<where>
+			<choose>
+				<when test="searchType == 'basic'">
+					is_process = 0
+				</when>
+				<when test="searchType == 'apartmentName'">
+					a_apartment_name like '%'||#{keyword}||'%' and is_process = 0
+				</when>
+			</choose>
+		</where>
+	</select>
+	
+	<select id="selectApartApplicationList" resultType="apartApplication">
+		select * from (
+			select rownum rnum, b.* from (
+				select * from tb_apart_application 
+				<where>
+					<choose>
+						<when test="searchType == 'basic'">
+							is_process = 0
+						</when>
+						<when test="searchType == 'apartmentName'">
+							a_apartment_name like '%'||#{keyword}||'%' and is_process = 0
+						</when>
+					</choose>
+				</where>
+				
+				order by application_idx desc ) b 
+			) where rnum between #{paging.queryStart} and #{paging.queryEnd}
+	</select>
+	
+	<update id="procedureApartApplicationUpdate" statementType="CALLABLE">
+		{call PL_APART_APPROVAL(#{applicationIdx, mode=IN},#{isProcess, mode=IN})}
+	</update>
+
+
+	<select id="selectAdminCnt" resultType="int">
+		select count(*) from tb_manager
+		<where>
+			<choose>
+				<when test="searchType = 'basic'">
+					is_del = 0
+				</when>
+				<when test="searchType == 'apartmentName'">
+					apartment_idx = #{apartmentIdx} and is_del = 0
+				</when>
+				<when test="searchType == 'name'">
+					name = #{keyword} and is_del = 0 
+				</when>
+			</choose>
+		</where>
+	</select>
+	
+	<select id="selectAdminList" resultType="admin">
+		select * from (
+			select rownum rnum, b.* from (
+				select * from tb_manager 
+				<where>
+					<choose>
+						<when test="searchType = 'basic'">
+							is_del = 0
+						</when>
+						<when test="searchType == 'apartmentName'">
+							apartment_idx = #{apartmentIdx} and is_del = 0
+						</when>
+						<when test="searchType == 'name'">
+							name = #{keyword} and is_del = 0 
+						</when>
+					</choose>
+				</where>
+				
+				order by manager_idx desc ) b 
+			) where rnum between #{paging.queryStart} and #{paging.queryEnd}
+	</select>
+	
+	</mapper>

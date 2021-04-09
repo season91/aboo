@@ -1,54 +1,35 @@
 package com.kh.aboo.car;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
-import com.kh.aboo.admin.car.model.service.CarService;
-import com.kh.aboo.admin.car.model.vo.Car;
-import com.kh.aboo.common.code.Configcode;
-import com.kh.aboo.user.generation.model.vo.Generation;
-
-@WebAppConfiguration 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/*-context.xml"})
+@WebAppConfiguration // 프로젝트의 web.xml 대신 테스트를 위해 생성된 가상 web.xml 사용한다.
+@RunWith(SpringJUnit4ClassRunner.class) // Junit 단위테스트 프레임워크의 실행방법을 지정해준다. 테스트때 사용할 가상의 applicationContext를 생성하고 관리해준다.
+@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/*-context.xml"}) //가상 applicationContext 가 읽을 스프링 빈 설정파일의 위치를 지정.
 public class CarControllerTest {
-	@Autowired
-	CarService carService;
-
-	
-	@Test
-	public void carAdd() {
-		// 세대정보 가져온다
-		Generation generationInfo = new Generation();
-		generationInfo.setBuilding("104");
-		generationInfo.setNum("405");
-		generationInfo.setApartmentIdx("100000");
-		
-		Generation generation = carService.selectGenerationByBuildingAndNum(generationInfo);
-		
-		System.out.println(generation);
-		
-		// 세대정보와 차량번호를 넣어준다.
-		Car car = new Car();
-		car.setApartmentIdx(generation.getApartmentIdx());
-		car.setGenerationIdx(generation.getGenerationIdx());
-		car.setCarNumber("104마4545");
-		car.setCarQR(Configcode.QRCODE_PATH.desc);
-		
-		String res = carService.insertAndQRWrite(generation.getGenerationIdx(), car);
-		System.out.println(res);
-	};
-	
-	
-	@Test
-	public void carApplicationApproval() {
-		
-		// 등록신청 
-		
-	}
+   
+   @Autowired
+   private WebApplicationContext context; 
+   
+   private MockMvc mockMvc;
+   
+   @Before
+   public void setup() {
+      this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context).build();
+   }
+   
+  
+   
 }

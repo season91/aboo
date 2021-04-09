@@ -60,7 +60,6 @@
                    <!-- Dropdown - 말머리 -->
                    <div class="dropdown mb-3">
 		                    <select class="btn dropdown-toggle p-3" name="bCategory">
-							  <option>category</option>
 							  <option value="정보">정보</option>
 							  <option value="질문">질문</option>
 							</select>
@@ -76,9 +75,6 @@
 			              </div>
 			              <div class="form-group">
 			                <textarea name="bContent" id="bContent" cols="30" rows="15" class="form-control" placeholder="내용을 입력하세요"  required="required"></textarea>
-			              </div>
-			               <div class="form-group">
-			                 <input type="file" name="files" id="contract_file" multiple/>
 			              </div>
 			              <div class="nav ftco-animate nav-pills d-flex justify-content-center mt-5" id="v-pills-tab" role="tablist" aria-orientation="vertical">	
                 		 	<button class="nav-link pl-5 pr-5 bg-white" >등록하기</button>
@@ -143,6 +139,7 @@
                 <li><a href="/myapt/schedule" class="py-2 d-block">MyApt</a></li>
                 <li><a href="/baord/info/listinfo" class="py-2 d-block">Board</a></li>
                 <li><a href="/mypage/modifyinfo" class="py-2 d-block">MyPage</a></li>
+              	<li><a href="/bdmin/contactus" class="py-2 d-block">Contact us</a></li>
               </ul>
             </div>
           </div>

@@ -14,60 +14,66 @@
     -->
       <div class="sidebar-wrapper">
         <div class="logo">
-          <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+          <a href="/admin/index" class="simple-text logo-mini">
             <img src="../../../resources/abooimg/logo_w.png">
           </a>
-          <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+          <a href="/admin/index" class="simple-text logo-normal">
             ADMIN
           </a>
         </div>
         <ul class="nav">
           <li >
-            <a href="./dashboard.html">
+            <a href="/admin/mypage/modifyinfo">
               <i class="tim-icons icon-badge"></i>
               <p>Mypage</p>
             </a>
           </li>
           <li class="active">
-            <a href="./dashboard.html">
+            <a href="/admin/vote/makevote">
               <i class="tim-icons icon-tap-02"></i>
               <p>Vote</p>
             </a>
           </li>
           <li>
-            <a href="./icons.html">
+            <a href="/admin/authority">
               <i class="tim-icons icon-single-02"></i>
               <p>Authority</p>
             </a>
           </li>
           <li>
-            <a href="./map.html">
+            <a href="/admin/mgmtfee">
               <i class="tim-icons icon-chart-bar-32"></i>
-              <p>Mgmtfee</p>
+              <p>Management Fee</p>
             </a>
           </li>
           <li>
-            <a href="./notifications.html">
+            <a href="/admin/car">
               <i class="tim-icons icon-bus-front-12"></i>
-              <p>Vehicle</p>
+              <p>Car</p>
             </a>
           </li>
           <li>
-            <a href="./user.html">
+            <a href="/admin/schedule/addschedule">
               <i class="tim-icons icon-calendar-60"></i>
               <p>Schedule</p>
             </a>
           </li>
           <li>
-            <a href="./tables.html">
+            <a href="/admin/chat">
               <i class="tim-icons icon-chat-33"></i>
               <p>Chat</p>
             </a>
           </li>
+         <li>
+           <a href="/bdmin/notice/noticelist">
+              <i class="tim-icons icon-volume-98"></i>
+              <p>notice</p>
+            </a>
+          </li>
           <li>
-            <a href="./rtl.html">
+            <a href="/bdmin/login">
               <i class="tim-icons icon-key-25"></i>
-              <p>BDIN</p>
+              <p>BDMIN</p>
             </a>
           </li>
         </ul>
@@ -106,14 +112,14 @@
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Profile</a>
+                    <a href="/admin/mypage/modifyinfo" class="nav-item dropdown-item">Profile</a>
                   </li>
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Settings</a>
+                    <a href="/admin/chat" class="nav-item dropdown-item">1:1 Chat</a>
                   </li>
                   <div class="dropdown-divider"></div>
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Log out</a>
+                    <a href="/admin/logout" class="nav-item dropdown-item">Log out</a>
                   </li>
                 </ul>
               </li>
@@ -163,7 +169,7 @@
                       <div class="form-group">
                         <label>투표 기간</label>
                         <div class="d-flex">
-                        	<input type="date" class="form-control" name="voteBeginDate" required="required">
+                        	<input id="voteBeginDate" type="date" class="form-control" name="voteBeginDate" required="required" readonly>
                         	<div class="ml-5 mr-5 font-weight-bold align-self-center" style="color: rgba(255, 255, 255, 0.8); font-size: 1.3rem">&#126;</div>
                         	<input type="date" class="form-control" name="voteEndDate" required="required">
                         </div>
@@ -226,46 +232,6 @@
             <a href="https://www.creative-tim.com" target="_blank">aboo</a> for a better apartment.
           </div>
       </footer>
-      </div>
-    </div>
-    <div class="fixed-plugin">
-      <div class="dropdown show-dropdown">
-        <a href="#" data-toggle="dropdown">
-          <i class="fa fa-cog fa-2x"> </i>
-        </a>
-        <ul class="dropdown-menu">
-          <li class="header-title"> Sidebar Background</li>
-          <li class="adjustments-line">
-            <a href="javascript:void(0)" class="switch-trigger background-color">
-              <div class="badge-colors text-center">
-                <span class="badge filter badge-primary active" data-color="primary"></span>
-                <span class="badge filter badge-blue" data-color="blue"></span>
-                <span class="badge filter badge-green" data-color="green"></span>
-              </div>
-              <div class="clearfix"></div>
-            </a>
-          </li>
-          <li class="adjustments-line text-center color-change">
-            <span class="color-label">LIGHT MODE</span>
-            <span class="badge light-badge mr-2"></span>
-            <span class="badge dark-badge ml-2"></span>
-            <span class="color-label">DARK MODE</span>
-          </li>
-          <li class="button-container">
-            <a href="https://www.creative-tim.com/product/black-dashboard" target="_blank" class="btn btn-primary btn-block btn-round">Download Now</a>
-            <a href="https://demos.creative-tim.com/black-dashboard/docs/1.0/getting-started/introduction.html" target="_blank" class="btn btn-default btn-block btn-round">
-              Documentation
-            </a>
-          </li>
-          <li class="header-title">Thank you for 95 shares!</li>
-          <li class="button-container text-center">
-            <button id="twitter" class="btn btn-round btn-info"><i class="fab fa-twitter"></i> &middot; 45</button>
-            <button id="facebook" class="btn btn-round btn-info"><i class="fab fa-facebook-f"></i> &middot; 50</button>
-            <br>
-            <br>
-            <a class="github-button" href="https://github.com/creativetimofficial/black-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ntkme/github-buttons on GitHub">Star</a>
-          </li>
-        </ul>
       </div>
     </div>
     <!--   Core JS Files   -->
@@ -393,6 +359,8 @@
           });
         });
       });
+      
+      document.querySelector('#voteBeginDate').valueAsDate = new Date();
     </script>
 </body>
 

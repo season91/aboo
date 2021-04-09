@@ -32,13 +32,13 @@ public interface GenerationRepository {
 	@Update("update TB_GENERATION set PASSWORD = #{password} where ID = #{id}")
 	public int updateFindPassword(Generation generation);
 		
-	//세대원 추가 페이지 리스트
+	//세대원  페이지 리스트
 	List<GenerationWon> selectGenerationWonList(Map<String,Object> generationMap);
 
-	//세대 총 수
+	//세대원 총 수
 	@Select("select count(*) from TB_GENERATION_WON where IS_DEL = 0 and GENERATION_IDX = #{generationIdx}")
 	int selectContentCnt(String generationIdx);
-
+	
 	//세대원 수정
 	@Update("update TB_GENERATION_WON set NAME = #{name} , tell = #{tell} where generation_won_idx = #{generationWonIdx}")
 	int updateGenerationWonModify(GenerationWon generationWon);
@@ -55,9 +55,23 @@ public interface GenerationRepository {
 	@Select("select * from TB_GENERATION where GENERATION_IDX = #{generationIdx}")
 	Generation selectGeneration(Generation generation);
 	
+	//정보수정
 	int updateGenerationModify(Generation generation);
 	
+	//이메일 보내기전 확인
+	@Select("select count(*) from TB_GENERATION where email = #{email}")
+	int selectGenerationEmailCnt(Generation generation);
+	
+	//이메일 정보수정
 	@Update("update TB_GENERATION set email = #{email} where GENERATION_IDX = #{generationIdx}")
 	int updateGenerationEmail(Generation generation);
+	
+	//휴대폰 보내기전 확인
+	@Select("select count(*) from TB_GENERATION where tell = #{tell}")
+	int selectGenerationTellCnt(Generation generation);
+	
+	//휴대폰 정보수정
+	@Update("update TB_GENERATION set TELL = #{tell} where GENERATION_IDX = #{generationIdx}")
+	int updateGenerationTell(Generation generation);
 }
 

@@ -17,22 +17,21 @@
 	          <li class="nav-item active"><a href="/index" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
 	          <li class="nav-item "><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
-	          <li class="nav-item"><a class="nav-link" href="/board/info/infolist">Board</a></li>
+	          <li class="nav-item"><a class="nav-link" href="/board/info/listinfo">Board</a></li>
 	          <li class="nav-item "><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
-	          <c:choose>
-		          <c:when test="${sessionScope.generation == null}">
-		          	<li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
-		          </c:when>
-		          <c:when test="${sessionScope.generation != null}">
-		          	<li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>	          
-		          </c:when>
-		          <c:when test="${sessionScope.admin == null}">
-		          	<li class="nav-item cta"><a href="/login" class="nav-link"><span>Admin Login</span></a></li>	          
-		          </c:when>
-		          <c:when test="${sessionScope.admin != null}">
-		          	<li class="nav-item cta"><a href="/login" class="nav-link"><span>Admin Logout</span></a></li>	          
-		          </c:when>
-	          </c:choose>
+				<c:choose>
+					<c:when
+						test="${sessionScope.generation == null and sessionScope.admin == null}">
+						<li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>
+					</c:when>
+					<c:when test="${sessionScope.generation != null}">
+						<li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>
+					</c:when>
+					<c:when test="${sessionScope.admin != null}">
+						<li class="nav-item cta"><a href="/admin/logout"
+							class="nav-link"><span>Logout</span></a></li>
+					</c:when>
+				</c:choose>
 	        </ul>
 	      </div>
 	    </div>
@@ -45,7 +44,6 @@
         <div class="container-fluid">
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
             <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <!-- <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span>Contact</span></p> -->
 	           <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Home</h1>
             </div>
           </div>
@@ -111,6 +109,7 @@
 	                <li><a href="/myapt/schedule" class="py-2 d-block">MyApt</a></li>
 	                <li><a href="/baord/info/listinfo" class="py-2 d-block">Board</a></li>
 	                <li><a href="/mypage/modifyinfo" class="py-2 d-block">MyPage</a></li>
+	                <li><a href="/bdmin/contactus" class="py-2 d-block">Contact us</a></li>
 	              </ul>
 	            </div>
 	          </div>

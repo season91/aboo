@@ -40,7 +40,7 @@
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
 
             <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Parking</a></span> <span class="mr-2">Schedule</span> <span>Institutions</span></p>
+              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span><a href="${context }/myapt/vote/votelist">Parking</a></span> <span><a href="${context }/myapt/schedule">Schedule</a></span> <span><a href="${context }/myapt/institutions/institutions">Institutions</a></span></p>
 	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Vote</h1>
             </div>
           </div>
@@ -90,15 +90,15 @@
             		<div class="about-author d-flex p-5 bg-light mt-3">
 		              <div class="desc align-self-md-center w-100 d-flex flex-column align-items-center">
 		                <h3 class="text-center">${voteMng.voteTitle}</h3>
+		                <h6 class="text-center">총 ${voteGenCnt}명 참여</h6>
 		                <c:forEach items="${itemList}" var="itemList" varStatus="status">
-		                	<div class="text-center col-md-4 d-flex justify-content-between"><span>${status.count}. ${itemList}</span><span>${turnoutList[status.index]}%</span></div>
+		                	<div class="text-center col-md-4 d-flex justify-content-between"><span>${status.count}. ${itemList}</span><span>${turnoutList[status.index]}% (${voteOnWhatList[status.index]}표)</span></div>
 		                </c:forEach>
 		              </div>
 		            </div>
 		            
 		            <div class="mt-5 mb-5 text-danger text-center">
 		            	<p class="mb-0">투표가 종료되었습니다.</p>
-		            	<p class="mb-0">투표결과 ${idxOfMax+1}번 선택지가 ${maxTurnout}%로 가장 높은 수의 표를 얻었습니다.</p>
 		            	<p>투표에 참여해주신 입주민 여러분 감사드립니다.</p>
 		            </div>
             	</c:otherwise>
@@ -175,6 +175,7 @@
                 <li><a href="/myapt/schedule" class="py-2 d-block">MyApt</a></li>
                 <li><a href="/baord/info/listinfo" class="py-2 d-block">Board</a></li>
                 <li><a href="/mypage/modifyinfo" class="py-2 d-block">MyPage</a></li>
+                <li><a href="/bdmin/contactus" class="py-2 d-block">Contact us</a></li>
               </ul>
             </div>
           </div>

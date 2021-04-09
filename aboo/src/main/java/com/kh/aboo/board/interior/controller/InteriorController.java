@@ -204,6 +204,14 @@ public class InteriorController {
 	@PostMapping("intcmtupload")
 	public String intCmtUpload(IntCmt intCmt, Model model, HttpSession session) {
 		Generation generation = (Generation) session.getAttribute("generation");
+		
+		if(generation == null) {
+			model.addAttribute("alertMsg", "회원 로그인 후 댓글을 작성하실 수 있습니다.");
+			model.addAttribute("url", "/login");
+			
+			return "common/result";
+		}
+		
 		intCmt.setIntCmtWriter(generation.getBuilding() + "동 " + generation.getNum() + "호");
 		int res = interiorService.insertIntCmt(intCmt);
 		
@@ -255,6 +263,45 @@ public class InteriorController {
 		}
 		
 		return "fail";
+	}
+	
+	@GetMapping("intsearch")
+	public String intSearch(String intSearch
+			, @RequestParam(defaultValue = "1") int page
+			, Model model
+			, HttpSession session) {
+		Generation generation = (Generation) session.getAttribute("generation");
+		Admin admin = (Admin) session.getAttribute("admin");
+		session.setAttribute("intSearch", intSearch);
+		
+		if(generation != null) {
+			Map<String, Object> commandMap = interiorService.selectInteriorBrdSearchList(page, generation.getApartmentIdx(), intSearch);
+			List<InteriorBrd> interiorBrd = (List<InteriorBrd>) commandMap.get("interiorBrd");
+			List<Integer> intCmtCntList = new ArrayList<>();
+			
+			for (InteriorBrd intBrd : interiorBrd) {
+				int intCmt = interiorService.selectIntCmtCnt(intBrd.getIntPostNo());
+				intCmtCntList.add(intCmt);
+			}
+			
+			model.addAllAttributes(interiorService.selectInteriorBrdSearchList(page, generation.getApartmentIdx(), intSearch));
+			model.addAttribute("intCmtCntList", intCmtCntList);
+		}else {
+			Map<String, Object> commandMap = interiorService.selectInteriorBrdSearchList(page, admin.getApartmentIdx(), intSearch);
+			List<InteriorBrd> interiorBrd = (List<InteriorBrd>) commandMap.get("interiorBrd");
+			List<Integer> intCmtCntList = new ArrayList<>();
+			
+			for (InteriorBrd intBrd : interiorBrd) {
+				int intCmt = interiorService.selectIntCmtCnt(intBrd.getIntPostNo());
+				intCmtCntList.add(intCmt);
+			}
+			
+			model.addAllAttributes(interiorService.selectInteriorBrdSearchList(page, admin.getApartmentIdx(), intSearch));
+			model.addAttribute("intCmtCntList", intCmtCntList);
+			model.addAttribute("intSearch", intSearch);
+		}
+		
+		return "board/interior/intsearch";
 	}
 	
 }

@@ -24,12 +24,18 @@ public interface AdminRepository {
 	@Insert("insert into TB_GENERATION(GENERATION_IDX,APARTMENT_IDX,ID,PASSWORD,BUILDING,NUM) values(SC_GENERATION_IDX.nextval,#{apartmentIdx},#{id},#{password},#{building},#{num})")
 	public int insertGeneration(Generation generation);
 	
-	@Select("select count(*) from TB_GENERATION where is_del = 0 and APARTMENT_IDX = #{apartmentIdx}")
-	int selectContentCnt(String apartmentIdx);
+	@Select("select count(*) from TB_GENERATION where id = #{id} and is_del = 0 ")
+	public int selectGenerationIdCnt(Generation generation);
+	
+	int selectContentCnt(Map<String,Object> searchMap);
 
 	//세대 추가 페이지 리스트
 	List<Generation> selectAuthorityList(Map<String,Object> authorityMap);
 		
+	//세대 검색 세대 찾기
+	@Select("select generation_idx from tb_generation where apartment_idx = #{apartmentIdx} and building = #{building} and num = #{num} and IS_DEL = 0")
+	String selectGenerationByBuildingAndNum(Generation generation);
+	
 	//아이디 메일 전에 있는 어드민인지 체크
 	@Select("select * from TB_MANAGER where name = #{name} and EMAIL = #{email}")
 	public Admin selectFindId(Admin admin);
@@ -49,16 +55,28 @@ public interface AdminRepository {
 	//정보 업데이트
 	int updateAdminModify(Admin admin);
 	
+	//이메일 보내기전 확인
+	@Select("select count(*) from TB_MANAGER where email = #{email}")
+	int selectAdminEmailCnt(Admin admin);
+	
 	//이메일인증 업데이트 
 	@Update("update TB_MANAGER set email = #{email} where MANAGER_IDX = #{managerIdx}")
 	int updateAdminEmail(Admin admin);
 	
 	//세대 초기화
 	@Update("update TB_GENERATION set IS_DEL = 1 where GENERATION_IDX =#{generationIdx}")
-	int resetGeneration(Generation generation);
+	int updateDeleteGeneration(Generation generation);
 	
-	//세대 초기화 후 새로 생성
-	@Insert("@Insert into TB_GENERATION(GENERATION_IDX,APARTMENT_IDX,BUILDING,NUM,ID,PASSWORD) value(SC_GENERATION_IDX.nextval,#{apartmentIdx},#{building},${num},#{id},#{password})")
-	int resetInsertGeneration(Generation generation);
+	//어드민 아파트 시권스의 구분자 찾기
+	@Select("select SEPARATOR from TB_APARTMENT where APARTMENT_IDX = #{apartmentIdx} ")
+	String selectApartmentBySeparator(String apartmentIdx);
 	
+	//휴대폰 정보수정
+	@Update("update TB_MANAGER set TELL = #{tell} where MANAGER_IDX = #{managerIdx}")
+	int updateAdminTell(Admin admin);
+	
+	//휴대폰번호 보내기전 확인
+	@Select("select count(*) from TB_MANAGER where tell = #{tell}")
+	int selectAdminTellCnt(Admin admin);
 }	
+

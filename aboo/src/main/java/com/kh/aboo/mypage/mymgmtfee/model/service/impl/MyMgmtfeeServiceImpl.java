@@ -76,8 +76,14 @@ public class MyMgmtfeeServiceImpl implements MyMgmtfeeService {
 
 	//선영 결제
 	@Override
-	public int insertPayment(MgmtfeePayment mgmtfeePayment) {
-		return myMgmtfeeRepository.insertPayment(mgmtfeePayment);
+	public void insertPayment(MgmtfeePayment mgmtfeePayment) {
+		 myMgmtfeeRepository.procedurePaymentInsert(mgmtfeePayment);
+	}
+
+
+	@Override
+	public String selectPaymentGenerationIdx(String mgmtfeeIdx) {
+		return myMgmtfeeRepository.selectPaymentGenerationIdx(mgmtfeeIdx);
 	}
 
 

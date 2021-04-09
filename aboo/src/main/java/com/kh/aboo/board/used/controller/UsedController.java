@@ -14,10 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kh.aboo.board.model.repository.BoardRepository;
-import com.kh.aboo.board.model.service.BoardService;
 import com.kh.aboo.board.used.model.service.UsedService;
 import com.kh.aboo.board.used.model.vo.UsedBrd;
+import com.kh.aboo.board.used.model.vo.UsedCmt;
 import com.kh.aboo.user.generation.model.vo.Generation;
 import com.kh.aboo.user.manager.model.vo.Admin;
 import com.sun.org.apache.xpath.internal.operations.Mod;
@@ -33,16 +32,19 @@ public class UsedController {
 	}
 
 	@GetMapping("usedlist")
-	public String usedList(@RequestParam(defaultValue = "1") int page, Model model, HttpSession session) {
+	public String usedList(@RequestParam(defaultValue = "1") int page
+			, @RequestParam(defaultValue = "apartmentIdx") String kind
+			,@RequestParam(defaultValue = "ㄱ") String keyword
+			, Model model
+			, HttpSession session) {
 
 		Generation generation = (Generation) session.getAttribute("generation");
 		Admin admin = (Admin) session.getAttribute("admin");
 
 		if (generation != null) {
-			model.addAllAttributes(usedService.selectUsedBrdList(page, generation.getApartmentIdx()));
-
+			model.addAllAttributes(usedService.selectUsedBrdList(page, generation.getApartmentIdx(), kind, keyword));
 		} else {
-			model.addAllAttributes(usedService.selectUsedBrdList(page, admin.getApartmentIdx()));
+			model.addAllAttributes(usedService.selectUsedBrdList(page, admin.getApartmentIdx(), kind, keyword));
 
 		}
 
@@ -53,8 +55,8 @@ public class UsedController {
 	public String usedDetail(String usedIdx, Model model) {
 
 		model.addAllAttributes(usedService.selectUsedDetail(usedIdx));
-		System.out.println(usedService.selectUsedDetail(usedIdx));
-			
+		model.addAttribute("usedBrdCmtList", usedService.selectUsedBrdCmt(usedIdx));
+		model.addAttribute("usedBrdCmtCnt", usedService.selectUsedBrdCmtCnt(usedIdx));
 		return "board/used/usedDetail";
 
 	}
@@ -76,13 +78,10 @@ public class UsedController {
 	@ResponseBody
 	public String usedDelete(String usedIdx, Model model) {
 
-		int res = usedService.updateUsedDelete(usedIdx);
+		usedService.updateUsedDelete(usedIdx);
 
-		if (res > 0) {
-			return "success";
-		}
+		return "success";
 
-		return "fail";
 	}
 
 	@GetMapping("usedmodify")
@@ -100,21 +99,23 @@ public class UsedController {
 	}
 
 	@PostMapping("usedmodifyimpl")
-	public String usedmodifyImpl(UsedBrd usedBrdInfo, Model model) {
-		System.out.println(usedBrdInfo);
+	public String usedmodifyImpl(@RequestParam List<MultipartFile> files, UsedBrd usedBrd, Model model) {
 
-		return "";
+		usedService.updateUsedBrdFileModify(usedBrd, files);
+
+		model.addAttribute("alertMsg", "게시물 수정에 성공하였습니다.");
+		model.addAttribute("url", "/board/used/usedlist");
+		return "common/result";
 	}
 
 	@GetMapping("usedupload")
 	public String usedUpload() {
-
 		return "board/used/usedUpload";
 	}
 
 	@PostMapping("useduploadimpl")
 	public String usedUploadimpl(@RequestParam List<MultipartFile> files, UsedBrd usedBrd,
-			@SessionAttribute(name = "generation", required = false) Generation generation,Model model) {
+			@SessionAttribute(name = "generation", required = false) Generation generation, Model model) {
 
 		String generationIdx = generation.getGenerationIdx();
 		String apartmentIdx = generation.getApartmentIdx();
@@ -124,10 +125,65 @@ public class UsedController {
 		usedBrd.setApartmentIdx(apartmentIdx);
 
 		usedService.insertUsedBrd(usedBrd, files);
-		
+
 		model.addAttribute("alertMsg", "게시물 등록에 성공하였습니다.");
 		model.addAttribute("url", "/board/used/usedlist");
 		return "common/result";
+	}
+
+	@PostMapping("usedcmtupload")
+	public String usedCmtUpload(UsedCmt usedCmt,
+			@SessionAttribute(name = "generation", required = false) Generation generation, Model model) {
+
+		String usedCmtWriter = generation.getBuilding() + "동" + generation.getNum() + "호";
+		usedCmt.setUsedCmtWriter(usedCmtWriter);
+		usedService.insertUsedBrdCmtUpload(usedCmt);
+
+		model.addAttribute("alertMsg", "댓글 등록에 성공하였습니다.");
+		model.addAttribute("url", "/board/used/useddetail?usedIdx=" + usedCmt.getUsedIdx());
+		return "common/result";
+
+	}
+
+	@PostMapping("usedbrdcmtmodify")
+	public String usedBrdCmtModify(UsedCmt usedCmt, UsedBrd usedBrd, Model model) {
+
+		usedService.updateUsedBrdCmt(usedCmt);
+
+		model.addAttribute("alertMsg", "댓글 수정에 성공하였습니다.");
+		model.addAttribute("url", "/board/used/useddetail?usedIdx=" + usedCmt.getUsedIdx());
+		return "common/result";
+	}
+
+	@GetMapping("usedbrdcmtdelete")
+	@ResponseBody
+	public String usedBrdCmtDelete(String usedCmtIdx, Model model) {
+
+		int res = usedService.updateUsedBrdCmtDelete(usedCmtIdx);
+
+		if (res > 0) {
+
+			return "success";
+		} else {
+			return "fail";
+		}
+
+	}
+
+	@GetMapping("usedbrdcmtprivate")
+	@ResponseBody
+	public String usedBrdCmtPrivate(String usedCmtIdx, Model model) {
+
+		int res = usedService.updateUsedBrdCmtPrivate(usedCmtIdx);
+
+		if (res > 0) {
+
+			return "success";
+
+		} else {
+			return "fail";
+		}
+
 	}
 
 }

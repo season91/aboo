@@ -14,7 +14,7 @@
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
-     <div class="sidebar-wrapper">
+       <div class="sidebar-wrapper">
         <div class="logo">
           <a href="/admin/index" class="simple-text logo-mini">
             <img src="../../../resources/abooimg/logo_w.png">
@@ -49,9 +49,9 @@
             </a>
           </li>
           <li>
-            <a href="/admin/vehicle">
+            <a href="/admin/car">
               <i class="tim-icons icon-bus-front-12"></i>
-              <p>Vehicle</p>
+              <p>Car</p>
             </a>
           </li>
           <li>
@@ -67,9 +67,15 @@
             </a>
           </li>
           <li>
-            <a href="/admin/bdin">
+           <a href="/bdmin/notice/noticelist">
+              <i class="tim-icons icon-volume-98"></i>
+              <p>notice</p>
+            </a>
+          </li>
+          <li>
+            <a href="/bdmin/login">
               <i class="tim-icons icon-key-25"></i>
-              <p>BDIN</p>
+              <p>BDMIN</p>
             </a>
           </li>
         </ul>
@@ -77,7 +83,7 @@
     </div>
     <div class="main-panel">
       <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent   ">
+       <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent   ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
             <div class="navbar-toggle d-inline">
@@ -87,31 +93,35 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">ADMIN 페이지 입니다.</a>
+            <a class="navbar-brand" href="#pablo">Aboo admin</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navigation">
+             <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto ">
               <li class="dropdown nav-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div class="photo">
-                    <img src="../../resources/img/anime3.png">
+                    <img src="../../../../resources/img/anime3.png">
                   </div>
+                  <b class="caret d-none d-lg-block d-xl-block"></b>
+                  <p class="d-lg-none">
+                    Log out
+                  </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Profile</a>
+                    <a href="${context }/admin/mypage/modifyinfo" class="nav-item dropdown-item">Profile</a>
                   </li>
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Settings</a>
+                    <a href="${context }/admin/chat" class="nav-item dropdown-item">1:1 chat</a>
                   </li>
                   <div class="dropdown-divider"></div>
                   <li class="nav-link">
-                  <c:choose>
+                   <c:choose>
                   	<c:when test="${sessionScope.admin == null}">
                     	<a href="/admin/login" class="nav-item dropdown-item">Log in</a>
                   	</c:when>
@@ -136,19 +146,15 @@
               <div class="card-header ">
                 <div class="row">
                   <div class="col-sm-6 text-left">
-                    <h5 class="card-category">Total Shipments</h5>
-                    <h2 class="card-title">Performance</h2>
+                    <h5 class="card-category">Total Management Fee</h5>
+                    <h2 class="card-title">
+                    <script>
+		              document.write(new Date().getFullYear())
+		            </script>년 월별 관리비 고지서 발행 금액 </h2>
                   </div>
                   <div class="col-sm-6">
                     <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
-                      <label class="btn btn-sm btn-primary btn-simple active" id="0">
-                        <input type="radio" name="options" autocomplete="off" checked> Accounts
-                      </label>
-                      <label class="btn btn-sm btn-primary btn-simple " id="1">
-                        <input type="radio" name="options" autocomplete="off"> Purchases
-                      </label>
-                      <label class="btn btn-sm btn-primary btn-simple " id="2">
-                        <input type="radio" name="options" autocomplete="off"> Sessions
+                       <label class="btn btn-sm btn-primary btn-simple active" id="0"> (단위 : 만원)
                       </label>
                     </div>
                   </div>
@@ -157,11 +163,13 @@
               <div class="card-body">
                 <div class="chart-area">
                   <canvas id="chartBig1"></canvas>
+                  <input type="hidden" id="list" value="${list}">
                 </div>
               </div>
             </div>
           </div>
         </div>
+        
         <div class="row">
           <div class="col-lg-4">
             <div class="card card-chart">
@@ -176,6 +184,7 @@
               </div>
             </div>
           </div>
+       <!-- 
           <div class="col-lg-4">
             <div class="card card-chart">
               <div class="card-header ">
@@ -189,11 +198,32 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-4">
+           -->   
+      <input type="hidden" value="${usedList}" id="usedList">
+      <input type="hidden" value="${infoList}" id="infoList">
+      <input type="hidden" value="${intList}" id="intList">
+          <div class="col-lg-8">
             <div class="card card-chart">
               <div class="card-header ">
-                <h5 class="card-category">Completed Tasks</h5>
-                <h3 class="card-title"><i class="tim-icons icon-send text-success "></i> 12,100K</h3>
+               <div class="row">
+                  <div class="col-sm-6 text-left">
+                    <h5 class="card-category">Community</h5>
+                    <h2 class="card-title">USED</h2>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+                      <label class="btn btn-sm btn-primary btn-simple active" id="0">
+                        <input type="radio" name="options" autocomplete="off" checked> USED
+                      </label>
+                      <label class="btn btn-sm btn-primary btn-simple " id="1">
+                        <input type="radio" name="options" autocomplete="off"> INFO
+                      </label>
+                      <label class="btn btn-sm btn-primary btn-simple " id="2">
+                        <input type="radio" name="options" autocomplete="off"> INT
+                      </label>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="card-body ">
                 <div class="chart-area">
@@ -203,284 +233,80 @@
             </div>
           </div>
         </div>
+        
         <div class="row">
-          <div class="col-lg-6 col-md-12">
-            <div class="card card-tasks">
-              <div class="card-header ">
-                <h6 class="title d-inline">Tasks(5)</h6>
-                <p class="card-category d-inline">today</p>
-                <div class="dropdown">
-                  <button type="button" class="btn btn-link dropdown-toggle btn-icon" data-toggle="dropdown">
-                    <i class="tim-icons icon-settings-gear-63"></i>
-                  </button>
-                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="#pablo">Action</a>
-                    <a class="dropdown-item" href="#pablo">Another action</a>
-                    <a class="dropdown-item" href="#pablo">Something else</a>
-                  </div>
-                </div>
+           <div class="col-lg-6 col-md-12">
+            <div class="card ">
+              <div class="card-header">
+                <h4 class="card-title"><a href="/admin/schedule/addschedule" class="text-white">${aptName} 일정목록</a></h4>
               </div>
-              <div class="card-body ">
-                <div class="table-full-width table-responsive">
-                  <table class="table">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>
-                          <p class="title">Update the Documentation</p>
-                          <p class="text-muted">Dwuamish Head, Seattle, WA 8:47 AM</p>
-                        </td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
-                            <i class="tim-icons icon-pencil"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="" checked="">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>
-                          <p class="title">GDPR Compliance</p>
-                          <p class="text-muted">The GDPR is a regulation that requires businesses to protect the personal data and privacy of Europe citizens for transactions that occur within EU member states.</p>
-                        </td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
-                            <i class="tim-icons icon-pencil"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>
-                          <p class="title">Solve the issues</p>
-                          <p class="text-muted">Fifty percent of all respondents said they would be more likely to shop at a company </p>
-                        </td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
-                            <i class="tim-icons icon-pencil"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>
-                          <p class="title">Release v2.0.0</p>
-                          <p class="text-muted">Ra Ave SW, Seattle, WA 98116, SUA 11:19 AM</p>
-                        </td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
-                            <i class="tim-icons icon-pencil"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>
-                          <p class="title">Export the processed files</p>
-                          <p class="text-muted">The report also shows that consumers will not easily forgive a company once a breach exposing their personal data occurs. </p>
-                        </td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
-                            <i class="tim-icons icon-pencil"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>
-                          <p class="title">Arival at export process</p>
-                          <p class="text-muted">Capitol Hill, Seattle, WA 12:34 AM</p>
-                        </td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
-                            <i class="tim-icons icon-pencil"></i>
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+              <c:choose>
+            	<c:when test="${!empty schedule}">
+	              <div class="card-body">
+	                <div class="table-responsive">
+	                  <table class="table tablesorter " id="">
+	                    <thead class=" text-primary">
+	                      <th style="width: 30%;">시작 날짜</th>
+	                      <th style="width: 30%;">마감 날짜</th>
+	                      <th style="width: 40%;">일정내용</th>
+	                    </thead>
+	                    <tbody>
+	                      <c:forEach items="${schedule}" var="schedule" begin="0" end="6">
+	                      	<tr>
+	                          <td>${schedule.scheduleSdate}</td>
+	                          <td>${schedule.scheduleEdate}</td>
+	                          <td>${schedule.scheduleCon}</td>
+	                        </tr>
+	                      </c:forEach>
+	                    </tbody>
+	                  </table>
+	                </div>
+	              </div>
+            	</c:when>
+            	<c:otherwise>
+	              <div class="card-body">
+	                <div class="text-center" style="color: rgba(255, 255, 255, 0.8);">등록된 일정이 없습니다.</div>
+	              </div>
+            	</c:otherwise>
+            </c:choose>
             </div>
           </div>
           <div class="col-lg-6 col-md-12">
             <div class="card ">
               <div class="card-header">
-                <h4 class="card-title"> Simple Table</h4>
+                <h4 class="card-title"> 공지사항</h4>
               </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table tablesorter " id="">
-                    <thead class=" text-primary">
-                      <th>
-                        Name
-                      </th>
-                      <th>
-                        Country
-                      </th>
-                      <th>
-                        City
-                      </th>
-                      <th class="text-center">
-                        Salary
-                      </th>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          Dakota Rice
-                        </td>
-                        <td>
-                          Niger
-                        </td>
-                        <td>
-                          Oud-Turnhout
-                        </td>
-                        <td class="text-center">
-                          $36,738
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Minerva Hooper
-                        </td>
-                        <td>
-                          Curaçao
-                        </td>
-                        <td>
-                          Sinaai-Waas
-                        </td>
-                        <td class="text-center">
-                          $23,789
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Sage Rodriguez
-                        </td>
-                        <td>
-                          Netherlands
-                        </td>
-                        <td>
-                          Baileux
-                        </td>
-                        <td class="text-center">
-                          $56,142
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Philip Chaney
-                        </td>
-                        <td>
-                          Korea, South
-                        </td>
-                        <td>
-                          Overland Park
-                        </td>
-                        <td class="text-center">
-                          $38,735
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Doris Greene
-                        </td>
-                        <td>
-                          Malawi
-                        </td>
-                        <td>
-                          Feldkirchen in Kärnten
-                        </td>
-                        <td class="text-center">
-                          $63,542
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Mason Porter
-                        </td>
-                        <td>
-                          Chile
-                        </td>
-                        <td>
-                          Gloucester
-                        </td>
-                        <td class="text-center">
-                          $78,615
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Jon Porter
-                        </td>
-                        <td>
-                          Portugal
-                        </td>
-                        <td>
-                          Gloucester
-                        </td>
-                        <td class="text-center">
-                          $98,615
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+              <c:choose>
+            	<c:when test="${!empty noticeList}">
+	              <div class="card-body">
+	                <div class="table-responsive">
+	                  <table class="table tablesorter " id="">
+	                    <thead class=" text-primary">
+	                      <th style="width: 20%;">공지번호</th>
+	                      <th style="width: 45%;">제목</th>
+	                      <th style="width: 20%;">작성일</th>
+	                      <th class="text-center" style="width: 15%;">작성자</th>
+	                    </thead>
+	                    <tbody>
+	                      <c:forEach items="${noticeList}" var="noticeList" begin="0" end="6">
+	                      	<tr>
+	                          <td>${noticeList.nNo}</td>
+	                          <td><a href="/bdmin/notice/noticedetail?nNo=${noticeList.nNo}" style="cursor: pointer; color: rgba(255, 255, 255, 0.8);">${noticeList.nTitle}</a></td>
+	                          <td>${noticeList.nRegDate}</td>
+	                          <td class="text-center">${noticeList.nWriter}</td>
+	                        </tr>
+	                      </c:forEach>
+	                    </tbody>
+	                  </table>
+	                </div>
+	              </div>
+            	</c:when>
+            	<c:otherwise>
+	              <div class="card-body">
+	                <div class="text-center" style="color: rgba(255, 255, 255, 0.8);">작성된 공지사항이 없습니다.</div>
+	              </div>
+            	</c:otherwise>
+            </c:choose>
             </div>
           </div>
         </div>
@@ -490,18 +316,13 @@
           <nav>
             <ul>
               <li>
-                <a href="https://www.creative-tim.com">
-                  Creative Tim
+                <a href="/about">
+                  About
                 </a>
               </li>
               <li>
-                <a href="http://presentation.creative-tim.com">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="http://blog.creative-tim.com">
-                  Blog
+                <a href="/index">
+                  to generation
                 </a>
               </li>
             </ul>
@@ -511,51 +332,12 @@
             <script>
               document.write(new Date().getFullYear())
             </script> made with <i class="tim-icons icon-heart-2"></i> by
-            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+            <a href="https://www.creative-tim.com" target="_blank">aboo</a> for a better apartment.
           </div>
       </footer>
       </div>
     </div>
-    <div class="fixed-plugin">
-      <div class="dropdown show-dropdown">
-        <a href="#" data-toggle="dropdown">
-          <i class="fa fa-cog fa-2x"> </i>
-        </a>
-        <ul class="dropdown-menu">
-          <li class="header-title"> Sidebar Background</li>
-          <li class="adjustments-line">
-            <a href="javascript:void(0)" class="switch-trigger background-color">
-              <div class="badge-colors text-center">
-                <span class="badge filter badge-primary active" data-color="primary"></span>
-                <span class="badge filter badge-blue" data-color="blue"></span>
-                <span class="badge filter badge-green" data-color="green"></span>
-              </div>
-              <div class="clearfix"></div>
-            </a>
-          </li>
-          <li class="adjustments-line text-center color-change">
-            <span class="color-label">LIGHT MODE</span>
-            <span class="badge light-badge mr-2"></span>
-            <span class="badge dark-badge ml-2"></span>
-            <span class="color-label">DARK MODE</span>
-          </li>
-          <li class="button-container">
-            <a href="https://www.creative-tim.com/product/black-dashboard" target="_blank" class="btn btn-primary btn-block btn-round">Download Now</a>
-            <a href="https://demos.creative-tim.com/black-dashboard/docs/1.0/getting-started/introduction.html" target="_blank" class="btn btn-default btn-block btn-round">
-              Documentation
-            </a>
-          </li>
-          <li class="header-title">Thank you for 95 shares!</li>
-          <li class="button-container text-center">
-            <button id="twitter" class="btn btn-round btn-info"><i class="fab fa-twitter"></i> &middot; 45</button>
-            <button id="facebook" class="btn btn-round btn-info"><i class="fab fa-facebook-f"></i> &middot; 50</button>
-            <br>
-            <br>
-            <a class="github-button" href="https://github.com/creativetimofficial/black-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ntkme/github-buttons on GitHub">Star</a>
-          </li>
-        </ul>
-      </div>
-    </div>
+   
     <!--   Core JS Files   -->
     <script src="../../../resources/js/admin/core/jquery.min.js"></script>
     <script src="../../../resources/js/admin/core/popper.min.js"></script>
@@ -688,6 +470,11 @@
         demo.initDashboardPageCharts();
 
       });
+    </script>
+    
+    <script type="text/javascript">
+  	
+
     </script>
 </body>
 </html>

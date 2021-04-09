@@ -9,7 +9,7 @@
 </head>
 <body class=" ">
   <div class="wrapper ">
-       <div class="sidebar">
+    <div class="sidebar">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
@@ -24,58 +24,64 @@
         </div>
         <ul class="nav">
           <li >
-            <a href="./dashboard.html">
+            <a href="/admin/mypage/modifyinfo">
               <i class="tim-icons icon-badge"></i>
               <p>Mypage</p>
             </a>
           </li>
           <li>
-            <a href="./dashboard.html">
+            <a href="/admin/vote/makevote">
               <i class="tim-icons icon-tap-02"></i>
               <p>Vote</p>
             </a>
           </li>
-          <li class="active">
+          <li  class="active">
             <a href="/admin/authority">
               <i class="tim-icons icon-single-02"></i>
               <p>Authority</p>
             </a>
           </li>
           <li>
-            <a href="./map.html">
+            <a href="/admin/mgmtfee">
               <i class="tim-icons icon-chart-bar-32"></i>
-              <p>Mgmtfee</p>
+              <p>Management Fee</p>
             </a>
           </li>
           <li>
-            <a href="./notifications.html">
+            <a href="/admin/car">
               <i class="tim-icons icon-bus-front-12"></i>
-              <p>Vehicle</p>
+              <p>Car</p>
             </a>
           </li>
-          <li>
-            <a href="./user.html">
+          <li >
+            <a href="/admin/schedule/addschedule">
               <i class="tim-icons icon-calendar-60"></i>
               <p>Schedule</p>
             </a>
           </li>
           <li>
-            <a href="./tables.html">
+            <a href="/admin/chat">
               <i class="tim-icons icon-chat-33"></i>
               <p>Chat</p>
             </a>
           </li>
+         <li>
+           <a href="/bdmin/notice/noticelist">
+              <i class="tim-icons icon-volume-98"></i>
+              <p>notice</p>
+            </a>
+          </li>
           <li>
-            <a href="./rtl.html">
+            <a href="/bdmin/login">
               <i class="tim-icons icon-key-25"></i>
-              <p>BDIN</p>
+              <p>BDMIN</p>
             </a>
           </li>
         </ul>
       </div>
     </div>
     <div class="main-panel">
-      <!-- Navbar -->
+       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent   ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
@@ -86,42 +92,35 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Table List</a>
+            <a class="navbar-brand" href="#pablo">Authority</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
-            <div class="collapse navbar-collapse" id="navigation">
+          <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto ">
               <li class="dropdown nav-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div class="photo">
-                    <img src="../../resources/img/anime3.png">
+                    <img src="../../../../resources/img/anime3.png">
                   </div>
                   <b class="caret d-none d-lg-block d-xl-block"></b>
                   <p class="d-lg-none">
-                    Log out / Login
+                    Log out
                   </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Profile</a>
+                    <a href="/admin/mypage/modifyinfo" class="nav-item dropdown-item">Profile</a>
                   </li>
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Settings</a>
+                    <a href="/admin/chat" class="nav-item dropdown-item">1:1 chat</a>
                   </li>
                   <div class="dropdown-divider"></div>
                   <li class="nav-link">
-                  <c:choose>
-                  	<c:when test="${sessionScope.admin == null}">
-                    	<a href="/admin/login" class="nav-item dropdown-item">Log in</a>
-                  	</c:when>
-                  	<c:when test="${sessionScope.admin != null}">
-                    	<a href="/admin/logout" class="nav-item dropdown-item">Log out</a>
-                  	</c:when>
-                  </c:choose>
+                    <a href="/admin/logout" class="nav-item dropdown-item">Log out</a>
                   </li>
                 </ul>
               </li>
@@ -130,43 +129,35 @@
           </div>
         </div>
       </nav>
-      <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="SEARCH">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <i class="tim-icons icon-simple-remove"></i>
-              </button>
-            </div>
-            <div class="modal-footer">
-            </div>
-          </div>
-        </div>
-      </div>
+
       <!-- End Navbar -->
 			  <div class="content">
 		    <div class="row">
 		        <div class="col-md-12">
 					
-					<div class= "w-100 d-flex justify-content-end"><button class="btn btn-primary px-xl-5 py-xl-2 mb-2" data-toggle="modal" data-target="#add">추가</button></div>
+					<div class= "w-100 d-flex justify-content-end">				
+						<button class="btn btn-primary px-xl-5 py-xl-2 mb-2" data-toggle="modal" data-target="#add">추가</button>
+						<button class="btn btn-info px-xl-5 py-xl-2 ml-2 mb-2" data-toggle="modal" data-target="#search">검색</button>
+					</div>
 		            <div class="card ">
-		                <div class="card-header">
+		                <div class="card-header d-flex justify-content-between">
 		                    <h4 class="card-title">세대관리</h4>
 		                </div>
 		                <div class="card-body">
 		                    <div class="table-responsive">
 		                        <table class="table tablesorter " id="">
 		                            <thead class=" text-primary">
-		                                <th>번호</th>
-		                                <th>동 </th>
-		                                <th>호</th>
-		                                <th>아이디</th>
-		                                <th>입주일</th>
+			                            <tr>
+			                                <th>번호</th>
+			                                <th>동 </th>
+			                                <th>호</th>
+			                                <th>아이디</th>
+			                                <th>입주일</th>
+			                            </tr>
 		                            </thead>
 		                            <tbody>
 										<c:forEach items="${authorityList}" var="authority">
-											<tr  onclick="openModal(this)" data-toggle="modal" data-target="#modifyModal">
+											<tr onclick="openModal(this)" data-toggle="modal" data-target="#modifyModal">
 											    <td>${authority.generationIdx}</td>
 											    <td>${authority.building}</td>
 											    <td>${authority.num}</td>
@@ -181,30 +172,81 @@
 		                    </div>
 		                </div>		
 		            </div>
+		            	<c:choose>
+          				<c:when test="${searchType eq 'apartmentIdx'}">
+							<div class="row d-flex">
+						    <div class="col text-center">
+						      <div class="block-27">
+						        <ul>
+						        <li><a href="/admin/authority" class="nav first">&lt;&lt;</a></li>
+						        <li><a href="/admin/authority?page=${paging.prev}">&lt;</a></li>
+						        
+						       <c:choose>
+						        <c:when test="${paging.lastPage eq 0 }">
+						         	<li class = "active"><a href="/admin/authority?page=${page}">1</a></li>
+						        </c:when>
+						    	<c:otherwise>						    	
+							         <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">					         
+								         <c:choose>
+								         	<c:when test="${paging.currentPage eq page}">
+						         		  		<li class = "active"><a href="/admin/authority?page=${page}">${page}</a></li>
+								         	</c:when>
+								         	<c:otherwise>
+						         		  		<li><a href="/admin/authority?page=${page}">${page}</a></li>
+								         	</c:otherwise>
+								         </c:choose>
+					         		 </c:forEach>
+				         		 </c:otherwise>
+				         	    </c:choose>	 
+						        <li><a href="/admin/authority?page=${paging.next}">&gt;</a></li>
+						        <li>
+		 	   	 				 <a href="/admin/authority?page=${paging.lastPage}">&gt;&gt;</a>
+						         </li>
+						        </ul>
+						      </div>
+						    </div>
+						</div>	
+					</c:when>
+					
+					<c:otherwise>
 						<div class="row d-flex">
-					    <div class="col text-center">
-					      <div class="block-27">
-					        <ul>
-					        <li><a href="/admin/authority" class="nav first">&lt;&lt;</a></li>
-					        <li><a href="/admin/authority?page=${paging.prev}">&lt;</a></li>
-					         <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">					         
-						         <c:choose>
-						         	<c:when test="${paging.currentPage eq page}">
-				         		  		<li class = "active"><a href="/admin/authority?page=${page}">${page}</a></li>
-						         	</c:when>
-						         	<c:otherwise>
-				         		  		<li><a href="/admin/authority?page=${page}">${page}</a></li>
-						         	</c:otherwise>
-						         </c:choose>
-			         		 </c:forEach>
-					        <li><a href="/admin/authority?page=${paging.next}">&gt;</a></li>
-					        <li>
-	 	   	 				 <a href="/admin/authority?page=${paging.lastPage}">&gt;&gt;</a>
-					         </li>
-					        </ul>
-					      </div>
-					    </div>
-					</div>		        
+						    <div class="col text-center">
+						      <div class="block-27">
+						        <ul>
+						        <li><a href="/admin/authority?kind=${searchType}&keyword=${keyword}" class="nav first">&lt;&lt;</a></li>
+						        <li><a href="/admin/authority?page=${paging.prev}&kind=${searchType}&keyword=${keyword}">&lt;</a></li>
+						       
+						        <c:choose>
+						        	<c:when test="${paging.lastPage eq 0 }">				
+					         		  	<li><a href="/admin/authority?page=${page}&kind=${searchType}&keyword=${keyword}">1</a></li>
+						        	</c:when>
+							        <c:otherwise>
+								         <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">					         
+									         <c:choose>
+									         	<c:when test="${paging.currentPage eq page}">
+							         		  		<li class = "active"><a href="/admin/authority?page=${page}&kind=${searchType}&keyword=${keyword}">${page}</a></li>
+									         	</c:when>
+									         	<c:otherwise>
+							         		  		<li><a href="/admin/authority?page=${page}&kind=${searchType}&keyword=${keyword}">${page}</a></li>
+									         	</c:otherwise>
+									         </c:choose>
+						         		 </c:forEach>
+					         		 </c:otherwise>
+				         		</c:choose> 
+				         		
+						        <li><a href="/admin/authority?page=${paging.next}&kind=${searchType}&keyword=${keyword}">&gt;</a></li>
+						        <li>
+		 	   	 				 <a href="/admin/authority?page=${paging.lastPage}&kind=${searchType}&keyword=${keyword}">&gt;&gt;</a>
+						         </li>
+						        </ul>
+						      </div>
+						    </div>
+						</div>	
+					</c:otherwise>
+					
+					</c:choose>
+					
+						        
 		        </div>
 		    </div>
 		</div>
@@ -234,46 +276,7 @@
       </footer>
       </div>
     </div>
-    <div class="fixed-plugin">
-      <div class="dropdown show-dropdown">
-        <a href="#" data-toggle="dropdown">
-          <i class="fa fa-cog fa-2x"> </i>
-        </a>
-        <ul class="dropdown-menu">
-          <li class="header-title"> Sidebar Background</li>
-          <li class="adjustments-line">
-            <a href="javascript:void(0)" class="switch-trigger background-color">
-              <div class="badge-colors text-center">
-                <span class="badge filter badge-primary active" data-color="primary"></span>
-                <span class="badge filter badge-blue" data-color="blue"></span>
-                <span class="badge filter badge-green" data-color="green"></span>
-              </div>
-              <div class="clearfix"></div>
-            </a>
-          </li>
-          <li class="adjustments-line text-center color-change">
-            <span class="color-label">LIGHT MODE</span>
-            <span class="badge light-badge mr-2"></span>
-            <span class="badge dark-badge ml-2"></span>
-            <span class="color-label">DARK MODE</span>
-          </li>
-          <li class="button-container">
-            <a href="https://www.creative-tim.com/product/black-dashboard" target="_blank" class="btn btn-primary btn-block btn-round">Download Now</a>
-            <a href="https://demos.creative-tim.com/black-dashboard/docs/1.0/getting-started/introduction.html" target="_blank" class="btn btn-default btn-block btn-round">
-              Documentation
-            </a>
-          </li>
-          <li class="header-title">Thank you for 95 shares!</li>
-          <li class="button-container text-center">
-            <button id="twitter" class="btn btn-round btn-info"><i class="fab fa-twitter"></i> &middot; 45</button>
-            <button id="facebook" class="btn btn-round btn-info"><i class="fab fa-facebook-f"></i> &middot; 50</button>
-            <br>
-            <br>
-            <a class="github-button" href="https://github.com/creativetimofficial/black-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ntkme/github-buttons on GitHub">Star</a>
-          </li>
-        </ul>
-      </div>
-    </div>
+
     
       <!-- 세대원 추가  Modal -->
       <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -284,24 +287,58 @@
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-            <form action="">
+            <form action="/admin/authorityadd" method="post">
        	      <div class="form-group">
                 <label for="name">동</label>
-    			<input type="text" id = "addBuilding" name = "building" class="form-control text-dark" id="d" placeholder="동을 입력하세요">
+    			<input type="text" id = "addBuilding" name = "building" class="form-control text-dark" required="required" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="동을 입력하세요">
               </div>             
               <div class="form-group">
                 <label for="name">호</label>
-    			<input type="text" id = "addNum" name = "num" class="form-control text-dark" id="h" placeholder="호를 입력하세요">
+    			<input type="text" id = "addNum" name = "num" class="form-control text-dark" required="required" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="호를 입력하세요">
               </div>  
-              </form>    
-            </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" onclick="add()">확인</button>
+              <button type="button" id = "closeAdd" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" >확인</button>
+            </div>
+              </form>    
             </div>
           </div>
         </div>
       </div>
+      
+      <!-- 세대원 검색  Modal -->
+      <div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title text-dark" id="myModalLabel">세대 검색</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+            <form action="/admin/authority" method="get">
+       	      <div class="form-group">
+       	      	<div id = "lableWrap" class = "d-flex flex-column">
+	                <label style="font-size: 1vw; color: #8a8a8a;" for="name">세대를 검색하세요 양식 : [000-000]</label>
+	                <label style="font-size: 1vw; color: #8a8a8a;" for="name">동을 검색하세요 양식 : [000]</label>
+	                <label style="font-weight: bold;"><input type="checkbox" id = "checkBuilding"> 동만 검색</label>
+                </div>
+                <div class = "d-flex justify-content-between">
+                	<input id = "building" type="hidden" name="none" value="building">
+                	<input id = "generation"  type="hidden" name="kind" value="generation">
+    				<input type="text" id = "keyword" name = "keyword" class="form-control text-dark">
+              	</div>
+              </div>             
+            <div class="modal-footer">
+              <button type="button" id = "closeSearch" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" >확인</button>
+            </div>
+              </form>    
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
       
       <!-- 세대원 수정 Modal -->
       <div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -312,35 +349,37 @@
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-    			<input type="hidden" class="form-control" id="modifyGenerationIdx"><!--generationIdx 숨겨두기-->
+    			<input type="hidden" class="form-control " id="modifyGenerationIdx"><!--generationIdx 숨겨두기-->
        	      <div class="form-group">
                 <label for="name">동</label>
-    			<input type="text" class="form-control text-dark" id="modifyBuilding">
+    			<input type="text" class="form-control text-dark bg-white"  readonly="readonly"   id="modifyBuilding">
               </div>             
               <div class="form-group">
                 <label for="name">호</label>
-    			<input type="text" class="form-control text-dark" id="modifyNum">
+    			<input type="text" class="form-control text-dark bg-white" readonly="readonly" id="modifyNum">
               </div>
               <div class="form-group">
                 <label for="name">아이디</label>
-    			<input type="text" class="form-control text-dark" id="modifyId">
+    			<input type="text" class="form-control text-dark bg-white" readonly="readonly" id="modifyId">
               </div>             
               <div class="form-group">
                 <label for="name">전화번호</label>
-    			<input type="text" class="form-control text-dark" id="modifyTell">
+    			<input type="text" class="form-control text-dark bg-white" readonly="readonly" id="modifyTell">
               </div>
               <div class="form-group">
                 <label for="name">전화번호</label>
-    			<input type="text" class="form-control text-dark" id="modityEmail">
+    			<input type="text" class="form-control text-dark bg-white" readonly="readonly" id="modityEmail">
               </div> 
                <div class="form-group">
                 <label for="name">입주일</label>
-    			<input type="text" class="form-control text-dark" id="modifyRegDate">
+    			<b><input type="text" class="form-control text-dark bg-white" readonly="readonly" id="modifyRegDate"></b>
               </div>    
             </div>
             <div class="modal-footer">
               <button type="button" id = "closeModity" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-danger" onclick="del() ">초기화</button>
+              <button type="button" class="btn btn-info" onclick="reset() ">초기화</button>
+              <button type="button" class="btn btn-danger" onclick="del() ">삭제</button>
+              
             </div>
           </div>
         </div>
@@ -482,49 +521,29 @@
 
       });
     </script>
+    
+    <!-- 키워드 검색 체크시 input박스 바꿔주기 -->
+	<script type="text/javascript">
+		$("#checkBuilding").change(function(){         
+	        if($("#checkBuilding").is(":checked")){
+				console.dir("선택")
+				 document.querySelector("#generation").name = 'none';
+				 document.querySelector("#building").name = 'kind';
+	        }else{
+				console.dir("선택 안함")
+				 document.querySelector("#building").name = 'none';
+				 document.querySelector("#generation").name = 'kind';
+	        }
+	    });
 
-   
-   <!-- 세대 추가 자바스크립트 -->
-   <script type="text/javascript">
-   let add = () => {
-	  let building = document.querySelector("#addBuilding").value;
-	  let num = document.querySelector("#addNum").value;
-	  console.dir(building);
-	  console.dir(num);
-	  
-	  const url = '/admin/authorityadd';
-	  let paramObj = new Object();
-	  
-	   paramObj.building = building;
-       paramObj.num = num;
-       let headerObj = new Headers();
-       headerObj.append("content-type","application/json");
-       fetch(url,{
-           method:"post",
-           headers:headerObj,
-           body:JSON.stringify(paramObj)
-        }).then(response => {
-           if(response.ok){
-              return response.text();   
-           }
-           throw new AsyncPageError(response.text());
-        }).then((text) => {
-           if(text == 'susesse'){
-         		alert("세대 추가 완료")
-				location.href = "/admin/authority"
-           }else{
-           }
-        }).catch(error => {
-           error.alertMessage();
-        });
-     }
-   
-   </script>
-   
-   <script type="text/javascript">
+	
+	
+	
+	</script>
+
+    <script type="text/javascript"> /*모달에 값 넣기*/
 	let openModal = (info) => {
 		   $('#modifyModal').show();
-		   	  console.dir(info)
 			  let generationIdx = info.cells[0].innerHTML;
 			  let building = info.cells[1].innerHTML;
 			  let num = info.cells[2].innerHTML;
@@ -532,7 +551,8 @@
 			  let regDate = info.cells[4].innerHTML;
 			  let tell = info.cells[5].children[0].defaultValue
 			  let email = info.cells[6].children[0].defaultValue
-			  
+		   	  console.dir(generationIdx)
+
 			  document.querySelector("#modifyGenerationIdx").value = generationIdx;
 			  document.querySelector("#modifyBuilding").value = building;
 			  document.querySelector("#modifyNum").value = num;
@@ -543,12 +563,12 @@
 		}
    </script>
    
-   	<script type="text/javascript">
-	let del = () => {
+   	<script type="text/javascript"> /*초기화*/
+	let reset = () => {
 		
 		let	result = confirm('정말 초기화하시겠습니까?')
 		if (result) {
-         const url = '/admin/authoritydelete';
+         const url = '/admin/authorityreset';
          let paramObj = new Object();
          paramObj.generationIdx = document.querySelector("#modifyGenerationIdx").value;
          paramObj.building = document.querySelector("#modifyBuilding").value;
@@ -581,5 +601,61 @@
 		}
  		
 	</script>
+	
+	<script type="text/javascript"> /*삭제*/
+	let del = () => {
+		
+		let	result = confirm('정말 삭제 하시겠습니까?')
+		if (result) {
+         const url = '/admin/authoritydelete';
+         let paramObj = new Object();
+         paramObj.generationIdx = document.querySelector("#modifyGenerationIdx").value;
+
+         let headerObj = new Headers();
+         headerObj.append("content-type","application/json");
+         fetch(url,{
+            method:"post",
+            headers:headerObj,
+            body:JSON.stringify(paramObj)
+         }).then(response => {
+            if(response.ok){
+               return response.text();   
+            }
+            throw new AsyncPageError(response.text());
+         }).then((text) => {
+            if(text == 'success'){
+          		alert("삭제에 성공하였습니다.")
+          		location.href = "/admin/authority"
+            }else{
+          		alert("삭제에 실패하였습니다.")
+            }
+         }).catch(error => {
+            error.alertMessage();
+         });	
+         
+		 }
+		}
+ 		
+	</script>
+	
+	<!-- 모달 Close 초기화 -->
+	<script type="text/javascript">
+	
+		$('#closeAdd').click(function(e) {
+		   $('#addBuilding').val(" ");
+		   $('#addNum').val(" ");
+		});		
+		
+		$('#closeSearch').click(function(e) {
+			   $('#keyword').val(" ");
+			});
+		
+	</script>
+	
+	
+	
+	
+	
+	
 </body>
 </html>

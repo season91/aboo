@@ -17,7 +17,7 @@
       <div class="sidebar-wrapper">
         <div class="logo">
           <a href="/admin/index" class="simple-text logo-mini">
-            <img src="../../../resources/images/logo_w.png">
+            <img src="../../../resources/abooimg/logo_w.png">
           </a>
           <a href="/admin/index" class="simple-text logo-normal">
             ADMIN
@@ -67,9 +67,15 @@
             </a>
           </li>
           <li>
-            <a href="/admin/bdin">
+           <a href="/bdmin/notice/noticelist">
+              <i class="tim-icons icon-volume-98"></i>
+              <p>notice</p>
+            </a>
+          </li>
+          <li>
+            <a href="/bdmin/login">
               <i class="tim-icons icon-key-25"></i>
-              <p>BDIN</p>
+              <p>BDMIN</p>
             </a>
           </li>
         </ul>
@@ -77,7 +83,7 @@
     </div>
     <div class="main-panel">
       <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent   ">
+       <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent   ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
             <div class="navbar-toggle d-inline">
@@ -99,23 +105,30 @@
               <li class="dropdown nav-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div class="photo">
-                    <img src="../../resources/img/anime3.png">
+                    <img src="../../../../resources/img/anime3.png">
                   </div>
                   <b class="caret d-none d-lg-block d-xl-block"></b>
                   <p class="d-lg-none">
-                    Log out / Login
+                    Log out
                   </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Profile</a>
+                    <a href="${context }/admin/mypage/modifyinfo" class="nav-item dropdown-item">Profile</a>
                   </li>
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Settings</a>
+                    <a href="${context }/admin/chat" class="nav-item dropdown-item">1:1 chat</a>
                   </li>
                   <div class="dropdown-divider"></div>
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Log out</a>
+                   <c:choose>
+                  	<c:when test="${sessionScope.admin == null}">
+                    	<a href="/admin/login" class="nav-item dropdown-item">Log in</a>
+                  	</c:when>
+                  	<c:when test="${sessionScope.admin != null}">
+                    	<a href="/admin/logout" class="nav-item dropdown-item">Log out</a>
+                  	</c:when>
+                  </c:choose>
                   </li>
                 </ul>
               </li>
@@ -124,20 +137,8 @@
           </div>
         </div>
       </nav>
-      <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="SEARCH">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <i class="tim-icons icon-simple-remove"></i>
-              </button>
-            </div>
-            <div class="modal-footer">
-            </div>
-          </div>
-        </div>
-      </div>
+      
+   
       <!-- End Navbar -->
       
 		
@@ -241,7 +242,10 @@
               </div>
             </div>
           </div>
-          <div class="row mt-5 d-flex card-body ">
+          
+          <c:choose>
+          	<c:when test="${searchType eq 'apartmentIdx' }">
+          	<div class="row mt-5 d-flex card-body ">
 	          <div class="col text-center">
 	            <div class="block-27">
 	              <ul>
@@ -270,6 +274,41 @@
 	            </div>
 	          </div>
 	        </div>
+          	</c:when>
+          	
+          	<c:otherwise>
+          	<div class="row mt-5 d-flex card-body ">
+	          <div class="col text-center">
+	            <div class="block-27">
+	              <ul>
+	                <li><a href="/admin/${paging.type }?standard=${searchType }&keyword=${keyword}">&lt;&lt;</a></li>
+	                <li><a href="/admin/${paging.type }?page=${paging.prev}&standard=${searchType }&keyword=${keyword}">&lt;</a></li>
+              	  <c:choose>
+                	<c:when test="${paging.lastPage eq 0 }">
+                		<li><a href="/admin/${paging.type }?standard=${searchType }&keyword=${keyword}">1</a></li>
+                	</c:when>
+                	<c:otherwise>
+	                 <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
+                      <c:choose>
+                         <c:when test="${paging.currentPage eq page}">
+                            <li class="active"><a href="/admin/${paging.type }?page=${page}&standard=${searchType }&keyword=${keyword}">${page}</a></li>
+                         </c:when>
+                         <c:otherwise>
+                            <li><a href="/admin/${paging.type }?page=${page}&standard=${searchType }&keyword=${keyword}">${page}</a></li>
+                         </c:otherwise>
+                      </c:choose>
+                 	 </c:forEach> 
+                 	 </c:otherwise>
+	                </c:choose>
+	                <li><a href="/admin/${paging.type }?page=${paging.next}&standard=${searchType }&keyword=${keyword}">&gt;</a></li>
+	                <li><a href="/admin/${paging.type }?page=${paging.lastPage }&standard=${searchType }&keyword=${keyword}">&gt;&gt;</a></li>
+	              </ul>
+	            </div>
+	          </div>
+	        </div>
+          	</c:otherwise>
+          </c:choose>
+  
     	</div>
     	</div>
         </div>

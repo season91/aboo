@@ -22,74 +22,33 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.aboo.admin.mgmtfee.model.service.MgmtfeeService;
 import com.kh.aboo.admin.mgmtfee.model.vo.Mgmtfee;
 import com.kh.aboo.admin.mgmtfee.model.vo.MgmtfeeOverdue;
+import com.kh.aboo.common.code.AlarmCode;
 import com.kh.aboo.common.code.ErrorCode;
 import com.kh.aboo.common.exception.ToAlertException;
 import com.kh.aboo.common.util.file.FileUtil;
+import com.kh.aboo.mypage.myalarm.model.service.MyAlarmService;
 import com.kh.aboo.user.generation.model.vo.Generation;
 import com.kh.aboo.user.manager.model.vo.Admin;
 
 @Controller
 public class MgmtfeeController {
 	private final MgmtfeeService mgmtfeeService;
+	private final MyAlarmService myAlarmService;
 
-	public MgmtfeeController(MgmtfeeService mgmtfeeService) {
+	public MgmtfeeController(MgmtfeeService mgmtfeeService, MyAlarmService myAlarmService) {
 		this.mgmtfeeService = mgmtfeeService;
+		this.myAlarmService = myAlarmService;
 	}
 
 	// 페이징처리
 	@GetMapping("admin/mgmtfee")
-	public String adminMgmtfee(@RequestParam(defaultValue = "1") int page, @SessionAttribute(name = "admin", required = false) Admin admin, @RequestParam(defaultValue = "apartmentIdx") String standard,  @RequestParam(defaultValue = "apartmentIdx") String keyword, Model model) {
+	public void adminMgmtfee(@RequestParam(defaultValue = "1") int page, @SessionAttribute(name = "admin", required = false) Admin admin, @RequestParam(defaultValue = "apartmentIdx") String standard,  @RequestParam(defaultValue = "apartmentIdx") String keyword, Model model) {
 		String apartmentIdx = admin.getApartmentIdx();
-		// 페이징 처리 타입 3개
-		// 아파트정보는 어차피 로그인유저꺼로 가져오니깐 처리타입을 3개로나눠 맵에담아보내자, 뭐
-		// 1. 키워드없는 경우
-		// 2. 키워드가 관리비인경우
-		// 3. 키워드가 세대정보인경우
-		// 4. 키워드가 미납인경우 
-		Map<String, Object> searchMap = new HashMap<String, Object>();
-		searchMap.put("apartmentIdx", apartmentIdx);
 
-		String link = "";
-		switch (standard) {
-		case "apartmentIdx":
-			// 기본 페이징
-			searchMap.put("searchType", "apartmentIdx");
-			break;
-		case "mgmtfeeIdx":
-			// 관리비번호로 조회 
-			searchMap.put("searchType", "mgmtfeeIdx");
-			searchMap.put("mgmtfeeIdx", keyword);
-			break;
-		case "generationInfo":
-			// 세대정보로 조회 
-			Generation generation = new Generation();
-			String[] generationInfo = keyword.split("-");
-			generation.setApartmentIdx(apartmentIdx);
-			generation.setBuilding(generationInfo[0]);
-			generation.setNum(generationInfo[1]);
-			System.out.println(generation);
-			
-			// 조회된 세대관리번호를 map에 담아준다.
-			String generationIdx = mgmtfeeService.selectGenerationByBuildingAndNum(generation).getGenerationIdx();
-			searchMap.put("searchType", "generationIdx");
-			searchMap.put("generationIdx", generationIdx);
-			break;
-		case "dueDate" :
-			// 납기일로 조회
-			searchMap.put("searchType", "dueDate");
-			searchMap.put("dueDate", keyword); 
-			link = "/duedate";
-			model.addAttribute("keyword", keyword);
-			break;
-		case "isPayment" :
-			// 미납 조회
-			searchMap.put("searchType", "isPayment");
-			link = "/nopayment";
-			break;
-		}
-		
-		model.addAllAttributes(mgmtfeeService.selectMgmtfeeList(page, searchMap));
-		return "admin/mgmtfee"+link;
+		// 반환형은 map이고 여기엔 검색기준, 세대정보, 검색값, 페이징, 검색결과list가 들어있다.
+		// 자세한건 service impl에 구현
+		// view에서는 페이징부분이 관건인데, choose문을 searchType을 이용해 페이징처리 분기를 나눈다.
+		model.addAllAttributes(mgmtfeeService.selectMgmtfeeList(page, apartmentIdx, standard, keyword));
 	};
 		
 
@@ -108,6 +67,12 @@ public class MgmtfeeController {
 		if(mgmtfeeList == null || mgmtfeeList.size() == 0 || mgmtfeeList.get(0).getPeriodPayment().equals("")) {
 			System.out.println("실패유");
 			return "fail";
+		}
+		System.out.println("컨트롤러리스트"+mgmtfeeList);
+		// 성공시 알람넣어주기.
+		for (int i = 0; i < mgmtfeeList.size(); i++) {
+			System.out.println("알람보낼세대관리번호"+mgmtfeeList.get(i));
+			myAlarmService.insertPvAlarm("8월 "+AlarmCode.ADD_MGMTFEE, mgmtfeeList.get(i).getGenerationIdx());
 		}
 		
 		return "success";
@@ -155,6 +120,7 @@ public class MgmtfeeController {
 		
 		// 둘다 조회가 되었다면 내역 넘기고, 둘중 하나라도 조회내역이없다면 에러 발동한다.
 		if(mgmtfee != null && generation != null) {
+			
 			model.addAttribute(mgmtfee);
 			model.addAttribute(generation);
 			model.addAttribute("overdue",mgmtfeeService.selectMgmtfeeOverdue(mgmtfee.getMgmtfeeIdx()));
@@ -187,12 +153,14 @@ public class MgmtfeeController {
 		Mgmtfee updateMgmtefee = mgmtfeeService.updateMgmtfee(mgmtfee);
 		// 업데이트내역이 있다면 수정완료, 없다면 실패안내. mgmt update는 프로시저라 int로 판단안함. 
 		if(updateMgmtefee != null) {
+			System.out.println("모야몇번찍히는겨");
+			myAlarmService.insertPvAlarm(AlarmCode.MODIFY_MGMTFEE+"", mgmtfee.getGenerationIdx());
 			model.addAttribute("alertMsg", "수정이 완료되었습니다.");
-			model.addAttribute("url", "/admin/mgmtfeemodify?mgmtfeeidx="+mgmtfee.getMgmtfeeIdx());
+			model.addAttribute("url", "/admin/mgmtfee/modify?mgmtfeeidx="+mgmtfee.getMgmtfeeIdx());
 			model.addAttribute("mgmtfee",updateMgmtefee);
 		} else {
 			model.addAttribute("alertMsg", "수정이 실패하였습니다.");
-			model.addAttribute("url", "/admin/mgmtfeemodify?mgmtfeeidx="+mgmtfee.getMgmtfeeIdx());
+			model.addAttribute("url", "/admin/mgmtfee/modify?mgmtfeeidx="+mgmtfee.getMgmtfeeIdx());
 		}
 		return "common/result";
 	}

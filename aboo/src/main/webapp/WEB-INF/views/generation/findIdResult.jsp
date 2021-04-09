@@ -3,6 +3,7 @@
 <%@ include file="/WEB-INF/views/include/generationhead.jsp"%>
 <!DOCTYPE html>
 <html>
+
 <body>
 
 	<nav
@@ -18,12 +19,12 @@
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a href="/index" class="nav-link">Home</a></li>
+					<li class="nav-item active"><a href="/index" class="nav-link">Home</a></li>
 					<li class="nav-item"><a href="/about" class="nav-link">About</a></li>
 					<li class="nav-item "><a href="/myapt/schedule"
 						class="nav-link">MyApt</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="/board/info/infolist">Board</a></li>
+						href="/board/info/listinfo">Board</a></li>
 					<li class="nav-item"><a href="/mypage/modifyinfo"
 						class="nav-link">MyPage</a></li>
 					<c:choose>
@@ -54,14 +55,8 @@
 				<div
 					class="row slider-text align-items-center justify-content-center"
 					data-scrollax-parent="true">
-					<div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate"
-						data-scrollax=" properties: { translateY: '70%' }">
-						<p class="breadcrumbs"
-							data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
-							<span class="mr-2"><a href="index.html">Home</a></span> <span>Contact</span>
-						</p>
-						<h1 class="mb-3 bread"
-							data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Contact</h1>
+					<div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+						<h1 class="mb-3 bread"data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Home</h1>
 					</div>
 				</div>
 			</div>
@@ -69,12 +64,18 @@
 	</section>
 
 	<section class="ftco-section contact-section ftco-degree-bg">
-		<h4 class="text-center mb-4">회원님의 아이디는</h4>
+	<div style="height: 40vh;background-color: #f7f7f7; display: flex; flex-direction: column; justify-content: center;">
+	
+		<h4 class="text-center" style="">회원님의 아이디는</h4>
 		<div class="container">
 			<div class="row block-9 justify-content-center">
-				<b>${findGeneration.id}</b>입니다 감사합니다.
+				<b id = "id" style="display: none;">${findGeneration.id}</b>입니다. 감사합니다. 
+				<div id = "idOpenBnt" style="border: none;padding-left:5px ;cursor: pointer;"  onclick="idOpen()" ><i class="fas fa-lock"></i></div>
+				<div id = "idCloseBnt" style="display : none;  border: none; padding-left:5px ;pacursor: pointer;"  onclick="idClose()" ><i class="fas fa-lock-open"></i></div>
 			</div>
 		</div>
+		
+	</div>	
 	</section>
 
 	<footer class="ftco-footer ftco-bg-dark ftco-section">
@@ -124,6 +125,7 @@
 							<li><a href="/myapt/schedule" class="py-2 d-block">MyApt</a></li>
 							<li><a href="/baord/info/listinfo" class="py-2 d-block">Board</a></li>
 							<li><a href="/mypage/modifyinfo" class="py-2 d-block">MyPage</a></li>
+							<li><a href="/bdmin/contactus" class="py-2 d-block">Contact us</a></li>
 						</ul>
 					</div>
 				</div>
@@ -176,7 +178,24 @@
 				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
 	</div>
 
-
+	<script type="text/javascript">
+	 let idOpen = () =>{
+		 document.querySelector("#idOpenBnt").style.display = 'none';
+		 document.querySelector("#id").style.display = '';
+		 document.querySelector("#idCloseBnt").style.display = '';
+		 
+	 }
+	
+	 let idClose = () =>{
+		 document.querySelector("#idOpenBnt").style.display = '';
+		 document.querySelector("#id").style.display = 'none';
+		 document.querySelector("#idCloseBnt").style.display = 'none';
+		 
+	 }
+	
+	
+	
+	</script>
 
    
 	<script src="../../../resources/js/generation/jquery.min.js"></script>

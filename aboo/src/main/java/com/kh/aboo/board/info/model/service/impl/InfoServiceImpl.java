@@ -38,34 +38,53 @@ public class InfoServiceImpl implements InfoService{
 
 	@Override
 	public Map<String, Object> selectInfoBoardList(int currentPage,String apartmentIdx) {
-
+		Map<String, Object> searchMap = new HashMap<String, Object>();
 		
 		Paging paging = Paging.builder()
 				.currentPage(currentPage)
 				.blockCnt(5)
 				.cntPerPage(10)
-				.type("infoBoard")
+				.type("info")
 				.total(infoRepository.selectInfoContentCnt(apartmentIdx))
 				.build();
 		System.out.println(paging.toString());
 	
 		Map<String,Object> commandMap = new HashMap<String, Object>();
 		commandMap.put("paging", paging);
-		commandMap.put("infoBoard", infoRepository.selectInfoBoardList(paging));
+		commandMap.put("infoBoard", infoRepository.selectInfoBoardList(paging.getQueryStart(), paging.getQueryEnd(), apartmentIdx));
 					
 		return commandMap;
 
 	}
 
 	@Override
+	public Map<String, Object> selectInfoSearchList(int currentPage,String apartmentIdx,String keyword) {
+		
+		Paging paging = Paging.builder()
+				.currentPage(currentPage)
+				.blockCnt(5)
+				.cntPerPage(10)
+				.type("info")
+				.total(infoRepository.selectInfoSeachCnt(apartmentIdx, keyword))
+				.build();
+		System.out.println(paging.toString());
+	
+		Map<String,Object> commandMap = new HashMap<String, Object>();
+		commandMap.put("paging", paging);
+		commandMap.put("infoBoard", infoRepository.selectInfoSearchList(paging.getQueryStart(), paging.getQueryEnd(), apartmentIdx, keyword));
+					
+		return commandMap;
+		
+	}
+
+
+	@Override
 	public Map<String, Object> selectInfoBoardDetail(String bIdx) {
 
 		InfoBoard infoBoard = infoRepository.selectInfoBoardDetail(bIdx);
-		List<FileVo> files = infoRepository.selectFileWithBIdx(bIdx);
 		
 		Map<String,Object> commandMap = new HashMap<String, Object>();
 		commandMap.put("infoBoard",infoBoard);
-		commandMap.put("files", files);
 
 		return  commandMap;
 	}

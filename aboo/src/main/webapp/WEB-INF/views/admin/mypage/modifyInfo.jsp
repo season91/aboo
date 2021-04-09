@@ -17,60 +17,66 @@
     -->
       <div class="sidebar-wrapper">
         <div class="logo">
-          <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-            CT
+          <a href="/admin/index" class="simple-text logo-mini">
+            <img src="../../../resources/abooimg/logo_w.png">
           </a>
-          <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-            Creative Tim
+          <a href="/admin/index" class="simple-text logo-normal">
+            ADMIN
           </a>
         </div>
         <ul class="nav">
-          <li class="active ">
-            <a href="./dashboard.html">
-              <i class="tim-icons icon-chart-pie-36"></i>
-              <p>Dashboard</p>
+          <li class="active">
+            <a href="/admin/mypage/modifyinfo">
+              <i class="tim-icons icon-badge"></i>
+              <p>Mypage</p>
             </a>
           </li>
           <li>
-            <a href="./icons.html">
-              <i class="tim-icons icon-atom"></i>
-              <p>Icons</p>
+            <a href="/admin/vote/makevote">
+              <i class="tim-icons icon-tap-02"></i>
+              <p>Vote</p>
             </a>
           </li>
           <li>
-            <a href="./map.html">
-              <i class="tim-icons icon-pin"></i>
-              <p>Maps</p>
-            </a>
-          </li>
-          <li>
-            <a href="./notifications.html">
-              <i class="tim-icons icon-bell-55"></i>
-              <p>Notifications</p>
-            </a>
-          </li>
-          <li>
-            <a href="./user.html">
+            <a href="/admin/authority">
               <i class="tim-icons icon-single-02"></i>
-              <p>User Profile</p>
+              <p>Authority</p>
             </a>
           </li>
           <li>
-            <a href="./tables.html">
-              <i class="tim-icons icon-puzzle-10"></i>
-              <p>Table List</p>
+            <a href="/admin/mgmtfee">
+              <i class="tim-icons icon-chart-bar-32"></i>
+              <p>Management Fee</p>
             </a>
           </li>
           <li>
-            <a href="./typography.html">
-              <i class="tim-icons icon-align-center"></i>
-              <p>Typography</p>
+            <a href="/admin/car">
+              <i class="tim-icons icon-bus-front-12"></i>
+              <p>Car</p>
+            </a>
+          </li>
+          <li >
+            <a href="/admin/schedule/addschedule">
+              <i class="tim-icons icon-calendar-60"></i>
+              <p>Schedule</p>
             </a>
           </li>
           <li>
-            <a href="./rtl.html">
-              <i class="tim-icons icon-world"></i>
-              <p>RTL Support</p>
+            <a href="/admin/chat">
+              <i class="tim-icons icon-chat-33"></i>
+              <p>Chat</p>
+            </a>
+          </li>
+         <li>
+           <a href="/bdmin/notice/noticelist">
+              <i class="tim-icons icon-volume-98"></i>
+              <p>notice</p>
+            </a>
+          </li>
+          <li>
+            <a href="/bdmin/login">
+              <i class="tim-icons icon-key-25"></i>
+              <p>BDMIN</p>
             </a>
           </li>
         </ul>
@@ -88,7 +94,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Dashboard</a>
+            <a class="navbar-brand" href="#pablo">MODIFYINFO</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -97,57 +103,10 @@
           </button>
           <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto ">
-              <div class="search-bar input-group">
-                <!-- <input type="text" class="form-control" placeholder="Search...">
-      <div class="input-group-addon"><i class="tim-icons icon-zoom-split"></i></div> -->
-                <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal"><i class="tim-icons icon-zoom-split"></i></button>
-                <!-- You can choose types of search input -->
-              </div>
-              <!-- <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="SEARCH">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <i class="tim-icons icon-simple-remove"></i>
-          </button>
-        </div>
-
-        <div class="modal-footer">
-        </div>
-      </div>
-    </div>
-  </div> -->
-              <li class="dropdown nav-item">
-                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                  <div class="notification d-none d-lg-block d-xl-block"></div>
-                  <i class="tim-icons icon-sound-wave"></i>
-                  <p class="d-lg-none">
-                    New Notifications
-                  </p>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
-                  <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Mike John responded to your email</a>
-                  </li>
-                  <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">You have 5 more tasks</a>
-                  </li>
-                  <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Your friend Michael is in town</a>
-                  </li>
-                  <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Another notification</a>
-                  </li>
-                  <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Another one</a>
-                  </li>
-                </ul>
-              </li>
               <li class="dropdown nav-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div class="photo">
-                    <img src="../../resources/img/anime3.png">
+                    <img src="../../../../resources/img/anime3.png">
                   </div>
                   <b class="caret d-none d-lg-block d-xl-block"></b>
                   <p class="d-lg-none">
@@ -156,14 +115,14 @@
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Profile</a>
+                    <a href="/admin/mypage/modifyinfo" class="nav-item dropdown-item">Profile</a>
                   </li>
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Settings</a>
+                    <a href="/admin/chat" class="nav-item dropdown-item">1:1 chat</a>
                   </li>
                   <div class="dropdown-divider"></div>
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Log out</a>
+                    <a href="/admin/logout" class="nav-item dropdown-item">Log out</a>
                   </li>
                 </ul>
               </li>
@@ -190,35 +149,42 @@
       <div class="content">
 		<section class="ftco-section contact-section ftco-degree-bg">
     	<div style="height: 10vh"></div>
-     	<h4 class = "text-center mb-4">개인정보 수정</h4>
+    	<div class = "card">
+     	<h4 class = "text-center mt-4 mb-4">개인정보 수정</h4>
 	      <div class="container">
 	        <div class="row block-9 justify-content-center">
 	          <div class="col-md-6">
 	            <form:form id = "modifyForm" action="/admin/mypage/modifyupdate" method="post" modelAttribute ="admin">
-	              <div class="form-group">
-	                <input type="text" readonly="readonly" class="form-control" id = "id" value="${selectAdmin.id}" >
+	              <div class="form-group d-flex justify-content-between">
+	              	<div class="col-md-3 text-6c757d d-flex justify-content-center align-items-center bg-sun">아이디</div>
+	                <input type="text" readonly="readonly" class="form-control" id = "id" value="${selectAdmin.id}" style="width: 26vw">
 	              </div>
 	              <div class="form-group">
 	                <input type="text" class="form-control password" id = "password_1" placeholder="비밀번호"> 
+	                <div id ="passwordConfirm" class = "validator"></div> <!--프론트 패스워드 유효성-->
+	              	<div><form:errors path="password" cssClass="validator"/></div><!--백 패스워드 유효성  -->	 
 	              </div>
 	              <div class="form-group">
 	                <input type="text" class="form-control password" id = "password_2" name = "password" placeholder="비밀번호 확인">
-				    <div id = "pass" style="font-size: 1vw;"></div> <!--비밀번호 일치-->
-				    <div id ="passwordConfirm" class = "validator"></div> <!--프론트 패스워드 유효성-->
-	              	<div><form:errors path="password" cssClass="validator"/></div><!--백 패스워드 유효성  -->	                
+				    <div id = "pass" class = "validator"></div> <!--비밀번호 일치-->               
 	              </div>
 	              <div class="form-group d-flex justify-content-between">
-	                <input type="text" class="form-control col-md-10" readonly="readonly" name = "tell" value = "${selectAdmin.tell}" ><button type="button" class="btn btn-primary px-xl-3 py-xl-1" data-toggle="modal" data-target="#tellModal">인증</button>              
+	            	<div class="col-md-3  text-6c757d d-flex justify-content-center align-items-center bg-sun">휴대폰</div>
+	                <input type="text" class="form-control col-md-7" readonly="readonly" name = "tell" value = "${selectAdmin.tell}" >
+	                <button type="button" class="btn btn-primary px-xl-3 py-xl-1 d-flex justify-content-center align-items-center" data-toggle="modal" data-target="#tellModal">인증</button>              
 	              </div>
 	              <div class="form-group d-flex justify-content-between">
-	                <input type="text" class="form-control col-md-10"  readonly="readonly" name = "email" value = "${selectAdmin.email}"><button type="button" class="btn btn-primary px-xl-3 py-xl-1" data-toggle="modal" data-target="#emailModal">인증</button>
+	              <div class="col-md-3  text-6c757d d-flex justify-content-center align-items-center bg-sun">이메일</div>
+	                <input type="text" class="form-control col-md-7"  readonly="readonly" name = "email" value = "${selectAdmin.email}">
+	                <button type="button" class="btn btn-primary px-xl-3 py-xl-1 d-flex justify-content-center align-items-center" data-toggle="modal" data-target="#emailModal">인증</button>
 	              </div>
-	              <div class="form-group">
-	                <input type="submit" value="수정완료" class="btn btn-primary py-3 px-5 col-sm-12" >
+	              <div class="form-group mt-4 mb-4">
+	                <input type="submit" value="수정완료" class="btn btn-primary mt-2 py-3 px-5 col-sm-12" >
 	              </div>
 	            </form:form>                    
 	          </div>
 	        </div>
+	      </div>
 	      </div>
 	    </section>
       </div>
@@ -253,63 +219,27 @@
       </footer>
       </div>
     </div>
-    <div class="fixed-plugin">
-      <div class="dropdown show-dropdown">
-        <a href="#" data-toggle="dropdown">
-          <i class="fa fa-cog fa-2x"> </i>
-        </a>
-        <ul class="dropdown-menu">
-          <li class="header-title"> Sidebar Background</li>
-          <li class="adjustments-line">
-            <a href="javascript:void(0)" class="switch-trigger background-color">
-              <div class="badge-colors text-center">
-                <span class="badge filter badge-primary active" data-color="primary"></span>
-                <span class="badge filter badge-blue" data-color="blue"></span>
-                <span class="badge filter badge-green" data-color="green"></span>
-              </div>
-              <div class="clearfix"></div>
-            </a>
-          </li>
-          <li class="adjustments-line text-center color-change">
-            <span class="color-label">LIGHT MODE</span>
-            <span class="badge light-badge mr-2"></span>
-            <span class="badge dark-badge ml-2"></span>
-            <span class="color-label">DARK MODE</span>
-          </li>
-          <li class="button-container">
-            <a href="https://www.creative-tim.com/product/black-dashboard" target="_blank" class="btn btn-primary btn-block btn-round">Download Now</a>
-            <a href="https://demos.creative-tim.com/black-dashboard/docs/1.0/getting-started/introduction.html" target="_blank" class="btn btn-default btn-block btn-round">
-              Documentation
-            </a>
-          </li>
-          <li class="header-title">Thank you for 95 shares!</li>
-          <li class="button-container text-center">
-            <button id="twitter" class="btn btn-round btn-info"><i class="fab fa-twitter"></i> &middot; 45</button>
-            <button id="facebook" class="btn btn-round btn-info"><i class="fab fa-facebook-f"></i> &middot; 50</button>
-            <br>
-            <br>
-            <a class="github-button" href="https://github.com/creativetimofficial/black-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ntkme/github-buttons on GitHub">Star</a>
-          </li>
-        </ul>
-      </div>
-    </div>
+
       
       <!-- 번호 인증 Modal -->
       <div class="modal fade" id="tellModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-          <div class="modal-content">
+          <div class="modal-content modal-bg-sun">
             <div class="modal-header">
-              <h4 class="modal-title text-dark" id="myModalLabel">인증번호</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">휴대폰 인증</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class= "text-white" aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
+            <div class="form-group d-flex justify-content-between">
+                <input type="text" class="form-control col-md-10 " id = "tell" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="11" placeholder="휴대폰 번호를 입력하세요."><button type="button" class="btn btn-primary px-xl-3 py-xl-1" onclick="tellSend()">발송</button>
+              </div>
        	      <div class="form-group">
-                <input type="text" class="form-control"> 
+                <input type="text" class="form-control " id = "certifiedPNum" placeholder="인증번호를 입력하세요."> 
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">확인</button>
+              <button type="button" id ="closeTell" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" onclick="certifiedPNum()">확인</button>
             </div>
           </div>
         </div>
@@ -318,26 +248,39 @@
        <!-- 이메일 인증 Modal -->
       <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-          <div class="modal-content">
+          <div class="modal-content modal-bg-sun" >
             <div class="modal-header">
-              <h4 class="modal-title text-dark" id="myModalLabel">이메일 인증</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title " id="myModalLabel">이메일 인증</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class= "text-white" aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
             <div class="form-group d-flex justify-content-between">
-                <input type="text" class="form-control col-md-10" id = "email"><button type="button" class="btn btn-primary px-xl-3 py-xl-1" onclick="emailSend()">발송</button>
+                <input type="text" class="form-control col-md-10 " id = "email" placeholder="이메일을 입력하세요."><button type="button" class="btn btn-primary px-xl-3 py-xl-1" onclick="emailSend()">발송</button>
               </div>
        	      <div class="form-group">
-                <input type="text" class="form-control" id = "certifiedNum"> 
+                <input type="text" class="form-control " id = "certifiedNum" placeholder="인증번호를 입력하세요."> 
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" id = "closeEmail" class="btn btn-default" data-dismiss="modal">Close</button>
               <button type="button" class="btn btn-primary"  onclick="certifiedNum()">확인</button>
             </div>
           </div>
         </div>
       </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    
+	
+	
+	
     <!--   Core JS Files   -->
     <script src="../../../resources/js/admin/core/jquery.min.js"></script>
     <script src="../../../resources/js/admin/core/popper.min.js"></script>
@@ -514,7 +457,7 @@
  	   
  	   	if (!flg) {
            	document.querySelector("#pass").innerHTML = '비밀번호가 일치하지않습니다'
-  		   	e.preventDefault();
+           	e.preventDefault();
 
 
 		}
@@ -523,6 +466,7 @@
     
    	</script>
    	
+   	<!-- 이메일 인증 메일 -->
     <script type="text/javascript">
       let emailSend = () => {
     	  let email = document.querySelector("#email").value;
@@ -545,7 +489,7 @@
              throw new AsyncPageError(response.text());
           }).then((text) => {
              if(text == 'fail'){ 
-                alert('실패')
+                alert('중복된 이메일입니다.')
              }else{ 
                  alert('메일이 발송되었습니다.');
 
@@ -557,10 +501,48 @@
 
    </script>
    
+   
+   <!--휴대폰 인증 메일 -->
+   <script type="text/javascript">
+      let tellSend = () => {
+    	  let tell = document.querySelector("#tell").value;
+    	  console.dir(tell);
+    	  
+          const url = '/admin/mypage/modifytellimpl';
+           
+          let paramObj = new Object();
+          paramObj.tell = document.querySelector("#tell").value;
+          let headerObj = new Headers();
+          headerObj.append("content-type","application/json");
+          fetch(url,{
+             method:"post",
+             headers:headerObj,
+             body:JSON.stringify(paramObj)
+          }).then(response => {
+             if(response.ok){
+                return response.text();    
+             }
+             throw new AsyncPageError(response.text());
+          }).then((text) => {
+             if(text == 'fail'){ 
+                alert('중복된 휴대폰번호입니다.')
+             }else{ 
+                 alert('인증번호가 발송되었습니다.');
+
+             }
+          }).catch(error => {
+             error.alertMessage();
+          }); 
+       }
+
+   </script>
+   
+
+  <!-- 이메일 인증 --> 
   <script type="text/javascript">
       let certifiedNum = () => {
     	  
-          const url = '/admin/mypage/authenticationemail';
+          const url = '/admin/mypage/authemail';
            
           let paramObj = new Object();
           paramObj.certifiedNum = document.querySelector("#certifiedNum").value;
@@ -590,13 +572,53 @@
 
    </script>
    
-   <script type="text/javascript">
-      $('#tellModal').modal(options)
+   
+  <!-- 휴대폰 인증 --> 
+  <script type="text/javascript">
+      let certifiedPNum = () => {
+    	  
+          const url = '/admin/mypage/authtell';
+           
+          let paramObj = new Object();
+          paramObj.certifiedPNum = document.querySelector("#certifiedPNum").value;
+          paramObj.tell = document.querySelector("#tell").value;
+          let headerObj = new Headers();
+          headerObj.append("content-type","application/json");
+          fetch(url,{
+             method:"post",
+             headers:headerObj,
+             body:JSON.stringify(paramObj)
+          }).then(response => {
+             if(response.ok){
+                return response.text();    
+             }
+             throw new AsyncPageError(response.text());
+          }).then((text) => {
+             if(text == 'fail'){ 
+                alert('정확한 인증번호를 입력해주세요')
+             }else{ 
+                 alert('휴대폰 인증에 성공하였습니다.');
+                 location.href = "/admin/mypage/modifyinfo"
+             }
+          }).catch(error => {
+             error.alertMessage();
+          }); 
+       }
+
    </script>
    
-   <script type="text/javascript">
-      $('#emailModal').modal(options)
-   </script>
+   	<!-- 모달 Close 초기화 -->
+	<script type="text/javascript">
+	
+		$('#closeTell').click(function(e) {
+		   $('#certifiedPNum').val(" ");
+		});		
+		
+		$('#closeEmail').click(function(e) {
+			   $('#certifiedNum').val(" ");
+			});
+		
+	</script>
     
 </body>
 </html>

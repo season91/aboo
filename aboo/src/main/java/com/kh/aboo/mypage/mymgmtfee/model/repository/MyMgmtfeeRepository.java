@@ -3,21 +3,19 @@ package com.kh.aboo.mypage.mymgmtfee.model.repository;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import com.kh.aboo.admin.mgmtfee.model.vo.Mgmtfee;
 import com.kh.aboo.admin.mgmtfee.model.vo.MgmtfeeOverdue;
 import com.kh.aboo.mypage.mymgmtfee.model.vo.MgmtfeePayment;
-import com.kh.aboo.user.generation.model.vo.Generation;
 
 @Mapper
 public interface MyMgmtfeeRepository {
 	
 	// [관리비 페이지 페이징처리]
 	// 1. total 개수 세는 쿼리
-	@Select("select count(*) from tb_mgmtfee where generation_idx = #{generationIdx}")
+	@Select("select count(*) from tb_mgmtfee where generation_idx = #{generationIdx} and is_del = 0")
 	int selectContentCnt(String generationIdx);
 
 	// 2. 관리비 리스트 가져오는 쿼리
@@ -35,8 +33,12 @@ public interface MyMgmtfeeRepository {
 	// 2. 고지월로만 조회
 	@Select("select extract(year from mgmt_start_date) year, extract(month from mgmt_start_date) month from tb_mgmtfee where mgmtfee_idx=#{mgmtfeeIdx}")
 	Map<String,Object> selectMyMgmtfeeDate(String mgmtfeeIdx);
+		
+	// 위에메서드 아래꺼로 교체하면됩니당~!
+	// 프로시저 결제
+	// 선영 결제 성공시 결제테이블 insert하고 아영 관리비 update하는 프로시저.
+	void procedurePaymentInsert(MgmtfeePayment mgmtfeePayment);
 	
-	//선영 결제
-	@Insert("insert into TB_MGMTFEE_PAYMENT(PAYMENT_IDX,MGMTFEE_IDX,PAYMENT_METHOD,PAYMENT_AMOUNT,PAYMENT_STATE) values(SC_PAYMENT_IDX.nextval,#{mgmtfeeIdx},#{paymentMethod},#{paymentAmount},'1')")
-	int insertPayment(MgmtfeePayment mgmtfeePayment);
+	@Select("select GENERATION_IDX from TB_MGMTFEE where MGMTFEE_IDX = #{mgmtfeeIdx}")
+	String selectPaymentGenerationIdx(String mgmtfeeIdx);
 }

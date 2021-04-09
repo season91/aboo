@@ -10,6 +10,7 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<property name="url" value="jdbc:oracle:thin:@abooDB_medium?TNS_ADMIN=C:\\CODE\\wallet\\Wallet_abooDB"/>
+		<!-- <property name="url" value="jdbc:oracle:thin:@abooDB_medium?TNS_ADMIN=/Users/choayoung91/Documents/CODE/wallet/Wallet_abooDB"/> -->
 		<property name="username" value="admin"/>
 		<property name="password" value="Aboo91939699"/>
 	</bean>
@@ -27,7 +28,7 @@
 	<bean id="mailSenderImpl" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.naver.com"></property>
 		<property name="username" value="suny10312@naver.com"></property>
-		<property name="password" value=""></property>
+		<property name="password" value="cofla0228*"></property>
 		<property name="port" value="465"></property>
 		<property name="javaMailProperties">
 			<props>

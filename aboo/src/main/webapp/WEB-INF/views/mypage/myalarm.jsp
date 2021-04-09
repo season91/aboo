@@ -39,7 +39,13 @@
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
 
             <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span>MyAlarm</span></p>
+              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
+             		
+	 				<span class="mr-2"><a href="/mypage/mycar">My Car</a></span>
+	 				<span class="mr-2"><a href="/mypage/mymgmtfee">My Management Fee</a></span>
+	 				<span class="mr-2"><a href="/mypage/modifyinfo">My information</a></span>
+	 				<span class="mr-2"><a href="/mypage/generationwon">Generation won</a></span>
+	 				<span class="mr-2"><a href="/mypage/writelist/myinfolist">My write list</a></span>
 	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">MyAlarm</h1>
             </div>
           </div>
@@ -49,102 +55,41 @@
     
        <section class="ftco-section contact-section ftco-degree-bg">
       <div class="container">
-        <div class="row d-flex mb-3 contact-info">
-          <div class="col-md-12 mb-4 d-flex justify-content-center">
-            <h2 class="h1">My Alarm</h2>
-          </div>
-          <div class="w-100"></div>
-        </div>
-          <div class="col-md-12 d-flex justify-content-center">
-
-                <div class="col-md-12">
-            <div class="card ">
-              <div class="card-header">
-                <h5 class="card-title text-center text-dark">위례 LH35단지 3501동 1311호</h6>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table tablesorter " id="">
-                    <thead class=" text-black-50">
-						<th>날짜</th>
-                        <th>알림내역</th>
+        <div class="row justify-content-center mb-5">
+			<div class="col-md-7 text-center heading-section ftco-animate">
+			      <h2 class="mb-4">My Alarm</h2>
+			         <p>${aptName} ${building}</p>
+			 </div>
+		</div>
+		<div class="row">
+		   <div class="col-md-12 ftco-animate">
+		      <div class="table-responsive">
+                 <table class="table tablesorter" style="width:99% !important;">
+                   <thead class=" text-black-50">
+					<th>날짜</th>
+                    <th>알림내역</th>
 
 
                     </thead>
                     <tbody>
+                    <c:forEach items='${alarmList}' var="alarmList" begin='0' end='9'>
                       <tr>
                         <td>
-                          2021.03.10
+                          ${alarmList.issueDate}
                         </td>
                         <td>
-                          '분리수거 날짜 변경' 투표가 추가되었습니다.
+                          ${alarmList.issueContent}
                         </td>
        
                       </tr>
-                      <tr>
-                        <td>
-                          2021.03.10
-                        </td>
-                        <td>
-                          '분리수거 날짜 변경' 투표가 추가되었습니다.
-                        </td>
-                       
-                      </tr>
-                      <tr>
-                        <td>
-                         2021.03.10
-                        </td>
-                        <td>
-                          '분리수거 날짜 변경' 투표가 추가되었습니다.
-                        </td>
-
-                      </tr>
-                      <tr>
-                        <td>
-                          2021.03.10
-                        </td>
-                        <td>
-                          '분리수거 날짜 변경' 투표가 추가되었습니다.
-                        </td>
-
-                      </tr>
-                      <tr>
-                        <td>
-                          2021.03.10
-                        </td>
-                        <td>
-                          '분리수거 날짜 변경' 투표가 추가되었습니다.
-                        </td>
-
-                      </tr>
-                      <tr>
-                        <td>
-                          2021.03.10
-                        </td>
-                        <td>
-                          '분리수거 날짜 변경' 투표가 추가되었습니다.
-                        </td>
-
-                      </tr>
-                      <tr>
-                        <td>
-                          2021.03.10
-                        </td>
-                        <td>
-                          '분리수거 날짜 변경' 투표가 추가되었습니다.
-                        </td>
-
-                      </tr>
+                     </c:forEach>
                     </tbody>
                   </table>
                 </div>
               </div>
             </div>
           </div>
- 
-          </div>
 
-        </div>
     </section>
 
       <footer class="ftco-footer ftco-bg-dark ftco-section">

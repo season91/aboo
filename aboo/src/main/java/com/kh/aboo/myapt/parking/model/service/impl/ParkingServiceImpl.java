@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.kh.aboo.admin.car.model.vo.Car;
 import com.kh.aboo.admin.car.model.vo.CarApplication;
 import com.kh.aboo.myapt.parking.model.repository.ParkingRepository;
 import com.kh.aboo.myapt.parking.model.service.ParkingService;
@@ -43,6 +44,18 @@ public class ParkingServiceImpl implements ParkingService{
 	public List<CarApplication> selectCarApplicationByGenerationIdx(String generationIdx) {
 		// TODO Auto-generated method stub
 		return parkingRepository.selectCarApplicationByGenerationIdx(generationIdx);
+	}
+
+	@Override
+	public Car selectCarByApplicationInfo(CarApplication carApplication) {
+		// TODO Auto-generated method stub
+		return parkingRepository.selectCarByApplicationInfo(carApplication);
+	}
+
+	@Override
+	public CarApplication selectCarApplication(CarApplication carApplication) {
+		// TODO Auto-generated method stub
+		return parkingRepository.selectCarApplication(carApplication);
 	}
 
 }

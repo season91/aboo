@@ -17,12 +17,12 @@
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a href="/index" class="nav-link">Home</a></li>
+					<li class="nav-item active"><a href="/index" class="nav-link">Home</a></li>
 					<li class="nav-item"><a href="/about" class="nav-link">About</a></li>
 					<li class="nav-item "><a href="/myapt/schedule"
 						class="nav-link">MyApt</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="/board/info/infolist">Board</a></li>
+						href="/board/info/listinfo">Board</a></li>
 					<li class="nav-item"><a href="/mypage/modifyinfo"
 						class="nav-link action">MyPage</a></li>
 					<c:choose>
@@ -53,14 +53,8 @@
 				<div
 					class="row slider-text align-items-center justify-content-center"
 					data-scrollax-parent="true">
-					<div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate"
-						data-scrollax=" properties: { translateY: '70%' }">
-						<p class="breadcrumbs"
-							data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
-							<span class="mr-2"><a href="index.html">FindId</a></span> <span>FindPasswrod</span>
-						</p>
-						<h1 class="mb-3 bread"
-							data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Mypage</h1>
+					<div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+						<h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Home</h1>
 					</div>
 				</div>
 			</div>
@@ -70,7 +64,7 @@
 	<section class="ftco-section contact-section ftco-degree-bg">
 		<h4 class="text-center mb-4">아이디 찾기</h4>
 		<div class="d-flex justify-content-center">
-			<div>아래정보를 입력하시면 아이디를 인증번호를 발송해드립니다</div>
+			<div>아래정보를 입력하시면 메일로 인증번호를 발송해드립니다</div>
 		</div>
 		<div class="container">
 			<div class="row block-9 justify-content-center">
@@ -85,19 +79,19 @@
 						<input type="text" class="form-control" id="email" name="email" placeholder="이메일">
 					</div>
 					<div id = "certifiedBox" class="form-group" style="display: none;">
-						<form action="/authenticationid" method="get">
+						<!-- <form action="/authenticationid" method="get"> -->
 						<div class= "d-flex justify-content-between">
 							<input type="text" class="form-control col-md-10" id="certifiedNum" name="certifiedNum" placeholder="인증번호">
-							<button class = "btn btn-primary px-xl-3 py-xl-1 ">확인</button>
+							<button class = "btn btn-primary px-xl-3 py-xl-1 " onclick="certified()">확인</button>
 						</div>
-						</form>
+						<!-- </form> -->
 					</div>
 					<div class="form-group" >
 						<input type="submit" value="확인" class="btn btn-primary py-3 px-5 col-sm-12" onclick="emailSend()">
 					</div>
 					<div class="col-sm-12 d-flex justify-content-center">
 						<div>
-							<a href="/mypage/findid">아이디 찾기</a> | <a href="/mypage/findpassword">비밀번호 찾기</a>
+							<a href="/findid">아이디 찾기</a> | <a href="/findpassword">비밀번호 찾기</a>
 						</div>
 					</div>
 				</div>
@@ -152,6 +146,7 @@
 							<li><a href="/myapt/schedule" class="py-2 d-block">MyApt</a></li>
 							<li><a href="/baord/info/listinfo" class="py-2 d-block">Board</a></li>
 							<li><a href="/mypage/modifyinfo" class="py-2 d-block">MyPage</a></li>
+							<li><a href="/bdmin/contactus" class="py-2 d-block">Contact us</a></li>
 						</ul>
 					</div>
 				</div>
@@ -239,7 +234,25 @@
 
    </script>
 
-
+	<script type="text/javascript">
+      let certified = () => {
+    	  let certifiedNum = document.querySelector("#certifiedNum").value;
+    	  	
+  	  			fetch("/authid?certifiedNum="+certifiedNum,{
+  	  				method:"GET"
+  	  			})
+  	  			.then(response => response.text())
+  	  			.then(text => {
+  	  				if(text == 'success'){
+  	  					alert("인증이 완료되었습니다.");
+  	  					location.href = "/findidresult";
+  	  				}else{
+  	  					alert("인증번호를 다시 확인해주세요.");
+  	  				}
+  	  			})
+  	  		
+   	};
+   </script>
    
 	<script src="../../../resources/js/generation/jquery.min.js"></script>
 	<script

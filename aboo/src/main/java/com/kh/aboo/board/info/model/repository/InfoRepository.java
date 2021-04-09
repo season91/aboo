@@ -25,19 +25,15 @@ public interface InfoRepository {
 	int insertFile(FileVo file);
 	
 	//페이징처리 된 정보게시판 글목록 불러오기
-	List<InfoBoard> selectInfoBoardList(Paging paging);
+	List<InfoBoard> selectInfoBoardList(@Param(value = "queryStart") int queryStart, @Param(value = "queryEnd") int queryEnd, @Param(value = "apartmentIdx") String apartmentIdx);
 	
 	//정보게시판 글 갯수 불러오기
-	@Select("select count(*) from tb_inf_qst_brd where apartment_idx = #{apartmentIdx}")
+	@Select("select count(*) from tb_inf_qst_brd where apartment_idx = #{apartmentIdx} and b_isdel = 0")
 	int selectInfoContentCnt(String apartmentIdx);
 	
 	//글번호로 게시글 불러오기
 	@Select("select * from tb_inf_qst_brd where b_idx = #{bIdx}")
 	InfoBoard selectInfoBoardDetail(String bIdx);
-	
-	//글번호로 업로드된 파일 불러오기
-	@Select("select * from tb_file where type_idx = #{bIdx}")
-	List<FileVo> selectFileWithBIdx(String bIdx);
 	
 	//게시글 수정하기
 	@Update("update tb_inf_qst_brd set b_title = #{bTitle}, b_content = #{bContent}, b_category = #{bCategory} where b_idx = #{bIdx}")
@@ -50,6 +46,13 @@ public interface InfoRepository {
 	//게시글 비공개처리
 	@Update("update tb_inf_qst_brd set b_isprivate = 1 where b_idx = #{bIdx}")
 	int updateInfoPrivate(String bIdx);
+	
+	//게시글 검색리스트
+	List<InfoBoard> selectInfoSearchList(@Param(value = "queryStart") int queryStart, @Param(value = "queryEnd") int queryEnd, @Param(value = "apartmentIdx") String apartmentIdx, @Param(value = "keyword") String keyword);
+	
+	//검색한 글 갯수 불러오기
+	@Select("select count(*) from (select replace(b_title, ' ', '') p from tb_inf_qst_brd where b_isdel = 0 and apartment_idx = #{apartmentIdx}) where p like '%'||#{keyword}||'%'")
+	int selectInfoSeachCnt(@Param(value = "apartmentIdx") String apartmentIdx, @Param(value = "keyword") String keyword);
 	
 	////////////////////////////
 	//정보게시판 댓글관련

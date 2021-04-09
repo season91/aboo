@@ -156,6 +156,7 @@ demo = {
       }
     };
 
+	/*아영 관리비 그래프 틀*/
     gradientChartOptionsConfigurationWithTooltipPurple = {
       maintainAspectRatio: false,
       legend: {
@@ -182,8 +183,8 @@ demo = {
             zeroLineColor: "transparent",
           },
           ticks: {
-            suggestedMin: 60,
-            suggestedMax: 125,
+            suggestedMin: 1000,
+            suggestedMax: 2000,
             padding: 20,
             fontColor: "#9a9a9a"
           }
@@ -278,8 +279,8 @@ demo = {
             zeroLineColor: "transparent",
           },
           ticks: {
-            suggestedMin: 50,
-            suggestedMax: 125,
+            suggestedMin: 0,
+            suggestedMax: 100,
             padding: 20,
             fontColor: "#9e9e9e"
           }
@@ -378,12 +379,13 @@ demo = {
       }]
     };
 
+
     var myChart = new Chart(ctx, {
       type: 'line',
       data: data,
       options: gradientChartOptionsConfigurationWithTooltipPurple
     });
-
+	
 
     var ctxGreen = document.getElementById("chartLineGreen").getContext("2d");
 
@@ -393,10 +395,19 @@ demo = {
     gradientStroke.addColorStop(0.4, 'rgba(66,134,121,0.0)'); //green colors
     gradientStroke.addColorStop(0, 'rgba(66,134,121,0)'); //green colors
 
+		
+    let usedList = document.querySelector("#usedList").value
+
+	usedList = usedList.replace('[','');
+	usedList = usedList.replace(']','');
+	usedList = usedList.replace(' ','');
+	usedList = usedList.split(',');
+	console.dir(usedList);
+	
     var data = {
-      labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV'],
+      labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'] ,
       datasets: [{
-        label: "My First dataset",
+        label: "총 게시물 수",
         fill: true,
         backgroundColor: gradientStroke,
         borderColor: '#00d6b4',
@@ -410,8 +421,12 @@ demo = {
         pointHoverRadius: 4,
         pointHoverBorderWidth: 15,
         pointRadius: 4,
-        data: [90, 27, 60, 12, 80],
-      }]
+        data: usedList,
+      }
+
+
+
+]
     };
 
     var myChart = new Chart(ctxGreen, {
@@ -421,10 +436,16 @@ demo = {
 
     });
 
+	/* 아영 그래프 내용 부분*/
+	let list = document.querySelector('#list').value;
+	list = list.replace('[','');
+	list = list.replace(']','');
+	list = list.replace(' ','');
+	list = list.split(',');
 
 
     var chart_labels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-    var chart_data = [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100];
+    var chart_data = list;
 
 
     var ctx = document.getElementById("chartBig1").getContext('2d');

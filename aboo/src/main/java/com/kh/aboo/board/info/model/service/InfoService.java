@@ -17,6 +17,7 @@ public interface InfoService {
 	int updateInfoBoard(InfoBoard infoBoard);
 	int deleteInfoBoard(String bIdx, String apartmentIdx);
 	int updateInfoPrivate(String bIdx);
+	Map<String,Object> selectInfoSearchList(int currentPage,String apartmentIdx,String keyword);
 	
 	//희원 정보게시판 댓글 업로드
 	int insertInfoCmt(InfoCmt infoCmt);
