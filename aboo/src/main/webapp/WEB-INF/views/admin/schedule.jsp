@@ -105,7 +105,7 @@
               <li class="dropdown nav-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div class="photo">
-                    <img src="../../resources/img/anime3.png">
+                    <img src="../../../../resources/img/anime3.png">
                   </div>
                   <b class="caret d-none d-lg-block d-xl-block"></b>
                   <p class="d-lg-none">
@@ -121,7 +121,7 @@
                   </li>
                   <div class="dropdown-divider"></div>
                   <li class="nav-link">
-                  <c:choose>
+                   <c:choose>
                   	<c:when test="${sessionScope.admin == null}">
                     	<a href="/admin/login" class="nav-item dropdown-item">Log in</a>
                   	</c:when>
@@ -291,7 +291,7 @@
 	                           	 <h6 class="font-weight-bold">일정 내용</h6>
 	                            </div>
 	                            <div class="col-sm-9">
-	                    	 	 	<textarea class="form-control col-sm-9 bg-white text-dark rounded"  id="scheduleCon" name="scheduleCon" style="height: 300px; resize: none;" wrap="hard"  cols="15"></textarea>
+	                    	 	 	<textarea class="form-control form-control-user h6 rounded bg-white text-dark"  id="scheduleCon" name="scheduleCon"></textarea>
 	                   			</div>
 	                   		</div>
                     </div>
@@ -336,7 +336,7 @@
 	                           	 <h6 class="font-weight-bold">일정 내용</h6>
 	                            </div>
 	                            <div class="col-sm-9">
-	                    	 	 	<textarea class="form-control col-sm-9 bg-white text-dark rounded"  id="modifyScheduleCon" name="scheduleCon" style="height: 300px; resize: none;" wrap="hard"  cols="15"></textarea>
+	                    	 	 	<textarea class="form-control  form-control-user h6 rounded bg-white text-dark"  id="modifyScheduleCon" name="scheduleCon" ></textarea>
 	                   			</div>
 	                   			<input type="hidden" id="scheduleIdx">
 	                   		</div>
@@ -519,6 +519,7 @@
 		let scheduleSdate = document.querySelector('#modifyScheduleSdate').value;
 		let scheduleEdate = document.querySelector('#modifyScheduleEdate').value;
 		let scheduleCon = document.querySelector('#modifyScheduleCon').value;
+		scheduleCon = scheduleCon.replace(/(?:\r\n|\r|\n)/g,'');
 		
 		
 		if(confirm("일정을 수정하시겠습니까?")){

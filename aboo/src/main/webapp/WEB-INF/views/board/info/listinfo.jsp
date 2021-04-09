@@ -67,7 +67,7 @@
   		<div class="row">
 		   <div class="col-md-12 ftco-animate">
 		      <div class="table-responsive">
-                 <table class="table tablesorter " id="">
+                 <table class="table tablesorter " style="width:99% !important;">
 
                     <thead class=" text-primary">
                     

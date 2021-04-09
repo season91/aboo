@@ -169,6 +169,7 @@
 
   				}, 
 
+
   				events: [
 
   			  		<c:forEach items="${schedule}" var="schedule">

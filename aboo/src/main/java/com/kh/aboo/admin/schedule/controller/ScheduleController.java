@@ -50,9 +50,11 @@ public class ScheduleController {
 		
 		//나중에 세션값으로 바꾸기
 		schedule.setApartmentIdx(admin.getApartmentIdx());
+		String content = schedule.getScheduleCon();
+		content = content.replaceAll("(\r\n|\r|\n|\n\r)", "");
+		schedule.setScheduleCon(content);
 		
 		int res = scheduleService.insertSchedule(schedule);
-
 		
 		if(res > 0) {
 			myAlarmService.insertAptAlarm("'" + schedule.getScheduleCon() + "' " + AlarmCode.ADD_SCHEDULE, admin.getApartmentIdx());

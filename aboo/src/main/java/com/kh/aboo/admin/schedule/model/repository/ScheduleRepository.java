@@ -20,7 +20,11 @@ public interface ScheduleRepository {
 	int insertSchedule(Schedule schedule);
 	
 	//페이징 처리된 스케쥴 목록
-	List<InfoBoard> selectScheduleList(@Param(value = "queryStart") int queryStart, @Param(value = "queryEnd") int queryEnd,@Param(value = "apartmentIdx")  String apartmentIdx);
+	List<Schedule> selectScheduleList(@Param(value = "queryStart") int queryStart, @Param(value = "queryEnd") int queryEnd,@Param(value = "apartmentIdx")  String apartmentIdx);
+	
+	//달력에 보여질 일정목록
+	@Select("select * from tb_schedule where is_leave= 0 and apartment_idx = #{apartmentIdx}")
+	List<Schedule> selectScheduleListForCalendar(String apartmentIdx);
 	
 	//일정 갯수 가져오기
 	@Select("select count(*) from tb_schedule where apartment_idx = #{apartmentIdx} and is_leave = 0")
@@ -39,7 +43,7 @@ public interface ScheduleRepository {
 	int deleteSchedule(String scheduleIdx);
 	
 	//admin index에 보여질 월별 일정내역
-	@Select("select * from tb_schedule where extract(month from sysdate) = extract(month from schedule_sdate)")
+	@Select("select * from tb_schedule where extract(month from sysdate) = extract(month from schedule_sdate) and is_leave = 0")
 	List<Schedule> selectScheduleByMonth();
 
 }
