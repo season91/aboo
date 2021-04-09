@@ -88,7 +88,7 @@ public class ManagementController {
 		System.out.println(apartment);
 		managementService.updateApartment(apartment);
 		model.addAttribute("alertMsg", "수정이 완료되었습니다");
-		model.addAttribute("url", "/bdmin/apartment");
+		model.addAttribute("url", "/bdmin/management/apartment");
 		return "common/result";
 	}
 	

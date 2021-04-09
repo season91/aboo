@@ -67,7 +67,7 @@
             </a>
           </li>
           <li>
-          <a href="/admin/notice">
+          <a href="/bdmin/notice/noticelist">
             <i class="tim-icons icon-volume-98"></i>
       		 <p>notice</p>
       		</a>
