@@ -42,7 +42,7 @@
               <p>Authority</p>
             </a>
           </li>
-          <li class="active ">
+          <li >
             <a href="/admin/mgmtfee">
               <i class="tim-icons icon-chart-bar-32"></i>
               <p>Management Fee</p>
@@ -106,30 +106,26 @@
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navigation">
+         <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto ">
               <li class="dropdown nav-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div class="photo">
-                    <img src="../../resources/img/anime3.png">
+                    <img src="../../../../resources/img/anime3.png">
                   </div>
                   <b class="caret d-none d-lg-block d-xl-block"></b>
+                  <p class="d-lg-none">
+                    Log out
+                  </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Profile</a>
-                  </li>
-                  <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Settings</a>
-                  </li>
-                  <div class="dropdown-divider"></div>
-                  <li class="nav-link">
-                  <c:choose>
-                  	<c:when test="${sessionScope.admin == null}">
-                    	<a href="/admin/login" class="nav-item dropdown-item">Log in</a>
+                   <c:choose>
+                  	<c:when test="${sessionScope.bdmin == null}">
+                    	<a href="/bdmin/login" class="nav-item dropdown-item">Log in</a>
                   	</c:when>
-                  	<c:when test="${sessionScope.admin != null}">
-                    	<a href="/admin/logout" class="nav-item dropdown-item">Log out</a>
+                  	<c:when test="${sessionScope.bdmin != null}">
+                    	<a href="/bdmin/logout" class="nav-item dropdown-item">Log out</a>
                   	</c:when>
                   </c:choose>
                   </li>
@@ -150,7 +146,7 @@
               </div>
                 	  
               <div class="card-body">
-                  <form id="form-apart" action="${context}/bdmin/apartment/modify" method="post">
+                  <form id="form-apart" action="${context}/bdmin/management/apartment/modify" method="post">
                   <h4 class="title"> 1. 아파트 정보</h4>
                   	<div class="row">
                   		<div class="col-md-3 pr-md-1">
@@ -181,7 +177,7 @@
                     </div>
                 	<div class="card-footer" style="display: flex; justify-content: space-around;">
 		                <button type="submit" class="btn btn-fill btn-success">수정하기</button>
-		                <button type="button" class="btn btn-fill btn-warning">삭제하기</button>
+		                <button type="button" class="btn btn-fill btn-warning" onclick="location.href='/bdmin/management/apartment'">돌아가기</button>
                 	</div>
                 </form>
 			</div>

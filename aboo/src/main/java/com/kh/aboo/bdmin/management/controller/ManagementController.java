@@ -59,7 +59,7 @@ public class ManagementController {
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("bdmin");
-		return "redirect:/admin/index";
+		return "redirect:/bdmin/login";
 	}
 
 	// [관리업무- 1.아파트관리]
@@ -88,7 +88,7 @@ public class ManagementController {
 		System.out.println(apartment);
 		managementService.updateApartment(apartment);
 		model.addAttribute("alertMsg", "수정이 완료되었습니다");
-		model.addAttribute("url", "/bdmin/apartment");
+		model.addAttribute("url", "/bdmin/management/apartment");
 		return "common/result";
 	}
 	
