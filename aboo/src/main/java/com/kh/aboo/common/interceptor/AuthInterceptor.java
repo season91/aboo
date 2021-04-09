@@ -98,8 +98,13 @@ public class AuthInterceptor implements HandlerInterceptor {
 							throw new ToAlertException(ErrorCode.AUTH06);
 						}
 						break;
+						
 					case "usedupload":
-						if (session.getAttribute("generation") == null)
+						if (session.getAttribute("generation") == null) 
+							throw new ToAlertException(ErrorCode.AUTH06);
+						
+					case "usedcmtupload":
+						if (session.getAttribute("generation") == null) 
 							throw new ToAlertException(ErrorCode.AUTH06);
 					}
 					break;

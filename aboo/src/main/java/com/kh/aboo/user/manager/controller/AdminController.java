@@ -109,7 +109,7 @@ public class AdminController {
 			@SessionAttribute(name = "admin", required = false) Admin admin, Model model) {
 
 		adminService.insertGeneration(generationInfo, admin.getApartmentIdx());
-
+				
 		model.addAttribute("alertMsg", "추가 되었습니다.");
 		model.addAttribute("url", "/admin/authority");
 		return "common/result";

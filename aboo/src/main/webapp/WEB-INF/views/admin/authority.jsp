@@ -315,7 +315,7 @@
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-            <form action="/admin/authority" method="get">
+            <form id = "searchForm" action="/admin/authority" method="get">
        	      <div class="form-group">
        	      	<div id = "lableWrap" class = "d-flex flex-column">
 	                <label style="font-size: 1vw; color: #8a8a8a;" for="name">세대를 검색하세요 양식 : [000-000]</label>
@@ -521,23 +521,61 @@
 
       });
     </script>
+
+	<script type="text/javascript">
+    document.querySelector('#searchForm').addEventListener('submit',(e)=>{
+    	
+		$("#checkBuilding").change(function(){        
+	        if($("#checkBuilding").is(":checked")){
+
+	        }else{
+					let keyword = document.querySelector("#keyword").value;
+					if (!keyword.includes('-')) {
+						alert("-를 입력하세요");
+			           	e.preventDefault();
+
+					}
+
+	        }
+ 	    }); 
+	
+    });
+    
+	</script>
     
     <!-- 키워드 검색 체크시 input박스 바꿔주기 -->
 	<script type="text/javascript">
-		$("#checkBuilding").change(function(){         
+	
+	let flg = false;
+	
+		$("#checkBuilding").change(function(){        
 	        if($("#checkBuilding").is(":checked")){
 				console.dir("선택")
 				 document.querySelector("#generation").name = 'none';
 				 document.querySelector("#building").name = 'kind';
+				 flg = true;
+				 console.dir('선택'+flg)
 	        }else{
 				console.dir("선택 안함")
 				 document.querySelector("#building").name = 'none';
 				 document.querySelector("#generation").name = 'kind';
-	        }
-	    });
+				 flg = false;
+				 console.dir('선택안함'+flg)
 
-	
-	
+	        }
+ 	    }); 
+
+        document.querySelector('#searchForm').addEventListener('submit', (e) => {
+            let keyword = document.querySelector("#keyword").value;
+
+            if (!flg) {
+              if (!keyword.includes('-')) {
+                alert("-를 입력하세요");
+                e.preventDefault();
+
+              }
+            }
+          });
 	
 	</script>
 
