@@ -19,13 +19,13 @@
           <a href="/admin/index" class="simple-text logo-mini">
             <img src="../../../resources/abooimg/logo_w.png">
           </a>
-          <a href="/admin/index" class="simple-text logo-normal">
-            BDMIN
+          <a href="/admin/login" class="simple-text logo-normal">
+            ADMIN
           </a>
         </div>
         <ul class="nav">
           <li >
-            <a href="/admin/mypage/modifyinfo">
+            <a href="/admin/mypage/modifyinfos">
               <i class="tim-icons icon-badge"></i>
               <p>Mypage</p>
             </a>
@@ -66,13 +66,13 @@
               <p>Chat</p>
             </a>
           </li>
-         <li>
+          <li>
            <a href="/bdmin/notice/noticelist">
               <i class="tim-icons icon-volume-98"></i>
               <p>notice</p>
             </a>
           </li>
-          <li>
+          <li  class="active ">
             <a href="/bdmin/login">
               <i class="tim-icons icon-key-25"></i>
               <p>BDMIN</p>
@@ -93,40 +93,33 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Table List</a>
+            <a class="navbar-brand" href="#pablo">bdmin login</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
-            <div class="collapse navbar-collapse" id="navigation">
+         <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto ">
               <li class="dropdown nav-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div class="photo">
-                    <img src="../../resources/img/anime3.png">
+                    <img src="../../../../resources/img/anime3.png">
                   </div>
                   <b class="caret d-none d-lg-block d-xl-block"></b>
                   <p class="d-lg-none">
-                    Log out / Login
+                    Log out
                   </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Profile</a>
-                  </li>
-                  <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Settings</a>
-                  </li>
-                  <div class="dropdown-divider"></div>
-                  <li class="nav-link">
-                  <c:choose>
+                   <c:choose>
                   	<c:when test="${sessionScope.bdmin == null}">
-                    	<a href="/admin/login" class="nav-item dropdown-item">Log in</a>
+                    	<a href="/bdmin/login" class="nav-item dropdown-item">Log in</a>
                   	</c:when>
                   	<c:when test="${sessionScope.bdmin != null}">
-                    	<a href="/admin/logout" class="nav-item dropdown-item">Log out</a>
+                    	<a href="/bdmin/logout" class="nav-item dropdown-item">Log out</a>
                   	</c:when>
                   </c:choose>
                   </li>
@@ -137,20 +130,7 @@
           </div>
         </div>
       </nav>
-      <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="SEARCH">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <i class="tim-icons icon-simple-remove"></i>
-              </button>
-            </div>
-            <div class="modal-footer">
-            </div>
-          </div>
-        </div>
-      </div>
+      
       <!-- End Navbar -->
 		<div class="content d-flex align-items-center">
 		        <div class="container">

@@ -19,13 +19,13 @@
           <a href="/admin/index" class="simple-text logo-mini">
             <img src="../../../resources/abooimg/logo_w.png">
           </a>
-          <a href="/admin/index" class="simple-text logo-normal">
+          <a href="/index" class="simple-text logo-normal">
            ABOO
           </a>
         </div>
         <ul class="nav">
           <li >
-            <a href="/admin/mypage/modifyinfos">
+            <a href="/bdmin/contactus">
               <i class="tim-icons icon-badge"></i>
               <p> contact us</p>
             </a>

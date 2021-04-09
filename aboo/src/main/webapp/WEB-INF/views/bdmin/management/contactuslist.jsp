@@ -60,6 +60,12 @@
               <p>Schedule</p>
             </a>
           </li>
+          <li>
+            <a href="/admin/chat">
+              <i class="tim-icons icon-chat-33"></i>
+              <p>Chat</p>
+            </a>
+          </li>
            <li>
            <a href="/bdmin/notice/noticelist">
               <i class="tim-icons icon-volume-98"></i>
@@ -105,25 +111,21 @@
               <li class="dropdown nav-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div class="photo">
-                    <img src="../../resources/img/anime3.png">
+                    <img src="../../../../resources/img/anime3.png">
                   </div>
                   <b class="caret d-none d-lg-block d-xl-block"></b>
+                  <p class="d-lg-none">
+                    Log out
+                  </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Profile</a>
-                  </li>
-                  <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Settings</a>
-                  </li>
-                  <div class="dropdown-divider"></div>
-                  <li class="nav-link">
-                  <c:choose>
-                  	<c:when test="${sessionScope.admin == null}">
-                    	<a href="/admin/login" class="nav-item dropdown-item">Log in</a>
+                   <c:choose>
+                  	<c:when test="${sessionScope.bdmin == null}">
+                    	<a href="/bdmin/login" class="nav-item dropdown-item">Log in</a>
                   	</c:when>
-                  	<c:when test="${sessionScope.admin != null}">
-                    	<a href="/admin/logout" class="nav-item dropdown-item">Log out</a>
+                  	<c:when test="${sessionScope.bdmin != null}">
+                    	<a href="/bdmin/logout" class="nav-item dropdown-item">Log out</a>
                   	</c:when>
                   </c:choose>
                   </li>
