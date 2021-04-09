@@ -61,6 +61,15 @@ public class AuthInterceptor implements HandlerInterceptor {
 				case "car": // 차량
 					if (session.getAttribute("admin") == null)
 						throw new ToAlertException(ErrorCode.AUTH05);
+				case "chat": // 채팅
+					if (session.getAttribute("admin") == null)
+						throw new ToAlertException(ErrorCode.AUTH05);
+				case "schedule": // 일정
+					if (session.getAttribute("admin") == null)
+						throw new ToAlertException(ErrorCode.AUTH05);
+				case "vote": // 투표
+					if (session.getAttribute("admin") == null)
+						throw new ToAlertException(ErrorCode.AUTH05);
 				}
 				break;
 

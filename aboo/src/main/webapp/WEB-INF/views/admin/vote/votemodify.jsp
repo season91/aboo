@@ -186,9 +186,7 @@
 							CKEDITOR.replace('p_content', {height: 400, editorplaceholder: '안건 내용에 대한 설명을 입력해주세요.'});
 							CKEDITOR.config.resize_enabled = false;
 							CKEDITOR.config.uiColor = '#222a42';
-							let test = '${voteContent}';
-							let test1 = test.replace(test,'');
-							CKEDITOR.instances.p_content.setData();
+							CKEDITOR.instances.p_content.setData('${voteContent}');
 						</script>
                       </div>
                     </div>

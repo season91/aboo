@@ -146,7 +146,7 @@
               </div>
                 	  
               <div class="card-body">
-                  <form id="form-apart" action="${context}/bdmin/apartment/modify" method="post">
+                  <form id="form-apart" action="${context}/bdmin/management/apartment/modify" method="post">
                   <h4 class="title"> 1. 아파트 정보</h4>
                   	<div class="row">
                   		<div class="col-md-3 pr-md-1">
@@ -177,7 +177,7 @@
                     </div>
                 	<div class="card-footer" style="display: flex; justify-content: space-around;">
 		                <button type="submit" class="btn btn-fill btn-success">수정하기</button>
-		                <button type="button" class="btn btn-fill btn-warning">삭제하기</button>
+		                <button type="button" class="btn btn-fill btn-warning" onclick="location.href='/bdmin/management/apartment'">돌아가기</button>
                 	</div>
                 </form>
 			</div>
