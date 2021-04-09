@@ -24,7 +24,7 @@ public interface AdminRepository {
 	@Insert("insert into TB_GENERATION(GENERATION_IDX,APARTMENT_IDX,ID,PASSWORD,BUILDING,NUM) values(SC_GENERATION_IDX.nextval,#{apartmentIdx},#{id},#{password},#{building},#{num})")
 	public int insertGeneration(Generation generation);
 	
-	@Select("select count(*) from TB_GENERATION where id = #{id}")
+	@Select("select count(*) from TB_GENERATION where id = #{id} and is_del = 0 ")
 	public int selectGenerationIdCnt(Generation generation);
 	
 	int selectContentCnt(Map<String,Object> searchMap);
