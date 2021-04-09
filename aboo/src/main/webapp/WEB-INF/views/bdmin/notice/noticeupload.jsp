@@ -111,16 +111,25 @@
                   </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
-                  <li class="nav-link">
-                    <a href="/admin/mypage/modifyinfo" class="nav-item dropdown-item">Profile</a>
-                  </li>
-                  <li class="nav-link">
-                    <a href="/admin/chat" class="nav-item dropdown-item">1:1 Chat</a>
-                  </li>
-                  <div class="dropdown-divider"></div>
-                  <li class="nav-link">
-                    <a href="/admin/logout" class="nav-item dropdown-item">Log out</a>
-                  </li>
+                  <c:choose>
+                  	<c:when test="${sessionScope.admin != null}">
+                  		<li class="nav-link">
+	                      <a href="/admin/mypage/modifyinfo" class="nav-item dropdown-item">Profile</a>
+	                    </li>
+	                    <li class="nav-link">
+	                      <a href="/admin/chat" class="nav-item dropdown-item">1:1 Chat</a>
+	                    </li>
+	                    <div class="dropdown-divider"></div>
+	                    <li class="nav-link">
+	                      <a href="/admin/logout" class="nav-item dropdown-item">Log out</a>
+	                    </li>
+                  	</c:when>
+                  	<c:when test="${sessionScope.bdmin != null}">
+                  		<li class="nav-link">
+	                      <a href="/bdmin/logout" class="nav-item dropdown-item">Log out</a>
+	                    </li>
+                  	</c:when>
+                  </c:choose>
                 </ul>
               </li>
               <li class="separator d-lg-none"></li>
