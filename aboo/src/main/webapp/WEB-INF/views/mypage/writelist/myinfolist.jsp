@@ -65,7 +65,7 @@
 						  </button>
 						  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
 						    <li role="presentation"><a class="d-block text-muted" role="menuitem" tabindex="-1" href="/mypage/writelist/myinfolist">정보&질문</a></li>
-						    <li role="presentation"><a class="d-block text-muted" role="menuitem" tabindex="-1" href="/mypage/writelist/myinteriorlist">인테리어</a></li>
+						    <li role="presentation"><a class="d-block text-muted" role="menuitem" tabindex="-1" href="/mypage/writelist/myintlist">인테리어</a></li>
 						    <li role="presentation"><a class="d-block text-muted" role="menuitem" tabindex="-1" href="/mypage/writelist/myusedlist">중고</a></li>
 						  </ul>
 						</div>
