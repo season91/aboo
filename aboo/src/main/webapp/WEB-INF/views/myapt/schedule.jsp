@@ -168,6 +168,8 @@
   				right: 'today',
 
   				}, 
+  				
+  				displayEventTime : false,
 
 
   				events: [
