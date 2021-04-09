@@ -1,5 +1,8 @@
 package com.kh.aboo.myapt.aptSchedule.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.aboo.admin.schedule.model.service.ScheduleService;
+import com.kh.aboo.admin.schedule.model.vo.Schedule;
 import com.kh.aboo.user.generation.model.vo.Generation;
 import com.kh.aboo.user.manager.model.vo.Admin;
 
@@ -30,7 +34,10 @@ public class AptScheduleController {
 
 		if(admin != null) {
 			String apartmentIdx = admin.getApartmentIdx();
-			model.addAllAttributes(scheduleService.selectScheduleList(page, apartmentIdx));
+			List<Schedule> scheduleList = new ArrayList<>();
+			scheduleList = scheduleService.selectScheduleListForCalendar(apartmentIdx);
+
+			model.addAttribute("schedule",scheduleList);
 			model.addAttribute("aptName",scheduleService.selectAptNameByIdx(apartmentIdx));
 			System.out.println(scheduleService.selectAptNameByIdx(apartmentIdx));
 			

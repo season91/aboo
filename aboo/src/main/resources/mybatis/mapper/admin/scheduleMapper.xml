@@ -13,7 +13,7 @@
 					select *
 					from tb_schedule
 					where is_leave = 0 and apartment_Idx = #{apartmentIdx}
-					order by schedule_idx desc
+					order by schedule_sdate 
 				) b
 			) where rnum between #{queryStart} and #{queryEnd}
 		</select>

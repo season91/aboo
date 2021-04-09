@@ -23,6 +23,8 @@ public class ScheduleServiceImpl implements ScheduleService{
 	@Override
 	public int insertSchedule(Schedule schedule) {
 		
+		
+		
 		return scheduleRepository.insertSchedule(schedule);
 	}
 
@@ -69,6 +71,12 @@ public class ScheduleServiceImpl implements ScheduleService{
 	public List<Schedule> selectScheduleByMonth() {
 		
 		return scheduleRepository.selectScheduleByMonth();
+	}
+
+	@Override
+	public List<Schedule> selectScheduleListForCalendar(String apartmentIdx) {
+		
+		return scheduleRepository.selectScheduleListForCalendar(apartmentIdx);
 	}
 	
 	
