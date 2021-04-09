@@ -24,7 +24,7 @@ public class CarApplicationValidator implements Validator{
 		// Object target : 컨트롤러 메서드의 파라미터
 		// Errors errors : 검증에 실패할 경우, 내용을 저장할 Error 객체. 컨트롤러 메서드의 파라미터로 전달된다.
 
-		Pattern pattern = Pattern.compile("^\\d{2,3}[가-힣]\\d{4}"); //차량 정규표현식.
+		Pattern pattern = Pattern.compile("^\\d{2,3}[가-힣]\\d{4}$"); //차량 정규표현식.
 		CarApplication carApplicationInfo = (CarApplication) target;
 
 		// 1. 차량번호 양식이 22마2222 , 222마2222 가 맞는지 확인
