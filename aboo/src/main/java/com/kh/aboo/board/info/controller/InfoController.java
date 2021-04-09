@@ -65,6 +65,7 @@ public class InfoController {
 		
 		Generation generation = (Generation) session.getAttribute("generation");
 		Admin admin = (Admin) session.getAttribute("admin");
+		session.setAttribute("keyword", keyword);
 		
 		if(admin != null) {
 			

@@ -39,7 +39,7 @@
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
 
             <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/board/interior/intlist">INTERIOR</a></span> <span><a href="/board/used/usedlist">Bullentin</a></span></p>
+              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/board/interior/intlist">INTERIOR</a></span> <span><a href="/board/used/usedlist">used</a></span></p>
 	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Info</h1>
             </div>
           </div>
@@ -54,7 +54,7 @@
             <div class="card-body ">
              <div class=" d-flex justify-content-between">
              <h2 class="h4">정보 & 질문 게시판</h2>
-              <form action="${context}/info/listinfo" class="search-form">
+              <form action="${context}/board/info/search" class="search-form">
                 <div class="form-group">
                   <div class="icon">
                   	<button type="submit" class="icon-search bg-white border-0"></button>
@@ -67,7 +67,7 @@
   		<div class="row">
 		   <div class="col-md-12 ftco-animate">
 		      <div class="table-responsive">
-                 <table class="table tablesorter " id="">
+                 <table class="table tablesorter " style="width:99% !important;">
 
                     <thead class=" text-primary">
                     
@@ -140,20 +140,20 @@
             <div class="block-27">
             
                   <ul>
-                <li><a href="${context}/board/${paging.type}/listinfo">&lt;&lt;</a></li>
-                <li><a href="${context}/board/${paging.type}/listinfot?page=${paging.prev}">&lt;</a></li>
+                <li><a href="${context}/board/${paging.type}/search?keyword=${keyword}">&lt;&lt;</a></li>
+                <li><a href="${context}/board/${paging.type}/search?keyword=${keyword}&page=${paging.prev}">&lt;</a></li>
 	                <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
 	                   <c:choose>
 	                      <c:when test="${paging.currentPage eq page}">
-	                         <li class="active"><a href="${context}/board/${paging.type}/listinfo?page=${page}">${page}</a></li>
+	                         <li class="active"><a href="${context}/board/${paging.type}/search?keyword=${keyword}&page=${page}">${page}</a></li>
 	                      </c:when>
 	                      <c:otherwise>
-	                         <li><a href="${context}/board/${paging.type}?page=${page}/listinfo">${page}</a></li>
+	                         <li><a href="${context}/board/${paging.type}?page=${page}/search?keyword=${keyword}">${page}</a></li>
 	                      </c:otherwise>
 	                   </c:choose>
 	              	 </c:forEach>
-                <li><a href="${context}/board/${paging.type}/listinfo?page=${paging.next}">&gt;</a></li>
-                <li><a href="${context}/board/${paging.type}/listinfo?page=${paging.lastPage}">&gt;&gt;</a></li>
+                <li><a href="${context}/board/${paging.type}/search?keyword=${keyword}&page=${paging.next}">&gt;</a></li>
+                <li><a href="${context}/board/${paging.type}/search?keyword=${keyword}&page=${paging.lastPage}">&gt;&gt;</a></li>
               </ul>
             </div>
           </div>
@@ -202,6 +202,7 @@
                 <li><a href="/myapt/schedule" class="py-2 d-block">MyApt</a></li>
                 <li><a href="/baord/info/listinfo" class="py-2 d-block">Board</a></li>
                 <li><a href="/mypage/modifyinfo" class="py-2 d-block">MyPage</a></li>
+              	<li><a href="/bdmin/contactus" class="py-2 d-block">Contact us</a></li>
               </ul>
             </div>
           </div>
