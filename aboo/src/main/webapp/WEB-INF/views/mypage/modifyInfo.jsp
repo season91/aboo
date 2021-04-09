@@ -51,7 +51,7 @@
 	 				<span class="mr-2"><a href="/mypage/mycar">My Car</a></span>
 	 				<span class="mr-2"><a href="/mypage/mymgmtfee">Management Fee</a></span>
 	 				<span class="mr-2"><a href="/mypage/generationwon">Generation won</a></span>
-	 				<span class="mr-2"><a href="/mypage/writelist">My write list</a></span>
+	 				<span class="mr-2"><a href="/mypage/writelist/myinfolist">My write list</a></span>
  				</p>
 	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">My Information</h1>
             </div>
@@ -146,6 +146,7 @@
 	                <li><a href="/myapt/schedule" class="py-2 d-block">MyApt</a></li>
 	                <li><a href="/baord/info/listinfo" class="py-2 d-block">Board</a></li>
 	                <li><a href="/mypage/modifyinfo" class="py-2 d-block">MyPage</a></li>
+	                <li><a href="/bdmin/contactus" class="py-2 d-block">Contact us</a></li>
 	              </ul>
 	            </div>
 	          </div>
