@@ -116,10 +116,10 @@ public class MyAlarmServiceImpl implements MyAlarmService{
 	public int sendAlarmMsg(String tell,String issueContent) {
 		
 		String method = "POST";
-		String url = "/sms/v2/services/ncp:sms:kr:264958255981:aboo/messages";
+		String url = "/sms/v2/services//messages";
 		String timestamp = Long.toString(System.currentTimeMillis());
-		String accessKey = "M8VeVYMJfH49Asj7UO7E";
-		String secretKey = "QrB5gfTBIf3fv1yX2dtDHxmJeDyChK2xgsEBNk6a";
+		String accessKey = "";
+		String secretKey = "";
 		
 		String signature = makeSignature(url, timestamp, method, accessKey, secretKey);
 		HttpHeaders header = new HttpHeaders();
@@ -142,7 +142,7 @@ public class MyAlarmServiceImpl implements MyAlarmService{
 			
 			RequestEntity<String> request = 
 					RequestEntity
-					.post("https://sens.apigw.ntruss.com/sms/v2/services/ncp:sms:kr:264958255981:aboo/messages")
+					.post("https://sens.apigw.ntruss.com/sms/v2/services//messages")
 					.headers(header)
 					.body(body);
 			
