@@ -74,11 +74,11 @@
 		select count(*) from tb_manager
 		<where>
 			<choose>
-				<when test="searchType = 'basic'">
+				<when test="searchType == 'basic'">
 					is_del = 0
 				</when>
 				<when test="searchType == 'apartmentName'">
-					apartment_idx = #{apartmentIdx} and is_del = 0
+					apartment_idx = #{keyword} and is_del = 0
 				</when>
 				<when test="searchType == 'name'">
 					name = #{keyword} and is_del = 0 
@@ -93,11 +93,11 @@
 				select * from tb_manager 
 				<where>
 					<choose>
-						<when test="searchType = 'basic'">
+						<when test="searchType == 'basic'">
 							is_del = 0
 						</when>
 						<when test="searchType == 'apartmentName'">
-							apartment_idx = #{apartmentIdx} and is_del = 0
+							apartment_idx = #{keyword} and is_del = 0
 						</when>
 						<when test="searchType == 'name'">
 							name = #{keyword} and is_del = 0 

@@ -15,7 +15,7 @@
 		<typeAlias type="com.kh.aboo.admin.mgmtfee.model.vo.Mgmtfee" alias="mgmtfee"/>
 		<typeAlias type="com.kh.aboo.admin.car.model.vo.Car" alias="car"/>
 		<typeAlias type="com.kh.aboo.admin.car.model.vo.CarApplication" alias="carApplication"/>
-		
+		<typeAlias type="com.kh.aboo.user.manager.model.vo.Admin" alias="admin"/>
 	</typeAliases>
 
 <!-- 3. 작성쿼리 root등록을 위한 경로 설정. 맨아래에 있어야 한다.-->
@@ -23,6 +23,7 @@
 		<mapper resource="mybatis/mapper/mgmtfee/mgmtfeeMapper.xml"/>
 		<mapper resource="mybatis/mapper/mymgmtfee/mymgmtfeeMapper.xml"/>
 		<mapper resource="mybatis/mapper/car/carMapper.xml"/>
+		<mapper resource="mybatis/mapper/bdmin/managementMapper.xml"/>
 	</mappers>
 
 </configuration>

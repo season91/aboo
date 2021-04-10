@@ -386,7 +386,7 @@
        <div class="modal-dialog" role="document">
          <div class="modal-content" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675); color:white;">
            <div class="modal-header">
-           	<h4 class="modal-title" id="mgmtfeeDueDateModalLabel">납부일로 검색</h4>
+           	<h4 class="modal-title" id="mgmtfeeDueDateModalLabel">납부월로 검색</h4>
             	 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <i class="tim-icons icon-simple-remove"></i>
               </button>
@@ -395,7 +395,7 @@
         <form action="${context }/admin/mgmtfee">
           <div class="form-group">
           <input type="hidden" name="standard" value="dueDate">
-           <input type="date" class="form-control mgmtfee-keyword" id="inlineFormInputGroup" name="keyword">
+           <input type="month" class="form-control mgmtfee-keyword" id="inlineFormInputGroup" name="keyword">
           </div>
           <div class="modal-footer">
            <button type="submit" class="btn btn-primary">검색</button>
@@ -443,7 +443,7 @@
         <form action="${context }/admin/mgmtfee">
           <div class="form-group">
            <input type="hidden" name="standard" value="generationInfo">
-           <input type="text" class="form-control mgmtfee-keyword" id="inlineFormInputGroup" name="keyword" placeholder="세대정보로 검색하세요.(예 : 101-101)">
+           <input type="text" class="form-control mgmtfee-keyword" id="inlineFormInputGroup" name="keyword" placeholder="세대정보로 검색하세요.(예 : 101-101)" pattern="[0-9]{3,4}-[0-9]{3,4}">
           </div>
           <div class="modal-footer">
            <button type="submit" class="btn btn-primary">검색</button>

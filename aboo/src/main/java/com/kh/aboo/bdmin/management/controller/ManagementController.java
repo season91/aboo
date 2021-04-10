@@ -149,7 +149,7 @@ public class ManagementController {
 			String[] apartmentIndx = keyword.split("/");
 			// [0]은 아파트이름이고 [1]아파트 idx이다.
 			keyword = apartmentIndx[1];
-			searchMap.put("apartmentIdx", keyword);
+			searchMap.put("keyword", keyword);
 		}
 		
 		System.out.println(searchMap);
