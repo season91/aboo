@@ -110,7 +110,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Car</a>
+            <a class="navbar-brand" href="#pablo">Chat</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -165,9 +165,9 @@
               </div>
               <div class="card-body">
                 <div class="alert alert-info">
-                  <span>관리자 화면입니다.</span>
+                  <span>접속자 정보 확인</span>
                 </div>
-                <div class="alert alert-info " id="infoArea">
+                <div class="alert alert-info" id="infoArea" style="overflow: auto; height: 50vh">
                 </div>
               </div>
             </div>
@@ -176,10 +176,13 @@
           <div class="col-md-6">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title">채팅내용</h4>
+                <h4 class="card-title">채팅 내용</h4>
               </div>
               <div class="card-body">
-                <div class="alert alert-primary" id="messageArea">
+             	 <div class="alert alert-primary">
+                  <span>대화 확인</span>
+                </div>
+                <div class="alert alert-primary" id="messageArea" style="overflow: auto; height: 50vh">
                 </div>
               </div>
             </div>
