@@ -470,7 +470,7 @@
 	        <form action="${context }/admin/car">
 	          <div class="form-group">
 	          	<input type="hidden" name="standard" value="generationInfo">
-	           <input type="text" class="form-control"  name="keyword" id="inlineFormInputGroup" placeholder="세대정보로 검색 (103-906)">
+	           <input type="text" class="form-control"  name="keyword" id="inlineFormInputGroup" placeholder="세대정보로 검색 (101-101)" pattern="[0-9]{3,4}-[0-9]{3,4}">
 	          </div>
 	           <div class="modal-footer">
 	            <button type="submit" class="btn btn-primary">검색</button>

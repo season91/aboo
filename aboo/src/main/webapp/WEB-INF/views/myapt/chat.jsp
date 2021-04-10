@@ -45,26 +45,11 @@
         </div>
       </div>
     </section>
-    
-    <section class="home-slider owl-carousel">
-      <div class="slider-item bread-item" style="background-image: url(images/bg_1.jpg);" data-stellar-background-ratio="0.5">
-        <div class="overlay"></div>
-        <div class="container-fluid">
-          <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
-
-            <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span>Contact</span></p>
-	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Contact</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   
     <section class="ftco-section contact-section ftco-degree-bg">
       <div class="container">
-        <div class="row d-flex mb-5 contact-info">
-          <div class="col-md-12 mb-4">
+        <div class="row d-flex contact-info">
+          <div class="col-md-12 ">
             <h2 class="h4">관리자와 채팅하기</h2>
           </div>
         </div>
@@ -74,8 +59,18 @@
                 <input type="text" class="form-control" id="name" readonly="readonly" placeholder="${sessionScope.generation.id}">
                 <input type="hidden" class="form-control" id="target" readonly="readonly" value="${sessionScope.generation.apartmentIdx}">
               </div>
-              <div class="card-body" id="messageArea"  placeholder="대화내용이 없습니다.">
-              </div>
+             <!--  <div class="card-body" id="messageArea"  placeholder="대화내용이 없습니다." style="overflow-y: scroll;">
+              </div> -->
+              
+              <div class="card" >
+		        <div id="menuone" class="collapse show" >
+		          <div class="card-body" id="messageArea" style="overflow: auto; height: 15vh">
+		          </div>
+		        </div>
+		      </div>
+              
+              
+              
               <div>
                 <input type="text" class="form-control" id="message" placeholder="문의내용을 입력하세요.">
               </div>

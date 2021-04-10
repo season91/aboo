@@ -80,16 +80,18 @@ public class EchoHandler extends TextWebSocketHandler {
 		int fromIdx = sessionList.indexOf(session); // 보낸이..
 		
 		String adminId = "";
+		String name = (String) nameList.get(fromIdx);
 		// 보낸 세션이 admin이라면 admin에게 다 보내주기
 		if(session.getAttributes().get("admin") != null) {
 			int idx = sessionList.indexOf(session);
 			adminId = (String) nameList.get(idx);
+			name = "관리자";
 		}
 		
 		for (int i = 0; i < sessionList.size(); i++) {
 			// 닉네임이 같다면 해당 i번째 세션에 보내준다
 			if(nameList.get(i).equals(target)  || sessionList.get(i).equals(session) || nameList.get(i).equals(adminId)) {
-				sessionList.get(i).sendMessage(new TextMessage(nameList.get(fromIdx)+" : "+msg));
+				sessionList.get(i).sendMessage(new TextMessage(name+" : "+msg));
 			}
 			
 		}
@@ -106,9 +108,16 @@ public class EchoHandler extends TextWebSocketHandler {
 		sessionList.remove(session);
 		nameList.remove(idx);
 		
+		String adminId = "";
+		// 보낸 세션이 admin이라면 admin에게 다 보내주기
+		if(session.getAttributes().get("admin") != null) {
+			int adminIdx = sessionList.indexOf(session);
+			adminId = (String) nameList.get(adminIdx);
+		}
+		
 		//접속시에 접속자 정보 보여준다.
 		for (int i = 0; i < nameList.size(); i++) {
-			if(nameList.get(i).equals("admin1")) {
+			if(nameList.get(i).equals(adminId)) {
 				//관리자라면 입장자 정보 받는다.
 				sessionList.get(i).sendMessage(new TextMessage("[안내] "+id+" 세대가 퇴장하셨습니다."));
 			}

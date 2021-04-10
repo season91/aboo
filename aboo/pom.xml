@@ -59,6 +59,13 @@
 		    <artifactId>json</artifactId>
 		    <version>20190722</version>
 		</dependency>
+		<!-- * 톰캣도 설정해준다. -->
+		<dependency>
+		    <groupId>org.apache.tomcat.embed</groupId>
+		    <artifactId>tomcat-embed-websocket</artifactId>
+		    <version>9.0.37</version>
+		</dependency>
+				
 		
 		<!-- 스프링 배치 -->
 		<!-- https://mvnrepository.com/artifact/org.springframework.batch/spring-batch-core -->

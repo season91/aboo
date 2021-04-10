@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.kh.aboo.bdmin.management.model.repository.ManagementRepository">
+	
+	<select id="selectAdminCnt" resultType="int">
+		select count(*) from tb_manager
+		<where>
+			<choose>
+				<when test="searchType == 'bbbbbasic'">
+					is_del = 0
+				</when>
+				<when test="searchType == 'name'">
+					name = '조아영' and is_del = 0 
+				</when>
+				<when test="searchType == 'apartmentName'">
+					apartment_idx = #{keyword} and is_del = 0
+				</when>
+			</choose>
+		</where>
+	</select>
+	
+	<select id="selectAdminList" resultType="admin">
+		select * from (
+			select rownum rnum, b.* from (
+				select * from tb_manager 
+				<where>
+					<choose>
+						<when test="searchType = 'basic'">
+							is_del = 0
+						</when>
+						<when test="searchType == 'apartmentName'">
+							apartment_idx = #{keyword} and is_del = 0
+						</when>
+						<when test="searchType == 'name'">
+							name = #{keyword} and is_del = 0 
+						</when>
+					</choose>
+				</where>
+				
+				order by manager_idx desc ) b 
+			) where rnum between #{paging.queryStart} and #{paging.queryEnd}
+	</select>
+	
+	</mapper>

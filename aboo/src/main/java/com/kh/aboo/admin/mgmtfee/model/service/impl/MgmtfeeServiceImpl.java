@@ -220,6 +220,7 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 	@Override
 	public Map<String, Object> selectMgmtfeeList(int currentPage,String apartmentIdx, String standard, String keyword) {
 		Map<String, Object> searchMap = searchMap(apartmentIdx,standard,keyword);
+		System.out.println(searchMap);
 		//페이징처리
 		Paging paging = Paging.builder()
 				.currentPage(currentPage)

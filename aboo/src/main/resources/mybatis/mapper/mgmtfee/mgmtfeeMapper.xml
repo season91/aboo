@@ -32,7 +32,7 @@
 							m.apartment_idx = #{apartmentIdx} and m.is_payment = 0 and m.is_del = 0 
 						</when>
 						<when test="searchType == 'dueDate'">
-							m.apartment_idx = #{apartmentIdx} and m.due_date = #{keyword} and m.is_del = 0 
+							m.apartment_idx = #{apartmentIdx} and EXTRACT(year from m.due_date) || '-' || LTRIM(TO_CHAR(EXTRACT(month from m.due_date),'00')) = #{keyword} and m.is_del = 0 
 						</when>
 					</choose>
 				</where>
@@ -57,7 +57,7 @@
 					apartment_idx = #{apartmentIdx} and is_payment = 0 and is_del = 0
 				</when>
 				<when test="searchType == 'dueDate'">
-					apartment_idx = #{apartmentIdx} and due_date = #{keyword} and is_del = 0
+					apartment_idx = #{apartmentIdx} and EXTRACT(year from due_date) || '-' || LTRIM(TO_CHAR(EXTRACT(month from due_date),'00')) = #{keyword} and is_del = 0
 				</when>
 			</choose>
 		</where>

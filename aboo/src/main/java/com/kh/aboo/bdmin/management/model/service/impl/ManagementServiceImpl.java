@@ -110,6 +110,7 @@ public class ManagementServiceImpl implements ManagementService{
 				.total(managementRepository.selectAdminCnt(searchMap))
 				.build();
 		System.out.println(paging.toString());
+		System.out.println("검색조건 " + searchMap);
 		searchMap.put("paging", paging);
 
 		List<Admin> adminList = managementRepository.selectAdminList(searchMap);

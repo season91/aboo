@@ -44,7 +44,6 @@ public class MgmtfeeController {
 	@GetMapping("admin/mgmtfee")
 	public void adminMgmtfee(@RequestParam(defaultValue = "1") int page, @SessionAttribute(name = "admin", required = false) Admin admin, @RequestParam(defaultValue = "apartmentIdx") String standard,  @RequestParam(defaultValue = "apartmentIdx") String keyword, Model model) {
 		String apartmentIdx = admin.getApartmentIdx();
-
 		// 반환형은 map이고 여기엔 검색기준, 세대정보, 검색값, 페이징, 검색결과list가 들어있다.
 		// 자세한건 service impl에 구현
 		// view에서는 페이징부분이 관건인데, choose문을 searchType을 이용해 페이징처리 분기를 나눈다.
@@ -72,7 +71,7 @@ public class MgmtfeeController {
 		// 성공시 알람넣어주기.
 		for (int i = 0; i < mgmtfeeList.size(); i++) {
 			System.out.println("알람보낼세대관리번호"+mgmtfeeList.get(i));
-			myAlarmService.insertPvAlarm("8월 "+AlarmCode.ADD_MGMTFEE, mgmtfeeList.get(i).getGenerationIdx());
+			myAlarmService.insertPvAlarm(AlarmCode.ADD_MGMTFEE.name(), mgmtfeeList.get(i).getGenerationIdx());
 		}
 		
 		return "success";
