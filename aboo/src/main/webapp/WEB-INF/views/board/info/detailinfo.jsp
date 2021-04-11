@@ -96,6 +96,11 @@
             <div class="pt-5 mt-5">
               <h3 class="mb-5">${infoCmtCnt} Comments</h3>
               <ul class="comment-list">
+              <c:choose>
+                	<c:when test="${infoCmtCnt == 0}">
+                		<li class="comment">작성된 댓글이 없습니다.</li>
+                	</c:when>
+              		<c:otherwise>
               <c:forEach items="${infoCmtList}" var="infoCmtList">
                 <li class="comment" id="infoCmt">
                   <div class="vcard bio">
@@ -137,7 +142,7 @@
                     <h3>${infoCmtList.cWriter}</h3>
                     <div class="meta">${infoCmtList.cWdate}</div>
                     
-                    <form action="${context}/board/info/infocmtedit" method="post" class="p-5 bg-light">
+                    <form action="${context}/board/info/infocmtedit" method="post">
 
 
 							<input type="hidden" name="bIdx" value="${infoBoard.bIdx}">
@@ -145,13 +150,15 @@
 		                    <textarea name="cContent" id="message" cols="30" rows="5" class="form-control">${infoCmtList.cContent}</textarea>
 
 		                  <p>
-		                    <input type="submit" value="등록하기" class="btn py-3 px-4 btn-primary">
+		                    <input type="submit" value="수정하기" class="btn mt-3 py-3 px-4 btn-primary">
 		                  </p>
 	
 	                </form>
                   </div>
                 </li>
 			 </c:forEach>
+			 </c:otherwise>
+			 </c:choose>
 
               </ul>
               <!-- END comment-list -->
@@ -327,10 +334,10 @@
 	  		.then(response => response.text())
 	  		.then(text => {
 	  			if(text == 'success'){
-	  				alert("댓글이 삭제되었습니다.");
+	  				alert("댓글이 비공개 처리되었습니다.");
 					location.href = "/board/info/detail?bIdx=" + bIdx;
 	  			}else{
-	  				alert("댓글 삭제 중 에러가 발생했습니다.");
+	  				alert("댓글 비공개 처리 중 에러가 발생했습니다.");
 	  				location.href = "/board/info/detail?bIdx=" + bIdx;
 	  			}
 	  		})
