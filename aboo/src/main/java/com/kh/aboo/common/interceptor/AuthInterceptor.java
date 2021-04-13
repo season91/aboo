@@ -108,6 +108,32 @@ public class AuthInterceptor implements HandlerInterceptor {
 							throw new ToAlertException(ErrorCode.AUTH06);
 					}
 					break;
+				case "info":
+					switch (uriArr[3]) {
+					case "listinfo":
+						if (session.getAttribute("generation") == null && session.getAttribute("admin") == null) {
+							throw new ToAlertException(ErrorCode.AUTH06);
+						}
+						break;
+						
+					case "upload":
+						if (session.getAttribute("generation") == null) 
+							throw new ToAlertException(ErrorCode.AUTH06);
+						
+					case "uploadinfocmt":
+						if (session.getAttribute("generation") == null) 
+							throw new ToAlertException(ErrorCode.AUTH06);
+					}
+					break;
+				}
+				break;
+			case "myapt":
+				switch (uriArr[2]) {
+				case "schedule" :
+					if (session.getAttribute("generation") == null && session.getAttribute("admin") == null) {
+						throw new ToAlertException(ErrorCode.AUTH06);
+					}
+					break;
 				}
 				break;
 			}
