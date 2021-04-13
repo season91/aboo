@@ -64,7 +64,7 @@
               
               <div class="card" >
 		        <div id="menuone" class="collapse show" >
-		          <div class="card-body" id="messageArea" style="overflow: auto; height: 15vh">
+		          <div class="card-body" id="messageArea" style="overflow: auto; height: 15vh;">
 		          </div>
 		        </div>
 		      </div>
@@ -180,11 +180,13 @@
 		// 서버로부터 메시지를 받았을 때
 		function onMessage(msg) {
 			let data = msg.data;
-			console.dir(data);
 			if(data.includes("[안내]")){
 				$("#infoArea").append(data + "<br/>");
 			} else {
 				$("#messageArea").append(data + "<br/>");
+				  /* 자동스크롤 내리기 */
+				 const top = $('#messageArea').prop('scrollHeight'); 
+				  $('#messageArea').scrollTop(top);
 			}
 			
 		}
@@ -214,6 +216,13 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="../../../resources/js/generation/google-map.js"></script>
   <script src="../../../resources/js/generation/main.js"></script>
-    
+   <script type="text/javascript">
+   /* 자동스크롤 내리기 */
+   $('#sendBtn').on('click', ()=> {
+		  const top = $('#messageArea').prop('scrollHeight'); 
+		  $('#messageArea').scrollTop(top);
+	  });
+   
+   </script>
 </body>
 </html>
