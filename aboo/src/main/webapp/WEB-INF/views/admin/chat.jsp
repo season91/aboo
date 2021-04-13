@@ -206,7 +206,7 @@
 	                      <div class="form-group" style="display: flex; justify-content: space-around;">
 	                        <input type="text" class="form-control " id="name" placeholder="세대아이디 입력">
 	                        <input type="text" class="form-control " id="message" placeholder="채팅내용을 입력하세요.">
-	                         <button type="submit" class="btn btn-fill btn-primary " id="sendBtn">보내기</button>
+	                         <button type="submit" class="btn btn-fill btn-primary " id="sendBtn" onclick="scroll()">보내기</button>
 	                      </div>
 	                    </div>
                       </div>
@@ -264,6 +264,19 @@
     
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
+	
+	<script type="text/javascript">
+	/* 스크롤 따라 내려가기 */
+	function scroll() {
+	var objDiv = document.getElementById("messageArea");
+	objDiv.scrollTop = objDiv.scrollHeight;
+	console.dir(objDiv.scrollTop)
+	console.dir(objDiv.scrollHeight)
+		
+	}
+	</script>
+	
+	
 	<script type="text/javascript">
 		$("#sendBtn").click(function() {
 			sendMessage();
@@ -292,13 +305,16 @@
 				$("#messageArea").append(data + "<br/>");
 			}
 			
+			scroll();
+			/* 스크롤 따라 내려가기 */
+			
 		}
 		// 서버와 연결을 끊었을 때
 		function onClose(evt) {
 			$("#messageArea").append("연결 끊김");
 		
 		}
-	
+
 	</script>
     <script>
       $(document).ready(function() {
