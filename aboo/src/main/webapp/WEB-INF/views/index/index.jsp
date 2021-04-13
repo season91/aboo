@@ -4,289 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <style>
-     *,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-/* 자동차 div 배경이미지, 건물  */
-.cloudcontainer {
-  z-index: 1;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  min-height: 35rem;
-  background: url(../../../resources//abooimg/인덱스_건물.png) no-repeat center
-    center;
-  background-blend-mode: soft-light;
-  background-size: contain;
-  background-position: center center;
-  padding: 2rem;
-
-  transform: scale(0) translateY(5vh);
-  will-change: transform;
-
-  animation-name: fly-right-one;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-
-  animation-duration: 15s;
-  animation-delay: 1s;
-}
-
-
-/* 띄울 div들의 배경 */
-
-.cloud-container--two {
-  background-image: url(../../../resources/abooimg/구름_오.png);
-  background-size: 60px;
-  width: 60px;
-  height: 50px;
-  will-change: background-position;
-
-  animation-name: fly-cycle;
-  animation-timing-function: steps(10);
-  animation-iteration-count: infinite;
-
-  animation-delay: 1s;
-}
-
-/* 띄운 div의 효과 */
-
-.cloud-container--two{
-  position: absolute;
-  top: 20%;
-  left: -10%;
-  transform: scale(0.8) translateX(50vw) translateY(-10vh); 
-  will-change: transform;
-
-  animation-name: fly-right-two;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-
-  animation-duration: 16s;
-  animation-delay: 1s;
-}
-
-.rcloud--two {
-  background-image: url(../../../resources/abooimg/구름_오.png);
-  background-size: auto 100%;
-  width: 500px;
-  height: 500px;
-  will-change: background-position;
-
-  animation-name: fly-cycle;
-  animation-timing-function: steps(10);
-  animation-iteration-count: infinite;
-
-  animation-delay: 1s;
-
-}
-
-.rcloud-container--two {
-   position: absolute;
-  top: 20%;
-  left: -10%;
-  transform: scale(0.3) translateY(-135vh) translateX(115vw);
-  will-change: transform;
-
-  animation-name: fly-right-three;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-
-  animation-duration: 16s;
-  animation-delay: 1s;
-
-}
-
-
-
-.cloud--ay {
-  background: url(../../../resources/abooimg/구름_왼.png) no-repeat center
-    center;
-  background-size: contain;
-  width: 350px;
-  height: 250px;
-  will-change: background-position;
-
-  animation-name: fly-cycle;
-  animation-timing-function: steps(10);
-  animation-iteration-count: infinite;
-
-  animation-delay: 1s;
-}
-
-.cloud-container--ay {
-  position: absolute;
-  top: 20%;
-  left: -10%;
-  transform: translateY(-10vh) translateX(-3vw) scale(0.5);
-  will-change: transform;
-
-  animation-name: fly-right-ay;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-
-  animation-duration: 16s;
-  animation-delay: 1s;
-}
-
-
-
-@keyframes fly-cycle {
-  100% {
-    background-position: -900px 0;
-  }
-}
-
-
-
-
-/* 띄운 div의 움직일 경로  */
-@keyframes fly-right-one {
-  0% {
-    transform: translateY(7vh);
-  }
-
-  30% {
-    transform: translateY(5vh);
-  }
-
-  60% {
-    transform: translateY(7vh);
-  }
-
-  100% {
-    transform: translateY(5vh);
-  }
-}
-
-@keyframes fly-right-two {
-  0% {
-   transform: scale(0.8) translateX(50vw) translateY(-10vh); 
-  }
-
- 10% {
-     transform: scale(0.8) translateX(55vw) translateY(-8vh); 
-  }
-
-  20% {
-      transform: scale(0.8) translateX(50vw) translateY(-10vh); 
-  }
-
-  30% {
-     transform: scale(0.8) translateX(55vw) translateY(-8vh); 
-  }
-
-  40% {
-    transform: scale(0.8) translateX(50vw) translateY(-10vh); 
-  }
-
-  50% {
-     transform: scale(0.8) translateX(55vw) translateY(-8vh); 
-  }
-
-  60% {
-     transform: scale(0.8) translateX(50vw) translateY(-10vh); 
-  }
-  
-  70% {
-     transform: scale(0.8) translateX(55vw) translateY(-8vh); 
-  }
-  
-  80% {
-     transform: scale(0.8) translateX(50vw) translateY(-10vh); 
-  }
-  
-  90% {
-      transform: scale(0.8) translateX(55vw) translateY(-8vh);  
-  }
-
-  100% {
-      transform: scale(0.8) translateX(50vw) translateY(-10vh); 
-  }
-}
-
-@keyframes fly-right-three {
-  0% {
-   transform: scale(0.3) translateY(-135vh) translateX(120vw);
-  }
-
-
-  20% {
-    transform: scale(0.3) translateY(-135vh) translateX(110vw);
-  }
-  
-  40% {
-    transform: scale(0.3) translateY(-135vh) translateX(120vw);
-  }
-
-  60% {
-    transform: scale(0.3) translateY(-135vh) translateX(110vw);
-  }
-
-  80% {
-     transform: scale(0.3) translateY(-135vh) translateX(120vw);
-  }
-
-  100% {
-   transform: scale(0.3) translateY(-135vh) translateX(110vw);
-  }
-
-  
-}
-
-@keyframes fly-right-ay {
-  0% {
-    transform: translateY(-10vh) translateX(-3vw) scale(0.5);
-  }
-
-  10% {
-    transform: translateY(-10vh) translateX(-1vw) scale(0.6);
-  }
-
-  20% {
-    transform: translateY(-10vh) translateX(-3vw) scale(0.5);
-  }
-
-  30% {
-    transform: translateY(-10vh) translateX(-1vw) scale(0.6);
-  }
-
-  40% {
-    transform: translateY(-10vh) translateX(-3vw) scale(0.5);
-  }
-
-  50% {
-    transform: translateY(-10vh) translateX(-1vw) scale(0.6);
-  }
-
-  60% {
-    transform: translateY(-10vh) translateX(-3vw) scale(0.5);
-  }
-
-  70% {
-    transform: translateY(-10vh) translateX(-3vw) scale(0.6);
-  }
-
-  80% {
-    transform: translateY(-10vh) translateX(-1vw) scale(0.5);
-  }
-
-  90% {
-    transform: translateY(-10vh) translateX(-3vw) scale(0.6);
-  }
-
-  100% {
-    transform: translateY(-10vh) translateX(-1vw) scale(0.5);
-  }
-}
-   </style>
+<link rel="stylesheet" href="../../../resources/css/generation/city.css">
 </head>
 <body>
      <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -321,26 +39,24 @@
     <!-- END nav -->
     
   <section class="home-slider owl-carousel">
-      <div class="slider-item" style="background-image: url(../../../resources/images/bg_1.jpg);">
+      <div class="slider-item" style="">
         <div class="overlay"></div>
         <div class="container-fluid">
           <div class="row slider-text align-items-center" data-scrollax-parent="true">
 
             <div class="col-md-5 wrap col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <h1 class="mb-4 mt-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Everything you get what you need to Host your website</h1>
-              <p class="mb-4 mb-md-5 sub-p" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Up to 90% Discount with Free Domain Name Registration</p>
-              <p><a href="#" class="btn btn-primary p-3 px-xl-5 py-xl-3">Get started</a> <a href="#" class="btn btn-primary btn-primary-2 p-3 px-xl-5 py-xl-3">Read more</a></p>
+              <h1 class="mb-4 mt-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
+                <img src="../../../resources/abooimg/logo_w.png" class="img-fluid" alt="Colorlib Template">
+              <p class="mb-4 mb-md-5 sub-p text-center" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">aboo makes a better apartment!</p>
+              <p class="text-center"><a href="${context }/bdmin/contactus" class="btn btn-primary p-3 px-xl-5 py-xl-3">Contact us</a> <a href="${context }/about" class="btn btn-primary btn-primary-2 p-3 px-xl-5 py-xl-3">About us</a></p>
             </div>
             <!-- 자동차 구현 부분.  -->
             <div class="col-md-7 ftco-animate">
               
               <div class="cloudcontainer"> 
-
                 <div class="bird-container cloud-container--two">
                   <div class="bird car--two"></div>
                 </div>
-                
-                
                 
                 <div class="bird-container cloud-container--ay">
                   <div class="bird cloud--ay"></div>
@@ -363,8 +79,8 @@
       <div class="container">
          <div class="row justify-content-center mb-5 pb-3">
           <div class="col-md-7 text-center heading-section ftco-animate">
-            <h2 class="mb-4">The WebHost Guarantee</h2>
-            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+            <h2 class="mb-4">Our Service</h2>
+            <p>아파트를 부탁해에서 제공해드리는 주요 서비스입니다.</p>
           </div>
         </div>
         <div class="row">
@@ -372,12 +88,12 @@
             <div class="media block-6 services d-block text-center">
               <div class="d-flex justify-content-center">
                  <div class="icon d-flex align-items-center justify-content-center">
-                    <span class="flaticon-guarantee"></span>
+                    <span class=""><i class="fas fa-users"></i></span>
                  </div>
               </div>
               <div class="media-body p-2 mt-3">
-                <h3 class="heading">100% Uptime Guarantee</h3>
-                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                <h3 class="heading">입주민 소통 및 정보 공유</h3>
+                <p>정보 & 질문, 인테리어, 중고 게시판 등을 이용할 수 있으며 입주민 간 정보 공유 및 소통을 할 수 있습니다.</p>
               </div>
             </div>      
           </div>
@@ -385,12 +101,13 @@
             <div class="media block-6 services d-block text-center">
               <div class="d-flex justify-content-center">
                  <div class="icon d-flex align-items-center justify-content-center">
-                    <span class="flaticon-shield"></span>
+                   <span class="flaticon-support"></span>
                  </div>
               </div>
               <div class="media-body p-2 mt-3">
-                <h3 class="heading">Safe and Secured</h3>
-                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                <h3 class="heading">온라인 민원 채팅</h3>
+                <p>입주민의 민원을 온라인으로 간편하게 처리할 수 있는 채팅 서비스를 제공해
+                  관리소의 업무를 경감시키고 운영 비용을 절감 할수 있습니다.</p>
               </div>
             </div>    
           </div>
@@ -398,12 +115,12 @@
             <div class="media block-6 services d-block text-center">
               <div class="d-flex justify-content-center">
                  <div class="icon d-flex align-items-center justify-content-center">
-                    <span class="flaticon-support"></span>
+                    <span class=""><i class="fas fa-vote-yea"></i></span>
                  </div>
               </div>
               <div class="media-body p-2 mt-3">
-                <h3 class="heading">Our Dedicated Support</h3>
-                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                <h3 class="heading">아파트 의결건 전자투표</h3>
+                <p>아파트 내 입주민의 의견을 모아야 하는 안건에 대해 세대원 인증을 거쳐 투표를 진행할 수 있습니다.</p>
               </div>
             </div>      
           </div>
@@ -411,12 +128,12 @@
             <div class="media block-6 services d-block text-center">
               <div class="d-flex justify-content-center">
                  <div class="icon d-flex align-items-center justify-content-center">
-                    <span class="flaticon-cloud-computing"></span>
+                  <span class=""><i class="far fa-calendar-alt"></i></span>
                  </div>
               </div>
               <div class="media-body p-2 mt-3">
-                <h3 class="heading">Domain Transfer</h3>
-                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                <h3 class="heading">아파트 주요 일정</h3>
+                <p>아파트 내 공사, 점검 등의 공식 행사를 달력을 통해 한눈에 파악할 수 있습니다.</p>
               </div>
             </div>      
           </div>
@@ -424,12 +141,12 @@
             <div class="media block-6 services d-block text-center">
               <div class="d-flex justify-content-center">
                  <div class="icon d-flex align-items-center justify-content-center">
-                    <span class="flaticon-settings"></span>
+                    <span class=""><i class="fas fa-car-side"></i></span>
                  </div>
               </div>
               <div class="media-body p-2 mt-3">
-                <h3 class="heading">DNS Control</h3>
-                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                <h3 class="heading">아파트 주차현황 및 차량관리</h3>
+                <p>입주자는 온라인으로 등록하고 싶은 차량을 신청할 수 있고, 현재 주차가능대수도 확인이 가능합니다.</p>
               </div>
             </div>    
           </div>
@@ -437,12 +154,12 @@
             <div class="media block-6 services d-block text-center">
               <div class="d-flex justify-content-center">
                  <div class="icon d-flex align-items-center justify-content-center">
-                    <span class="flaticon-loading"></span>
+                    <span class=""><i class="fas fa-coins"></i></span>
                  </div>
               </div>
               <div class="media-body p-2 mt-3">
-                <h3 class="heading">Fast Loaded</h3>
-                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                <h3 class="heading">관리비 운영 및 결제</h3>
+                <p>관리자 관리비 관리지원 및 고지서 온라인 배부해드리며, 입주자는 온라인으로 확인 및 결제 가능합니다.</p>
               </div>
             </div>      
           </div>
@@ -455,24 +172,25 @@
           <div class="row justify-content-center mb-5 pb-3">
           <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
             <h2 class="mb-4">Our Clients</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
+            <p>아파트를 부탁해 서비스를 이용중인 고객사 입니다.</p>
           </div>
         </div>
-          <div class="row">
+          <div class="row text-center">
              <div class="col-sm ftco-animate">
-                <a href="#" class="partner"><img src="../../../resources/images/partner-1.png" class="img-fluid" alt="Colorlib Template"></a>
+                <a href="#" class="partner"><img src="../../../resources/abooimg/래미안.png" class="img-fluid" alt="Colorlib Template"></a>
              </div>
              <div class="col-sm ftco-animate">
-                <a href="#" class="partner"><img src="../../../resources/images/partner-2.png" class="img-fluid" alt="Colorlib Template"></a>
+                <a href="#" class="partner"><img src="https://w.namu.la/s/f40934b3d8888a66f673c6423bba1674dc6ea9728210eda4ec0dc178f7c7fc684a813e8e77e30a5dd68c7db19226d4ab6a26d3a3038141f98afa2f974e2be4a410ed8e7696cdc0f2c069d8d19d0d9aa2c165197279957e1f47d7f62fac5bad2f" class="img-fluid" alt="Colorlib Template"></a>
              </div>
              <div class="col-sm ftco-animate">
-                <a href="#" class="partner"><img src="../../../resources/images/partner-3.png" class="img-fluid" alt="Colorlib Template"></a>
+              <a href="#" class="partner"><img src="../../../resources/abooimg/아이파크.png" class="img-fluid" alt="Colorlib Template"></a>
              </div>
              <div class="col-sm ftco-animate">
-                <a href="#" class="partner"><img src="../../../resources/images/partner-4.png" class="img-fluid" alt="Colorlib Template"></a>
+                <a href="#" class="partner">
+                <img src="https://lh3.googleusercontent.com/proxy/armUSe9ynBjPtp8JvmWm6TNKhq_UZL-QWT4EZciZByDTeybCeNnWhLyOkGDR4su3ZrTUzcJ2XGPk5m9WQ1FLisBLD33509l4d02RXbowzYY-h-5BEuIGIZm-RI9TLzDuq8MQaPlbL97y_RjfB11PYg8KipjKSnnqPHsUI1Qxa82C70X207w6axO2ZBqBeMjLKbKvPc5Cdkzspbc" class="img-fluid" alt="Colorlib Template"></a>
              </div>
              <div class="col-sm ftco-animate">
-                <a href="#" class="partner"><img src="../../../resources/images/partner-5.png" class="img-fluid" alt="Colorlib Template"></a>
+                <a href="#" class="partner"><img src="http://image.lottecon.co.kr/_img/kor/medias/img_sn3_cn2_11.gif" class="img-fluid" alt="Colorlib Template"></a>
              </div>
           </div>
        </div>
