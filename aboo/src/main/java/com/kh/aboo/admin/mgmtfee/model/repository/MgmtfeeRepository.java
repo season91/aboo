@@ -45,7 +45,7 @@ public interface MgmtfeeRepository {
 	Generation selectGenerationByGenerationIdx(String generationIdx);
 	
 	// 3. 의 상세조회버전 동,호수로 세대정보가져온다.
-	@Select("select * from tb_generation where apartment_idx = #{apartmentIdx} and building = #{building} and num = #{num}")
+	@Select("select * from tb_generation where apartment_idx = #{apartmentIdx} and building = #{building} and num = #{num} and is_del=0")
 	Generation selectGenerationByBuildingAndNum(Generation generation);
 
 	// [관리비 검색-미납건]

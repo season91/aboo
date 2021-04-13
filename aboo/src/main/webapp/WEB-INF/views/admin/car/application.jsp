@@ -226,7 +226,10 @@
                       <th>처리상태</th>
                     </thead>
                     <tbody>
-                      <c:forEach items="${carApplicationList}" var="carApplication" varStatus="status">
+                    
+                    <c:choose>
+                    	<c:when test="${carApplicationList.size() > 0}">
+                    		<c:forEach items="${carApplicationList}" var="carApplication" varStatus="status">
                      <tr>
                        <td>
                           <div class="form-check">
@@ -255,9 +258,20 @@
                         </c:choose>
                        </tr>
                     </c:forEach>
+                    	</c:when>
+                    	<c:otherwise>
+                    	<script>
+	               		alert('조회결과가 없습니다.');
+	               		location.href='/admin/car/application';
+	               		</script>
+                    	</c:otherwise>
+                    	
+                    </c:choose>
+                     
                     </tbody>
                   </table>
-                </div>              </div>
+                </div>             
+               </div>
 
             </div>
           </div>
