@@ -108,11 +108,13 @@ public class EchoHandler extends TextWebSocketHandler {
 		sessionList.remove(session);
 		nameList.remove(idx);
 		
+		
 		String adminId = "";
 		// 보낸 세션이 admin이라면 admin에게 다 보내주기
 		if(session.getAttributes().get("admin") != null) {
 			int adminIdx = sessionList.indexOf(session);
 			adminId = (String) nameList.get(adminIdx);
+
 		}
 		
 		//접속시에 접속자 정보 보여준다.
