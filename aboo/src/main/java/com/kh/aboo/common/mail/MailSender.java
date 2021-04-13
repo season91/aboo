@@ -2,6 +2,7 @@ package com.kh.aboo.common.mail;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.mail.javamail.JavaMailSender;
@@ -36,7 +37,7 @@ public class MailSender {
 		
 		MimeMessage msg = mail.createMimeMessage();
 		try {
-			msg.setFrom(Configcode.EMAIL.desc); 
+			msg.setFrom(new InternetAddress(Configcode.EMAIL.desc)); 
 			msg.setRecipients(Message.RecipientType.TO, to); //받는사람
 			msg.setSubject(subject);
 			msg.setContent(htmlText, "text/html; charset=UTF-8");
