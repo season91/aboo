@@ -136,15 +136,15 @@
 	              아파트 주변 공공기관부터 투표, 관리비납부, 차량등록, 층간소음 문의 등 관리하기 편한 기능을 제공합니다.
 	              </p>
 	              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-	                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-	                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-	                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+	                <li class="ftco-animate"><a href="https://github.com/season91/aboo"><span><i class="fab fa-github"></i></span></a></li>
+	                <li class="ftco-animate"><a href="https://app.asana.com/0/1200089682403032/list"><span><i class="fas fa-calendar-check"></i></span></a></li>
+	                <li class="ftco-animate"><a href="https://www.erdcloud.com/d/d3HajP7xvXbTnSxtE"><span><i class="fas fa-cloud"></i></span></a></li>
 	              </ul>
 	            </div>
 	          </div>
 	          <div class="col-md">
 	            <div class="ftco-footer-widget mb-4 ml-md-5">
-	              <h2 class="ftco-heading-2">Unseful Links</h2>
+	              <h2 class="ftco-heading-2">Useful Links</h2>
 	              <ul class="list-unstyled">
 	                <li><a href="/myapt/parking" class="py-2 d-block">Parking</a></li>
 	                <li><a href="/board/info/listinfo" class="py-2 d-block">Info Board</a></li>
@@ -162,7 +162,7 @@
 	                <li><a href="/index" class="py-2 d-block">Home</a></li>
 	                <li><a href="/about" class="py-2 d-block">About</a></li>
 	                <li><a href="/myapt/schedule" class="py-2 d-block">MyApt</a></li>
-	                <li><a href="/baord/info/listinfo" class="py-2 d-block">Board</a></li>
+	                <li><a href="/board/info/listinfo" class="py-2 d-block">Board</a></li>
 	                <li><a href="/mypage/modifyinfo" class="py-2 d-block">MyPage</a></li>
 	                <li><a href="/bdmin/contactus" class="py-2 d-block">Contact us</a></li>
 	              </ul>
@@ -170,17 +170,17 @@
 	          </div>
 	          <div class="col-md">
 	            <div class="ftco-footer-widget mb-4">
-	            	<h2 class="ftco-heading-2">Office</h2>
-	            	<div class="block-23 mb-3">
-		              <ul>
-		                <li><span class="icon icon-map-marker"></span><span class="text">6, Teheran-ro 14-gil, Gangnam-gu, Seoul, Republic of Korea</span></li>
-		                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+82 123 4567 8910</span></a></li>
-		                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">choayoung91@naver.com</span></a></li>
-		                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">gmldnjs74@gmail.com</span></a></li>
-		                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">minh0380@naver.com</span></a></li>
-		                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">psuny1031@naver.com</span></a></li>
-		              </ul>
-		            </div>
+	               <h2 class="ftco-heading-2">Office</h2>
+	               <div class="block-23 mb-3">
+	                 <ul>
+	                   <li><span class="icon icon-map-marker"></span><span class="text">6, Teheran-ro 14-gil, Gangnam-gu, Seoul, Republic of Korea</span></li>
+	                   <li><a href="#"><span class="icon icon-phone"></span><span class="text">+82 123 4567 8910</span></a></li>
+	                   <li><a href="#"><span class="icon icon-envelope"></span><span class="text">choayoung91@naver.com</span></a></li>
+	                   <li><a href="#"><span class="icon icon-envelope"></span><span class="text">gmldnjs74@gmail.com</span></a></li>
+	                   <li><a href="#"><span class="icon icon-envelope"></span><span class="text">minh0380@naver.com</span></a></li>
+	                   <li><a href="#"><span class="icon icon-envelope"></span><span class="text">psuny1031@naver.com</span></a></li>
+	                 </ul>
+	               </div>
 	            </div>
 	          </div>
 	        </div>
