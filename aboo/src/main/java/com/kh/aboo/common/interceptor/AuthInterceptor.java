@@ -74,13 +74,8 @@ public class AuthInterceptor implements HandlerInterceptor {
 				break;
 
 			case "mypage": // generation
-				switch (uriArr[2]) {
-				case "modifyinfo":
-					if (session.getAttribute("generation") == null)
-						throw new ToAlertException(ErrorCode.AUTH06);
-				case "generationwon":
-					if (session.getAttribute("generation") == null)
-						throw new ToAlertException(ErrorCode.AUTH06);
+				if (session.getAttribute("generation") == null) {
+					throw new ToAlertException(ErrorCode.AUTH06);
 				}
 				break;
 
@@ -128,13 +123,9 @@ public class AuthInterceptor implements HandlerInterceptor {
 				}
 				break;
 			case "myapt":
-				switch (uriArr[2]) {
-				case "schedule" :
-					if (session.getAttribute("generation") == null && session.getAttribute("admin") == null) {
-						throw new ToAlertException(ErrorCode.AUTH06);
-					}
-					break;
-				}
+				if (session.getAttribute("generation") == null && session.getAttribute("admin") == null) {
+					throw new ToAlertException(ErrorCode.AUTH06);
+				}	
 				break;
 			}
 		}

@@ -80,9 +80,9 @@
               아파트 주변 공공기관부터 투표, 관리비납부, 차량등록, 층간소음 문의 등 관리하기 편한 기능을 제공합니다.
               </p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                <li class="ftco-animate"><a href="https://github.com/season91/aboo"><span><i class="fab fa-github"></i></span></a></li>
+                <li class="ftco-animate"><a href="https://app.asana.com/0/1200089682403032/list"><span><i class="fas fa-calendar-check"></i></span></a></li>
+                <li class="ftco-animate"><a href="https://www.erdcloud.com/d/d3HajP7xvXbTnSxtE"><span><i class="fas fa-cloud"></i></span></a></li>
               </ul>
             </div>
           </div>
@@ -106,7 +106,7 @@
                 <li><a href="/index" class="py-2 d-block">Home</a></li>
                 <li><a href="/about" class="py-2 d-block">About</a></li>
                 <li><a href="/myapt/schedule" class="py-2 d-block">MyApt</a></li>
-                <li><a href="/baord/info/listinfo" class="py-2 d-block">Board</a></li>
+                <li><a href="/board/info/listinfo" class="py-2 d-block">Board</a></li>
                 <li><a href="/mypage/modifyinfo" class="py-2 d-block">MyPage</a></li>
                 <li><a href="/bdmin/contactus" class="py-2 d-block">Contact us</a></li>
               </ul>
@@ -138,6 +138,7 @@
         </div>
       </div>
     </footer>
+    
   
     
   
