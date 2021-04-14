@@ -52,13 +52,13 @@ public interface UsedRepository {
 	int updateUsedBrdFileModify(Map<String, Object> commandMap);
 
 	
-	@Select("select count(*) from TB_USED_BRD where USED_REG_DATE = to_char(sysdate,'YYYYMMDD')")
+	@Select("select count(*) from TB_USED_BRD where to_char(USED_REG_DATE,'YYYYMMDD') = to_char(sysdate,'YYYYMMDD')")
 	int selectUsedBrdTodayCnt();
 	
-	@Select("select count(*) from TB_INF_QST_BRD where B_WDATE = to_char(sysdate,'YYYYMMDD')")
+	@Select("select count(*) from TB_INF_QST_BRD where to_char(B_WDATE,'YYYYMMDD') = to_char(sysdate,'YYYYMMDD')")
 	int selectInfoBrdTodayCnt();
 	
-	@Select("select count(*) from TB_INTERIOR_BRD where INT_REG_DATE = to_char(sysdate,'YYYYMMDD')")
+	@Select("select count(*) from TB_INTERIOR_BRD where to_char(INT_REG_DATE,'YYYYMMDD') = to_char(sysdate,'YYYYMMDD')")
 	int selectIntBrdTodayCnt();
 
 }

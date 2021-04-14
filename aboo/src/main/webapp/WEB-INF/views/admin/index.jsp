@@ -435,13 +435,13 @@
         loop: true
     });
      
-    typewriter.typeString('중고게시판 3건')
+    typewriter.typeString('중고게시판 ${usedCnt}건')
         .pauseFor(2500)
         .deleteAll()
-        .typeString('인테리어게시판 4건')
+        .typeString('인테리어게시판 ${intCnt}건')
         .pauseFor(2500)
         .deleteAll()
-        .typeString('정보질문게시판 2건')
+        .typeString('정보질문게시판 ${infoCnt}건')
         .start();
 
     </script>

@@ -54,7 +54,7 @@ public class AdminIndexController {
 		int usedCnt = usedService.selectUsedBrdTodayCnt();
 		int infoCnt = usedService.selectInfoBrdTodayCnt();
 		int intCnt = usedService.selectIntBrdTodayCnt();
-
+		System.out.println(usedCnt + ":" + infoCnt + ":" + intCnt);
 	
 
 		model.addAttribute("usedCnt", usedCnt);
