@@ -210,32 +210,44 @@
                       <th>등록상태</th>
                     </thead>
                     <tbody>
-                      <c:forEach items="${carList}" var="car" varStatus="status">
-                     <tr>
-                       <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input car" type="checkbox" value="">
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>${car.carIdx}</td>
-                        <td> ${generationList[status.index].building }-${generationList[status.index].num}</td>
-                        <td> ${car.carNumber } </td>
-                        <c:choose>
-                        	<c:when test="${car.isDel eq 0}">
-                        		<td>등록 중</td>
-                        	</c:when>
-                        	<c:otherwise>
-                        		<td>등록 해제</td>
-                        	</c:otherwise>
-                        </c:choose>
-                        
-                       </tr>
-                    </c:forEach>
+                    
+                    <c:choose>
+                    	<c:when test="${carList.size() > 0 }">
+                    		<c:forEach items="${carList}" var="car" varStatus="status">
+		                     <tr>
+		                       <td>
+		                          <div class="form-check">
+		                            <label class="form-check-label">
+		                              <input class="form-check-input car" type="checkbox" value="">
+		                              <span class="form-check-sign">
+		                                <span class="check"></span>
+		                              </span>
+		                            </label>
+		                          </div>
+		                        </td>
+		                        <td>${car.carIdx}</td>
+		                        <td> ${generationList[status.index].building }-${generationList[status.index].num}</td>
+		                        <td> ${car.carNumber } </td>
+		                        <c:choose>
+		                        	<c:when test="${car.isDel eq 0}">
+		                        		<td>등록 중</td>
+		                        	</c:when>
+		                        	<c:otherwise>
+		                        		<td>등록 해제</td>
+		                        	</c:otherwise>
+		                        </c:choose>
+		                        
+		                       </tr>
+		                    </c:forEach>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<script>
+		               		alert('조회결과가 없습니다.');
+		               		location.href='/admin/car';
+		               		</script>
+                    	</c:otherwise>
+                    </c:choose>
+                      
                     </tbody>
                   </table>
                 </div>

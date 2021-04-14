@@ -146,24 +146,9 @@
               <div class="card-header ">
                 <div class="row">
                   <div class="col-sm-6 text-left">
-                    <h5 class="card-category">Total Management Fee</h5>
-                    <h2 class="card-title">
-                    <script>
-		              document.write(new Date().getFullYear())
-		            </script>년 월별 관리비 고지서 발행 금액 </h2>
+                    <h5 class="card-category" id="today"> </h5>
+                    <h2 class="card-title">오늘 <p class="typing"></p> 등록 되었습니다.</h2>
                   </div>
-                  <div class="col-sm-6">
-                    <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
-                       <label class="btn btn-sm btn-primary btn-simple active" id="0"> (단위 : 만원)
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="chart-area">
-                  <canvas id="chartBig1"></canvas>
-                  <input type="hidden" id="list" value="${list}">
                 </div>
               </div>
             </div>
@@ -171,7 +156,7 @@
         </div>
         
         <div class="row">
-          <div class="col-lg-4">
+          <div class="col-lg-12">
             <div class="card card-chart">
               <div class="card-header ">
                 <h5 class="card-category">Total Shipments</h5>
@@ -180,6 +165,7 @@
               <div class="card-body ">
                 <div class="chart-area">
                   <canvas id="chartLinePurple"></canvas>
+                   <input type="hidden" id="list" value="${list}">
                 </div>
               </div>
             </div>
@@ -199,39 +185,6 @@
             </div>
           </div>
            -->   
-      <input type="hidden" value="${usedList}" id="usedList">
-      <input type="hidden" value="${infoList}" id="infoList">
-      <input type="hidden" value="${intList}" id="intList">
-          <div class="col-lg-8">
-            <div class="card card-chart">
-              <div class="card-header ">
-               <div class="row">
-                  <div class="col-sm-6 text-left">
-                    <h5 class="card-category">Community</h5>
-                    <h2 class="card-title">USED</h2>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
-                      <label class="btn btn-sm btn-primary btn-simple active" id="0">
-                        <input type="radio" name="options" autocomplete="off" checked> USED
-                      </label>
-                      <label class="btn btn-sm btn-primary btn-simple " id="1">
-                        <input type="radio" name="options" autocomplete="off"> INFO
-                      </label>
-                      <label class="btn btn-sm btn-primary btn-simple " id="2">
-                        <input type="radio" name="options" autocomplete="off"> INT
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-body ">
-                <div class="chart-area">
-                  <canvas id="chartLineGreen"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
         
         <div class="row">
@@ -353,6 +306,9 @@
     <script src="../../../resources/js/admin/black-dashboard.min.js?v=1.0.0" type="text/javascript"></script>
     <!-- Black Dashboard DEMO methods, don't include it in your project! -->
     <script src="../../../resources/demo/demo.js"></script>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://www.cssscript.com/demo/simple-typewriter-effect-pure-javascript-typewriterjs/typewriter.js"></script>
     <script>
       $(document).ready(function() {
         $().ready(function() {
@@ -473,8 +429,28 @@
     </script>
     
     <script type="text/javascript">
-  	
+    var typing = document.querySelector('.typing');
+    
+    var typewriter = new Typewriter(typing, {
+        loop: true
+    });
+     
+    typewriter.typeString('중고게시판 3건')
+        .pauseFor(2500)
+        .deleteAll()
+        .typeString('인테리어게시판 4건')
+        .pauseFor(2500)
+        .deleteAll()
+        .typeString('정보질문게시판 2건')
+        .start();
 
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+		  let date = new Date();
+		  let today = date.getFullYear() + '년 ' + (date.getMonth()+1) + '월 '+date.getDate() + '일 ';  
+		  document.querySelector('#today').innerHTML = today;
+	})
     </script>
 </body>
 </html>

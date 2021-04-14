@@ -130,7 +130,6 @@ public class MgmtfeeController {
 	
 	@PostMapping("admin/mgmtfee/modifyimpl")
 	public String mgmtfeeModifyImpl(Mgmtfee mgmtfee, @RequestParam String overdueFee, @RequestParam String isPaymentText, Model model) {
-		System.out.println("vo찍히나???"+mgmtfee);
 		
 		if(isPaymentText.equals("미납")) {
 			mgmtfee.setIsPayment(0);
@@ -152,7 +151,6 @@ public class MgmtfeeController {
 		Mgmtfee updateMgmtefee = mgmtfeeService.updateMgmtfee(mgmtfee);
 		// 업데이트내역이 있다면 수정완료, 없다면 실패안내. mgmt update는 프로시저라 int로 판단안함. 
 		if(updateMgmtefee != null) {
-			System.out.println("모야몇번찍히는겨");
 			myAlarmService.insertPvAlarm(AlarmCode.MODIFY_MGMTFEE+"", mgmtfee.getGenerationIdx());
 			model.addAttribute("alertMsg", "수정이 완료되었습니다.");
 			model.addAttribute("url", "/admin/mgmtfee/modify?mgmtfeeidx="+mgmtfee.getMgmtfeeIdx());

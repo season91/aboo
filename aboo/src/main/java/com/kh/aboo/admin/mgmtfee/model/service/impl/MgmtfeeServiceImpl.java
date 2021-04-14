@@ -237,6 +237,7 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 		List<Mgmtfee> mgmtfeeList = mgmtfeeRepository.selectMgmtfeeList(searchMap);
 		searchMap.put("mgmtfeeList", mgmtfeeList);
 		System.out.println("mgmtfeeList"+mgmtfeeList);
+		System.out.println("mgmtfeeList size"+mgmtfeeList.size());
 		
 		// 관리비번호 기준  세대정보 가져오자.
 		List<Generation> generationList = new ArrayList<>();

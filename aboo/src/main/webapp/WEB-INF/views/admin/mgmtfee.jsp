@@ -212,8 +212,10 @@
                    <th>이동</th>
                  </thead>
                  <tbody>
-                  
-            	<c:forEach items="${mgmtfeeList}" var="mgmtfee" varStatus="status">
+                
+               <c:choose>
+               	<c:when test="${mgmtfeeList.size() > 0}">
+               		<c:forEach items="${mgmtfeeList}" var="mgmtfee" varStatus="status">
                    <tr>
                    	 <td>
                          <div class="form-check">
@@ -240,6 +242,15 @@
                        <td> <a href="/admin/mgmtfee/modify?mgmtfeeidx=${mgmtfee.mgmtfeeIdx}">수정/삭제</a></td>
                       </tr>
                    </c:forEach>
+               	</c:when>
+               	<c:otherwise>
+               		<script>
+               		alert('조회결과가 없습니다.');
+               		location.href='/admin/mgmtfee';
+               		</script>
+               	</c:otherwise>
+               </c:choose>
+            	
               		
                     </tbody>
                   </table>
@@ -247,6 +258,7 @@
               </div>
             </div>
           </div>
+          
           
           <c:choose>
           	<c:when test="${searchType eq 'apartmentIdx'}">
@@ -292,7 +304,7 @@
 	                <li><a href="/admin/${paging.type }?page=${paging.prev}&standard=${searchType}">&lt;</a></li>
 	                 <c:choose>
 	                	<c:when test="${paging.lastPage eq 0 }">
-	                		<li><a href="/admin/${paging.type }&standard=${searchType}"><span>1</span></a></li>
+	                		<li><a href="/admin/${paging.type }&standard=${searchType}">1</a></li>
 	                	</c:when>
 	                	<c:otherwise>
 		                 <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
@@ -325,7 +337,7 @@
 	                <li><a href="/admin/${paging.type }?page=${paging.prev}&standard=${searchType }&keyword=${keyword}">&lt;</a></li>
               	  <c:choose>
                 	<c:when test="${paging.lastPage eq 0 }">
-                		<li><a href="/admin/${paging.type }"><span>1</span></a></li>
+                		<li><a href="/admin/${paging.type }">1</a></li>
                 	</c:when>
                 	<c:otherwise>
 	                 <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
