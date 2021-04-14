@@ -358,8 +358,15 @@ demo = {
     gradientStroke.addColorStop(0.2, 'rgba(72,72,176,0.0)');
     gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
 
+	/* 아영 그래프 내용 부분*/
+	let list = document.querySelector('#list').value;
+	list = list.replace('[','');
+	list = list.replace(']','');
+	list = list.replace(' ','');
+	list = list.split(',');
+
     var data = {
-      labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+      labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
       datasets: [{
         label: "Data",
         fill: true,
@@ -375,7 +382,7 @@ demo = {
         pointHoverRadius: 4,
         pointHoverBorderWidth: 15,
         pointRadius: 4,
-        data: [80, 100, 70, 80, 120, 80],
+        data: list,
       }]
     };
 
@@ -436,16 +443,8 @@ demo = {
 
     });
 
-	/* 아영 그래프 내용 부분*/
-	let list = document.querySelector('#list').value;
-	list = list.replace('[','');
-	list = list.replace(']','');
-	list = list.replace(' ','');
-	list = list.split(',');
-
-
     var chart_labels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-    var chart_data = list;
+    var chart_data = [1,1];
 
 
     var ctx = document.getElementById("chartBig1").getContext('2d');

@@ -159,8 +159,8 @@
           <div class="col-lg-12">
             <div class="card card-chart">
               <div class="card-header ">
-                <h5 class="card-category">Total Shipments</h5>
-                <h3 class="card-title"><i class="tim-icons icon-bell-55 text-primary "></i> 763,215</h3>
+                <h5 class="card-category">Month Management Fee</h5>
+                <h3 class="card-title"><i class="tim-icons icon-money-coins text-primary "></i> 월별 관리비 발행 금액 (단위:만원)</h3>
               </div>
               <div class="card-body ">
                 <div class="chart-area">
@@ -170,21 +170,6 @@
               </div>
             </div>
           </div>
-       <!-- 
-          <div class="col-lg-4">
-            <div class="card card-chart">
-              <div class="card-header ">
-                <h5 class="card-category">Daily Sales</h5>
-                <h3 class="card-title"><i class="tim-icons icon-delivery-fast text-info "></i> 3,500€</h3>
-              </div>
-              <div class="card-body ">
-                <div class="chart-area">
-                  <canvas id="CountryChart"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
-           -->   
         </div>
         
         <div class="row">
