@@ -232,7 +232,7 @@
                    <li><a href="/index" class="py-2 d-block">Home</a></li>
                    <li><a href="/about" class="py-2 d-block">About</a></li>
                    <li><a href="/myapt/schedule" class="py-2 d-block">MyApt</a></li>
-                   <li><a href="/baord/info/listinfo" class="py-2 d-block">Board</a></li>
+                   <li><a href="/board/info/listinfo" class="py-2 d-block">Board</a></li>
                    <li><a href="/mypage/modifyinfo" class="py-2 d-block">MyPage</a></li>
                    <li><a href="/bdmin/contactus" class="py-2 d-block">Contact us</a></li>
                  </ul>
