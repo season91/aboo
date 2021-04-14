@@ -51,32 +51,15 @@ public class AdminIndexController {
 		
 		
 		//선영-작성글현황
-		List<Map<String, Object>> usedMap = usedService.selectUsedBrdYearCnt();
-		List<Map<String, Object>> infoMap = usedService.selectInfoBrdYearCnt();
-		List<Map<String, Object>> intMap = usedService.selectIntBrdYearCnt();
+		int usedCnt = usedService.selectUsedBrdTodayCnt();
+		int infoCnt = usedService.selectInfoBrdTodayCnt();
+		int intCnt = usedService.selectIntBrdTodayCnt();
 
-		List<Object> usedList = new ArrayList<Object>();
-		for (Map<String, Object> map : usedMap) {
-			usedList.add(map.get("CNT"));
+	
 
-		}
-		List<Object> infoList = new ArrayList<Object>();
-		for (Map<String, Object> map : infoMap) {
-			infoList.add(map.get("CNT"));
-
-		}
-		List<Object> intList = new ArrayList<Object>();
-		for (Map<String, Object> map : intMap) {
-			intList.add(map.get("CNT"));
-		}
-
-		System.out.println("usedList" + usedList);
-		System.out.println("infoList" + infoList);
-		System.out.println("intList" + intList);
-
-		model.addAttribute("usedList", usedList);
-		model.addAttribute("infoList", infoList);
-		model.addAttribute("intList", intList);
+		model.addAttribute("usedCnt", usedCnt);
+		model.addAttribute("infoCnt", infoCnt);
+		model.addAttribute("intCnt", intCnt);
 
 		return "admin/index";
 	}

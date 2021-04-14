@@ -38,11 +38,11 @@ public interface UsedService {
 
 	int updateUsedBrdCmtPrivate(String usedCmtIdx);
 	
-	List<Map<String,Object>> selectUsedBrdYearCnt();
+	int selectUsedBrdTodayCnt();
 	
-	List<Map<String,Object>> selectInfoBrdYearCnt();
+	int selectInfoBrdTodayCnt();
 
-	List<Map<String,Object>> selectIntBrdYearCnt();
+	int selectIntBrdTodayCnt();
 
 
 }

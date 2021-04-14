@@ -51,19 +51,14 @@ public interface UsedRepository {
 
 	int updateUsedBrdFileModify(Map<String, Object> commandMap);
 
-	@Select(" SELECT TO_CHAR(b.dt, 'YYYY-MM') AS year, NVL(SUM(a.cnt), 0) cnt FROM ( SELECT TO_CHAR(USED_REG_DATE, 'YYYY-MM-DD') AS year , COUNT(*) cnt FROM TB_USED_BRD  WHERE USED_REG_DATE BETWEEN TO_DATE('2021-01-01', 'YYYY-MM-DD')  AND TO_DATE('2021-12-31', 'YYYY-MM-DD') AND IS_DEL = 0 GROUP BY USED_REG_DATE ) a "
-			+ "   , ( SELECT TO_DATE('2021-01-01','YYYY-MM-DD') + LEVEL - 1 AS dt FROM dual   CONNECT BY LEVEL <= (TO_DATE('1981-12-31','YYYY-MM-DD')    - TO_DATE('1981-01-01','YYYY-MM-DD') + 1)  ) b "
-			+ "  WHERE b.dt = a.year(+) GROUP BY TO_CHAR(b.dt, 'YYYY-MM') ORDER BY TO_CHAR(b.dt, 'YYYY-MM')")
-	List<Map<String, Object>> selectUsedBrdYearCnt();
 	
-	@Select(" SELECT TO_CHAR(b.dt, 'YYYY-MM') AS year, NVL(SUM(a.cnt), 0) cnt FROM ( SELECT TO_CHAR(B_WDATE, 'YYYY-MM-DD') AS year , COUNT(*) cnt FROM TB_INF_QST_BRD  WHERE B_WDATE BETWEEN TO_DATE('2021-01-01', 'YYYY-MM-DD')  AND TO_DATE('2021-12-31', 'YYYY-MM-DD') AND B_ISDEL = 0 GROUP BY B_WDATE ) a "
-			+ "   , ( SELECT TO_DATE('2021-01-01','YYYY-MM-DD') + LEVEL - 1 AS dt FROM dual   CONNECT BY LEVEL <= (TO_DATE('1981-12-31','YYYY-MM-DD')    - TO_DATE('1981-01-01','YYYY-MM-DD') + 1)  ) b "
-			+ "  WHERE b.dt = a.year(+) GROUP BY TO_CHAR(b.dt, 'YYYY-MM') ORDER BY TO_CHAR(b.dt, 'YYYY-MM')")
-	List<Map<String, Object>> selectInfoBrdYearCnt();
+	@Select("select count(*) from TB_USED_BRD where USED_REG_DATE = to_char(sysdate,'YYYYMMDD')")
+	int selectUsedBrdTodayCnt();
 	
-	@Select(" SELECT TO_CHAR(b.dt, 'YYYY-MM') AS year, NVL(SUM(a.cnt), 0) cnt FROM ( SELECT TO_CHAR(INT_REG_DATE, 'YYYY-MM-DD') AS year , COUNT(*) cnt FROM TB_INTERIOR_BRD  WHERE INT_REG_DATE BETWEEN TO_DATE('2021-01-01', 'YYYY-MM-DD')  AND TO_DATE('2021-12-31', 'YYYY-MM-DD') AND INT_IS_DEL = 0 GROUP BY INT_REG_DATE ) a "
-			+ "   , ( SELECT TO_DATE('2021-01-01','YYYY-MM-DD') + LEVEL - 1 AS dt FROM dual   CONNECT BY LEVEL <= (TO_DATE('1981-12-31','YYYY-MM-DD')    - TO_DATE('1981-01-01','YYYY-MM-DD') + 1)  ) b "
-			+ "  WHERE b.dt = a.year(+) GROUP BY TO_CHAR(b.dt, 'YYYY-MM') ORDER BY TO_CHAR(b.dt, 'YYYY-MM')")
-	List<Map<String, Object>> selectIntBrdYearCnt();
+	@Select("select count(*) from TB_INF_QST_BRD where B_WDATE = to_char(sysdate,'YYYYMMDD')")
+	int selectInfoBrdTodayCnt();
+	
+	@Select("select count(*) from TB_INTERIOR_BRD where INT_REG_DATE = to_char(sysdate,'YYYYMMDD')")
+	int selectIntBrdTodayCnt();
 
 }
