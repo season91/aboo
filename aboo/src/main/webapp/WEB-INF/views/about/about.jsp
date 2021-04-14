@@ -13,8 +13,8 @@
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
 	          <li class="nav-item"><a href="/index" class="nav-link">Home</a></li>
-	          <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
-	          <li class="nav-item active"><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
+	          <li class="nav-item active"><a href="/about" class="nav-link">About</a></li>
+	          <li class="nav-item"><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
 	          <li class="nav-item"><a class="nav-link" href="/board/info/listinfo">Board</a></li>
 	          <li class="nav-item"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
 	          <c:choose>
@@ -118,10 +118,10 @@
             <div class="block-10">
               <div class="person-info mb-1">
                 <span class="name">박선영</span>
-                <span class="position">Co Designer</span>
+                <span class="position">회원관리, 관리비 결제, 중고게시판</span>
               </div>
               <img src="../../../resources/abooimg/선영.gif" alt="" class="img-fluid mb-3">
-              <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+              <p>기획했던 프로젝트가 실제로 구현되기까지 팀원들과 함께 하지 않았으면 구현하기 어려웠을 것이고 같이 오류들을 해결해가며 즐거움을 느꼈다.</p>
             </div>
           </div>
           <div class="col-md-3 ftco-animate">
