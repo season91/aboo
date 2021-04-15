@@ -26,7 +26,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import com.kh.aboo.common.code.Configcode;
+import com.kh.aboo.common.code.ConfigCode;
 import com.kh.aboo.common.mail.MailSender;
 import com.kh.aboo.common.util.paging.Paging;
 import com.kh.aboo.user.generation.model.repository.GenerationRepository;
@@ -79,7 +79,7 @@ public class GenerationServiceImpl implements GenerationService {
 		body.add("mail-template", "findid");
 		body.add("id", generation.getId());
 		body.add("authPath", authPathId);
-		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(Configcode.DOMAIN + "/mail")
+		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(ConfigCode.DOMAIN + "/mail")
 				.header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE).body(body);
 
 		ResponseEntity<String> response = http.exchange(request, String.class);
@@ -101,7 +101,7 @@ public class GenerationServiceImpl implements GenerationService {
 		body.add("password", password);
 		System.out.println("메일 보낼번호 : " + password);
 
-		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(Configcode.DOMAIN + "/mail")
+		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(ConfigCode.DOMAIN + "/mail")
 				.header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE).body(body);
 
 		ResponseEntity<String> response = http.exchange(request, String.class);
@@ -171,7 +171,7 @@ public class GenerationServiceImpl implements GenerationService {
 		body.add("mail-template", "email");
 		body.add("id", generation.getId());
 		body.add("authPath", authPathEmail);
-		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(Configcode.DOMAIN + "/mail")
+		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(ConfigCode.DOMAIN + "/mail")
 				.header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE).body(body);
 
 		ResponseEntity<String> response = http.exchange(request, String.class);

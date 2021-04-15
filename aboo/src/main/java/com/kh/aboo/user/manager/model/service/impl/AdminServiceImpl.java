@@ -39,7 +39,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.aboo.admin.mgmtfee.model.vo.Mgmtfee;
-import com.kh.aboo.common.code.Configcode;
+import com.kh.aboo.common.code.ConfigCode;
 import com.kh.aboo.common.code.ErrorCode;
 import com.kh.aboo.common.exception.ToAlertException;
 import com.kh.aboo.common.mail.MailSender;
@@ -162,7 +162,7 @@ public class AdminServiceImpl implements AdminService {
 		body.add("mail-template", "findid");
 		body.add("id", admin.getId());
 		body.add("authPath", authPathId);
-		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(Configcode.DOMAIN + "/mail")
+		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(ConfigCode.DOMAIN + "/mail")
 				.header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE).body(body);
 
 		ResponseEntity<String> response = http.exchange(request, String.class);
@@ -184,7 +184,7 @@ public class AdminServiceImpl implements AdminService {
 		body.add("password", password);
 		System.out.println("메일 보낼번호 : " + password);
 
-		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(Configcode.DOMAIN + "/mail")
+		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(ConfigCode.DOMAIN + "/mail")
 				.header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE).body(body);
 
 		ResponseEntity<String> response = http.exchange(request, String.class);
@@ -225,7 +225,7 @@ public class AdminServiceImpl implements AdminService {
 		body.add("mail-template", "email");
 		body.add("id", admin.getId());
 		body.add("authPath", authPathEmail);
-		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(Configcode.DOMAIN + "/mail")
+		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(ConfigCode.DOMAIN + "/mail")
 				.header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE).body(body);
 
 		ResponseEntity<String> response = http.exchange(request, String.class);

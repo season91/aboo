@@ -2,6 +2,8 @@ package com.kh.aboo.admin.car.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +15,7 @@ import com.kh.aboo.admin.car.model.service.CarService;
 import com.kh.aboo.admin.car.model.vo.Car;
 import com.kh.aboo.admin.car.model.vo.CarApplication;
 import com.kh.aboo.common.code.AlarmCode;
-import com.kh.aboo.common.code.Configcode;
+import com.kh.aboo.common.code.ConfigCode;
 import com.kh.aboo.common.code.ErrorCode;
 import com.kh.aboo.common.exception.ToAlertException;
 import com.kh.aboo.mypage.myalarm.model.service.MyAlarmService;
@@ -59,7 +61,6 @@ public class CarController {
 		generationInfo.setBuilding(building);
 		generationInfo.setNum(num);
 		Generation generation = carService.selectGenerationByBuildingAndNum(generationInfo);
-		System.out.println(generation);
 		
 		// 전달받은 차량번호를 세대정보와 함께 넣어준다.
 		Car car = new Car();
@@ -108,19 +109,16 @@ public class CarController {
 				car.setGenerationIdx(carApplication.getGenerationIdx());
 				car.setApartmentIdx(carApplication.getApartmentIdx());
 				car.setCarNumber(carApplication.getAplctCarNumber());
-				car.setCarQR(Configcode.QRCODE_PATH.desc);
 				
 				resStr = carService.insertAndQRWrite(car);
 				
 			} 
-			System.out.println("QR추가완료?"+resStr);
 			
 			//3. QR코드가 생성이 되었다면 신청을 승인 처리해준다. 생성되지않았다면 승인처리 하지않고 에러 발동시킨다.
 			if(resStr.equals("등록되었습니다.")) {
-				System.out.println("여긴 성공시 도는건데 왜도낭?");
 				int res = carService.updateCarApplicationApproval(applicationidx.get(i));
 				myAlarmService.insertPvAlarm("'" + carApplication.getAplctCarNumber() + "' " +AlarmCode.ADD_CAR, carApplication.getGenerationIdx());
-				System.out.println(res);
+
 			} else {
 				throw new ToAlertException(ErrorCode.IAC01);
 			}
@@ -170,7 +168,8 @@ public class CarController {
 	
 	// QR로인해 해당 url 접근시 관리자가 차량 입차 체크한다.
 	@GetMapping("admin/carread")
-	public String carRead(@RequestParam String generationidx, @RequestParam String caridx, Model model) {
+	public String carRead(@RequestParam String generationidx, @RequestParam String caridx, HttpSession session, Model model) {
+		
 		// 전달받은 세대관리번호의 차량번호가 일치하는지 확인하고 진행한다.
 		List<String> carIdxCheckList = carService.selectCarNumberByGenerationIdx(generationidx);
 		String carIdx = "";
@@ -183,7 +182,9 @@ public class CarController {
 		}
 		// 리스트로 비교를해서 포문돌려서 포문안에 이 if문을 넣는다.
 		if(carIdx.equals(caridx)) {
-			String msg = carService.updateIsInCar(caridx); 
+			String msg = carService.updateIsInCar(caridx);
+			// 주자관련 session 넣어서 보내준다
+			session.setAttribute("apartmentIdx", carService.selectCar(carIdx).getApartmentIdx());
 			model.addAttribute("alertMsg", msg);
 		} else { 
 			model.addAttribute("alertMsg", "실패하였습니다. 등록정보를 확인하세요.");

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -12,7 +11,7 @@ import com.kh.aboo.admin.car.model.repository.CarRepository;
 import com.kh.aboo.admin.car.model.service.CarService;
 import com.kh.aboo.admin.car.model.vo.Car;
 import com.kh.aboo.admin.car.model.vo.CarApplication;
-import com.kh.aboo.common.code.Configcode;
+import com.kh.aboo.common.code.ConfigCode;
 import com.kh.aboo.common.code.ErrorCode;
 import com.kh.aboo.common.exception.ToAlertException;
 import com.kh.aboo.common.util.paging.Paging;
@@ -27,8 +26,6 @@ public class CarServiceImpl implements CarService{
 	public CarServiceImpl(CarRepository carRepository) {
 		this.carRepository = carRepository;
 	}
-
-	
 
 	@Override
 	public Car selectCar(String carIdx) {
@@ -68,9 +65,9 @@ public class CarServiceImpl implements CarService{
 			throw new ToAlertException(ErrorCode.IQR01);
 		}
 		// 2. QR코드 생성한다.
-		// url 링크는 localhost:8888/admin/vehicleread?generationidx=값&vehicleidx=값
-		// 파일명은 v시퀀스번호로 한다.
-		String domain = Configcode.DOMAIN.desc +"/admin/carread?generationidx="+newCar.getGenerationIdx()+"&caridx="+newCar.getCarIdx();
+		// url 링크는 localhost:9393/admin/carread?generationidx=값&vehicleidx=값
+		// 파일명은 c시퀀스번호로 한다.
+		String domain = ConfigCode.QR_DOMAIN.desc +"/admin/carread?generationidx="+newCar.getGenerationIdx()+"&caridx="+newCar.getCarIdx();
 		QRCodeUtil qr = new QRCodeUtil();
 		qr.makeQR(domain, "c"+newCar.getCarIdx());
 		

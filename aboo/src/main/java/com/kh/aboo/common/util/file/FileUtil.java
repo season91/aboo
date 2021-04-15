@@ -16,7 +16,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kh.aboo.common.code.Configcode;
+import com.kh.aboo.common.code.ConfigCode;
 import com.kh.aboo.user.generation.model.vo.Generation;
 import com.kh.aboo.user.manager.model.repository.AdminRepository;
 
@@ -74,7 +74,7 @@ public class FileUtil {
 	// 파일 삭제
 	public void deleteFile(String path, String renameFileName) {
 		// 기초 저장경로 + 날짜 저장경로 + 파일이름
-		File file = new File(Configcode.UPLOAD_PATH + path + renameFileName);
+		File file = new File(ConfigCode.UPLOAD_PATH + path + renameFileName);
 		file.delete();
 	}
 	
