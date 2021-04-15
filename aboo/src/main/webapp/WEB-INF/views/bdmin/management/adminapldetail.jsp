@@ -49,7 +49,7 @@
             </a>
           </li>
           <li>
-            <a href="/admin/vehicle">
+            <a href="/admin/car">
               <i class="tim-icons icon-bus-front-12"></i>
               <p>Car</p>
             </a>
@@ -66,19 +66,19 @@
               <p>Chat</p>
             </a>
           </li>
-           <li>
-           <a href="/bdmin/notice/noticelist">
-              <i class="tim-icons icon-volume-98"></i>
-              <p>notice</p>
-            </a>
-          </li>
-	     <li  class="active ">
+          <li>
+          <a href="/bdmin/notice/noticelist">
+            <i class="tim-icons icon-volume-98"></i>
+      		 <p>notice</p>
+      		</a>
+      	 </li>
+      	<li  >
 	       	<a href="/bdmin/management/apartment">
 	         <i class="tim-icons icon-key-25"></i>
 	  		 <p>BDIN - apartment</p>
 	  	    </a>
 	  	 </li>
-	  	  <li  class=" ">
+	  	  <li  class="active ">
 	       	<a href="/bdmin/management/adminauthority">
 	         <i class="tim-icons icon-key-25"></i>
 	  		 <p>BDIN - manager</p>
@@ -99,7 +99,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">BDMIN - contact us list</a>
+            <a class="navbar-brand" href="#pablo">BDMIN - admin application</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -120,6 +120,13 @@
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link">
+                    <a href="${context }/admin/mypage/modifyinfo" class="nav-item dropdown-item">Profile</a>
+                  </li>
+                  <li class="nav-link">
+                    <a href="${context }/admin/chat" class="nav-item dropdown-item">1:1 chat</a>
+                  </li>
+                  <div class="dropdown-divider"></div>
+                  <li class="nav-link">
                    <c:choose>
                   	<c:when test="${sessionScope.bdmin == null}">
                     	<a href="/bdmin/login" class="nav-item dropdown-item">Log in</a>
@@ -137,145 +144,61 @@
         </div>
       </nav>
       
-    <div class="content">
-           <div class="row">
+      <div class="content">
+        <div class="row">
           <div class="col-md-12">
-            <div class="card ">
+            <div class="card">
               <div class="card-header">
-                <h3 class="title">Apart 신청 현황</h3>
+                <h3 class="title">어드민 계정 신청서</h3>
               </div>
-              <div class="col-md-12">
-                <div class="places-buttons">
-                  <div class="row">
-                    <div class="col-md-6 ml-auto mr-auto text-center">
-                      <h4 class="card-title">
-                       	Apart 신청 검색
-                        <p class="category">조회 조건을 선택하세요.
-                      </h4>
+                	  
+                <div class="card-body">
+                  <form id="form_admin_join" action="/bdmin/adminapplicationadd" method="post">
+                  <h4 class="title">신청서 작성</h4>
+                  	<div class="" style="display: block; margin-left: 20px">
+                  	
+	                    <div class="col-md-9 px-md-1">
+	                      <div class="form-group">
+	                        <label>신청 아이디 </label>
+	                        <div class = "d-flex">
+	                        	<input type="text" class="form-control col-md-8" id = "id" name="id" required="required" value="${adminApplication.id }">
+		                		<button type="button" class="btn btn-primary col-md-2" onclick="idCheck()" style="display: flex; justify-content: center;align-items: center; margin-left: 10px">아이디 검사</button>
+	                     	</div>
+	                     	<div id = "id_check" class = " mt-2"></div>
+	                      </div>
+	                    </div>
+	                    
+	                    
+	                    <div class="col-md-6 px-md-1">
+			              <div class="form-group">
+	                        <label>신청 비밀번호</label>			              
+			                <input type="password" class="form-control password"  id = "password_1" readonly="readonly"  placeholder="비밀번호" value="${adminApplication.password }"> 
+			              </div>
+	                    </div>
+	                    	                    
+		                  <div class="col-md-6 px-md-1">
+	                      <div class="form-group">
+	                        <label>신청자 이름</label>
+	                        <input type="text" class="form-control" name="name" required="required" readonly="readonly" value="${adminApplication.name }">
+	                      </div>
+	                    </div>
+	                    <div class="col-md-6 px-md-1">
+	                      <div class="form-group">
+	                        <label>신청자 생년월일</label>
+	                        <input type="Date" class="form-control" name="birth" required="required" readonly="readonly" value="${adminApplication.birth }">
+	                      </div>
+	                    </div>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-12 ml-auto mr-auto">
-                      <div class="row " style="display: flex; justify-content: center">
-                        <div class="col-md-3">
-                          <button type="button" class="btn btn-success btn-block" id="search-button" data-toggle="modal" data-target="#nameModal">아파트 명으로 검색</button>
-                        </div>
-                        <div class="col-md-3">
-                        <form action="${context }/bdmin/management/apartment">
-                          <button type="submit" class="btn btn-success btn-block" id="search-button" data-toggle="modal" data-target="#apartmentModal">아파트 현황 보기</button>
-                        </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-          </div>
-          
-       	 <div class="card-body">
-             <div class="table-responsive">
-               <table class="table tablesorter " id="">
-                 <thead class=" text-primary">
-                   <th>신청번호</th>
-                   <th>아파트명</th>
-                   <th>아파트 주소</th>
-                   <th>세대 수</th>
-                   <th>신청자 명</th>
-                   <th>상세보기</th>
-                 </thead>
-                 <tbody>
-                  
-            	<c:forEach items="${apartApplicationList}" var="application" varStatus="status">
-                   <tr>
-                       <td> ${application.applicationIdx}</td>
-                       <td> ${application.aApartmentName } </td>
-                       <td> ${application.aGenerationCnt }</td>
-                       <td> ${application.aParking} </td>
-                       <td> ${application.aName} </td>
-                       <td> <a href="${context }/bdmin/management/contactusdetail?applicationIdx=${application.applicationIdx}"><i class="tim-icons icon-single-copy-04"></i></a></td>
-                      </tr>
-                   </c:forEach>
-              		
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+                	<div class="card-footer" style="display: flex; justify-content: space-around;">
+		                <button type="submit" class="btn btn-fill btn-success">승인하기</button>
+		                <button type="button" class="btn btn-fill btn-primary">반려하기</button>
+                	</div>
+                </form>
+			</div>
             </div>
           </div>
-          
-          <c:choose>
-          	<c:when test="${searchType eq 'basic' }">
-          	<div class="row d-flex card-body ">
-	          <div class="col text-center">
-	            <div class="block-27">
-	              <ul>
-	                <li><a href="/bdmin/management/contactuslist">&lt;&lt;</a></li>
-	                <li><a href="/bdmin/management/contactuslist?page=${paging.prev}">&lt;</a></li>
-	                <c:choose>
-	                	<c:when test="${paging.lastPage eq 0 }">
-	                		<li><a href="/bdmin/management/contactuslist">1</a></li>
-	                	</c:when>
-	                	<c:otherwise>
-	                		<c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
-		                      <c:choose>
-		                         <c:when test="${paging.currentPage eq page}">
-		                            <li class="active"><a href="/bdmin/management/contactuslist?page=${page}">${page}</a></li>
-		                         </c:when>
-		                         <c:otherwise>
-		                            <li><a href="/bdmin/management/contactuslist?page=${page}">${page}</a></li>
-		                         </c:otherwise>
-		                      </c:choose>
-		                 	 </c:forEach> 
-	                	</c:otherwise>
-	                </c:choose>
-	                 
-	                <li><a href="/bdmin/management/contactuslist?page=${paging.next}">&gt;</a></li>
-	                <li><a href="/bdmin/management/contactuslist?page=${paging.lastPage }">&gt;&gt;</a></li>
-	              </ul>
-	            </div>
-	          </div>
-	        </div>
-          	</c:when>
-          	
-          	<c:otherwise>
-          	
-          	 <div class="row d-flex card-body ">
-	          <div class="col text-center">
-	            <div class="block-27">
-	              <ul>
-	                <li><a href="/bdmin/management/contactuslist?standard=${searchType }&keyword=${keyword}">&lt;&lt;</a></li>
-	                <li><a href="/bdmin/management/contactuslist?page=${paging.prev}&standard=${searchType }&keyword=${keyword}">&lt;</a></li>
-	                <c:choose>
-	                	<c:when test="${paging.lastPage eq 0 }">
-	                		<li><a href="/bdmin/management/contactuslist?standard=${searchType }&keyword=${keyword}">1</a></li>
-	                	</c:when>
-	                	<c:otherwise>
-	                		<c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
-		                      <c:choose>
-		                         <c:when test="${paging.currentPage eq page}">
-		                            <li class="active"><a href="/bdmin/management/contactuslist?page=${page}&standard=${searchType }&keyword=${keyword}">${page}</a></li>
-		                         </c:when>
-		                         <c:otherwise>
-		                            <li><a href="/bdmin/management/contactuslist?page=${page}&standard=${searchType }&keyword=${keyword}">${page}</a></li>
-		                         </c:otherwise>
-		                      </c:choose>
-		                 	 </c:forEach> 
-	                	</c:otherwise>
-	                </c:choose>
-	                <li><a href="/bdmin/management/contactuslist?page=${paging.next}&standard=${searchType }&keyword=${keyword}">&gt;</a></li>
-	                <li><a href="/bdmin/management/contactuslist?page=${paging.lastPage }&standard=${searchType }&keyword=${keyword}">&gt;&gt;</a></li>
-	              </ul>
-	            </div>
-	          </div>
-	        </div>
-          	
-          	</c:otherwise>
-          	
-          </c:choose>
-    	</div>
-    	</div>
-        </div>
       </div>
-
+      </div>
 
 
      <footer class="footer">
@@ -305,35 +228,11 @@
       </div>
     </div>
     
-    
-     
-    <div class="modal fade" id="nameModal" tabindex="-1" role="dialog" aria-labelledby="nameModalLabel" aria-hidden="true">
-       <div class="modal-dialog" role="document">
-         <div class="modal-content" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675); color:white;">
-           <div class="modal-header">
-           	<h4 class="modal-title" id="nameModalLabel">아파트 명으로 검색 검색</h4>
-            	 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <i class="tim-icons icon-simple-remove"></i>
-              </button>
-           </div>
-           <div class="modal-body">
-        <form action="${context }/bdmin/management/contactuslist">
-          <div class="form-group">
-          <input type="hidden" name="standard" value="apartmentName">
-           <input type="text" class="form-control mgmtfee-keyword" id="inlineFormInputGroup" name="keyword" placeholder="아파트 이름으로 검색하세요.">
-          </div>
-          <div class="modal-footer">
-           <button type="submit" class="btn btn-primary">검색</button>
-           </div>
-        </form>
-      </div>
-         </div>
-       </div>
-     </div>
-     
+   
      
    
     <!--   Core JS Files   -->
+    <script src="../../../resources/js/admin/mgmtfee.js"></script>
     <script src="../../../resources/js/admin/core/jquery.min.js"></script>
     <script src="../../../resources/js/admin/core/popper.min.js"></script>
     <script src="../../../resources/js/admin/core/bootstrap.min.js"></script>
@@ -471,5 +370,94 @@
 
       });
     </script>
+    
+    
+    
+       <script type="text/javascript">
+	   let idCheckFlg = false;
+	   let idCheck = () => {
+	      //사용자가 입력한 아이디
+	      //요소의 아이디속성이 있을 경우 해당 엘리먼트를 가져다가 사용할 수 있다.
+	      let id = document.querySelector("#id").value;
+	      console.dir('id는 ??'+ id)
+	      if(id){
+	         fetch("/bdmin/adminapplicationidcheck?id=" + id,{
+	            method:"GET"
+	         })	
+	         .then(response => response.text())
+	         .then(text =>{
+	            if(text == 'success'){
+	               idCheckFlg = true;
+	               document.querySelector("#id_check").innerHTML = '사용 가능한 아이디 입니다.';
+	               document.querySelector("#id_check").style.color = 'skyblue';
+
+	            }else{
+	               idCheckFlg = false;
+	               document.querySelector("#id_check").innerHTML = '사용 불 가능한 아이디 입니다.';
+	               document.querySelector("#id_check").style.color = 'red';
+	               document.querySelector("#id").value="";
+	            }
+	         })
+	         
+	      }else{
+	         alert("아이디를 입력하지 않으셨습니다.");
+	      }
+	   };
+
+	   let flg = false;
+	    
+	    $('.password').focusout(function () {
+	        var pwd1 = $("#password_1").val();
+	        var pwd2 = $("#password_2").val();
+
+	        if (pwd1 != '' && pwd2 == '') {
+	            null;
+	        } else if (pwd1 != "" || pwd2 != "") {
+	            if (pwd1 == pwd2) {
+	                document.querySelector("#passwordConfirm2").style.color='blue'
+	                passwordConfirm2.innerHTML = '비밀번호가 일치합니다';
+	                flg = true;
+	            } else {
+	                document.querySelector("#passwordConfirm2").style.color='red'
+	                passwordConfirm2.innerHTML = '비밀번호가 일치 하지않습니다';
+					flg = false;
+	            }
+	        }
+	    });
+	    
+
+	     document.querySelector('#form_admin_join').addEventListener('submit',(e)=>{
+		   let password_1 = document.querySelector("#password_1").value;
+		   let password_2 = document.querySelector("#password_2").value;
+			
+	 	   let regExp = /^(?!.*[ㄱ-힣])(?=.*\W)(?=.*\d)(?=.*[a-zA-Z])(?=.{8,})/;
+	 	   
+	 	   if(!(regExp.test(password_1) || regExp.test(password_2))){
+	 		   //form의 데이터 전송을 막음
+	 		   e.preventDefault();
+	 		   passwordConfirm.innerHTML = '비밀번호는 숫자,영문자,특수문자 조합의 8글자 이상인 문자열입니다2.';
+	 		   passwordConfirm2.innerHTML='';
+	 		   password_1.value='';
+	 		   password_1.value='';
+
+	 	   }
+	 	   
+	 	   	if (!flg) {
+	           	document.querySelector("#passwordConfirm2").innerHTML = '비밀번호가 일치 하지않습니다'
+	           	e.preventDefault();
+
+			}
+	 	   	
+	 	   if(!idCheckFlg){
+			   e.preventDefault();
+			   alert("아이디 중복검사를 하지 않으셨습니다.");
+			   id.focus()
+		   }
+	 	   
+	    });  
+
+   
+   </script>
+
 </body>
 </html>

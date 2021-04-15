@@ -192,7 +192,7 @@
                        <td> ${apart.apartmentName } </td>
                        <td> ${apart.apartmentAddress }</td>
                        <td> ${apart.apartmentParking} </td>
-                       <td> <a href="${context }/bdmin/management/apartmentdetail?apartmentIdx=${apart.apartmentIdx}">상세정보</a></td>
+                       <td> <a href="${context }/bdmin/management/apartmentdetail?apartmentIdx=${apart.apartmentIdx}"><i class="tim-icons icon-notes"></i></a></td>
                       </tr>
                    </c:forEach>
               		

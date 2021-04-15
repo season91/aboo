@@ -49,7 +49,7 @@
             </a>
           </li>
           <li>
-            <a href="/admin/vehicle">
+            <a href="/admin/car">
               <i class="tim-icons icon-bus-front-12"></i>
               <p>Car</p>
             </a>
@@ -66,19 +66,19 @@
               <p>Chat</p>
             </a>
           </li>
-           <li>
-           <a href="/bdmin/notice/noticelist">
-              <i class="tim-icons icon-volume-98"></i>
-              <p>notice</p>
-            </a>
-          </li>
-	     <li  class="active ">
+          <li>
+          <a href="/bdmin/notice/noticelist">
+            <i class="tim-icons icon-volume-98"></i>
+      		 <p>notice</p>
+      		</a>
+      	 </li>
+      	<li  >
 	       	<a href="/bdmin/management/apartment">
 	         <i class="tim-icons icon-key-25"></i>
 	  		 <p>BDIN - apartment</p>
 	  	    </a>
 	  	 </li>
-	  	  <li  class=" ">
+	  	  <li  class="active ">
 	       	<a href="/bdmin/management/adminauthority">
 	         <i class="tim-icons icon-key-25"></i>
 	  		 <p>BDIN - manager</p>
@@ -99,7 +99,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">BDMIN - contact us list</a>
+            <a class="navbar-brand" href="#pablo">BDMIN - admin application</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -120,6 +120,13 @@
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link">
+                    <a href="${context }/admin/mypage/modifyinfo" class="nav-item dropdown-item">Profile</a>
+                  </li>
+                  <li class="nav-link">
+                    <a href="${context }/admin/chat" class="nav-item dropdown-item">1:1 chat</a>
+                  </li>
+                  <div class="dropdown-divider"></div>
+                  <li class="nav-link">
                    <c:choose>
                   	<c:when test="${sessionScope.bdmin == null}">
                     	<a href="/bdmin/login" class="nav-item dropdown-item">Log in</a>
@@ -137,33 +144,33 @@
         </div>
       </nav>
       
-    <div class="content">
+      
+      
+     <div class="content">
            <div class="row">
           <div class="col-md-12">
             <div class="card ">
               <div class="card-header">
-                <h3 class="title">Apart 신청 현황</h3>
+                <h3 class="title">Admin 계정 권한 신청</h3>
               </div>
               <div class="col-md-12">
                 <div class="places-buttons">
                   <div class="row">
                     <div class="col-md-6 ml-auto mr-auto text-center">
                       <h4 class="card-title">
-                       	Apart 신청 검색
+                       	Admin 계정 신청 검색
                         <p class="category">조회 조건을 선택하세요.
                       </h4>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-lg-12 ml-auto mr-auto">
-                      <div class="row " style="display: flex; justify-content: center">
+                      <div class="row "  style="display: flex; justify-content: center">
                         <div class="col-md-3">
-                          <button type="button" class="btn btn-success btn-block" id="search-button" data-toggle="modal" data-target="#nameModal">아파트 명으로 검색</button>
+                          <button type="button" class="btn btn-success btn-block" id="search-button" data-toggle="modal" data-target="#nameModal">신청자 이름 검색</button>
                         </div>
                         <div class="col-md-3">
-                        <form action="${context }/bdmin/management/apartment">
-                          <button type="submit" class="btn btn-success btn-block" id="search-button" data-toggle="modal" data-target="#apartmentModal">아파트 현황 보기</button>
-                        </form>
+                          <button type="button" class="btn btn-success btn-block" id="search-button" data-toggle="modal" data-target="#apartmentNameModal">아파트 명으로 검색</button>
                         </div>
                       </div>
                     </div>
@@ -176,22 +183,18 @@
                <table class="table tablesorter " id="">
                  <thead class=" text-primary">
                    <th>신청번호</th>
-                   <th>아파트명</th>
-                   <th>아파트 주소</th>
-                   <th>세대 수</th>
-                   <th>신청자 명</th>
+                   <th>신청자이름</th>
+                   <th>신청아이디</th>
                    <th>상세보기</th>
                  </thead>
                  <tbody>
                   
-            	<c:forEach items="${apartApplicationList}" var="application" varStatus="status">
+            	<c:forEach items="${applicationList}" var="manager" varStatus="status">
                    <tr>
-                       <td> ${application.applicationIdx}</td>
-                       <td> ${application.aApartmentName } </td>
-                       <td> ${application.aGenerationCnt }</td>
-                       <td> ${application.aParking} </td>
-                       <td> ${application.aName} </td>
-                       <td> <a href="${context }/bdmin/management/contactusdetail?applicationIdx=${application.applicationIdx}"><i class="tim-icons icon-single-copy-04"></i></a></td>
+                       <td> ${manager.managerApplicationIdx}</td>
+                       <td> ${manager.name }</td>
+                       <td> ${manager.id} </td>
+                       <td><a href="/bdmin/management/adminapldetail?managerApplicationIdx=${manager.managerApplicationIdx }"><i class="tim-icons icon-credit-card"></i></a></td>
                       </tr>
                    </c:forEach>
               		
@@ -203,33 +206,34 @@
           </div>
           
           <c:choose>
+          
           	<c:when test="${searchType eq 'basic' }">
-          	<div class="row d-flex card-body ">
+          	 <div class="row d-flex card-body ">
 	          <div class="col text-center">
 	            <div class="block-27">
 	              <ul>
-	                <li><a href="/bdmin/management/contactuslist">&lt;&lt;</a></li>
-	                <li><a href="/bdmin/management/contactuslist?page=${paging.prev}">&lt;</a></li>
+	                <li><a href="/bdmin/management/${paging.type }">&lt;&lt;</a></li>
+	                <li><a href="/bdmin/management/${paging.type }?page=${paging.prev}">&lt;</a></li>
 	                <c:choose>
 	                	<c:when test="${paging.lastPage eq 0 }">
-	                		<li><a href="/bdmin/management/contactuslist">1</a></li>
+	                		<li><a href="/bdmin/management/${paging.type }">1</a></li>
 	                	</c:when>
 	                	<c:otherwise>
 	                		<c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
 		                      <c:choose>
 		                         <c:when test="${paging.currentPage eq page}">
-		                            <li class="active"><a href="/bdmin/management/contactuslist?page=${page}">${page}</a></li>
+		                            <li class="active"><a href="/bdmin/management/${paging.type }?page=${page}">${page}</a></li>
 		                         </c:when>
 		                         <c:otherwise>
-		                            <li><a href="/bdmin/management/contactuslist?page=${page}">${page}</a></li>
+		                            <li><a href="/bdmin/management/${paging.type }?page=${page}">${page}</a></li>
 		                         </c:otherwise>
 		                      </c:choose>
 		                 	 </c:forEach> 
 	                	</c:otherwise>
 	                </c:choose>
 	                 
-	                <li><a href="/bdmin/management/contactuslist?page=${paging.next}">&gt;</a></li>
-	                <li><a href="/bdmin/management/contactuslist?page=${paging.lastPage }">&gt;&gt;</a></li>
+	                <li><a href="/bdmin/management/${paging.type }?page=${paging.next}">&gt;</a></li>
+	                <li><a href="/bdmin/management/${paging.type }?page=${paging.lastPage }">&gt;&gt;</a></li>
 	              </ul>
 	            </div>
 	          </div>
@@ -237,45 +241,42 @@
           	</c:when>
           	
           	<c:otherwise>
-          	
           	 <div class="row d-flex card-body ">
 	          <div class="col text-center">
 	            <div class="block-27">
 	              <ul>
-	                <li><a href="/bdmin/management/contactuslist?standard=${searchType }&keyword=${keyword}">&lt;&lt;</a></li>
-	                <li><a href="/bdmin/management/contactuslist?page=${paging.prev}&standard=${searchType }&keyword=${keyword}">&lt;</a></li>
+	                <li><a href="/bdmin/management/${paging.type }?standard=${searchType}&keyword=${keyword}">&lt;&lt;</a></li>
+	                <li><a href="/bdmin/management/${paging.type }?page=${paging.prev}&standard=${searchType}&keyword=${keyword}">&lt;</a></li>
 	                <c:choose>
 	                	<c:when test="${paging.lastPage eq 0 }">
-	                		<li><a href="/bdmin/management/contactuslist?standard=${searchType }&keyword=${keyword}">1</a></li>
+	                		<li><a href="/bdmin/management/${paging.type }&standard=${searchType}&keyword=${keyword}">1</a></li>
 	                	</c:when>
 	                	<c:otherwise>
 	                		<c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
 		                      <c:choose>
 		                         <c:when test="${paging.currentPage eq page}">
-		                            <li class="active"><a href="/bdmin/management/contactuslist?page=${page}&standard=${searchType }&keyword=${keyword}">${page}</a></li>
+		                            <li class="active"><a href="/bdmin/management/${paging.type }?page=${page}&standard=${searchType}&keyword=${keyword}">${page}</a></li>
 		                         </c:when>
 		                         <c:otherwise>
-		                            <li><a href="/bdmin/management/contactuslist?page=${page}&standard=${searchType }&keyword=${keyword}">${page}</a></li>
+		                            <li><a href="/bdmin/management/${paging.type }?page=${page}&standard=${searchType}&keyword=${keyword}">${page}</a></li>
 		                         </c:otherwise>
 		                      </c:choose>
 		                 	 </c:forEach> 
 	                	</c:otherwise>
 	                </c:choose>
-	                <li><a href="/bdmin/management/contactuslist?page=${paging.next}&standard=${searchType }&keyword=${keyword}">&gt;</a></li>
-	                <li><a href="/bdmin/management/contactuslist?page=${paging.lastPage }&standard=${searchType }&keyword=${keyword}">&gt;&gt;</a></li>
+	                 
+	                <li><a href="/bdmin/management/${paging.type }?page=${paging.next}&standard=${searchType}&keyword=${keyword}">&gt;</a></li>
+	                <li><a href="/bdmin/management/${paging.type }?page=${paging.lastPage }&standard=${searchType}&keyword=${keyword}">&gt;&gt;</a></li>
 	              </ul>
 	            </div>
 	          </div>
 	        </div>
-          	
           	</c:otherwise>
-          	
           </c:choose>
     	</div>
     	</div>
         </div>
       </div>
-
 
 
      <footer class="footer">
@@ -307,23 +308,29 @@
     
     
      
-    <div class="modal fade" id="nameModal" tabindex="-1" role="dialog" aria-labelledby="nameModalLabel" aria-hidden="true">
+    <div class="modal fade" id="apartmentNameModal" tabindex="-1" role="dialog" aria-labelledby="apartmentNameModalLabel" aria-hidden="true">
        <div class="modal-dialog" role="document">
          <div class="modal-content" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675); color:white;">
            <div class="modal-header">
-           	<h4 class="modal-title" id="nameModalLabel">아파트 명으로 검색 검색</h4>
+           	<h4 class="modal-title" id="apartmentNameModalLabel">아파트 명 검색</h4>
             	 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <i class="tim-icons icon-simple-remove"></i>
               </button>
            </div>
            <div class="modal-body">
-        <form action="${context }/bdmin/management/contactuslist">
+        <form action="${context }/bdmin/management/adminapllist">
           <div class="form-group">
           <input type="hidden" name="standard" value="apartmentName">
-           <input type="text" class="form-control mgmtfee-keyword" id="inlineFormInputGroup" name="keyword" placeholder="아파트 이름으로 검색하세요.">
+          <input class="form-control" list="datalistOptions" name="keyword" placeholder="아파트명을 검색하세요.">
+	            <datalist id="datalistOptions">
+				<c:forEach items="${apartmentList}" var="apartment">
+					<option value="${apartment.apartmentName }/${apartment.apartmentIdx}">
+				</c:forEach>
+				</datalist>
+         
           </div>
           <div class="modal-footer">
-           <button type="submit" class="btn btn-primary">검색</button>
+           <button type="submit" class="btn btn-success">검색</button>
            </div>
         </form>
       </div>
@@ -331,9 +338,34 @@
        </div>
      </div>
      
-     
+      <div class="modal fade" id="nameModal" tabindex="-1" role="dialog" aria-labelledby="nameModalLabel" aria-hidden="true">
+       <div class="modal-dialog" role="document">
+         <div class="modal-content" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675); color:white;">
+           <div class="modal-header">
+           	<h4 class="modal-title" id="nameModalLabel">관리자 이름 검색</h4>
+            	 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i class="tim-icons icon-simple-remove"></i>
+              </button>
+           </div>
+           <div class="modal-body">
+        <form action="${context }/bdmin/management/adminapllist">
+          <div class="form-group">
+           <input type="hidden" name="standard" value="name">
+           <input type="text" class="form-control mgmtfee-keyword" id="inlineFormInputGroup" name="keyword" placeholder="이름을 입력하세요.">
+          </div>
+          <div class="modal-footer">
+           <button type="submit" class="btn btn-success">검색</button>
+           </div>
+        </form>
+      </div>
+         </div>
+       </div>
+     </div>
+    
+ 
    
     <!--   Core JS Files   -->
+    <script src="../../../resources/js/bdmin/adminauthority.js"></script>
     <script src="../../../resources/js/admin/core/jquery.min.js"></script>
     <script src="../../../resources/js/admin/core/popper.min.js"></script>
     <script src="../../../resources/js/admin/core/bootstrap.min.js"></script>

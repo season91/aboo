@@ -209,7 +209,7 @@
                    <th>관리비 고지월 </th>
                    <th>산출금액</th>
                    <th>납부상태</th>
-                   <th>이동</th>
+                   <th>상세보기</th>
                  </thead>
                  <tbody>
                 
@@ -239,7 +239,7 @@
                        		<td>완료</td>
                        	</c:otherwise>
                        </c:choose>
-                       <td> <a href="/admin/mgmtfee/modify?mgmtfeeidx=${mgmtfee.mgmtfeeIdx}">수정/삭제</a></td>
+                       <td> <a href="/admin/mgmtfee/modify?mgmtfeeidx=${mgmtfee.mgmtfeeIdx}"><i class="tim-icons icon-paper"></i></a></td>
                       </tr>
                    </c:forEach>
                	</c:when>

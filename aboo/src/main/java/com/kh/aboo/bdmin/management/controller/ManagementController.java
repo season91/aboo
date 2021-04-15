@@ -179,17 +179,17 @@ public class ManagementController {
 		 managementService.updateAdminIsDel(manageridx);
 	}
 		
-	
+	// [관리업무- 4. 아파트관리자인 admin 계정 신청 관리]
 	// [선영] 어드민 신청 폼
-	@GetMapping("managerapplication")
-	public String managerContact(ManagerApplication managerApplication) {
-		return "/bdmin/managerApplication";
+	@GetMapping("adminapplication")
+	public String adminContact(ManagerApplication managerApplication) {
+		return "/bdmin/adminApplication";
 	}
 	
 	// [선영] 어드민 신청 아이디 체크
-	@GetMapping("managerapplicationidcheck")
+	@GetMapping("adminapplicationidcheck")
 	@ResponseBody
-	public String managerapplicationIdCheck(@RequestParam String id , Model model) {
+	public String adminApplicationIdCheck(@RequestParam String id , Model model) {
 
 		int res = managementService.selectManagerContactId(id);
 
@@ -200,8 +200,8 @@ public class ManagementController {
 	}
 	
 	// [선영] 어드민 신청 추가
-	@PostMapping("managerapplicationadd")
-	public String managerContactAdd(ManagerApplication managerApplication , Model model) {
+	@PostMapping("adminapplicationadd")
+	public String adminContactAdd(ManagerApplication managerApplication , Model model) {
 		
 		managementService.insertManagerContact(managerApplication);
 		
@@ -209,4 +209,20 @@ public class ManagementController {
 		model.addAttribute("url", "/admin/login");
 		return "common/result";
 	}
+	
+	// [아영] admin 계정 신청 목록
+	@GetMapping("/management/adminapllist")
+	public void adminApplicationList(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "basic") String standard, @RequestParam(defaultValue = "basic") String keyword, Model model) {
+	
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("searchType", standard);
+		searchMap.put("keyword", keyword);
+		model.addAllAttributes(managementService.selectAdminApplicationList(page, searchMap));
+	}
+	
+	@GetMapping("/management/adminapldetail")
+	public void adminApplicationDeatil(@RequestParam String managerApplicationIdx, Model model) {
+		model.addAttribute("adminApplication", managementService.selectAdminApplication(managerApplicationIdx));
+	}
+	
 }

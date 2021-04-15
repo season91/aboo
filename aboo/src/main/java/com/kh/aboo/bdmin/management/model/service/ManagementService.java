@@ -49,4 +49,11 @@ public interface ManagementService {
 	
 	// [선영] 어드민 신청 테이블 아이디 체크 
 	int selectManagerContactId(String  id);
+	
+	// [매니저 계정 신청]
+	// 1. 신청 목록 페이징
+	Map<String, Object> selectAdminApplicationList(int page, Map<String, Object> searchMap);
+	
+	// 2. 상세조회
+	ManagerApplication selectAdminApplication(String managerApplicationIdx);
 }

@@ -154,5 +154,30 @@ public class ManagementServiceImpl implements ManagementService{
 	public int selectManagerContactId(String id) {
 		return managementRepository.selectManagerContactId(id);
 	}
+
+	@Override
+	public Map<String, Object> selectAdminApplicationList(int page, Map<String, Object> searchMap) {
+		Paging paging = Paging.builder()
+				.currentPage(page)
+				.blockCnt(5)
+				.cntPerPage(10)
+				.type("adminapllist")
+				.total(managementRepository.selectAdminApplicationCnt(searchMap))
+				.build();
+		System.out.println(paging.toString());
+		System.out.println("검색조건 " + searchMap);
+		searchMap.put("paging", paging);
+
+		List<ManagerApplication> applicationList = managementRepository.selectAdminApplicationList(searchMap);
+		searchMap.put("applicationList", applicationList);
+		System.out.println("결과"+searchMap);
+		return searchMap;
+	}
+
+	@Override
+	public ManagerApplication selectAdminApplication(String managerApplicationIdx) {
+		// TODO Auto-generated method stub
+		return managementRepository.selectAdminApplication(managerApplicationIdx);
+	}
 	
 }

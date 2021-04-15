@@ -27,7 +27,7 @@
           <li >
             <a href="/bdmin/contactus">
               <i class="tim-icons icon-badge"></i>
-              <p>Managerment contact</p>
+              <p>Admin Application</p>
             </a>
           </li>
         </ul>
@@ -92,7 +92,7 @@
               </div>
                 	  
                 <div class="card-body">
-                  <form id="form_admin_join" action="/bdmin/managerapplicationadd" method="post">
+                  <form id="form_admin_join" action="/bdmin/adminapplicationadd" method="post">
                   <h4 class="title">신청서 작성</h4>
                   	<div class="" style="display: block; margin-left: 20px">
                   	
@@ -330,7 +330,7 @@
 	      let id = document.querySelector("#id").value;
 	      console.dir('id는 ??'+ id)
 	      if(id){
-	         fetch("/bdmin/managerapplicationidcheck?id=" + id,{
+	         fetch("/bdmin/adminapplicationidcheck?id=" + id,{
 	            method:"GET"
 	         })	
 	         .then(response => response.text())

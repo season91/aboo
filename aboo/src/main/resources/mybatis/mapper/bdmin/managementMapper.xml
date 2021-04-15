@@ -109,4 +109,43 @@
 			) where rnum between #{paging.queryStart} and #{paging.queryEnd}
 	</select>
 	
+	
+	<select id="selectAdminApplicationCnt" resultType="int">
+		select count(*) from tb_manager_application 
+		<where>
+			<choose>
+				<when test="searchType == 'basic'">
+					IS_APPROVAL = 0
+				</when>
+				<when test="searchType == 'apartmentName'">
+					apartment_name = #{keyword} and IS_APPROVAL = 0
+				</when>
+				<when test="searchType == 'name'">
+					name = #{keyword} and IS_APPROVAL = 0
+				</when>
+			</choose>
+		</where>
+	</select>
+	
+	<select id="selectAdminApplicationList" resultType="adminApplication">
+		select * from (
+			select rownum rnum, b.* from (
+				select * from tb_manager_application 
+				<where>
+					<choose>
+						<when test="searchType == 'basic'">
+							IS_APPROVAL = 0
+						</when>
+						<when test="searchType == 'apartmentName'">
+							apartment_name = #{keyword} and IS_APPROVAL = 0
+						</when>
+						<when test="searchType == 'name'">
+							name = #{keyword} and IS_APPROVAL = 0
+						</when>
+					</choose>
+				</where>
+				
+				order by APPROVAL_DATE desc ) b 
+			) where rnum between #{paging.queryStart} and #{paging.queryEnd}
+	</select>
 	</mapper>

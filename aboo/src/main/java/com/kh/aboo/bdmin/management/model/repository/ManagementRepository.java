@@ -93,4 +93,12 @@ public interface ManagementRepository {
 	//매니저 테이블에서 아이디가 있는지 체크해서 가져오는것
 	@Select("select count(*) from TB_MANAGER where id = #{id} and is_del = 0")
 	int selectManagerContactId(String  id);
+	
+	//[아영] 어드민 신청 list
+	int selectAdminApplicationCnt(Map<String, Object> searchMap);
+	
+	List<ManagerApplication> selectAdminApplicationList(Map<String, Object> searchMap);
+	
+	@Select("select * from tb_manager_application where is_approval = 0 and manager_application_idx = ${managerApplicationIdx}")
+	ManagerApplication selectAdminApplication(String managerApplicationIdx);
 }
