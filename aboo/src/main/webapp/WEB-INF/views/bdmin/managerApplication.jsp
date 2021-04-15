@@ -14,68 +14,20 @@
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
-      <div class="sidebar-wrapper">
+       <div class="sidebar-wrapper">
         <div class="logo">
           <a href="/admin/index" class="simple-text logo-mini">
             <img src="../../../resources/abooimg/logo_w.png">
           </a>
-          <a href="/admin/index" class="simple-text logo-normal">
-            ADMIN
+          <a href="/index" class="simple-text logo-normal">
+           ABOO
           </a>
         </div>
         <ul class="nav">
           <li >
-            <a href="/admin/mypage/modifyinfo">
+            <a href="/bdmin/contactus">
               <i class="tim-icons icon-badge"></i>
-              <p>Mypage</p>
-            </a>
-          </li>
-          <li>
-            <a href="/admin/vote/makevote">
-              <i class="tim-icons icon-tap-02"></i>
-              <p>Vote</p>
-            </a>
-          </li>
-          <li >
-            <a href="/admin/authority">
-              <i class="tim-icons icon-single-02"></i>
-              <p>Authority</p>
-            </a>
-          </li>
-          <li>
-            <a href="/admin/mgmtfee">
-              <i class="tim-icons icon-chart-bar-32"></i>
-              <p>Management Fee</p>
-            </a>
-          </li>
-          <li>
-            <a href="/admin/car">
-              <i class="tim-icons icon-bus-front-12"></i>
-              <p>Car</p>
-            </a>
-          </li>
-          <li >
-            <a href="/admin/schedule/addschedule">
-              <i class="tim-icons icon-calendar-60"></i>
-              <p>Schedule</p>
-            </a>
-          </li>
-          <li>
-            <a href="/admin/chat">
-              <i class="tim-icons icon-chat-33"></i>
-              <p>Chat</p>
-            </a>
-          </li>
-         <li>
-           <a href="/bdmin/notice/noticelist">
-              <i class="tim-icons icon-volume-98"></i>
-              <p>notice</p>
-            </a>
-          </li>
-          <li>
-            <a href="/bdmin/login">
-              <i class="tim-icons icon-key-25"></i>
-              <p>BDMIN</p>
+              <p>Managerment contact</p>
             </a>
           </li>
         </ul>
@@ -93,40 +45,33 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">LOGIN</a>
+            <a class="navbar-brand" href="#pablo">아파트를 부탁해</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
-            <div class="collapse navbar-collapse" id="navigation">
+         <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto ">
               <li class="dropdown nav-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div class="photo">
-                    <img src="../../resources/img/anime3.png">
+                    <img src="../../../../resources/img/anime3.png">
                   </div>
                   <b class="caret d-none d-lg-block d-xl-block"></b>
                   <p class="d-lg-none">
-                    Log out / Login
+                    Log out
                   </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link">
-                    <a href="/admin/mypage/modifyinfo" class="nav-item dropdown-item">Profile</a>
-                  </li>
-                  <li class="nav-link">
-                    <a href="/admin/chat" class="nav-item dropdown-item">1:1 chat</a>
-                  </li>
-                  <div class="dropdown-divider"></div>
-                  <li class="nav-link">
-                  <c:choose>
-                  	<c:when test="${sessionScope.admin == null}">
-                    	<a href="/admin/login" class="nav-item dropdown-item">Log in</a>
+                   <c:choose>
+                  	<c:when test="${sessionScope.bdmin == null}">
+                    	<a href="/bdmin/login" class="nav-item dropdown-item">Log in</a>
                   	</c:when>
-                  	<c:when test="${sessionScope.admin != null}">
-                    	<a href="/admin/logout" class="nav-item dropdown-item">Log out</a>
+                  	<c:when test="${sessionScope.bdmin != null}">
+                    	<a href="/bdmin/logout" class="nav-item dropdown-item">Log out</a>
                   	</c:when>
                   </c:choose>
                   </li>
@@ -137,50 +82,81 @@
           </div>
         </div>
       </nav>
-      <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="SEARCH">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <i class="tim-icons icon-simple-remove"></i>
-              </button>
-            </div>
-            <div class="modal-footer">
+      
+      <div class="content">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="title">어드민 계정 신청서</h3>
+              </div>
+                	  
+                <div class="card-body">
+                  <form id="form_admin_join" action="/bdmin/managerapplicationadd" method="post">
+                  <h4 class="title">신청서 작성</h4>
+                  	<div class="" style="display: block; margin-left: 20px">
+                  	
+	                    <div class="col-md-9 px-md-1">
+	                      <div class="form-group">
+	                        <label>신청 아이디 </label>
+	                        <div class = "d-flex">
+	                        	<input type="text" class="form-control col-md-8" id = "id" name="id" required="required">
+		                		<button type="button" class="btn btn-primary col-md-2" onclick="idCheck()" style="display: flex; justify-content: center;align-items: center; margin-left: 10px">아이디 검사</button>
+	                     	</div>
+	                     	<div id = "id_check" class = " mt-2"></div>
+	                      </div>
+	                    </div>
+	                    
+	                    
+	                    <div class="col-md-6 px-md-1">
+			              <div class="form-group">
+	                        <label>신청 비밀번호</label>			              
+			                <input type="text" class="form-control password"  id = "password_1"  placeholder="비밀번호"> 
+						    <div id ="passwordConfirm" class = "validator"></div> <!--프론트 패스워드 유효성-->
+			              </div>
+	                    </div>
+	                    
+
+	                    <div class="col-md-6 px-md-1">
+			              <div class="form-group">
+	                        <label>신청 비밀번호확인</label>			              
+			                <input type="text" class="form-control password" id = "password_2"  name = "password" placeholder="비밀번호 확인">
+						    <div id = "passwordConfirm2" class = "validator"></div> <!--비밀번호 일치-->
+			              </div>
+	                    </div>
+	                    
+	                    	                    
+		                  <div class="col-md-6 px-md-1">
+	                      <div class="form-group">
+	                        <label>신청자 이름</label>
+	                        <input type="text" class="form-control" name="name" required="required">
+	                      </div>
+	                    </div>
+	                    <div class="col-md-6 px-md-1">
+	                      <div class="form-group">
+	                        <label>신청자 생년월일</label>
+	                        <input type="Date" class="form-control" name="birth" required="required">
+	                      </div>
+	                    </div>
+                    </div>
+                	<div class="card-footer" style="display: flex; justify-content: space-around;">
+		                <button type="submit" class="btn btn-fill btn-primary">신청서 작성</button>
+                	</div>
+                </form>
+			</div>
             </div>
           </div>
-        </div>
       </div>
-      <!-- End Navbar -->
-		<div class="content d-flex align-items-center">
-		        <div class="container">
-		          <div class="row block-9 justify-content-center">
-		            <div class="col-md-6 pr-md-5 ">
-          			<h4 class = "text-center">로그인</h4>
-		                <div class="form-group">
-		                  <input type="text" id = "id" name = "id" class="form-control" placeholder="아이디를 입력해주세요.">
-		                </div>
-		                <div class="form-group">
-		                  <input type="text" id ="password" name = "password"class="form-control" placeholder="비밀번호를 입력해주세요.">
-		                </div>
-		                <div class="form-group">
-		                  <input type="submit" value="로그인" class="btn btn-primary py-3 px-5 col-sm-12" onclick="login()">
-		                </div>
-		              <div class="col-sm-12 d-flex justify-content-center">
-		                <div><a href="/admin/findid">아이디 찾기</a> | <a href="/admin/findpassword">비밀번호 찾기</a> | <a href="/bdmin/managerapplication">어드민 계정 신청</a></div>
-		              </div>
-		            </div>
-		          </div>
-		        </div>
-		      </div>
+      </div>
+
 
      <footer class="footer">
         <div class="container-fluid">
           <nav>
             <ul>
               <li>
-                <a href="/aboutus">
-                  About Us
+                <a href="/about">
+                  About
                 </a>
               </li>
               <li>
@@ -200,8 +176,12 @@
       </footer>
       </div>
     </div>
-
+    
+   
+     
+   
     <!--   Core JS Files   -->
+    <script src="../../../resources/js/admin/mgmtfee.js"></script>
     <script src="../../../resources/js/admin/core/jquery.min.js"></script>
     <script src="../../../resources/js/admin/core/popper.min.js"></script>
     <script src="../../../resources/js/admin/core/bootstrap.min.js"></script>
@@ -216,42 +196,6 @@
     <script src="../../../resources/js/admin/black-dashboard.min.js?v=1.0.0" type="text/javascript"></script>
     <!-- Black Dashboard DEMO methods, don't include it in your project! -->
     <script src="../../../resources/demo/demo.js"></script>
-	   
-	   <script type="text/javascript">
-	      let login = () => {
-	         const url = '/admin/loginimpl';
-	         let paramObj = new Object();
-	         paramObj.id = id.value;
-	         paramObj.password = password.value;
-	         
-	         let headerObj = new Headers();
-	         headerObj.append("content-type","application/json");
-	         fetch(url,{
-	            method:"post",
-	            headers:headerObj,
-	            //body:urlEncodeForm(paramObj)
-	            body:JSON.stringify(paramObj)
-	         }).then(response => {
-	            //response.ok : 상태코드 200~299사이라면 ok = true            
-	            if(response.ok){
-	               return response.text();   
-	            }
-	            //200번대 코드가 아니라면 에러를 발생시켜서 catch블록으로 이동
-	            throw new AsyncPageError(response.text());
-	         }).then((text) => {
-	            if(text == 'fail'){
-	          		alert("아이디와 비밀번호를 확인하세요")
-	            }else{
-	               <%-- 로그인에 성공하면 index페이지로 브라우저가 재요청 --%>
-	               location.href="/admin/index";
-	            }
-	         }).catch(error => {
-	            error.alertMessage();
-	         });
-	      }
-	   </script>
-    
-    
     <script>
       $(document).ready(function() {
         $().ready(function() {
@@ -362,6 +306,11 @@
           });
         });
       });
+      
+     $('.modal').on('hidden.bs.modal', function (e) {
+ 	    $(this).find('form')[0].reset()
+		});
+    
     </script>
     <script>
       $(document).ready(function() {
@@ -370,5 +319,94 @@
 
       });
     </script>
+    
+    
+    
+       <script type="text/javascript">
+	   let idCheckFlg = false;
+	   let idCheck = () => {
+	      //사용자가 입력한 아이디
+	      //요소의 아이디속성이 있을 경우 해당 엘리먼트를 가져다가 사용할 수 있다.
+	      let id = document.querySelector("#id").value;
+	      console.dir('id는 ??'+ id)
+	      if(id){
+	         fetch("/bdmin/managerapplicationidcheck?id=" + id,{
+	            method:"GET"
+	         })	
+	         .then(response => response.text())
+	         .then(text =>{
+	            if(text == 'success'){
+	               idCheckFlg = true;
+	               document.querySelector("#id_check").innerHTML = '사용 가능한 아이디 입니다.';
+	               document.querySelector("#id_check").style.color = 'skyblue';
+
+	            }else{
+	               idCheckFlg = false;
+	               document.querySelector("#id_check").innerHTML = '사용 불 가능한 아이디 입니다.';
+	               document.querySelector("#id_check").style.color = 'red';
+	               document.querySelector("#id").value="";
+	            }
+	         })
+	         
+	      }else{
+	         alert("아이디를 입력하지 않으셨습니다.");
+	      }
+	   };
+
+	   let flg = false;
+	    
+	    $('.password').focusout(function () {
+	        var pwd1 = $("#password_1").val();
+	        var pwd2 = $("#password_2").val();
+
+	        if (pwd1 != '' && pwd2 == '') {
+	            null;
+	        } else if (pwd1 != "" || pwd2 != "") {
+	            if (pwd1 == pwd2) {
+	                document.querySelector("#passwordConfirm2").style.color='blue'
+	                passwordConfirm2.innerHTML = '비밀번호가 일치합니다';
+	                flg = true;
+	            } else {
+	                document.querySelector("#passwordConfirm2").style.color='red'
+	                passwordConfirm2.innerHTML = '비밀번호가 일치 하지않습니다';
+					flg = false;
+	            }
+	        }
+	    });
+	    
+
+	     document.querySelector('#form_admin_join').addEventListener('submit',(e)=>{
+		   let password_1 = document.querySelector("#password_1").value;
+		   let password_2 = document.querySelector("#password_2").value;
+			
+	 	   let regExp = /^(?!.*[ㄱ-힣])(?=.*\W)(?=.*\d)(?=.*[a-zA-Z])(?=.{8,})/;
+	 	   
+	 	   if(!(regExp.test(password_1) || regExp.test(password_2))){
+	 		   //form의 데이터 전송을 막음
+	 		   e.preventDefault();
+	 		   passwordConfirm.innerHTML = '비밀번호는 숫자,영문자,특수문자 조합의 8글자 이상인 문자열입니다2.';
+	 		   passwordConfirm2.innerHTML='';
+	 		   password_1.value='';
+	 		   password_1.value='';
+
+	 	   }
+	 	   
+	 	   	if (!flg) {
+	           	document.querySelector("#passwordConfirm2").innerHTML = '비밀번호가 일치 하지않습니다'
+	           	e.preventDefault();
+
+			}
+	 	   	
+	 	   if(!idCheckFlg){
+			   e.preventDefault();
+			   alert("아이디 중복검사를 하지 않으셨습니다.");
+			   id.focus()
+		   }
+	 	   
+	    });  
+
+   
+   </script>
+
 </body>
 </html>

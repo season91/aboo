@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Update;
 
 import com.kh.aboo.bdmin.management.model.vo.ApartApplication;
 import com.kh.aboo.bdmin.management.model.vo.Bdmin;
+import com.kh.aboo.bdmin.management.model.vo.ManagerApplication;
 import com.kh.aboo.user.apartment.model.vo.Apartment;
 import com.kh.aboo.user.manager.model.vo.Admin;
 
@@ -84,5 +85,12 @@ public interface ManagementRepository {
 	@Update("update tb_manager set is_del = 1 where manager_idx = #{managerIdx} and is_del = 0")
 	int updateAdminIsDel(String managerIdx);
 	
+	//[선영] 어드민 신청 폼 insert 
+	@Insert("insert into TB_MANAGER_APPLICATION(MANAGER_APPLICATION_IDX, ID, PASSWORD, NAME ,BIRTH) values(SC_MANAGER_APPLICATION.nextval, #{id}, #{password} , #{name}, #{birth})")
+	int insertManagerContact(ManagerApplication managerApplication);
 	
+	//[선영] 어드민 신청 폼 아이디 체크
+	//매니저 테이블에서 아이디가 있는지 체크해서 가져오는것
+	@Select("select count(*) from TB_MANAGER where id = #{id} and is_del = 0")
+	int selectManagerContactId(String  id);
 }

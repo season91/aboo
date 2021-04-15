@@ -230,7 +230,7 @@
 
 
     <script>
-     let flg = false;
+    let flg = false;
     
     $('.password').focusout(function () {
         var pwd1 = $("#password_1").val();

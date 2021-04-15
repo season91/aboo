@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.aboo.bdmin.management.model.service.ManagementService;
 import com.kh.aboo.bdmin.management.model.vo.ApartApplication;
 import com.kh.aboo.bdmin.management.model.vo.Bdmin;
+import com.kh.aboo.bdmin.management.model.vo.ManagerApplication;
 import com.kh.aboo.user.apartment.model.vo.Apartment;
 import com.kh.aboo.user.manager.model.vo.Admin;
 
@@ -178,4 +179,34 @@ public class ManagementController {
 		 managementService.updateAdminIsDel(manageridx);
 	}
 		
+	
+	// [선영] 어드민 신청 폼
+	@GetMapping("managerapplication")
+	public String managerContact(ManagerApplication managerApplication) {
+		return "/bdmin/managerApplication";
+	}
+	
+	// [선영] 어드민 신청 아이디 체크
+	@GetMapping("managerapplicationidcheck")
+	@ResponseBody
+	public String managerapplicationIdCheck(@RequestParam String id , Model model) {
+
+		int res = managementService.selectManagerContactId(id);
+
+		if (res > 0) {
+			return "fail";
+		}
+		return "success";
+	}
+	
+	// [선영] 어드민 신청 추가
+	@PostMapping("managerapplicationadd")
+	public String managerContactAdd(ManagerApplication managerApplication , Model model) {
+		
+		managementService.insertManagerContact(managerApplication);
+		
+		model.addAttribute("alertMsg", "등록신청이 완료되었습니다. 처리까지는 1~3일 소요되며, 승인시 담당자가 연락할 예정입니다.");
+		model.addAttribute("url", "/admin/login");
+		return "common/result";
+	}
 }

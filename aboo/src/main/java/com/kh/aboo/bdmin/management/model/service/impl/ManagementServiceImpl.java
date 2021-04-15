@@ -11,6 +11,7 @@ import com.kh.aboo.bdmin.management.model.repository.ManagementRepository;
 import com.kh.aboo.bdmin.management.model.service.ManagementService;
 import com.kh.aboo.bdmin.management.model.vo.ApartApplication;
 import com.kh.aboo.bdmin.management.model.vo.Bdmin;
+import com.kh.aboo.bdmin.management.model.vo.ManagerApplication;
 import com.kh.aboo.common.code.ErrorCode;
 import com.kh.aboo.common.exception.ToAlertException;
 import com.kh.aboo.common.util.paging.Paging;
@@ -144,6 +145,14 @@ public class ManagementServiceImpl implements ManagementService{
 		return managementRepository.updateAdminIsDel(managerIdx);
 	}
 
-
+	@Override
+	public int insertManagerContact(ManagerApplication managerApplication) {
+		return managementRepository.insertManagerContact(managerApplication);
+	}
+	
+	@Override
+	public int selectManagerContactId(String id) {
+		return managementRepository.selectManagerContactId(id);
+	}
 	
 }

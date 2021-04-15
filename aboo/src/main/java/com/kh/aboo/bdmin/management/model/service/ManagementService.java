@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.kh.aboo.bdmin.management.model.vo.ApartApplication;
 import com.kh.aboo.bdmin.management.model.vo.Bdmin;
+import com.kh.aboo.bdmin.management.model.vo.ManagerApplication;
 import com.kh.aboo.user.apartment.model.vo.Apartment;
 import com.kh.aboo.user.manager.model.vo.Admin;
 
@@ -43,4 +44,9 @@ public interface ManagementService {
 	// 매니저 권한회수
 	int updateAdminIsDel(String managerIdx);
 
+	// [선영] 어드민 신청 폼 테이블에 insert
+	int insertManagerContact(ManagerApplication managerApplication);
+	
+	// [선영] 어드민 신청 테이블 아이디 체크 
+	int selectManagerContactId(String  id);
 }
