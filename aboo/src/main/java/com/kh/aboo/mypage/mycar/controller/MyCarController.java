@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.kh.aboo.admin.car.model.vo.Car;
-import com.kh.aboo.common.code.Configcode;
+import com.kh.aboo.common.code.ConfigCode;
 import com.kh.aboo.mypage.mycar.model.service.MyCarService;
 import com.kh.aboo.user.generation.model.vo.Generation;
 
@@ -41,9 +41,9 @@ public class MyCarController {
 	@GetMapping("/mypage/mycarqrdownload")
 	public ResponseEntity<FileSystemResource> myQRDownload(String path) {
 		// 파일명만 나오게 잘라준다. path : QR경로이다.
-		String fileName = path.replace(Configcode.QRCODE_PATH.desc, "");
+		String fileName = path.replace(ConfigCode.QRCODE_PATH.desc, "");
 		// 실제 저장된 곳으로 지정한다.
-		String originPath = Configcode.QRCODE_PATH.desc;
+		String originPath = ConfigCode.QRCODE_PATH.desc;
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentDisposition(ContentDisposition.builder("attachment").filename(fileName, Charset.forName("UTF-8"))

@@ -123,10 +123,13 @@ public class AuthInterceptor implements HandlerInterceptor {
 				}
 				break;
 			case "myapt":
-				if (session.getAttribute("generation") == null && session.getAttribute("admin") == null) {
-					throw new ToAlertException(ErrorCode.AUTH06);
-				}	
-				break;
+				switch (uriArr[2]) {
+				case "schedule" :
+					if (session.getAttribute("generation") == null && session.getAttribute("admin") == null) {
+						throw new ToAlertException(ErrorCode.AUTH06);
+					}
+					break;
+				}break;
 			}
 		}
 		return true;
