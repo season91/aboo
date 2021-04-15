@@ -277,6 +277,8 @@
 	             }else{ 
 	                 alert('메일이 발송되었습니다.');
 	                 document.querySelector("#certifiedBox").style.display = ''
+	                 document.getElementById("certifiedNum").focus();          
+
 	             }
 	          }).catch(error => {
 	             error.alertMessage();
