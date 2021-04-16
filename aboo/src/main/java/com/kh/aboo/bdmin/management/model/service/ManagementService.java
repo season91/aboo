@@ -39,7 +39,7 @@ public interface ManagementService {
 	// 기본페이징
 	Map<String, Object> selectAdminList(int page, Map<String, Object> searchMap);
 	
-	int insertAdmin(Admin admin);
+	int insertAdmin(Admin admin, String apartmentInfo);
 
 	// 매니저 권한회수
 	int updateAdminIsDel(String managerIdx);
@@ -55,5 +55,8 @@ public interface ManagementService {
 	Map<String, Object> selectAdminApplicationList(int page, Map<String, Object> searchMap);
 	
 	// 2. 상세조회
-	ManagerApplication selectAdminApplication(String managerApplicationIdx);
+	Map<String, Object> selectAdminApplication(String managerApplicationIdx);
+	
+	// 3. 어드민 계정 신청서 업데이트 및 어드민 계정 생성
+	String updateAdminApplication(ManagerApplication application, String apartmentInfo);
 }

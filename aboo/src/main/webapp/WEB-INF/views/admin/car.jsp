@@ -243,7 +243,7 @@
                     	<c:otherwise>
                     		<script>
 		               		alert('조회결과가 없습니다.');
-		               		location.href='/admin/car';
+		               		location.href='/admin/index';
 		               		</script>
                     	</c:otherwise>
                     </c:choose>

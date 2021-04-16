@@ -153,15 +153,35 @@
               </div>
                 	  
                 <div class="card-body">
-                  <form id="form_admin_join" action="/bdmin/adminapplicationadd" method="post">
+                  <form id="form_admin_join" action="${context }/bdmin/management/adminapproval" method="post">
                   <h4 class="title">신청서 작성</h4>
                   	<div class="" style="display: block; margin-left: 20px">
+                  		
+                  	   <div class="col-md-6 px-md-1">
+                  		<div class="form-group">
+				            <label for="recipient-name" class="control-label">아파트 관리 번호</label>
+				            <input class="form-control" list="datalistOptions" name="apartmentInfo" required="required"  placeholder="아파트명을 검색하세요.">
+				            <datalist id="datalistOptions">
+							<c:forEach items="${adminApplication.apartmentList}" var="apartment">
+								<option value="${apartment.apartmentName }/${apartment.apartmentIdx}">
+							</c:forEach>
+							</datalist>
+				          </div>
+				         </div>
+				          
+                  		<div class="col-md-6 px-md-1">
+			              <div class="form-group">
+	                        <label>신청 아파트명</label>	              
+			                <input type="hidden" class="form-control"  id ="managerApplicationIdx" name ="managerApplicationIdx" value="${adminApplication.application.managerApplicationIdx }"> 
+			                <input type="text" class="form-control"  id ="apartmentName" name ="apartmentName" readonly="readonly"  value='${adminApplication.application.apartmentName }'> 
+			              </div>
+	                    </div>     
                   	
 	                    <div class="col-md-9 px-md-1">
 	                      <div class="form-group">
 	                        <label>신청 아이디 </label>
 	                        <div class = "d-flex">
-	                        	<input type="text" class="form-control col-md-8" id = "id" name="id" required="required" value="${adminApplication.id }">
+	                        	<input type="text" class="form-control col-md-8" id = "id" name="id" required="required" value="${adminApplication.application.id }">
 		                		<button type="button" class="btn btn-primary col-md-2" onclick="idCheck()" style="display: flex; justify-content: center;align-items: center; margin-left: 10px">아이디 검사</button>
 	                     	</div>
 	                     	<div id = "id_check" class = " mt-2"></div>
@@ -172,26 +192,35 @@
 	                    <div class="col-md-6 px-md-1">
 			              <div class="form-group">
 	                        <label>신청 비밀번호</label>			              
-			                <input type="password" class="form-control password"  id = "password_1" readonly="readonly"  placeholder="비밀번호" value="${adminApplication.password }"> 
+			                <input type="password" class="form-control password"  name="password" readonly="readonly"  placeholder="비밀번호" value="${adminApplication.application.password }"> 
 			              </div>
 	                    </div>
 	                    	                    
 		                  <div class="col-md-6 px-md-1">
 	                      <div class="form-group">
 	                        <label>신청자 이름</label>
-	                        <input type="text" class="form-control" name="name" required="required" readonly="readonly" value="${adminApplication.name }">
+	                        <input type="text" class="form-control" name="name" required="required" readonly="readonly" value="${adminApplication.application.name }">
 	                      </div>
 	                    </div>
+	                    
+	                    <div class="col-md-6 px-md-1">
+	                      <div class="form-group">
+	                        <label>신청자 이메일</label>
+	                        <input type="email" class="form-control" name="email" required="required" readonly="readonly" value="${adminApplication.application.email }">
+	                      </div>
+	                    </div>   
+	                    
 	                    <div class="col-md-6 px-md-1">
 	                      <div class="form-group">
 	                        <label>신청자 생년월일</label>
-	                        <input type="Date" class="form-control" name="birth" required="required" readonly="readonly" value="${adminApplication.birth }">
+	                        <input type="Date" class="form-control" name="birth" required="required" readonly="readonly" value="${adminApplication.application.birth }">
 	                      </div>
 	                    </div>
                     </div>
                 	<div class="card-footer" style="display: flex; justify-content: space-around;">
+                		<input type="hidden" name="isApproval" value="1">
 		                <button type="submit" class="btn btn-fill btn-success">승인하기</button>
-		                <button type="button" class="btn btn-fill btn-primary">반려하기</button>
+		                <button type="button" class="btn btn-fill btn-primary" onclick="location.href='${context}/bdmin/management/adminapproval?managerApplicationIdx=${adminApplication.application.managerApplicationIdx }&isApproval=2'">반려하기</button>
                 	</div>
                 </form>
 			</div>

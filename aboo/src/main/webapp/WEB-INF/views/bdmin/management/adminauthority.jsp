@@ -353,7 +353,7 @@
            </div>
            <div class="modal-body">
 	        <form action="${context }/bdmin/management/adminadd" method="post">
-	        	<div class="form-group">
+	          <div class="form-group">
 	            <label for="recipient-name" class="control-label">아파트 관리 번호</label>
 	            <input class="form-control" list="datalistOptions" name="apartmentInfo" placeholder="아파트명을 검색하세요.">
 	            <datalist id="datalistOptions">

@@ -101,4 +101,12 @@ public interface ManagementRepository {
 	
 	@Select("select * from tb_manager_application where is_approval = 0 and manager_application_idx = ${managerApplicationIdx}")
 	ManagerApplication selectAdminApplication(String managerApplicationIdx);
+	
+	//[아영] 어드민 계정 신청 승인
+	@Update("update tb_manager_application set is_approval = ${isApproval} where manager_application_idx = ${managerApplicationIdx} and is_approval = 0")
+	int updateAdminApplication(ManagerApplication application);
+	
+	//[아영] 신청서로 인한 어드민 계정 생성.
+	@Insert("insert into tb_manager(manager_idx, apartment_idx, id, password, name, email, birth) values(sc_manager_idx.nextval, #{apartmentIdx}, #{id}, #{password}, #{name}, #{email}, #{birth})")
+	int insertAdminByApplication(Admin admin);
 }

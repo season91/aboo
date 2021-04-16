@@ -107,7 +107,7 @@
                 <li><a href="/board/interior/intlist" class="py-2 d-block">Interior Board</a></li>
                 <li><a href="/board/used/usedlist" class="py-2 d-block">Used Board</a></li>
                 <li><a href="/myapt/schedule" class="py-2 d-block">Apt Schedule</a></li>
-                <li><a href="/myapt/institutions" class="py-2 d-block">Institutions</a></li>
+                <li><a href="/myapt/institutions/institutions" class="py-2 d-block">Institutions</a></li>
               </ul>
             </div>
           </div>
@@ -166,7 +166,7 @@
 			$('#message').val('')
 		});
 	
-		let sock = new SockJS("http://localhost:9393/echo/");
+		let sock = new SockJS("http://192.168.35.122:9393/echo/");
 		sock.onmessage = onMessage;
 		sock.onclose = onClose;
 		

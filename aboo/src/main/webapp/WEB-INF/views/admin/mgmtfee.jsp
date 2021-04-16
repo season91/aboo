@@ -243,12 +243,7 @@
                       </tr>
                    </c:forEach>
                	</c:when>
-               	<c:otherwise>
-               		<script>
-               		alert('조회결과가 없습니다.');
-               		location.href='/admin/mgmtfee';
-               		</script>
-               	</c:otherwise>
+              
                </c:choose>
             	
               		

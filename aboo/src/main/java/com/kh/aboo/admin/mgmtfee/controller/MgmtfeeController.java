@@ -67,7 +67,6 @@ public class MgmtfeeController {
 			System.out.println("실패유");
 			return "fail";
 		}
-		System.out.println("컨트롤러리스트"+mgmtfeeList);
 		// 성공시 알람넣어주기.
 		for (int i = 0; i < mgmtfeeList.size(); i++) {
 			System.out.println("알람보낼세대관리번호"+mgmtfeeList.get(i));
@@ -90,7 +89,7 @@ public class MgmtfeeController {
 
 		FileUtil fileUtil = new FileUtil();
 		// mgmtfeeFormExcel 엑셀 양식 호출.
-		System.out.println("양식만들기시작");
+		System.out.println("양식만들기시작" + apartmentIdx);
 		File file = fileUtil.mfmtgeeFormExcel(generationList);
 		
 		// 내보내기

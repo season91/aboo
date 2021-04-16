@@ -151,7 +151,7 @@
 	                    <div class="col-md-6 px-md-1">
 	                      <div class="form-group">
 	                        <label>신청자 이메일</label>
-	                        <input type="tel" class="form-control" name="email" required="required" placeholder="010-0000-0000">
+	                        <input type="email" class="form-control" name="email" required="required">
 	                      </div>
 	                    </div>      	                    
 	                    

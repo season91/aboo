@@ -185,6 +185,7 @@
                    <th>신청번호</th>
                    <th>신청자이름</th>
                    <th>신청아이디</th>
+                   <th>신청이메일</th>
                    <th>상세보기</th>
                  </thead>
                  <tbody>
@@ -194,6 +195,7 @@
                        <td> ${manager.managerApplicationIdx}</td>
                        <td> ${manager.name }</td>
                        <td> ${manager.id} </td>
+                       <td> ${manager.email} </td>
                        <td><a href="/bdmin/management/adminapldetail?managerApplicationIdx=${manager.managerApplicationIdx }"><i class="tim-icons icon-credit-card"></i></a></td>
                       </tr>
                    </c:forEach>
