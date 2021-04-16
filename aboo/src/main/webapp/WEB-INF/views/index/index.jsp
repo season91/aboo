@@ -37,14 +37,24 @@
        </div>
      </nav>
     <!-- END nav -->
-    
+
+	<div id="msg" class= "btn1Wrap">
+		<button class = "btn1" onclick="chatPage()">Chat</button>	  
+	</div>
+
+	<script type="text/javascript">
+	function chatPage() {
+		location.href ='/myapt/chat';
+	}
+	</script>
+
   <section class="home-slider owl-carousel">
       <div class="slider-item" style="">
         <div class="overlay"></div>
         <div class="container-fluid">
           <div class="row slider-text align-items-center" data-scrollax-parent="true">
 
-            <div class="col-md-5 wrap col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+            <div style="padding-left: 5%" class="col-md-5 wrap col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
               <h1 class="mb-4 mt-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
                 <img src="../../../resources/abooimg/logo_w.png" class="img-fluid" alt="Colorlib Template">
               <p class="mb-4 mb-md-5 sub-p text-center" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">aboo makes a better apartment!</p>

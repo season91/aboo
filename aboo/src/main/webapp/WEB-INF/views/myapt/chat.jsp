@@ -64,14 +64,14 @@
               
               <div class="card" >
 		        <div id="menuone" class="collapse show" >
-		          <div class="card-body" id="messageArea" style="overflow: auto; height: 15vh;">
+		          <div class="card-body" id="messageArea" style="overflow: auto; height: 50vh;">
 		          </div>
 		        </div>
 		      </div>
               
               
               
-              <div>
+              <div class = "mt-3 mb-3">
                 <input type="text" class="form-control" id="message" placeholder="문의내용을 입력하세요.">
               </div>
               <div class="form-group">
