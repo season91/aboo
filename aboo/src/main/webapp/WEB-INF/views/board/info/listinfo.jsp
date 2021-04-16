@@ -189,7 +189,7 @@
                 <li><a href="/board/interior/intlist" class="py-2 d-block">Interior Board</a></li>
                 <li><a href="/board/used/usedlist" class="py-2 d-block">Used Board</a></li>
                 <li><a href="/myapt/schedule" class="py-2 d-block">Apt Schedule</a></li>
-                <li><a href="/myapt/institutions" class="py-2 d-block">Institutions</a></li>
+                <li><a href="/myapt/institutions/institutions" class="py-2 d-block">Institutions</a></li>
               </ul>
             </div>
           </div>
