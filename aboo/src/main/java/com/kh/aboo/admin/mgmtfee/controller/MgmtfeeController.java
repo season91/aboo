@@ -60,16 +60,13 @@ public class MgmtfeeController {
 		
 		String apartmentIdx = admin.getApartmentIdx();
 		List<Mgmtfee> mgmtfeeList = mgmtfeeService.insertMgmtfee(commandMap, apartmentIdx);
-		System.out.println(mgmtfeeList.size());
 		
-		// 성공 실패 분기나누기
 		if(mgmtfeeList == null || mgmtfeeList.size() == 0 || mgmtfeeList.get(0).getPeriodPayment().equals("")) {
-			System.out.println("실패유");
 			return "fail";
 		}
+		
 		// 성공시 알람넣어주기.
 		for (int i = 0; i < mgmtfeeList.size(); i++) {
-			System.out.println("알람보낼세대관리번호"+mgmtfeeList.get(i));
 			myAlarmService.insertPvAlarm(AlarmCode.ADD_MGMTFEE.name(), mgmtfeeList.get(i).getGenerationIdx());
 		}
 		
@@ -89,7 +86,6 @@ public class MgmtfeeController {
 
 		FileUtil fileUtil = new FileUtil();
 		// mgmtfeeFormExcel 엑셀 양식 호출.
-		System.out.println("양식만들기시작" + apartmentIdx);
 		File file = fileUtil.mfmtgeeFormExcel(generationList);
 		
 		// 내보내기
