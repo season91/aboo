@@ -86,7 +86,7 @@ public interface ManagementRepository {
 	int updateAdminIsDel(String managerIdx);
 	
 	//[선영] 어드민 신청 폼 insert 
-	@Insert("insert into TB_MANAGER_APPLICATION(MANAGER_APPLICATION_IDX, ID, PASSWORD, NAME ,BIRTH) values(SC_MANAGER_APPLICATION.nextval, #{id}, #{password} , #{name}, #{birth})")
+	@Insert("insert into TB_MANAGER_APPLICATION(MANAGER_APPLICATION_IDX, APARTMENT_NAME, APARTMENT_ADDRESS, ID, PASSWORD, NAME, EMAIL ,BIRTH) values(SC_MANAGER_APPLICATION.nextval,#{apartmentName},#{apartmentAddress}, #{id}, #{password} , #{name}, #{email} ,#{birth})")
 	int insertManagerContact(ManagerApplication managerApplication);
 	
 	//[선영] 어드민 신청 폼 아이디 체크

@@ -5,6 +5,8 @@ import java.sql.Date;
 public class ManagerApplication {
 
 	private String managerApplicationIdx;
+	private String apartmentName;
+	private String apartmentAddress;
 	private String id;
 	private String password;
 	private Date approvalDate;
@@ -17,10 +19,12 @@ public class ManagerApplication {
 	public ManagerApplication() {
 	}
 
-	public ManagerApplication(String managerApplicationIdx, String id, String password, Date approvalDate, String name,
-			String email, String tell, Date birth, String isApproval) {
+	public ManagerApplication(String managerApplicationIdx, String apartmentName, String apartmentAddress, String id,
+			String password, Date approvalDate, String name, String email, String tell, Date birth, String isApproval) {
 		super();
 		this.managerApplicationIdx = managerApplicationIdx;
+		this.apartmentName = apartmentName;
+		this.apartmentAddress = apartmentAddress;
 		this.id = id;
 		this.password = password;
 		this.approvalDate = approvalDate;
@@ -37,6 +41,22 @@ public class ManagerApplication {
 
 	public void setManagerApplicationIdx(String managerApplicationIdx) {
 		this.managerApplicationIdx = managerApplicationIdx;
+	}
+
+	public String getApartmentName() {
+		return apartmentName;
+	}
+
+	public void setApartmentName(String apartmentName) {
+		this.apartmentName = apartmentName;
+	}
+
+	public String getApartmentAddress() {
+		return apartmentAddress;
+	}
+
+	public void setApartmentAddress(String apartmentAddress) {
+		this.apartmentAddress = apartmentAddress;
 	}
 
 	public String getId() {
@@ -105,9 +125,10 @@ public class ManagerApplication {
 
 	@Override
 	public String toString() {
-		return "ManagerApplication [managerApplicationIdx=" + managerApplicationIdx + ", id=" + id + ", password="
-				+ password + ", approvalDate=" + approvalDate + ", name=" + name + ", email=" + email + ", tell=" + tell
-				+ ", birth=" + birth + ", isApproval=" + isApproval + "]";
+		return "ManagerApplication [managerApplicationIdx=" + managerApplicationIdx + ", apartmentName=" + apartmentName
+				+ ", apartmentAddress=" + apartmentAddress + ", id=" + id + ", password=" + password + ", approvalDate="
+				+ approvalDate + ", name=" + name + ", email=" + email + ", tell=" + tell + ", birth=" + birth
+				+ ", isApproval=" + isApproval + "]";
 	}
 
 }
