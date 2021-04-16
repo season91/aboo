@@ -86,7 +86,7 @@
   position: absolute;
   top: 20%;
   left: -10%;
-  transform: scale(0.1) translateY(-20vh) translateX(55vw);
+  transform: scale(0.1) translateY(-10vh) translateX(10vw);
   will-change: transform;
 
   animation-name: fly-right-three;
@@ -101,8 +101,7 @@
 
 .cloud-container--ay {
 	/* 배경 */
-	background: url(../../../resources/abooimg/구름_왼.png) no-repeat center
-    center;
+  background: url(../../../resources/abooimg/구름_왼.png) no-repeat center center;
   background-size: contain;
   width: 350px;
   height: 250px;
@@ -118,7 +117,7 @@
   position: absolute;
   top: 20%;
   left: -10%;
-  transform: translateY(-10vh) translateX(-3vw) scale(0.5);
+  transform: translateY(-15vh) translateX(0vw) scale(0.5);
   will-change: transform;
 
   animation-name: fly-right-ay;
@@ -204,30 +203,31 @@
       transform: scale(0.8) translateX(50vw) translateY(-10vh); 
   }
 }
+
 @keyframes fly-right-three {
   0% {
-   transform: scale(0.3) translateY(-135vh) translateX(120vw);
+   transform: scale(0.3) translateY(-60vh) translateX(100vw);
   }
 
 
   20% {
-    transform: scale(0.3) translateY(-135vh) translateX(110vw);
+    transform: scale(0.3)  translateY(-60vh) translateX(110vw);
   }
   
   40% {
-    transform: scale(0.3) translateY(-135vh) translateX(120vw);
+    transform: scale(0.3)  translateY(-60vh) translateX(100vw);
   }
 
   60% {
-    transform: scale(0.3) translateY(-135vh) translateX(110vw);
+    transform: scale(0.3) translateY(-60vh) translateX(110vw);
   }
 
   80% {
-     transform: scale(0.3) translateY(-135vh) translateX(120vw);
+     transform: scale(0.3) translateY(-60vh) translateX(100vw);
   }
 
   100% {
-   transform: scale(0.3) translateY(-135vh) translateX(110vw);
+   transform: scale(0.3) translateY(-60vh) translateX(110vw);
   }
 
   
@@ -235,46 +235,46 @@
 
 @keyframes fly-right-ay {
   0% {
-    transform: translateY(-10vh) translateX(-3vw) scale(0.5);
+    transform: translateY(-15vh) translateX(0vw) scale(0.5);
   }
 
   10% {
-    transform: translateY(-10vh) translateX(-1vw) scale(0.6);
+    transform: translateY(-15vh) translateX(3vw) scale(0.6);
   }
 
   20% {
-    transform: translateY(-10vh) translateX(-3vw) scale(0.5);
+    transform: translateY(-15vh) translateX(0vw) scale(0.5);
   }
 
   30% {
-    transform: translateY(-10vh) translateX(-1vw) scale(0.6);
+    transform: translateY(-15vh) translateX(3vw) scale(0.6);
   }
 
   40% {
-    transform: translateY(-10vh) translateX(-3vw) scale(0.5);
+    transform: translateY(-15vh) translateX(3vw) scale(0.5);
   }
 
   50% {
-    transform: translateY(-10vh) translateX(-1vw) scale(0.6);
+    transform: translateY(-15vh) translateX(1vw) scale(0.6);
   }
 
   60% {
-    transform: translateY(-10vh) translateX(-3vw) scale(0.5);
+    transform: translateY(-15vh) translateX(3vw) scale(0.5);
   }
 
   70% {
-    transform: translateY(-10vh) translateX(-3vw) scale(0.6);
+    transform: translateY(-15vh) translateX(1vw) scale(0.6);
   }
 
   80% {
-    transform: translateY(-10vh) translateX(-1vw) scale(0.5);
+    transform: translateY(-15vh) translateX(3vw) scale(0.5);
   }
 
   90% {
-    transform: translateY(-10vh) translateX(-3vw) scale(0.6);
+    transform: translateY(-15vh) translateX(1vw) scale(0.6);
   }
 
   100% {
-    transform: translateY(-10vh) translateX(-1vw) scale(0.5);
+    transform: translateY(-15vh) translateX(3vw) scale(0.5);
   }
 }
