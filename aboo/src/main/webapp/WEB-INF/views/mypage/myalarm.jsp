@@ -117,7 +117,7 @@
                 <li><a href="/board/interior/intlist" class="py-2 d-block">Interior Board</a></li>
                 <li><a href="/board/used/usedlist" class="py-2 d-block">Used Board</a></li>
                 <li><a href="/myapt/schedule" class="py-2 d-block">Apt Schedule</a></li>
-                <li><a href="/myapt/institutions" class="py-2 d-block">Institutions</a></li>
+                <li><a href="/myapt/institutions/institutions" class="py-2 d-block">Institutions</a></li>
               </ul>
             </div>
           </div>
@@ -151,6 +151,10 @@
         </div>
         <div class="row">
           <div class="col-md-12 text-center">
+         
+        <div id="chat">
+        	어쩌구
+        </div>
 
             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
   Copyright &copy;<script>document.write(new Date().getFullYear());</script> <i class="icon-heart" aria-hidden="true"></i> by aboo for a better apartment.
