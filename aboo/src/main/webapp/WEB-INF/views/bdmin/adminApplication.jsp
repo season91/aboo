@@ -106,7 +106,7 @@
 	                    <div class="col-md-6 px-md-1">
 			             <div class="form-group">
 	                        <label for="exampleInputEmail1">신청 아파트주소</label>
-	                        <input type="tel" class="form-control"  id="apartmentAddress" name="apartmentAddress" onclick="searchAdress()" required="required">
+	                        <input type="text" class="form-control"  id="address" name="apartmentAddress" onclick="searchAdress()" required="required">
 	                      </div>
 	                    </div>           	
                   	
