@@ -10,6 +10,7 @@ import com.kh.aboo.admin.schedule.model.repository.ScheduleRepository;
 import com.kh.aboo.admin.schedule.model.service.ScheduleService;
 import com.kh.aboo.admin.schedule.model.vo.Schedule;
 import com.kh.aboo.common.util.paging.Paging;
+import com.kh.aboo.user.generation.model.vo.Generation;
 
 @Service
 public class ScheduleServiceImpl implements ScheduleService{
@@ -28,23 +29,29 @@ public class ScheduleServiceImpl implements ScheduleService{
 		return scheduleRepository.insertSchedule(schedule);
 	}
 
-	@Override
-	public Map<String, Object> selectScheduleList(int currentPage, String apartmentIdx) {
 
+	@Override
+	public Map<String, Object> selectScheduleList(int currentPage,String apartmentIdx, String standard, String keyword) {
+
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		
+		searchMap.put("apartmentIdx", apartmentIdx);
+		searchMap.put("searchType", standard);
+		searchMap.put("keyword", keyword);
+		
 		Paging paging = Paging.builder()
 				.currentPage(currentPage)
 				.blockCnt(5)
 				.cntPerPage(10)
 				.type("schedule")
-				.total(scheduleRepository.selectScheduleCnt(apartmentIdx))
+				.total(scheduleRepository.selectScheduleCnt(searchMap))
 				.build();
 		System.out.println(paging.toString());
-	
-		Map<String,Object> commandMap = new HashMap<String, Object>();
-		commandMap.put("paging", paging);
-		commandMap.put("schedule", scheduleRepository.selectScheduleList(paging.getQueryStart(), paging.getQueryEnd(),apartmentIdx));
+
+		searchMap.put("paging", paging);
+		searchMap.put("schedule", scheduleRepository.selectScheduleList(searchMap));
 					
-		return commandMap;
+		return searchMap;
 	}
 
 	@Override

@@ -68,8 +68,8 @@
 
 
 .rcloud-container--two {
-	
-	/* 배경  */
+   
+   /* 배경  */
   background-image: url(../../../resources/abooimg/구름_오.png);
   background-size: contain;
   width: 500px;
@@ -81,8 +81,8 @@
   animation-iteration-count: infinite;
 
   animation-delay: 1s;
-	
-	/* 효과 */
+   
+   /* 효과 */
   position: absolute;
   top: 20%;
   left: -10%;
@@ -98,7 +98,6 @@
 
 
 }
-
 .cloud-container--ay {
 	/* 배경 */
   background: url(../../../resources/abooimg/구름_왼.png) no-repeat center center;

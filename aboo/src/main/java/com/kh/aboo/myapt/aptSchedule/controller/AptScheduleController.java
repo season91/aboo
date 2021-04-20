@@ -44,7 +44,10 @@ public class AptScheduleController {
 			
 		}else {
 			String apartmentIdx = generation.getApartmentIdx();
-			model.addAllAttributes(scheduleService.selectScheduleList(page, apartmentIdx));
+			List<Schedule> scheduleList = new ArrayList<>();
+			scheduleList = scheduleService.selectScheduleListForCalendar(apartmentIdx);
+
+			model.addAttribute("schedule",scheduleList);
 			model.addAttribute("aptName",scheduleService.selectAptNameByIdx(apartmentIdx));
 			System.out.println(scheduleService.selectAptNameByIdx(apartmentIdx));
 		}
