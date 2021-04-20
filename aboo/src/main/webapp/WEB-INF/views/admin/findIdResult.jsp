@@ -154,12 +154,19 @@
       <!-- End Navbar -->
       <div class="content d-flex flex-column justify-content-center">
     	<div style="height: 10vh"></div>
-		<div style="height: 40vh;background-color: #1e1e2d; display: flex; flex-direction: column; justify-content: center;">
-		<h4 class="text-center" style="">회원님의 아이디는</h4>
+
+		<div style="height: 40vh; width:70%;  margin:auto; background-color: #1e1e2d; display: flex; flex-direction: column; justify-content: center;">
 		<div class="container">
+		    <div class= "mb-4">
+				<h3 class="text-center" style="">아이디 찾기가 완료 되었습니다.</h3>
+				<h5 class="text-center">다음 정보로 가입된 아이디가 총 1개 있습니다.</h5>
+			</div>
+			<div class ="mb-2" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+				<p>이메일 :<b> ${findAdmin.email}</b></p>
+			</div>
 			<div class="row block-9 justify-content-center" style="color: #9e9e9e">
-				<b class= "text-white" id = "id" style="display: none;">${findAdmin.id}</b>&nbsp;입니다. 감사합니다. 
-				<div id = "idOpenBnt" style="border: none;padding-left:5px ;cursor: pointer;"  onclick="idOpen()" ><i class="fas fa-lock"></i></div>
+				<p class= "text-white" id = "id" style="display: none;">아이디 :<b> ${findAdmin.id} </b></p>
+				<div id = "idOpenBnt" style="border: none; padding-left:5px ;cursor: pointer;"  onclick="idOpen()" ><i class="fas fa-lock"></i></div>
 				<div id = "idCloseBnt" style="display : none;  border: none; padding-left:5px ;pacursor: pointer;"  onclick="idClose()" ><i class="fas fa-lock-open"></i></div>
 			</div>
 		</div>
@@ -196,46 +203,7 @@
       </footer>
       </div>
     </div>
-    <div class="fixed-plugin">
-      <div class="dropdown show-dropdown">
-        <a href="#" data-toggle="dropdown">
-          <i class="fa fa-cog fa-2x"> </i>
-        </a>
-        <ul class="dropdown-menu">
-          <li class="header-title"> Sidebar Background</li>
-          <li class="adjustments-line">
-            <a href="javascript:void(0)" class="switch-trigger background-color">
-              <div class="badge-colors text-center">
-                <span class="badge filter badge-primary active" data-color="primary"></span>
-                <span class="badge filter badge-blue" data-color="blue"></span>
-                <span class="badge filter badge-green" data-color="green"></span>
-              </div>
-              <div class="clearfix"></div>
-            </a>
-          </li>
-          <li class="adjustments-line text-center color-change">
-            <span class="color-label">LIGHT MODE</span>
-            <span class="badge light-badge mr-2"></span>
-            <span class="badge dark-badge ml-2"></span>
-            <span class="color-label">DARK MODE</span>
-          </li>
-          <li class="button-container">
-            <a href="https://www.creative-tim.com/product/black-dashboard" target="_blank" class="btn btn-primary btn-block btn-round">Download Now</a>
-            <a href="https://demos.creative-tim.com/black-dashboard/docs/1.0/getting-started/introduction.html" target="_blank" class="btn btn-default btn-block btn-round">
-              Documentation
-            </a>
-          </li>
-          <li class="header-title">Thank you for 95 shares!</li>
-          <li class="button-container text-center">
-            <button id="twitter" class="btn btn-round btn-info"><i class="fab fa-twitter"></i> &middot; 45</button>
-            <button id="facebook" class="btn btn-round btn-info"><i class="fab fa-facebook-f"></i> &middot; 50</button>
-            <br>
-            <br>
-            <a class="github-button" href="https://github.com/creativetimofficial/black-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ntkme/github-buttons on GitHub">Star</a>
-          </li>
-        </ul>
-      </div>
-    </div>
+
   
 	<script type="text/javascript">
 	 let idOpen = () =>{

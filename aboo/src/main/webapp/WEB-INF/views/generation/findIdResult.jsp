@@ -64,12 +64,18 @@
 	</section>
 
 	<section class="ftco-section contact-section ftco-degree-bg">
-	<div style="height: 40vh;background-color: #f7f7f7; display: flex; flex-direction: column; justify-content: center;">
-	
-		<h4 class="text-center" style="">회원님의 아이디는</h4>
+	<div class= "mb-4">
+		<h4 class="text-center" style="">아이디 찾기가 완료 되었습니다.</h4>
+		<h6 class="text-center">다음 정보로 가입된 아이디가 총 1개 있습니다.</h6>
+	</div>
+	<div style="height: 30vh; width:60%; margin:auto; background-color: #e6effa; display: flex; flex-direction: column; justify-content: center;">
 		<div class="container">
+			<div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+				<p>이메일 :<b> ${findGeneration.email}</b></p>
+				<p>가입일 :<b> ${findGeneration.regDate} </b></p>
+			</div>
 			<div class="row block-9 justify-content-center">
-				<b id = "id" style="display: none;">${findGeneration.id}</b>입니다. 감사합니다. 
+				<b id = "id" style="display: none;">아이디 : ${findGeneration.id}</b>
 				<div id = "idOpenBnt" style="border: none;padding-left:5px ;cursor: pointer;"  onclick="idOpen()" ><i class="fas fa-lock"></i></div>
 				<div id = "idCloseBnt" style="display : none;  border: none; padding-left:5px ;pacursor: pointer;"  onclick="idClose()" ><i class="fas fa-lock-open"></i></div>
 			</div>
