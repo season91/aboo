@@ -1,6 +1,7 @@
 package com.kh.aboo.admin.schedule.model.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -20,15 +21,14 @@ public interface ScheduleRepository {
 	int insertSchedule(Schedule schedule);
 	
 	//페이징 처리된 스케쥴 목록
-	List<Schedule> selectScheduleList(@Param(value = "queryStart") int queryStart, @Param(value = "queryEnd") int queryEnd,@Param(value = "apartmentIdx")  String apartmentIdx);
+	List<Schedule> selectScheduleList(Map<String,Object> searchMap);
 	
 	//달력에 보여질 일정목록
 	@Select("select * from tb_schedule where is_leave= 0 and apartment_idx = #{apartmentIdx}")
 	List<Schedule> selectScheduleListForCalendar(String apartmentIdx);
 	
 	//일정 갯수 가져오기
-	@Select("select count(*) from tb_schedule where apartment_idx = #{apartmentIdx} and is_leave = 0")
-	int selectScheduleCnt(String apartmentIdx);
+	int selectScheduleCnt(Map<String,Object> searchMap);
 	
 	//아파트명 불러오기
 	@Select("select apartment_name from tb_apartment where apartment_idx = #{apartmentIdx}")

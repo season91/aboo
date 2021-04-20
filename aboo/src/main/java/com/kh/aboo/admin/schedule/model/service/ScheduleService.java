@@ -9,7 +9,7 @@ public interface ScheduleService {
 	
 	int insertSchedule(Schedule schedule);
 	
-	Map<String,Object> selectScheduleList(int currentPage,String apartmentIdx);
+	Map<String,Object> selectScheduleList(int currentPage, String apartmentIdx, String standard, String keyword);
 	
 	String selectAptNameByIdx(String apartmentIdx);
 	

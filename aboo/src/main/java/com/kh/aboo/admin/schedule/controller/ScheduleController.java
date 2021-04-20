@@ -33,14 +33,13 @@ public class ScheduleController {
 	}
 	
 	@GetMapping("addschedule")
-	public String schedule(@RequestParam(defaultValue = "1") int page,HttpSession session,Model model) {
+	public String schedule(@RequestParam(defaultValue = "1") int page,HttpSession session,Model model,@RequestParam(defaultValue = "apartmentIdx") String standard,  @RequestParam(defaultValue = "apartmentIdx") String keyword) {
 		
 		Admin admin = (Admin) session.getAttribute("admin");
-
 			
-			String apartmentIdx = admin.getApartmentIdx();
-			model.addAllAttributes(scheduleService.selectScheduleList(page, apartmentIdx));
-			model.addAttribute("aptName",scheduleService.selectAptNameByIdx(apartmentIdx));
+		String apartmentIdx = admin.getApartmentIdx();
+		model.addAllAttributes(scheduleService.selectScheduleList(page, apartmentIdx, standard, keyword));
+		model.addAttribute("aptName",scheduleService.selectAptNameByIdx(apartmentIdx));
 			
 			return "admin/schedule";
 	}
