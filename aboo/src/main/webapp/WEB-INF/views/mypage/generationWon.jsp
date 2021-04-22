@@ -76,7 +76,8 @@
     	<div class="container">
     		<div class="row justify-content-center mb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
-     	  <h4 class = "text-center mb-4">세대원 관리</h4>
+     	  <h4 class = "text-center mb-2">세대원 관리</h4>
+     	  <h6>세대원은 최대 5명까지 추가 가능합니다.</h6>
           </div>
         </div>
         	<div class = "d-flex justify-content-end">
@@ -96,7 +97,7 @@
 						    <tbody>
 								<c:forEach items="${generationWonList}" var="generationWon">
 									<tr onclick="openModal(this)" data-toggle="modal" data-target="#modifyModal">
-									    <td class = "generationWonIdx" >${generationWon.generationWonIdx}</td>
+										<td class = "generationWonIdx" >${generationWon.generationWonIdx}</td>
 									    <td class = "name" >${generationWon.name}</td>
 									    <td class = "tell">${generationWon.tell}</td>
 									 </tr>
@@ -280,13 +281,21 @@
 		   document.querySelector("#modifyName").value = name;
 		   document.querySelector("#modityTell").value = tell;
 		   document.querySelector("#modifyGenerationWonIdx").value = generationWonIdx;
+		   
+		   console.dir(generationWonIdx)
 		}
  		
 	</script>
 	
 	<script type="text/javascript">
 		let modity = () => {
+			
+	  	let tell = document.querySelector('#modityTell').value;
+		let regExp = /^\d{11}$/;
 		
+ 		if(regExp.test(tell)){	
+			
+			
 		let modifyName = document.querySelector("#modifyName").value
 		let modifyTell = document.querySelector("#modityTell").value
 		let modifyGenerationWonIdx = document.querySelector("#modifyGenerationWonIdx").value
@@ -323,8 +332,16 @@
          });	
          
 		 }
+ 		}else{
+      		alert("전화번호는 '-'를 제외한 11자리 숫자를 입력해주세요.")
+
+ 		}
+		
 		}
  		
+		
+		
+		
 	</script>
 	
 	
@@ -373,6 +390,11 @@
 	
 	<script type="text/javascript">
 	let add = () => {
+	
+	let tell = document.querySelector('#addTell').value;
+	let regExp = /^\d{11}$/;
+	
+	if(regExp.test(tell)){		
 		
 	let addName = document.querySelector("#addName").value;
 	let addTell = document.querySelector("#addTell").value;
@@ -410,7 +432,13 @@
         });	
         
 	 }
+	
+	}else{
+  		alert("전화번호는 '-'를 제외한 11자리 숫자를 입력해주세요.")
 	}
+	
+	}/* END */
+	
  		
 	</script>
 	
