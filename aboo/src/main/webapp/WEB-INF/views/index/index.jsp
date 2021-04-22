@@ -39,7 +39,7 @@
     <!-- END nav -->
 
 	<div id="msg" class= "btn1Wrap">
-		<button class = "btn1" onclick="chatPage()">Chat</button>	  
+		<button class = "btn1" onclick="chatPage()" style="outline: none;">Chat</button>	  
 	</div>
 
 	<script type="text/javascript">
