@@ -142,6 +142,12 @@ public class AuthInterceptor implements HandlerInterceptor {
 						throw new ToAlertException(ErrorCode.AUTH06);
 					}
 					break;
+				
+				case "chat" :
+					if (session.getAttribute("generation") == null) {
+						throw new ToAlertException(ErrorCode.AUTH06);
+					}
+					break;
 				}break;
 			}
 		}

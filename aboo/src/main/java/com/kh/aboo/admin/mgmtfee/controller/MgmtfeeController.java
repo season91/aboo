@@ -82,11 +82,7 @@ public class MgmtfeeController {
 		// 아파트번호는 로그인한 관리자 세션을 통해 가져온다.
 		// 관리인 정보 기준으로 아파트 번호 받아와 세대정보 보내준다.
 		String apartmentIdx = admin.getApartmentIdx();
-		Map<String, Object> generationList = mgmtfeeService.selectGenerationList(apartmentIdx);
-
-		FileUtil fileUtil = new FileUtil();
-		// mgmtfeeFormExcel 엑셀 양식 호출.
-		File file = fileUtil.mfmtgeeFormExcel(generationList);
+		File file  = mgmtfeeService.selectGenerationList(apartmentIdx);
 		
 		// 내보내기
 		HttpHeaders headers= new HttpHeaders();

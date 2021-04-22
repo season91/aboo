@@ -1,5 +1,6 @@
 package com.kh.aboo.admin.mgmtfee.model.service.impl;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ import com.kh.aboo.admin.mgmtfee.model.vo.Mgmtfee;
 import com.kh.aboo.admin.mgmtfee.model.vo.MgmtfeeOverdue;
 import com.kh.aboo.common.code.ErrorCode;
 import com.kh.aboo.common.exception.ToAlertException;
+import com.kh.aboo.common.util.file.FileUtil;
+import com.kh.aboo.common.util.file.FileVo;
 import com.kh.aboo.common.util.paging.Paging;
 import com.kh.aboo.user.generation.model.repository.GenerationRepository;
 import com.kh.aboo.user.generation.model.vo.Generation;
@@ -172,16 +175,24 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 
 	// 세대정보 엑셀다운을 위한 리스트 동,호수 리스트받아오기.
 	@Override
-	public Map<String, Object> selectGenerationList(String apartmentIdx) {
+	public File selectGenerationList(String apartmentIdx) {
 		List<String> builging = mgmtfeeRepository.selectBuildingByApartmentIdx(apartmentIdx);
 		List<String> num = mgmtfeeRepository.selectNumByApartmentIdx(apartmentIdx);
 		
 		Map<String, Object> commandMap = new HashMap<>();
 		commandMap.put("building", builging);
 		commandMap.put("num", num);
-		System.out.println("세대리스트"+commandMap);
-		return commandMap;
+		
+		//세대 리스트가지고 엑셀 다운로드 양식준비한다.
+		
+		return mfmtgeeFormExcel(commandMap, apartmentIdx+"_관리비양식.xlsx");
 	}
+	
+	public File mfmtgeeFormExcel(Map<String, Object> commandMap,String fileName) {
+		FileUtil fileUtil = new FileUtil();
+		return  fileUtil.mfmtgeeFormExcel(commandMap, fileName);
+	}
+	
 	
 	public Map<String, Object> searchMap(String apartmentIdx, String standard, String keyword){
 		Map<String, Object> searchMap = new HashMap<String, Object>();
