@@ -1,5 +1,6 @@
 package com.kh.aboo.admin.mgmtfee.model.service;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,7 @@ public interface MgmtfeeService {
 	List<Mgmtfee> insertMgmtfee(Map<String,Object> commandMap, String apartmentIdx);
 	
 	// 2. 세대정보 엑셀다운을 위한 리스트 동,호수 리스트받아오기.
-	Map<String, Object> selectGenerationList(String apartmentIdx);
+	File selectGenerationList(String apartmentIdx);
 
 	// 3. 페이징에 세대정보 넣어야해서 세대번호기준 세대정보 가져온다. 관리비 상세조회에서 쓸 세대정보 조회
 	Generation selectGenerationByGenerationIdx(String generationIdx);
