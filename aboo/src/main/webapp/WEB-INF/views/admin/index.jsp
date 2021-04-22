@@ -82,8 +82,8 @@
       </div>
     </div>
     <div class="main-panel">
-      <!-- Navbar -->
-       <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent   ">
+     <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent   ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
             <div class="navbar-toggle d-inline">
@@ -93,35 +93,35 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Aboo admin</a>
+            <a class="navbar-brand" href="#pablo">ADMIN HOME</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
-             <div class="collapse navbar-collapse" id="navigation">
+            <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto ">
               <li class="dropdown nav-item">
-                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" >
                   <div class="photo">
-                    <img src="../../../../resources/img/anime3.png">
+                    <img src="../../resources/img/anime3.png">
                   </div>
                   <b class="caret d-none d-lg-block d-xl-block"></b>
                   <p class="d-lg-none">
-                    Log out
+                    Log out / Login
                   </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link">
-                    <a href="${context }/admin/mypage/modifyinfo" class="nav-item dropdown-item">Profile</a>
+                    <a href="/admin/mypage/modifyinfo" class="nav-item dropdown-item">Profile</a>
                   </li>
                   <li class="nav-link">
-                    <a href="${context }/admin/chat" class="nav-item dropdown-item">1:1 chat</a>
+                    <a href="/admin/chat" class="nav-item dropdown-item">1:1 chat</a>
                   </li>
                   <div class="dropdown-divider"></div>
                   <li class="nav-link">
-                   <c:choose>
+                  <c:choose>
                   	<c:when test="${sessionScope.admin == null}">
                     	<a href="/admin/login" class="nav-item dropdown-item">Log in</a>
                   	</c:when>
@@ -292,9 +292,9 @@
     <!-- Black Dashboard DEMO methods, don't include it in your project! -->
     <script src="../../../resources/demo/demo.js"></script>
     <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://www.cssscript.com/demo/simple-typewriter-effect-pure-javascript-typewriterjs/typewriter.js"></script>
-    <script>
+
+ <script>
       $(document).ready(function() {
         $().ready(function() {
           $sidebar = $('.sidebar');
@@ -413,6 +413,7 @@
       });
     </script>
     
+   
     <script type="text/javascript">
     var typing = document.querySelector('.typing');
     
@@ -436,6 +437,6 @@
 		  let today = date.getFullYear() + '년 ' + (date.getMonth()+1) + '월 '+date.getDate() + '일 ';  
 		  document.querySelector('#today').innerHTML = today;
 	})
-    </script>
+    </script>   
 </body>
 </html>

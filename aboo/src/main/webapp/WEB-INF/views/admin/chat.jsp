@@ -24,7 +24,7 @@
         </div>
         <ul class="nav">
           <li >
-            <a href="/admin/mypage/modifyinfos">
+            <a href="/admin/mypage/modifyinfo">
               <i class="tim-icons icon-badge"></i>
               <p>Mypage</p>
             </a>
@@ -265,7 +265,7 @@
 			$('#message').val('')
 		});
 	
-		let sock = new SockJS("http://192.168.35.122:9393/echo/");
+		let sock = new SockJS("http://localhost:9393/echo/");
 		sock.onmessage = onMessage;
 		sock.onclose = onClose;
 		

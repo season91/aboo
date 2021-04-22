@@ -190,14 +190,14 @@
                 <a href="#" class="partner"><img src="../../../resources/abooimg/래미안.png" class="img-fluid" alt="Colorlib Template"></a>
              </div>
              <div class="col-sm ftco-animate">
-                <a href="#" class="partner"><img src="https://w.namu.la/s/f40934b3d8888a66f673c6423bba1674dc6ea9728210eda4ec0dc178f7c7fc684a813e8e77e30a5dd68c7db19226d4ab6a26d3a3038141f98afa2f974e2be4a410ed8e7696cdc0f2c069d8d19d0d9aa2c165197279957e1f47d7f62fac5bad2f" class="img-fluid" alt="Colorlib Template"></a>
+                <a href="#" class="partner"><img src="../../../resources/abooimg/자이.png" class="img-fluid" alt="Colorlib Template"></a>
              </div>
              <div class="col-sm ftco-animate">
               <a href="#" class="partner"><img src="../../../resources/abooimg/아이파크.png" class="img-fluid" alt="Colorlib Template"></a>
              </div>
              <div class="col-sm ftco-animate">
                 <a href="#" class="partner">
-                <img src="https://lh3.googleusercontent.com/proxy/armUSe9ynBjPtp8JvmWm6TNKhq_UZL-QWT4EZciZByDTeybCeNnWhLyOkGDR4su3ZrTUzcJ2XGPk5m9WQ1FLisBLD33509l4d02RXbowzYY-h-5BEuIGIZm-RI9TLzDuq8MQaPlbL97y_RjfB11PYg8KipjKSnnqPHsUI1Qxa82C70X207w6axO2ZBqBeMjLKbKvPc5Cdkzspbc" class="img-fluid" alt="Colorlib Template"></a>
+                <img src="../../../resources/abooimg/한라비발디.png" class="img-fluid" alt="Colorlib Template"></a>
              </div>
              <div class="col-sm ftco-animate">
                 <a href="#" class="partner"><img src="http://image.lottecon.co.kr/_img/kor/medias/img_sn3_cn2_11.gif" class="img-fluid" alt="Colorlib Template"></a>
@@ -255,10 +255,10 @@
 	              <ul>
 	                <li><span class="icon icon-map-marker"></span><span class="text">6, Teheran-ro 14-gil, Gangnam-gu, Seoul, Republic of Korea</span></li>
 	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+82 123 4567 8910</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">choayoung91@naver.com</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">gmldnjs74@gmail.com</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">minh0380@naver.com</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">psuny1031@naver.com</span></a></li>
+	                <li><a href="mailto:choayoung91@naver.com"><span class="icon icon-envelope"></span><span class="text">choayoung91@naver.com</span></a></li>
+	                <li><a href="mailto:gmldnjs74@gmail.com"><span class="icon icon-envelope"></span><span class="text">gmldnjs74@gmail.com</span></a></li>
+	                <li><a href="mailto:minh0380@naver.com"><span class="icon icon-envelope"></span><span class="text">minh0380@naver.com</span></a></li>
+	                <li><a href="mailto:psuny1031@naver.com"><span class="icon icon-envelope"></span><span class="text">psuny1031@naver.com</span></a></li>
 	              </ul>
 	            </div>
             </div>

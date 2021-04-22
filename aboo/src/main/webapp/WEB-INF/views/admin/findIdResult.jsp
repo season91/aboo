@@ -155,10 +155,10 @@
       <div class="content d-flex flex-column justify-content-center">
     	<div style="height: 10vh"></div>
 
-		<div style="height: 40vh; width:70%;  margin:auto; background-color: #1e1e2d; display: flex; flex-direction: column; justify-content: center;">
+		<div style="height: 45vh; width:70%;  margin:auto; background-color: #3e3e59; display: flex; flex-direction: column; justify-content: center;">
 		<div class="container">
 		    <div class= "mb-4">
-				<h3 class="text-center" style="">아이디 찾기가 완료 되었습니다.</h3>
+				<h3 class="text-center" style="margin-bottom: 15px">아이디 찾기가 완료 되었습니다.</h3>
 				<h5 class="text-center">다음 정보로 가입된 아이디가 총 1개 있습니다.</h5>
 			</div>
 			<div class ="mb-2" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">

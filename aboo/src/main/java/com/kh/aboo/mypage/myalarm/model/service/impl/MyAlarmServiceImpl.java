@@ -49,23 +49,18 @@ public class MyAlarmServiceImpl implements MyAlarmService{
 			
 			List<Generation> genList = new ArrayList<Generation>();
 			genList = myAlarmRepository.selectGenerationByApt(apartmentIdx);
-			
-			
-			
-			for (Generation generation : genList) {
-				if(generation.getTell() != null) {
-					
-					int msg = sendAlarmMsg(generation.getTell() , issueContent);
-					
-					if(msg == 202) {
-						System.out.println("문자성공");
-					}else {
-						System.out.println("문자 실패");
-					}
-					
-				}
-			}
-			
+			/*
+			 * 
+			 * 
+			 * for (Generation generation : genList) { if(generation.getTell() != null) {
+			 * 
+			 * int msg = sendAlarmMsg(generation.getTell() , issueContent);
+			 * 
+			 * if(msg == 202) { System.out.println("문자성공"); }else {
+			 * System.out.println("문자 실패"); }
+			 * 
+			 * } }
+			 */
 			
 			
 			System.out.println("알람등록");
@@ -84,18 +79,17 @@ public class MyAlarmServiceImpl implements MyAlarmService{
 			
 			Generation generation = myAlarmRepository.selectGenerationByIdx(generationIdx);
 			
-			if(generation.getTell() != null) {
-				
-				int msg = sendAlarmMsg(generation.getTell() , issueContent);
-				
-				if(msg == 202) {
-					System.out.println("문자성공");
-				}else {
-					System.out.println("문자 실패");
-				}
-				
-				
-			}
+			/*
+			 * if(generation.getTell() != null) {
+			 * 
+			 * int msg = sendAlarmMsg(generation.getTell() , issueContent);
+			 * 
+			 * if(msg == 202) { System.out.println("문자성공"); }else {
+			 * System.out.println("문자 실패"); }
+			 * 
+			 * 
+			 * }
+			 */
 			
 			System.out.println("알람등록");
 		}else {
@@ -133,7 +127,7 @@ public class MyAlarmServiceImpl implements MyAlarmService{
 		JSONArray messages = new JSONArray();
 		try {
 			params.put("type", "SMS");
-			params.put("from", "01080034094");
+			params.put("from", "");
 			params.put("content", "[ABOO:아파트를 부탁해] " + issueContent);
 			params2.put("to", tell);
 			messages.put(params2);

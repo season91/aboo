@@ -166,7 +166,7 @@
 			$('#message').val('')
 		});
 	
-		let sock = new SockJS("http://192.168.35.122:9393/echo/");
+		let sock = new SockJS("http://localhost:9393/echo/");
 		sock.onmessage = onMessage;
 		sock.onclose = onClose;
 		

@@ -97,7 +97,7 @@
 	            </div>
 	          </div>
 	          <div class="row d-flex justify-content-center">
-		          	 <a href="/mypage/mymgmtfee" class="btn btn-primary btn-primary-2 p-3 px-xl-5 py-xl-3" style="background: linear-gradient(45deg, #56c8fb 0%, #627bed 100%); border: none;">목록으로</a>
+		          	 <a href="/mypage/mymgmtfee" class="btn btn-primary btn-primary-2 p-3 px-xl-5 py-xl-3 mt-3" style="background: linear-gradient(45deg, #56c8fb 0%, #627bed 100%); border: none;">목록으로</a>
 		          </div>
 	        </div>
 	      </div>
@@ -229,7 +229,7 @@
   	
 	$("#check_module").click(function () {
         var IMP = window.IMP; // 생략가능
-        IMP.init('');
+        IMP.init('imp71306117');
         // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
         // i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
         IMP.request_pay({
