@@ -37,6 +37,19 @@
 	    </div>
 	  </nav>
     <!-- END nav -->
+    
+    
+    <div id="msg" class= "btn1Wrap">
+		<button class = "btn1" onclick="chatPage()" style="outline: none;">Chat</button>	  
+	</div>
+
+	<script type="text/javascript">
+	function chatPage() {
+		location.href ='/myapt/chat';
+	}
+	</script>
+	
+	
     <section class="home-slider owl-carousel">
       <div class="slider-item bread-item" style="background-image: url(images/bg_1.jpg);" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
