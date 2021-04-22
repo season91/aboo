@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-
 <body class=" ">
   <div class="wrapper ">
     <div class="sidebar">
