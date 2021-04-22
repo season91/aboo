@@ -179,7 +179,7 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 		Map<String, Object> commandMap = new HashMap<>();
 		commandMap.put("building", builging);
 		commandMap.put("num", num);
-		
+		System.out.println("세대리스트"+commandMap);
 		return commandMap;
 	}
 	
@@ -220,6 +220,7 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 	@Override
 	public Map<String, Object> selectMgmtfeeList(int currentPage,String apartmentIdx, String standard, String keyword) {
 		Map<String, Object> searchMap = searchMap(apartmentIdx,standard,keyword);
+		System.out.println(searchMap);
 		//페이징처리
 		Paging paging = Paging.builder()
 				.currentPage(currentPage)
@@ -235,7 +236,6 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 		// 페이징정보 포함해서 페이징에 뿌려줄 리스트 받아온다.
 		List<Mgmtfee> mgmtfeeList = mgmtfeeRepository.selectMgmtfeeList(searchMap);
 		searchMap.put("mgmtfeeList", mgmtfeeList);
-		System.out.println("mgmtfeeList"+mgmtfeeList);
 		
 		// 관리비번호 기준  세대정보 가져오자.
 		List<Generation> generationList = new ArrayList<>();
@@ -245,25 +245,21 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 		}
 		
 		searchMap.put("generationList", generationList);
-		System.out.println("searchMap"+searchMap);
 		return searchMap;
 	}
 
 	@Override
 	public Mgmtfee selectMgmtfeeByMgmtfeeIdx(String mgmtfeeIdx) {
-		// TODO Auto-generated method stub
 		return mgmtfeeRepository.selectMgmtfeeByMgmtfeeIdx(mgmtfeeIdx);
 	}
 
 	@Override
 	public Generation selectGenerationByGenerationIdx(String generationIdx) {
-		// TODO Auto-generated method stub
 		return mgmtfeeRepository.selectGenerationByGenerationIdx(generationIdx);
 	}
 
 	@Override
 	public Mgmtfee updateMgmtfee(Mgmtfee mgmtfee) {
-		// TODO Auto-generated method stub
 		String mgmtfeeIdx = mgmtfee.getMgmtfeeIdx();
 		int res = mgmtfeeRepository.updateMgmtfee(mgmtfee);
 		//납부금액 업데이트

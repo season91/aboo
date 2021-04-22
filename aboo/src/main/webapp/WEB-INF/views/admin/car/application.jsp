@@ -25,7 +25,7 @@
         </div>
         <ul class="nav">
           <li >
-            <a href="/admin/mypage/modifyinfos">
+            <a href="/admin/mypage/modifyinfo">
               <i class="tim-icons icon-badge"></i>
               <p>Mypage</p>
             </a>
@@ -226,7 +226,10 @@
                       <th>처리상태</th>
                     </thead>
                     <tbody>
-                      <c:forEach items="${carApplicationList}" var="carApplication" varStatus="status">
+                    
+                    <c:choose>
+                    	<c:when test="${carApplicationList.size() > 0}">
+                    		<c:forEach items="${carApplicationList}" var="carApplication" varStatus="status">
                      <tr>
                        <td>
                           <div class="form-check">
@@ -255,9 +258,20 @@
                         </c:choose>
                        </tr>
                     </c:forEach>
+                    	</c:when>
+                    	<c:otherwise>
+                    	<script>
+	               		alert('조회결과가 없습니다.');
+	               		location.href='/admin/car/application';
+	               		</script>
+                    	</c:otherwise>
+                    	
+                    </c:choose>
+                     
                     </tbody>
                   </table>
-                </div>              </div>
+                </div>             
+               </div>
 
             </div>
           </div>
@@ -480,7 +494,7 @@
 	        <form action="${context }/admin/car/application">
 	          <div class="form-group">
 	          	<input type="hidden" name="standard" value="generationInfo">
-	           <input type="text" class="form-control"  name="keyword" id="inlineFormInputGroup" placeholder="세대정보로 검색 (103-906)">
+	           <input type="text" class="form-control"  name="keyword" id="inlineFormInputGroup" placeholder="세대정보로 검색 (101-101)" pattern="[0-9]{3,4}-[0-9]{3,4}">
 	          </div>
 	           <div class="modal-footer">
 	            <button type="submit" class="btn btn-primary">검색</button>

@@ -159,8 +159,17 @@
               <div class="card-header d-flex justify-content-center mt-3">
                 <h3 class="card-title">${aptName} 일정목록</h3>
               </div>
+              <div class="d-flex justify-content-center mt-3">
+              	<div class="col-md-3 dropdown">
+                    <button class="btn btn-primary btn-block" id="search-button" data-toggle="modal" data-target="#searchByDate">일정 날짜로 검색</button>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-primary btn-block" id="search-button" data-toggle="modal" data-target="#searchByContent">일정 내용으로 검색</button>
+                 </div>
+              </div>
               <div class="card-body">
                 <div class="table-responsive">
+                
                   <table class="table tablesorter" id="">
                     <thead class=" text-primary">
                       <th >
@@ -199,28 +208,58 @@
                
              
        </div>
-       <div class="row mt-5 d-flex card-body ">
-             <div class="col text-center">
-               <div class="block-27">
-                 <ul>
-                   <li><a href="${context}/admin/${paging.type}/addschedule">&lt;&lt;</a></li>
-               		 <li><a href="${context}/admin/${paging.type}/addschedule?page=${paging.prev}">&lt;</a></li>
-		                <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
-		                   <c:choose>
-		                      <c:when test="${paging.currentPage eq page}">
-		                         <li class="active"><a href="${context}/admin/${paging.type}/addschedule?page=${page}">${page}</a></li>
-		                      </c:when>
-		                      <c:otherwise>
-		                         <li><a href="${context}/admin/${paging.type}/addschedule?page=${page}">${page}</a></li>
-		                      </c:otherwise>
-		                   </c:choose>
-		              	 </c:forEach>
-               		  <li><a href="${context}/admin/${paging.type}/addschedule?page=${paging.next}">&gt;</a></li>
-               		<li><a href="${context}/admin/${paging.type}/addschedule?page=${paging.lastPage}">&gt;&gt;</a></li>
-                 </ul>
-               </div>
-             </div>
-           </div>
+       <c:choose>
+       	<c:when test="${searchType eq 'apartmentIdx'}">
+	       <div class="row mt-5 d-flex card-body ">
+	          <div class="col text-center">
+	             <div class="block-27">
+	                <ul>
+	                  <li><a href="${context}/admin/${paging.type}/addschedule">&lt;&lt;</a></li>
+	               		<li><a href="${context}/admin/${paging.type}/addschedule?page=${paging.prev}">&lt;</a></li>
+			                <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
+			                   <c:choose>
+			                      <c:when test="${paging.currentPage eq page}">
+			                         <li class="active"><a href="${context}/admin/${paging.type}/addschedule?page=${page}">${page}</a></li>
+			                      </c:when>
+			                      <c:otherwise>
+			                         <li><a href="${context}/admin/${paging.type}/addschedule?page=${page}">${page}</a></li>
+			                      </c:otherwise>
+			                   </c:choose>
+			              	 </c:forEach>
+	               		  <li><a href="${context}/admin/${paging.type}/addschedule?page=${paging.next}">&gt;</a></li>
+	               		<li><a href="${context}/admin/${paging.type}/addschedule?page=${paging.lastPage}">&gt;&gt;</a></li>
+	                 </ul>
+	              </div>
+	           </div>
+	        </div>
+	     </c:when>
+	     <c:otherwise>
+	     	<div class="row mt-5 d-flex card-body ">
+	          <div class="col text-center">
+	             <div class="block-27">
+	                <ul>
+	                  <li><a href="${context}/admin/${paging.type}/addschedule?standard=${searchType }&keyword=${keyword}">&lt;&lt;</a></li>
+	               		<li><a href="${context}/admin/${paging.type}/addschedule?page=${paging.prev}&standard=${searchType }&keyword=${keyword}">&lt;</a></li>
+			                <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
+			                   <c:choose>
+			                      <c:when test="${paging.currentPage eq page}">
+			                         <li class="active"><a href="${context}/admin/${paging.type}/addschedule?page=${page}&standard=${searchType }&keyword=${keyword}">${page}</a></li>
+			                      </c:when>
+			                      <c:otherwise>
+			                         <li><a href="${context}/admin/${paging.type}/addschedule?page=${page}&standard=${searchType }&keyword=${keyword}">${page}</a></li>
+			                      </c:otherwise>
+			                   </c:choose>
+			              	 </c:forEach>
+	               		  <li><a href="${context}/admin/${paging.type}/addschedule?page=${paging.next}&standard=${searchType }&keyword=${keyword}">&gt;</a></li>
+	               		<li><a href="${context}/admin/${paging.type}/addschedule?page=${paging.lastPage}&standard=${searchType }&keyword=${keyword}">&gt;&gt;</a></li>
+	                 </ul>
+	              </div>
+	           </div>
+	        </div>
+	     
+	     </c:otherwise>
+           
+       </c:choose>
        </div>
        </div>
        </div>
@@ -348,6 +387,56 @@
             </div>
         </div>
      </div>
+     
+    <!-- 검색 모달창 -->
+     <div class="modal fade" id="searchByDate" tabindex="-1" role="dialog" aria-labelledby="mgmtfeeDueDateModalLabel" aria-hidden="true">
+       <div class="modal-dialog" role="document">
+         <div class="modal-content" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675); color:white;">
+           <div class="modal-header">
+           	<h4 class="modal-title" id="scheduleDateModalLabel">납부월로 검색</h4>
+            	 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i class="tim-icons icon-simple-remove"></i>
+              </button>
+           </div>
+           <div class="modal-body">
+        <form action="${context }/admin/schedule/addschedule">
+          <div class="form-group">
+          <input type="hidden" name="standard" value="dueDate">
+           <input type="month" class="form-control schedule-keyword" id="inlineFormInputGroup" name="keyword">
+          </div>
+          <div class="modal-footer">
+           <button type="submit" class="btn btn-primary">검색</button>
+           </div>
+        </form>
+      </div>
+         </div>
+       </div>
+     </div>
+     
+      <div class="modal fade" id="searchByContent" tabindex="-1" role="dialog" aria-labelledby="mgmtfeeDueDateModalLabel" aria-hidden="true">
+       <div class="modal-dialog" role="document">
+         <div class="modal-content" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675); color:white;">
+           <div class="modal-header">
+           	<h4 class="modal-title" id="scheduleConModalLabel">납부월로 검색</h4>
+            	 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i class="tim-icons icon-simple-remove"></i>
+              </button>
+           </div>
+           <div class="modal-body">
+        <form action="${context }/admin/schedule/addschedule">
+          <div class="form-group">
+          <input type="hidden" name="standard" value="content">
+           <input type="text" class="form-control schedule-keyword" id="inlineFormInputGroup" name="keyword">
+          </div>
+          <div class="modal-footer">
+           <button type="submit" class="btn btn-primary">검색</button>
+           </div>
+        </form>
+      </div>
+         </div>
+       </div>
+     </div>
+    
     <!--   Core JS Files   -->
     <script src="../../../resources/js/admin/core/jquery.min.js"></script>
     <script src="../../../resources/js/admin/core/popper.min.js"></script>

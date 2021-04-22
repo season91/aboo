@@ -20,16 +20,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.aboo.bdmin.management.model.service.ManagementService;
 import com.kh.aboo.bdmin.management.model.vo.ApartApplication;
 import com.kh.aboo.bdmin.management.model.vo.Bdmin;
+import com.kh.aboo.bdmin.management.model.vo.ManagerApplication;
 import com.kh.aboo.user.apartment.model.vo.Apartment;
 import com.kh.aboo.user.manager.model.vo.Admin;
 
 @Controller
 @RequestMapping("/bdmin")
 public class ManagementController {
-	
-	@Autowired
-	private PasswordEncoder encoder;
-	
 	private final ManagementService managementService;
 	
 	public ManagementController(ManagementService managementService) {
@@ -66,7 +63,6 @@ public class ManagementController {
 	// 현재 서비스 이용 중인 아파트리스트
 	@GetMapping("/management/apartment")
 	public void apartment(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "basic") String standard, @RequestParam(defaultValue = "basic") String keyword, Model model) {
-		
 		// 반환형은 map이고 여기엔 검색기준, 검색값, 페이징, 검색결과list가 들어있다.
 		// 자세한건 service impl에 구현
 		// view에서는 페이징부분이 관건인데, choose문을 searchType을 이용해 페이징처리 분기를 나눈다.
@@ -93,7 +89,7 @@ public class ManagementController {
 	}
 	
 	// [관리업무- 2.아파트 서비스 신청 관리]
-	// 입점문의건 목록
+	// 서비스 신청 목록
 	@GetMapping("/management/contactuslist")
 	public void contactList(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "basic") String standard, @RequestParam(defaultValue = "basic") String keyword, Model model) {
 		Map<String, Object> searchMap = new HashMap<String, Object>();
@@ -102,17 +98,16 @@ public class ManagementController {
 		model.addAllAttributes(managementService.selectApartApplicationList(page, searchMap));
 	}
 	
-	// 입점문의 상세
+	// 서비스 신청 상세
 	@GetMapping("/management/contactusdetail")
 	public void contactDetail(String applicationIdx, Model model) {
 		System.out.println(applicationIdx);
 		model.addAttribute(managementService.selectApartApplication(applicationIdx));
 	}
 	
-	// 입점문의 승인, 반려 업데이트
+	// 서비스 신청 승인, 반려 업데이트
 	@PostMapping("/contactus/process")
 	public String contactUsProcess(ApartApplication apartApplication, Model model) {
-		System.out.println("처리시작?"+apartApplication.getApplicationIdx()+"처리?"+apartApplication.getIsProcess());
 		//프로시저로 처리
 		managementService.procedureApartApplicationUpdate(apartApplication);
 		model.addAttribute("alertMsg", "처리가 완료되었습니다.");
@@ -130,7 +125,6 @@ public class ManagementController {
 	@PostMapping("/contactusimpl")
 	public String contactUsImpl(ApartApplication apartApplication, Model model) {
 		// 신청서 작성시 신청서 insert한다.
-		System.out.println(apartApplication);
 		managementService.insertApartApplication(apartApplication);
 		model.addAttribute("alertMsg", "등록신청이 완료되었습니다. 처리까지는 4~5일 소요되며, 승인시 담당자가 연락할 예정입니다.");
 		model.addAttribute("url", "/bdmin/contactus");
@@ -149,7 +143,7 @@ public class ManagementController {
 			String[] apartmentIndx = keyword.split("/");
 			// [0]은 아파트이름이고 [1]아파트 idx이다.
 			keyword = apartmentIndx[1];
-			searchMap.put("apartmentIdx", keyword);
+			searchMap.put("keyword", keyword);
 		}
 		
 		System.out.println(searchMap);
@@ -158,13 +152,9 @@ public class ManagementController {
 	
 	// 관리자 신규등록
 	@PostMapping("/management/adminadd")
-	public String adminAdd(Admin admin, @RequestParam String apartmentInfo, Model model) {
-		
-		String[] apartmentIndx = apartmentInfo.split("/");
-		// [0]은 아파트이름이고 [1]아파트 idx이다.
-		admin.setApartmentIdx(apartmentIndx[1]);
-		admin.setPassword(encoder.encode(admin.getPassword()));
-		managementService.insertAdmin(admin);
+	public String adminAdd(Admin admin, @RequestParam String apartmentInfo,Model model) {
+
+		managementService.insertAdmin(admin, apartmentInfo);
 		
 		model.addAttribute("alertMsg", "권한부여가 되었습니다.");
 		model.addAttribute("url", "/bdmin/management/adminauthority");
@@ -178,4 +168,59 @@ public class ManagementController {
 		 managementService.updateAdminIsDel(manageridx);
 	}
 		
+	// [관리업무- 4. 아파트관리자인 admin 계정 신청 관리]
+	// [선영] 어드민 신청 폼
+	@GetMapping("adminapplication")
+	public String adminContact(ManagerApplication managerApplication) {
+		return "/bdmin/adminApplication";
+	}
+	
+	// [선영] 어드민 신청 아이디 체크
+	@GetMapping("adminapplicationidcheck")
+	@ResponseBody
+	public String adminApplicationIdCheck(@RequestParam String id , Model model) {
+
+		int res = managementService.selectManagerContactId(id);
+
+		if (res > 0) {
+			return "fail";
+		}
+		return "success";
+	}
+	
+	// [선영] 어드민 신청 추가
+	@PostMapping("adminapplicationadd")
+	public String adminContactAdd(ManagerApplication managerApplication , Model model) {
+		
+		managementService.insertManagerContact(managerApplication);
+		
+		model.addAttribute("alertMsg", "등록신청이 완료되었습니다. 처리까지는 1~3일 소요되며, 승인시 담당자가 연락할 예정입니다.");
+		model.addAttribute("url", "/admin/login");
+		return "common/result";
+	}
+	
+	// [아영] admin 계정 신청 목록
+	@GetMapping("/management/adminapllist")
+	public void adminApplicationList(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "basic") String standard, @RequestParam(defaultValue = "basic") String keyword, Model model) {
+	
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("searchType", standard);
+		searchMap.put("keyword", keyword);
+		model.addAllAttributes(managementService.selectAdminApplicationList(page, searchMap));
+	}
+	
+	@GetMapping("/management/adminapldetail")
+	public void adminApplicationDeatil(@RequestParam String managerApplicationIdx, Model model) {
+		model.addAttribute("adminApplication", managementService.selectAdminApplication(managerApplicationIdx));
+	}
+	
+	// [아영] admin 계정 신청 승인,
+	@PostMapping("/management/adminapproval")
+	public String adminApproval(ManagerApplication application, @RequestParam String apartmentInfo, Model model) {
+		String msg = managementService.updateAdminApplication(application, apartmentInfo);
+		
+		model.addAttribute("alertMsg", msg);
+		model.addAttribute("url", "/bdmin/management/adminauthority");
+		return "common/result";
+	}
 }

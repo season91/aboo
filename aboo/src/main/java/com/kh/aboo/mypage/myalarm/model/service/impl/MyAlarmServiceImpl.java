@@ -49,23 +49,18 @@ public class MyAlarmServiceImpl implements MyAlarmService{
 			
 			List<Generation> genList = new ArrayList<Generation>();
 			genList = myAlarmRepository.selectGenerationByApt(apartmentIdx);
-			
-			
-			
-			for (Generation generation : genList) {
-				if(generation.getTell() != null) {
-					
-					int msg = sendAlarmMsg(generation.getTell() , issueContent);
-					
-					if(msg == 202) {
-						System.out.println("문자성공");
-					}else {
-						System.out.println("문자 실패");
-					}
-					
-				}
-			}
-			
+			/*
+			 * 
+			 * 
+			 * for (Generation generation : genList) { if(generation.getTell() != null) {
+			 * 
+			 * int msg = sendAlarmMsg(generation.getTell() , issueContent);
+			 * 
+			 * if(msg == 202) { System.out.println("문자성공"); }else {
+			 * System.out.println("문자 실패"); }
+			 * 
+			 * } }
+			 */
 			
 			
 			System.out.println("알람등록");
@@ -84,18 +79,17 @@ public class MyAlarmServiceImpl implements MyAlarmService{
 			
 			Generation generation = myAlarmRepository.selectGenerationByIdx(generationIdx);
 			
-			if(generation.getTell() != null) {
-				
-				int msg = sendAlarmMsg(generation.getTell() , issueContent);
-				
-				if(msg == 202) {
-					System.out.println("문자성공");
-				}else {
-					System.out.println("문자 실패");
-				}
-				
-				
-			}
+			/*
+			 * if(generation.getTell() != null) {
+			 * 
+			 * int msg = sendAlarmMsg(generation.getTell() , issueContent);
+			 * 
+			 * if(msg == 202) { System.out.println("문자성공"); }else {
+			 * System.out.println("문자 실패"); }
+			 * 
+			 * 
+			 * }
+			 */
 			
 			System.out.println("알람등록");
 		}else {
@@ -116,10 +110,10 @@ public class MyAlarmServiceImpl implements MyAlarmService{
 	public int sendAlarmMsg(String tell,String issueContent) {
 		
 		String method = "POST";
-		String url = "/sms/v2/services/ncp:sms:kr:264958255981:aboo/messages";
+		String url = "/sms/v2/services//messages";
 		String timestamp = Long.toString(System.currentTimeMillis());
-		String accessKey = "M8VeVYMJfH49Asj7UO7E";
-		String secretKey = "QrB5gfTBIf3fv1yX2dtDHxmJeDyChK2xgsEBNk6a";
+		String accessKey = "";
+		String secretKey = "";
 		
 		String signature = makeSignature(url, timestamp, method, accessKey, secretKey);
 		HttpHeaders header = new HttpHeaders();
@@ -133,7 +127,7 @@ public class MyAlarmServiceImpl implements MyAlarmService{
 		JSONArray messages = new JSONArray();
 		try {
 			params.put("type", "SMS");
-			params.put("from", "01080034094");
+			params.put("from", "");
 			params.put("content", "[ABOO:아파트를 부탁해] " + issueContent);
 			params2.put("to", tell);
 			messages.put(params2);
@@ -142,7 +136,7 @@ public class MyAlarmServiceImpl implements MyAlarmService{
 			
 			RequestEntity<String> request = 
 					RequestEntity
-					.post("https://sens.apigw.ntruss.com/sms/v2/services/ncp:sms:kr:264958255981:aboo/messages")
+					.post("https://sens.apigw.ntruss.com/sms/v2/services//messages")
 					.headers(header)
 					.body(body);
 			

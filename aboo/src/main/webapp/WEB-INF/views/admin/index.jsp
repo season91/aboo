@@ -82,8 +82,8 @@
       </div>
     </div>
     <div class="main-panel">
-      <!-- Navbar -->
-       <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent   ">
+     <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent   ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
             <div class="navbar-toggle d-inline">
@@ -93,35 +93,35 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Aboo admin</a>
+            <a class="navbar-brand" href="#pablo">ADMIN HOME</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
-             <div class="collapse navbar-collapse" id="navigation">
+            <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto ">
               <li class="dropdown nav-item">
-                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" >
                   <div class="photo">
-                    <img src="../../../../resources/img/anime3.png">
+                    <img src="../../resources/img/anime3.png">
                   </div>
                   <b class="caret d-none d-lg-block d-xl-block"></b>
                   <p class="d-lg-none">
-                    Log out
+                    Log out / Login
                   </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link">
-                    <a href="${context }/admin/mypage/modifyinfo" class="nav-item dropdown-item">Profile</a>
+                    <a href="/admin/mypage/modifyinfo" class="nav-item dropdown-item">Profile</a>
                   </li>
                   <li class="nav-link">
-                    <a href="${context }/admin/chat" class="nav-item dropdown-item">1:1 chat</a>
+                    <a href="/admin/chat" class="nav-item dropdown-item">1:1 chat</a>
                   </li>
                   <div class="dropdown-divider"></div>
                   <li class="nav-link">
-                   <c:choose>
+                  <c:choose>
                   	<c:when test="${sessionScope.admin == null}">
                     	<a href="/admin/login" class="nav-item dropdown-item">Log in</a>
                   	</c:when>
@@ -146,24 +146,9 @@
               <div class="card-header ">
                 <div class="row">
                   <div class="col-sm-6 text-left">
-                    <h5 class="card-category">Total Management Fee</h5>
-                    <h2 class="card-title">
-                    <script>
-		              document.write(new Date().getFullYear())
-		            </script>년 월별 관리비 고지서 발행 금액 </h2>
+                    <h5 class="card-category" id="today"> </h5>
+                    <h2 class="card-title">오늘 <p class="typing"></p> 등록 되었습니다.</h2>
                   </div>
-                  <div class="col-sm-6">
-                    <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
-                       <label class="btn btn-sm btn-primary btn-simple active" id="0"> (단위 : 만원)
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="chart-area">
-                  <canvas id="chartBig1"></canvas>
-                  <input type="hidden" id="list" value="${list}">
                 </div>
               </div>
             </div>
@@ -171,63 +156,16 @@
         </div>
         
         <div class="row">
-          <div class="col-lg-4">
+          <div class="col-lg-12">
             <div class="card card-chart">
               <div class="card-header ">
-                <h5 class="card-category">Total Shipments</h5>
-                <h3 class="card-title"><i class="tim-icons icon-bell-55 text-primary "></i> 763,215</h3>
+                <h5 class="card-category">Month Management Fee</h5>
+                <h3 class="card-title"><i class="tim-icons icon-money-coins text-primary "></i> 월별 관리비 발행 금액 (단위:만원)</h3>
               </div>
               <div class="card-body ">
                 <div class="chart-area">
                   <canvas id="chartLinePurple"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
-       <!-- 
-          <div class="col-lg-4">
-            <div class="card card-chart">
-              <div class="card-header ">
-                <h5 class="card-category">Daily Sales</h5>
-                <h3 class="card-title"><i class="tim-icons icon-delivery-fast text-info "></i> 3,500€</h3>
-              </div>
-              <div class="card-body ">
-                <div class="chart-area">
-                  <canvas id="CountryChart"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
-           -->   
-      <input type="hidden" value="${usedList}" id="usedList">
-      <input type="hidden" value="${infoList}" id="infoList">
-      <input type="hidden" value="${intList}" id="intList">
-          <div class="col-lg-8">
-            <div class="card card-chart">
-              <div class="card-header ">
-               <div class="row">
-                  <div class="col-sm-6 text-left">
-                    <h5 class="card-category">Community</h5>
-                    <h2 class="card-title">USED</h2>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
-                      <label class="btn btn-sm btn-primary btn-simple active" id="0">
-                        <input type="radio" name="options" autocomplete="off" checked> USED
-                      </label>
-                      <label class="btn btn-sm btn-primary btn-simple " id="1">
-                        <input type="radio" name="options" autocomplete="off"> INFO
-                      </label>
-                      <label class="btn btn-sm btn-primary btn-simple " id="2">
-                        <input type="radio" name="options" autocomplete="off"> INT
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-body ">
-                <div class="chart-area">
-                  <canvas id="chartLineGreen"></canvas>
+                   <input type="hidden" id="list" value="${list}">
                 </div>
               </div>
             </div>
@@ -353,7 +291,10 @@
     <script src="../../../resources/js/admin/black-dashboard.min.js?v=1.0.0" type="text/javascript"></script>
     <!-- Black Dashboard DEMO methods, don't include it in your project! -->
     <script src="../../../resources/demo/demo.js"></script>
-    <script>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://www.cssscript.com/demo/simple-typewriter-effect-pure-javascript-typewriterjs/typewriter.js"></script>
+
+ <script>
       $(document).ready(function() {
         $().ready(function() {
           $sidebar = $('.sidebar');
@@ -472,9 +413,30 @@
       });
     </script>
     
+   
     <script type="text/javascript">
-  	
+    var typing = document.querySelector('.typing');
+    
+    var typewriter = new Typewriter(typing, {
+        loop: true
+    });
+     
+    typewriter.typeString('중고게시판 ${usedCnt}건')
+        .pauseFor(2500)
+        .deleteAll()
+        .typeString('인테리어게시판 ${intCnt}건')
+        .pauseFor(2500)
+        .deleteAll()
+        .typeString('정보질문게시판 ${infoCnt}건')
+        .start();
 
     </script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+		  let date = new Date();
+		  let today = date.getFullYear() + '년 ' + (date.getMonth()+1) + '월 '+date.getDate() + '일 ';  
+		  document.querySelector('#today').innerHTML = today;
+	})
+    </script>   
 </body>
 </html>

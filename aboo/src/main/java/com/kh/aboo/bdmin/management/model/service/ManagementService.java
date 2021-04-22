@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.kh.aboo.bdmin.management.model.vo.ApartApplication;
 import com.kh.aboo.bdmin.management.model.vo.Bdmin;
+import com.kh.aboo.bdmin.management.model.vo.ManagerApplication;
 import com.kh.aboo.user.apartment.model.vo.Apartment;
 import com.kh.aboo.user.manager.model.vo.Admin;
 
@@ -38,9 +39,24 @@ public interface ManagementService {
 	// 기본페이징
 	Map<String, Object> selectAdminList(int page, Map<String, Object> searchMap);
 	
-	int insertAdmin(Admin admin);
+	int insertAdmin(Admin admin, String apartmentInfo);
 
 	// 매니저 권한회수
 	int updateAdminIsDel(String managerIdx);
 
+	// [선영] 어드민 신청 폼 테이블에 insert
+	int insertManagerContact(ManagerApplication managerApplication);
+	
+	// [선영] 어드민 신청 테이블 아이디 체크 
+	int selectManagerContactId(String  id);
+	
+	// [매니저 계정 신청]
+	// 1. 신청 목록 페이징
+	Map<String, Object> selectAdminApplicationList(int page, Map<String, Object> searchMap);
+	
+	// 2. 상세조회
+	Map<String, Object> selectAdminApplication(String managerApplicationIdx);
+	
+	// 3. 어드민 계정 신청서 업데이트 및 어드민 계정 생성
+	String updateAdminApplication(ManagerApplication application, String apartmentInfo);
 }

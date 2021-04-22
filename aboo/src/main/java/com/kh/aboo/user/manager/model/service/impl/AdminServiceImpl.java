@@ -39,7 +39,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.aboo.admin.mgmtfee.model.vo.Mgmtfee;
-import com.kh.aboo.common.code.Configcode;
+import com.kh.aboo.common.code.ConfigCode;
 import com.kh.aboo.common.code.ErrorCode;
 import com.kh.aboo.common.exception.ToAlertException;
 import com.kh.aboo.common.mail.MailSender;
@@ -162,7 +162,7 @@ public class AdminServiceImpl implements AdminService {
 		body.add("mail-template", "findid");
 		body.add("id", admin.getId());
 		body.add("authPath", authPathId);
-		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(Configcode.DOMAIN + "/mail")
+		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(ConfigCode.DOMAIN + "/mail")
 				.header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE).body(body);
 
 		ResponseEntity<String> response = http.exchange(request, String.class);
@@ -184,7 +184,7 @@ public class AdminServiceImpl implements AdminService {
 		body.add("password", password);
 		System.out.println("메일 보낼번호 : " + password);
 
-		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(Configcode.DOMAIN + "/mail")
+		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(ConfigCode.DOMAIN + "/mail")
 				.header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE).body(body);
 
 		ResponseEntity<String> response = http.exchange(request, String.class);
@@ -225,7 +225,7 @@ public class AdminServiceImpl implements AdminService {
 		body.add("mail-template", "email");
 		body.add("id", admin.getId());
 		body.add("authPath", authPathEmail);
-		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(Configcode.DOMAIN + "/mail")
+		RequestEntity<MultiValueMap<String, String>> request = RequestEntity.post(ConfigCode.DOMAIN + "/mail")
 				.header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE).body(body);
 
 		ResponseEntity<String> response = http.exchange(request, String.class);
@@ -266,10 +266,10 @@ public class AdminServiceImpl implements AdminService {
 	public int authTell(String tell, HttpSession httpSession) {
 
 		String method = "POST";
-		String url = "/sms/v2/services/ncp:sms:kr:265084223367:aboo/messages";
+		String url = "/sms/v2/services//messages";
 		String timestamp = Long.toString(System.currentTimeMillis());
-		String accessKey = "LPnIQJHIKlcBN3dZOoNR";
-		String secretKey = "UoCz0OH0zgR5RA7YwiCnMPiVfOn7jJkwzL7K18kb";
+		String accessKey = "";
+		String secretKey = "";
 
 		String signature = makeSignature(url, timestamp, method, accessKey, secretKey);
 		HttpHeaders header = new HttpHeaders();
@@ -286,7 +286,7 @@ public class AdminServiceImpl implements AdminService {
 		JSONArray messages = new JSONArray();
 		try {
 			params.put("type", "SMS");
-			params.put("from", "01092680961");
+			params.put("from", "");
 			params.put("content", "[ABOO:아파트를 부탁해] 본인 확인을 위해 인증번호 [" + authPathTell + "]를 입력해주세요.");
 			params2.put("to", tell);
 			messages.put(params2);
@@ -294,7 +294,7 @@ public class AdminServiceImpl implements AdminService {
 			String body = params.toString();
 
 			RequestEntity<String> request = RequestEntity
-					.post("https://sens.apigw.ntruss.com/sms/v2/services/ncp:sms:kr:265084223367:aboo/messages").headers(header).body(body);
+					.post("https://sens.apigw.ntruss.com/sms/v2/services//messages").headers(header).body(body);
 
 			ResponseEntity<String> response = http.exchange(request, String.class);
 			return response.getStatusCodeValue();

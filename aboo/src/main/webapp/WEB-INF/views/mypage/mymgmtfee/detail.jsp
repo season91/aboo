@@ -43,7 +43,7 @@
       </div>
     </section>
 
- <section class="ftco-section bg-light">
+	 <section class="ftco-section bg-light">
     	<div class="container">
     		<div class="row justify-content-center mb-5 pb-3">
           <div class="col-md-7 text-center heading-section ftco-animate">
@@ -97,7 +97,7 @@
 	            </div>
 	          </div>
 	          <div class="row d-flex justify-content-center">
-		          	 <a href="/mypage/mymgmtfee" class="btn btn-primary btn-primary-2 p-3 px-xl-5 py-xl-3" style="background: linear-gradient(45deg, #56c8fb 0%, #627bed 100%); border: none;">목록으로</a>
+		          	 <a href="/mypage/mymgmtfee" class="btn btn-primary btn-primary-2 p-3 px-xl-5 py-xl-3 mt-3" style="background: linear-gradient(45deg, #56c8fb 0%, #627bed 100%); border: none;">목록으로</a>
 		          </div>
 	        </div>
 	      </div>
@@ -115,9 +115,9 @@
               아파트 주변 공공기관부터 투표, 관리비납부, 차량등록, 층간소음 문의 등 관리하기 편한 기능을 제공합니다.
               </p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                <li class="ftco-animate"><a href="https://github.com/season91/aboo"><span><i class="fab fa-github"></i></span></a></li>
+                <li class="ftco-animate"><a href="https://app.asana.com/0/1200089682403032/list"><span><i class="fas fa-calendar-check"></i></span></a></li>
+                <li class="ftco-animate"><a href="https://www.erdcloud.com/d/d3HajP7xvXbTnSxtE"><span><i class="fas fa-cloud"></i></span></a></li>
               </ul>
             </div>
           </div>
@@ -130,7 +130,7 @@
                 <li><a href="/board/interior/intlist" class="py-2 d-block">Interior Board</a></li>
                 <li><a href="/board/used/usedlist" class="py-2 d-block">Used Board</a></li>
                 <li><a href="/myapt/schedule" class="py-2 d-block">Apt Schedule</a></li>
-                <li><a href="/myapt/institutions" class="py-2 d-block">Institutions</a></li>
+                <li><a href="/myapt/institutions/institutions" class="py-2 d-block">Institutions</a></li>
               </ul>
             </div>
           </div>
@@ -141,7 +141,7 @@
                 <li><a href="/index" class="py-2 d-block">Home</a></li>
                 <li><a href="/about" class="py-2 d-block">About</a></li>
                 <li><a href="/myapt/schedule" class="py-2 d-block">MyApt</a></li>
-                <li><a href="/baord/info/listinfo" class="py-2 d-block">Board</a></li>
+                <li><a href="/board/info/listinfo" class="py-2 d-block">Board</a></li>
                 <li><a href="/mypage/modifyinfo" class="py-2 d-block">MyPage</a></li>
                 <li><a href="/bdmin/contactus" class="py-2 d-block">Contact us</a></li>
               </ul>
@@ -173,6 +173,7 @@
         </div>
       </div>
     </footer>
+    
   
 
   <!-- loader -->

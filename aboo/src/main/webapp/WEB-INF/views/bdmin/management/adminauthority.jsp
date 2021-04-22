@@ -25,7 +25,7 @@
         </div>
         <ul class="nav">
           <li >
-            <a href="/admin/mypage/modifyinfos">
+            <a href="/admin/mypage/modifyinfo">
               <i class="tim-icons icon-badge"></i>
               <p>Mypage</p>
             </a>
@@ -164,7 +164,7 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-lg-16 ml-auto mr-auto">
+                    <div class="col-lg-17 ml-auto mr-auto">
                       <div class="row">
                         <div class="col-md-3">
                           <button type="button" class="btn btn-warning btn-block managerAdd" data-toggle="modal" data-target="#addadminModal" >관리자 신규 등록</button>
@@ -177,6 +177,11 @@
                         </div>
                         <div class="col-md-3">
                           <button type="button" class="btn btn-warning btn-block" id="search-button" data-toggle="modal" data-target="#apartmentNameModal">아파트 명으로 검색</button>
+                        </div>
+                        <div class="col-md-3">
+                        <form action="${context }/bdmin/management/adminapllist">
+                          <button type="submit" class="btn btn-warning btn-block" id="search-button" data-toggle="modal" data-target="#apartmentModal">계정 신청 보기</button>
+                        </form>
                         </div>
                       </div>
                     </div>
@@ -348,7 +353,7 @@
            </div>
            <div class="modal-body">
 	        <form action="${context }/bdmin/management/adminadd" method="post">
-	        	<div class="form-group">
+	          <div class="form-group">
 	            <label for="recipient-name" class="control-label">아파트 관리 번호</label>
 	            <input class="form-control" list="datalistOptions" name="apartmentInfo" placeholder="아파트명을 검색하세요.">
 	            <datalist id="datalistOptions">

@@ -2,6 +2,7 @@ package com.kh.aboo.common.mail;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.mail.javamail.JavaMailSender;
@@ -9,7 +10,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
 
-import com.kh.aboo.common.code.Configcode;
+import com.kh.aboo.common.code.ConfigCode;
 
 // 어디서든 사용가능한 우리만의 MailSender 구현.
 // 외부 패키지 생성하는 경우에도 servlet-context에 해당 경로 추가해주어 관리대상으로 만든다.
@@ -36,7 +37,7 @@ public class MailSender {
 		
 		MimeMessage msg = mail.createMimeMessage();
 		try {
-			msg.setFrom(Configcode.EMAIL.desc); 
+			msg.setFrom(new InternetAddress(ConfigCode.EMAIL.desc)); 
 			msg.setRecipients(Message.RecipientType.TO, to); //받는사람
 			msg.setSubject(subject);
 			msg.setContent(htmlText, "text/html; charset=UTF-8");

@@ -3,26 +3,9 @@
 <%@ include file="/WEB-INF/views/include/adminhead.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>
-    Black Dashboard by Creative Tim
-  </title>
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-  <!--     Fonts and icons     -->
-  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
-  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-  <!-- Nucleo Icons -->
-  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-  <!-- CSS Files -->
-  <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="../assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="../assets/demo/demo.css" rel="stylesheet" />
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
 
 <body class=" ">
@@ -42,7 +25,7 @@
         </div>
         <ul class="nav">
           <li >
-            <a href="/admin/mypage/modifyinfos">
+            <a href="/admin/mypage/modifyinfo">
               <i class="tim-icons icon-badge"></i>
               <p>Mypage</p>
             </a>
@@ -110,7 +93,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Car</a>
+            <a class="navbar-brand" href="#pablo">Chat</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -165,9 +148,9 @@
               </div>
               <div class="card-body">
                 <div class="alert alert-info">
-                  <span>관리자 화면입니다.</span>
+                  <span>접속자 정보 확인</span>
                 </div>
-                <div class="alert alert-info " id="infoArea">
+                <div class="alert alert-info" id="infoArea" style="overflow: auto; height: 50vh">
                 </div>
               </div>
             </div>
@@ -176,10 +159,13 @@
           <div class="col-md-6">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title">채팅내용</h4>
+                <h4 class="card-title">채팅 내용</h4>
               </div>
               <div class="card-body">
-                <div class="alert alert-primary" id="messageArea">
+             	 <div class="alert alert-primary">
+                  <span>대화 확인</span>
+                </div>
+                <div class="alert alert-primary" id="messageArea" style="overflow: auto; height: 50vh">
                 </div>
               </div>
             </div>
@@ -203,7 +189,7 @@
 	                      <div class="form-group" style="display: flex; justify-content: space-around;">
 	                        <input type="text" class="form-control " id="name" placeholder="세대아이디 입력">
 	                        <input type="text" class="form-control " id="message" placeholder="채팅내용을 입력하세요.">
-	                         <button type="submit" class="btn btn-fill btn-primary " id="sendBtn">보내기</button>
+	                         <button type="submit" class="btn btn-fill btn-primary " id="sendBtn" onclick="scroll()">보내기</button>
 	                      </div>
 	                    </div>
                       </div>
@@ -261,6 +247,19 @@
     
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
+	
+	<script type="text/javascript">
+	/* 스크롤 따라 내려가기 */
+	function scroll() {
+	var objDiv = document.getElementById("messageArea");
+	objDiv.scrollTop = objDiv.scrollHeight;
+	console.dir(objDiv.scrollTop)
+	console.dir(objDiv.scrollHeight)
+		
+	}
+	</script>
+	
+	
 	<script type="text/javascript">
 		$("#sendBtn").click(function() {
 			sendMessage();
@@ -274,7 +273,7 @@
 		// 메시지 전송
 		function sendMessage() {
 			let msg = {
-					target : $("#name").val(),
+					target : $("#name").val().trim(),
 					messeage : $("#message").val()
 			}
 			sock.send(JSON.stringify(msg));
@@ -289,13 +288,16 @@
 				$("#messageArea").append(data + "<br/>");
 			}
 			
+			scroll();
+			/* 스크롤 따라 내려가기 */
+			
 		}
 		// 서버와 연결을 끊었을 때
 		function onClose(evt) {
 			$("#messageArea").append("연결 끊김");
 		
 		}
-	
+
 	</script>
     <script>
       $(document).ready(function() {

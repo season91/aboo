@@ -30,7 +30,7 @@ public interface MgmtfeeRepository {
 	List<String> selectNumByApartmentIdx(String apartmentIdx);
 
 	// 2. 엑셀 양식 다운로드를 위한 세대 정보 가져온다.
-	@Select("select * from TB_GENERATION where building = #{building} and num = #{num} and apartment_idx = #{apartmentIdx}")
+	@Select("select * from TB_GENERATION where building = #{building} and num = #{num} and apartment_idx = #{apartmentIdx} and is_del = 0")
 	Generation selectGenerationIdx(Generation generationInfo);
 	
 	// [관리비페이지 목록- 페이징,글목록 (동적쿼리)]
@@ -45,7 +45,7 @@ public interface MgmtfeeRepository {
 	Generation selectGenerationByGenerationIdx(String generationIdx);
 	
 	// 3. 의 상세조회버전 동,호수로 세대정보가져온다.
-	@Select("select * from tb_generation where apartment_idx = #{apartmentIdx} and building = #{building} and num = #{num}")
+	@Select("select * from tb_generation where apartment_idx = #{apartmentIdx} and building = #{building} and num = #{num} and is_del=0")
 	Generation selectGenerationByBuildingAndNum(Generation generation);
 
 	// [관리비 검색-미납건]

@@ -25,7 +25,7 @@
         </div>
         <ul class="nav">
           <li >
-            <a href="/admin/mypage/modifyinfos">
+            <a href="/admin/mypage/modifyinfo">
               <i class="tim-icons icon-badge"></i>
               <p>Mypage</p>
             </a>
@@ -209,11 +209,13 @@
                    <th>관리비 고지월 </th>
                    <th>산출금액</th>
                    <th>납부상태</th>
-                   <th>이동</th>
+                   <th>상세보기</th>
                  </thead>
                  <tbody>
-                  
-            	<c:forEach items="${mgmtfeeList}" var="mgmtfee" varStatus="status">
+                
+               <c:choose>
+               	<c:when test="${mgmtfeeList.size() > 0}">
+               		<c:forEach items="${mgmtfeeList}" var="mgmtfee" varStatus="status">
                    <tr>
                    	 <td>
                          <div class="form-check">
@@ -225,7 +227,7 @@
                            </label>
                          </div>
                        </td>
-                       <td><a href="/mypage/mymgmtfee?${mgmtfee.mgmtfeeIdx }"> ${mgmtfee.mgmtfeeIdx}</a> </td>
+                       <td><a href="/mypage/mymgmtfee/detail?mgmtfeeidx=${mgmtfee.mgmtfeeIdx }"> ${mgmtfee.mgmtfeeIdx}</a> </td>
                        <td> ${generationList[status.index].building }동 ${generationList[status.index].num}호</td>
                        <td> ${mgmtfee.dueDate } </td>
                        <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${mgmtfee.periodPayment}"/> </td>
@@ -237,9 +239,13 @@
                        		<td>완료</td>
                        	</c:otherwise>
                        </c:choose>
-                       <td> <a href="/admin/mgmtfee/modify?mgmtfeeidx=${mgmtfee.mgmtfeeIdx}">수정/삭제</a></td>
+                       <td> <a href="/admin/mgmtfee/modify?mgmtfeeidx=${mgmtfee.mgmtfeeIdx}"><i class="tim-icons icon-paper"></i></a></td>
                       </tr>
                    </c:forEach>
+               	</c:when>
+              
+               </c:choose>
+            	
               		
                     </tbody>
                   </table>
@@ -247,6 +253,7 @@
               </div>
             </div>
           </div>
+          
           
           <c:choose>
           	<c:when test="${searchType eq 'apartmentIdx'}">
@@ -292,7 +299,7 @@
 	                <li><a href="/admin/${paging.type }?page=${paging.prev}&standard=${searchType}">&lt;</a></li>
 	                 <c:choose>
 	                	<c:when test="${paging.lastPage eq 0 }">
-	                		<li><a href="/admin/${paging.type }&standard=${searchType}"><span>1</span></a></li>
+	                		<li><a href="/admin/${paging.type }&standard=${searchType}">1</a></li>
 	                	</c:when>
 	                	<c:otherwise>
 		                 <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
@@ -325,7 +332,7 @@
 	                <li><a href="/admin/${paging.type }?page=${paging.prev}&standard=${searchType }&keyword=${keyword}">&lt;</a></li>
               	  <c:choose>
                 	<c:when test="${paging.lastPage eq 0 }">
-                		<li><a href="/admin/${paging.type }"><span>1</span></a></li>
+                		<li><a href="/admin/${paging.type }">1</a></li>
                 	</c:when>
                 	<c:otherwise>
 	                 <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
@@ -386,7 +393,7 @@
        <div class="modal-dialog" role="document">
          <div class="modal-content" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675); color:white;">
            <div class="modal-header">
-           	<h4 class="modal-title" id="mgmtfeeDueDateModalLabel">납부일로 검색</h4>
+           	<h4 class="modal-title" id="mgmtfeeDueDateModalLabel">납부월로 검색</h4>
             	 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <i class="tim-icons icon-simple-remove"></i>
               </button>
@@ -395,7 +402,7 @@
         <form action="${context }/admin/mgmtfee">
           <div class="form-group">
           <input type="hidden" name="standard" value="dueDate">
-           <input type="date" class="form-control mgmtfee-keyword" id="inlineFormInputGroup" name="keyword">
+           <input type="month" class="form-control mgmtfee-keyword" id="inlineFormInputGroup" name="keyword">
           </div>
           <div class="modal-footer">
            <button type="submit" class="btn btn-primary">검색</button>
@@ -443,7 +450,7 @@
         <form action="${context }/admin/mgmtfee">
           <div class="form-group">
            <input type="hidden" name="standard" value="generationInfo">
-           <input type="text" class="form-control mgmtfee-keyword" id="inlineFormInputGroup" name="keyword" placeholder="세대정보로 검색하세요.(예 : 101-101)">
+           <input type="text" class="form-control mgmtfee-keyword" id="inlineFormInputGroup" name="keyword" placeholder="세대정보로 검색하세요.(예 : 101-101)" pattern="[0-9]{3,4}-[0-9]{3,4}">
           </div>
           <div class="modal-footer">
            <button type="submit" class="btn btn-primary">검색</button>

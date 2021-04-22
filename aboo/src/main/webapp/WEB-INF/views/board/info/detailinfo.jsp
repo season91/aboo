@@ -96,6 +96,11 @@
             <div class="pt-5 mt-5">
               <h3 class="mb-5">${infoCmtCnt} Comments</h3>
               <ul class="comment-list">
+              <c:choose>
+                	<c:when test="${infoCmtCnt == 0}">
+                		<li class="comment">작성된 댓글이 없습니다.</li>
+                	</c:when>
+              		<c:otherwise>
               <c:forEach items="${infoCmtList}" var="infoCmtList">
                 <li class="comment" id="infoCmt">
                   <div class="vcard bio">
@@ -137,7 +142,7 @@
                     <h3>${infoCmtList.cWriter}</h3>
                     <div class="meta">${infoCmtList.cWdate}</div>
                     
-                    <form action="${context}/board/info/infocmtedit" method="post" class="p-5 bg-light">
+                    <form action="${context}/board/info/infocmtedit" method="post">
 
 
 							<input type="hidden" name="bIdx" value="${infoBoard.bIdx}">
@@ -145,13 +150,15 @@
 		                    <textarea name="cContent" id="message" cols="30" rows="5" class="form-control">${infoCmtList.cContent}</textarea>
 
 		                  <p>
-		                    <input type="submit" value="등록하기" class="btn py-3 px-4 btn-primary">
+		                    <input type="submit" value="수정하기" class="btn mt-3 py-3 px-4 btn-primary">
 		                  </p>
 	
 	                </form>
                   </div>
                 </li>
 			 </c:forEach>
+			 </c:otherwise>
+			 </c:choose>
 
               </ul>
               <!-- END comment-list -->
@@ -189,9 +196,9 @@
               아파트 주변 공공기관부터 투표, 관리비납부, 차량등록, 층간소음 문의 등 관리하기 편한 기능을 제공합니다.
               </p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                <li class="ftco-animate"><a href="https://github.com/season91/aboo"><span><i class="fab fa-github"></i></span></a></li>
+                <li class="ftco-animate"><a href="https://app.asana.com/0/1200089682403032/list"><span><i class="fas fa-calendar-check"></i></span></a></li>
+                <li class="ftco-animate"><a href="https://www.erdcloud.com/d/d3HajP7xvXbTnSxtE"><span><i class="fas fa-cloud"></i></span></a></li>
               </ul>
             </div>
           </div>
@@ -204,7 +211,7 @@
                 <li><a href="/board/interior/intlist" class="py-2 d-block">Interior Board</a></li>
                 <li><a href="/board/used/usedlist" class="py-2 d-block">Used Board</a></li>
                 <li><a href="/myapt/schedule" class="py-2 d-block">Apt Schedule</a></li>
-                <li><a href="/myapt/institutions" class="py-2 d-block">Institutions</a></li>
+                <li><a href="/myapt/institutions/institutions" class="py-2 d-block">Institutions</a></li>
               </ul>
             </div>
           </div>
@@ -215,7 +222,7 @@
                 <li><a href="/index" class="py-2 d-block">Home</a></li>
                 <li><a href="/about" class="py-2 d-block">About</a></li>
                 <li><a href="/myapt/schedule" class="py-2 d-block">MyApt</a></li>
-                <li><a href="/baord/info/listinfo" class="py-2 d-block">Board</a></li>
+                <li><a href="/board/info/listinfo" class="py-2 d-block">Board</a></li>
                 <li><a href="/mypage/modifyinfo" class="py-2 d-block">MyPage</a></li>
               	<li><a href="/bdmin/contactus" class="py-2 d-block">Contact us</a></li>
               </ul>
@@ -327,10 +334,10 @@
 	  		.then(response => response.text())
 	  		.then(text => {
 	  			if(text == 'success'){
-	  				alert("댓글이 삭제되었습니다.");
+	  				alert("댓글이 비공개 처리되었습니다.");
 					location.href = "/board/info/detail?bIdx=" + bIdx;
 	  			}else{
-	  				alert("댓글 삭제 중 에러가 발생했습니다.");
+	  				alert("댓글 비공개 처리 중 에러가 발생했습니다.");
 	  				location.href = "/board/info/detail?bIdx=" + bIdx;
 	  			}
 	  		})

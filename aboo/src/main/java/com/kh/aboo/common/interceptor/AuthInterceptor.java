@@ -40,6 +40,11 @@ public class AuthInterceptor implements HandlerInterceptor {
 
 			case "admin": // 아파트 관리자
 				switch (uriArr[2]) {
+				case "index" : 
+					if(session.getAttribute("admin") == null) {
+						throw new ToAlertException(ErrorCode.AUTH07);
+					}
+					break;
 				case "login":
 					if (session.getAttribute("admin") != null) {
 						throw new ToAlertException(ErrorCode.AUTH08);
@@ -75,15 +80,18 @@ public class AuthInterceptor implements HandlerInterceptor {
 
 			case "mypage": // generation
 				switch (uriArr[2]) {
-				case "modifyinfo":
-					if (session.getAttribute("generation") == null)
+				case "mymgmtfee":
+					if (session.getAttribute("generation") == null && session.getAttribute("admin") == null) {
 						throw new ToAlertException(ErrorCode.AUTH06);
-				case "generationwon":
-					if (session.getAttribute("generation") == null)
-						throw new ToAlertException(ErrorCode.AUTH06);
+					}
+					break;
+				default : 
+					if (session.getAttribute("generation") == null) {
+						throw new ToAlertException(ErrorCode.AUTH09);
+					}
+					break;
 				}
 				break;
-
 			case "login":
 				if (session.getAttribute("generation") != null) {
 					throw new ToAlertException(ErrorCode.AUTH09);
@@ -98,13 +106,43 @@ public class AuthInterceptor implements HandlerInterceptor {
 							throw new ToAlertException(ErrorCode.AUTH06);
 						}
 						break;
+						
 					case "usedupload":
-						if (session.getAttribute("generation") == null)
+						if (session.getAttribute("generation") == null) 
+							throw new ToAlertException(ErrorCode.AUTH06);
+						
+					case "usedcmtupload":
+						if (session.getAttribute("generation") == null) 
+							throw new ToAlertException(ErrorCode.AUTH06);
+					}
+					break;
+				case "info":
+					switch (uriArr[3]) {
+					case "listinfo":
+						if (session.getAttribute("generation") == null && session.getAttribute("admin") == null) {
+							throw new ToAlertException(ErrorCode.AUTH06);
+						}
+						break;
+						
+					case "upload":
+						if (session.getAttribute("generation") == null) 
+							throw new ToAlertException(ErrorCode.AUTH06);
+						
+					case "uploadinfocmt":
+						if (session.getAttribute("generation") == null) 
 							throw new ToAlertException(ErrorCode.AUTH06);
 					}
 					break;
 				}
 				break;
+			case "myapt":
+				switch (uriArr[2]) {
+				case "schedule" :
+					if (session.getAttribute("generation") == null && session.getAttribute("admin") == null) {
+						throw new ToAlertException(ErrorCode.AUTH06);
+					}
+					break;
+				}break;
 			}
 		}
 		return true;

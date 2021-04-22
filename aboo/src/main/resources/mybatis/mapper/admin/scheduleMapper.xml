@@ -9,13 +9,42 @@
 			select *
 			from(
 				select rownum rnum, b.*
-				from(
-					select *
-					from tb_schedule
-					where is_leave = 0 and apartment_Idx = #{apartmentIdx}
+				from( 
+				select * from tb_schedule
+				<where>
+					<choose>
+						<when test="searchType == 'apartmentIdx'">
+							apartment_idx = #{apartmentIdx} and is_leave = 0 
+						</when>
+						<when test="searchType == 'content'">
+							apartment_idx = #{apartmentIdx} and schedule_con like '%'||#{keyword}||'%' and is_leave = 0 
+						</when>
+						<when test="searchType == 'dueDate'">
+							apartment_idx = #{apartmentIdx} and EXTRACT(year from schedule_sdate) || '-' || LTRIM(TO_CHAR(EXTRACT(month from schedule_sdate ),'00')) = #{keyword} and is_leave = 0  
+						</when>
+					</choose>
+				</where>
 					order by schedule_sdate 
 				) b
-			) where rnum between #{queryStart} and #{queryEnd}
+			) where rnum between #{paging.queryStart} and #{paging.queryEnd}
+		</select>
+		
+		<select id="selectScheduleCnt" resultType="int">
+			select count(*) from tb_schedule
+			<where>
+				<choose>
+					<when test="searchType == 'apartmentIdx'">
+						apartment_idx = #{apartmentIdx} and is_leave = 0 
+					</when>
+					<when test="searchType == 'content'">
+						apartment_idx = #{apartmentIdx} and schedule_con like '%'||#{keyword}||'%' and is_leave = 0 
+					</when>
+					<when test="searchType == 'dueDate'">
+						apartment_idx = #{apartmentIdx} and EXTRACT(year from schedule_sdate) || '-' || LTRIM(TO_CHAR(EXTRACT(month from schedule_sdate ),'00')) = #{keyword} and is_leave = 0  
+					</when>
+				</choose>
+			</where>
+
 		</select>
     
     </mapper>

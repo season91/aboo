@@ -25,7 +25,7 @@
         </div>
         <ul class="nav">
           <li >
-            <a href="/admin/mypage/modifyinfos">
+            <a href="/admin/mypage/modifyinfo">
               <i class="tim-icons icon-badge"></i>
               <p>Mypage</p>
             </a>
@@ -191,7 +191,7 @@
                        <td> ${application.aGenerationCnt }</td>
                        <td> ${application.aParking} </td>
                        <td> ${application.aName} </td>
-                       <td> <a href="${context }/bdmin/management/contactusdetail?applicationIdx=${application.applicationIdx}">신청서 상세</a></td>
+                       <td> <a href="${context }/bdmin/management/contactusdetail?applicationIdx=${application.applicationIdx}"><i class="tim-icons icon-single-copy-04"></i></a></td>
                       </tr>
                    </c:forEach>
               		

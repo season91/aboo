@@ -44,7 +44,6 @@ public class MgmtfeeController {
 	@GetMapping("admin/mgmtfee")
 	public void adminMgmtfee(@RequestParam(defaultValue = "1") int page, @SessionAttribute(name = "admin", required = false) Admin admin, @RequestParam(defaultValue = "apartmentIdx") String standard,  @RequestParam(defaultValue = "apartmentIdx") String keyword, Model model) {
 		String apartmentIdx = admin.getApartmentIdx();
-
 		// 반환형은 map이고 여기엔 검색기준, 세대정보, 검색값, 페이징, 검색결과list가 들어있다.
 		// 자세한건 service impl에 구현
 		// view에서는 페이징부분이 관건인데, choose문을 searchType을 이용해 페이징처리 분기를 나눈다.
@@ -61,18 +60,14 @@ public class MgmtfeeController {
 		
 		String apartmentIdx = admin.getApartmentIdx();
 		List<Mgmtfee> mgmtfeeList = mgmtfeeService.insertMgmtfee(commandMap, apartmentIdx);
-		System.out.println(mgmtfeeList.size());
 		
-		// 성공 실패 분기나누기
 		if(mgmtfeeList == null || mgmtfeeList.size() == 0 || mgmtfeeList.get(0).getPeriodPayment().equals("")) {
-			System.out.println("실패유");
 			return "fail";
 		}
-		System.out.println("컨트롤러리스트"+mgmtfeeList);
+		
 		// 성공시 알람넣어주기.
 		for (int i = 0; i < mgmtfeeList.size(); i++) {
-			System.out.println("알람보낼세대관리번호"+mgmtfeeList.get(i));
-			myAlarmService.insertPvAlarm("8월 "+AlarmCode.ADD_MGMTFEE, mgmtfeeList.get(i).getGenerationIdx());
+			myAlarmService.insertPvAlarm(AlarmCode.ADD_MGMTFEE.name(), mgmtfeeList.get(i).getGenerationIdx());
 		}
 		
 		return "success";
@@ -91,7 +86,6 @@ public class MgmtfeeController {
 
 		FileUtil fileUtil = new FileUtil();
 		// mgmtfeeFormExcel 엑셀 양식 호출.
-		System.out.println("양식만들기시작");
 		File file = fileUtil.mfmtgeeFormExcel(generationList);
 		
 		// 내보내기
@@ -131,7 +125,6 @@ public class MgmtfeeController {
 	
 	@PostMapping("admin/mgmtfee/modifyimpl")
 	public String mgmtfeeModifyImpl(Mgmtfee mgmtfee, @RequestParam String overdueFee, @RequestParam String isPaymentText, Model model) {
-		System.out.println("vo찍히나???"+mgmtfee);
 		
 		if(isPaymentText.equals("미납")) {
 			mgmtfee.setIsPayment(0);
@@ -153,7 +146,6 @@ public class MgmtfeeController {
 		Mgmtfee updateMgmtefee = mgmtfeeService.updateMgmtfee(mgmtfee);
 		// 업데이트내역이 있다면 수정완료, 없다면 실패안내. mgmt update는 프로시저라 int로 판단안함. 
 		if(updateMgmtefee != null) {
-			System.out.println("모야몇번찍히는겨");
 			myAlarmService.insertPvAlarm(AlarmCode.MODIFY_MGMTFEE+"", mgmtfee.getGenerationIdx());
 			model.addAttribute("alertMsg", "수정이 완료되었습니다.");
 			model.addAttribute("url", "/admin/mgmtfee/modify?mgmtfeeidx="+mgmtfee.getMgmtfeeIdx());

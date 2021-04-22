@@ -187,15 +187,17 @@ public class UsedServiceImpl implements UsedService {
 		return usedCmtRepository.updateUsedBrdCmtPrivate(usedCmtIdx);
 	}
 
-	public List<Map<String, Object>> selectUsedBrdYearCnt() {
-		return usedRepository.selectUsedBrdYearCnt();
+	public int selectUsedBrdTodayCnt() {
+		return usedRepository.selectUsedBrdTodayCnt();
 	}
 
-	public List<Map<String, Object>> selectInfoBrdYearCnt() {
-		return usedRepository.selectInfoBrdYearCnt();
+	public int selectInfoBrdTodayCnt() {
+		return usedRepository.selectInfoBrdTodayCnt();
 	}
 	
-	public List<Map<String, Object>> selectIntBrdYearCnt() {
-		return usedRepository.selectIntBrdYearCnt();
+	public int selectIntBrdTodayCnt() {
+		return usedRepository.selectIntBrdTodayCnt();
 	}
+
+
 }

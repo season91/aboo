@@ -3,6 +3,7 @@ package com.kh.aboo.myapt.parking.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -44,15 +45,21 @@ public class ParkingController {
 	}
 	
 	@GetMapping("/myapt/parking")
-	public void parking(@SessionAttribute(name = "generation", required = false) Generation generation, Model model) {
+	public void parking(@SessionAttribute(name = "apartmentIdx", required = false) String apartmentIdx, 
+			@SessionAttribute(name = "generation", required = false) Generation generation, 
+			HttpSession session, Model model) {
+		if(generation != null) {
+			apartmentIdx = generation.getApartmentIdx();
+		}
 		// 주차가능대수 조회
-		Map<String, Object> parkingMap = parkingService.possibleParking(generation.getApartmentIdx());
+		Map<String, Object> parkingMap = parkingService.possibleParking(apartmentIdx);
+		session.removeAttribute("apartmentIdx");
 		model.addAllAttributes(parkingMap);
 	}
 	
 	// 차량신청
 	@GetMapping("/myapt/parking/application")
-	public void carApplication(@SessionAttribute(name = "generation", required = false) Generation generation, Model model){
+	public void carApplication(@SessionAttribute(name = "generation", required = false) Generation generation,  Model model){
 		// 신청한 내역이 있는지 확인한다.
 		List<CarApplication> carApplicationCheck = parkingService.selectCarApplicationByGenerationIdx(generation.getGenerationIdx());
 		System.out.println(carApplicationCheck);

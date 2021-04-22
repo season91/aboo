@@ -45,26 +45,11 @@
         </div>
       </div>
     </section>
-    
-    <section class="home-slider owl-carousel">
-      <div class="slider-item bread-item" style="background-image: url(images/bg_1.jpg);" data-stellar-background-ratio="0.5">
-        <div class="overlay"></div>
-        <div class="container-fluid">
-          <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
-
-            <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span>Contact</span></p>
-	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Contact</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   
     <section class="ftco-section contact-section ftco-degree-bg">
       <div class="container">
-        <div class="row d-flex mb-5 contact-info">
-          <div class="col-md-12 mb-4">
+        <div class="row d-flex contact-info">
+          <div class="col-md-12 ">
             <h2 class="h4">관리자와 채팅하기</h2>
           </div>
         </div>
@@ -74,9 +59,19 @@
                 <input type="text" class="form-control" id="name" readonly="readonly" placeholder="${sessionScope.generation.id}">
                 <input type="hidden" class="form-control" id="target" readonly="readonly" value="${sessionScope.generation.apartmentIdx}">
               </div>
-              <div class="card-body" id="messageArea"  placeholder="대화내용이 없습니다.">
-              </div>
-              <div>
+             <!--  <div class="card-body" id="messageArea"  placeholder="대화내용이 없습니다." style="overflow-y: scroll;">
+              </div> -->
+              
+              <div class="card" >
+		        <div id="menuone" class="collapse show" >
+		          <div class="card-body" id="messageArea" style="overflow: auto; height: 50vh;">
+		          </div>
+		        </div>
+		      </div>
+              
+              
+              
+              <div class = "mt-3 mb-3">
                 <input type="text" class="form-control" id="message" placeholder="문의내용을 입력하세요.">
               </div>
               <div class="form-group">
@@ -97,9 +92,9 @@
               아파트 주변 공공기관부터 투표, 관리비납부, 차량등록, 층간소음 문의 등 관리하기 편한 기능을 제공합니다.
               </p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                <li class="ftco-animate"><a href="https://github.com/season91/aboo"><span><i class="fab fa-github"></i></span></a></li>
+                <li class="ftco-animate"><a href="https://app.asana.com/0/1200089682403032/list"><span><i class="fas fa-calendar-check"></i></span></a></li>
+                <li class="ftco-animate"><a href="https://www.erdcloud.com/d/d3HajP7xvXbTnSxtE"><span><i class="fas fa-cloud"></i></span></a></li>
               </ul>
             </div>
           </div>
@@ -112,7 +107,7 @@
                 <li><a href="/board/interior/intlist" class="py-2 d-block">Interior Board</a></li>
                 <li><a href="/board/used/usedlist" class="py-2 d-block">Used Board</a></li>
                 <li><a href="/myapt/schedule" class="py-2 d-block">Apt Schedule</a></li>
-                <li><a href="/myapt/institutions" class="py-2 d-block">Institutions</a></li>
+                <li><a href="/myapt/institutions/institutions" class="py-2 d-block">Institutions</a></li>
               </ul>
             </div>
           </div>
@@ -123,7 +118,7 @@
                 <li><a href="/index" class="py-2 d-block">Home</a></li>
                 <li><a href="/about" class="py-2 d-block">About</a></li>
                 <li><a href="/myapt/schedule" class="py-2 d-block">MyApt</a></li>
-                <li><a href="/baord/info/listinfo" class="py-2 d-block">Board</a></li>
+                <li><a href="/board/info/listinfo" class="py-2 d-block">Board</a></li>
                 <li><a href="/mypage/modifyinfo" class="py-2 d-block">MyPage</a></li>
                 <li><a href="/bdmin/contactus" class="py-2 d-block">Contact us</a></li>
               </ul>
@@ -157,6 +152,7 @@
     </footer>
     
     
+    
   
 
   <!-- loader -->
@@ -185,11 +181,13 @@
 		// 서버로부터 메시지를 받았을 때
 		function onMessage(msg) {
 			let data = msg.data;
-			console.dir(data);
 			if(data.includes("[안내]")){
 				$("#infoArea").append(data + "<br/>");
 			} else {
 				$("#messageArea").append(data + "<br/>");
+				  /* 자동스크롤 내리기 */
+				 const top = $('#messageArea').prop('scrollHeight'); 
+				  $('#messageArea').scrollTop(top);
 			}
 			
 		}
@@ -219,6 +217,13 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="../../../resources/js/generation/google-map.js"></script>
   <script src="../../../resources/js/generation/main.js"></script>
-    
+   <script type="text/javascript">
+   /* 자동스크롤 내리기 */
+   $('#sendBtn').on('click', ()=> {
+		  const top = $('#messageArea').prop('scrollHeight'); 
+		  $('#messageArea').scrollTop(top);
+	  });
+   
+   </script>
 </body>
 </html>

@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Update;
 
 import com.kh.aboo.bdmin.management.model.vo.ApartApplication;
 import com.kh.aboo.bdmin.management.model.vo.Bdmin;
+import com.kh.aboo.bdmin.management.model.vo.ManagerApplication;
 import com.kh.aboo.user.apartment.model.vo.Apartment;
 import com.kh.aboo.user.manager.model.vo.Admin;
 
@@ -84,5 +85,28 @@ public interface ManagementRepository {
 	@Update("update tb_manager set is_del = 1 where manager_idx = #{managerIdx} and is_del = 0")
 	int updateAdminIsDel(String managerIdx);
 	
+	//[선영] 어드민 신청 폼 insert 
+	@Insert("insert into TB_MANAGER_APPLICATION(MANAGER_APPLICATION_IDX, APARTMENT_NAME, APARTMENT_ADDRESS, ID, PASSWORD, NAME, EMAIL ,BIRTH) values(SC_MANAGER_APPLICATION.nextval,#{apartmentName},#{apartmentAddress}, #{id}, #{password} , #{name}, #{email} ,#{birth})")
+	int insertManagerContact(ManagerApplication managerApplication);
 	
+	//[선영] 어드민 신청 폼 아이디 체크
+	//매니저 테이블에서 아이디가 있는지 체크해서 가져오는것
+	@Select("select count(*) from TB_MANAGER where id = #{id} and is_del = 0")
+	int selectManagerContactId(String  id);
+	
+	//[아영] 어드민 신청 list
+	int selectAdminApplicationCnt(Map<String, Object> searchMap);
+	
+	List<ManagerApplication> selectAdminApplicationList(Map<String, Object> searchMap);
+	
+	@Select("select * from tb_manager_application where is_approval = 0 and manager_application_idx = ${managerApplicationIdx}")
+	ManagerApplication selectAdminApplication(String managerApplicationIdx);
+	
+	//[아영] 어드민 계정 신청 승인
+	@Update("update tb_manager_application set is_approval = ${isApproval} where manager_application_idx = ${managerApplicationIdx} and is_approval = 0")
+	int updateAdminApplication(ManagerApplication application);
+	
+	//[아영] 신청서로 인한 어드민 계정 생성.
+	@Insert("insert into tb_manager(manager_idx, apartment_idx, id, password, name, email, birth) values(sc_manager_idx.nextval, #{apartmentIdx}, #{id}, #{password}, #{name}, #{email}, #{birth})")
+	int insertAdminByApplication(Admin admin);
 }

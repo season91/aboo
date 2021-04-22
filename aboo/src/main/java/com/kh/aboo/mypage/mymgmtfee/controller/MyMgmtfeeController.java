@@ -45,18 +45,14 @@ public class MyMgmtfeeController {
 
 	// 관리비상세
 	@GetMapping("mymgmtfee/detail")
-	public void mgmtfeedetail(@RequestParam String mgmtfeeidx,
-			@SessionAttribute(name = "generation", required = false) Generation generation, Model model) {
-		System.out.println("넘어오나?" + mgmtfeeidx);
+	public void mgmtfeedetail(@RequestParam String mgmtfeeidx, Model model) {
 		Mgmtfee mgmtfee = myMgmtfeeService.selectMyMgmtfeeByMgmtfeeIdx(mgmtfeeidx);
 		Map<String, Object> mgmtdate = myMgmtfeeService.selectMyMgmtfeeDate(mgmtfeeidx);
 
-		System.out.println("mgmtfee" + mgmtfee);
 		// 연체료정보도 보내준다
 		MgmtfeeOverdue mgmtfeeOverdue = myMgmtfeeService.selectMyMgmtfeeOverdue(mgmtfeeidx);
 		if (mgmtfeeOverdue != null) {
 			model.addAttribute(mgmtfeeOverdue);
-			System.out.println("연체있다" + mgmtfeeOverdue);
 		}
 
 		model.addAttribute(mgmtfee);

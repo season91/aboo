@@ -2,7 +2,7 @@ package com.kh.aboo.common.util.file;
 
 import java.sql.Date;
 
-import com.kh.aboo.common.code.Configcode;
+import com.kh.aboo.common.code.ConfigCode;
 
 public class FileVo {
 
@@ -17,7 +17,7 @@ public class FileVo {
 	
 	// 저장경로랑헷갈려서 풀 경로따로 확인하기 위한 확인용메서드
 	public String getFullPath() {
-		return Configcode.UPLOAD_PATH + savePath;
+		return ConfigCode.UPLOAD_PATH + savePath;
 	}
 
 	public int getfIdx() {

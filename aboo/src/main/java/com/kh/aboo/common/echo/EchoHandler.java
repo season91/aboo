@@ -28,7 +28,6 @@ public class EchoHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		String id = "";
-		System.out.println("방금접속한정보"+session);
 		if(session.getAttributes().get("admin") == null) {
 			Generation generation = (Generation) session.getAttributes().get("generation");
 			id = generation.getId();
@@ -75,21 +74,22 @@ public class EchoHandler extends TextWebSocketHandler {
 		String target = object.getString("target");
 		String msg = object.getString("messeage");
 		
-		
 		System.out.println("받는이 : "+target);
 		int fromIdx = sessionList.indexOf(session); // 보낸이..
 		
 		String adminId = "";
+		String name = (String) nameList.get(fromIdx);
 		// 보낸 세션이 admin이라면 admin에게 다 보내주기
 		if(session.getAttributes().get("admin") != null) {
 			int idx = sessionList.indexOf(session);
 			adminId = (String) nameList.get(idx);
+			name = "관리자";
 		}
 		
 		for (int i = 0; i < sessionList.size(); i++) {
 			// 닉네임이 같다면 해당 i번째 세션에 보내준다
 			if(nameList.get(i).equals(target)  || sessionList.get(i).equals(session) || nameList.get(i).equals(adminId)) {
-				sessionList.get(i).sendMessage(new TextMessage(nameList.get(fromIdx)+" : "+msg));
+				sessionList.get(i).sendMessage(new TextMessage(name+" : "+msg));
 			}
 			
 		}
@@ -100,17 +100,27 @@ public class EchoHandler extends TextWebSocketHandler {
 	// 클라이언트가 연결 끊었을 때 실행
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		System.out.println("퇴장"+session.getId());
+		System.out.println("퇴장" + session.getId());
 		int idx = sessionList.indexOf(session);
 		String id = (String) nameList.get(idx);
 		sessionList.remove(session);
 		nameList.remove(idx);
-		
-		//접속시에 접속자 정보 보여준다.
+		System.out.println("session2" + session.getAttributes());
+
+		Generation generation = (Generation) session.getAttributes().get("generation");
+		String apartmentIdx = generation.getApartmentIdx();
+
+		System.out.println("나간 유저의 아파트 아이디"+apartmentIdx);
+		disconnectList(id, apartmentIdx);
+
+	}
+	
+	public void disconnectList(String id, String apartmentIdx) throws IOException {
+
 		for (int i = 0; i < nameList.size(); i++) {
-			if(nameList.get(i).equals("admin1")) {
-				//관리자라면 입장자 정보 받는다.
-				sessionList.get(i).sendMessage(new TextMessage("[안내] "+id+" 세대가 퇴장하셨습니다."));
+			if (nameList.get(i).equals(apartmentIdx)) {
+				// 관리자라면 입장자 정보 받는다
+				sessionList.get(i).sendMessage(new TextMessage("[안내] " + id + " 세대가 퇴장하셨습니다."));
 			}
 		}
 	}

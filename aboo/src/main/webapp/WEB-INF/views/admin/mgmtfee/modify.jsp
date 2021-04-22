@@ -25,7 +25,7 @@
         </div>
         <ul class="nav">
           <li >
-            <a href="/admin/mypage/modifyinfos">
+            <a href="/admin/mypage/modifyinfo">
               <i class="tim-icons icon-badge"></i>
               <p>Mypage</p>
             </a>
@@ -144,7 +144,7 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="title">관리비 수정</h3>
-                <p>수정시 기존 정보가 전부 변경됩니다. 수정시 유의바랍니다. 이미 부과된 연체료는 원복이 어려우니 세대감면액을 이용해주시기 바랍니다.</p>
+                <p>수정시 기존 정보가 전부 변경됩니다. 수정시 유의바랍니다. <br> 이미 부과된 연체료는 원복이 어려우니 세대감면액을 이용해주시기 바랍니다.</p>
               </div>
                 	  
               <div class="card-body">
@@ -302,14 +302,6 @@
                     	</c:otherwise>
                     </c:choose>        
                     </div> 
-                   <div class="row">
-                    <div class="col-md-8">
-                      <div class="form-group">
-                        <label>알림 메시지</label>
-                        <textarea rows="4" cols="80" class="form-control" name="mgmtfee-alarm">지난달 세대전기료가 과다 부과되어 당월 금액 조정하였습니다.</textarea>
-                      </div>
-                    </div>
-                  </div>
                      <div class="card-footer" style="display: flex; justify-content: space-around;">
 		                <button type="submit" class="btn btn-fill btn-primary">전송하기</button>
 		                <a href="${context }/admin/mgmtfee"><button type="button" class="btn btn-fill btn-success">목록으로</button></a>
