@@ -25,7 +25,7 @@
         </div>
         <ul class="nav">
           <li >
-            <a href="/admin/mypage/modifyinfos">
+            <a href="/admin/mypage/modifyinfo">
               <i class="tim-icons icon-badge"></i>
               <p>Mypage</p>
             </a>

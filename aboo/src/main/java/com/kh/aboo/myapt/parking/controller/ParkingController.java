@@ -45,7 +45,12 @@ public class ParkingController {
 	}
 	
 	@GetMapping("/myapt/parking")
-	public void parking(@SessionAttribute(name = "apartmentIdx", required = false) String apartmentIdx, HttpSession session, Model model) {
+	public void parking(@SessionAttribute(name = "apartmentIdx", required = false) String apartmentIdx, 
+			@SessionAttribute(name = "generation", required = false) Generation generation, 
+			HttpSession session, Model model) {
+		if(generation != null) {
+			apartmentIdx = generation.getApartmentIdx();
+		}
 		// 주차가능대수 조회
 		Map<String, Object> parkingMap = parkingService.possibleParking(apartmentIdx);
 		session.removeAttribute("apartmentIdx");

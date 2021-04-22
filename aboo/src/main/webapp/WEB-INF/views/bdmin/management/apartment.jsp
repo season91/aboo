@@ -25,7 +25,7 @@
         </div>
         <ul class="nav">
           <li >
-            <a href="/admin/mypage/modifyinfos">
+            <a href="/admin/mypage/modifyinfo">
               <i class="tim-icons icon-badge"></i>
               <p>Mypage</p>
             </a>
@@ -164,7 +164,7 @@
                         </div>
                         <div class="col-md-3">
                         <form action="${context }/bdmin/management/contactuslist">
-                          <button type="submit" class="btn btn-warning btn-block" id="search-button" data-toggle="modal" data-target="#apartmentModal">입점 문의건 보기</button>
+                          <button type="submit" class="btn btn-warning btn-block" id="search-button" data-toggle="modal" data-target="#apartmentModal">서비스 신청건 보기</button>
                         </form>
                         </div>
                       </div>

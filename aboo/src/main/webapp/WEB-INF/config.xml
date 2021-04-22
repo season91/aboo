@@ -22,7 +22,9 @@
 -->	<!-- 민희 baseDir -->
 <!-- 	<baseDir>E:\CODE\aboo\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\aboo\resources\ckstorage</baseDir> -->
 	<!--아영 baseDir-->
-	<baseDir>C:\CODE\kh-aboo-dev\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\aboo\resources\ckstorage</baseDir>
+	<!-- <baseDir>C:\CODE\kh-aboo-dev\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\aboo\resources\ckstorage</baseDir> -->
+	<!-- 선영 -->
+	<baseDir>C:\final\abooWorkspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\aboo\resources\ckstorage</baseDir>
 	<baseURL>/resources/ckstorage</baseURL>
 	<licenseKey></licenseKey>
 	<licenseName></licenseName>

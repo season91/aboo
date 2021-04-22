@@ -40,6 +40,11 @@ public class AuthInterceptor implements HandlerInterceptor {
 
 			case "admin": // 아파트 관리자
 				switch (uriArr[2]) {
+				case "index" : 
+					if(session.getAttribute("admin") == null) {
+						throw new ToAlertException(ErrorCode.AUTH07);
+					}
+					break;
 				case "login":
 					if (session.getAttribute("admin") != null) {
 						throw new ToAlertException(ErrorCode.AUTH08);
@@ -74,11 +79,19 @@ public class AuthInterceptor implements HandlerInterceptor {
 				break;
 
 			case "mypage": // generation
-				if (session.getAttribute("generation") == null) {
-					throw new ToAlertException(ErrorCode.AUTH06);
+				switch (uriArr[2]) {
+				case "mymgmtfee":
+					if (session.getAttribute("generation") == null && session.getAttribute("admin") == null) {
+						throw new ToAlertException(ErrorCode.AUTH06);
+					}
+					break;
+				default : 
+					if (session.getAttribute("generation") == null) {
+						throw new ToAlertException(ErrorCode.AUTH09);
+					}
+					break;
 				}
 				break;
-
 			case "login":
 				if (session.getAttribute("generation") != null) {
 					throw new ToAlertException(ErrorCode.AUTH09);

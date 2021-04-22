@@ -28,7 +28,6 @@ public class EchoHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		String id = "";
-		System.out.println("방금접속한정보"+session);
 		if(session.getAttributes().get("admin") == null) {
 			Generation generation = (Generation) session.getAttributes().get("generation");
 			id = generation.getId();
@@ -74,7 +73,6 @@ public class EchoHandler extends TextWebSocketHandler {
 		// 전송을 눌렀을때, 세션정보가 리스트의 i 번째와 같은 위치에 name을 넣어준다.
 		String target = object.getString("target");
 		String msg = object.getString("messeage");
-		
 		
 		System.out.println("받는이 : "+target);
 		int fromIdx = sessionList.indexOf(session); // 보낸이..

@@ -213,7 +213,7 @@ public class GenerationServiceImpl implements GenerationService {
 		JSONArray messages = new JSONArray();
 		try {
 			params.put("type", "SMS");
-			params.put("from", "01092680961");
+			params.put("from", "");
 			params.put("content", "[ABOO:아파트를 부탁해] 본인 확인을 위해 인증번호 [" + authPathTell + "]를 입력해주세요.");
 			params2.put("to", tell);
 			messages.put(params2);

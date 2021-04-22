@@ -25,7 +25,7 @@
         </div>
         <ul class="nav">
           <li >
-            <a href="/admin/mypage/modifyinfos">
+            <a href="/admin/mypage/modifyinfo">
               <i class="tim-icons icon-badge"></i>
               <p>Mypage</p>
             </a>
@@ -227,7 +227,7 @@
                            </label>
                          </div>
                        </td>
-                       <td><a href="/mypage/mymgmtfee?${mgmtfee.mgmtfeeIdx }"> ${mgmtfee.mgmtfeeIdx}</a> </td>
+                       <td><a href="/mypage/mymgmtfee/detail?mgmtfeeidx=${mgmtfee.mgmtfeeIdx }"> ${mgmtfee.mgmtfeeIdx}</a> </td>
                        <td> ${generationList[status.index].building }동 ${generationList[status.index].num}호</td>
                        <td> ${mgmtfee.dueDate } </td>
                        <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${mgmtfee.periodPayment}"/> </td>
