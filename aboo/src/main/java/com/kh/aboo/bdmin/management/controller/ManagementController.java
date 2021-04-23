@@ -188,6 +188,20 @@ public class ManagementController {
 		return "success";
 	}
 	
+	// [선영] 어드민 신청 이메일 체크
+	@GetMapping("adminapplicationemailcheck")
+	@ResponseBody
+	public String adminApplicationEmailCheck(@RequestParam String email , Model model) {
+
+		int res = managementService.selectManagerContactEmail(email);
+
+		if (res > 0) {
+			return "fail";
+		}
+		return "success";
+	}
+	
+	
 	// [선영] 어드민 신청 추가
 	@PostMapping("adminapplicationadd")
 	public String adminContactAdd(ManagerApplication managerApplication , Model model) {

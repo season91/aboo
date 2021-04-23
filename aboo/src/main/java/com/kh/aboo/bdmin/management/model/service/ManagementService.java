@@ -59,4 +59,7 @@ public interface ManagementService {
 	
 	// 3. 어드민 계정 신청서 업데이트 및 어드민 계정 생성
 	String updateAdminApplication(ManagerApplication application, String apartmentInfo);
+
+	//[선영] 어드민 신청 폼 테이블 이메일 체크
+	int selectManagerContactEmail(String email);
 }
