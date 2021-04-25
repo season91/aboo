@@ -109,4 +109,7 @@ public interface ManagementRepository {
 	//[아영] 신청서로 인한 어드민 계정 생성.
 	@Insert("insert into tb_manager(manager_idx, apartment_idx, id, password, name, email, birth) values(sc_manager_idx.nextval, #{apartmentIdx}, #{id}, #{password}, #{name}, #{email}, #{birth})")
 	int insertAdminByApplication(Admin admin);
+
+	@Select("select count(*) from TB_MANAGER where email = #{email} and is_del = 0")
+	int selectManagerContactEmail(String email);
 }

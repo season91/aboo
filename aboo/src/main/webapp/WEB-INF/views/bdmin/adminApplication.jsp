@@ -148,10 +148,14 @@
 	                      </div>
 	                    </div>
 	                    
-	                    <div class="col-md-6 px-md-1">
+	                    <div class="col-md-9 px-md-1">
 	                      <div class="form-group">
 	                        <label>신청자 이메일</label>
-	                        <input type="email" class="form-control" name="email" required="required">
+	                        <div class= "d-flex">
+	                        	<input type="email" class="form-control col-md-8" id = "email" name="email" required="required">
+	                        	<button type="button" class="btn btn-primary col-md-2" onclick="emailCheck()" style="display: flex; justify-content: center;align-items: center; margin-left: 10px">이메일 검사</button>	                   
+	                        </div>
+	                     	<div id = "email_check" class = " mt-2"></div>
 	                      </div>
 	                    </div>      	                    
 	                    
@@ -361,11 +365,11 @@
 	            if(text == 'success'){
 	               idCheckFlg = true;
 	               document.querySelector("#id_check").innerHTML = '사용 가능한 아이디 입니다.';
-	               document.querySelector("#id_check").style.color = 'skyblue';
+	               document.querySelector("#id_check").style.color = 'blue';
 
 	            }else{
 	               idCheckFlg = false;
-	               document.querySelector("#id_check").innerHTML = '사용 불 가능한 아이디 입니다.';
+	               document.querySelector("#id_check").innerHTML = '사용 불가능한 아이디 입니다.';
 	               document.querySelector("#id_check").style.color = 'red';
 	               document.querySelector("#id").value="";
 	            }
@@ -375,6 +379,37 @@
 	         alert("아이디를 입력하지 않으셨습니다.");
 	      }
 	   };
+	   
+	   let emailCheckFlg = false;
+	   let emailCheck = () => {
+		      //사용자가 입력한 아이디
+		      //요소의 아이디속성이 있을 경우 해당 엘리먼트를 가져다가 사용할 수 있다.
+		      let email = document.querySelector("#email").value;
+
+		      if(email){
+		         fetch("/bdmin/adminapplicationemailcheck?email=" + email,{
+		            method:"GET"
+		         })	
+		         .then(response => response.text())
+		         .then(text =>{
+		            if(text == 'success'){
+		            	emailCheckFlg = true;
+		               document.querySelector("#email_check").innerHTML = '사용 가능한 이메일 입니다.';
+		               document.querySelector("#email_check").style.color = 'blue';
+
+		            }else{
+		            	emailCheckFlg = false;
+		               document.querySelector("#email_check").innerHTML = '사용 불가능한 이메일 입니다.';
+		               document.querySelector("#email_check").style.color = 'red';
+		               document.querySelector("#email").value="";
+		            }
+		         })
+		         
+		      }else{
+		         alert("이메일을 입력하지 않으셨습니다.");
+		      }
+		   };
+		   
 
 	   let flg = false;
 	    
@@ -426,9 +461,18 @@
 			   id.focus()
 		   }
 	 	   
+	 	   
+	 	   if(!emailCheckFlg){
+			   e.preventDefault();
+			   alert("이메일 중복검사를 하지 않으셨습니다.");
+			   email.focus()
+		   }
 	    });  
 
    
+	     
+	     
+	     
    </script>
    
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

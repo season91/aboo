@@ -72,8 +72,8 @@
 	</section>
 
 	<section class="ftco-section contact-section ftco-degree-bg">
-		<h4 class="text-center mb-4">아이디 찾기</h4>
-		<div class="d-flex justify-content-center">
+		<h4 class="text-center mb-2">아이디 찾기</h4>
+		<div class="d-flex justify-content-center mb-2">
 			<div>아래정보를 입력하시면 메일로 인증번호를 발송해드립니다</div>
 		</div>
 		<div class="container">
