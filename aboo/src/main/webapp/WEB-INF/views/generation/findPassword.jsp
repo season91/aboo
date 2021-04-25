@@ -69,8 +69,8 @@
     </section>
   
     <section class="ftco-section contact-section ftco-degree-bg">
-     <h4 class = "text-center mb-4">비밀번호 찾기</h4>
-     <div class = "d-flex justify-content-center"><div>아래정보를 입력하시면 메일로 임시 비밀번호를 발송해드립니다</div></div>
+     <h4 class = "text-center mb-2">비밀번호 찾기</h4>
+     <div class = "d-flex justify-content-center mb-2"><div>아래정보를 입력하시면 메일로 임시 비밀번호를 발송해드립니다</div></div>
       <div class="container">
         <div class="row block-9 justify-content-center">
           <div class="col-md-6">

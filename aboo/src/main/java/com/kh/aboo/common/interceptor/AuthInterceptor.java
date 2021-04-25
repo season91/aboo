@@ -87,7 +87,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 					break;
 				default : 
 					if (session.getAttribute("generation") == null) {
-						throw new ToAlertException(ErrorCode.AUTH09);
+						throw new ToAlertException(ErrorCode.AUTH06);
 					}
 					break;
 				}
