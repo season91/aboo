@@ -14,6 +14,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,11 +52,6 @@ public class AdminController {
 
 	}
 
-	// 선영
-	/*@GetMapping("index")
-	public String admin() {
-		return "admin/index";
-	}*/
 
 	// 선영
 	@GetMapping("login")

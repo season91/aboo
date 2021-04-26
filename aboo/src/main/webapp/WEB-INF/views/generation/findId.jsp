@@ -25,34 +25,24 @@
 						href="/board/info/listinfo">Board</a></li>
 					<li class="nav-item"><a href="/mypage/modifyinfo"
 						class="nav-link action">MyPage</a></li>
-					<c:choose>
-						<c:when
-							test="${sessionScope.generation == null and sessionScope.admin == null}">
-							<li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>
-						</c:when>
-						<c:when test="${sessionScope.generation != null}">
-							<li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>
-						</c:when>
-						<c:when test="${sessionScope.admin != null}">
-							<li class="nav-item cta"><a href="/admin/logout"
-								class="nav-link"><span>Logout</span></a></li>
-						</c:when>
-					</c:choose>
+ 			<c:choose>
+                <c:when test="${sessionScope.generation == null && sessionScope.admin == null}">
+                   <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>             
+                </c:when>
+                <c:when test="${sessionScope.generation != null && sessionScope.admin == null}">
+                   <li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>             
+                </c:when>
+                <c:when test="${sessionScope.admin != null && sessionScope.generation == null}">
+                   <li class="nav-item cta"><a href="/admin/logout" class="nav-link"><span>Admin Logout</span></a></li>             
+                </c:when>
+             </c:choose>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	<!-- END nav -->
 	
-	<div id="msg" class= "btn1Wrap">
-		<button class = "btn1" onclick="chatPage()" style="outline: none;">Chat</button>	  
-	</div>
 
-	<script type="text/javascript">
-	function chatPage() {
-		location.href ='/myapt/chat';
-	}
-	</script>
 
 	<section class="home-slider owl-carousel">
 		<div class="slider-item bread-item"

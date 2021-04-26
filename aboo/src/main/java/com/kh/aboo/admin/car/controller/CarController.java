@@ -54,27 +54,32 @@ public class CarController {
 	
 	// 건별등록
 	@GetMapping("admin/caradd")
-	public String carAdd(@RequestParam String building, @SessionAttribute(name = "admin", required = false) Admin admin, @RequestParam String num, @RequestParam String carNumber, Model model){
+	@ResponseBody //비동기
+	public String carAdd(@SessionAttribute(name = "admin", required = false) Admin admin, @RequestParam String building, @RequestParam String num, @RequestParam String carNumber){
 		// 전달받은 아파트번호,동,호수 정보로 Generation 가져온다.
+		System.out.println("building"+building);
 		Generation generationInfo = new Generation();
 		generationInfo.setApartmentIdx(admin.getApartmentIdx());
 		generationInfo.setBuilding(building);
 		generationInfo.setNum(num);
 		Generation generation = carService.selectGenerationByBuildingAndNum(generationInfo);
-		
-		// 전달받은 차량번호를 세대정보와 함께 넣어준다.
-		Car car = new Car();
-		car.setGenerationIdx(generation.getGenerationIdx());
-		car.setApartmentIdx(generation.getApartmentIdx());
-		car.setCarNumber(carNumber);
-		
-		String res = carService.insertAndQRWrite(car);
-		
-		myAlarmService.insertPvAlarm("'" + car.getCarNumber() + "' " +AlarmCode.ADD_CAR+"", car.getGenerationIdx());
-		model.addAttribute("alertMsg", res);
-		model.addAttribute("url", "car");
 
-		return "common/result";
+		if(generation == null) {
+			return "null";
+		} else {
+			// 전달받은 차량번호를 세대정보와 함께 넣어준다.
+			Car car = new Car();
+			car.setGenerationIdx(generation.getGenerationIdx());
+			car.setApartmentIdx(generation.getApartmentIdx());
+			car.setCarNumber(carNumber);
+			
+			String res = carService.insertAndQRWrite(car);
+			
+			myAlarmService.insertPvAlarm("'" + car.getCarNumber() + "' " +AlarmCode.ADD_CAR+"", car.getGenerationIdx());
+			System.out.println(res);
+			return res;
+		}
+		
 	}
 	
 	// 비동기, 차량 삭제
