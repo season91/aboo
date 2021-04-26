@@ -12,6 +12,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -63,7 +64,6 @@ public class ParkingController {
 	public void carApplication(@SessionAttribute(name = "generation", required = false) Generation generation,  Model model){
 		// 신청한 내역이 있는지 확인한다.
 		List<CarApplication> carApplicationCheck = parkingService.selectCarApplicationByGenerationIdx(generation.getGenerationIdx());
-		System.out.println(carApplicationCheck);
 		if(carApplicationCheck != null && carApplicationCheck.size() > 0) {
 			model.addAttribute("carApplicationList",carApplicationCheck);
 		}
@@ -72,7 +72,7 @@ public class ParkingController {
 	
 	@GetMapping("/myapt/parking/applicationimpl")
 	@ResponseBody //비동기통신
-	public String carApplicationImpl(@Valid CarApplication carApplication, Errors errors, @SessionAttribute(name = "generation", required = false) Generation generation, Model model){
+	public String carApplicationImpl(@Valid @ModelAttribute CarApplication carApplication, Errors errors, @SessionAttribute(name = "generation", required = false) Generation generation, Model model){
 		System.out.println("carApplication?"+carApplication);
 		carApplication.setApartmentIdx(generation.getApartmentIdx());
 		carApplication.setGenerationIdx(generation.getGenerationIdx());

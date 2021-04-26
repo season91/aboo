@@ -63,9 +63,8 @@ public class CarController {
 		generationInfo.setBuilding(building);
 		generationInfo.setNum(num);
 		Generation generation = carService.selectGenerationByBuildingAndNum(generationInfo);
-		System.out.println(generation+"정보");
+
 		if(generation == null) {
-			System.out.println("여기오남?");
 			return "null";
 		} else {
 			// 전달받은 차량번호를 세대정보와 함께 넣어준다.

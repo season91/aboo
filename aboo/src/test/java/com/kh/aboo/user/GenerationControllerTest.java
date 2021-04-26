@@ -51,8 +51,8 @@ public class GenerationControllerTest {
 	public void loginImpl_success() throws Exception{
 		mockMvc.perform(post("/loginimpl")
 				.contentType(MediaType.APPLICATION_JSON)
-				.param("id", "101d101h")
-				).andDo(print());
+				.param("id", "bxi101d101h")
+	            .param("password", "123*")).andDo(print());
 	}
 	
 	
