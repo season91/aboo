@@ -164,23 +164,23 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-lg-17 ml-auto mr-auto">
+                    <div class="col-lg-15 ml-auto mr-auto">
                       <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-4" >
                           <button type="button" class="btn btn-warning btn-block managerAdd" data-toggle="modal" data-target="#addadminModal" >관리자 신규 등록</button>
                         </div>
-                         <div class="col-md-3">
+                         <div class="col-md-4">
                          <button type="button" class="btn btn-warning btn-block adminDelete" data-toggle="modal" data-target="#deleteadminModal">관리자 권한 회수</button>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                           <button type="button" class="btn btn-warning btn-block" id="search-button" data-toggle="modal" data-target="#nameModal">관리자 이름 검색</button>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                           <button type="button" class="btn btn-warning btn-block" id="search-button" data-toggle="modal" data-target="#apartmentNameModal">아파트 명으로 검색</button>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                         <form action="${context }/bdmin/management/adminapllist">
-                          <button type="submit" class="btn btn-warning btn-block" id="search-button" data-toggle="modal" data-target="#apartmentModal">계정 신청 보기</button>
+                          <button type="submit" class="btn btn-warning btn-block" id="search-button" data-toggle="modal" >계정 신청 보기</button>
                         </form>
                         </div>
                       </div>
