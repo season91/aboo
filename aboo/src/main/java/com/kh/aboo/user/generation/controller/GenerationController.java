@@ -61,7 +61,7 @@ public class GenerationController {
 
 		// generationInfo : 받아와서 맵핑 해주는 객체 이름
 		// generation : 진짜 generation 정보가 담긴 객체 이름
-
+		System.out.println("d??");
 		Generation generation = generationService.selectGenerationForAuth(generationInfo);
 		if (generation == null) {
 			return "fail";

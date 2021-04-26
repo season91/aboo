@@ -24,7 +24,7 @@
 						</when>
 					</choose>
 				</where>
-					order by schedule_sdate 
+					order by schedule_idx
 				) b
 			) where rnum between #{paging.queryStart} and #{paging.queryEnd}
 		</select>

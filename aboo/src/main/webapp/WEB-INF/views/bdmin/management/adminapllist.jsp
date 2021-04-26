@@ -172,6 +172,10 @@
                         <div class="col-md-3">
                           <button type="button" class="btn btn-success btn-block" id="search-button" data-toggle="modal" data-target="#apartmentNameModal">아파트 명으로 검색</button>
                         </div>
+                        <div class="col-md-3">
+ 						<form action="${context }/bdmin/management/adminauthority">
+                          <button type="submit" class="btn btn-success btn-block" id="search-button" data-toggle="modal">계정 신청 보기</button>
+                        </form>                        </div>
                       </div>
                     </div>
                   </div>

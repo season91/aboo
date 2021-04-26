@@ -2,6 +2,7 @@ package com.kh.aboo.board.info.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -47,11 +48,32 @@ public class InfoController {
 		if(admin != null) {
 			
 			String apartmentIdx = admin.getApartmentIdx();
+			Map<String, Object> commandMap  = infoService.selectInfoBoardList(page, apartmentIdx);
+			List<InfoBoard> infoBoard = (List<InfoBoard>) commandMap.get("infoBoard");
+			List<Integer> infoCmtCntList = new ArrayList<>();
+			
+			for (InfoBoard infoBrd : infoBoard) {
+				int infoCmt = infoService.selectInfoCmtcnt(infoBrd.getbIdx());
+				infoCmtCntList.add(infoCmt);
+			}
+
 			model.addAllAttributes(infoService.selectInfoBoardList(page, apartmentIdx));
+			model.addAttribute("infoCmtCntList", infoCmtCntList);
 
 		}else {
 			
 			String apartmentIdx = generation.getApartmentIdx();
+			Map<String, Object> commandMap  = infoService.selectInfoBoardList(page, apartmentIdx);
+			List<InfoBoard> infoBoard = (List<InfoBoard>) commandMap.get("infoBoard");
+			List<Integer> infoCmtCntList = new ArrayList<>();
+			
+			for (InfoBoard infoBrd : infoBoard) {
+				int infoCmt = infoService.selectInfoCmtcnt(infoBrd.getbIdx());
+				infoCmtCntList.add(infoCmt);
+			}
+
+			model.addAllAttributes(infoService.selectInfoBoardList(page, apartmentIdx));
+			model.addAttribute("infoCmtCntList", infoCmtCntList);
 			model.addAllAttributes(infoService.selectInfoBoardList(page,apartmentIdx));
 	
 		}

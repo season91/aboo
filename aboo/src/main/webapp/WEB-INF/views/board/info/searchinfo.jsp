@@ -17,13 +17,13 @@
 	          <li class="nav-item"><a href="/index" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
-	          <li class="nav-item active"><a class="nav-link" href="/board/info/infolist">Board</a></li>
+	          <li class="nav-item active"><a class="nav-link" href="/board/info/listinfo">Board</a></li>
 	          <li class="nav-item"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
 	          <c:choose>
-	          <c:when test="${sessionScope.generation == null}">
+	          <c:when test="${sessionScope.generation == null and sessionScope.admin == null}">
 	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
 	          </c:when>
-	          <c:when test="${sessionScope.generation != null}">
+	          <c:when test="${sessionScope.generation != null or sessionScope.admin != null}">
 	          <li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>	          
 	          </c:when>
 	          </c:choose>

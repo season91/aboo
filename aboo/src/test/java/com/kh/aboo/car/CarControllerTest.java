@@ -15,21 +15,59 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.kh.aboo.admin.car.model.vo.CarApplication;
+import com.kh.aboo.user.generation.model.vo.Generation;
+import com.kh.aboo.user.manager.model.vo.Admin;
+
 @WebAppConfiguration // 프로젝트의 web.xml 대신 테스트를 위해 생성된 가상 web.xml 사용한다.
 @RunWith(SpringJUnit4ClassRunner.class) // Junit 단위테스트 프레임워크의 실행방법을 지정해준다. 테스트때 사용할 가상의 applicationContext를 생성하고 관리해준다.
-@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/*-context.xml"}) //가상 applicationContext 가 읽을 스프링 빈 설정파일의 위치를 지정.
+@ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/**/*-context.xml" }) // 가상 applicationContext 가
+																								// 읽을 스프링 빈 설정파일의 위치를
+																								// 지정.
 public class CarControllerTest {
-   
-   @Autowired
-   private WebApplicationContext context; 
-   
-   private MockMvc mockMvc;
-   
-   @Before
-   public void setup() {
-      this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context).build();
-   }
-   
-  
-   
+
+	@Autowired
+	private WebApplicationContext context;
+
+	private MockMvc mockMvc;
+
+	@Before
+	public void setup() {
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context).build();
+	}
+	
+	// 차량등록
+	@Test
+	public void carAdd() throws Exception {
+		Admin admin = new Admin();
+		admin.setApartmentIdx("100020");
+		
+		String building = "101";
+		String num = "101";
+		String carNumber = "100마1133";
+		
+		this.mockMvc.perform(get("/admin/caradd")
+				.sessionAttr("admin", admin)
+				.param("building", building)
+				.param("num", num)
+				.param("carNumber", carNumber)
+				).andDo(print());
+	}
+	
+	//차량신청
+	@Test
+	public void carApplicationImpl() throws Exception {
+		Generation generation = new Generation();
+		generation.setApartmentIdx("100020");
+		generation.setGenerationIdx("100582");
+		
+		CarApplication carApplication = new CarApplication();
+		carApplication.setAplctCarNumber("100다1121");
+		
+		this.mockMvc.perform(get("/myapt/parking/applicationimpl")
+				.sessionAttr("generation", generation)
+				.param("aplctCarNumber", "100다1121")
+				).andDo(print());
+	}
+
 }
