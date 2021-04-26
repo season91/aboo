@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.kh.aboo.admin.car.model.vo.Car;
@@ -69,8 +70,10 @@ public class ParkingController {
 		
 	}
 	
-	@PostMapping("/myapt/parking/applicationimpl")
+	@GetMapping("/myapt/parking/applicationimpl")
+	@ResponseBody //비동기통신
 	public String carApplicationImpl(@Valid CarApplication carApplication, Errors errors, @SessionAttribute(name = "generation", required = false) Generation generation, Model model){
+		System.out.println("carApplication?"+carApplication);
 		carApplication.setApartmentIdx(generation.getApartmentIdx());
 		carApplication.setGenerationIdx(generation.getGenerationIdx());
 
@@ -91,17 +94,15 @@ public class ParkingController {
 			// 차량번호와 세대관리번호로 신청 테이블에 넣어준다.
 			int res = parkingService.insertCarApplication(carApplication);
 			if(res > 0) {
-				model.addAttribute("alertMsg", "차량 등록 신청이 되었습니다.");
+				return "success";
 			} else {
-				model.addAttribute("alertMsg", "차량 등록 신청이 실패하였습니다. 관리인에게 문의해주세요.");
+				return "fail";
 			}
 
 		} else {
-			model.addAttribute("alertMsg", "이미 신청된 차량 정보입니다.");
+			return "application";
 		}
-		
-		model.addAttribute("url", "/myapt/parking/application");
-		return "common/result";
+
 	}
 
 }

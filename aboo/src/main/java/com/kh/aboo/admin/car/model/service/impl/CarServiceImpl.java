@@ -36,15 +36,11 @@ public class CarServiceImpl implements CarService{
 	
 	@Override
 	public Generation selectGenerationByBuildingAndNum(Generation generation) {
-		if(carRepository.selectGenerationByBuildingAndNum(generation) == null) {
-			throw new ToAlertException(ErrorCode.SC02);
-		}
 		return carRepository.selectGenerationByBuildingAndNum(generation);
 	}
 
 	@Override
 	public String insertAndQRWrite(Car car) {
-		String resStr = "";
 		// QR코드 생성한 후 baseURL 경로에 저장한다.
 		// 1. DB에 저장한다 (시퀀스번호때문에 어쩔수없다.)
 		int resCnt = carRepository.selectCarCnt(car.getGenerationIdx());
@@ -71,7 +67,7 @@ public class CarServiceImpl implements CarService{
 		QRCodeUtil qr = new QRCodeUtil();
 		qr.makeQR(domain, "c"+newCar.getCarIdx());
 		
-		return "등록되었습니다.";
+		return "success";
 	}
 	
 	public Map<String, Object> searchMap(String apartmentIdx, String standard, String keyword){

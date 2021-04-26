@@ -21,7 +21,17 @@
 	          <li class="nav-item"><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
 	          <li class="nav-item"><a class="nav-link" href="/board/info/listinfo">Board</a></li>
 	          <li class="nav-item active"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
-	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>
+	          <c:choose>
+		          <c:when test="${sessionScope.generation == null && sessionScope.admin == null}">
+		          	<li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
+		          </c:when>
+		          <c:when test="${sessionScope.generation != null && sessionScope.admin == null}">
+		          	<li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>	          
+		          </c:when>
+		          <c:when test="${sessionScope.admin != null && sessionScope.generation == null}">
+		          	<li class="nav-item cta"><a href="/admin/logout" class="nav-link"><span>Admin Logout</span></a></li>	          
+		          </c:when>
+	          </c:choose>
 	        </ul>
 	      </div>
 	    </div>
@@ -86,7 +96,7 @@
 			              <li><strong>납기일 </strong> ${mgmtfee.dueDate }</li>
 			              <li>납부기한을 넘겨 납부하면 연체료가 일할계산되어 다음달 관리비에 포함됩니다.</li>
 			            </ul>
-			            <c:if test="${mgmtfee.isPayment eq 0 }">
+			            <c:if test="${mgmtfee.isPayment eq 0 && sessionScope.admin == null}">
 			            	<a class="btn btn-primary d-block px-3 py-3 mb-4 btn-payment" id = "check_module">결제하기</a>
 			            </c:if>
 	            	</c:when>
@@ -97,7 +107,9 @@
 	            </div>
 	          </div>
 	          <div class="row d-flex justify-content-center">
+	          		<c:if test="${sessionScope.admin == null}">
 		          	 <a href="/mypage/mymgmtfee" class="btn btn-primary btn-primary-2 p-3 px-xl-5 py-xl-3 mt-3" style="background: linear-gradient(45deg, #56c8fb 0%, #627bed 100%); border: none;">목록으로</a>
+		          	</c:if>
 		          </div>
 	        </div>
 	      </div>
