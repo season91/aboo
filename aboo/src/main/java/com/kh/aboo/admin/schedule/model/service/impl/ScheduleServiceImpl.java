@@ -75,9 +75,9 @@ public class ScheduleServiceImpl implements ScheduleService{
 	}
 
 	@Override
-	public List<Schedule> selectScheduleByMonth() {
+	public List<Schedule> selectScheduleByMonth(String apartmentIdx) {
 		
-		return scheduleRepository.selectScheduleByMonth();
+		return scheduleRepository.selectScheduleByMonth(apartmentIdx);
 	}
 
 	@Override
