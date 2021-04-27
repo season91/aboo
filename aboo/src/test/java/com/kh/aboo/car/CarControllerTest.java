@@ -43,14 +43,32 @@ public class CarControllerTest {
 		admin.setApartmentIdx("100020");
 		
 		String building = "101";
-		String num = "101";
-		String carNumber = "100마1133";
+		String carNumber = "130마18";
 		
-		this.mockMvc.perform(get("/admin/caradd")
-				.sessionAttr("admin", admin)
-				.param("building", building)
-				.param("num", num)
-				.param("carNumber", carNumber)
+		for (int i = 1; i < 10; i++) {
+			for (int j = 1; j < 5; j++) {
+				this.mockMvc.perform(get("/admin/caradd")
+						.sessionAttr("admin", admin)
+						.param("building", building)
+						.param("num", i+"0"+j)
+						.param("carNumber", carNumber+i+j)
+						).andDo(print());
+				
+			}
+			
+		}
+		
+	}
+	
+	// 입차일부
+	@Test
+	public void carread() throws Exception {
+		String generationIdx = "100886";
+		String carNumber = "100267";
+		
+		this.mockMvc.perform(get("/admin/carread")
+				.param("generationidx", generationIdx)
+				.param("caridx", carNumber)
 				).andDo(print());
 	}
 	
