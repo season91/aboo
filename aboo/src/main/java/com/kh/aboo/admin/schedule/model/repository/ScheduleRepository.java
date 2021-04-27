@@ -43,7 +43,7 @@ public interface ScheduleRepository {
 	int deleteSchedule(String scheduleIdx);
 	
 	//admin index에 보여질 월별 일정내역
-	@Select("select * from tb_schedule where extract(month from sysdate) = extract(month from schedule_sdate) and is_leave = 0")
-	List<Schedule> selectScheduleByMonth();
+	@Select("select * from tb_schedule where extract(month from sysdate) = extract(month from schedule_sdate) and is_leave = 0 and apartment_idx = #{apartmentIdx}")
+	List<Schedule> selectScheduleByMonth(String apartmentIdx);
 
 }

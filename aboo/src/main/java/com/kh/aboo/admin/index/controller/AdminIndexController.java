@@ -42,7 +42,7 @@ public class AdminIndexController {
 		
 		// 희원-스캐쥴
 		Admin admin = (Admin) session.getAttribute("admin");
-		model.addAttribute("schedule", scheduleService.selectScheduleByMonth());
+		model.addAttribute("schedule", scheduleService.selectScheduleByMonth(admin.getApartmentIdx()));
 		model.addAttribute("aptName", scheduleService.selectAptNameByIdx(admin.getApartmentIdx()));
 		
 		//아영-관리비
