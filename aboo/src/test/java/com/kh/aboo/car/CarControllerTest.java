@@ -42,11 +42,11 @@ public class CarControllerTest {
 		Admin admin = new Admin();
 		admin.setApartmentIdx("100020");
 		
-		String building = "102";
-		String carNumber = "12마90";
+		String building = "101";
+		String carNumber = "130마18";
 		
 		for (int i = 1; i < 10; i++) {
-			for (int j = 1; j < 3; j++) {
+			for (int j = 1; j < 5; j++) {
 				this.mockMvc.perform(get("/admin/caradd")
 						.sessionAttr("admin", admin)
 						.param("building", building)
