@@ -142,7 +142,7 @@ public class AdminServiceImpl implements AdminService {
 	public Map<String, Object> selectAuthorityList(int currentPage, String apartmentIdx, String kind, String keyword) {
 		Map<String, Object> searchMap = searchMap(apartmentIdx, kind, keyword);
 
-		Paging paging = Paging.builder().currentPage(currentPage).blockCnt(5).cntPerPage(5).type("board")
+		Paging paging = Paging.builder().currentPage(currentPage).blockCnt(5).cntPerPage(10).type("board")
 				.total(adminRepository.selectContentCnt(searchMap)).build();
 
 		searchMap.put("paging", paging);
