@@ -163,14 +163,14 @@
             
                   <ul>
                 <li><a href="${context}/board/${paging.type}/listinfo">&lt;&lt;</a></li>
-                <li><a href="${context}/board/${paging.type}/listinfot?page=${paging.prev}">&lt;</a></li>
+                <li><a href="${context}/board/${paging.type}/listinfo?page=${paging.prev}">&lt;</a></li>
 	                <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
 	                   <c:choose>
 	                      <c:when test="${paging.currentPage eq page}">
 	                         <li class="active"><a href="${context}/board/${paging.type}/listinfo?page=${page}">${page}</a></li>
 	                      </c:when>
 	                      <c:otherwise>
-	                         <li><a href="${context}/board/${paging.type}?page=${page}/listinfo">${page}</a></li>
+	                         <li><a href="${context}/board/${paging.type}/listinfo?page=${page}">${page}</a></li>
 	                      </c:otherwise>
 	                   </c:choose>
 	              	 </c:forEach>
