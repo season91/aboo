@@ -51,9 +51,9 @@ public class AdminIndexController {
 		
 		
 		//선영-작성글현황
-		int usedCnt = usedService.selectUsedBrdTodayCnt();
-		int infoCnt = usedService.selectInfoBrdTodayCnt();
-		int intCnt = usedService.selectIntBrdTodayCnt();
+		int usedCnt = usedService.selectUsedBrdTodayCnt(admin.getApartmentIdx());
+		int infoCnt = usedService.selectInfoBrdTodayCnt(admin.getApartmentIdx());
+		int intCnt = usedService.selectIntBrdTodayCnt(admin.getApartmentIdx());
 		System.out.println(usedCnt + ":" + infoCnt + ":" + intCnt);
 	
 

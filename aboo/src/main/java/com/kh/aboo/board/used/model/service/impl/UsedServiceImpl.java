@@ -187,16 +187,16 @@ public class UsedServiceImpl implements UsedService {
 		return usedCmtRepository.updateUsedBrdCmtPrivate(usedCmtIdx);
 	}
 
-	public int selectUsedBrdTodayCnt() {
-		return usedRepository.selectUsedBrdTodayCnt();
+	public int selectUsedBrdTodayCnt(String apartmentIdx) {
+		return usedRepository.selectUsedBrdTodayCnt(apartmentIdx);
 	}
 
-	public int selectInfoBrdTodayCnt() {
-		return usedRepository.selectInfoBrdTodayCnt();
+	public int selectInfoBrdTodayCnt(String apartmentIdx) {
+		return usedRepository.selectInfoBrdTodayCnt(apartmentIdx);
 	}
 	
-	public int selectIntBrdTodayCnt() {
-		return usedRepository.selectIntBrdTodayCnt();
+	public int selectIntBrdTodayCnt(String apartmentIdx) {
+		return usedRepository.selectIntBrdTodayCnt(apartmentIdx);
 	}
 
 
