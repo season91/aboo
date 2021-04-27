@@ -1,15 +1,9 @@
 package com.kh.aboo.user;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
-import java.util.Enumeration;
-import java.util.UUID;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionContext;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +19,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.kh.aboo.user.generation.model.service.GenerationService;
 import com.kh.aboo.user.generation.model.vo.Generation;
-import com.kh.aboo.user.generation.validator.GenerationValidator;
 
 @WebAppConfiguration 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -50,9 +43,9 @@ public class GenerationControllerTest {
 	//로그인 - 성공
 	public void loginImpl_success() throws Exception{
 		mockMvc.perform(post("/loginimpl")
-				.contentType(MediaType.APPLICATION_JSON)
-				.param("id", "bxi101d101h")
-	            .param("password", "123*")).andDo(print());
+				.param("id","grf000d000h")
+				.param("password","123")
+				).andDo(print());
 	}
 	
 	
@@ -60,9 +53,8 @@ public class GenerationControllerTest {
 	//아이디 찾기 - 성공
 	public void findIdImpl_success() throws Exception{
 		mockMvc.perform(post("/findidimpl")
-				.contentType(MediaType.APPLICATION_JSON)
-				.param("building", "101")
-				.param("num", "101")
+				.param("building", "000")
+				.param("num", "000")
 				.param("email", "psuny1031@naver.com")
 				).andDo(print());
 		
@@ -73,7 +65,6 @@ public class GenerationControllerTest {
 	//비밀번호 찾기 - 성공
 	public void findPasswordImpl_success() throws Exception{
 		mockMvc.perform(post("/findpasswordimpl")
-				.contentType(MediaType.APPLICATION_JSON)
 				.param("id", "grf000d000h")
 				.param("email", "psuny1031@naver.com")
 				).andDo(print());	
@@ -83,8 +74,10 @@ public class GenerationControllerTest {
 	@Test
 	//세대원 수정 - 성공
 	public void generationWonModify_success() throws Exception{
+		Generation generationInfo = new Generation();
+		generationInfo.setApartmentIdx("100000");
 		mockMvc.perform(post("/mypage/generationwonmodify")
-				.contentType(MediaType.APPLICATION_JSON)
+				.sessionAttr("generationInfo", generationInfo)
 				.param("generationWonIdx", "100304")
 				.param("name", "박선영")
 				.param("tell", "01092680961")
@@ -145,29 +138,21 @@ public class GenerationControllerTest {
 	// 세대 더미 추가할 테스트 메서드
 /*	@Test
 	public void generationAddTest() throws Exception {
-//		mockMvc.perform(get("/generation/add")
-//				.param("id", "101d101h")
-//				.param("password", "123")
-//				.param("aprtmentIdx", "100000")
-//				).andDo(print());
 		
-		// 101~109동부터 1호~6호까지
-		for (int i = 1; i < 10; i++) {
-			String a = "10"+i;
-			System.out.println(a);
-			for (int j = 1; j < 7; j++) {
-				String b = i + "0" + j;
-				System.out.println(a+b);
+		for (int i = 1; i <= 9; i++) {
+			for (int j = 1; j <= 4; j++) {
+				
 				mockMvc.perform(get("/generation/add")
-		                  .param("id", a+"d"+b+"h")
-		                  .param("password", "123")
-		                  .param("apartmentIdx", "100000")
-		                  .param("building", a)
-		                  .param("num", b)
-		                  ).andDo(print());
+						.param("id", "bxi"+"102d"+i+"0"+j+"h")
+						.param("password", "123")
+						.param("apartmentIdx", "100020")
+						.param("building", "102")
+						.param("num", i+"0"+j)
+						).andDo(print());
 			}
-			
 		}
 	}
+	
 	*/
+	
 }
