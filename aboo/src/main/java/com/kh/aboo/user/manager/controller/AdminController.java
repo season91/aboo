@@ -146,7 +146,7 @@ public class AdminController {
 
 		String authPathId = (String) session.getAttribute("authPathId");
 
-		System.out.println("아이디 인증번호" + authPathId);
+		System.out.println("아이디 인증번호 " + authPathId);
 
 		if (!certifiedNum.equals(authPathId)) {
 			return "fail";
@@ -184,7 +184,7 @@ public class AdminController {
 
 			String password = random.randomPw();
 
-			System.out.println("임시 번호 : " + password);
+			System.out.println("임시 번호  " + password);
 
 			adminService.findPasswordEmail(findAdmin, password); // 메일 보내기
 
@@ -235,7 +235,7 @@ public class AdminController {
 		String authPathEmail = UUID.randomUUID().toString().replace("-", "");
 		authPathEmail = authPathEmail.substring(0, 10);
 
-		
+		System.out.println("이메일 인증 " + authPathEmail);
 		
 		session.setAttribute("authPathEmail", authPathEmail);
 		adminService.authEmail(adminInfo, authPathEmail);

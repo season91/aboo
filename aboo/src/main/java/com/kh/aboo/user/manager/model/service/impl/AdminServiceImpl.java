@@ -280,7 +280,8 @@ public class AdminServiceImpl implements AdminService {
 
 		String authPathTell = makeCertNum();
 		httpSession.setAttribute("authPathTell", authPathTell);
-
+		System.out.println("휴대폰 인증 " + authPathTell );
+		
 		JSONObject params = new JSONObject();
 		JSONObject params2 = new JSONObject();
 		JSONArray messages = new JSONArray();

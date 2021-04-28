@@ -207,6 +207,7 @@ public class GenerationServiceImpl implements GenerationService {
 
 		String authPathTell = makeCertNum();
 		httpSession.setAttribute("authPathTell", authPathTell);
+		System.out.println("휴대폰 인증 " + authPathTell );
 
 		JSONObject params = new JSONObject();
 		JSONObject params2 = new JSONObject();
