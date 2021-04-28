@@ -9,10 +9,10 @@ import org.apache.ibatis.annotations.Select;
 public interface IndexManagementRepository {
 	
 	//관리비 월별 조회
-	@Select("select sum(period_payment) from tb_mgmtfee where is_del = 0 and apartment_idx = #{apartmentIdx} group by due_date order by due_date")
+	@Select("select sum(period_payment) from tb_mgmtfee where is_del = 0 and apartment_idx = #{apartmentIdx} group by mgmt_start_date order by mgmt_start_date")
 	List<String> selectMgmtfeeMonthFee(String apartmentIdx);
 
-	@Select("select extract(month from due_date) from tb_mgmtfee where is_del = 0 and apartment_idx = #{apartmentIdx} group by due_date order by due_date")
+	@Select("select extract(month from mgmt_start_date) from tb_mgmtfee where is_del = 0 and apartment_idx = #{apartmentIdx} group by mgmt_start_date order by mgmt_start_date")
 	List<Integer> selectMgmtfeeMonth(String apartmentIdx);
 	
 	//등록가능한 차량 대수 확인

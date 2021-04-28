@@ -52,6 +52,7 @@ public class ParkingController {
 			HttpSession session, Model model) {
 		if(generation != null) {
 			apartmentIdx = generation.getApartmentIdx();
+			System.out.println(apartmentIdx);
 		}
 		// 주차가능대수 조회
 		Map<String, Object> parkingMap = parkingService.possibleParking(apartmentIdx);

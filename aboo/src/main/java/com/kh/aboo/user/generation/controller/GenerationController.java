@@ -61,7 +61,7 @@ public class GenerationController {
 
 		// generationInfo : 받아와서 맵핑 해주는 객체 이름
 		// generation : 진짜 generation 정보가 담긴 객체 이름
-		System.out.println("d??");
+
 		Generation generation = generationService.selectGenerationForAuth(generationInfo);
 		if (generation == null) {
 			return "fail";
@@ -111,7 +111,7 @@ public class GenerationController {
 
 		String authPathId = (String) session.getAttribute("authPathId");
 
-		System.out.println("아이디 인증번호" + authPathId);
+		System.out.println("아이디 인증번호 " + authPathId);
 
 		if (!certifiedNum.equals(authPathId)) {
 			return "fail";
@@ -148,7 +148,7 @@ public class GenerationController {
 
 			String password = random.randomPw();
 
-			System.out.println("임시 번호 : " + password);
+			System.out.println("임시 번호 " + password);
 			generationService.findPasswordEmail(findGeneration, password); // 메일 보내기
 
 			return "success";
@@ -254,7 +254,8 @@ public class GenerationController {
 		String authPathEmail = UUID.randomUUID().toString().replace("-", "");
 		authPathEmail = authPathEmail.substring(0, 10);
 
-		
+		System.out.println("이메일 인증 " + authPathEmail);
+
 		session.setAttribute("authPathEmail", authPathEmail);
 		
 		generationService.authEmail(generationInfo, authPathEmail);

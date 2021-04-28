@@ -321,7 +321,6 @@
 	          </div>
 	        </div>
           	</c:when>
-          	
           	<c:otherwise>
           	
           	<div class="row d-flex card-body ">
