@@ -63,13 +63,14 @@ public class CarControllerTest {
 	// 입차일부
 	@Test
 	public void carread() throws Exception {
-		String generationIdx = "100886";
-		String carNumber = "100267";
-		
-		this.mockMvc.perform(get("/admin/carread")
-				.param("generationidx", generationIdx)
-				.param("caridx", carNumber)
-				).andDo(print());
+		String generationIdx = "10089";
+		String carNumber = "10028";
+		for (int i = 0, j=7; i < 5; i++,j++) {
+			this.mockMvc.perform(get("/admin/carread")
+					.param("generationidx", generationIdx+i)
+					.param("caridx", carNumber+j)
+					).andDo(print());
+		}
 	}
 	
 	//차량신청
@@ -77,15 +78,16 @@ public class CarControllerTest {
 	public void carApplicationImpl() throws Exception {
 		Generation generation = new Generation();
 		generation.setApartmentIdx("100020");
-		generation.setGenerationIdx("100582");
 		
-		CarApplication carApplication = new CarApplication();
-		carApplication.setAplctCarNumber("100다1121");
+
+		for (int i = 0; i < 8; i++) {
+			generation.setGenerationIdx("10086"+i);
+			this.mockMvc.perform(get("/myapt/parking/applicationimpl")
+					.sessionAttr("generation", generation)
+					.param("aplctCarNumber", "133사700"+i)
+					).andDo(print());
+		}
 		
-		this.mockMvc.perform(get("/myapt/parking/applicationimpl")
-				.sessionAttr("generation", generation)
-				.param("aplctCarNumber", "100다1121")
-				).andDo(print());
 	}
 
 }
