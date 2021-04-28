@@ -31,13 +31,11 @@ public class IndexManagementServiceImpl implements IndexManagementService{
 				intRes.add(i,0);
 			}
 		}
-		
 		for (int i = 0; i < totalPay.size(); i++) {
+
 			String str = totalPay.get(i).substring(0, totalPay.get(i).length()-4); // 만원단위니까 뒤에 4개 잘라주기.
 			int temp = Integer.parseInt(str);
-			intRes.add(month.get(i)-1, temp);
-			System.out.println(totalPay.get(i));
-			System.out.println(temp);
+			intRes.add((month.get(i)-1), temp);
 		}
 
 		return intRes;
