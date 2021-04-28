@@ -187,8 +187,8 @@
                        <div class="col-md-12">
 	                      <div class="form-group" style="display: flex; justify-content: space-around;">
 	                        <input type="text" class="form-control " id="name" placeholder="세대아이디 입력">
-	                        <input type="text" class="form-control " id="message" placeholder="채팅내용을 입력하세요.">
-	                         <button type="submit" class="btn btn-fill btn-primary " id="sendBtn" onclick="scroll()">보내기</button>
+	                        <input type="text" class="form-control ml-2" id="message" placeholder="채팅내용을 입력하세요.">
+	                         <button type="submit" class="btn btn-fill btn-primary d-flex justify-content-center ml-2" id="sendBtn" onclick="scroll()">보내기</button>
 	                      </div>
 	                    </div>
                       </div>
