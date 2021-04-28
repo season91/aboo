@@ -120,8 +120,8 @@ public class CarController {
 			} 
 			
 			//3. QR코드가 생성이 되었다면 신청을 승인 처리해준다. 생성되지않았다면 승인처리 하지않고 에러 발동시킨다.
-			if(resStr.equals("등록되었습니다.")) {
-				int res = carService.updateCarApplicationApproval(applicationidx.get(i));
+			if(resStr.equals("success")) {
+				carService.updateCarApplicationApproval(applicationidx.get(i));
 				myAlarmService.insertPvAlarm("'" + carApplication.getAplctCarNumber() + "' " +AlarmCode.ADD_CAR, carApplication.getGenerationIdx());
 
 			} else {
