@@ -42,7 +42,7 @@ public class AdminIndexController {
 		
 		// 희원-스캐쥴
 		Admin admin = (Admin) session.getAttribute("admin");
-		model.addAttribute("schedule", scheduleService.selectScheduleByMonth());
+		model.addAttribute("schedule", scheduleService.selectScheduleByMonth(admin.getApartmentIdx()));
 		model.addAttribute("aptName", scheduleService.selectAptNameByIdx(admin.getApartmentIdx()));
 		
 		//아영-관리비
@@ -51,9 +51,9 @@ public class AdminIndexController {
 		
 		
 		//선영-작성글현황
-		int usedCnt = usedService.selectUsedBrdTodayCnt();
-		int infoCnt = usedService.selectInfoBrdTodayCnt();
-		int intCnt = usedService.selectIntBrdTodayCnt();
+		int usedCnt = usedService.selectUsedBrdTodayCnt(admin.getApartmentIdx());
+		int infoCnt = usedService.selectInfoBrdTodayCnt(admin.getApartmentIdx());
+		int intCnt = usedService.selectIntBrdTodayCnt(admin.getApartmentIdx());
 		System.out.println(usedCnt + ":" + infoCnt + ":" + intCnt);
 	
 

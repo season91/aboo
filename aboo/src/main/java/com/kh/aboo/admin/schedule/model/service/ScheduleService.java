@@ -17,7 +17,7 @@ public interface ScheduleService {
 	
 	int deleteSchedule(String scheduleIdx);
 	
-	List<Schedule> selectScheduleByMonth();
+	List<Schedule> selectScheduleByMonth(String apartmentIdx);
 	
 	List<Schedule> selectScheduleListForCalendar(String apartmentIdx);
 
