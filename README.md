@@ -32,6 +32,7 @@ kh정보교육원 final project
 접근 방법 : Q 해당 아파트의 세대를 어떻게 구별할 것이며 어떻게 아이디의 중복을 막을 것인가.
 
 <img width="531" alt="1" src="https://user-images.githubusercontent.com/74293481/116706165-46402000-aa08-11eb-9efb-046885303d2a.PNG">
+
 ##### -아파트의 기본 키를 세대 테이블 외래키로 두어 구별했다.
 
 
