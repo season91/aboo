@@ -21,11 +21,28 @@ kh정보교육원 final project
 아영 : 관리비 CRUD(POI 라이브러리), 차량 CRUD(zxing), 차량 QR, 주차현황, 채팅<br>
 
 
-# 선영
 
+
+# 선영
 
 ## **1. generation**
 기능 : 로그인, 아이디찾기, 비밀번호찾기, 회원정보수정, 문자인증, 이메일인증, 세대원 보기, 세대원 추가, 세대원 수정, 세대원 삭제
+
+접근방법 : Q 해당 아파트의 세대를 어떻게 구별할것이며 어떻게 아이디의 중복을 막을 것인가
+
+<img width="531" alt="1" src="https://user-images.githubusercontent.com/74293481/116705497-8eab0e00-aa07-11eb-998f-fb95bd1b58a6.PNG">
+
+
+##### 아파트의 기본키를 세대의 외래키로 두어 구별했다.
+
+```
+String Separator = adminRepository.selectApartmentBySeparator(apartmentIdx);
+String id = Separator + generation.getBuilding() + "d" + generation.getNum() + "h";
+
+generation.setId(id);
+
+```
+##### 아파트 구분자를 받아서 세대의 같은 동, 호의 중복을 막았다.
 
 ## **2. manager**
 기능 : 로그인, 아이디찾기, 비밀번호찾기, 회원정보수정, 문자인증, 이메일인증, 세대 보기, 세대 검색, 세대 동으로 검색, 세대 추가, 세대 초기화, 세대 삭제
@@ -34,4 +51,7 @@ kh정보교육원 final project
 기능 : 관리비 결제
 
 ## **4. used**
-기능 : 게시판 보기, 게시글 상세보기, 거래 중/거래 완료로 검색, 키워드 검색, 게시글 작성, 게시글 수정, 게시글 삭제, 게시글 비공개, 댓글 작성, 댓글 수정, 댓글 삭제, 댓글 비공개 
+기능 : 게시판 보기, 게시글 상세보기, 거래 중/거래 완료로 검색, 키워드 검색, 게시글 작성, 게시글 수정, 게시글 삭제, 게시글 비공개, 댓글 작성, 댓글 수정, 댓글 삭제, 댓글 비공개
+
+## **5. echo**
+기능 : 접속 종료, 세대 종료시 관리자에게 안내
