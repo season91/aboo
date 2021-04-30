@@ -30,7 +30,7 @@ kh정보교육원 final project
 ## **1. generation**
 기능 : 로그인, 아이디찾기, 비밀번호찾기, 회원정보수정, 문자인증, 이메일인증, 세대원 보기, 세대원 추가, 세대원 수정, 세대원 삭제
 
-접근방법 : Q 해당 아파트의 세대를 어떻게 구별할것이며 어떻게 아이디의 중복을 막을 것인가
+접근방법 : Q 해당 아파트의 세대를 어떻게 구별할것이며 어떻게 아이디의 중복을 막을 것인가.
 
 <img width="531" alt="1" src="https://user-images.githubusercontent.com/74293481/116706165-46402000-aa08-11eb-9efb-046885303d2a.PNG">
 
@@ -144,7 +144,7 @@ let mgmtfeeIdx = $("#mgmtfeeIdx")[0].defaultValue;
 
 <img width="608" alt="3" src="https://user-images.githubusercontent.com/74293481/116709317-86ed6880-aa0b-11eb-91a9-6ca3cdcffb5b.PNG">
 
-##### -게시판에 글을 작성할때 로그인된 세대의 SESSION에서 APARTMENT_IDX를 받아 INSERT 
+##### -게시판에 글을 작성할때 로그인된 세대의 SESSION에서 APARTMENT_IDX를 받아 INSERT.
 ##### -게시판을 보여줄때 로그인된 세대의 SESSION에서 APARTMENT_IDX를 받아 해당 아파트의 게시글만 보여준다.
 
 
