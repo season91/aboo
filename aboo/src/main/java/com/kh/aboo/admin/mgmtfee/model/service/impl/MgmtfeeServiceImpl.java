@@ -27,9 +27,7 @@ import com.kh.aboo.admin.mgmtfee.model.vo.MgmtfeeOverdue;
 import com.kh.aboo.common.code.ErrorCode;
 import com.kh.aboo.common.exception.ToAlertException;
 import com.kh.aboo.common.util.file.FileUtil;
-import com.kh.aboo.common.util.file.FileVo;
 import com.kh.aboo.common.util.paging.Paging;
-import com.kh.aboo.user.generation.model.repository.GenerationRepository;
 import com.kh.aboo.user.generation.model.vo.Generation;
 
 @Service
