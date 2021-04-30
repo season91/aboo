@@ -50,6 +50,7 @@ generation.setId(id);
 접근 방법 : Q 아파트와 관리인을 어떻게 연결해줄 것인가
 
 <img width="560" alt="2" src="https://user-images.githubusercontent.com/74293481/116706812-ff9ef580-aa08-11eb-939e-424d8bd844b5.PNG">
+
 ##### -아파트의 기본 키를 관리인 테이블 외래키로 두어 구별했다.
 
 
@@ -137,6 +138,7 @@ let mgmtfeeIdx = $("#mgmtfeeIdx")[0].defaultValue;
 접근 방법 : Q 아파트 단위로 게시판이 존재해야 한다.
 
 <img width="608" alt="3" src="https://user-images.githubusercontent.com/74293481/116709317-86ed6880-aa0b-11eb-91a9-6ca3cdcffb5b.PNG">
+
 ##### -게시판에 글을 작성할 때 로그인된 세대의 SESSION에서 APARTMENT_IDX를 받아 INSERT.
 ##### -게시판을 보여줄 때 로그인된 세대의 SESSION에서 APARTMENT_IDX를 받아 해당 아파트의 게시글만 보여준다.
 
