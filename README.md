@@ -44,7 +44,7 @@ String id = Separator + generation.getBuilding() + "d" + generation.getNum() + "
 generation.setId(id);
 
 ```
-##### -아파트 구분자를 받아서 세대의 같은 동, 호의 중복을 막았다.
+##### -아파트 구분자를 받아서 세대 아이디의 중복을 막았다.
 
 ## **2. manager**
 기능 : 로그인, 아이디 찾기, 비밀번호 찾기, 회원 정보수정, 문자인증, 이메일인증, 세대 보기, 세대 검색, 세대 동으로 검색, 세대 추가, 세대 초기화, 세대 삭제
