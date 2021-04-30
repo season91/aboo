@@ -49,7 +49,7 @@ generation.setId(id);
 ## **2. manager**
 기능 : 로그인, 아이디 찾기, 비밀번호 찾기, 회원 정보수정, 문자인증, 이메일인증, 세대 보기, 세대 검색, 세대 동으로 검색, 세대 추가, 세대 초기화, 세대 삭제
 
-접근 방법 : Q 아파트와 관리인을 어떻게 연결해줄 것인가
+접근 방법 : Q 아파트와 관리인을 어떻게 연결해줄 것인가.
 
 <img width="560" alt="2" src="https://user-images.githubusercontent.com/74293481/116706812-ff9ef580-aa08-11eb-939e-424d8bd844b5.PNG">
 
