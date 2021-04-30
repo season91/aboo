@@ -38,11 +38,11 @@ public interface UsedService {
 
 	int updateUsedBrdCmtPrivate(String usedCmtIdx);
 	
-	int selectUsedBrdTodayCnt();
+	int selectUsedBrdTodayCnt(String apartmentIdx);
 	
-	int selectInfoBrdTodayCnt();
+	int selectInfoBrdTodayCnt(String apartmentIdx);
 
-	int selectIntBrdTodayCnt();
+	int selectIntBrdTodayCnt(String apartmentIdx);
 
 
 }

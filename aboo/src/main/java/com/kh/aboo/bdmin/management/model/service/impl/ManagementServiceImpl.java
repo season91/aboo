@@ -252,5 +252,10 @@ public class ManagementServiceImpl implements ManagementService{
 		mail.send(admin.getEmail(), "❗ [ABOO:아파트를 부탁해] 어드민 계정 신청이 승인되었습니다.", message);
 		
 	}
+
+	@Override
+	public int selectManagerContactEmail(String email) {
+		return managementRepository.selectManagerContactEmail(email);
+	}
 	
 }

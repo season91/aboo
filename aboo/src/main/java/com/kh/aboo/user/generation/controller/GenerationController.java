@@ -14,6 +14,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -110,7 +111,7 @@ public class GenerationController {
 
 		String authPathId = (String) session.getAttribute("authPathId");
 
-		System.out.println("아이디 인증번호" + authPathId);
+		System.out.println("아이디 인증번호 " + authPathId);
 
 		if (!certifiedNum.equals(authPathId)) {
 			return "fail";
@@ -147,7 +148,7 @@ public class GenerationController {
 
 			String password = random.randomPw();
 
-			System.out.println("임시 번호 : " + password);
+			System.out.println("임시 번호 " + password);
 			generationService.findPasswordEmail(findGeneration, password); // 메일 보내기
 
 			return "success";
@@ -253,7 +254,8 @@ public class GenerationController {
 		String authPathEmail = UUID.randomUUID().toString().replace("-", "");
 		authPathEmail = authPathEmail.substring(0, 10);
 
-		
+		System.out.println("이메일 인증 " + authPathEmail);
+
 		session.setAttribute("authPathEmail", authPathEmail);
 		
 		generationService.authEmail(generationInfo, authPathEmail);

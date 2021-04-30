@@ -75,13 +75,13 @@
 	     <li  class="active ">
 	       	<a href="/bdmin/management/apartment">
 	         <i class="tim-icons icon-key-25"></i>
-	  		 <p>BDIN - apartment</p>
+	  		 <p>BDMIN - apartment</p>
 	  	    </a>
 	  	 </li>
 	  	  <li  class=" ">
 	       	<a href="/bdmin/management/adminauthority">
 	         <i class="tim-icons icon-key-25"></i>
-	  		 <p>BDIN - manager</p>
+	  		 <p>BDMIN - manager</p>
 	  	    </a>
 	  	 </li>
         </ul>

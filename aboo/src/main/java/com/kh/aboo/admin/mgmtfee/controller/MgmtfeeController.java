@@ -2,7 +2,6 @@ package com.kh.aboo.admin.mgmtfee.controller;
 
 import java.io.File;
 import java.nio.charset.Charset;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +24,6 @@ import com.kh.aboo.admin.mgmtfee.model.vo.MgmtfeeOverdue;
 import com.kh.aboo.common.code.AlarmCode;
 import com.kh.aboo.common.code.ErrorCode;
 import com.kh.aboo.common.exception.ToAlertException;
-import com.kh.aboo.common.util.file.FileUtil;
 import com.kh.aboo.mypage.myalarm.model.service.MyAlarmService;
 import com.kh.aboo.user.generation.model.vo.Generation;
 import com.kh.aboo.user.manager.model.vo.Admin;
@@ -67,7 +65,7 @@ public class MgmtfeeController {
 		
 		// 성공시 알람넣어주기.
 		for (int i = 0; i < mgmtfeeList.size(); i++) {
-			myAlarmService.insertPvAlarm(AlarmCode.ADD_MGMTFEE.name(), mgmtfeeList.get(i).getGenerationIdx());
+			myAlarmService.insertPvAlarm(AlarmCode.ADD_MGMTFEE+"", mgmtfeeList.get(i).getGenerationIdx());
 		}
 		
 		return "success";
@@ -82,11 +80,7 @@ public class MgmtfeeController {
 		// 아파트번호는 로그인한 관리자 세션을 통해 가져온다.
 		// 관리인 정보 기준으로 아파트 번호 받아와 세대정보 보내준다.
 		String apartmentIdx = admin.getApartmentIdx();
-		Map<String, Object> generationList = mgmtfeeService.selectGenerationList(apartmentIdx);
-
-		FileUtil fileUtil = new FileUtil();
-		// mgmtfeeFormExcel 엑셀 양식 호출.
-		File file = fileUtil.mfmtgeeFormExcel(generationList);
+		File file  = mgmtfeeService.selectGenerationList(apartmentIdx);
 		
 		// 내보내기
 		HttpHeaders headers= new HttpHeaders();

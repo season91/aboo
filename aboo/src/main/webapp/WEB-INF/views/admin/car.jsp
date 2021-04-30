@@ -243,7 +243,7 @@
                     	<c:otherwise>
                     		<script>
 		               		alert('조회결과가 없습니다.');
-		               		location.href='/admin/index';
+		               		location.href='/admin/car';
 		               		</script>
                     	</c:otherwise>
                     </c:choose>
@@ -365,24 +365,22 @@
               </button>
            </div>
            <div class="modal-body">
-	        <form action="${context }/admin/caradd">
 	          <div class="form-group">
 	            <label for="recipient-name" class="control-label">세대 정보(동)</label>
-	            <input type="text" class="form-control" name="building">
+	            <input type="text" class="form-control" name="building" id="building">
 	          </div>
 	          <div class="form-group">
 	            <label for="recipient-name" class="control-label">세대 정보(호수)</label>
-	            <input type="text" class="form-control" name="num">
+	            <input type="text" class="form-control" name="num" id="num">
 	          </div>
 	          <div class="form-group">
 	            <label for="recipient-name" class="control-label">차량 번호</label>
-	            <input type="text" class="form-control" name="carNumber">
+	            <input type="text" class="form-control" name="carNumber" id="carNumber">
 	          </div>
 	          <div class="modal-footer">
-	           <button type="submit" class="btn btn-primary" >등록하기</button>
+	           <button type="submit" class="btn btn-primary" onclick="send()">등록하기</button>
 	           <button type="button" class="btn btn-default" data-dismiss="modal">취소하기</button>
 	           </div>
-	        </form>
       		</div>
          </div>
        </div>
@@ -493,9 +491,6 @@
         </div>
       </div>
       
-      
-      
-    
     <!--   Core JS Files   -->
     <script src="../../../resources/js/admin/car.js"></script>
     <script src="../../../resources/js/admin/core/jquery.min.js"></script>
@@ -512,128 +507,39 @@
     <script src="../../../resources/js/admin/black-dashboard.min.js?v=1.0.0" type="text/javascript"></script>
     <!-- Black Dashboard DEMO methods, don't include it in your project! -->
     <script src="../../../resources/demo/demo.js"></script>
-    
-    <script>
-      $(document).ready(function() {
-        $().ready(function() {
-          $sidebar = $('.sidebar');
-          $navbar = $('.navbar');
-
-          $full_page = $('.full-page');
-
-          $sidebar_responsive = $('body > .navbar-collapse');
-          sidebar_mini_active = true;
-          white_color = false;
-
-          window_width = $(window).width();
-
-          fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
-
-
-
-          $('.fixed-plugin a').click(function(event) {
-            // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
-            if ($(this).hasClass('switch-trigger')) {
-              if (event.stopPropagation) {
-                event.stopPropagation();
-              } else if (window.event) {
-                window.event.cancelBubble = true;
-              }
-            }
-          });
-
-          $('.fixed-plugin .background-color span').click(function() {
-            $(this).siblings().removeClass('active');
-            $(this).addClass('active');
-
-            var new_color = $(this).data('color');
-
-            if ($sidebar.length != 0) {
-              $sidebar.attr('data-color', new_color);
-            }
-
-            if ($navbar.length != 0) {
-              $navbar.attr('data-color', new_color);
-            }
-
-            if ($full_page.length != 0) {
-              $full_page.attr('filter-color', new_color);
-            }
-
-            if ($sidebar_responsive.length != 0) {
-              $sidebar_responsive.attr('data-color', new_color);
-            }
-          });
-
-          $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function() {
-            var $btn = $(this);
-
-            if (sidebar_mini_active == true) {
-              $('body').removeClass('sidebar-mini');
-              sidebar_mini_active = false;
-              blackDashboard.showSidebarMessage('Sidebar mini deactivated...');
-            } else {
-              $('body').addClass('sidebar-mini');
-              sidebar_mini_active = true;
-              blackDashboard.showSidebarMessage('Sidebar mini activated...');
-            }
-
-            // we simulate the window Resize so the charts will get updated in realtime.
-            var simulateWindowResize = setInterval(function() {
-              window.dispatchEvent(new Event('resize'));
-            }, 180);
-
-            // we stop the simulation of Window Resize after the animations are completed
-            setTimeout(function() {
-              clearInterval(simulateWindowResize);
-            }, 1000);
-          });
-
-          $('.switch-change-color input').on("switchChange.bootstrapSwitch", function() {
-            var $btn = $(this);
-
-            if (white_color == true) {
-
-              $('body').addClass('change-background');
-              setTimeout(function() {
-                $('body').removeClass('change-background');
-                $('body').removeClass('white-content');
-              }, 900);
-              white_color = false;
-            } else {
-
-              $('body').addClass('change-background');
-              setTimeout(function() {
-                $('body').removeClass('change-background');
-                $('body').addClass('white-content');
-              }, 900);
-
-              white_color = true;
-            }
-
-
-          });
-
-          $('.light-badge').click(function() {
-            $('body').addClass('white-content');
-          });
-
-          $('.dark-badge').click(function() {
-            $('body').removeClass('white-content');
-          });
-        });
-      });
-        
-      $('.modal').on('hidden.bs.modal', function (e) {
-    	    $(this).find('form')[0].reset()
-    	});
-    </script>
-    <script>
-      $(document).ready(function() {
-        // Javascript method's body can be found in assets/js/demos.js
-        demo.initDashboardPageCharts();
-
-      });
-    </script>
+    <script type="text/javascript">
+	  let send = () =>{
+		  console.dir('dd');
+			let carNumber =  document.querySelector('#carNumber').value;
+			let building =  document.querySelector('#building').value;
+			let num =  document.querySelector('#num').value;
+			if (carNumber) {
+				let regExp = /^\d{2,3}[가-힣]\d{4}$/;
+				console.dir(regExp.test(carNumber));
+				if(regExp.test(carNumber)){
+					fetch("/admin/caradd?building="+building+"&num="+num+"&carNumber="+carNumber,{
+						method:"GET"
+					})
+					.then(response => response.text())
+					.then(text => {
+						console.dir(text);
+						if(text == 'success'){
+							alert("차량등록이 신청되었습니다.");
+							location.href="/admin/car";
+						} else if(text == 'null') {
+							alert("존재하지 않는 세대 정보 입니다.");
+							location.href="/admin/car";
+						} else {
+							alert("신청이 완료되지 않았습니다. 관리자에게 문의주세요.");
+						}
+					})
+				} else {
+					alert("차량번호 양식에 맞게 작성하여주세요.");
+				}
+			} else{
+				alert("신청하실 차량번호를 입력해주세요.");
+			}
+		}
+	  </script>
 </body>
 </html>

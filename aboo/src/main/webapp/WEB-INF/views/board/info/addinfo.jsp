@@ -15,13 +15,13 @@
 	          <li class="nav-item"><a href="/index" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
-	          <li class="nav-item active"><a class="nav-link" href="/board/info/infolist">Board</a></li>
+	          <li class="nav-item active"><a class="nav-link" href="/board/info/listinfo">Board</a></li>
 	          <li class="nav-item"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
 	          <c:choose>
-	          <c:when test="${sessionScope.generation == null}">
+	          <c:when test="${sessionScope.generation == null and sessionScope.admin == null}">
 	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
 	          </c:when>
-	          <c:when test="${sessionScope.generation != null}">
+	          <c:when test="${sessionScope.generation != null or sessionScope.admin != null}">
 	          <li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>	          
 	          </c:when>
 	          </c:choose>
@@ -30,6 +30,16 @@
 	    </div>
 	  </nav>
     <!-- END nav -->
+    
+    <div id="msg" class= "btn1Wrap">
+		<button class = "btn1" onclick="chatPage()" style="outline: none;">Chat</button>	  
+	</div>
+
+	<script type="text/javascript">
+	function chatPage() {
+		location.href ='/myapt/chat';
+	}
+	</script>
 
  <section class="home-slider owl-carousel">
       <div class="slider-item bread-item" style="background-image: url(../../../resources/abooimg/logo_w.png);" data-stellar-background-ratio="0.5">
@@ -38,7 +48,7 @@
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
 
             <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/board/interior/intlist">INTERIOR</a></span> <span><a href="/board/used/usedlist">Bullentin</a></span></p>
+              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/board/interior/intlist">INTERIOR</a></span> <span><a href="/board/used/usedlist">Used</a></span></p>
 	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Info</h1>
             </div>
           </div>

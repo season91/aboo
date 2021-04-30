@@ -25,24 +25,25 @@
 						href="/board/info/listinfo">Board</a></li>
 					<li class="nav-item"><a href="/mypage/modifyinfo"
 						class="nav-link active">MyPage</a></li>
-					<c:choose>
-						<c:when
-							test="${sessionScope.generation == null and sessionScope.admin == null}">
-							<li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>
-						</c:when>
-						<c:when test="${sessionScope.generation != null}">
-							<li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>
-						</c:when>
-						<c:when test="${sessionScope.admin != null}">
-							<li class="nav-item cta"><a href="/admin/logout"
-								class="nav-link"><span>Logout</span></a></li>
-						</c:when>
-					</c:choose>
+			<c:choose>
+                <c:when test="${sessionScope.generation == null && sessionScope.admin == null}">
+                   <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>             
+                </c:when>
+                <c:when test="${sessionScope.generation != null && sessionScope.admin == null}">
+                   <li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>             
+                </c:when>
+                <c:when test="${sessionScope.admin != null && sessionScope.generation == null}">
+                   <li class="nav-item cta"><a href="/admin/logout" class="nav-link"><span>Admin Logout</span></a></li>             
+                </c:when>
+             </c:choose>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	<!-- END nav -->
+	
+	
+
 
     <section class="home-slider owl-carousel">
       <div class="slider-item bread-item" style="background-image: url(images/bg_1.jpg);" data-stellar-background-ratio="0.5">
@@ -58,8 +59,8 @@
     </section>
   
     <section class="ftco-section contact-section ftco-degree-bg">
-     <h4 class = "text-center mb-4">비밀번호 찾기</h4>
-     <div class = "d-flex justify-content-center"><div>아래정보를 입력하시면 메일로 임시 비밀번호를 발송해드립니다</div></div>
+     <h4 class = "text-center mb-2">비밀번호 찾기</h4>
+     <div class = "d-flex justify-content-center mb-2"><div>아래정보를 입력하시면 메일로 임시 비밀번호를 발송해드립니다</div></div>
       <div class="container">
         <div class="row block-9 justify-content-center">
           <div class="col-md-6">

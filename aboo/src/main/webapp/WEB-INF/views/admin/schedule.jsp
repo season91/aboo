@@ -393,7 +393,7 @@
        <div class="modal-dialog" role="document">
          <div class="modal-content" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675); color:white;">
            <div class="modal-header">
-           	<h4 class="modal-title" id="scheduleDateModalLabel">납부월로 검색</h4>
+           	<h4 class="modal-title" id="scheduleDateModalLabel">일정날짜로 검색</h4>
             	 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <i class="tim-icons icon-simple-remove"></i>
               </button>
@@ -417,7 +417,7 @@
        <div class="modal-dialog" role="document">
          <div class="modal-content" style="background-image: linear-gradient(to bottom left, #344675, #263148, #344675); color:white;">
            <div class="modal-header">
-           	<h4 class="modal-title" id="scheduleConModalLabel">납부월로 검색</h4>
+           	<h4 class="modal-title" id="scheduleConModalLabel">일정내용으로 검색</h4>
             	 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <i class="tim-icons icon-simple-remove"></i>
               </button>

@@ -38,7 +38,6 @@ public class InfoServiceImpl implements InfoService{
 
 	@Override
 	public Map<String, Object> selectInfoBoardList(int currentPage,String apartmentIdx) {
-		Map<String, Object> searchMap = new HashMap<String, Object>();
 		
 		Paging paging = Paging.builder()
 				.currentPage(currentPage)

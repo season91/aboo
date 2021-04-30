@@ -179,7 +179,7 @@
           <nav>
             <ul>
               <li>
-                <a href="/aboutus">
+                <a href="/about">
                   About Us
                 </a>
               </li>

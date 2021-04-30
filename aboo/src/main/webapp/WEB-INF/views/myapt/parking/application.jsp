@@ -30,6 +30,15 @@
 	    </div>
 	  </nav>
     <!-- END nav -->
+    <div id="msg" class= "btn1Wrap">
+		<button class = "btn1" onclick="chatPage()" style="outline: none;">Chat</button>	  
+	</div>
+
+	<script type="text/javascript">
+	function chatPage() {
+		location.href ='/myapt/chat';
+	}
+	</script>
 
     <section class="home-slider owl-carousel">
       <div class="slider-item bread-item" style="background-image: url(../../../resources/abooimg/logo_w.png);" data-stellar-background-ratio="0.5">
@@ -38,7 +47,7 @@
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
 
             <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span><a href="${context }/myapt/vote/votelist">Vote</a></span> <span><a href="${context }/myapt/schedule">Schedule</a></span> <span><a href="${context }/myapt/institutions/institutions">Institutions</a></span></p>
+              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="${context }/myapt/vote/votelist">Vote</a></span> <span><a href="${context }/myapt/schedule">Schedule</a></span> <span><a href="${context }/myapt/institutions/institutions">Institutions</a></span> <span><a href="${context }/myapt/chat">chat</a></span></p>
 	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Parking Application</h1>
             </div>
           </div>
@@ -55,12 +64,12 @@
     				<p>세대당 2대만 등록 가능합니다.</p>
     			</div>
     			<div class="col-lg-7 ftco-wrap ftco-animate">
-    		<form:form modelAttribute="carApplication" action="${context }/myapt/parking/applicationimpl" method="post" class="domain-form d-flex">
+    		<form:form modelAttribute="carApplication" class="domain-form d-flex">
               <div class="form-group domain-name">
-                <input type="text" class="form-control name px-4" name="aplctCarNumber" placeholder="예 : 123가4567" maxlength="8">
+                <input type="text" class="form-control name px-4" name="aplctCarNumber" id="aplctCarNumber" placeholder="예 : 123가4567" maxlength="8">
               </div>
               <div class="form-group domain-select d-flex">
-                <button type="submit" class="search-domain btn btn-primary text-center" >신청하기</button>
+                <button type="button" class="search-domain btn btn-primary text-center" onclick='send()'>신청하기</button>
 	            </div>
 	          <form:errors path="aplctCarNumber" cssClass="heading-white"></form:errors>
             </form:form>
@@ -177,11 +186,39 @@
   <script src="../../../resources/js/generation/aos.js"></script>
   <script src="../../../resources/js/generation/jquery.animateNumber.min.js"></script>
   <script src="../../../resources/js/generation/bootstrap-datepicker.js"></script>
-  <script src="../../../resources/js/generation/jquery.timepicker.min.js"></script>
   <script src="../../../resources/js/generation/scrollax.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="../../../resources/js/generation/google-map.js"></script>
   <script src="../../../resources/js/generation/main.js"></script>
+  <script type="text/javascript">
+  let send = () =>{
+	  console.dir('dd');
+		let aplctCarNumber =  document.querySelector('#aplctCarNumber').value;
+		if (aplctCarNumber) {
+			let regExp = /^\d{2,3}[가-힣]\d{4}$/;
+			if(!regExp.test(aplctCarNumber)){
+				alert("차량번호 양식에 맞게 작성하여주세요.");
+			} else {
+				fetch("/myapt/parking/applicationimpl?aplctCarNumber="+aplctCarNumber,{
+					method:"GET"
+				})
+				.then(response => response.text())
+				.then(text => {
+					if(text == 'success'){
+						alert("차량등록이 신청되었습니다.");
+						location.href = "/myapt/parking/application";
+					} else if( text == 'application') {
+						alert("이미 신청하신 차량번호 입니다.");
+					} else {
+						alert("신청이 완료되지 않았습니다. 관리자에게 문의주세요.");
+					}
+				})
+			}
+		} else{
+			alert("신청하실 차량번호를 입력해주세요.");
+		}
+	}
+  </script>
     
 </body>
 </html>

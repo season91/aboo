@@ -44,15 +44,14 @@ public class CarServiceImpl implements CarService{
 
 	@Override
 	public String insertAndQRWrite(Car car) {
-		String resStr = "";
 		// QR코드 생성한 후 baseURL 경로에 저장한다.
 		// 1. DB에 저장한다 (시퀀스번호때문에 어쩔수없다.)
 		int resCnt = carRepository.selectCarCnt(car.getGenerationIdx());
 		// 2건이상 등록된 세대라면 등록하지 않는다. 차량번호가 중복되면 등록하지 않는다.
-		Car vehicleCheck = carRepository.selectCarByGenerationIdxAndCarNumber(car);
+		Car carCheck = carRepository.selectCarByGenerationIdxAndCarNumber(car);
 		System.out.println("등록건수" + resCnt);
 		int insertRes = 0;
-		if(resCnt < 2 && vehicleCheck == null) {
+		if(resCnt < 2 && carCheck == null) {
 			insertRes = carRepository.insertCar(car);
 		} else {
 			throw new ToAlertException(ErrorCode.IQR02);
@@ -71,7 +70,7 @@ public class CarServiceImpl implements CarService{
 		QRCodeUtil qr = new QRCodeUtil();
 		qr.makeQR(domain, "c"+newCar.getCarIdx());
 		
-		return "등록되었습니다.";
+		return "success";
 	}
 	
 	public Map<String, Object> searchMap(String apartmentIdx, String standard, String keyword){

@@ -17,13 +17,13 @@
 	          <li class="nav-item"><a href="/index" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
-	          <li class="nav-item active"><a class="nav-link" href="/board/info/infolist">Board</a></li>
+	          <li class="nav-item active"><a class="nav-link" href="/board/info/listinfo">Board</a></li>
 	          <li class="nav-item"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
 	          <c:choose>
-	          <c:when test="${sessionScope.generation == null}">
+	          <c:when test="${sessionScope.generation == null and sessionScope.admin == null}">
 	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
 	          </c:when>
-	          <c:when test="${sessionScope.generation != null}">
+	          <c:when test="${sessionScope.generation != null or sessionScope.admin != null}">
 	          <li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>	          
 	          </c:when>
 	          </c:choose>
@@ -32,6 +32,15 @@
 	    </div>
 	  </nav>
     <!-- END nav -->
+    <div id="msg" class= "btn1Wrap">
+		<button class = "btn1" onclick="chatPage()" style="outline: none;">Chat</button>	  
+	</div>
+
+	<script type="text/javascript">
+	function chatPage() {
+		location.href ='/myapt/chat';
+	}
+	</script>
 
  <section class="home-slider owl-carousel">
  	<div class="slider-item bread-item" style="background-image: url(../../../resources/abooimg/logo_w.png);" data-stellar-background-ratio="0.5">        <div class="overlay"></div>
@@ -39,7 +48,7 @@
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
 
             <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/board/interior/intlist">INTERIOR</a></span> <span><a href="/board/used/usedlist">used</a></span></p>
+              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/board/interior/intlist">INTERIOR</a></span> <span><a href="/board/used/usedlist">Used</a></span></p>
 	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Info</h1>
             </div>
           </div>
@@ -52,9 +61,13 @@
         <div class=" pt-5 pb-5 w-99">
          <div class=" mb-4 ">
             <div class="card-body ">
-             <div class=" d-flex justify-content-between">
-             <h2 class="h4">정보 & 질문 게시판</h2>
-              <form action="${context}/board/info/search" class="search-form">
+            <div>
+             <p class="h4 pb-3">정보 & 질문 게시판</p>
+              <p>입주민들 간 자유롭게 정보를 공유할 수 있는 게시판 입니다.</p>
+              </div>
+             <div class=" d-flex justify-content-end">
+             
+              <form action="${context}/board/info/search" class="search-form col-md-5">
                 <div class="form-group">
                   <div class="icon">
                   	<button type="submit" class="icon-search bg-white border-0"></button>
@@ -72,10 +85,10 @@
                     <thead class=" text-primary">
                     
                       <th>
-                        
+                        글번호
                       </th>
                       <th>
-                        
+                        카테고리
                       </th>
                       <th>
                       	제목
@@ -89,7 +102,7 @@
                     </thead>
                    
                     <tbody>
- 					<c:forEach items="${infoBoard}" var="infoBoard">
+ 					<c:forEach items="${infoBoard}" var="infoBoard" varStatus="status">
  					
 		                      <tr>
 		                        <td>
@@ -100,18 +113,27 @@
 		                        </td>
 		                        <c:choose>
         							<c:when test="${infoBoard.bIsPrivate == 0}">
-				                        <td>
+				                        <td class="ml-2">
+				                        <div class="d-flex justify-center ml-3">
 				                         <a href="${context}/board/info/detail?bIdx=${infoBoard.bIdx}" class="text-dark">
 				                          ${infoBoard.bTitle}
 				                          </a>
-
+				                          <div class="ml-3">
+				                          <a href="${context}/board/info/detail?bIdx=${infoBoard.bIdx}" class="meta-chat text-dark"><span class="icon-chat" style="font-size:0.9vw;"></span>${infoCmtCntList[status.index]}</a></div>
+										</div>
 				                         
 				                         
 				                        </td>
 				                     </c:when>
 				                     <c:otherwise>
 				                     	<td>
-				                     		비공개 처리된 게시물입니다.
+				                     	 <div class="d-flex justify-center ml-3">
+				                     		<a href="${context}/board/info/detail?bIdx=${infoBoard.bIdx}" class="text-dark">비공개 처리된 게시물입니다.</a>
+				                     		<div class="ml-3">
+				                         	 <a href="${context}/board/info/detail?bIdx=${infoBoard.bIdx}" class="meta-chat text-dark"><span class="icon-chat" style="font-size:0.9vw;"></span>${infoCmtCntList[status.index]}</a>
+				                         	 </div>
+				                         </div>
+				                         
 				                     	</td>
 				                     </c:otherwise>
 				                     
@@ -141,14 +163,14 @@
             
                   <ul>
                 <li><a href="${context}/board/${paging.type}/listinfo">&lt;&lt;</a></li>
-                <li><a href="${context}/board/${paging.type}/listinfot?page=${paging.prev}">&lt;</a></li>
+                <li><a href="${context}/board/${paging.type}/listinfo?page=${paging.prev}">&lt;</a></li>
 	                <c:forEach begin="${paging.blockStart}" end="${paging.blockEnd}" var="page">
 	                   <c:choose>
 	                      <c:when test="${paging.currentPage eq page}">
 	                         <li class="active"><a href="${context}/board/${paging.type}/listinfo?page=${page}">${page}</a></li>
 	                      </c:when>
 	                      <c:otherwise>
-	                         <li><a href="${context}/board/${paging.type}?page=${page}/listinfo">${page}</a></li>
+	                         <li><a href="${context}/board/${paging.type}/listinfo?page=${page}">${page}</a></li>
 	                      </c:otherwise>
 	                   </c:choose>
 	              	 </c:forEach>

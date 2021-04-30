@@ -90,11 +90,13 @@
 		                <div>
 			                <h2 class="mb-4">Asana</h2>
 			              	<p onclick="location.href='https://app.asana.com/0/1200089682403032/list'">https://app.asana.com/0/1200089682403032/list</p>
-                     		 <h2 class="mb-4">Git</h2>
+                     		<h2 class="mb-4">Git</h2>
 			                <p onclick="location.href='https://github.com/season91/aboo'">https://github.com/season91/aboo</p>
-		                      <h2 class="mb-4">ERD CLOUD</h2>
-		                      <p onclick="location.href='https://www.erdcloud.com/d/d3HajP7xvXbTnSxtE'">https://www.erdcloud.com/d/d3HajP7xvXbTnSxtE</p>
+		                    <h2 class="mb-4">Notion</h2>
+		                    <p onclick="location.href='https://www.notion.so/6d9080b56ef44ec0a468a51a53cd6e2b'">https://www.notion.so/6d9080b56ef44ec0a468a51a53cd6e2b</p>
+				            
 				            </div>
+				            
 		              </div>
 		            </div>
 		          </div>

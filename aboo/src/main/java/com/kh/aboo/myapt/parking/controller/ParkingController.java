@@ -12,8 +12,10 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.kh.aboo.admin.car.model.vo.Car;
@@ -50,6 +52,7 @@ public class ParkingController {
 			HttpSession session, Model model) {
 		if(generation != null) {
 			apartmentIdx = generation.getApartmentIdx();
+			System.out.println(apartmentIdx);
 		}
 		// 주차가능대수 조회
 		Map<String, Object> parkingMap = parkingService.possibleParking(apartmentIdx);
@@ -62,15 +65,16 @@ public class ParkingController {
 	public void carApplication(@SessionAttribute(name = "generation", required = false) Generation generation,  Model model){
 		// 신청한 내역이 있는지 확인한다.
 		List<CarApplication> carApplicationCheck = parkingService.selectCarApplicationByGenerationIdx(generation.getGenerationIdx());
-		System.out.println(carApplicationCheck);
 		if(carApplicationCheck != null && carApplicationCheck.size() > 0) {
 			model.addAttribute("carApplicationList",carApplicationCheck);
 		}
 		
 	}
 	
-	@PostMapping("/myapt/parking/applicationimpl")
-	public String carApplicationImpl(@Valid CarApplication carApplication, Errors errors, @SessionAttribute(name = "generation", required = false) Generation generation, Model model){
+	@GetMapping("/myapt/parking/applicationimpl")
+	@ResponseBody //비동기통신
+	public String carApplicationImpl(@Valid @ModelAttribute CarApplication carApplication, Errors errors, @SessionAttribute(name = "generation", required = false) Generation generation, Model model){
+		System.out.println("carApplication?"+carApplication);
 		carApplication.setApartmentIdx(generation.getApartmentIdx());
 		carApplication.setGenerationIdx(generation.getGenerationIdx());
 
@@ -91,17 +95,15 @@ public class ParkingController {
 			// 차량번호와 세대관리번호로 신청 테이블에 넣어준다.
 			int res = parkingService.insertCarApplication(carApplication);
 			if(res > 0) {
-				model.addAttribute("alertMsg", "차량 등록 신청이 되었습니다.");
+				return "success";
 			} else {
-				model.addAttribute("alertMsg", "차량 등록 신청이 실패하였습니다. 관리인에게 문의해주세요.");
+				return "fail";
 			}
 
 		} else {
-			model.addAttribute("alertMsg", "이미 신청된 차량 정보입니다.");
+			return "application";
 		}
-		
-		model.addAttribute("url", "/myapt/parking/application");
-		return "common/result";
+
 	}
 
 }

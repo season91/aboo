@@ -19,10 +19,10 @@
 	          <li class="nav-item"><a class="nav-link" href="/board/info/listinfo">Board</a></li>
 	          <li class="nav-item active"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
 	          <c:choose>
-	          <c:when test="${sessionScope.generation == null}">
+	          <c:when test="${sessionScope.generation == null and sessionScope.admin == null}">
 	          <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
 	          </c:when>
-	          <c:when test="${sessionScope.generation != null}">
+	          <c:when test="${sessionScope.generation != null or sessionScope.admin != null}">
 	          <li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>	          
 	          </c:when>
 	          </c:choose>
@@ -31,6 +31,16 @@
 	    </div>
 	  </nav>
     <!-- END nav -->
+    
+     <div id="msg" class= "btn1Wrap">
+		<button class = "btn1" onclick="chatPage()" style="outline: none;">Chat</button>	  
+	</div>
+
+	<script type="text/javascript">
+	function chatPage() {
+		location.href ='/myapt/chat';
+	}
+	</script>
 
    <section class="home-slider owl-carousel">
        <div class="slider-item bread-item" style="background-image: url(../../../resources/abooimg/logo_w.png);" data-stellar-background-ratio="0.5">

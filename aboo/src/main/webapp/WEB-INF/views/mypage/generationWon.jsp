@@ -18,27 +18,37 @@
 	          <li class="nav-item "><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
 	          <li class="nav-item"><a class="nav-link" href="/board/info/listinfo">Board</a></li>
 	          <li class="nav-item active"><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
-	          <c:choose>
-		          <c:when test="${sessionScope.generation == null}">
-		          	<li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>	          
-		          </c:when>
-		          <c:when test="${sessionScope.generation != null}">
-		          	<li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>	          
-		          </c:when>
-		          <c:when test="${sessionScope.admin == null}">
-		          	<li class="nav-item cta"><a href="/login" class="nav-link"><span>Admin Login</span></a></li>	          
-		          </c:when>
-		          <c:when test="${sessionScope.admin != null}">
-		          	<li class="nav-item cta"><a href="/login" class="nav-link"><span>Admin Logout</span></a></li>	          
-		          </c:when>
-	          </c:choose>
+ 			<c:choose>
+                <c:when test="${sessionScope.generation == null && sessionScope.admin == null}">
+                   <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>             
+                </c:when>
+                <c:when test="${sessionScope.generation != null && sessionScope.admin == null}">
+                   <li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>             
+                </c:when>
+                <c:when test="${sessionScope.admin != null && sessionScope.generation == null}">
+                   <li class="nav-item cta"><a href="/admin/logout" class="nav-link"><span>Admin Logout</span></a></li>             
+                </c:when>
+             </c:choose>
 	        </ul>
 	      </div>
 	    </div>
 	  </nav>
     <!-- END nav -->
+    
+    
+    <div id="msg" class= "btn1Wrap">
+		<button class = "btn1" onclick="chatPage()" style="outline: none;">Chat</button>	  
+	</div>
+
+	<script type="text/javascript">
+	function chatPage() {
+		location.href ='/myapt/chat';
+	}
+	</script>
+	
+	
     <section class="home-slider owl-carousel">
-      <div class="slider-item bread-item" style="background-image: url(images/bg_1.jpg);" data-stellar-background-ratio="0.5">
+      <div class="slider-item bread-item" style="background-image: url(../../../resources/abooimg/logo_w.png);" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container-fluid">
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
@@ -63,7 +73,8 @@
     	<div class="container">
     		<div class="row justify-content-center mb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
-     	  <h4 class = "text-center mb-4">세대원 관리</h4>
+     	  <h4 class = "text-center mb-2">세대원 관리</h4>
+     	  <h6>세대원은 최대 5명까지 추가 가능합니다.</h6>
           </div>
         </div>
         	<div class = "d-flex justify-content-end">
@@ -83,7 +94,7 @@
 						    <tbody>
 								<c:forEach items="${generationWonList}" var="generationWon">
 									<tr onclick="openModal(this)" data-toggle="modal" data-target="#modifyModal">
-									    <td class = "generationWonIdx" >${generationWon.generationWonIdx}</td>
+										<td class = "generationWonIdx" >${generationWon.generationWonIdx}</td>
 									    <td class = "name" >${generationWon.name}</td>
 									    <td class = "tell">${generationWon.tell}</td>
 									 </tr>
@@ -267,13 +278,21 @@
 		   document.querySelector("#modifyName").value = name;
 		   document.querySelector("#modityTell").value = tell;
 		   document.querySelector("#modifyGenerationWonIdx").value = generationWonIdx;
+		   
+		   console.dir(generationWonIdx)
 		}
  		
 	</script>
 	
 	<script type="text/javascript">
 		let modity = () => {
+			
+	  	let tell = document.querySelector('#modityTell').value;
+		let regExp = /^\d{11}$/;
 		
+ 		if(regExp.test(tell)){	
+			
+			
 		let modifyName = document.querySelector("#modifyName").value
 		let modifyTell = document.querySelector("#modityTell").value
 		let modifyGenerationWonIdx = document.querySelector("#modifyGenerationWonIdx").value
@@ -310,8 +329,16 @@
          });	
          
 		 }
+ 		}else{
+      		alert("전화번호는 '-'를 제외한 11자리 숫자를 입력해주세요.")
+
+ 		}
+		
 		}
  		
+		
+		
+		
 	</script>
 	
 	
@@ -360,6 +387,11 @@
 	
 	<script type="text/javascript">
 	let add = () => {
+	
+	let tell = document.querySelector('#addTell').value;
+	let regExp = /^\d{11}$/;
+	
+	if(regExp.test(tell)){		
 		
 	let addName = document.querySelector("#addName").value;
 	let addTell = document.querySelector("#addTell").value;
@@ -397,7 +429,13 @@
         });	
         
 	 }
+	
+	}else{
+  		alert("전화번호는 '-'를 제외한 11자리 숫자를 입력해주세요.")
 	}
+	
+	}/* END */
+	
  		
 	</script>
 	

@@ -31,6 +31,17 @@
 	    </div>
 	  </nav>
     <!-- END nav -->
+    
+	<div id="msg" class= "btn1Wrap">
+		<button class = "btn1" onclick="chatPage()" style="outline: none;">Chat</button>	  
+	</div>
+
+	<script type="text/javascript">
+	function chatPage() {
+		location.href ='/myapt/chat';
+	}
+	</script>
+    
 
     <section class="home-slider owl-carousel">
       <div class="slider-item bread-item" style="background-image: url(../../../resources/abooimg/logo_w.png);" data-stellar-background-ratio="0.5">
@@ -39,7 +50,7 @@
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
 
             <div class="col-md-8 mt-5 text-center col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="${context }/myapt/vote/votelist">Vote</a></span> <span><a href="${context }/myapt/schedule">Schedule</a></span> <span><a href="${context }/myapt/institutions/institutions">Institutions</a></span></p>
+				 <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span><a href="${context }/myapt/vote/votelist">Vote</a></span> <span><a href="${context }/myapt/schedule">Schedule</a></span> <span><a href="${context }/myapt/institutions/institutions">Institutions</a></span> <span><a href="${context }/myapt/chat">chat</a></span></p>
 	            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Parking</h1>
             </div>
           </div>

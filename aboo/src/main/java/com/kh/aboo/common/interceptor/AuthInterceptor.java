@@ -87,7 +87,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 					break;
 				default : 
 					if (session.getAttribute("generation") == null) {
-						throw new ToAlertException(ErrorCode.AUTH09);
+						throw new ToAlertException(ErrorCode.AUTH06);
 					}
 					break;
 				}
@@ -139,6 +139,12 @@ public class AuthInterceptor implements HandlerInterceptor {
 				switch (uriArr[2]) {
 				case "schedule" :
 					if (session.getAttribute("generation") == null && session.getAttribute("admin") == null) {
+						throw new ToAlertException(ErrorCode.AUTH06);
+					}
+					break;
+				
+				case "chat" :
+					if (session.getAttribute("generation") == null) {
 						throw new ToAlertException(ErrorCode.AUTH06);
 					}
 					break;

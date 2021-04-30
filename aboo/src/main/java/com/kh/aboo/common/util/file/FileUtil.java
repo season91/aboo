@@ -124,14 +124,12 @@ public class FileUtil {
 	}
 	
 	// 아영 : 셋팅된 양식 excel file로 구성하기.
-	public File mfmtgeeFormExcel(Map<String, Object> generationList) {
+	public File mfmtgeeFormExcel(Map<String, Object> generationList,String fileName) {
 		// excel 양식 셋팅하기
 		XSSFWorkbook workbook = mgmtfeeFormSetting(generationList);
 		
 		// 파일 내보내기
 		// 파일 명
-		String fileName = "반포.xlsx";
-		System.out.println(fileName);
 		File fileDown = new File(fileName);
 		FileOutputStream fos = null;
 		if(!fileDown.exists()) {

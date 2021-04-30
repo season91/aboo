@@ -2,6 +2,7 @@ package com.kh.aboo.board.info.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -47,11 +48,32 @@ public class InfoController {
 		if(admin != null) {
 			
 			String apartmentIdx = admin.getApartmentIdx();
+			Map<String, Object> commandMap  = infoService.selectInfoBoardList(page, apartmentIdx);
+			List<InfoBoard> infoBoard = (List<InfoBoard>) commandMap.get("infoBoard");
+			List<Integer> infoCmtCntList = new ArrayList<>();
+			
+			for (InfoBoard infoBrd : infoBoard) {
+				int infoCmt = infoService.selectInfoCmtcnt(infoBrd.getbIdx());
+				infoCmtCntList.add(infoCmt);
+			}
+
 			model.addAllAttributes(infoService.selectInfoBoardList(page, apartmentIdx));
+			model.addAttribute("infoCmtCntList", infoCmtCntList);
 
 		}else {
 			
 			String apartmentIdx = generation.getApartmentIdx();
+			Map<String, Object> commandMap  = infoService.selectInfoBoardList(page, apartmentIdx);
+			List<InfoBoard> infoBoard = (List<InfoBoard>) commandMap.get("infoBoard");
+			List<Integer> infoCmtCntList = new ArrayList<>();
+			
+			for (InfoBoard infoBrd : infoBoard) {
+				int infoCmt = infoService.selectInfoCmtcnt(infoBrd.getbIdx());
+				infoCmtCntList.add(infoCmt);
+			}
+
+			model.addAllAttributes(infoService.selectInfoBoardList(page, apartmentIdx));
+			model.addAttribute("infoCmtCntList", infoCmtCntList);
 			model.addAllAttributes(infoService.selectInfoBoardList(page,apartmentIdx));
 	
 		}
@@ -114,9 +136,6 @@ public class InfoController {
 			Generation generation,
 			Model model
 			) {
-		
-		//System.out.println("multipartFile list length : " + files.size());
-		//System.out.println(files.get(0));
 	
 		//session에서 아파트번호와 세대번호 불러오기
 		String apartmentIdx = generation.getApartmentIdx();
@@ -156,10 +175,9 @@ public class InfoController {
 		return "board/info/editinfo";
 	};
 	
-	//게시글 삭제
+	//게시글 수정
 	@PostMapping("editimpl")
-	public String editimpl(@RequestParam List<MultipartFile> files
-			,InfoBoard infoBoard, String bIdx, Model model) {
+	public String editimpl(InfoBoard infoBoard, String bIdx, Model model) {
 		
 		infoBoard.setbIdx(bIdx);
 		

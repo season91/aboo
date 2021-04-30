@@ -19,27 +19,27 @@
 	          <li class="nav-item "><a href="/myapt/schedule" class="nav-link">MyApt</a></li>
 	          <li class="nav-item"><a class="nav-link" href="/board/info/listinfo">Board</a></li>
 	          <li class="nav-item "><a href="/mypage/modifyinfo" class="nav-link">MyPage</a></li>
-				<c:choose>
-					<c:when
-						test="${sessionScope.generation == null and sessionScope.admin == null}">
-						<li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>
-					</c:when>
-					<c:when test="${sessionScope.generation != null}">
-						<li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>
-					</c:when>
-					<c:when test="${sessionScope.admin != null}">
-						<li class="nav-item cta"><a href="/admin/logout"
-							class="nav-link"><span>Logout</span></a></li>
-					</c:when>
-				</c:choose>
+ 			<c:choose>
+                <c:when test="${sessionScope.generation == null && sessionScope.admin == null}">
+                   <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>             
+                </c:when>
+                <c:when test="${sessionScope.generation != null && sessionScope.admin == null}">
+                   <li class="nav-item cta"><a href="/logout" class="nav-link"><span>Logout</span></a></li>             
+                </c:when>
+                <c:when test="${sessionScope.admin != null && sessionScope.generation == null}">
+                   <li class="nav-item cta"><a href="/admin/logout" class="nav-link"><span>Admin Logout</span></a></li>             
+                </c:when>
+             </c:choose>
 	        </ul>
 	      </div>
 	    </div>
 	  </nav>
     <!-- END nav -->
+    
+
 
     <section class="home-slider owl-carousel">
-      <div class="slider-item bread-item" style="background-image: url(images/bg_1.jpg);" data-stellar-background-ratio="0.5">
+      <div class="slider-item bread-item" style="background-image: url(../../../resources/abooimg/logo_w.png);" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container-fluid">
           <div class="row slider-text align-items-center justify-content-center" data-scrollax-parent="true">
