@@ -28,14 +28,14 @@ kh정보교육원 final project
 # 선영
 
 ## **1. generation**
-기능 : 로그인, 아이디찾기, 비밀번호찾기, 회원정보수정, 문자인증, 이메일인증, 세대원 보기, 세대원 추가, 세대원 수정, 세대원 삭제
+기능 : 로그인, 아이디 찾기, 비밀번호 찾기, 회원 정보수정, 문자인증, 이메일인증, 세대원 보기, 세대원 추가, 세대원 수정, 세대원 삭제
 
-접근방법 : Q 해당 아파트의 세대를 어떻게 구별할것이며 어떻게 아이디의 중복을 막을 것인가.
+접근 방법 : Q 해당 아파트의 세대를 어떻게 구별할 것이며 어떻게 아이디의 중복을 막을 것인가.
 
 <img width="531" alt="1" src="https://user-images.githubusercontent.com/74293481/116706165-46402000-aa08-11eb-9efb-046885303d2a.PNG">
 
 
-##### -아파트의 기본키를 세대 테이블 외래키로 두어 구별했다.
+##### -아파트의 기본 키를 세대 테이블 외래키로 두어 구별했다.
 
 ```
 String Separator = adminRepository.selectApartmentBySeparator(apartmentIdx);
@@ -47,13 +47,13 @@ generation.setId(id);
 ##### -아파트 구분자를 받아서 세대의 같은 동, 호의 중복을 막았다.
 
 ## **2. manager**
-기능 : 로그인, 아이디찾기, 비밀번호찾기, 회원정보수정, 문자인증, 이메일인증, 세대 보기, 세대 검색, 세대 동으로 검색, 세대 추가, 세대 초기화, 세대 삭제
+기능 : 로그인, 아이디 찾기, 비밀번호 찾기, 회원 정보수정, 문자인증, 이메일인증, 세대 보기, 세대 검색, 세대 동으로 검색, 세대 추가, 세대 초기화, 세대 삭제
 
-접근방법 : Q 아파트와 관리인을 어떻게 연결해줄 것인가
+접근 방법 : Q 아파트와 관리인을 어떻게 연결해줄 것인가
 
 <img width="560" alt="2" src="https://user-images.githubusercontent.com/74293481/116706812-ff9ef580-aa08-11eb-939e-424d8bd844b5.PNG">
 
-##### -아파트의 기본키를 관리인 테이블 외래키로 두어 구별했다.
+##### -아파트의 기본 키를 관리인 테이블 외래키로 두어 구별했다.
 
 
 ## **3. mymgmtfee**
@@ -70,7 +70,7 @@ $("#check_module").click(function () {
           
             merchant_uid: 'merchant_' + new Date().getTime(),
            
-            name: '주문명:관리비고지서',
+            name: '주문명:관리비 고지서',
            
             amount: periodPayment,
            
@@ -84,14 +84,14 @@ $("#check_module").click(function () {
         }, function (rsp) {
             console.log(rsp);
             if (rsp.success) {
-           	    var msg = '결제가 완료되었습니다.';
+           	    var msg = '결제가 완료 되었습니다;';
                           
                 payment(rsp.pay_method,rsp.paid_amount);
 
 
             } else {
-                var msg = '결제에 실패하였습니다.';
-                msg += '에러내용 : ' + rsp.error_msg;
+                var msg = '결제에 실패 하였습니다;';
+                msg += '에러 내용 : ' + rsp.error_msg;
 
             }
             alert(msg);
@@ -111,7 +111,8 @@ let mgmtfeeIdx = $("#mgmtfeeIdx")[0].defaultValue;
 
 
 	    let headerObj = new Headers();
-	    headerObj.append("content-type","application/json");
+	    headerObj.append("content-type","application/json
+	    fetch" >");
 	    fetch(url,{
 	       method:"post",
 	       headers:headerObj,
@@ -134,25 +135,25 @@ let mgmtfeeIdx = $("#mgmtfeeIdx")[0].defaultValue;
 
 
 ```
-##### -결제 성공시 payment()로 미납->완료 UPDATE, 결제 테이블의 INSERT 프로시저를 돌린다. 
+##### -결제 성공 시 payment()로 미납->완료 UPDATE, 결제 테이블의 INSERT 프로시저를 돌린다. 
 
 
 ## **4. used**
 기능 : 게시판 보기, 게시글 상세보기, 거래 중/거래 완료로 검색, 키워드 검색, 게시글 작성, 게시글 수정, 게시글 삭제, 게시글 비공개, 댓글 작성, 댓글 수정, 댓글 삭제, 댓글 비공개
 
-접근방법 : Q 아파트 단위로 게시판이 존재해야한다.
+접근 방법 : Q 아파트 단위로 게시판이 존재해야 한다.
 
 <img width="608" alt="3" src="https://user-images.githubusercontent.com/74293481/116709317-86ed6880-aa0b-11eb-91a9-6ca3cdcffb5b.PNG">
 
-##### -게시판에 글을 작성할때 로그인된 세대의 SESSION에서 APARTMENT_IDX를 받아 INSERT.
-##### -게시판을 보여줄때 로그인된 세대의 SESSION에서 APARTMENT_IDX를 받아 해당 아파트의 게시글만 보여준다.
+##### -게시판에 글을 작성할 때 로그인된 세대의 SESSION에서 APARTMENT_IDX를 받아 INSERT.
+##### -게시판을 보여줄 때 로그인된 세대의 SESSION에서 APARTMENT_IDX를 받아 해당 아파트의 게시글만 보여준다.
 
 
 ## **5. echo**
-기능 : 접속 종료, 세대 종료시 관리자에게 안내
+기능 : 접속 종료, 세대 종료 시 관리자에게 안내
 
 사용 클래스 : Spring Framework의 TextWebSocketHandler Class
-사용한 이유 : 스프링 프레임워크 내 기능을 사용하고자 했으며 관리자와 세대가 계속 통신을 주고 받아야 하기때문에 양방향을 지원하는 WebSocket을 사용했다.
+사용한 이유 : 스프링 프레임워크 내 기능을 사용하고자 했으며 관리자와 세대가 계속 통신을 주고받아야 하므로 양방향을 지원하는 Web Socket을 사용했다.
 
 ```
 @Override
@@ -182,5 +183,5 @@ public void disconnectList(String id, String apartmentIdx) throws IOException {
 
 
 ```
-##### -퇴장시 sessionList, nameList에서 지운다.
+##### -퇴장 시 sessionList, nameList에서 지운다.
 
