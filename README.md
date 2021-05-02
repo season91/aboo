@@ -22,8 +22,8 @@ kh정보교육원 final project
 ### **[패키지별 구현 기능]**
  1. com/kh/aboo/bdmin : Bdmin 액터가 사용할 기능 패키지로 management, notice 패키지 존재<br>
  > management<br>
- - 서비스 이용중인 apartment 관리와 Admin 계정 CRUD 기능을 구현한 패키지<br>
- - ManagementController의 Method : apartment 목록 출력 및 수정, 서비스 신청서 출력 및 승인/반려, Admin 계정 CRUD, Admin 계정 신청서 승인/반려, Admin 계정 승인시 아이디 및 이메일 중복 확인<br>
+ > - 서비스 이용중인 apartment 관리와 Admin 계정 CRUD 기능을 구현한 패키지<br>
+ > - ManagementController의 Method : apartment 목록 출력 및 수정, 서비스 신청서 출력 및 승인/반려, Admin 계정 CRUD, Admin 계정 신청서 승인/반려, Admin 계정 승인시 아이디 및 이메일 중복 확인<br>
 
  > notice<br>
  - Admin에게 보여줄 공지사항 CRUD 기능을 구현한 패키지<br>
