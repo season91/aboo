@@ -38,22 +38,35 @@ kh정보교육원 final project
  > - 관리비 Excel 양식 다운로드 및 업로드, CRUD 기능 구현한 패키지<br>
  > - MgmtfeeController의 Method : 관리비 Excel 양식 다운로드, 작성한 관리비 Excel 업로드, 관리비 목록 출력, 관리비 CRUD, 미납/고지월별/관리비번호/세대정보로 검색<br>
 
+ > schedule<br>
+ > - 일정 관리 기능 구현한 패키지<br>
+ > - ScheduleController의 Method : 일정 CRUD<br>
+
  > vote<br>
  > - 투표를 관리할 때 사용하는 기능을 구현한 패키지<br>
  > - AdminVoteController의 Method : 투표 생성, 투표 수정, 투표 삭제, 투표 종료<br>
 
  3. com/kh/aboo/board : Generation 액터와 Admin 액터가 사용할 게시판 CRUD 패키지로 info, interior, used 패키지가 존재<br>
+ > info<br>
+ > - Generation 액터가 정보&질문 게시판의 글 및 댓글을 CRUD할 기능을 구현한 패키지<br>
+ > - Admin 액터가 정보&질문 게시판 글 및 댓글을 관리할 수 있는 기능을 구현한 패키지<br>
+ > - InfoController의 Method : 정보&질문 게시판 글 목록 출력, 정보&질문 게시판 CRUD, 정보&질문 게시판 댓글 CRUD, 정보&질문 게시판 게시글 비공개 처리(Admin권한), 정보&질문 게시판 댓글 비공개 처리(Admin 권한), 정보&질문 게시판 제목으로 검색<br>
+
  > interior<br>
  > - Generation 액터가 인테리어 게시판의 글 및 댓글을 CRUD할 기능을 구현한 패키지<br>
  > - Admin 액터가 인테리어 게시판 글 및 댓글을 관리할 수 있는 기능을 구현한 패키지<br>
- > - InteriorController의 Method : 인테리어 게시글 목록 출력, 인테리어 게시글 상세화면 출력, 인테리어 게시글 CRUD, 인테리어 댓글 CRUD, 인테리어 게시글 비공개 처리(Admin 권한), 인테리어 댓글 비공개 처리(Admin 권한), 인테리어 게시글 제목으로 검색<br>
+ > - InteriorController의 Method : 인테리어 게시글 목록 출력, 인테리어 게시글 CRUD, 인테리어 댓글 CRUD, 인테리어 게시글 비공개 처리(Admin 권한), 인테리어 댓글 비공개 처리(Admin 권한), 인테리어 게시글 제목으로 검색<br>
 
  > used<br>
  > - Generation 액터가 중고 게시판의 글 및 댓글을 CRUD할 기능을 구현한 패키지<br>
  > - Admin 액터가 중고 게시판 글 및 댓글을 관리할 수 있는 기능을 구현한 패키지<br>
- > - UsedController의 Method : 중고 게시글 목록 출력, 중고 게시글 상세화면 출력, 중고 게시글 CRUD, 중고 댓글 CRUD, 중고 게시글 비공개 처리(Admin 권한), 중고 댓글 비공개 처리(Admin 권한), 중고 게시글 제목으로 검색, 중고 거래 중/거래 완료 검색<br>
+ > - UsedController의 Method : 중고 게시글 목록 출력, 중고 게시글 CRUD, 중고 댓글 CRUD, 중고 게시글 비공개 처리(Admin 권한), 중고 댓글 비공개 처리(Admin 권한), 중고 게시글 제목으로 검색, 중고 거래 중/거래 완료 검색<br>
 
  4. com/kh/aboo/myapt : Generation 액터와 GenerationWon 액터가 사용할 기능 패키지로 aptSchedule, institutions, parking, vote 패키지가 존재<br>
+ > aptSchedule<br>
+ > - Generation 액터가 본인 아파트 일정을 확인할 수 있도록 기능을 구현한 패키지<br>
+ > - AptScheduleController의 Method : 아파트 일정을 달력에 출력할 수 있게끔 view로 목록을 전달<br>
+
  > institutions<br>
  > - Generation 액터가 본인 아파트 주변의 공공기관 위치 정보를 얻을 때 사용하는 기능을 구현한 패키지<br>
  > - InstitutionsController의 Method : view에서 아파트 주변 공공기관의 위치를 출력하기 위해 아파트의 위치 정보를 view로 보내는 메서드가 존재<br>
@@ -67,8 +80,11 @@ kh정보교육원 final project
  > - GenerationWon 액터가 생성된 투표에 참여할 수 있는 기능을 구현한 패키지<br>
  > - VoteController의 Method : 투표 목록 출력, 투표 상세화면 출력, 투표 참여 여부 확인, 전화번호 문자 인증, 세대원 인증, 표 행사, 투표 제목으로 검색<br>
 
-
  5. com/kh/aboo/mypage : Generation 액터가 사용할 기능 패키지로 myalarm, mycar, mymgmtfee, writelist 패키지가 존재<br>
+ > myalarm<br>
+ > - Generation 액터가 본인 또는 아파트와 관련된 일정, 투표, 관리비, 차량등록 알람을 확인할 수 있도록 구현한 패키지<br>
+ > - MyAlarmController의 Method : 알람 목록 출력<br>
+ 
  > mycar<br>
  > - 아파트에 등록된 본인 차량의 QR 이미지와 주차 상태를 파악하는 패키지<br>
  > - MyCarController의 Method : 내가 등록한 차량 출력, QR 코드 다운로드 기능<br>
@@ -97,9 +113,8 @@ kh정보교육원 final project
  > - AdminController의 Method  : 로그인, 로그아웃, 아이디 찾기, 비밀번호 찾기, 회원 정보수정, 문자인증, 이메일인증, 세대 보기, 세대 검색, 세대 동으로 검색, 세대 추가, 세대 초기화, 세대 삭제<br>
 
  7-1. com/kh/aboo/common : [공통모듈1] 공통주소코드, 공통에러코드, 권한관리, 채팅, 메일, util 기능이 있는 패키지로 code, echo, exception, interceptor, mail, util 패키지가 존재<br>
+ > echo<br>
+ > - Generation 액터와 Admin 액터의 1:1 채팅을 구현한 패키지<br>
+ > - EchoHandler의 Method : 채팅 접속 시, 채팅 접속 시 안내, 클라이언트 메세지 받기, 채팅 퇴장 시, 채팅 퇴장 시 안내<br>
 
  7-2. com/kh/aboo/common/util : [공통모듈2] 인코딩, 파일업로드 및 다운로드, 페이징처리, QR코드 생성, 랜덤 기능이 있는 패키지로 encoding, file, paging, qrcode, random 패키지가 존재<br>
-
-
-
-
