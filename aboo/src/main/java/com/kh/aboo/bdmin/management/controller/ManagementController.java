@@ -81,7 +81,6 @@ public class ManagementController {
 	
 	@PostMapping("/management/apartment/modify")
 	public String apartmentModify(Apartment apartment, Model model) {
-		System.out.println(apartment);
 		managementService.updateApartment(apartment);
 		model.addAttribute("alertMsg", "수정이 완료되었습니다");
 		model.addAttribute("url", "/bdmin/management/apartment");
@@ -101,7 +100,6 @@ public class ManagementController {
 	// 서비스 신청 상세
 	@GetMapping("/management/contactusdetail")
 	public void contactDetail(String applicationIdx, Model model) {
-		System.out.println(applicationIdx);
 		model.addAttribute(managementService.selectApartApplication(applicationIdx));
 	}
 	
@@ -118,7 +116,6 @@ public class ManagementController {
 	
 	@GetMapping("/contactus")
 	public String contactUs() {
-		System.out.println("오나");
 		return "/bdmin/contactus";
 	}
 	
@@ -145,15 +142,13 @@ public class ManagementController {
 			keyword = apartmentIndx[1];
 			searchMap.put("keyword", keyword);
 		}
-		
-		System.out.println(searchMap);
+
 		model.addAllAttributes(managementService.selectAdminList(page, searchMap));
 	}
 	
 	// 관리자 신규등록
 	@PostMapping("/management/adminadd")
 	public String adminAdd(Admin admin, @RequestParam String apartmentInfo,Model model) {
-
 		managementService.insertAdmin(admin, apartmentInfo);
 		
 		model.addAttribute("alertMsg", "권한부여가 되었습니다.");

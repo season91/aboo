@@ -49,7 +49,7 @@ public class CarServiceImpl implements CarService{
 		int resCnt = carRepository.selectCarCnt(car.getGenerationIdx());
 		// 2건이상 등록된 세대라면 등록하지 않는다. 차량번호가 중복되면 등록하지 않는다.
 		Car carCheck = carRepository.selectCarByGenerationIdxAndCarNumber(car);
-		System.out.println("등록건수" + resCnt);
+		
 		int insertRes = 0;
 		if(resCnt < 2 && carCheck == null) {
 			insertRes = carRepository.insertCar(car);
@@ -110,7 +110,6 @@ public class CarServiceImpl implements CarService{
 				.type("car")
 				.total(carRepository.selectContentCnt(searchMap))
 				.build();
-		System.out.println(paging.toString());
 		
 		// paing 세대조건 정보 넣을 맵
 		searchMap.put("paging", paging);
@@ -118,7 +117,6 @@ public class CarServiceImpl implements CarService{
 		// 페이징정보 포함해서 페이징에 뿌려줄 리스트 받아온다.
 		List<Car> carList = carRepository.selectCarList(searchMap);
 		searchMap.put("carList", carList);
-		System.out.println("carList"+carList);
 		
 		// 차량리스트 기준 세대정보 가져오자.
 		List<Generation> generationList = new ArrayList<>();
@@ -128,7 +126,6 @@ public class CarServiceImpl implements CarService{
 		}
 
 		searchMap.put("generationList", generationList);
-		System.out.println("searchMap" + searchMap);
 		return searchMap;
 	}
 
@@ -144,7 +141,6 @@ public class CarServiceImpl implements CarService{
 				.type("car")
 				.total(carRepository.selectApplicationContentCnt(applicationMap))
 				.build();
-		System.out.println(paging.toString());
 		
 		// paing 세대조건 정보 넣을 맵
 		applicationMap.put("paging", paging);
@@ -152,7 +148,6 @@ public class CarServiceImpl implements CarService{
 		// 페이징정보 포함해서 페이징에 뿌려줄 리스트 받아온다.
 		List<CarApplication> carApplicationList = carRepository.selectCarApplicationList(applicationMap);
 		applicationMap.put("carApplicationList", carApplicationList);
-		System.out.println("carApplicationList"+carApplicationList);
 		
 		// 차량리스트 기준 세대정보 가져오자.
 		List<Generation> generationList = new ArrayList<>();
@@ -162,7 +157,6 @@ public class CarServiceImpl implements CarService{
 		}
 
 		applicationMap.put("generationList", generationList);
-		System.out.println("applicationMap" + applicationMap);
 		return applicationMap;
 	}
 

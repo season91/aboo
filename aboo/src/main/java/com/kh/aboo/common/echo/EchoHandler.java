@@ -41,9 +41,6 @@ public class EchoHandler extends TextWebSocketHandler {
 		}
 		sessionList.add(session);
 		nameList.add(id);
-		
-		System.out.println("총인원"+sessionList);
-		System.out.println("총네임"+nameList);
 
 	}
 	
@@ -64,7 +61,6 @@ public class EchoHandler extends TextWebSocketHandler {
 	// 클라이언트가 웹소켓 서버로 메시지를 전송했을 때 실행
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		System.out.println("전송"+session.getId()+message.getPayload());
 		//모든 유저에게 메시지 출력
 		//하지만 우리는 1:1채팅이기에 이부분 수정해야한다.
 		
@@ -74,7 +70,6 @@ public class EchoHandler extends TextWebSocketHandler {
 		String target = object.getString("target");
 		String msg = object.getString("messeage");
 		
-		System.out.println("받는이 : "+target);
 		int fromIdx = sessionList.indexOf(session); // 보낸이..
 		
 		String adminId = "";
@@ -100,23 +95,17 @@ public class EchoHandler extends TextWebSocketHandler {
 	// 클라이언트가 연결 끊었을 때 실행
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		System.out.println("퇴장" + session.getId());
 		int idx = sessionList.indexOf(session);
 		String id = (String) nameList.get(idx);
 		sessionList.remove(session);
 		nameList.remove(idx);
-		System.out.println("session2" + session.getAttributes());
-
 		Generation generation = (Generation) session.getAttributes().get("generation");
 		String apartmentIdx = generation.getApartmentIdx();
-
-		System.out.println("나간 유저의 아파트 아이디"+apartmentIdx);
 		disconnectList(id, apartmentIdx);
 
 	}
 	
 	public void disconnectList(String id, String apartmentIdx) throws IOException {
-
 		for (int i = 0; i < nameList.size(); i++) {
 			if (nameList.get(i).equals(apartmentIdx)) {
 				// 관리자라면 입장자 정보 받는다

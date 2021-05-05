@@ -65,7 +65,7 @@ public class ManagementServiceImpl implements ManagementService{
 				.type("apartment")
 				.total(managementRepository.selectApartCnt(searchMap))
 				.build();
-		System.out.println(paging.toString());
+		
 		searchMap.put("paging", paging);
 		List<Apartment> apartList = managementRepository.selectApartList(searchMap);
 		searchMap.put("apartList", apartList);
@@ -84,7 +84,7 @@ public class ManagementServiceImpl implements ManagementService{
 				.type("apartment")
 				.total(managementRepository.selectApartApplicationCnt(searchMap))
 				.build();
-		System.out.println(paging.toString());
+		
 		searchMap.put("paging", paging);
 		List<Apartment> apartApplicationList = managementRepository.selectApartApplicationList(searchMap);
 		searchMap.put("apartApplicationList", apartApplicationList);
@@ -129,8 +129,7 @@ public class ManagementServiceImpl implements ManagementService{
 				.type("adminauthority")
 				.total(managementRepository.selectAdminCnt(searchMap))
 				.build();
-		System.out.println(paging.toString());
-		System.out.println("검색조건 " + searchMap);
+
 		searchMap.put("paging", paging);
 
 		List<Admin> adminList = managementRepository.selectAdminList(searchMap);
@@ -143,10 +142,7 @@ public class ManagementServiceImpl implements ManagementService{
 			apartmentNameList.add(managementRepository.selectApartmentNameByApartmentIdx(apartmentIdx));
 		}
 		searchMap.put("apartmentNameList", apartmentNameList);
-		
-		//테스트
 		searchMap.put("apartmentList", managementRepository.selectApartmentList());
-		System.out.println(searchMap);
 		return searchMap;
 	}
 
@@ -188,13 +184,12 @@ public class ManagementServiceImpl implements ManagementService{
 				.type("adminapllist")
 				.total(managementRepository.selectAdminApplicationCnt(searchMap))
 				.build();
-		System.out.println(paging.toString());
-		System.out.println("검색조건 " + searchMap);
+
 		searchMap.put("paging", paging);
 
 		List<ManagerApplication> applicationList = managementRepository.selectAdminApplicationList(searchMap);
 		searchMap.put("applicationList", applicationList);
-		System.out.println("결과"+searchMap);
+
 		return searchMap;
 	}
 
@@ -212,7 +207,6 @@ public class ManagementServiceImpl implements ManagementService{
 		String msg = "";
 		// 신청서 승인 후 매니저 추가한다.
 		// 승인이든 반려이든 요청온 신청서 값 업데이트
-		System.out.println(application);
 		managementRepository.updateAdminApplication(application);
 		
 		// 만약 요청값이 1인 승인이라면 매니저 추가한다.
