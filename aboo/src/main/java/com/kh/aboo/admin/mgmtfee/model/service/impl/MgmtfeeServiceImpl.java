@@ -49,7 +49,6 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 		// 1. 업로드된 엑셀파일의 확장자 확인
 		Workbook workbook = null;
 		if (!extension.equals("xlsx")) {
-			System.out.println("예외발동한다.");
 			throw new ToAlertException(ErrorCode.ER01);
 		}
 
@@ -166,8 +165,6 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 			mgmtfeeList.add(mgmtfee);
 
 		}
-		
-		System.out.println("서비스 리스트" + mgmtfeeList);
 		return mgmtfeeList;
 	}
 
@@ -215,7 +212,6 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 			generation.setApartmentIdx(apartmentIdx);
 			generation.setBuilding(generationInfo[0]);
 			generation.setNum(generationInfo[1]);
-			System.out.println(generation);
 			
 			// 조회된 세대관리번호를 map에 담아준다.
 			String generationIdx = selectGenerationByBuildingAndNum(generation).getGenerationIdx();
@@ -238,7 +234,6 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 				.type("mgmtfee")
 				.total(mgmtfeeRepository.selectContentCnt(searchMap))
 				.build();
-		System.out.println(paging.toString());
 		// paing 세대조건 정보 넣을 맵
 		searchMap.put("paging", paging);
 		
@@ -286,14 +281,12 @@ public class MgmtfeeServiceImpl implements MgmtfeeService{
 	@Scheduled(cron = "0 0 18 * * *")
 	public void procedureMgmtOverDue() {
 		// 연체료 계산하는 배치 메서드, 매일 18시 00분에 돈다. 시연할땐 시간 조정
-		System.out.println("배치시작");
 		// 납기일이 지난  전체 미납 관리비 가져온다.
 		List<Mgmtfee> mgmtfeeList = mgmtfeeRepository.selectMgmtfeeListByAll();
 		
 		for (int i = 0; i < mgmtfeeList.size(); i++) {
 			String mgmtfeeIdx = mgmtfeeList.get(i).getMgmtfeeIdx();
 			// 관리비번호 프로시저로 보낸다.
-			System.out.println(mgmtfeeIdx+"배치수행");
 			mgmtfeeRepository.procedureMgmtOverDue(mgmtfeeIdx);
 		}
 		

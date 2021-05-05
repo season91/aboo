@@ -76,7 +76,7 @@ public class CarController {
 			String res = carService.insertAndQRWrite(car);
 			
 			myAlarmService.insertPvAlarm("'" + car.getCarNumber() + "' " +AlarmCode.ADD_CAR+"", car.getGenerationIdx());
-			System.out.println(res);
+
 			return res;
 		}
 		
@@ -102,7 +102,6 @@ public class CarController {
 		String resStr = "";
 		// 1. 전달받은 파라미터 배열을 하나씩 열어서 기존에 있는 차량정보인지 확인후 QR생성하고 처리 승인되게 한다.
 		for (int i = 0; i < applicationidx.size() ; i++) {
-			System.out.println(applicationidx.get(i)+"번째 처리중");
 			// 2. CarApplication가 미처리건인지 확인한다.QR코드 생성하고 차량 DB에 넣어준다.
 			// applicationidx 로 신청정보 가져와 대기중인 CarApplication 를 완성시킨다.
 			// 만약 이미 처리된건이라면 update문이 0을 반환하여 null이 반환되면서 해당 if문은 넘어가게 된다.

@@ -153,8 +153,6 @@ public class MgmtfeeController {
 	
 	@GetMapping("admin/mgmtfeedelete")
 	public String mgmtfeeDelete(@RequestParam String mgmtfeeidx, Model model) {
-		System.out.println("삭제할관리비번호 "+mgmtfeeidx);
-		
 		int res = mgmtfeeService.updateMgmtfeeIsDel(mgmtfeeidx);
 		
 		// 삭제가 되었다면 완료, 삭제내역이없다면 실패 안내.
@@ -173,11 +171,8 @@ public class MgmtfeeController {
 	@GetMapping("admin/mgmtfeedeletelist")
 	@ResponseBody
 	public void  mgmtfeeDeleteList(@RequestParam List<String> mgmtfeeidx) {
-		System.out.println("삭제할관리비번호 "+mgmtfeeidx);
-
 		for (int i = 0; i < mgmtfeeidx.size(); i++) {
 			int res = mgmtfeeService.updateMgmtfeeIsDel(mgmtfeeidx.get(i));
-			System.out.println(res);
 			// 삭제가 되었다면 완료, 삭제내역이없다면 실패 안내.
 			if(res == 0) {
 				throw new ToAlertException(ErrorCode.DMGMT01);

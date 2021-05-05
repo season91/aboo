@@ -52,7 +52,7 @@ public class ParkingController {
 			HttpSession session, Model model) {
 		if(generation != null) {
 			apartmentIdx = generation.getApartmentIdx();
-			System.out.println(apartmentIdx);
+
 		}
 		// 주차가능대수 조회
 		Map<String, Object> parkingMap = parkingService.possibleParking(apartmentIdx);
@@ -74,7 +74,7 @@ public class ParkingController {
 	@GetMapping("/myapt/parking/applicationimpl")
 	@ResponseBody //비동기통신
 	public String carApplicationImpl(@Valid @ModelAttribute CarApplication carApplication, Errors errors, @SessionAttribute(name = "generation", required = false) Generation generation, Model model){
-		System.out.println("carApplication?"+carApplication);
+
 		carApplication.setApartmentIdx(generation.getApartmentIdx());
 		carApplication.setGenerationIdx(generation.getGenerationIdx());
 
