@@ -16,19 +16,19 @@ import com.kh.aboo.admin.car.model.vo.Car;
 @WebAppConfiguration 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/*-context.xml"})
-public class CarRepositoryTest {
+public class CarRepositort {
 	
 	@Autowired
 	CarRepository carRepository;
 	
 	@Test
-	public void insertCar() {
+	public Car insertCar() {
 		Car car = new Car();
 		car.setApartmentIdx("100000");
 		car.setGenerationIdx("100362");
 		car.setCarNumber("123허4568");
-		System.out.println(carRepository.insertCar(car));
 		
+		return car;
 	};
 
 	@Test
@@ -38,8 +38,6 @@ public class CarRepositoryTest {
 		Map<String, String> commandMap = new HashMap<String, String>();
 		commandMap.put("carNumber", carNumber);
 		commandMap.put("generationIdx", generationIdx);
-		System.out.println(carRepository.selectCarByCarNumberAndGenerationIdx(commandMap));
-
 	}
 
 	// 차량 상태 업데이트 프로시저 확인
@@ -54,10 +52,6 @@ public class CarRepositoryTest {
 	public void selectCarApplicationList() {
 		Map<String, Object> commandMap = new HashMap<String, Object>();
 		commandMap.put("apartmentIdx", "100000");
-		// 총개수 가져오나?
-		System.out.println(carRepository.selectApplicationContentCnt(commandMap));
-		// 리스트 가져오나?
-		System.out.println(carRepository.selectCarApplicationList(commandMap));
 	}
 	
 

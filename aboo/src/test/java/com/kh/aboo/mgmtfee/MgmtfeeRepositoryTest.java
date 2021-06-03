@@ -21,15 +21,17 @@ public class MgmtfeeRepositoryTest {
 	@Autowired
 	MgmtfeeRepository mgmtfeeRepository;
 	
+	
+	@Test
+	public void selectMgmtfeeByMgmtfeeIdx() {
+		mgmtfeeRepository.selectMgmtfeeByMgmtfeeIdx("102724");
+	}
+	
 	 @Test
 	   public void selectMemberById() {
 		   String apartmentIdx = "100000";
 		   List<String> test = mgmtfeeRepository.selectBuildingByApartmentIdx(apartmentIdx);
 		   List<String> test2 = mgmtfeeRepository.selectNumByApartmentIdx(apartmentIdx);
-		   for (int i = 0; i < test.size(); i++) {
-			System.out.println(test.get(i)+"동");
-			System.out.println(test2.get(i)+"호");
-		   }
 	   }
 	   
 	   @Test
@@ -42,7 +44,7 @@ public class MgmtfeeRepositoryTest {
 		   inpu.setNum(num);
 		   inpu.setApartmentIdx(apartmentIdx);
 		   Generation test = mgmtfeeRepository.selectGenerationIdx(inpu);
-		   System.out.println(test);
+
 	   }
 	   
 	   @Test
@@ -66,8 +68,6 @@ public class MgmtfeeRepositoryTest {
 		   
 		   //프로시저부른다.
 		   mgmtfeeRepository.procedureUpdatePeriodPayment(mgmtfeeIdx);
-		   
-		   System.out.println(mgmtfeeRepository.selectMgmtfeeByMgmtfeeIdx(mgmtfeeIdx));
 		   
 	   }
 	   

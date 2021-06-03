@@ -24,6 +24,7 @@ public class MyMgmtfeeRepositoryTest {
 	@Autowired
 	MyMgmtfeeRepository myMgmtfeeRepository;
 	
+	
 	/* @Test */
 	public void selectMyMgmtfeeList() {
 		Map<String, Object> generationMap = new HashMap<>();
@@ -35,12 +36,11 @@ public class MyMgmtfeeRepositoryTest {
 				.type("board")
 				.total(myMgmtfeeRepository.selectContentCnt(generationIdx))
 				.build();
-		System.out.println(paging.toString());
 		generationMap.put("paging", paging);
 		generationMap.put("generationIdx", generationIdx);
 		
 		List<Mgmtfee> myMgmtfeeList = myMgmtfeeRepository.selectMyMgmtfeeList(generationMap);
-		System.out.println(myMgmtfeeList);
+
 	}
 	
 

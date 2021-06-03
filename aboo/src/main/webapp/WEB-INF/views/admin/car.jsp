@@ -508,14 +508,12 @@
     <!-- Black Dashboard DEMO methods, don't include it in your project! -->
     <script src="../../../resources/demo/demo.js"></script>
     <script type="text/javascript">
-	  let send = () =>{
-		  console.dir('dd');
+	  let send = () =>{ 
 			let carNumber =  document.querySelector('#carNumber').value;
 			let building =  document.querySelector('#building').value;
 			let num =  document.querySelector('#num').value;
 			if (carNumber) {
 				let regExp = /^\d{2,3}[가-힣]\d{4}$/;
-				console.dir(regExp.test(carNumber));
 				if(regExp.test(carNumber)){
 					fetch("/admin/caradd?building="+building+"&num="+num+"&carNumber="+carNumber,{
 						method:"GET"
