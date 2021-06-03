@@ -32,11 +32,6 @@ public class CarController {
 		this.carService = carService;
 		this.myAlarmService = myAlarmService;
 	}
-	
-	@GetMapping("/admin/chat")
-	public void chatTest() {
-		
-	}
 
 	// 1.일반 페이징처리하기
 	@GetMapping("admin/car")
