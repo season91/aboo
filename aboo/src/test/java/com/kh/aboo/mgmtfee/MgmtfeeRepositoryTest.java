@@ -21,6 +21,12 @@ public class MgmtfeeRepositoryTest {
 	@Autowired
 	MgmtfeeRepository mgmtfeeRepository;
 	
+	
+	@Test
+	public void selectMgmtfeeByMgmtfeeIdx() {
+		mgmtfeeRepository.selectMgmtfeeByMgmtfeeIdx("102724");
+	}
+	
 	 @Test
 	   public void selectMemberById() {
 		   String apartmentIdx = "100000";

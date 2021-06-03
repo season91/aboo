@@ -24,6 +24,7 @@ public class MyMgmtfeeRepositoryTest {
 	@Autowired
 	MyMgmtfeeRepository myMgmtfeeRepository;
 	
+	
 	/* @Test */
 	public void selectMyMgmtfeeList() {
 		Map<String, Object> generationMap = new HashMap<>();
