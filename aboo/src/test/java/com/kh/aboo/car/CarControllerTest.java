@@ -35,6 +35,17 @@ public class CarControllerTest {
 		
 	}
 	
+	//차량 조회, 페이징확인
+	@Test
+	public void car() throws Exception {
+		//매개변수 Admin세션
+		Admin admin = new Admin();
+		admin.setApartmentIdx("100020");
+		this.mockMvc.perform(get("/admin/car")
+				.sessionAttr("admin", admin)
+				).andDo(print());
+	}
+	
 	//차량신청조회
 	@Test
 	public void carApplication() throws Exception {
