@@ -43,6 +43,17 @@ public class MgmtfeeControllerTest {
 		
 	}
 	
+	//일반조회
+	@Test
+	public void adminMgmtfee() throws Exception {
+		Admin admin = new Admin();
+		admin.setApartmentIdx("100020");
+		
+		mockMvc.perform(get("/admin/mgmtfee")
+				.sessionAttr("admin", admin)
+				).andDo(print());
+	}
+	
 	// 관리비 삭제
 	@Test
 	public void mgmtfeeDelete() throws Exception {
