@@ -34,7 +34,7 @@ public class MyMgmtfeeController {
 
 	// 페이징
 	@GetMapping("mymgmtfee")
-	public void mgmtfee(@RequestParam(defaultValue = "1") int page,
+	public void myMgmtfee(@RequestParam(defaultValue = "1") int page,
 			@SessionAttribute(name = "generation", required = false) Generation generation, Model model) {
 		String generationIdx = generation.getGenerationIdx();
 		System.out.println("page" + page);
