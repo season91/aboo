@@ -18,10 +18,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.kh.aboo.admin.car.model.vo.CarApplication;
 import com.kh.aboo.admin.mgmtfee.model.repository.MgmtfeeRepository;
 import com.kh.aboo.admin.mgmtfee.model.vo.Mgmtfee;
-import com.kh.aboo.user.generation.model.vo.Generation;
 import com.kh.aboo.user.manager.model.vo.Admin;
 
 @WebAppConfiguration
