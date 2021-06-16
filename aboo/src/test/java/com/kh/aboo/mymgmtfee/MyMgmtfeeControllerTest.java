@@ -48,5 +48,18 @@ public class MyMgmtfeeControllerTest {
 				).andDo(print());
 		
 	}
+	
+	//관리비 상세
+	@Test
+	public void myMgmtfeeDetail() throws Exception {
+		Generation generation = new Generation();
+		generation.setGenerationIdx("100838");
+		
+		this.mockMvc.perform(get("/mypage/mymgmtfee/detail")
+				.sessionAttr("generation", generation)
+				.param("mgmtfeeidx", "101647")
+				).andDo(print());
+	}
+	
 
 }
