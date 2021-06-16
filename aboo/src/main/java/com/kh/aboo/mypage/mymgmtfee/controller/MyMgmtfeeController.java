@@ -45,7 +45,7 @@ public class MyMgmtfeeController {
 
 	// 관리비상세
 	@GetMapping("mymgmtfee/detail")
-	public void mgmtfeedetail(@RequestParam String mgmtfeeidx, Model model) {
+	public void myMgmtfeeDetail(@RequestParam String mgmtfeeidx, Model model) {
 		Mgmtfee mgmtfee = myMgmtfeeService.selectMyMgmtfeeByMgmtfeeIdx(mgmtfeeidx);
 		Map<String, Object> mgmtdate = myMgmtfeeService.selectMyMgmtfeeDate(mgmtfeeidx);
 
