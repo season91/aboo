@@ -74,8 +74,6 @@ public class ManagementController {
 	
 	@GetMapping("/management/apartmentdetail")
 	public void apartmentDetail(@RequestParam String apartmentIdx, Model model) {
-		System.out.println(apartmentIdx);
-		
 		model.addAttribute(managementService.selectApartment(apartmentIdx));
 	}
 	
