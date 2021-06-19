@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -33,6 +34,13 @@ public class ManagementControllerTest {
 	public void setup() {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context).build();
 		
+	}
+	
+	//서비스 신청 리스트
+	@Test
+	public void contactList() throws Exception {
+		this.mockMvc.perform(get("/bdmin/contactus")
+				).andDo(print());
 	}
 	
 	
