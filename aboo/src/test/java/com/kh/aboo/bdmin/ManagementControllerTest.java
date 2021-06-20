@@ -43,5 +43,11 @@ public class ManagementControllerTest {
 				).andDo(print());
 	}
 	
-	
+	//서비스 신청 상세
+	@Test
+	public void contactDetail() throws Exception {
+		this.mockMvc.perform(get("/bdmin/management/contactusdetail")
+				.param("applicationIdx", "100061")
+				).andDo(print());
+	}
 }
