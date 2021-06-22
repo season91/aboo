@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.kh.aboo.bdmin.management.model.repository.ManagementRepository;
+import com.kh.aboo.bdmin.management.model.vo.Bdmin;
 
 @WebAppConfiguration 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -50,4 +51,14 @@ public class ManagementControllerTest {
 				.param("applicationIdx", "100061")
 				).andDo(print());
 	}
+	
+	// 서비스신청 접수
+	@Test
+	public void contactus() throws Exception {
+		Bdmin bdmin = new Bdmin();
+		this.mockMvc.perform(get("/bdmin/contactus")
+				.sessionAttr("bdmin", bdmin)
+				).andDo(print());
+	}
+	
 }
